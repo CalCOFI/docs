@@ -15,6 +15,23 @@ biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
 
+# CalCOFI Webenization Process
+
+1. Ingest
+
+1. Visualize
+
+1. Application
+
+<img src="
+https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/export/svg" alt="Image of Software Architecture"/>
+
+```{=html}
+<!-- Edit here:
+[software architecture | calcofi - Google Drawings](https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/edit)
+-->
+```
+
 # About
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
