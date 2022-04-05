@@ -1,6 +1,7 @@
 fig:nice-fig
 tab:nice-tab
 eq:binom
+process
 about
 usage
 render-book
@@ -22,5 +23,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-calcofi-webenization-process
-process
