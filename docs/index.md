@@ -1,7 +1,7 @@
---- 
-title: "A Minimal Book Example"
-author: "John Doe"
-date: "2022-03-03"
+---
+title: "CalCOFI Docs"
+author: "Ben Best"
+date: "2022-04-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -15,28 +15,24 @@ biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
 
-# CalCOFI Webenization Process
-
-1. Ingest
-
-1. Visualize
-
-1. Application
+# Process
 
 <img src="
-https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/export/svg" alt="Image of Software Architecture"/>
+https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/export/svg" alt="Image of Software Architecture"/> \
+*Figure 1. CalCOFI data workflow.*
+
+The original raw **data**, most often in tabular format [e.g., comma-seperated value (\*.csv)], gets **ingest**ed into the **database** by R [scripts](https://github.com/CalCOFI/scripts) that use functions and lookup data tables in the R package [**calcofi4R**](https://calcofi.github.io/calcofi4r/reference/index.html) where functions are organized into _Read_, _Analyze_ and _Visualize_ concepts. The application programming interface (**API**) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (**Apps**) using Shiny (or any other web application framework) and **reports** using Rmarkdown (or any other report templating framework). Finally, R scripts will **publish** metadata (as [Ecological Metadata Language](https://docs.ropensci.org/EML)) and data packages (e.g., in Darwin format) for discovery on a variety of data _**portals**_ oriented around slicing the tabular or gridded data ([ERDDAP](https://coastwatch.pfeg.noaa.gov/erddap/information.html)), biodographic analysis ([OBIS](https://obis.org)), long-term archive ([DataOne](https://www.dataone.org), [NCEI](https://www.ncei.noaa.gov)) or metadata discovery ([InPort](https://www.fisheries.noaa.gov/inport/)). The **database** will be spatially enabled by PostGIS for summarizing any and all data by _**Areas of Interest**_ (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas.
 
 ```{=html}
 <!-- Edit here:
 [software architecture | calcofi - Google Drawings](https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/edit)
 -->
 ```
-
 # About
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+This is a *sample* book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
 
-## Usage 
+## Usage
 
 Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
 
@@ -48,9 +44,9 @@ The `index.Rmd` file is required, and is also your first book chapter. It will b
 
 You can render the HTML version of this example book without changing anything:
 
-1. Find the **Build** pane in the RStudio IDE, and
+1.  Find the **Build** pane in the RStudio IDE, and
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+2.  Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
 
 Or build the book from the R console:
 
@@ -69,6 +65,5 @@ As you work, you may start a local server to live preview this HTML book. This p
 ```r
 bookdown::serve_book()
 ```
-
 
 

@@ -4,15 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Chapter 2 About | A Minimal Book Example</title>
+  <title>Ch. 2 About | CalCOFI Docs</title>
 
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Ben Best" />
   
    <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::bs4_book,
 set in the _output.yml file.</p>" />
    <meta name="generator" content="placeholder" />
-  <meta property="og:title" content="Chapter 2 About | A Minimal Book Example" />
+  <meta property="og:title" content="Ch. 2 About | CalCOFI Docs" />
   <meta property="og:type" content="book" />
   
   
@@ -21,7 +21,7 @@ The HTML output format for this example is bookdown::bs4_book,
 set in the _output.yml file.</p>" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 About | A Minimal Book Example" />
+  <meta name="twitter:title" content="Ch. 2 About | CalCOFI Docs" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::bs4_book,
@@ -31,7 +31,6 @@ set in the _output.yml file.</p>" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
@@ -45,7 +44,33 @@ set in the _output.yml file.</p>" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
 
   <!-- CSS -->
-    <link rel="stylesheet" href="bs4_style.css" />
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+    <style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+      <link rel="stylesheet" href="bs4_style.css" />
   
 </head>
 
@@ -58,7 +83,7 @@ set in the _output.yml file.</p>" />
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">A Minimal Book Example</a>
+        <a href="index.html" title="">CalCOFI Docs</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -81,7 +106,7 @@ set in the _output.yml file.</p>" />
 
   <main class="col-sm-12 col-md-9 col-lg-7" id="content">
 <div id="about" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> About</h1>
+<h1><span class="header-section-number">Ch. 2</span> About</h1>
 <p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports; for example, a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
 <div id="usage" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Usage</h2>
@@ -102,7 +127,7 @@ set in the _output.yml file.</p>" />
 </div>
 <div id="preview-book" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Preview book</h2>
-<p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book,” or from the R console:</p>
+<p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book”, or from the R console:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="about.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
 
 </div>
@@ -130,7 +155,7 @@ set in the _output.yml file.</p>" />
   <div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A Minimal Book Example</strong>" was written by John Doe. It was last built on 2022-03-03.</p>
+    <p>"<strong>CalCOFI Docs</strong>" was written by Ben Best. It was last built on 2022-04-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
