@@ -70,17 +70,7 @@ set in the _output.yml file.&lt;/p&gt;">
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Process</a></li>
-<li><a class="" href="about.html"><span class="header-section-number">2</span> About</a></li>
-<li><a class="" href="hello-bookdown.html"><span class="header-section-number">3</span> Hello bookdown</a></li>
-<li><a class="" href="cross.html"><span class="header-section-number">4</span> Cross-references</a></li>
-<li><a class="" href="parts.html"><span class="header-section-number">5</span> Parts</a></li>
-<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">6</span> Footnotes and citations</a></li>
-<li><a class="" href="blocks.html"><span class="header-section-number">7</span> Blocks</a></li>
-<li><a class="" href="sharing-your-book.html"><span class="header-section-number">8</span> Sharing your book</a></li>
-<li><a class="" href="references.html">References</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="active" href="index.html"><span class="header-section-number">Ch. 1</span> Process</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/CalCOFI/docs">View book source <i class="fab fa-github"></i></a></p>
@@ -91,23 +81,22 @@ set in the _output.yml file.&lt;/p&gt;">
 <h1>
 <span class="header-section-number">Ch. 1</span> Process<a class="anchor" aria-label="anchor" href="#process"><i class="fas fa-link"></i></a>
 </h1>
-<p><img src="https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/export/svg" alt="Image of Software Architecture"><br><em>Figure 1. CalCOFI data workflow.</em></p>
-<p>The original raw <strong>data</strong>, most often in tabular format [e.g., comma-seperated value (*.csv)], gets <strong>ingest</strong>ed into the <strong>database</strong> by R <a href="https://github.com/CalCOFI/scripts">scripts</a> that use functions and lookup data tables in the R package <a href="https://calcofi.github.io/calcofi4r/reference/index.html"><strong>calcofi4R</strong></a> where functions are organized into <em>Read</em>, <em>Analyze</em> and <em>Visualize</em> concepts. The application programming interface (<strong>API</strong>) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (<strong>Apps</strong>) using Shiny (or any other web application framework) and <strong>reports</strong> using Rmarkdown (or any other report templating framework). Finally, R scripts will <strong>publish</strong> metadata (as <a href="https://docs.ropensci.org/EML">Ecological Metadata Language</a>) and data packages (e.g., in Darwin format) for discovery on a variety of data <em><strong>portals</strong></em> oriented around slicing the tabular or gridded data (<a href="https://coastwatch.pfeg.noaa.gov/erddap/information.html">ERDDAP</a>), biodographic analysis (<a href="https://obis.org">OBIS</a>), long-term archive (<a href="https://www.dataone.org">DataOne</a>, <a href="https://www.ncei.noaa.gov">NCEI</a>) or metadata discovery (<a href="https://www.fisheries.noaa.gov/inport/">InPort</a>). The <strong>database</strong> will be spatially enabled by PostGIS for summarizing any and all data by <em><strong>Areas of Interest</strong></em> (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas.</p>
 <!-- Edit here:
 [software architecture | calcofi - Google Drawings](https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/edit)
 -->
+<p><img src="https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/export/svg" alt="Image of Software Architecture"><br><em>Figure 1. CalCOFI data workflow.</em></p>
+<p>The original raw <strong>data</strong>, most often in tabular format [e.g., comma-separated value (*.csv)], gets <strong>ingest</strong>ed into the <strong>database</strong> by R <a href="https://github.com/CalCOFI/scripts">scripts</a> that use functions and lookup data tables in the R package <a href="https://calcofi.github.io/calcofi4r/reference/index.html"><strong><code>calcofi4r</code></strong></a> where functions are organized into <em>Read</em>, <em>Analyze</em> and <em>Visualize</em> concepts. The application programming interface (<strong>API</strong>) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (<strong>Apps</strong>) using Shiny (or any other web application framework) and <strong>reports</strong> using Rmarkdown (or any other report templating framework). Finally, R scripts will <strong>publish</strong> metadata (as <a href="https://docs.ropensci.org/EML">Ecological Metadata Language</a>) and data packages (e.g., in Darwin format) for discovery on a variety of data <em><strong>portals</strong></em> oriented around slicing the tabular or gridded data (<a href="https://coastwatch.pfeg.noaa.gov/erddap/information.html">ERDDAP</a>), biodographic analysis (<a href="https://obis.org">OBIS</a>), long-term archive (<a href="https://www.dataone.org">DataOne</a>, <a href="https://www.ncei.noaa.gov">NCEI</a>) or metadata discovery (<a href="https://www.fisheries.noaa.gov/inport/">InPort</a>). The <strong>database</strong> will be spatially enabled by PostGIS for summarizing any and all data by <em><strong>Areas of Interest</strong></em> (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas.</p>
 </div>
   <div class="chapter-nav">
 <div class="empty"></div>
-<div class="next"><a href="about.html"><span class="header-section-number">2</span> About</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#process"><span class="header-section-number">1</span> Process</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#process"><span class="header-section-number">Ch. 1</span> Process</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CalCOFI/docs/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CalCOFI/docs/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>
@@ -119,7 +108,7 @@ set in the _output.yml file.&lt;/p&gt;">
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>CalCOFI Docs</strong>" was written by Ben Best. It was last built on 2022-04-05.</p>
+    <p>"<strong>CalCOFI Docs</strong>" was written by Ben Best. It was last built on 2022-04-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
