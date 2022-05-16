@@ -27,28 +27,6 @@ set in the _output.yml file.&lt;/p&gt;">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
 <link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -70,7 +48,11 @@ set in the _output.yml file.&lt;/p&gt;">
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="active" href="index.html"><span class="header-section-number">Ch. 1</span> Process</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html"><span class="header-section-number">1</span> Process</a></li>
+<li><a class="" href="reports.html"><span class="header-section-number">2</span> Reports</a></li>
+<li><a class="" href="apps.html"><span class="header-section-number">3</span> Apps</a></li>
+</ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/CalCOFI/docs">View book source <i class="fab fa-github"></i></a></p>
@@ -82,21 +64,26 @@ set in the _output.yml file.&lt;/p&gt;">
 <span class="header-section-number">Ch. 1</span> Process<a class="anchor" aria-label="anchor" href="#process"><i class="fas fa-link"></i></a>
 </h1>
 <!-- Edit here:
+[software architecture v2 | calcofi - Google Drawings](https://docs.google.com/drawings/d/10gMrYC7wIo0ahz94KjGh8rc-vP1Nim1MI-hZdUK9BL4/edit)
 [software architecture | calcofi - Google Drawings](https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/edit)
 -->
-<p><img src="https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/export/svg" alt="Image of Software Architecture"><br><em>Figure 1. CalCOFI data workflow.</em></p>
+<p><img src="https://docs.google.com/drawings/d/10gMrYC7wIo0ahz94KjGh8rc-vP1Nim1MI-hZdUK9BL4/export/svg" alt="Image of Software Architecture"><br><em>Figure 1. CalCOFI data workflow.</em></p>
 <p>The original raw <strong>data</strong>, most often in tabular format [e.g., comma-separated value (*.csv)], gets <strong>ingest</strong>ed into the <strong>database</strong> by R <a href="https://github.com/CalCOFI/scripts">scripts</a> that use functions and lookup data tables in the R package <a href="https://calcofi.github.io/calcofi4r/reference/index.html"><strong><code>calcofi4r</code></strong></a> where functions are organized into <em>Read</em>, <em>Analyze</em> and <em>Visualize</em> concepts. The application programming interface (<strong>API</strong>) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (<strong>Apps</strong>) using Shiny (or any other web application framework) and <strong>reports</strong> using Rmarkdown (or any other report templating framework). Finally, R scripts will <strong>publish</strong> metadata (as <a href="https://docs.ropensci.org/EML">Ecological Metadata Language</a>) and data packages (e.g., in Darwin format) for discovery on a variety of data <em><strong>portals</strong></em> oriented around slicing the tabular or gridded data (<a href="https://coastwatch.pfeg.noaa.gov/erddap/information.html">ERDDAP</a>), biodographic analysis (<a href="https://obis.org">OBIS</a>), long-term archive (<a href="https://www.dataone.org">DataOne</a>, <a href="https://www.ncei.noaa.gov">NCEI</a>) or metadata discovery (<a href="https://www.fisheries.noaa.gov/inport/">InPort</a>). The <strong>database</strong> will be spatially enabled by PostGIS for summarizing any and all data by <em><strong>Areas of Interest</strong></em> (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas.</p>
+<ul>
+<li>ERDDAP: great for gridded or tabular data, but does not aggregate on the server or clip to a specific area of interest</li>
+</ul>
 </div>
   <div class="chapter-nav">
 <div class="empty"></div>
-<div class="empty"></div>
+<div class="next"><a href="reports.html"><span class="header-section-number">2</span> Reports</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#process"><span class="header-section-number">Ch. 1</span> Process</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#process"><span class="header-section-number">1</span> Process</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+<li><a id="book-source" href="https://github.com/CalCOFI/docs/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/CalCOFI/docs/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -108,7 +95,7 @@ set in the _output.yml file.&lt;/p&gt;">
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>CalCOFI Docs</strong>" was written by Ben Best. It was last built on 2022-04-07.</p>
+    <p>"<strong>CalCOFI Docs</strong>" was written by Ben Best. It was last built on 2022-05-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -116,34 +103,6 @@ set in the _output.yml file.&lt;/p&gt;">
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>
