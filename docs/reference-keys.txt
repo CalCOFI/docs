@@ -2,8 +2,17 @@ process
 reports
 sanctuaries
 apps
+api
+variables-get-list-of-variables-for-timeseries
+species_groups-get-species-groups-for-larvae
+timeseries-get-time-series-data
+cruises-get-list-of-cruises
+raster-get-raster-map-of-variable
+cruise_lines-get-station-lines-from-cruises
+cruise_line_profile
 database
 relational-database-structure
 typography
 database-naming-conventions
 spatial-tips-and-conventions
+url-your-book-url-like-httpsbookdown.orgyihuibookdown
