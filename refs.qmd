@@ -3,9 +3,6 @@
 ```{r, include=FALSE}
 redo <- "F"
 if (redo){  # limit requirement for Quarto render on Github Action
-  c("plumber", "quarto", "shiny") |> 
-    knitr::write_bib(
-      file = "refs/packages.bib")
 }
 ```
 
