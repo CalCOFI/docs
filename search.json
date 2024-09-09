@@ -1,0 +1,162 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CalCOFI.io Docs",
+    "section": "",
+    "text": "1 Process\n\n\nFigure 1. CalCOFI data workflow.\nThe original raw data, most often in tabular format [e.g., comma-separated value (*.csv)], gets ingested into the database by R scripts that use functions and lookup data tables in the R package calcofi4r where functions are organized into Read, Analyze and Visualize concepts. The application programming interface (API) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (Apps) using Shiny (or any other web application framework) and reports using Rmarkdown (or any other report templating framework). Finally, R scripts will publish metadata (as Ecological Metadata Language) and data packages (e.g., in Darwin format) for discovery on a variety of data portals oriented around slicing the tabular or gridded data (ERDDAP), biogeographic analysis (OBIS), long-term archive (DataOne, NCEI) or metadata discovery (InPort). The database will be spatially enabled by PostGIS for summarizing any and all data by Areas of Interest (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas.\n\nERDDAP: great for gridded or tabular data, but does not aggregate on the server or clip to a specific area of interest",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Process</span>"
+    ]
+  },
+  {
+    "objectID": "reports.html",
+    "href": "reports.html",
+    "title": "2  Reports",
+    "section": "",
+    "text": "2.1 Sanctuaries",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Reports</span>"
+    ]
+  },
+  {
+    "objectID": "reports.html#sanctuaries",
+    "href": "reports.html#sanctuaries",
+    "title": "2  Reports",
+    "section": "",
+    "text": "Channel Islands WebCR\nweb-enabled Condition Report\n\nForage Fish\nexample of using calcofi4r functions that pull from the API\n\nUCSB Student Capstone",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Reports</span>"
+    ]
+  },
+  {
+    "objectID": "apps.html",
+    "href": "apps.html",
+    "title": "3  Apps",
+    "section": "",
+    "text": "CalCOFI Oceanography\noceanographic summarization by arbitrary area of interest and sampling period\nUCSB Student Capstone",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Apps</span>"
+    ]
+  },
+  {
+    "objectID": "api.html",
+    "href": "api.html",
+    "title": "4  API",
+    "section": "",
+    "text": "4.1 /variables: get list of variables for timeseries\nGet list of variables for use in /timeseries",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>API</span>"
+    ]
+  },
+  {
+    "objectID": "api.html#species_groups-get-species-groups-for-larvae",
+    "href": "api.html#species_groups-get-species-groups-for-larvae",
+    "title": "4  API",
+    "section": "4.2 /species_groups: get species groups for larvae",
+    "text": "4.2 /species_groups: get species groups for larvae\nNot yet working. Get list of species groups for use with variables larvae_counts.count in /timeseries",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>API</span>"
+    ]
+  },
+  {
+    "objectID": "api.html#timeseries-get-time-series-data",
+    "href": "api.html#timeseries-get-time-series-data",
+    "title": "4  API",
+    "section": "4.3 /timeseries: get time series data",
+    "text": "4.3 /timeseries: get time series data",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>API</span>"
+    ]
+  },
+  {
+    "objectID": "api.html#cruises-get-list-of-cruises",
+    "href": "api.html#cruises-get-list-of-cruises",
+    "title": "4  API",
+    "section": "4.4 /cruises: get list of cruises",
+    "text": "4.4 /cruises: get list of cruises\nGet list of cruises with summary stats as CSV table for time (date_beg)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>API</span>"
+    ]
+  },
+  {
+    "objectID": "api.html#raster-get-raster-map-of-variable",
+    "href": "api.html#raster-get-raster-map-of-variable",
+    "title": "4  API",
+    "section": "4.5 /raster: get raster map of variable",
+    "text": "4.5 /raster: get raster map of variable\nGet raster of variable",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>API</span>"
+    ]
+  },
+  {
+    "objectID": "api.html#cruise_lines-get-station-lines-from-cruises",
+    "href": "api.html#cruise_lines-get-station-lines-from-cruises",
+    "title": "4  API",
+    "section": "4.6 /cruise_lines: get station lines from cruises",
+    "text": "4.6 /cruise_lines: get station lines from cruises\nGet station lines from cruises (with more than one cast)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>API</span>"
+    ]
+  },
+  {
+    "objectID": "api.html#cruise_line_profile",
+    "href": "api.html#cruise_line_profile",
+    "title": "4  API",
+    "section": "4.7 /cruise_line_profile",
+    "text": "4.7 /cruise_line_profile\nGet profile at depths for given variable of casts along line of stations",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>API</span>"
+    ]
+  },
+  {
+    "objectID": "db.html",
+    "href": "db.html",
+    "title": "5  Database",
+    "section": "",
+    "text": "5.1 Relational Database Structure",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
+    ]
+  },
+  {
+    "objectID": "db.html#relational-database-structure",
+    "href": "db.html#relational-database-structure",
+    "title": "5  Database",
+    "section": "",
+    "text": "5.1.1 Typography\n\n{*}: indicates variable substitution, e.g. {mdl_key}_mdls would evaluate to the value am_mdls for mdl_id = \"am\" (AquaMaps)\n[*]: optional value, such as [ply_grp] is an optional column in the {mdl_key}_mdls table\n&lt;*&gt;: surrounds the columns used to uniquely identify (and index) each row\n...: additional columns, unique to the table\n\nThe format below is of the following format where the top line of a bulleted list item describes the table and the columns in that table are directly below, nested in hierarchical order:\n\n{table name} ({description})\n&lt;{column 1}, {column 2}&gt;, {column 3}, ...\n\n\n\n5.1.2 Database Naming Conventions\n\nUse all lower-case column names with underscores (i.e. from using janitor::clean_names()) to prevent need to quote SQL statements.\nFor short unique identifiers use suffix *_id for integer and *_key for short text.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
+    ]
+  },
+  {
+    "objectID": "db.html#spatial-tips-and-conventions",
+    "href": "db.html#spatial-tips-and-conventions",
+    "title": "5  Database",
+    "section": "5.2 Spatial Tips and Conventions",
+    "text": "5.2 Spatial Tips and Conventions\n\nSet PostGIS geometry fieldname to geom.\nUse ST_Subdivide() when running spatial joins on large polygons.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
+    ]
+  },
+  {
+    "objectID": "refs.html",
+    "href": "refs.html",
+    "title": "6  References",
+    "section": "",
+    "text": "6.1 R packages",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>References</span>"
+    ]
+  },
+  {
+    "objectID": "refs.html#r-packages",
+    "href": "refs.html#r-packages",
+    "title": "6  References",
+    "section": "",
+    "text": "API: plumber (Schloerke and Allen 2024)\ndocs: Quarto (Allaire and Dervieux 2024)\napps: Shiny (Chang et al. 2024)\n\n\n\n\n\nAllaire, JJ, and Christophe Dervieux. 2024. Quarto: R Interface to Quarto Markdown Publishing System. https://github.com/quarto-dev/quarto-r.\n\n\nChang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert, and Barbara Borges. 2024. Shiny: Web Application Framework for r. https://shiny.posit.co/.\n\n\nSchloerke, Barret, and Jeff Allen. 2024. Plumber: An API Generator for r. https://www.rplumber.io.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>References</span>"
+    ]
+  }
+]
