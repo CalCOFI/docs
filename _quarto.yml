@@ -1,0 +1,55 @@
+project:
+  type: book
+  # pre-render: libs/pre-render.R
+  output-dir: _book
+  resources:
+  - "/.nojekyll"
+
+book:
+  title: "CalCOFI.io Docs"
+  description: "Documentation for Open-Source Products at CalCOFI.io"
+  author:
+    - "![](/figs/contrib.rocks.svg)"
+  date: today
+  date-format: "YYYY-MM-DD"
+  site-url: https://calcofi.io/docs/
+  repo-url: https://github.com/CalCOFI/docs/
+  repo-actions: [edit]
+  downloads: [pdf, docx, epub]
+  sharing: [twitter, facebook, linkedin]
+  # google-analytics: "G-V3HZN14Z8G" # TODO: add Google Analytics
+  search: true
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - reports.qmd
+    - apps.qmd
+    - api.qmd
+    - db.qmd
+    - refs.qmd
+
+bibliography: ["refs/packages.bib"]
+bibliographystyle: apa
+link-citations: true
+
+format:
+  html:
+    theme: cosmo
+    css: lib/style.css
+    toc: true
+    number-sections: true
+  docx:
+    toc: true
+    echo: false
+    number-sections: true
+    highlight-style: github
+  pdf:
+    documentclass: scrreprt
+    # keep-tex: true  # for debugging
+    # include-in-header: libs/preamble.tex
+    nocite: |
+      @*
+  epub: default
+
+
+
