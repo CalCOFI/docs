@@ -140,11 +140,11 @@
     ]
   },
   {
-    "objectID": "db.html#relational-database-structure",
-    "href": "db.html#relational-database-structure",
+    "objectID": "db.html#relationships-between-tables",
+    "href": "db.html#relationships-between-tables",
     "title": "5  Database",
-    "section": "5.3 Relational Database Structure",
-    "text": "5.3 Relational Database Structure",
+    "section": "5.3 Relationships between tables",
+    "text": "5.3 Relationships between tables\n\nSee calcofi/workflows: clean_db\n\nTODO: add calcofi/apps: db to show latest tables, columns and relationsips",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]
