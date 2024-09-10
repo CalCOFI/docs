@@ -54,9 +54,11 @@
 
 - Fetch and display these descriptions into an interactive table with [`calcofi4r::`**`cc_db_catalog()`**](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
 
-## Relational Database Structure
+## Relationships between tables
 
+- See [calcofi/workflows: **clean_db**](https://calcofi.io/workflows/clean_db.html)\
 
+- `TODO:` add calcofi/apps: db to show latest tables, columns and relationsips
 
 ## Spatial Tips
 
