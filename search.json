@@ -32,11 +32,11 @@
   {
     "objectID": "apps.html",
     "href": "apps.html",
-    "title": "3  Apps",
+    "title": "3  Applications",
     "section": "",
     "text": "CalCOFI Oceanography\noceanographic summarization by arbitrary area of interest and sampling period\nUCSB Student Capstone",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Apps</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Applications</span>"
     ]
   },
   {
@@ -114,7 +114,27 @@
     "href": "db.html",
     "title": "5  Database",
     "section": "",
-    "text": "5.1 Relational Database Structure",
+    "text": "5.1 Database naming conventions",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
+    ]
+  },
+  {
+    "objectID": "db.html#database-naming-conventions",
+    "href": "db.html#database-naming-conventions",
+    "title": "5  Database",
+    "section": "",
+    "text": "Learn SQL: Naming Conventions\nBest Practices for Database Naming Conventions - Drygast.NET\n\n\n5.1.1 Name tables\n\nTable names are plural and use all lower case.\n\n\n\n5.1.2 Name columns\n\nTo name columns, use snake-case (i.e., lower-case with underscores) so as to prevent the need to quote SQL statements. (TIP: Use janitor::clean_names() to convert a table.)\nUnique identifiers are suffixed with:\n\n*_id for unique integer keys;\n*_key for unique string keys;\n*_seq for auto-incrementing sequence integer keys.\n\nSuffix with units where applicable (e.g., *_m for meters, *_km for kilometers, degc for degrees Celsius). See units vignette.\nSet geometry column to geom (used by PostGIS spatial extension). If the table has multiple geometry columns, use geom for the default geometry column and geom_{type} for additional geometry columns (e.g., geom_point, geom_line, geom_polygon).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
+    ]
+  },
+  {
+    "objectID": "db.html#describe-tables-and-columns",
+    "href": "db.html#describe-tables-and-columns",
+    "title": "5  Database",
+    "section": "5.2 Describe tables and columns",
+    "text": "5.2 Describe tables and columns\n\nUse the COMMENT clause to add descriptions to tables and columns, either through the GUI pgadmin.calcofi.io (by right-clicking on the table or column and selecting Properties) or with SQL. For example:\nCOMMENT ON TABLE public.aoi_fed_sanctuaries IS 'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)';\nNote the use of markdown for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so: &gt; areas of interest (aoi) polygons for federal National Marine Sanctuaries; loaded by workflow load_sanctuaries\nIt is especially helpful to link to any workflows that are responsible for the ingesting or updating of the input data.\nThese descriptions can be viewed in the CalCOFI API api.calcofi.io as CSV tables (see code in calcofi/api: plumber.R):\n\napi.calcofi.io/db_tables\nfields:\n\n\nschema: (only “public” so far)\ntable_type: “table”, “view”, or “materialized view” (none yet)\ntable: name of table\ntable_description: description of table (possibly in markdown)\n\napi.calcofi.io/db_columns\nfields:\n\n\nschema: (only “public” so far)\ntable_type: “table”, “view”, or “materialized view” (none yet)\ntable: name of table\ncolumn: name of column\ncolumn_type: data type of column\ncolumn_description: description of column (possibly in markdown)\n\n\nFetch and display these descriptions into an interactive table with calcofi4r::cc_db_catalog().",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]
@@ -123,18 +143,18 @@
     "objectID": "db.html#relational-database-structure",
     "href": "db.html#relational-database-structure",
     "title": "5  Database",
-    "section": "",
-    "text": "5.1.1 Typography\n\n{*}: indicates variable substitution, e.g. {mdl_key}_mdls would evaluate to the value am_mdls for mdl_id = \"am\" (AquaMaps)\n[*]: optional value, such as [ply_grp] is an optional column in the {mdl_key}_mdls table\n&lt;*&gt;: surrounds the columns used to uniquely identify (and index) each row\n...: additional columns, unique to the table\n\nThe format below is of the following format where the top line of a bulleted list item describes the table and the columns in that table are directly below, nested in hierarchical order:\n\n{table name} ({description})\n&lt;{column 1}, {column 2}&gt;, {column 3}, ...\n\n\n\n5.1.2 Database Naming Conventions\n\nUse all lower-case column names with underscores (i.e. from using janitor::clean_names()) to prevent need to quote SQL statements.\nFor short unique identifiers use suffix *_id for integer and *_key for short text.",
+    "section": "5.3 Relational Database Structure",
+    "text": "5.3 Relational Database Structure",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]
   },
   {
-    "objectID": "db.html#spatial-tips-and-conventions",
-    "href": "db.html#spatial-tips-and-conventions",
+    "objectID": "db.html#spatial-tips",
+    "href": "db.html#spatial-tips",
     "title": "5  Database",
-    "section": "5.2 Spatial Tips and Conventions",
-    "text": "5.2 Spatial Tips and Conventions\n\nSet PostGIS geometry fieldname to geom.\nUse ST_Subdivide() when running spatial joins on large polygons.",
+    "section": "5.4 Spatial Tips",
+    "text": "5.4 Spatial Tips\n\nUse ST_Subdivide() when running spatial joins on large polygons.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]

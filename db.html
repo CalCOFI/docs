@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -172,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Apps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -203,12 +237,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#relational-database-structure" id="toc-relational-database-structure" class="nav-link active" data-scroll-target="#relational-database-structure"><span class="header-section-number">5.1</span> Relational Database Structure</a>
+  <li><a href="#database-naming-conventions" id="toc-database-naming-conventions" class="nav-link active" data-scroll-target="#database-naming-conventions"><span class="header-section-number">5.1</span> Database naming conventions</a>
   <ul class="collapse">
-  <li><a href="#typography" id="toc-typography" class="nav-link" data-scroll-target="#typography"><span class="header-section-number">5.1.1</span> Typography</a></li>
-  <li><a href="#database-naming-conventions" id="toc-database-naming-conventions" class="nav-link" data-scroll-target="#database-naming-conventions"><span class="header-section-number">5.1.2</span> Database Naming Conventions</a></li>
+  <li><a href="#name-tables" id="toc-name-tables" class="nav-link" data-scroll-target="#name-tables"><span class="header-section-number">5.1.1</span> Name tables</a></li>
+  <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">5.1.2</span> Name columns</a></li>
   </ul></li>
-  <li><a href="#spatial-tips-and-conventions" id="toc-spatial-tips-and-conventions" class="nav-link" data-scroll-target="#spatial-tips-and-conventions"><span class="header-section-number">5.2</span> Spatial Tips and Conventions</a></li>
+  <li><a href="#describe-tables-and-columns" id="toc-describe-tables-and-columns" class="nav-link" data-scroll-target="#describe-tables-and-columns"><span class="header-section-number">5.2</span> Describe tables and columns</a></li>
+  <li><a href="#relational-database-structure" id="toc-relational-database-structure" class="nav-link" data-scroll-target="#relational-database-structure"><span class="header-section-number">5.3</span> Relational Database Structure</a></li>
+  <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">5.4</span> Spatial Tips</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/db.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -234,34 +270,72 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="relational-database-structure" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="relational-database-structure"><span class="header-section-number">5.1</span> Relational Database Structure</h2>
-<section id="typography" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="typography"><span class="header-section-number">5.1.1</span> Typography</h3>
+<section id="database-naming-conventions" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="database-naming-conventions"><span class="header-section-number">5.1</span> Database naming conventions</h2>
 <ul>
-<li><code>{*}</code>: indicates variable substitution, e.g.&nbsp;<code>{mdl_key}_mdls</code> would evaluate to the value <code>am_mdls</code> for <code>mdl_id = "am"</code> (AquaMaps)</li>
-<li><code>[*]</code>: optional value, such as <code>[ply_grp]</code> is an optional column in the <code>{mdl_key}_mdls</code> table</li>
-<li><code>&lt;*&gt;</code>: surrounds the columns used to uniquely identify (and index) each row</li>
-<li><code>...</code>: additional columns, unique to the table</li>
+<li><a href="https://www.sqlshack.com/learn-sql-naming-conventions/">Learn SQL: Naming Conventions</a></li>
+<li><a href="https://drygast.net/blog/post/database_naming_conventions">Best Practices for Database Naming Conventions - Drygast.NET</a></li>
 </ul>
-<p>The format below is of the following format where the top line of a bulleted list item describes the table and the columns in that table are directly below, nested in hierarchical order:</p>
+<section id="name-tables" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="name-tables"><span class="header-section-number">5.1.1</span> Name tables</h3>
 <ul>
-<li><code>{table name}</code> (<code>{description}</code>)<br>
-&lt;<code>{column 1}</code>, <code>{column 2}</code>&gt;, <code>{column 3}</code>, <code>...</code></li>
+<li>Table names are plural and use all lower case.</li>
 </ul>
 </section>
-<section id="database-naming-conventions" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="database-naming-conventions"><span class="header-section-number">5.1.2</span> Database Naming Conventions</h3>
+<section id="name-columns" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="name-columns"><span class="header-section-number">5.1.2</span> Name columns</h3>
 <ul>
-<li>Use all <strong>lower-case</strong> column names with underscores (i.e.&nbsp;from using <code>janitor::clean_names()</code>) to prevent need to quote SQL statements.</li>
-<li>For short unique <strong>identifiers</strong> use suffix <code>*_id</code> for integer and <code>*_key</code> for short text.</li>
+<li><p>To name columns, use <a href="https://cran.r-project.org/web/packages/snakecase/vignettes/introducing-the-snakecase-package.html"><strong>snake-case</strong></a> (i.e., lower-case with underscores) so as to prevent the need to quote SQL statements. (TIP: Use <a href="https://sfirke.github.io/janitor/reference/clean_names.html"><code>janitor::clean_names()</code></a> to convert a table.)</p></li>
+<li><p>Unique <strong>identifiers</strong> are suffixed with:</p>
+<ul>
+<li><code>*_id</code> for unique integer keys;</li>
+<li><code>*_key</code> for unique string keys;</li>
+<li><code>*_seq</code> for auto-incrementing sequence integer keys.</li>
+</ul></li>
+<li><p>Suffix with <strong>units</strong> where applicable (e.g., <code>*_m</code> for meters, <code>*_km</code> for kilometers, <code>degc</code> for degrees Celsius). See <a href="https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html">units vignette</a>.</p></li>
+<li><p>Set geometry column to <strong><code>geom</code></strong> (used by <a href="https://postgis.net">PostGIS</a> spatial extension). If the table has multiple geometry columns, use <code>geom</code> for the default geometry column and <code>geom_{type}</code> for additional geometry columns (e.g., <code>geom_point</code>, <code>geom_line</code>, <code>geom_polygon</code>).</p></li>
 </ul>
 </section>
 </section>
-<section id="spatial-tips-and-conventions" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="spatial-tips-and-conventions"><span class="header-section-number">5.2</span> Spatial Tips and Conventions</h2>
+<section id="describe-tables-and-columns" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="describe-tables-and-columns"><span class="header-section-number">5.2</span> Describe tables and columns</h2>
 <ul>
-<li>Set PostGIS geometry fieldname to <code>geom</code>.</li>
+<li><p>Use the <code>COMMENT</code> clause to add descriptions to tables and columns, either through the GUI <a href="https://pgadmin.calcofi.io/">pgadmin.calcofi.io</a> (by right-clicking on the table or column and selecting <code>Properties</code>) or with SQL. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Note the use of <a href="https://www.markdownguide.org/cheat-sheet/"><strong>markdown</strong></a> for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so: &gt; areas of interest (<code>aoi</code>) polygons for federal <strong>National Marine Sanctuaries</strong>; loaded by <em>workflow</em> <a href="https://calcofi.io/workflows/load_sanctuaries.html">load_sanctuaries</a></p></li>
+<li><p>It is especially helpful to link to any <em><strong>workflows</strong></em> that are responsible for the ingesting or updating of the input data.</p></li>
+<li><p>These descriptions can be viewed in the CalCOFI <strong>API</strong> <a href="api.calcofi.io">api.calcofi.io</a> as CSV tables (see code in <a href="https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990">calcofi/api: <code>plumber.R</code></a>):</p>
+<ul>
+<li><a href="https://api.calcofi.io/db_tables">api.calcofi.io<code>/db_tables</code></a><br>
+fields:<br>
+
+<ul>
+<li><code>schema</code>: (only “public” so far)</li>
+<li><code>table_type</code>: “table”, “view”, or “materialized view” (none yet)</li>
+<li><code>table</code>: name of table</li>
+<li><code>table_description</code>: description of table (possibly in markdown)</li>
+</ul></li>
+<li><a href="https://api.calcofi.io/db_columns">api.calcofi.io<code>/db_columns</code></a><br>
+fields:<br>
+
+<ul>
+<li><code>schema</code>: (only “public” so far)</li>
+<li><code>table_type</code>: “table”, “view”, or “materialized view” (none yet)</li>
+<li><code>table</code>: name of table</li>
+<li><code>column</code>: name of column</li>
+<li><code>column_type</code>: data type of column</li>
+<li><code>column_description</code>: description of column (possibly in markdown)</li>
+</ul></li>
+</ul></li>
+<li><p>Fetch and display these descriptions into an interactive table with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html"><code>calcofi4r::</code><strong><code>cc_db_catalog()</code></strong></a>.</p></li>
+</ul>
+</section>
+<section id="relational-database-structure" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="relational-database-structure"><span class="header-section-number">5.3</span> Relational Database Structure</h2>
+</section>
+<section id="spatial-tips" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="spatial-tips"><span class="header-section-number">5.4</span> Spatial Tips</h2>
+<ul>
 <li>Use <a href="https://postgis.net/docs/ST_Subdivide.html"><code>ST_Subdivide()</code></a> when running spatial joins on large polygons.</li>
 </ul>
 
