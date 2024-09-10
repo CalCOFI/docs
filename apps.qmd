@@ -1,4 +1,4 @@
-# Apps
+# Applications
 
 - [CalCOFI Oceanography](https://shiny.calcofi.io/oceano)\
   oceanographic summarization by arbitrary area of interest and sampling period

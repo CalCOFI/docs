@@ -1,27 +1,62 @@
 # Database
 
+## Database naming conventions
+
+- [Learn SQL: Naming Conventions](https://www.sqlshack.com/learn-sql-naming-conventions/)
+- [Best Practices for Database Naming Conventions - Drygast.NET](https://drygast.net/blog/post/database_naming_conventions)
+
+### Name tables
+
+- Table names are plural and use all lower case.
+
+### Name columns
+
+- To name columns, use [**snake-case**](https://cran.r-project.org/web/packages/snakecase/vignettes/introducing-the-snakecase-package.html) (i.e., lower-case with underscores) so as to prevent the need to quote SQL statements. (TIP: Use [`janitor::clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html) to convert a table.)
+
+- Unique **identifiers** are suffixed with:
+  - `*_id` for unique integer keys;
+  - `*_key` for unique string keys;
+  - `*_seq` for auto-incrementing sequence integer keys.
+
+- Suffix with **units** where applicable (e.g., `*_m` for meters, `*_km` for kilometers, `degc` for degrees Celsius). See [units vignette](https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html).
+
+- Set geometry column to **`geom`** (used by [PostGIS](https://postgis.net) spatial extension). If the table has multiple geometry columns, use `geom` for the default geometry column and `geom_{type}` for additional geometry columns (e.g., `geom_point`, `geom_line`, `geom_polygon`).
+
+## Describe tables and columns
+
+- Use the `COMMENT` clause to add descriptions to tables and columns, either through the GUI [pgadmin.calcofi.io](https://pgadmin.calcofi.io/) (by right-clicking on the table or column and selecting `Properties`) or with SQL. For example:
+  ```sql
+  COMMENT ON TABLE public.aoi_fed_sanctuaries IS 'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)';
+  ```
+
+- Note the use of [**markdown**](https://www.markdownguide.org/cheat-sheet/) for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:
+  > areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)
+
+- It is especially helpful to link to any _**workflows**_ that are responsible for the ingesting or updating of the input data.
+
+- These descriptions can be viewed in the CalCOFI **API** [api.calcofi.io](api.calcofi.io) as CSV tables (see code in [calcofi/api: `plumber.R`](https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990)):
+  - [api.calcofi.io`/db_tables`](https://api.calcofi.io/db_tables)\
+    fields:\
+    - `schema`: (only "public" so far)
+    - `table_type`: "table", "view", or "materialized view" (none yet)
+    - `table`: name of table
+    - `table_description`: description of table (possibly in markdown)
+  - [api.calcofi.io`/db_columns`](https://api.calcofi.io/db_columns)\
+    fields:\
+    - `schema`: (only "public" so far)
+    - `table_type`: "table", "view", or "materialized view" (none yet)
+    - `table`: name of table
+    - `column`: name of column
+    - `column_type`: data type of column
+    - `column_description`: description of column (possibly in markdown)
+
+- Fetch and display these descriptions into an interactive table with [`calcofi4r::`**`cc_db_catalog()`**](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
+
 ## Relational Database Structure
 
-### Typography
-
-- `{*}`: indicates variable substitution, e.g. `{mdl_key}_mdls` would evaluate to the value `am_mdls` for `mdl_id = "am"` (AquaMaps)
-- `[*]`: optional value, such as `[ply_grp]` is an optional column in the `{mdl_key}_mdls` table
-- `<*>`: surrounds the columns used to uniquely identify (and index) each row
-- `...`: additional columns, unique to the table
 
 
-The format below is of the following format where the top line of a bulleted list item describes the table and the columns in that table are directly below, nested in hierarchical order:
+## Spatial Tips
 
-- `{table name}` (`{description}`) \
-  <`{column 1}`, `{column 2}`>, `{column 3}`, `...`
-
-### Database Naming Conventions
-
-- Use all **lower-case** column names with underscores (i.e. from using `janitor::clean_names()`) to prevent need to quote SQL statements. 
-- For short unique **identifiers** use suffix `*_id` for integer and `*_key` for short text.
-
-## Spatial Tips and Conventions
-
-- Set PostGIS geometry fieldname to `geom`.
 - Use [`ST_Subdivide()`](https://postgis.net/docs/ST_Subdivide.html) when running spatial joins on large polygons.
 

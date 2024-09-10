@@ -8,8 +8,8 @@ project:
 book:
   title: "CalCOFI.io Docs"
   description: "Documentation for Open-Source Products at CalCOFI.io"
-  author:
-    - "![](/figs/contrib.rocks.svg)"
+  # author:
+  #   - "![](/figs/contrib.rocks.svg)"
   date: today
   date-format: "YYYY-MM-DD"
   site-url: https://calcofi.io/docs/
