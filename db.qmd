@@ -25,12 +25,14 @@
 ## Describe tables and columns
 
 - Use the `COMMENT` clause to add descriptions to tables and columns, either through the GUI [pgadmin.calcofi.io](https://pgadmin.calcofi.io/) (by right-clicking on the table or column and selecting `Properties`) or with SQL. For example:
+
   ```sql
   COMMENT ON TABLE public.aoi_fed_sanctuaries IS 'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)';
   ```
 
 - Note the use of [**markdown**](https://www.markdownguide.org/cheat-sheet/) for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:
-  > areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)
+   
+   > areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)
 
 - It is especially helpful to link to any _**workflows**_ that are responsible for the ingesting or updating of the input data.
 
