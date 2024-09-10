@@ -34,7 +34,7 @@
 
 - It is especially helpful to link to any _**workflows**_ that are responsible for the ingesting or updating of the input data.
 
-- These descriptions can be viewed in the CalCOFI **API** [api.calcofi.io](api.calcofi.io) as CSV tables (see code in [calcofi/api: `plumber.R`](https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990)):
+- These descriptions can be viewed in the CalCOFI **API** [api.calcofi.io](https://api.calcofi.io) as CSV tables (see code in [calcofi/api: `plumber.R`](https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990)):
   - [api.calcofi.io`/db_tables`](https://api.calcofi.io/db_tables)\
     fields:\
     - `schema`: (only "public" so far)
