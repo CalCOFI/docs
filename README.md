@@ -4,7 +4,7 @@ This repository is rendered as a Quarto book.
 
 ## Rendering the book on your local machine (_optional_)
 
-A Github Action will build the book automatically when you push changes to the repository. However, you can also build the book locally on your machine, which is especially helpful for testing output and debugging any issues.
+A Github Action will build the book automatically when you push changes to the repository. However, you can also build the book locally on your machine, which is especially helpful for testing output and for  debugging any issues.
 
 ## Setup software (R, Rstudio, Quarto, TinyTex) and download the repository
 
