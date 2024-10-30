@@ -24,6 +24,57 @@ We're circling the wagons to come up with the best conventions for naming. Here 
 
 - Set geometry column to **`geom`** (used by [PostGIS](https://postgis.net) spatial extension). If the table has multiple geometry columns, use `geom` for the default geometry column and `geom_{type}` for additional geometry columns (e.g., `geom_point`, `geom_line`, `geom_polygon`).
 
+## Use Unicode for text
+
+The [default character encoding for Postgresql](https://www.postgresql.org/docs/current/multibyte.html#MULTIBYTE-SETTING) is unicode (`UTF8`), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.
+
+Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all database text values to support international characters and documentation (i.e., tabs, etc for markdown conversion).
+
+- In **Python**, use [**`pandas`**](https://pandas.pydata.org/docs/index.html) to read ([`read_csv()`](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)) and write ([`to_csv()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html)) with UTF-8 encoding (i.e., `encoding='utf-8'`).:
+  
+  ```python
+  import pandas as pd
+  from sqlalchemy import create_engine
+  engine = create_engine('postgresql://user:password@localhost:5432/dbname')
+  
+  # read from a csv file
+  df = pd.read_csv('file.csv', encoding='utf-8')
+  
+  # write to PostgreSQL
+  df.to_sql('table_name', engine, if_exists='replace', index=False, method='multi', chunksize=1000, encoding='utf-8')
+  
+  # read from PostgreSQL
+  df = pd.read_sql('SELECT * FROM table_name', engine, encoding='utf-8')
+  
+  # write to a csv file with UTF-8 encoding
+  df.to_csv('file.csv', index=False, encoding='utf-8')
+  ```
+
+- In **R**, use [**`readr`**](https://readr.tidyverse.org/index.html) to read ([`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) and write ([`write_excel_csv()`](https://readr.tidyverse.org/reference/write_delim.html)) to force UTF-8 encoding.
+  
+  ```r
+  library(readr)
+  library(DBI)
+  library(RPostgres)
+  
+  # connect to PostgreSQL
+  con <- dbConnect(RPostgres::Postgres(), dbname = "dbname", host = "localhost", port = 5432, user = "user", password = "password")
+  
+  # read from a csv file
+  df <- read_csv('file.csv', locale = locale(encoding = 'UTF-8'))  # explicit
+  df <- read_csv('file.csv')                                       # implicit
+  
+  # write to PostgreSQL
+  dbWriteTable(con, 'table_name', df, overwrite = TRUE)
+  
+  # read from PostgreSQL
+  df <- dbReadTable(con, 'table_name')
+  
+  # write to a csv file with UTF-8 encoding
+  write_excel_csv(df, 'file.csv', locale = locale(encoding = 'UTF-8'))  # explicit
+  write_excel_csv(df, 'file.csv')                                       # implicit
+  ```
+
 ## Describe tables and columns
 
 - Use the `COMMENT` clause to add descriptions to tables and columns, either through the GUI [pgadmin.calcofi.io](https://pgadmin.calcofi.io/) (by right-clicking on the table or column and selecting `Properties`) or with SQL. For example:
