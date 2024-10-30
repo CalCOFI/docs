@@ -130,11 +130,21 @@
     ]
   },
   {
+    "objectID": "db.html#use-unicode-for-text",
+    "href": "db.html#use-unicode-for-text",
+    "title": "5  Database",
+    "section": "5.2 Use Unicode for text",
+    "text": "5.2 Use Unicode for text\nThe default character encoding for Postgresql is unicode (UTF8), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.\nUse Unicode (utf-8 in Python or UTF8 in Postgresql) encoding for all database text values to support international characters and documentation (i.e., tabs, etc for markdown conversion).\n\nIn Python, use pandas to read (read_csv()) and write (to_csv()) with UTF-8 encoding (i.e., encoding='utf-8').:\nimport pandas as pd\nfrom sqlalchemy import create_engine\nengine = create_engine('postgresql://user:password@localhost:5432/dbname')\n\n# read from a csv file\ndf = pd.read_csv('file.csv', encoding='utf-8')\n\n# write to PostgreSQL\ndf.to_sql('table_name', engine, if_exists='replace', index=False, method='multi', chunksize=1000, encoding='utf-8')\n\n# read from PostgreSQL\ndf = pd.read_sql('SELECT * FROM table_name', engine, encoding='utf-8')\n\n# write to a csv file with UTF-8 encoding\ndf.to_csv('file.csv', index=False, encoding='utf-8')\nIn R, use readr to read (read_csv()) and write (write_excel_csv()) to force UTF-8 encoding.\nlibrary(readr)\nlibrary(DBI)\nlibrary(RPostgres)\n\n# connect to PostgreSQL\ncon &lt;- dbConnect(RPostgres::Postgres(), dbname = \"dbname\", host = \"localhost\", port = 5432, user = \"user\", password = \"password\")\n\n# read from a csv file\ndf &lt;- read_csv('file.csv', locale = locale(encoding = 'UTF-8'))  # explicit\ndf &lt;- read_csv('file.csv')                                       # implicit\n\n# write to PostgreSQL\ndbWriteTable(con, 'table_name', df, overwrite = TRUE)\n\n# read from PostgreSQL\ndf &lt;- dbReadTable(con, 'table_name')\n\n# write to a csv file with UTF-8 encoding\nwrite_excel_csv(df, 'file.csv', locale = locale(encoding = 'UTF-8'))  # explicit\nwrite_excel_csv(df, 'file.csv')                                       # implicit",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
+    ]
+  },
+  {
     "objectID": "db.html#describe-tables-and-columns",
     "href": "db.html#describe-tables-and-columns",
     "title": "5  Database",
-    "section": "5.2 Describe tables and columns",
-    "text": "5.2 Describe tables and columns\n\nUse the COMMENT clause to add descriptions to tables and columns, either through the GUI pgadmin.calcofi.io (by right-clicking on the table or column and selecting Properties) or with SQL. For example:\nCOMMENT ON TABLE public.aoi_fed_sanctuaries IS 'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)';\nNote the use of markdown for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:\n\nareas of interest (aoi) polygons for federal National Marine Sanctuaries; loaded by workflow load_sanctuaries\n\nIt is especially helpful to link to any workflows that are responsible for the ingesting or updating of the input data.\nThese descriptions can be viewed in the CalCOFI API api.calcofi.io as CSV tables (see code in calcofi/api: plumber.R):\n\napi.calcofi.io/db_tables\nfields:\n\n\nschema: (only “public” so far)\ntable_type: “table”, “view”, or “materialized view” (none yet)\ntable: name of table\ntable_description: description of table (possibly in markdown)\n\napi.calcofi.io/db_columns\nfields:\n\n\nschema: (only “public” so far)\ntable_type: “table”, “view”, or “materialized view” (none yet)\ntable: name of table\ncolumn: name of column\ncolumn_type: data type of column\ncolumn_description: description of column (possibly in markdown)\n\n\nFetch and display these descriptions into an interactive table with calcofi4r::cc_db_catalog().",
+    "section": "5.3 Describe tables and columns",
+    "text": "5.3 Describe tables and columns\n\nUse the COMMENT clause to add descriptions to tables and columns, either through the GUI pgadmin.calcofi.io (by right-clicking on the table or column and selecting Properties) or with SQL. For example:\nCOMMENT ON TABLE public.aoi_fed_sanctuaries IS 'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)';\nNote the use of markdown for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:\n\nareas of interest (aoi) polygons for federal National Marine Sanctuaries; loaded by workflow load_sanctuaries\n\nIt is especially helpful to link to any workflows that are responsible for the ingesting or updating of the input data.\nThese descriptions can be viewed in the CalCOFI API api.calcofi.io as CSV tables (see code in calcofi/api: plumber.R):\n\napi.calcofi.io/db_tables\nfields:\n\n\nschema: (only “public” so far)\ntable_type: “table”, “view”, or “materialized view” (none yet)\ntable: name of table\ntable_description: description of table (possibly in markdown)\n\napi.calcofi.io/db_columns\nfields:\n\n\nschema: (only “public” so far)\ntable_type: “table”, “view”, or “materialized view” (none yet)\ntable: name of table\ncolumn: name of column\ncolumn_type: data type of column\ncolumn_description: description of column (possibly in markdown)\n\n\nFetch and display these descriptions into an interactive table with calcofi4r::cc_db_catalog().",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]
@@ -143,8 +153,8 @@
     "objectID": "db.html#relationships-between-tables",
     "href": "db.html#relationships-between-tables",
     "title": "5  Database",
-    "section": "5.3 Relationships between tables",
-    "text": "5.3 Relationships between tables\n\nSee calcofi/workflows: clean_db\n\nTODO: add calcofi/apps: db to show latest tables, columns and relationsips",
+    "section": "5.4 Relationships between tables",
+    "text": "5.4 Relationships between tables\n\nSee calcofi/workflows: clean_db\n\nTODO: add calcofi/apps: db to show latest tables, columns and relationsips",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]
@@ -153,8 +163,8 @@
     "objectID": "db.html#spatial-tips",
     "href": "db.html#spatial-tips",
     "title": "5  Database",
-    "section": "5.4 Spatial Tips",
-    "text": "5.4 Spatial Tips\n\nUse ST_Subdivide() when running spatial joins on large polygons.",
+    "section": "5.5 Spatial Tips",
+    "text": "5.5 Spatial Tips\n\nUse ST_Subdivide() when running spatial joins on large polygons.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]
