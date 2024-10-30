@@ -28,6 +28,31 @@ We're circling the wagons to come up with the best conventions for naming. Here 
 
 The [default character encoding for Postgresql](https://www.postgresql.org/docs/current/multibyte.html#MULTIBYTE-SETTING) is unicode (`UTF8`), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.
 
+Logging into the server, we can see this with the following command:
+
+```bash
+docker exec -it postgis psql -l
+```
+
+```
+                                  List of databases
+        Name        | Owner | Encoding |  Collate   |   Ctype    | Access privileges 
+--------------------+-------+----------+------------+------------+-------------------
+ gis                | admin | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/admin        +
+                    |       |          |            |            | admin=CTc/admin  +
+                    |       |          |            |            | ro_user=c/admin
+ lter_core_metabase | admin | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/admin        +
+                    |       |          |            |            | admin=CTc/admin  +
+                    |       |          |            |            | rw_user=c/admin
+ postgres           | admin | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0          | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +
+                    |       |          |            |            | admin=CTc/admin
+ template1          | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +
+                    |       |          |            |            | admin=CTc/admin
+ template_postgis   | admin | UTF8     | en_US.utf8 | en_US.utf8 | 
+(6 rows)
+```
+
 Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all database text values to support international characters and documentation (i.e., tabs, etc for markdown conversion).
 
 - In **Python**, use [**`pandas`**](https://pandas.pydata.org/docs/index.html) to read ([`read_csv()`](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)) and write ([`to_csv()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html)) with UTF-8 encoding (i.e., `encoding='utf-8'`).:
