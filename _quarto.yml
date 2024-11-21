@@ -26,6 +26,7 @@ book:
     - apps.qmd
     - api.qmd
     - db.qmd
+    - portals.qmd
     - refs.qmd
 
 bibliography: ["refs/packages.bib"]

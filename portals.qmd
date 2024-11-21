@@ -1,0 +1,112 @@
+# Portals
+
+## Overview
+
+CalCOFI data is available through various portals, each serving different purposes and user needs. This document outlines the main access points and their characteristics.
+
+## Data Portal Comparison
+
+| Portal | Full Archive | Query by xyt | Query by taxa | DOI issued | Multiple formats | API Access |
+|--------|--------------|--------------|---------------|------------|-----------------|------------|
+| **EDI**    | ✅           | ⚡           | ⚡            | ✅         | ⚡              | ⚡         |
+| **OBIS**   | ⚡           | ✅           | ✅            | ❌         | ✅              | ✅         |
+| **ERDDAP** | ⚡           | ✅           | ⚡            | ❌         | ✅              | ✅         |
+
+### Portal Details
+
+#### EDI (Environmental Data Initiative)
+- Complete dataset archives using DataOne software and EML metadata
+- DOIs issued for all datasets ensuring citability
+- Full archive allowing for any data file types
+- Basic spatial and temporal filtering through web interface
+- Download in original formats with metadata
+- Access through DataOne API
+- Links:
+  * [EDIrepository.org](https://edirepository.org)
+  * CalCOFI datasets: [EDI query "CalCOFI"](http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&q=CalCOFI&fq=-scope:ecotrends&fq=-scope:lter-landsat*&fl=id,packageid,title,author,organization,pubdate,coordinates&debug=false)
+
+#### OBIS (Ocean Biodiversity Information System)
+- Specialized in marine biodiversity data
+- Standardized using DarwinCore fields
+- Extended measurements supported via [extendedMeasurementOrFact](https://manual.obis.org/format_emof.html)
+- Powerful filtering by space, time, and taxonomic parameters
+- Multiple download formats (CSV, JSON, Darwin Core Archive)
+- Full REST API access
+- Links:
+  * [OBIS.org](https://obis.org)
+  * CalCOFI datasets: [obis.org/dataset](https://obis.org/datasets) + "calcofi" Keyword
+
+#### ERDDAP
+- Tabular and gridded data server
+- Advanced subsetting by space, time, and parameters
+- Multiple output formats (CSV, JSON, NetCDF, etc.)
+- RESTful API with direct data access
+- Built-in data visualization tools
+- No persistent identifiers but stable URLs
+- Links:
+  * [ERDDAP](https://upwell.pfeg.noaa.gov/erddap/index.html)
+  * CalCOFI datasets: 
+    - [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
+    - [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
+
+## Data Flow Architecture
+
+While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from the integrated database to the portals.
+
+```{mermaid}
+graph TD
+    A[Raw Data] --> B[CalCOFI Database]
+    B --> C[calcofi.org Downloads]
+    B --> D[API]
+    D --> E[R Package: calcofi4r]
+    D --> F[Web Applications]
+    B --> G[EDI Archive]
+    B --> H[OBIS Portal]
+    B --> I[ERDDAP Server]
+    G --> J[DataOne Network]
+    C & D & G & H & I --> K[ODIS.org]
+    K -->|Schema.org JSON-LD| L[Data Discovery]
+```
+
+In practice, CalCOFI is a partnership with various contributing members, so whichever portal is authoritative to them is what gets used.
+
+## Integrated Database and Tools
+
+CalCOFI is also developing an integrated database and tools that enable efficient data access and analysis:
+
+### APIs
+- RESTful endpoints for programmatic access
+- Filtering by space, time, and taxonomic parameters
+- Relationship queries across tables
+- Links:
+  * [api.calcofi.io](https://api.calcofi.io)
+  * [tile.calcofi.io](https://tile.calcofi.io)
+
+### R Package (calcofi4r)
+- Direct data access from R
+- Built-in analysis functions
+- Integration with tidyverse ecosystem
+- Link:
+  * [calcofi.io/calcofi4r](https://calcofi.io/calcofi4r)
+
+### Web Applications
+- Interactive data exploration
+- Visual analysis tools
+- User-friendly interfaces
+- Link:
+  * [calcofi.io](https://calcofi.io), App button
+
+
+## Data Discovery Through ODIS
+
+To enhance data discoverability, CalCOFI datasets are indexed by [ODIS.org](https://odis.org) through:
+
+1. Schema.org JSON-LD metadata
+2. Dataset landing pages
+3. Automated harvesting
+
+This federation approach ensures that CalCOFI data remains:
+- Discoverable through multiple channels
+- Properly cited and attributed
+- Integrated with global ocean data systems
+
