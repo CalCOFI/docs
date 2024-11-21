@@ -51,24 +51,73 @@ CalCOFI data is available through various portals, each serving different purpos
 
 ## Data Flow Architecture
 
-While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from the integrated database to the portals.
+While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from raw data to the integrated database to portals and meta-portals.
 
 ```{mermaid}
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#E0E7FF',
+    'primaryTextColor': '#312E81',
+    'primaryBorderColor': '#6366F1',
+    'lineColor': '#818CF8',
+    'secondaryColor': '#FEF3C7',
+    'tertiaryColor': '#ECFDF5'
+  }
+}}%%
+
 graph TD
-    A[Raw Data] --> B[CalCOFI Database]
-    B --> C[calcofi.org Downloads]
-    B --> D[API]
-    D --> E[R Package: calcofi4r]
-    D --> F[Web Applications]
-    B --> G[EDI Archive]
-    B --> H[OBIS Portal]
-    B --> I[ERDDAP Server]
-    G --> J[DataOne Network]
-    C & D & G & H & I --> K[ODIS.org]
-    K -->|Schema.org JSON-LD| L[Data Discovery]
+  %% nodes with styles
+  raw([raw data]):::source
+  db[(database)]:::database
+  
+  subgraph calcofi[CalCOFI.io]
+    web[calcofi.org]:::website
+    api[APIs]:::api
+    lib[libraries]:::code
+    app[applications]:::code
+    flow[workflows]:::code
+  end
+  
+  subgraph portals[Portals]
+    edi[EDI]:::portal
+    obis[OBIS]:::portal
+    erddap[ERDDAP]:::portal
+    ncei[NCEI]:::portal
+  end
+  
+  subgraph meta[Meta-Portals]
+    odis[ODIS]:::metaportal
+    datagov[data.gov]:::metaportal
+  end
+  
+  %% edges
+  raw --> db
+  db  --> api
+  db  --> web
+  api --> lib
+  api --> app
+  api --> flow
+  flow  --> portals
+  portals -->|sitemap| odis
+  portals --> datagov
+
+  %% Custom styles
+  classDef source fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+  classDef database fill:#FEF3C7,stroke:#D97706,stroke-width:2px
+  classDef website fill:#F3E8FF,stroke:#9333EA,stroke-width:2px
+  classDef api fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+  classDef code fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px
+  classDef portal fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
+  classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px
+
+  %% Style subgraphs
+  style calcofi fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+  style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+  style meta fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
 ```
 
-In practice, CalCOFI is a partnership with various contributing members, so whichever portal is authoritative to them is what gets used.
+In practice, CalCOFI is a partnership with various contributing members, so the authoritative dataset might flow differently, such as from EDI to the database to the other portals. The other portals, such as OBIS or ERDDAP, serve different audiences or purposes. The meta-portals like ODIS and Data.gov then index these portals to provide broader discovery of CalCOFI datasets.
 
 ## Integrated Database and Tools
 
