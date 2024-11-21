@@ -1,4 +1,7 @@
-# Portals
+---
+title: "Portals"
+from: markdown+emoji
+---
 
 ## Overview
 
@@ -29,8 +32,8 @@ graph TD
   subgraph calcofi[CalCOFI.io]
     web[calcofi.org]:::website
     api[APIs]:::api
-    lib[libraries]:::code
-    app[applications]:::code
+    lib[library]:::code
+    app[apps]:::code
     flow[workflows]:::code
   end
   
@@ -76,60 +79,68 @@ In practice, CalCOFI is a partnership with various contributing members, so the 
 
 ## Portals
 
-| Portal     | Full Archive | Versioning | DOI issued | Query by xyt | Query by taxa | Multiple formats | API Access |
-|------------|--------------|------------|------------|--------------|---------------|-----------------|------------|
-| **EDI**    | 🟢           | 🟢         | 🟢         | 🟡           | 🟡            | 🔴              | 🟡         |
-| **NCEI**   | 🟢           | 🟢         | 🟢         | 🔴           | 🔴            | 🔴              | 🟡         |
-| **OBIS**   | 🟡           | 🟡         | 🟡         | 🟢           | 🟢            | 🟡              | 🟢         |
-| **ERDDAP** | 🟡           | 🔴         | 🔴         | 🟢           | 🟡            | 🟢              | 🟢         |
+| Portal | Full Archive | Versioning | DOI issued | Query by xyt | Query by taxa | Multiple formats | API Access |
+|---------|---------|---------|---------|---------|---------|---------|---------|
+| **EDI** | :green_circle: | :green_circle: | :green_circle: | :yellow_circle: | :yellow_circle: | :red_circle: | :yellow_circle: |
+| **NCEI** | :green_circle: | :green_circle: | :green_circle: | :red_circle: | :red_circle: | :red_circle: | :yellow_circle: |
+| **OBIS** | :yellow_circle: | :yellow_circle: | :yellow_circle: | :green_circle: | :green_circle: | :yellow_circle: | :green_circle: |
+| **ERDDAP** | :yellow_circle: | :red_circle: | :red_circle: | :green_circle: | :yellow_circle: | :green_circle: | :green_circle: |
+
+<!-- TODO: get emojis to show in PDF -->
+
 ----
-† Capability: 🔴 none; 🟡 partial; 🟢 full
+
+† Capability: :red_circle: none; :yellow_circle: partial; :green_circle: full
 
 ### EDI (Environmental Data Initiative)
-- Complete dataset archives using DataOne software and EML metadata
-- DOIs issued for all datasets ensuring citability
-- Full archive allowing for any data file types
-- Basic spatial and temporal filtering through web interface
-- Download in original formats with metadata
-- Access through DataOne API
-- Links:
-  * [EDIrepository.org](https://edirepository.org)
-  * CalCOFI datasets: [EDI query "CalCOFI"](http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&q=CalCOFI&fq=-scope:ecotrends&fq=-scope:lter-landsat*&fl=id,packageid,title,author,organization,pubdate,coordinates&debug=false)
+
+-   Complete dataset archives using DataOne software and EML metadata
+-   DOIs issued for all datasets ensuring citability
+-   Full archive allowing for any data file types
+-   Basic spatial and temporal filtering through web interface
+-   Download in original formats with metadata
+-   Access through DataOne API
+-   Links:
+    -   [EDIrepository.org](https://edirepository.org)
+    -   CalCOFI datasets: [EDI query "CalCOFI"](http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&q=CalCOFI&fq=-scope:ecotrends&fq=-scope:lter-landsat*&fl=id,packageid,title,author,organization,pubdate,coordinates&debug=false)
 
 ### NCEI (National Centers for Environmental Information)
-- Long-term archival of oceanographic data
-- DOIs issued for dataset submissions
-- Standardized metadata using ISO 19115-2
-- Basic search interface with geographic and temporal filtering
-- Data preserved in original submission formats
-- Access through NCEI API services
-- Links:
-  * [NCEI Ocean Archive](https://www.ncei.noaa.gov/products/ocean-archive)
-  * CalCOFI datasets: [NCEI search "CalCOFI"](https://www.ncei.noaa.gov/access/search/index?q=CalCOFI)
+
+-   Long-term archival of oceanographic data
+-   DOIs issued for dataset submissions
+-   Standardized metadata using ISO 19115-2
+-   Basic search interface with geographic and temporal filtering
+-   Data preserved in original submission formats
+-   Access through NCEI API services
+-   Links:
+    -   [NCEI Ocean Archive](https://www.ncei.noaa.gov/products/ocean-archive)
+    -   CalCOFI datasets: [NCEI search "CalCOFI"](https://www.ncei.noaa.gov/access/search/index?q=CalCOFI)
 
 ### OBIS (Ocean Biodiversity Information System)
-- Specialized in marine biodiversity data
-- Standardized using DarwinCore fields
-- Extended measurements supported via [extendedMeasurementOrFact](https://manual.obis.org/format_emof.html)
-- Powerful filtering by space, time, and taxonomic parameters
-- Multiple download formats (CSV, JSON, Darwin Core Archive)
-- Full REST API access
-- Links:
-  * [OBIS.org](https://obis.org)
-  * CalCOFI datasets: [obis.org/dataset](https://obis.org/datasets) + "calcofi" Keyword
+
+-   Specialized in marine biodiversity data
+-   Standardized using DarwinCore fields
+-   Extended measurements supported via [extendedMeasurementOrFact](https://manual.obis.org/format_emof.html)
+-   Powerful filtering by space, time, and taxonomic parameters
+-   Multiple download formats (CSV, JSON, Darwin Core Archive)
+-   Full REST API access
+-   Links:
+    -   [OBIS.org](https://obis.org)
+    -   CalCOFI datasets: [obis.org/dataset](https://obis.org/datasets) + "calcofi" Keyword
 
 ### ERDDAP (Environmental Research Division Data Access Program)
-- Tabular and gridded data server
-- Advanced subsetting by space, time, and parameters
-- Multiple output formats (CSV, JSON, NetCDF, etc.)
-- RESTful API with direct data access
-- Built-in data visualization tools
-- No persistent identifiers but stable URLs
-- Links:
-  * [ERDDAP](https://upwell.pfeg.noaa.gov/erddap/index.html)
-  * CalCOFI datasets: 
-    - [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
-    - [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
+
+-   Tabular and gridded data server
+-   Advanced subsetting by space, time, and parameters
+-   Multiple output formats (CSV, JSON, NetCDF, etc.)
+-   RESTful API with direct data access
+-   Built-in data visualization tools
+-   No persistent identifiers but stable URLs
+-   Links:
+    -   [ERDDAP](https://upwell.pfeg.noaa.gov/erddap/index.html)
+    -   CalCOFI datasets:
+        -   [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
+        -   [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
 
 ## Meta-Portals
 
@@ -139,39 +150,35 @@ The JSON-LD metadata in the Portal dataset web pages get indexed by [Google Data
 
 ### ODIS (Ocean Data Information System)
 
-ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but 
-focuses on ocean data. CalCOFI curates a sitemap of authoritative datasets to
-server to [ODIS.org](https://odis.org)
+ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but focuses on ocean data. CalCOFI curates a sitemap of authoritative datasets to server to [ODIS.org](https://odis.org)
 
-This federated approach ensures that CalCOFI data remains:
-- Discoverable through multiple channels
-- Properly cited and attributed
-- Integrated with global ocean data systems
+This federated approach ensures that CalCOFI data remains: - Discoverable through multiple channels - Properly cited and attributed - Integrated with global ocean data systems
 
 ## CalCOFI.io Tools
 
 CalCOFI is also developing an integrated database and tools that enable efficient data access and analysis:
 
 ### APIs
-- RESTful endpoints for programmatic access
-- Filtering by space, time, and taxonomic parameters
-- Relationship queries across tables
-- Links:
-  * [api.calcofi.io](https://api.calcofi.io)
-  * [tile.calcofi.io](https://tile.calcofi.io)
+
+-   RESTful endpoints for programmatic access
+-   Filtering by space, time, and taxonomic parameters
+-   Relationship queries across tables
+-   Links:
+    -   [api.calcofi.io](https://api.calcofi.io)
+    -   [tile.calcofi.io](https://tile.calcofi.io)
 
 ### Library
-- Direct data access from R
-- Built-in analysis functions
-- Integration with tidyverse ecosystem
-- Link:
-  * [calcofi.io/calcofi4r](https://calcofi.io/calcofi4r)
 
-### Applications
-- Interactive data exploration
-- Visual analysis tools
-- User-friendly interfaces
-- Link:
-  * [calcofi.io](https://calcofi.io), App button
+-   Direct data access from R
+-   Built-in analysis functions
+-   Integration with tidyverse ecosystem
+-   Link:
+    -   [calcofi.io/calcofi4r](https://calcofi.io/calcofi4r)
 
+### Apps
 
+-   Interactive data exploration with Shiny applications
+-   User-friendly interfaces
+-   Subset and download data
+-   Link:
+    -   [calcofi.io](https://calcofi.io), App button
