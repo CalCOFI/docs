@@ -4,66 +4,7 @@
 
 CalCOFI data is available through various portals, each serving different purposes and user needs. This document outlines the main access points and their characteristics.
 
-## Data Portal Comparison
-
-| Portal     | Full Archive | Versioning | DOI issued | Query by xyt | Query by taxa | Multiple formats | API Access |
-|------------|--------------|------------|------------|--------------|---------------|-----------------|------------|
-| **EDI**    | 🟢           | 🟢         | 🟢         | 🟡           | 🟡            | 🔴              | 🟡         |
-| **NCEI**   | 🟢           | 🟢         | 🟢         | 🔴           | 🔴            | 🔴              | 🟡         |
-| **OBIS**   | 🟡           | 🟡         | 🟡         | 🟢           | 🟢            | 🟡              | 🟢         |
-| **ERDDAP** | 🟡           | 🔴         | 🔴         | 🟢           | 🟡            | 🟢              | 🟢         |
-----
-† Capability: 🔴 none; 🟡 partial; 🟢 full
-
-### Portal Details
-
-#### EDI (Environmental Data Initiative)
-- Complete dataset archives using DataOne software and EML metadata
-- DOIs issued for all datasets ensuring citability
-- Full archive allowing for any data file types
-- Basic spatial and temporal filtering through web interface
-- Download in original formats with metadata
-- Access through DataOne API
-- Links:
-  * [EDIrepository.org](https://edirepository.org)
-  * CalCOFI datasets: [EDI query "CalCOFI"](http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&q=CalCOFI&fq=-scope:ecotrends&fq=-scope:lter-landsat*&fl=id,packageid,title,author,organization,pubdate,coordinates&debug=false)
-
-#### NCEI (National Centers for Environmental Information)
-- Long-term archival of oceanographic data
-- DOIs issued for dataset submissions
-- Standardized metadata using ISO 19115-2
-- Basic search interface with geographic and temporal filtering
-- Data preserved in original submission formats
-- Access through NCEI API services
-- Links:
-  * [NCEI Ocean Archive](https://www.ncei.noaa.gov/products/ocean-archive)
-  * CalCOFI datasets: [NCEI search "CalCOFI"](https://www.ncei.noaa.gov/access/search/index?q=CalCOFI)
-
-#### OBIS (Ocean Biodiversity Information System)
-- Specialized in marine biodiversity data
-- Standardized using DarwinCore fields
-- Extended measurements supported via [extendedMeasurementOrFact](https://manual.obis.org/format_emof.html)
-- Powerful filtering by space, time, and taxonomic parameters
-- Multiple download formats (CSV, JSON, Darwin Core Archive)
-- Full REST API access
-- Links:
-  * [OBIS.org](https://obis.org)
-  * CalCOFI datasets: [obis.org/dataset](https://obis.org/datasets) + "calcofi" Keyword
-
-#### ERDDAP (Environmental Research Division Data Access Program)
-- Tabular and gridded data server
-- Advanced subsetting by space, time, and parameters
-- Multiple output formats (CSV, JSON, NetCDF, etc.)
-- RESTful API with direct data access
-- Built-in data visualization tools
-- No persistent identifiers but stable URLs
-- Links:
-  * [ERDDAP](https://upwell.pfeg.noaa.gov/erddap/index.html)
-  * CalCOFI datasets: 
-    - [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
-    - [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
-
-## Data Flow Architecture
+## Data Flow
 
 While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from raw data to the integrated database to portals and meta-portals.
 
@@ -133,7 +74,81 @@ graph TD
 
 In practice, CalCOFI is a partnership with various contributing members, so the authoritative dataset might flow differently, such as from EDI to the database to the other portals. The other portals, such as OBIS or ERDDAP, serve different audiences or purposes. The meta-portals like ODIS and Data.gov then index these portals to provide broader discovery of CalCOFI datasets.
 
-## Integrated Database and Tools
+## Portals
+
+| Portal     | Full Archive | Versioning | DOI issued | Query by xyt | Query by taxa | Multiple formats | API Access |
+|------------|--------------|------------|------------|--------------|---------------|-----------------|------------|
+| **EDI**    | 🟢           | 🟢         | 🟢         | 🟡           | 🟡            | 🔴              | 🟡         |
+| **NCEI**   | 🟢           | 🟢         | 🟢         | 🔴           | 🔴            | 🔴              | 🟡         |
+| **OBIS**   | 🟡           | 🟡         | 🟡         | 🟢           | 🟢            | 🟡              | 🟢         |
+| **ERDDAP** | 🟡           | 🔴         | 🔴         | 🟢           | 🟡            | 🟢              | 🟢         |
+----
+† Capability: 🔴 none; 🟡 partial; 🟢 full
+
+### EDI (Environmental Data Initiative)
+- Complete dataset archives using DataOne software and EML metadata
+- DOIs issued for all datasets ensuring citability
+- Full archive allowing for any data file types
+- Basic spatial and temporal filtering through web interface
+- Download in original formats with metadata
+- Access through DataOne API
+- Links:
+  * [EDIrepository.org](https://edirepository.org)
+  * CalCOFI datasets: [EDI query "CalCOFI"](http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&q=CalCOFI&fq=-scope:ecotrends&fq=-scope:lter-landsat*&fl=id,packageid,title,author,organization,pubdate,coordinates&debug=false)
+
+### NCEI (National Centers for Environmental Information)
+- Long-term archival of oceanographic data
+- DOIs issued for dataset submissions
+- Standardized metadata using ISO 19115-2
+- Basic search interface with geographic and temporal filtering
+- Data preserved in original submission formats
+- Access through NCEI API services
+- Links:
+  * [NCEI Ocean Archive](https://www.ncei.noaa.gov/products/ocean-archive)
+  * CalCOFI datasets: [NCEI search "CalCOFI"](https://www.ncei.noaa.gov/access/search/index?q=CalCOFI)
+
+### OBIS (Ocean Biodiversity Information System)
+- Specialized in marine biodiversity data
+- Standardized using DarwinCore fields
+- Extended measurements supported via [extendedMeasurementOrFact](https://manual.obis.org/format_emof.html)
+- Powerful filtering by space, time, and taxonomic parameters
+- Multiple download formats (CSV, JSON, Darwin Core Archive)
+- Full REST API access
+- Links:
+  * [OBIS.org](https://obis.org)
+  * CalCOFI datasets: [obis.org/dataset](https://obis.org/datasets) + "calcofi" Keyword
+
+### ERDDAP (Environmental Research Division Data Access Program)
+- Tabular and gridded data server
+- Advanced subsetting by space, time, and parameters
+- Multiple output formats (CSV, JSON, NetCDF, etc.)
+- RESTful API with direct data access
+- Built-in data visualization tools
+- No persistent identifiers but stable URLs
+- Links:
+  * [ERDDAP](https://upwell.pfeg.noaa.gov/erddap/index.html)
+  * CalCOFI datasets: 
+    - [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
+    - [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
+
+## Meta-Portals
+
+### Google Dataset Search
+
+The JSON-LD metadata in the Portal dataset web pages get indexed by [Google Dataset Search](https://datasetsearch.research.google.com/search?query=calcofi) through schema.org metadata. This ensures that CalCOFI data is discoverable through Google search and other search engines.
+
+### ODIS (Ocean Data Information System)
+
+ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but 
+focuses on ocean data. CalCOFI curates a sitemap of authoritative datasets to
+server to [ODIS.org](https://odis.org)
+
+This federated approach ensures that CalCOFI data remains:
+- Discoverable through multiple channels
+- Properly cited and attributed
+- Integrated with global ocean data systems
+
+## CalCOFI.io Tools
 
 CalCOFI is also developing an integrated database and tools that enable efficient data access and analysis:
 
@@ -159,15 +174,4 @@ CalCOFI is also developing an integrated database and tools that enable efficien
 - Link:
   * [calcofi.io](https://calcofi.io), App button
 
-## Data Discovery Through ODIS
 
-To enhance data discoverability, CalCOFI datasets are indexed by [ODIS.org](https://odis.org) through:
-
-1. Schema.org JSON-LD metadata
-2. Dataset landing pages
-3. Automated harvesting
-
-This federation approach ensures that CalCOFI data remains:
-- Discoverable through multiple channels
-- Properly cited and attributed
-- Integrated with global ocean data systems
