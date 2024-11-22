@@ -9,7 +9,8 @@ on:
 jobs:
   build-deploy:
     name: Render & publish Quarto book
-    runs-on: macOS-latest
+    # runs-on: macOS-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -30,7 +31,8 @@ jobs:
 
       - name: Install librsvg
         # convert svg to png for pdf
-        run: brew install librsvg
+        # run: brew install librsvg
+        run: sudo apt-get install librsvg2-bin # librsvg2-dev
 
       # - name: Install qpdf
       #   # to prevent R install from failing
@@ -38,10 +40,10 @@ jobs:
 
       - name: Install R
         uses: r-lib/actions/setup-r@v2
-        env:
-          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: true
-        with:
-          r-version: '4.4.1'     # 2024-09-04
+        # env:
+        #   HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: true
+        # with:
+        #   r-version: '4.4.1'     # 2024-09-04
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
