@@ -2,38 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://calcofi.io/docs/index.html</loc>
-    <lastmod>2024-10-30T12:23:06.502Z</lastmod>
+    <lastmod>2024-11-22T17:21:53.690Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/reports.html</loc>
-    <lastmod>2024-10-30T12:23:06.503Z</lastmod>
+    <lastmod>2024-11-22T17:21:53.694Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/apps.html</loc>
-    <lastmod>2024-10-30T12:23:06.501Z</lastmod>
+    <lastmod>2024-11-22T17:21:53.690Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/api.html</loc>
-    <lastmod>2024-10-30T12:23:06.501Z</lastmod>
+    <lastmod>2024-11-22T17:21:53.690Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/db.html</loc>
-    <lastmod>2024-10-30T12:23:06.501Z</lastmod>
+    <lastmod>2024-11-22T17:21:53.690Z</lastmod>
+  </url>
+  <url>
+    <loc>https://calcofi.io/docs/portals.html</loc>
+    <lastmod>2024-11-22T17:21:53.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://calcofi.io/docs/portals_a.html</loc>
+    <lastmod>2024-11-22T17:21:53.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://calcofi.io/docs/portals_b.html</loc>
+    <lastmod>2024-11-22T17:21:53.694Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/refs.html</loc>
-    <lastmod>2024-10-30T12:23:06.503Z</lastmod>
+    <lastmod>2024-11-22T17:21:53.694Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io-Docs.docx</loc>
-    <lastmod>2024-10-30T12:24:51.260Z</lastmod>
+    <lastmod>2024-11-22T17:27:25.125Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io-Docs.pdf</loc>
-    <lastmod>2024-10-30T12:25:05.921Z</lastmod>
+    <lastmod>2024-11-22T17:27:46.409Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io-Docs.epub</loc>
-    <lastmod>2024-10-30T12:25:06.822Z</lastmod>
+    <lastmod>2024-11-22T17:27:47.857Z</lastmod>
   </url>
 </urlset>

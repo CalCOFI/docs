@@ -134,7 +134,7 @@
     "href": "db.html#use-unicode-for-text",
     "title": "5  Database",
     "section": "5.2 Use Unicode for text",
-    "text": "5.2 Use Unicode for text\nThe default character encoding for Postgresql is unicode (UTF8), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.\nUse Unicode (utf-8 in Python or UTF8 in Postgresql) encoding for all database text values to support international characters and documentation (i.e., tabs, etc for markdown conversion).\n\nIn Python, use pandas to read (read_csv()) and write (to_csv()) with UTF-8 encoding (i.e., encoding='utf-8').:\nimport pandas as pd\nfrom sqlalchemy import create_engine\nengine = create_engine('postgresql://user:password@localhost:5432/dbname')\n\n# read from a csv file\ndf = pd.read_csv('file.csv', encoding='utf-8')\n\n# write to PostgreSQL\ndf.to_sql('table_name', engine, if_exists='replace', index=False, method='multi', chunksize=1000, encoding='utf-8')\n\n# read from PostgreSQL\ndf = pd.read_sql('SELECT * FROM table_name', engine, encoding='utf-8')\n\n# write to a csv file with UTF-8 encoding\ndf.to_csv('file.csv', index=False, encoding='utf-8')\nIn R, use readr to read (read_csv()) and write (write_excel_csv()) to force UTF-8 encoding.\nlibrary(readr)\nlibrary(DBI)\nlibrary(RPostgres)\n\n# connect to PostgreSQL\ncon &lt;- dbConnect(RPostgres::Postgres(), dbname = \"dbname\", host = \"localhost\", port = 5432, user = \"user\", password = \"password\")\n\n# read from a csv file\ndf &lt;- read_csv('file.csv', locale = locale(encoding = 'UTF-8'))  # explicit\ndf &lt;- read_csv('file.csv')                                       # implicit\n\n# write to PostgreSQL\ndbWriteTable(con, 'table_name', df, overwrite = TRUE)\n\n# read from PostgreSQL\ndf &lt;- dbReadTable(con, 'table_name')\n\n# write to a csv file with UTF-8 encoding\nwrite_excel_csv(df, 'file.csv', locale = locale(encoding = 'UTF-8'))  # explicit\nwrite_excel_csv(df, 'file.csv')                                       # implicit",
+    "text": "5.2 Use Unicode for text\nThe default character encoding for Postgresql is unicode (UTF8), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.\nLogging into the server, we can see this with the following command:\ndocker exec -it postgis psql -l\n                                  List of databases\n        Name        | Owner | Encoding |  Collate   |   Ctype    | Access privileges \n--------------------+-------+----------+------------+------------+-------------------\n gis                | admin | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/admin        +\n                    |       |          |            |            | admin=CTc/admin  +\n                    |       |          |            |            | ro_user=c/admin\n lter_core_metabase | admin | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/admin        +\n                    |       |          |            |            | admin=CTc/admin  +\n                    |       |          |            |            | rw_user=c/admin\n postgres           | admin | UTF8     | en_US.utf8 | en_US.utf8 | \n template0          | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +\n                    |       |          |            |            | admin=CTc/admin\n template1          | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +\n                    |       |          |            |            | admin=CTc/admin\n template_postgis   | admin | UTF8     | en_US.utf8 | en_US.utf8 | \n(6 rows)\nUse Unicode (utf-8 in Python or UTF8 in Postgresql) encoding for all database text values to support international characters and documentation (i.e., tabs, etc for markdown conversion).\n\nIn Python, use pandas to read (read_csv()) and write (to_csv()) with UTF-8 encoding (i.e., encoding='utf-8').:\nimport pandas as pd\nfrom sqlalchemy import create_engine\nengine = create_engine('postgresql://user:password@localhost:5432/dbname')\n\n# read from a csv file\ndf = pd.read_csv('file.csv', encoding='utf-8')\n\n# write to PostgreSQL\ndf.to_sql('table_name', engine, if_exists='replace', index=False, method='multi', chunksize=1000, encoding='utf-8')\n\n# read from PostgreSQL\ndf = pd.read_sql('SELECT * FROM table_name', engine, encoding='utf-8')\n\n# write to a csv file with UTF-8 encoding\ndf.to_csv('file.csv', index=False, encoding='utf-8')\nIn R, use readr to read (read_csv()) and write (write_excel_csv()) to force UTF-8 encoding.\nlibrary(readr)\nlibrary(DBI)\nlibrary(RPostgres)\n\n# connect to PostgreSQL\ncon &lt;- dbConnect(RPostgres::Postgres(), dbname = \"dbname\", host = \"localhost\", port = 5432, user = \"user\", password = \"password\")\n\n# read from a csv file\ndf &lt;- read_csv('file.csv', locale = locale(encoding = 'UTF-8'))  # explicit\ndf &lt;- read_csv('file.csv')                                       # implicit\n\n# write to PostgreSQL\ndbWriteTable(con, 'table_name', df, overwrite = TRUE)\n\n# read from PostgreSQL\ndf &lt;- dbReadTable(con, 'table_name')\n\n# write to a csv file with UTF-8 encoding\nwrite_excel_csv(df, 'file.csv', locale = locale(encoding = 'UTF-8'))  # explicit\nwrite_excel_csv(df, 'file.csv')                                       # implicit",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span>"
     ]
@@ -170,23 +170,93 @@
     ]
   },
   {
+    "objectID": "portals.html",
+    "href": "portals.html",
+    "title": "6  Portals",
+    "section": "",
+    "text": "6.1 Overview\nCalCOFI data is available through various portals, each serving different purposes and user needs. This document outlines the main access points and their characteristics.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Portals</span>"
+    ]
+  },
+  {
+    "objectID": "portals.html#overview",
+    "href": "portals.html#overview",
+    "title": "6  Portals",
+    "section": "",
+    "text": "6.1.1 EDI (Environmental Data Initiative)\n\nComplete dataset archives using DataOne software and EML metadata\nDOIs issued for all datasets ensuring citability\nFull archive allowing for any data file types\nBasic spatial and temporal filtering through web interface\nDownload in original formats with metadata\nAccess through DataOne API\nLinks:\n\nEDIrepository.org\nCalCOFI datasets: EDI query “CalCOFI”\n\n\n\n\n6.1.2 NCEI (National Centers for Environmental Information)\n\nLong-term archival of oceanographic data\nDOIs issued for dataset submissions\nStandardized metadata using ISO 19115-2\nBasic search interface with geographic and temporal filtering\nData preserved in original submission formats\nAccess through NCEI API services\nLinks:\n\nNCEI Ocean Archive\nCalCOFI datasets: NCEI search “CalCOFI”\n\n\n\n\n6.1.3 OBIS (Ocean Biodiversity Information System)\n\nSpecialized in marine biodiversity data\nStandardized using DarwinCore fields\nExtended measurements supported via extendedMeasurementOrFact\nPowerful filtering by space, time, and taxonomic parameters\nMultiple download formats (CSV, JSON, Darwin Core Archive)\nFull REST API access\nLinks:\n\nOBIS.org\nCalCOFI datasets: obis.org/dataset + “calcofi” Keyword\n\n\n\n\n6.1.4 ERDDAP (Environmental Research Division Data Access Program)\n\nTabular and gridded data server\nAdvanced subsetting by space, time, and parameters\nMultiple output formats (CSV, JSON, NetCDF, etc.)\nRESTful API with direct data access\nBuilt-in data visualization tools\nNo persistent identifiers but stable URLs\nLinks:\n\nERDDAP\nCalCOFI datasets:\n\nERDDAP, OceanView - CalCOFI seabirds\nERDDAP, CoastWatch - CalCOFI oceanographic",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Portals</span>"
+    ]
+  },
+  {
+    "objectID": "portals.html#meta-portals",
+    "href": "portals.html#meta-portals",
+    "title": "6  Portals",
+    "section": "6.2 Meta-Portals",
+    "text": "6.2 Meta-Portals\n\n6.2.1 Google Dataset Search\nThe JSON-LD metadata in the Portal dataset web pages get indexed by Google Dataset Search through schema.org metadata. This ensures that CalCOFI data is discoverable through Google search and other search engines.\n\n\n6.2.2 ODIS (Ocean Data Information System)\nODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but focuses on ocean data. CalCOFI curates a sitemap of authoritative datasets to server to ODIS.org\nThis federated approach ensures that CalCOFI data remains:\n\nDiscoverable through multiple channels\nProperly cited and attributed\nIntegrated with global ocean data systems",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Portals</span>"
+    ]
+  },
+  {
+    "objectID": "portals.html#calcofi.io-tools",
+    "href": "portals.html#calcofi.io-tools",
+    "title": "6  Portals",
+    "section": "6.3 CalCOFI.io Tools",
+    "text": "6.3 CalCOFI.io Tools\nCalCOFI is also developing an integrated database and tools that enable efficient data access and analysis:\n\n6.3.1 APIs\n\nRESTful endpoints for programmatic access\nFiltering by space, time, and taxonomic parameters\nRelationship queries across tables\nLinks:\n\napi.calcofi.io\ntile.calcofi.io\n\n\n\n\n6.3.2 Library\n\nDirect data access from R\nBuilt-in analysis functions\nIntegration with tidyverse ecosystem\nLink:\n\ncalcofi.io/calcofi4r\n\n\n\n\n6.3.3 Apps\n\nInteractive data exploration with Shiny applications\nUser-friendly interfaces\nSubset and download data\nLink:\n\ncalcofi.io, App button",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Portals</span>"
+    ]
+  },
+  {
+    "objectID": "portals_a.html",
+    "href": "portals_a.html",
+    "title": "7  portals_a",
+    "section": "",
+    "text": "7.1 Data Flow\nWhile it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from raw data to the integrated database to portals and meta-portals.\n%%{init: {\n  'theme': 'base',\n  'themeVariables': {\n    'primaryColor': '#E0E7FF',\n    'primaryTextColor': '#312E81',\n    'primaryBorderColor': '#6366F1',\n    'lineColor': '#818CF8',\n    'secondaryColor': '#FEF3C7',\n    'tertiaryColor': '#ECFDF5'\n  }\n}}%%\n\ngraph TD\n  %% nodes with styles\n  raw([raw data]):::source\n  db[(database)]:::database\n  \n  subgraph calcofi[CalCOFI.io]\n    web[calcofi.org]:::website\n    api[APIs]:::api\n    lib[library]:::code\n    app[apps]:::code\n    flow[workflows]:::code\n  end\n  \n  subgraph portals[Portals]\n    edi[EDI]:::portal\n    obis[OBIS]:::portal\n    erddap[ERDDAP]:::portal\n    ncei[NCEI]:::portal\n  end\n  \n  subgraph meta[Meta-Portals]\n    odis[ODIS]:::metaportal\n    datagov[data.gov]:::metaportal\n  end\n  \n  %% edges\n  raw --&gt; db\n  db  --&gt; api\n  db  --&gt; web\n  api --&gt; lib\n  api --&gt; app\n  api --&gt; flow\n  flow  --&gt; portals\n  portals --&gt;|sitemap| odis\n  portals --&gt; datagov\n\n  %% Custom styles\n  classDef source fill:#E0E7FF,stroke:#6366F1,stroke-width:2px\n  classDef database fill:#FEF3C7,stroke:#D97706,stroke-width:2px\n  classDef website fill:#F3E8FF,stroke:#9333EA,stroke-width:2px\n  classDef api fill:#E0E7FF,stroke:#6366F1,stroke-width:2px\n  classDef code fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px\n  classDef portal fill:#F0FDF4,stroke:#22C55E,stroke-width:2px\n  classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px\n\n  %% Style subgraphs\n  style calcofi fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px\n  style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px\n  style meta fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px\nIn practice, CalCOFI is a partnership with various contributing members, so the authoritative dataset might flow differently, such as from EDI to the database to the other portals. The other portals, such as OBIS or ERDDAP, serve different audiences or purposes. The meta-portals like ODIS and Data.gov then index these portals to provide broader discovery of CalCOFI datasets.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>portals_a</span>"
+    ]
+  },
+  {
+    "objectID": "portals_b.html",
+    "href": "portals_b.html",
+    "title": "8  portals_b",
+    "section": "",
+    "text": "8.1 Portals\n† Capability: 🔴 none; 🟡 partial; 🟢 full",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>portals_b</span>"
+    ]
+  },
+  {
+    "objectID": "portals_b.html#portals",
+    "href": "portals_b.html#portals",
+    "title": "8  portals_b",
+    "section": "",
+    "text": "Portal\nFull Archive\nVersioning\nDOI issued\nQuery by xyt\nQuery by taxa\nMultiple formats\nAPI Access\n\n\n\n\nEDI\n🟢\n🟢\n🟢\n🟡\n🟡\n🔴\n🟡\n\n\nNCEI\n🟢\n🟢\n🟢\n🔴\n🔴\n🔴\n🟡\n\n\nOBIS\n🟡\n🟡\n🟡\n🟢\n🟢\n🟡\n🟢\n\n\nERDDAP\n🟡\n🔴\n🔴\n🟢\n🟡\n🟢\n🟢",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>portals_b</span>"
+    ]
+  },
+  {
     "objectID": "refs.html",
     "href": "refs.html",
-    "title": "6  References",
+    "title": "9  References",
     "section": "",
-    "text": "6.1 R packages",
+    "text": "9.1 R packages",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>References</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>References</span>"
     ]
   },
   {
     "objectID": "refs.html#r-packages",
     "href": "refs.html#r-packages",
-    "title": "6  References",
+    "title": "9  References",
     "section": "",
     "text": "API: plumber (Schloerke and Allen 2024)\ndocs: Quarto (Allaire and Dervieux 2024)\napps: Shiny (Chang et al. 2024)\n\n\n\n\n\nAllaire, JJ, and Christophe Dervieux. 2024. Quarto: R Interface to Quarto Markdown Publishing System. https://github.com/quarto-dev/quarto-r.\n\n\nChang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert, and Barbara Borges. 2024. Shiny: Web Application Framework for r. https://shiny.posit.co/.\n\n\nSchloerke, Barret, and Jeff Allen. 2024. Plumber: An API Generator for r. https://www.rplumber.io.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>References</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>References</span>"
     ]
   }
 ]
