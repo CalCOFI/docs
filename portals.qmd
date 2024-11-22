@@ -26,9 +26,9 @@ While it would be ideal for CalCOFI data to be available through a single portal
 graph TD
   %% nodes with styles
   raw([raw data]):::source
-  db[(database)]:::database
   
   subgraph calcofi[CalCOFI.io]
+    db[(database)]:::database
     web[calcofi.org]:::website
     api[APIs]:::api
     lib[library]:::code
@@ -141,6 +141,62 @@ In practice, CalCOFI is a partnership with various contributing members, so the 
     -   CalCOFI datasets:
         -   [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
         -   [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
+
+## Metadata
+
+The [Ecological Metadata Language (EML)](https://eml.ecoinformatics.org/) (and using R package [EML](https://docs.ropensci.org/EML/) in workflows) serves as a key standard for describing ecological and environmental data. For CalCOFI, EML metadata files are generated alongside data files, providing structured documentation that enables interoperability across different data portals. This metadata-driven approach allows automated ingestion into various data systems while maintaining data integrity and provenance.
+
+```{mermaid}
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#E0E7FF',
+    'primaryTextColor': '#312E81',
+    'primaryBorderColor': '#6366F1',
+    'lineColor': '#818CF8',
+    'secondaryColor': '#FEF3C7',
+    'tertiaryColor': '#ECFDF5'
+  }
+}}%%
+graph LR
+    subgraph inputs[Data & Metadata]
+        data([data.csv]):::source
+        eml[metadata.eml]:::database
+    end
+
+    subgraph portals[Data Portals]
+        edi[EDI]:::portal
+        erddap[ERDDAP]:::portal
+        obis[OBIS]:::portal
+        ncei[NCEI]:::portal
+    end
+
+    data --> eml
+    eml --> edi
+    eml --> erddap
+    eml --> obis
+    eml --> ncei
+
+    %% Custom styles
+    classDef source fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+    classDef database fill:#FEF3C7,stroke:#D97706,stroke-width:2px
+    classDef portal fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
+
+    %% Style subgraphs
+    style inputs fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+    style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+```
+
+The EML specification provides detailed structure for describing datasets, including:
+
+- Dataset identification and citation
+- Geographic and temporal coverage
+- Variable definitions and units
+- Methods and protocols
+- Quality control procedures
+- Access and usage rights
+
+This standardized metadata enables automated data transformation and ingestion into various portal systems while preserving the original data context and quality information.
 
 ## Meta-Portals
 
