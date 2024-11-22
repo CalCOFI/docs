@@ -5,6 +5,9 @@ project:
   resources:
   - "/.nojekyll"
 
+editor:
+  mode: source
+
 book:
   title: "CalCOFI.io Docs"
   description: "Documentation for Open-Source Products at CalCOFI.io"
@@ -27,6 +30,8 @@ book:
     - api.qmd
     - db.qmd
     - portals.qmd
+    - portals_a.qmd
+    - portals_b.qmd
     - refs.qmd
 
 bibliography: ["refs/packages.bib"]
