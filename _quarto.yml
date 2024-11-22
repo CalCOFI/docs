@@ -30,8 +30,6 @@ book:
     - api.qmd
     - db.qmd
     - portals.qmd
-    - portals_a.qmd
-    - portals_b.qmd
     - refs.qmd
 
 bibliography: ["refs/packages.bib"]
