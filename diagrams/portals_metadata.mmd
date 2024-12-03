@@ -1,0 +1,38 @@
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#E0E7FF',
+    'primaryTextColor': '#312E81',
+    'primaryBorderColor': '#6366F1',
+    'lineColor': '#818CF8',
+    'secondaryColor': '#FEF3C7',
+    'tertiaryColor': '#ECFDF5'
+  }
+}}%%
+graph LR
+    subgraph inputs[Data & Metadata]
+        data([data.csv]):::source
+        eml[metadata.eml]:::database
+    end
+
+    subgraph portals[Data Portals]
+        edi[EDI]:::portal
+        erddap[ERDDAP]:::portal
+        obis[OBIS]:::portal
+        ncei[NCEI]:::portal
+    end
+
+    data --> eml
+    eml --> edi
+    eml --> erddap
+    eml --> obis
+    eml --> ncei
+
+    %% Custom styles
+    classDef source fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+    classDef database fill:#FEF3C7,stroke:#D97706,stroke-width:2px
+    classDef portal fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
+
+    %% Style subgraphs
+    style inputs fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+    style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px

@@ -1,6 +1,4 @@
----
-title: "Portals"
----
+# Portals
 
 ## Overview
 
@@ -11,85 +9,63 @@ CalCOFI data is available through various portals, each serving different purpos
 While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from raw data to the integrated database to portals and meta-portals.
 
 ```{mermaid}
-%%{init: {
-  'theme': 'base',
-  'themeVariables': {
-    'primaryColor': '#E0E7FF',
-    'primaryTextColor': '#312E81',
-    'primaryBorderColor': '#6366F1',
-    'lineColor': '#818CF8',
-    'secondaryColor': '#FEF3C7',
-    'tertiaryColor': '#ECFDF5'
-  }
-}}%%
-
-graph TD
-  %% nodes with styles
-  raw([raw data]):::source
-  
-  subgraph calcofi[CalCOFI.io]
-    db[(database)]:::database
-    web[calcofi.org]:::website
-    api[APIs]:::api
-    lib[library]:::code
-    app[apps]:::code
-    flow[workflows]:::code
-  end
-  
-  subgraph portals[Portals]
-    edi[EDI]:::portal
-    obis[OBIS]:::portal
-    erddap[ERDDAP]:::portal
-    ncei[NCEI]:::portal
-  end
-  
-  subgraph meta[Meta-Portals]
-    odis[ODIS]:::metaportal
-    datagov[data.gov]:::metaportal
-  end
-  
-  %% edges
-  raw --> db
-  db  --> api
-  db  --> web
-  api --> lib
-  api --> app
-  api --> flow
-  flow  --> portals
-  portals -->|sitemap| odis
-  portals --> datagov
-
-  %% Custom styles
-  classDef source fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
-  classDef database fill:#FEF3C7,stroke:#D97706,stroke-width:2px
-  classDef website fill:#F3E8FF,stroke:#9333EA,stroke-width:2px
-  classDef api fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
-  classDef code fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px
-  classDef portal fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
-  classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px
-
-  %% Style subgraphs
-  style calcofi fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
-  style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
-  style meta fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+%%| label: fig-portals-flow
+%%| fig-cap: "Flow of data from raw to database to portals and meta-portals."
+%%| file: diagrams/portals_flow.mmd
+%%| fig-width: 6
 ```
 
 In practice, CalCOFI is a partnership with various contributing members, so the authoritative dataset might flow differently, such as from EDI to the database to the other portals. The other portals, such as OBIS or ERDDAP, serve different audiences or purposes. The meta-portals like ODIS and Data.gov then index these portals to provide broader discovery of CalCOFI datasets.
 
 ## Portals
 
-| Portal | Full Archive | Versioning | DOI issued | Query by xyt | Query by taxa | Multiple formats | API Access |
-|----|----|----|----|----|----|----|----|
-| **EDI** | :green_circle: | :green_circle: | :green_circle: | :yellow_circle: | :yellow_circle: | :red_circle: | :yellow_circle: |
-| **NCEI** | :green_circle: | :green_circle: | :green_circle: | :red_circle: | :red_circle: | :red_circle: | :yellow_circle: |
-| **OBIS** | :yellow_circle: | :yellow_circle: | :yellow_circle: | :green_circle: | :green_circle: | :yellow_circle: | :green_circle: |
-| **ERDDAP** | :yellow_circle: | :red_circle: | :red_circle: | :green_circle: | :yellow_circle: | :green_circle: | :green_circle: |
+While some portals serve as data repositories, others provide advanced data access and visualization tools. The following sections describe the main portals where CalCOFI data is available and their key features.
 
-<!-- TODO: get emojis to show in PDF -->
+```{r}
+#| label: tbl-portals
+#| tbl-cap: Portal Capabilities.
 
-------------------------------------------------------------------------
+librarian::shelf(
+  dplyr, gt, here, readr, scales)
 
-† Capability: :red_circle: none; :yellow_circle: partial; :green_circle: full
+portals_csv <- here("data/portal_comparison.csv")
+
+# Define the capability symbols and colors
+cap_symbols <- c(
+  "none"    = "\u2716",   # ✖
+  "partial" = "\u25B2",   # ▲
+  "full"    = "\u2714")   # ✔
+cap_colors <- c(
+  "none"    = "#FFCCCC",  # Light red
+  "partial" = "#FFF2CC",  # Light yellow
+  "full"    = "#CCFFCC")  # Light green
+
+# Create the gt table
+read_csv(portals_csv, show_col_types = F) |>
+  gt(rowname_col = "Portal") |> 
+  # Apply background colors based on capability levels
+  data_color(
+    # columns = everything(),
+    fn      = scales::col_factor(
+      palette = as.character(cap_colors),
+      levels  = names(cap_colors))) |> 
+  # Center align the text
+  cols_align(
+    align = "center",
+    columns = everything() ) |>
+  # Apply colored symbols
+  text_transform(
+    fn = function(x) {
+      cap_symbols[x] } ) |>
+  # Add a caption explaining the symbols and colors
+  tab_source_note(
+    source_note = md(
+      "**Capability Legend**: ✔ = full, ▲ = partial, ✖ = none")) |>
+  # Adjust the table's style for better aesthetics
+  tab_options(
+    table.width      = pct(100),
+    data_row.padding = px(5))
+```
 
 
 ### EDI (Environmental Data Initiative)
@@ -147,54 +123,20 @@ In practice, CalCOFI is a partnership with various contributing members, so the 
 The [Ecological Metadata Language (EML)](https://eml.ecoinformatics.org/) (and using R package [EML](https://docs.ropensci.org/EML/) in workflows) serves as a key standard for describing ecological and environmental data. For CalCOFI, EML metadata files are generated alongside data files, providing structured documentation that enables interoperability across different data portals. This metadata-driven approach allows automated ingestion into various data systems while maintaining data integrity and provenance.
 
 ```{mermaid}
-%%{init: {
-  'theme': 'base',
-  'themeVariables': {
-    'primaryColor': '#E0E7FF',
-    'primaryTextColor': '#312E81',
-    'primaryBorderColor': '#6366F1',
-    'lineColor': '#818CF8',
-    'secondaryColor': '#FEF3C7',
-    'tertiaryColor': '#ECFDF5'
-  }
-}}%%
-graph LR
-    subgraph inputs[Data & Metadata]
-        data([data.csv]):::source
-        eml[metadata.eml]:::database
-    end
-
-    subgraph portals[Data Portals]
-        edi[EDI]:::portal
-        erddap[ERDDAP]:::portal
-        obis[OBIS]:::portal
-        ncei[NCEI]:::portal
-    end
-
-    data --> eml
-    eml --> edi
-    eml --> erddap
-    eml --> obis
-    eml --> ncei
-
-    %% Custom styles
-    classDef source fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
-    classDef database fill:#FEF3C7,stroke:#D97706,stroke-width:2px
-    classDef portal fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
-
-    %% Style subgraphs
-    style inputs fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
-    style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+%%| label: fig-portals-metadata
+%%| fig-cap: "Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals."
+%%| file: diagrams/portals_metadata.mmd
+%%| fig-width: 6
 ```
 
 The EML specification provides detailed structure for describing datasets, including:
 
-- Dataset identification and citation
-- Geographic and temporal coverage
-- Variable definitions and units
-- Methods and protocols
-- Quality control procedures
-- Access and usage rights
+-   Dataset identification and citation
+-   Geographic and temporal coverage
+-   Variable definitions and units
+-   Methods and protocols
+-   Quality control procedures
+-   Access and usage rights
 
 This standardized metadata enables automated data transformation and ingestion into various portal systems while preserving the original data context and quality information.
 

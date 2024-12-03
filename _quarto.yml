@@ -8,6 +8,10 @@ project:
 editor:
   mode: source
 
+execute:
+  echo: false
+  warning: false
+
 book:
   title: "CalCOFI.io Docs"
   description: "Documentation for Open-Source Products at CalCOFI.io"
@@ -39,7 +43,7 @@ link-citations: true
 format:
   html:
     theme: cosmo
-    css: lib/style.css
+    # css: libs/style.css
     toc: true
     number-sections: true
   docx:

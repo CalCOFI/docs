@@ -1,0 +1,5 @@
+Portal,Full Archive,Versioning,DOI Issued,Query by xyt,Query by taxa,Multiple formats,API Access
+EDI,full,full,full,partial,partial,none,partial
+NCEI,full,full,full,none,none,none,partial
+OBIS,partial,partial,partial,full,full,partial,full
+ERDDAP,partial,none,none,full,partial,full,full
