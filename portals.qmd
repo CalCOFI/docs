@@ -68,7 +68,8 @@ read_csv(portals_csv, show_col_types = F) |>
 ```
 
 
-### EDI (Environmental Data Initiative)
+### EDI
+**Environmental Data Initiative**
 
 -   Complete dataset archives using DataOne software and EML metadata
 -   DOIs issued for all datasets ensuring citability
@@ -80,7 +81,8 @@ read_csv(portals_csv, show_col_types = F) |>
     -   [EDIrepository.org](https://edirepository.org)
     -   CalCOFI datasets: [EDI query "CalCOFI"](http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&q=CalCOFI&fq=-scope:ecotrends&fq=-scope:lter-landsat*&fl=id,packageid,title,author,organization,pubdate,coordinates&debug=false)
 
-### NCEI (National Centers for Environmental Information)
+### NCEI
+**National Centers for Environmental Information**
 
 -   Long-term archival of oceanographic data
 -   DOIs issued for dataset submissions
@@ -92,7 +94,8 @@ read_csv(portals_csv, show_col_types = F) |>
     -   [NCEI Ocean Archive](https://www.ncei.noaa.gov/products/ocean-archive)
     -   CalCOFI datasets: [NCEI search "CalCOFI"](https://www.ncei.noaa.gov/access/search/index?q=CalCOFI)
 
-### OBIS (Ocean Biodiversity Information System)
+### OBIS
+**Ocean Biodiversity Information System**
 
 -   Specialized in marine biodiversity data
 -   Standardized using DarwinCore fields
@@ -104,7 +107,8 @@ read_csv(portals_csv, show_col_types = F) |>
     -   [OBIS.org](https://obis.org)
     -   CalCOFI datasets: [obis.org/dataset](https://obis.org/datasets) + "calcofi" Keyword
 
-### ERDDAP (Environmental Research Division Data Access Program)
+### ERDDAP
+**Environmental Research Division Data Access Program**
 
 -   Tabular and gridded data server
 -   Advanced subsetting by space, time, and parameters
@@ -146,7 +150,8 @@ This standardized metadata enables automated data transformation and ingestion i
 
 The JSON-LD metadata in the Portal dataset web pages get indexed by [Google Dataset Search](https://datasetsearch.research.google.com/search?query=calcofi) through schema.org metadata. This ensures that CalCOFI data is discoverable through Google search and other search engines.
 
-### ODIS (Ocean Data Information System)
+### ODIS
+**Ocean Data Information System**
 
 ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but focuses on ocean data. CalCOFI curates a sitemap of authoritative datasets to server to [ODIS.org](https://odis.org)
 

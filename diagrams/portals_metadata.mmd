@@ -1,27 +1,31 @@
 graph LR
-    subgraph inputs[Data & Metadata]
+    subgraph dataset[Dataset]
         data([data.csv]):::source
         eml[metadata.eml]:::database
     end
 
-    subgraph portals[Data Portals]
+    subgraph portals[Portals]
         edi[EDI]:::portal
         erddap[ERDDAP]:::portal
         obis[OBIS]:::portal
         ncei[NCEI]:::portal
     end
 
-    data --> eml
-    eml --> edi
-    eml --> erddap
-    eml --> obis
-    eml --> ncei
+    subgraph metaportals[Meta-Portals]
+        odis[ODIS]:::metaportal
+        datagov[data.gov]:::metaportal
+    end
+
+    dataset --> portals
+    eml -->|json-ld| metaportals
 
     %% Custom styles
-    classDef source fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
-    classDef database fill:#FEF3C7,stroke:#D97706,stroke-width:2px
-    classDef portal fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
+    classDef source     fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+    classDef database   fill:#FEF3C7,stroke:#D97706,stroke-width:2px
+    classDef portal     fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
+    classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px
 
     %% Style subgraphs
-    style inputs fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
-    style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+    style dataset     fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+    style portals     fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+    style metaportals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px

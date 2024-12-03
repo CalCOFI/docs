@@ -9,8 +9,8 @@ on:
 jobs:
   build-deploy:
     name: Render & publish Quarto book
-    # runs-on: macOS-latest
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
+    # runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -19,20 +19,20 @@ jobs:
 
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        # with:
-        #   tinytex: true  # for pdf but buggy on finding version
+        with:
+          tinytex: true  # for pdf but buggy on finding version
 
-      # - name: Install chromium for Quarto
-      #   # for rendering Mermaid diagrams to pdf: https://quarto.org/docs/authoring/diagrams.html#chrome-install
-      #   run: quarto install chromium
+      - name: Install chromium for Quarto
+        # for rendering Mermaid diagrams to pdf: https://quarto.org/docs/authoring/diagrams.html#chrome-install
+        run: quarto install chromium
 
-      - name: Install TinyTeX
-        uses: r-lib/actions/setup-tinytex@v2
+      # - name: Install TinyTeX
+      #   uses: r-lib/actions/setup-tinytex@v2
 
       - name: Install librsvg
         # convert svg to png for pdf
-        # run: brew install librsvg
-        run: sudo apt-get install librsvg2-bin # librsvg2-dev
+        run: brew install librsvg
+        # run: sudo apt-get install librsvg2-bin # librsvg2-dev
 
       # - name: Install qpdf
       #   # to prevent R install from failing
