@@ -1,9 +1,12 @@
 project:
   type: book
-  # pre-render: libs/pre-render.R
   output-dir: _book
   resources:
   - "/.nojekyll"
+  # pre-render:
+  #   - libs/pre-render.R
+  post-render:
+    - libs/post-render.R
 
 editor:
   mode: source
@@ -51,6 +54,7 @@ format:
     echo: false
     number-sections: true
     highlight-style: github
+    keep-md: true # see libs/post-render.R
   pdf:
     documentclass: scrreprt
     # keep-tex: true  # for debugging

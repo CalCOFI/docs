@@ -32,9 +32,9 @@ portals_csv <- here("data/portal_comparison.csv")
 
 # Define the capability symbols and colors
 cap_symbols <- c(
-  "none"    = "\u2716",   # ✖
-  "partial" = "\u25B2",   # ▲
-  "full"    = "\u2714")   # ✔
+  "none"    = "✖",  # "\u2716",   # ✖
+  "partial" = "▲",  # "\u25B2",   # ▲
+  "full"    = "✔")  # "\u2714")   # ✔
 cap_colors <- c(
   "none"    = "#FFCCCC",  # Light red
   "partial" = "#FFF2CC",  # Light yellow
