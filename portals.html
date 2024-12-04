@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -31,17 +31,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./portals_a.html" rel="next">
+<link href="./refs.html" rel="next">
 <link href="./db.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,9 +69,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="lib/style.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -195,20 +197,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./portals_a.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">portals_a</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./portals_b.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">portals_b</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -221,23 +211,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">6.1</span> Overview</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">6.1</span> Overview</a></li>
+  <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow"><span class="header-section-number">6.2</span> Data Flow</a></li>
+  <li><a href="#portals" id="toc-portals" class="nav-link" data-scroll-target="#portals"><span class="header-section-number">6.3</span> Portals</a>
   <ul class="collapse">
-  <li><a href="#edi-environmental-data-initiative" id="toc-edi-environmental-data-initiative" class="nav-link" data-scroll-target="#edi-environmental-data-initiative"><span class="header-section-number">6.1.1</span> EDI (Environmental Data Initiative)</a></li>
-  <li><a href="#ncei-national-centers-for-environmental-information" id="toc-ncei-national-centers-for-environmental-information" class="nav-link" data-scroll-target="#ncei-national-centers-for-environmental-information"><span class="header-section-number">6.1.2</span> NCEI (National Centers for Environmental Information)</a></li>
-  <li><a href="#obis-ocean-biodiversity-information-system" id="toc-obis-ocean-biodiversity-information-system" class="nav-link" data-scroll-target="#obis-ocean-biodiversity-information-system"><span class="header-section-number">6.1.3</span> OBIS (Ocean Biodiversity Information System)</a></li>
-  <li><a href="#erddap-environmental-research-division-data-access-program" id="toc-erddap-environmental-research-division-data-access-program" class="nav-link" data-scroll-target="#erddap-environmental-research-division-data-access-program"><span class="header-section-number">6.1.4</span> ERDDAP (Environmental Research Division Data Access Program)</a></li>
+  <li><a href="#edi" id="toc-edi" class="nav-link" data-scroll-target="#edi"><span class="header-section-number">6.3.1</span> EDI</a></li>
+  <li><a href="#ncei" id="toc-ncei" class="nav-link" data-scroll-target="#ncei"><span class="header-section-number">6.3.2</span> NCEI</a></li>
+  <li><a href="#obis" id="toc-obis" class="nav-link" data-scroll-target="#obis"><span class="header-section-number">6.3.3</span> OBIS</a></li>
+  <li><a href="#erddap" id="toc-erddap" class="nav-link" data-scroll-target="#erddap"><span class="header-section-number">6.3.4</span> ERDDAP</a></li>
   </ul></li>
-  <li><a href="#meta-portals" id="toc-meta-portals" class="nav-link" data-scroll-target="#meta-portals"><span class="header-section-number">6.2</span> Meta-Portals</a>
+  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata"><span class="header-section-number">6.4</span> Metadata</a></li>
+  <li><a href="#meta-portals" id="toc-meta-portals" class="nav-link" data-scroll-target="#meta-portals"><span class="header-section-number">6.5</span> Meta-Portals</a>
   <ul class="collapse">
-  <li><a href="#google-dataset-search" id="toc-google-dataset-search" class="nav-link" data-scroll-target="#google-dataset-search"><span class="header-section-number">6.2.1</span> Google Dataset Search</a></li>
-  <li><a href="#odis-ocean-data-information-system" id="toc-odis-ocean-data-information-system" class="nav-link" data-scroll-target="#odis-ocean-data-information-system"><span class="header-section-number">6.2.2</span> ODIS (Ocean Data Information System)</a></li>
+  <li><a href="#google-dataset-search" id="toc-google-dataset-search" class="nav-link" data-scroll-target="#google-dataset-search"><span class="header-section-number">6.5.1</span> Google Dataset Search</a></li>
+  <li><a href="#odis" id="toc-odis" class="nav-link" data-scroll-target="#odis"><span class="header-section-number">6.5.2</span> ODIS</a></li>
   </ul></li>
-  <li><a href="#calcofi.io-tools" id="toc-calcofi.io-tools" class="nav-link" data-scroll-target="#calcofi.io-tools"><span class="header-section-number">6.3</span> CalCOFI.io Tools</a>
+  <li><a href="#calcofi.io-tools" id="toc-calcofi.io-tools" class="nav-link" data-scroll-target="#calcofi.io-tools"><span class="header-section-number">6.6</span> CalCOFI.io Tools</a>
   <ul class="collapse">
-  <li><a href="#apis" id="toc-apis" class="nav-link" data-scroll-target="#apis"><span class="header-section-number">6.3.1</span> APIs</a></li>
-  <li><a href="#library" id="toc-library" class="nav-link" data-scroll-target="#library"><span class="header-section-number">6.3.2</span> Library</a></li>
-  <li><a href="#apps" id="toc-apps" class="nav-link" data-scroll-target="#apps"><span class="header-section-number">6.3.3</span> Apps</a></li>
+  <li><a href="#apis" id="toc-apis" class="nav-link" data-scroll-target="#apis"><span class="header-section-number">6.6.1</span> APIs</a></li>
+  <li><a href="#library" id="toc-library" class="nav-link" data-scroll-target="#library"><span class="header-section-number">6.6.2</span> Library</a></li>
+  <li><a href="#apps" id="toc-apps" class="nav-link" data-scroll-target="#apps"><span class="header-section-number">6.6.3</span> Apps</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/portals.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -267,8 +260,609 @@ ul.task-list li input[type="checkbox"] {
 <section id="overview" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">6.1</span> Overview</h2>
 <p>CalCOFI data is available through various portals, each serving different purposes and user needs. This document outlines the main access points and their characteristics.</p>
-<section id="edi-environmental-data-initiative" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="edi-environmental-data-initiative"><span class="header-section-number">6.1.1</span> EDI (Environmental Data Initiative)</h3>
+</section>
+<section id="data-flow" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">6.2</span> Data Flow</h2>
+<p>While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from raw data to the integrated database to portals and meta-portals.</p>
+<div class="cell" data-file="diagrams/portals_flow.mmd" data-fig-width="6" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-portals-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-portals-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-portals-flow">graph TD
+  %% nodes with styles
+  raw([raw data]):::source
+
+  subgraph calcofi[CalCOFI.io]
+    db[(database)]:::database
+    web[CalCOFI.org]:::website
+    api[APIs]:::api
+    lib[library]:::code
+    app[apps]:::code
+    flow[workflows]:::code
+  end
+
+  subgraph portals[Portals]
+    edi[EDI]:::portal
+    obis[OBIS]:::portal
+    erddap[ERDDAP]:::portal
+    ncei[NCEI]:::portal
+  end
+
+  subgraph meta[Meta-Portals]
+    odis[ODIS]:::metaportal
+    datagov[data.gov]:::metaportal
+  end
+
+  %% edges
+  raw --&gt; db
+  db  --&gt; api
+  db  --&gt; web
+  api --&gt; lib
+  api --&gt; app
+  api --&gt; flow
+  flow  --&gt; portals
+  portals --&gt;|sitemap| odis
+  portals --&gt; datagov
+
+  %% Custom styles
+  classDef source     fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+  classDef database   fill:#FEF3C7,stroke:#D97706,stroke-width:2px
+  classDef website    fill:#F3E8FF,stroke:#9333EA,stroke-width:2px
+  classDef api        fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+  classDef code       fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px
+  classDef portal     fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
+  classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px
+
+  %% Style subgraphs
+  style calcofi fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+  style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+  style meta fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-portals-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Flow of data from raw to database to portals and meta-portals.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In practice, CalCOFI is a partnership with various contributing members, so the authoritative dataset might flow differently, such as from EDI to the database to the other portals. The other portals, such as OBIS or ERDDAP, serve different audiences or purposes. The meta-portals like ODIS and Data.gov then index these portals to provide broader discovery of CalCOFI datasets.</p>
+</section>
+<section id="portals" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="portals"><span class="header-section-number">6.3</span> Portals</h2>
+<p>While some portals serve as data repositories, others provide advanced data access and visualization tools. The following sections describe the main portals where CalCOFI data is available and their key features.</p>
+<div class="cell">
+<div id="tbl-portals" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: Portal Capabilities.
+</figcaption>
+<div aria-describedby="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="gcwnizhbgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gcwnizhbgi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gcwnizhbgi thead, #gcwnizhbgi tbody, #gcwnizhbgi tfoot, #gcwnizhbgi tr, #gcwnizhbgi td, #gcwnizhbgi th {
+  border-style: none;
+}
+
+#gcwnizhbgi p {
+  margin: 0;
+  padding: 0;
+}
+
+#gcwnizhbgi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gcwnizhbgi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gcwnizhbgi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gcwnizhbgi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gcwnizhbgi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gcwnizhbgi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gcwnizhbgi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gcwnizhbgi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gcwnizhbgi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gcwnizhbgi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gcwnizhbgi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gcwnizhbgi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gcwnizhbgi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gcwnizhbgi .gt_row {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gcwnizhbgi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gcwnizhbgi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gcwnizhbgi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gcwnizhbgi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gcwnizhbgi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gcwnizhbgi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gcwnizhbgi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gcwnizhbgi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gcwnizhbgi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gcwnizhbgi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gcwnizhbgi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gcwnizhbgi .gt_left {
+  text-align: left;
+}
+
+#gcwnizhbgi .gt_center {
+  text-align: center;
+}
+
+#gcwnizhbgi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gcwnizhbgi .gt_font_normal {
+  font-weight: normal;
+}
+
+#gcwnizhbgi .gt_font_bold {
+  font-weight: bold;
+}
+
+#gcwnizhbgi .gt_font_italic {
+  font-style: italic;
+}
+
+#gcwnizhbgi .gt_super {
+  font-size: 65%;
+}
+
+#gcwnizhbgi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gcwnizhbgi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gcwnizhbgi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gcwnizhbgi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gcwnizhbgi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gcwnizhbgi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gcwnizhbgi .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gcwnizhbgi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gcwnizhbgi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Full-Archive" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Full Archive</th>
+<th id="Versioning" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Versioning</th>
+<th id="DOI-Issued" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">DOI Issued</th>
+<th id="Query-by-xyt" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Query by xyt</th>
+<th id="Query-by-taxa" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Query by taxa</th>
+<th id="Multiple-formats" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Multiple formats</th>
+<th id="API-Access" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">API Access</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">EDI</td>
+<td class="gt_row gt_center" headers="stub_1_1 Full Archive" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_1 Versioning" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_1 DOI Issued" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_1 Query by xyt" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_1 Query by taxa" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_1 Multiple formats" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="stub_1_1 API Access" style="background-color: #FFF2CC; color: #000000">▲</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">NCEI</td>
+<td class="gt_row gt_center" headers="stub_1_2 Full Archive" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_2 Versioning" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_2 DOI Issued" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_2 Query by xyt" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="stub_1_2 Query by taxa" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="stub_1_2 Multiple formats" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="stub_1_2 API Access" style="background-color: #FFF2CC; color: #000000">▲</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">OBIS</td>
+<td class="gt_row gt_center" headers="stub_1_3 Full Archive" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_3 Versioning" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_3 DOI Issued" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_3 Query by xyt" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_3 Query by taxa" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_3 Multiple formats" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_3 API Access" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">ERDDAP</td>
+<td class="gt_row gt_center" headers="stub_1_4 Full Archive" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_4 Versioning" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="stub_1_4 DOI Issued" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="stub_1_4 Query by xyt" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_4 Query by taxa" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="stub_1_4 Multiple formats" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="stub_1_4 API Access" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="8" class="gt_sourcenote"><strong>Capability Legend</strong>: ✔ = full, ▲ = partial, ✖ = none</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<section id="edi" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="edi"><span class="header-section-number">6.3.1</span> EDI</h3>
+<p><strong>Environmental Data Initiative</strong></p>
 <ul>
 <li>Complete dataset archives using DataOne software and EML metadata</li>
 <li>DOIs issued for all datasets ensuring citability</li>
@@ -283,8 +877,9 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </section>
-<section id="ncei-national-centers-for-environmental-information" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="ncei-national-centers-for-environmental-information"><span class="header-section-number">6.1.2</span> NCEI (National Centers for Environmental Information)</h3>
+<section id="ncei" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="ncei"><span class="header-section-number">6.3.2</span> NCEI</h3>
+<p><strong>National Centers for Environmental Information</strong></p>
 <ul>
 <li>Long-term archival of oceanographic data</li>
 <li>DOIs issued for dataset submissions</li>
@@ -299,8 +894,9 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </section>
-<section id="obis-ocean-biodiversity-information-system" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="obis-ocean-biodiversity-information-system"><span class="header-section-number">6.1.3</span> OBIS (Ocean Biodiversity Information System)</h3>
+<section id="obis" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="obis"><span class="header-section-number">6.3.3</span> OBIS</h3>
+<p><strong>Ocean Biodiversity Information System</strong></p>
 <ul>
 <li>Specialized in marine biodiversity data</li>
 <li>Standardized using DarwinCore fields</li>
@@ -315,8 +911,9 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </section>
-<section id="erddap-environmental-research-division-data-access-program" class="level3" data-number="6.1.4">
-<h3 data-number="6.1.4" class="anchored" data-anchor-id="erddap-environmental-research-division-data-access-program"><span class="header-section-number">6.1.4</span> ERDDAP (Environmental Research Division Data Access Program)</h3>
+<section id="erddap" class="level3" data-number="6.3.4">
+<h3 data-number="6.3.4" class="anchored" data-anchor-id="erddap"><span class="header-section-number">6.3.4</span> ERDDAP</h3>
+<p><strong>Environmental Research Division Data Access Program</strong></p>
 <ul>
 <li>Tabular and gridded data server</li>
 <li>Advanced subsetting by space, time, and parameters</li>
@@ -336,14 +933,76 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="meta-portals" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="meta-portals"><span class="header-section-number">6.2</span> Meta-Portals</h2>
-<section id="google-dataset-search" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="google-dataset-search"><span class="header-section-number">6.2.1</span> Google Dataset Search</h3>
+<section id="metadata" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="metadata"><span class="header-section-number">6.4</span> Metadata</h2>
+<p>The <a href="https://eml.ecoinformatics.org/">Ecological Metadata Language (EML)</a> (and using R package <a href="https://docs.ropensci.org/EML/">EML</a> in workflows) serves as a key standard for describing ecological and environmental data. For CalCOFI, EML metadata files are generated alongside data files, providing structured documentation that enables interoperability across different data portals. This metadata-driven approach allows automated ingestion into various data systems while maintaining data integrity and provenance.</p>
+<div class="cell" data-file="diagrams/portals_metadata.mmd" data-fig-width="6" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-portals-metadata" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-portals-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-portals-metadata">graph LR
+    subgraph dataset[Dataset]
+        data([data.csv]):::source
+        eml[metadata.eml]:::database
+    end
+
+    subgraph portals[Portals]
+        edi[EDI]:::portal
+        erddap[ERDDAP]:::portal
+        obis[OBIS]:::portal
+        ncei[NCEI]:::portal
+    end
+
+    subgraph metaportals[Meta-Portals]
+        odis[ODIS]:::metaportal
+        datagov[data.gov]:::metaportal
+    end
+
+    dataset --&gt; portals
+    eml --&gt;|json-ld| metaportals
+
+    %% Custom styles
+    classDef source     fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
+    classDef database   fill:#FEF3C7,stroke:#D97706,stroke-width:2px
+    classDef portal     fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
+    classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px
+
+    %% Style subgraphs
+    style dataset     fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+    style portals     fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+    style metaportals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-portals-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The EML specification provides detailed structure for describing datasets, including:</p>
+<ul>
+<li>Dataset identification and citation</li>
+<li>Geographic and temporal coverage</li>
+<li>Variable definitions and units</li>
+<li>Methods and protocols</li>
+<li>Quality control procedures</li>
+<li>Access and usage rights</li>
+</ul>
+<p>This standardized metadata enables automated data transformation and ingestion into various portal systems while preserving the original data context and quality information.</p>
+</section>
+<section id="meta-portals" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="meta-portals"><span class="header-section-number">6.5</span> Meta-Portals</h2>
+<section id="google-dataset-search" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="google-dataset-search"><span class="header-section-number">6.5.1</span> Google Dataset Search</h3>
 <p>The JSON-LD metadata in the Portal dataset web pages get indexed by <a href="https://datasetsearch.research.google.com/search?query=calcofi">Google Dataset Search</a> through schema.org metadata. This ensures that CalCOFI data is discoverable through Google search and other search engines.</p>
 </section>
-<section id="odis-ocean-data-information-system" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="odis-ocean-data-information-system"><span class="header-section-number">6.2.2</span> ODIS (Ocean Data Information System)</h3>
+<section id="odis" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="odis"><span class="header-section-number">6.5.2</span> ODIS</h3>
+<p><strong>Ocean Data Information System</strong></p>
 <p>ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but focuses on ocean data. CalCOFI curates a sitemap of authoritative datasets to server to <a href="https://odis.org">ODIS.org</a></p>
 <p>This federated approach ensures that CalCOFI data remains:</p>
 <ul>
@@ -353,11 +1012,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="calcofi.io-tools" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="calcofi.io-tools"><span class="header-section-number">6.3</span> CalCOFI.io Tools</h2>
+<section id="calcofi.io-tools" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="calcofi.io-tools"><span class="header-section-number">6.6</span> CalCOFI.io Tools</h2>
 <p>CalCOFI is also developing an integrated database and tools that enable efficient data access and analysis:</p>
-<section id="apis" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="apis"><span class="header-section-number">6.3.1</span> APIs</h3>
+<section id="apis" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="apis"><span class="header-section-number">6.6.1</span> APIs</h3>
 <ul>
 <li>RESTful endpoints for programmatic access</li>
 <li>Filtering by space, time, and taxonomic parameters</li>
@@ -369,8 +1028,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </section>
-<section id="library" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="library"><span class="header-section-number">6.3.2</span> Library</h3>
+<section id="library" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="library"><span class="header-section-number">6.6.2</span> Library</h3>
 <ul>
 <li>Direct data access from R</li>
 <li>Built-in analysis functions</li>
@@ -381,8 +1040,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </section>
-<section id="apps" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="apps"><span class="header-section-number">6.3.3</span> Apps</h3>
+<section id="apps" class="level3" data-number="6.6.3">
+<h3 data-number="6.6.3" class="anchored" data-anchor-id="apps"><span class="header-section-number">6.6.3</span> Apps</h3>
 <ul>
 <li>Interactive data exploration with Shiny applications</li>
 <li>User-friendly interfaces</li>
@@ -480,8 +1139,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -592,7 +1249,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -825,8 +1481,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./portals_a.html" class="pagination-link" aria-label="portals_a">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">portals_a</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./refs.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
