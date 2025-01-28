@@ -59,3 +59,5 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          QUARTO_CHROME_HEADLESS_MODE: new
+
