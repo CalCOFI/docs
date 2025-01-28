@@ -33,6 +33,8 @@ jobs:
       - name: Install chromium for Quarto
         # for rendering Mermaid diagrams to pdf: https://quarto.org/docs/authoring/diagrams.html#chrome-install
         run: quarto install chromium
+        env:
+          QUARTO_CHROME_HEADLESS_MODE: new
 
       # - name: Install qpdf
       #   # to prevent R install from failing
@@ -57,4 +59,3 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          QUARTO_CHROME_HEADLESS_MODE: new
