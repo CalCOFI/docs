@@ -2,6 +2,8 @@
 
 ## Database naming conventions
 
+> There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton (Netscape architect)
+
 We're circling the wagons to come up with the best conventions for naming. Here are some ideas:
 
 - [Learn SQL: Naming Conventions](https://www.sqlshack.com/learn-sql-naming-conventions/)
@@ -9,7 +11,7 @@ We're circling the wagons to come up with the best conventions for naming. Here 
 
 ### Name tables
 
-- Table names are plural and use all lower case.
+- Table names are singular and use all lower case.
 
 ### Name columns
 
@@ -17,6 +19,7 @@ We're circling the wagons to come up with the best conventions for naming. Here 
 
 - Unique **identifiers** are suffixed with:
   - `*_id` for unique integer keys;
+  - `*_uuid` for universally unique identifiers as defined by [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122) and stored in Postgres as [UUID Type](https://www.postgresql.org/docs/current/datatype-uuid.html).
   - `*_key` for unique string keys;
   - `*_seq` for auto-incrementing sequence integer keys.
 
