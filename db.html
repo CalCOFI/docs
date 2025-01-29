@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -278,6 +278,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="database-naming-conventions" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="database-naming-conventions"><span class="header-section-number">5.1</span> Database naming conventions</h2>
+<blockquote class="blockquote">
+<p>There are only two hard things in Computer Science: cache invalidation and naming things. – Phil Karlton (Netscape architect)</p>
+</blockquote>
 <p>We’re circling the wagons to come up with the best conventions for naming. Here are some ideas:</p>
 <ul>
 <li><a href="https://www.sqlshack.com/learn-sql-naming-conventions/">Learn SQL: Naming Conventions</a></li>
@@ -286,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="name-tables" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="name-tables"><span class="header-section-number">5.1.1</span> Name tables</h3>
 <ul>
-<li>Table names are plural and use all lower case.</li>
+<li>Table names are singular and use all lower case.</li>
 </ul>
 </section>
 <section id="name-columns" class="level3" data-number="5.1.2">
@@ -296,6 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Unique <strong>identifiers</strong> are suffixed with:</p>
 <ul>
 <li><code>*_id</code> for unique integer keys;</li>
+<li><code>*_uuid</code> for universally unique identifiers as defined by <a href="https://datatracker.ietf.org/doc/html/rfc4122">RFC 4122</a> and stored in Postgres as <a href="https://www.postgresql.org/docs/current/datatype-uuid.html">UUID Type</a>.</li>
 <li><code>*_key</code> for unique string keys;</li>
 <li><code>*_seq</code> for auto-incrementing sequence integer keys.</li>
 </ul></li>
