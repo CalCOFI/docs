@@ -103,7 +103,34 @@ Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all databas
   write_excel_csv(df, 'file.csv')                                       # implicit
   ```
 
-## Describe tables and columns
+## Ingest datasets with documentation
+
+Use Quarto documents with chunks of R code in the [workflows](https://github.com/CalCOFI/workflows/) Github repository to ingest datasets into the database. For example, see the [ingest_noaa-calcofi-db](https://calcofi.io/workflows/ingest_noaa-calcofi-db.html) workflow.
+
+```{mermaid}
+%%| label: fig-db_doc
+%%| fig-cap: "Database documentation scheme."
+%%| file: diagrams/db_doc.mmd
+```
+
+Google Drive \*.csv files get ingested with a **workflow** per **dataset** (in Github repository [calcofi/workflows](https://github.com/calcofi/workflows) as a Quarto document). Data definition CSV files (`tbls_redefine.csv` , `flds_redefine.csv`) are auto-generated (if missing) and manually updated to rename and describe tables and fields. After injecting the data for each of the tables, extra metadata is added to the `COMMENT`s of each table as JSON elements (links in markdown), including at the ***table*** level:
+
+-   **description**: general description describing contents and how each row is unique
+-   **source**: CSV (linked to Google Drive source as markdown)
+-   **source_created**: datetime stamp of when source was created on GoogleDrive
+-   **workflow**: html (rendered Quarto document on Github)
+-   **workflow_ingested**: datetime of ingestion
+
+And at the ***field*** level:
+
+-   **description**: general description of the field
+-   **units**: using the International System of Units (SI) as much as possible
+
+These comments are then exposed by the API [db_tables](https://api.calcofi.io/db_tables) endpoint, which can be consumed and rendered into a tabular searchable catalog with [calcofi4r::cc_db_catalog](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
+
+Additional workflows will publish the data to the various [Portals](https://calcofi.io/docs/portals.html) (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) and the [EML](https://docs.ropensci.org/EML/) R package, pulling directly from the structured metadata in the database (on table and field definitions).
+
+### OR Describe tables and columns directly
 
 - Use the `COMMENT` clause to add descriptions to tables and columns, either through the GUI [pgadmin.calcofi.io](https://pgadmin.calcofi.io/) (by right-clicking on the table or column and selecting `Properties`) or with SQL. For example:
 
@@ -116,6 +143,8 @@ Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all databas
    > areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)
 
 - It is especially helpful to link to any _**workflows**_ that are responsible for the ingesting or updating of the input data.
+
+### Display tables and columns with metadata
 
 - These descriptions can be viewed in the CalCOFI **API** [api.calcofi.io](https://api.calcofi.io) as CSV tables (see code in [calcofi/api: `plumber.R`](https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990)):
   - [api.calcofi.io`/db_tables`](https://api.calcofi.io/db_tables)\
@@ -144,4 +173,5 @@ Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all databas
 ## Spatial Tips
 
 - Use [`ST_Subdivide()`](https://postgis.net/docs/ST_Subdivide.html) when running spatial joins on large polygons.
+
 

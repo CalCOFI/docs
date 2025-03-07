@@ -1,0 +1,80 @@
+flowchart TB
+    %% Node definitions
+    gd[("`<b>Source Data</b>
+          Google Drive:
+          calcofi/data/{dataset}/*.csv`")]
+    iw["<b>Ingest Workflow</b>
+        workflows: ingest_{dataset}.qmd"]
+    dd["<b>Data Definitions</b>
+        workflows: /ingest/{dataset}/:
+        <ul>
+          <li>tbls_redefine.csv</li>
+          <li>flds_redefine.csv</li>
+        </ul>"]
+    db[("<b>Database</b>")]
+    api["<b>API Endpoint</b>\n/db_tables"]
+    catalog["<b>R Function</b>\ncalcofi4r::cc_db_catalog()"]
+    eml["<b>Publish Workflow</b>
+      workflows: publish_{dataset}_{portal}.qmd
+      with {portal}s:
+      <ul>
+        <li>erddap</li>
+        <li>edi</li>
+        <li>obis</li>
+        <li>ncei</li>
+      </ul>"]
+
+    %% Edge definitions
+    gd --> iw
+    iw -->|"1. auto-generated"| dd
+    dd -->|"2. manual edit"| iw
+    iw -->|"3. data"| db
+    iw --> comments
+    comments -->|"4. metadata"| db
+    db --> api
+    api --> catalog
+    db --> eml
+
+    %% Comments subgraph with internal nodes
+    subgraph comments["<b>Database Comments</b>
+              (stored as text in JSON format to differentiate elements)"]
+        direction TB
+        h["hideme"]:::hidden
+        h~~~tbl
+        h~~~fld
+        tbl["per <em>Table</em>:
+            <ul>
+              <li>description</li>
+              <li>source (<em>linked</em>)</li>
+              <li>source_created (<em>datetime</em>)</li>
+              <li>workflow (<em>linked</em>)</li>
+              <li>workflow_ingested (<em>datetime</em>)</li>
+            </ul>"]
+        fld["per <em>Field</em>:
+            <ul>
+              <li>description</li>
+              <li>units (SI)`</li>
+            </ul>"]
+    end
+
+    %% Clickable links
+    click gd "https://drive.google.com/drive/folders/1xxdWa4mWkmfkJUQsHxERTp9eBBXBMbV7" "calcofi folder - Google Drive"
+    click api "https://api.calcofi.io/db_tables" "API endpoint</b>"
+    click catalog "https://calcofi.io/calcofi4r/reference/cc_db_catalog.html" "R package function"
+
+    %% Styling
+    classDef source fill:#f9f9f9,stroke:#000,stroke-width:2px,color:#000
+    classDef process fill:#a3e0f2,stroke:#000,stroke-width:2px,color:#000
+    classDef eml fill:#F0FDF4,stroke:#22C55E,stroke-width:2px,color:#000,text-align:left
+    classDef data fill:#ffbe75,stroke:#000,stroke-width:2px,color:#000
+    classDef api fill:#9ad294,stroke:#000,stroke-width:2px,color:#000
+    classDef meta fill:#c9a6db,stroke:#000,stroke-width:2px,color:#000,text-align:left
+    classDef hidden display: none;
+
+    class gd source
+    class dd,comments,tbl,fld meta
+    class iw process
+    class db data
+    class api,catalog api
+    class tbl,fld li
+    class eml eml
