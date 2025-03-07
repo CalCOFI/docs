@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -103,6 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -248,7 +251,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">5.1.2</span> Name columns</a></li>
   </ul></li>
   <li><a href="#use-unicode-for-text" id="toc-use-unicode-for-text" class="nav-link" data-scroll-target="#use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</a></li>
-  <li><a href="#describe-tables-and-columns" id="toc-describe-tables-and-columns" class="nav-link" data-scroll-target="#describe-tables-and-columns"><span class="header-section-number">5.3</span> Describe tables and columns</a></li>
+  <li><a href="#ingest-datasets-with-documentation" id="toc-ingest-datasets-with-documentation" class="nav-link" data-scroll-target="#ingest-datasets-with-documentation"><span class="header-section-number">5.3</span> Ingest datasets with documentation</a>
+  <ul class="collapse">
+  <li><a href="#or-describe-tables-and-columns-directly" id="toc-or-describe-tables-and-columns-directly" class="nav-link" data-scroll-target="#or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.1</span> OR Describe tables and columns directly</a></li>
+  <li><a href="#display-tables-and-columns-with-metadata" id="toc-display-tables-and-columns-with-metadata" class="nav-link" data-scroll-target="#display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.2</span> Display tables and columns with metadata</a></li>
+  </ul></li>
   <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">5.4</span> Relationships between tables</a></li>
   <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">5.5</span> Spatial Tips</a></li>
   </ul>
@@ -370,8 +377,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_excel_csv</span>(df, <span class="st">'file.csv'</span>)                                       <span class="co"># implicit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
-<section id="describe-tables-and-columns" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="describe-tables-and-columns"><span class="header-section-number">5.3</span> Describe tables and columns</h2>
+<section id="ingest-datasets-with-documentation" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="ingest-datasets-with-documentation"><span class="header-section-number">5.3</span> Ingest datasets with documentation</h2>
+<p>Use Quarto documents with chunks of R code in the <a href="https://github.com/CalCOFI/workflows/">workflows</a> Github repository to ingest datasets into the database. For example, see the <a href="https://calcofi.io/workflows/ingest_noaa-calcofi-db.html">ingest_noaa-calcofi-db</a> workflow.</p>
+<div class="cell" data-file="diagrams/db_doc.mmd" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-db_doc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-db_doc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-db_doc">flowchart TB
+    %% Node definitions
+    gd[("`&lt;b&gt;Source Data&lt;/b&gt;
+          Google Drive:
+          calcofi/data/{dataset}/*.csv`")]
+    iw["&lt;b&gt;Ingest Workflow&lt;/b&gt;
+        workflows: ingest_{dataset}.qmd"]
+    dd["&lt;b&gt;Data Definitions&lt;/b&gt;
+        workflows: /ingest/{dataset}/:
+        &lt;ul&gt;
+          &lt;li&gt;tbls_redefine.csv&lt;/li&gt;
+          &lt;li&gt;flds_redefine.csv&lt;/li&gt;
+        &lt;/ul&gt;"]
+    db[("&lt;b&gt;Database&lt;/b&gt;")]
+    api["&lt;b&gt;API Endpoint&lt;/b&gt;\n/db_tables"]
+    catalog["&lt;b&gt;R Function&lt;/b&gt;\ncalcofi4r::cc_db_catalog()"]
+    eml["&lt;b&gt;Publish Workflow&lt;/b&gt;
+      workflows: publish_{dataset}_{portal}.qmd
+      with {portal}s:
+      &lt;ul&gt;
+        &lt;li&gt;erddap&lt;/li&gt;
+        &lt;li&gt;edi&lt;/li&gt;
+        &lt;li&gt;obis&lt;/li&gt;
+        &lt;li&gt;ncei&lt;/li&gt;
+      &lt;/ul&gt;"]
+
+    %% Edge definitions
+    gd --&gt; iw
+    iw --&gt;|"1. auto-generated"| dd
+    dd --&gt;|"2. manual edit"| iw
+    iw --&gt;|"3. data"| db
+    iw --&gt; comments
+    comments --&gt;|"4. metadata"| db
+    db --&gt; api
+    api --&gt; catalog
+    db --&gt; eml
+
+    %% Comments subgraph with internal nodes
+    subgraph comments["&lt;b&gt;Database Comments&lt;/b&gt;
+              (stored as text in JSON format to differentiate elements)"]
+        direction TB
+        h["hideme"]:::hidden
+        h~~~tbl
+        h~~~fld
+        tbl["per &lt;em&gt;Table&lt;/em&gt;:
+            &lt;ul&gt;
+              &lt;li&gt;description&lt;/li&gt;
+              &lt;li&gt;source (&lt;em&gt;linked&lt;/em&gt;)&lt;/li&gt;
+              &lt;li&gt;source_created (&lt;em&gt;datetime&lt;/em&gt;)&lt;/li&gt;
+              &lt;li&gt;workflow (&lt;em&gt;linked&lt;/em&gt;)&lt;/li&gt;
+              &lt;li&gt;workflow_ingested (&lt;em&gt;datetime&lt;/em&gt;)&lt;/li&gt;
+            &lt;/ul&gt;"]
+        fld["per &lt;em&gt;Field&lt;/em&gt;:
+            &lt;ul&gt;
+              &lt;li&gt;description&lt;/li&gt;
+              &lt;li&gt;units (SI)`&lt;/li&gt;
+            &lt;/ul&gt;"]
+    end
+
+    %% Clickable links
+    click gd "https://drive.google.com/drive/folders/1xxdWa4mWkmfkJUQsHxERTp9eBBXBMbV7" "calcofi folder - Google Drive"
+    click api "https://api.calcofi.io/db_tables" "API endpoint&lt;/b&gt;"
+    click catalog "https://calcofi.io/calcofi4r/reference/cc_db_catalog.html" "R package function"
+
+    %% Styling
+    classDef source fill:#f9f9f9,stroke:#000,stroke-width:2px,color:#000
+    classDef process fill:#a3e0f2,stroke:#000,stroke-width:2px,color:#000
+    classDef eml fill:#F0FDF4,stroke:#22C55E,stroke-width:2px,color:#000,text-align:left
+    classDef data fill:#ffbe75,stroke:#000,stroke-width:2px,color:#000
+    classDef api fill:#9ad294,stroke:#000,stroke-width:2px,color:#000
+    classDef meta fill:#c9a6db,stroke:#000,stroke-width:2px,color:#000,text-align:left
+    classDef hidden display: none;
+
+    class gd source
+    class dd,comments,tbl,fld meta
+    class iw process
+    class db data
+    class api,catalog api
+    class tbl,fld li
+    class eml eml
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-db_doc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Database documentation scheme.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Google Drive *.csv files get ingested with a <strong>workflow</strong> per <strong>dataset</strong> (in Github repository <a href="https://github.com/calcofi/workflows">calcofi/workflows</a> as a Quarto document). Data definition CSV files (<code>tbls_redefine.csv</code> , <code>flds_redefine.csv</code>) are auto-generated (if missing) and manually updated to rename and describe tables and fields. After injecting the data for each of the tables, extra metadata is added to the <code>COMMENT</code>s of each table as JSON elements (links in markdown), including at the <strong><em>table</em></strong> level:</p>
+<ul>
+<li><strong>description</strong>: general description describing contents and how each row is unique</li>
+<li><strong>source</strong>: CSV (linked to Google Drive source as markdown)</li>
+<li><strong>source_created</strong>: datetime stamp of when source was created on GoogleDrive</li>
+<li><strong>workflow</strong>: html (rendered Quarto document on Github)</li>
+<li><strong>workflow_ingested</strong>: datetime of ingestion</li>
+</ul>
+<p>And at the <strong><em>field</em></strong> level:</p>
+<ul>
+<li><strong>description</strong>: general description of the field</li>
+<li><strong>units</strong>: using the International System of Units (SI) as much as possible</li>
+</ul>
+<p>These comments are then exposed by the API <a href="https://api.calcofi.io/db_tables">db_tables</a> endpoint, which can be consumed and rendered into a tabular searchable catalog with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html">calcofi4r::cc_db_catalog</a>.</p>
+<p>Additional workflows will publish the data to the various <a href="https://calcofi.io/docs/portals.html">Portals</a> (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) and the <a href="https://docs.ropensci.org/EML/">EML</a> R package, pulling directly from the structured metadata in the database (on table and field definitions).</p>
+<section id="or-describe-tables-and-columns-directly" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.1</span> OR Describe tables and columns directly</h3>
 <ul>
 <li><p>Use the <code>COMMENT</code> clause to add descriptions to tables and columns, either through the GUI <a href="https://pgadmin.calcofi.io/">pgadmin.calcofi.io</a> (by right-clicking on the table or column and selecting <code>Properties</code>) or with SQL. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
@@ -380,7 +501,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>areas of interest (<code>aoi</code>) polygons for federal <strong>National Marine Sanctuaries</strong>; loaded by <em>workflow</em> <a href="https://calcofi.io/workflows/load_sanctuaries.html">load_sanctuaries</a></p>
 </blockquote></li>
 <li><p>It is especially helpful to link to any <em><strong>workflows</strong></em> that are responsible for the ingesting or updating of the input data.</p></li>
-<li><p>These descriptions can be viewed in the CalCOFI <strong>API</strong> <a href="https://api.calcofi.io">api.calcofi.io</a> as CSV tables (see code in <a href="https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990">calcofi/api: <code>plumber.R</code></a>):</p>
+</ul>
+</section>
+<section id="display-tables-and-columns-with-metadata" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.2</span> Display tables and columns with metadata</h3>
+<ul>
+<li>These descriptions can be viewed in the CalCOFI <strong>API</strong> <a href="https://api.calcofi.io">api.calcofi.io</a> as CSV tables (see code in <a href="https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990">calcofi/api: <code>plumber.R</code></a>):
 <ul>
 <li><a href="https://api.calcofi.io/db_tables">api.calcofi.io<code>/db_tables</code></a><br>
 fields:<br>
@@ -403,8 +529,9 @@ fields:<br>
 <li><code>column_description</code>: description of column (possibly in markdown)</li>
 </ul></li>
 </ul></li>
-<li><p>Fetch and display these descriptions into an interactive table with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html"><code>calcofi4r::</code><strong><code>cc_db_catalog()</code></strong></a>.</p></li>
+<li>Fetch and display these descriptions into an interactive table with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html"><code>calcofi4r::</code><strong><code>cc_db_catalog()</code></strong></a>.</li>
 </ul>
+</section>
 </section>
 <section id="relationships-between-tables" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="relationships-between-tables"><span class="header-section-number">5.4</span> Relationships between tables</h2>
