@@ -12,7 +12,7 @@ flowchart TB
           <li>flds_redefine.csv</li>
         </ul>"]
     db[("<b>Database</b>")]
-    api["<b>API Endpoint</b>\n/db_tables"]
+    api["<b>API Endpoint</b>\n/db_tables\n/db_columns"]
     catalog["<b>R Function</b>\ncalcofi4r::cc_db_catalog()"]
     eml["<b>Publish Workflow</b>
       workflows: publish_{dataset}_{portal}.qmd
@@ -26,11 +26,11 @@ flowchart TB
 
     %% Edge definitions
     gd --> iw
-    iw -->|"1. auto-generated"| dd
-    dd -->|"2. manual edit"| iw
-    iw -->|"3. data"| db
+    iw -->|"1 auto-generated"| dd
+    dd -->|"2 manual edit"| iw
+    iw -->|"3 data"| db
     iw --> comments
-    comments -->|"4. metadata"| db
+    comments -->|"4 metadata"| db
     db --> api
     api --> catalog
     db --> eml
