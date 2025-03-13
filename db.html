@@ -390,18 +390,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     %% Node definitions
     gd[("`&lt;b&gt;Source Data&lt;/b&gt;
           Google Drive:
-          calcofi/data/{dataset}/*.csv`")]
+          calcofi/data/{provider}/{dataset}/*.csv`")]
     iw["&lt;b&gt;Ingest Workflow&lt;/b&gt;
-        workflows: ingest_{dataset}.qmd"]
+        workflows: ingest_{provider}_{dataset}.qmd"]
     dd["&lt;b&gt;Data Definitions&lt;/b&gt;
-        workflows: /ingest/{dataset}/:
+        workflows: /ingest/{provider}/{dataset}/:
         &lt;ul&gt;
           &lt;li&gt;tbls_redefine.csv&lt;/li&gt;
           &lt;li&gt;flds_redefine.csv&lt;/li&gt;
         &lt;/ul&gt;"]
     db[("&lt;b&gt;Database&lt;/b&gt;")]
-    api["&lt;b&gt;API Endpoint&lt;/b&gt;\n/db_tables\n/db_columns"]
-    catalog["&lt;b&gt;R Function&lt;/b&gt;\ncalcofi4r::cc_db_catalog()"]
+    api["&lt;b&gt;API Endpoint&lt;/b&gt;
+         /db_tables
+         /db_columns"]
+    catalog["&lt;b&gt;R Function&lt;/b&gt;
+             calcofi4r::cc_db_catalog()"]
     eml["&lt;b&gt;Publish Workflow&lt;/b&gt;
       workflows: publish_{dataset}_{portal}.qmd
       with {portal}s:
