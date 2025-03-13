@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           &lt;li&gt;flds_redefine.csv&lt;/li&gt;
         &lt;/ul&gt;"]
     db[("&lt;b&gt;Database&lt;/b&gt;")]
-    api["&lt;b&gt;API Endpoint&lt;/b&gt;\n/db_tables"]
+    api["&lt;b&gt;API Endpoint&lt;/b&gt;\n/db_tables\n/db_columns"]
     catalog["&lt;b&gt;R Function&lt;/b&gt;\ncalcofi4r::cc_db_catalog()"]
     eml["&lt;b&gt;Publish Workflow&lt;/b&gt;
       workflows: publish_{dataset}_{portal}.qmd
@@ -414,11 +414,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
     %% Edge definitions
     gd --&gt; iw
-    iw --&gt;|"1. auto-generated"| dd
-    dd --&gt;|"2. manual edit"| iw
-    iw --&gt;|"3. data"| db
+    iw --&gt;|"1 auto-generated"| dd
+    dd --&gt;|"2 manual edit"| iw
+    iw --&gt;|"3 data"| db
     iw --&gt; comments
-    comments --&gt;|"4. metadata"| db
+    comments --&gt;|"4 metadata"| db
     db --&gt; api
     api --&gt; catalog
     db --&gt; eml
