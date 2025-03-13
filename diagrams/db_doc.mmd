@@ -2,18 +2,21 @@ flowchart TB
     %% Node definitions
     gd[("`<b>Source Data</b>
           Google Drive:
-          calcofi/data/{dataset}/*.csv`")]
+          calcofi/data/{provider}/{dataset}/*.csv`")]
     iw["<b>Ingest Workflow</b>
-        workflows: ingest_{dataset}.qmd"]
+        workflows: ingest_{provider}_{dataset}.qmd"]
     dd["<b>Data Definitions</b>
-        workflows: /ingest/{dataset}/:
+        workflows: /ingest/{provider}/{dataset}/:
         <ul>
           <li>tbls_redefine.csv</li>
           <li>flds_redefine.csv</li>
         </ul>"]
     db[("<b>Database</b>")]
-    api["<b>API Endpoint</b>\n/db_tables\n/db_columns"]
-    catalog["<b>R Function</b>\ncalcofi4r::cc_db_catalog()"]
+    api["<b>API Endpoint</b>
+         /db_tables
+         /db_columns"]
+    catalog["<b>R Function</b>
+             calcofi4r::cc_db_catalog()"]
     eml["<b>Publish Workflow</b>
       workflows: publish_{dataset}_{portal}.qmd
       with {portal}s:
