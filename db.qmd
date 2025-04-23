@@ -113,6 +113,50 @@ Use Quarto documents with chunks of R code in the [workflows](https://github.com
 %%| file: diagrams/db_doc.mmd
 ```
 
+### Using calcofi4db package
+
+The [calcofi4db](https://github.com/CalCOFI/calcofi4db) package provides functions to streamline dataset ingestion, metadata generation, and change detection. The standard workflow is:
+
+1. **Load data files**: `load_csv_files()` reads CSV files from a directory and prepares them for ingestion
+2. **Transform data**: `transform_data()` applies transformations according to redefinition files
+3. **Detect changes**: `detect_csv_changes()` compares data with existing database tables
+4. **Ingest data**: `ingest_csv_to_db()` writes data to the database with proper metadata
+
+For convenience, the high-level `ingest_dataset()` function combines these steps:
+
+```r
+library(calcofi4db)
+library(DBI)
+library(RPostgres)
+
+# Connect to database
+con <- dbConnect(
+  Postgres(),
+  dbname = "gis",
+  host = "localhost",
+  port = 5432,
+  user = "admin",
+  password = "postgres"
+)
+
+# Ingest a dataset
+result <- ingest_dataset(
+  con = con,
+  provider = "swfsc.noaa.gov",
+  dataset = "calcofi-db",
+  dir_data = "/path/to/data",
+  schema = "public",
+  dir_googledata = "https://drive.google.com/drive/folders/your-folder-id",
+  email = "your.email@example.com"
+)
+
+# Examine changes and results
+result$changes
+result$stats
+```
+
+### Workflow details
+
 Google Drive \*.csv files get ingested with a **workflow** per **dataset** (in Github repository [calcofi/workflows](https://github.com/calcofi/workflows) as a Quarto document). Data definition CSV files (`tbls_redefine.csv` , `flds_redefine.csv`) are auto-generated (if missing) and manually updated to rename and describe tables and fields. After injecting the data for each of the tables, extra metadata is added to the `COMMENT`s of each table as JSON elements (links in markdown), including at the ***table*** level:
 
 -   **description**: general description describing contents and how each row is unique
@@ -127,6 +171,28 @@ And at the ***field*** level:
 -   **units**: using the International System of Units (SI) as much as possible
 
 These comments are then exposed by the API [db_tables](https://api.calcofi.io/db_tables) endpoint, which can be consumed and rendered into a tabular searchable catalog with [calcofi4r::cc_db_catalog](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
+
+### Change detection strategy
+
+The `calcofi4db` package implements a comprehensive change detection strategy:
+
+1. **Table changes**:
+   - New tables are identified for initial creation
+   - Existing tables are identified for potential updates
+
+2. **Field changes**:
+   - Added fields: New columns in CSV not present in the database
+   - Removed fields: Columns in database not present in the CSV
+   - Type changes: Fields with different data types between CSV and database
+
+3. **Data changes**:
+   - Row counts are compared between source and destination
+   - Data comparison is handled with checksum verification
+
+If changes are detected, they are displayed to the user who can decide whether to:
+- Create new tables
+- Modify existing table schemas
+- Update data with appropriate strategies (append, replace, merge)
 
 Additional workflows will publish the data to the various [Portals](https://calcofi.io/docs/portals.html) (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) and the [EML](https://docs.ropensci.org/EML/) R package, pulling directly from the structured metadata in the database (on table and field definitions).
 
