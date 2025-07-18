@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "CalCOFI.io Docs",
     "section": "",
-    "text": "1 Process\n\n\n\n\n\n\n\nFigure 1.1: CalCOFI data workflow.\n\n\n\nThe original raw data, most often in tabular format [e.g., comma-separated value (*.csv)], gets ingested into the database by R scripts that use functions and lookup data tables in the R package calcofi4r where functions are organized into Read, Analyze and Visualize concepts. The application programming interface (API) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (Apps) using Shiny (or any other web application framework) and reports using Rmarkdown (or any other report templating framework). Finally, R scripts will publish metadata (as Ecological Metadata Language) and data packages (e.g., in Darwin format) for discovery on a variety of data portals oriented around slicing the tabular or gridded data (ERDDAP), biogeographic analysis (OBIS), long-term archive (DataOne, NCEI) or metadata discovery (InPort). The database will be spatially enabled by PostGIS for summarizing any and all data by Areas of Interest (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas. (Figure 1.1)\n\nERDDAP: great for gridded or tabular data, but does not aggregate on the server or clip to a specific area of interest",
+    "text": "1 Process\n\n\n\n\n\n\n\nFigure 1.1: CalCOFI data workflow.\n\n\n\nThe original raw data, most often in tabular format [e.g., comma-separated value (*.csv)], gets ingested into the database by R scripts that use functions and lookup data tables in the R package calcofi4r where functions are organized into Read, Analyze and Visualize concepts. The application programming interface (API) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (Apps) using Shiny (or any other web application framework) and reports using Rmarkdown (or any other report templating framework). Finally, R scripts will publish metadata (as Ecological Metadata Language) and data packages (e.g., in Darwin format) for discovery on a variety of data portals oriented around slicing the tabular or gridded data (ERDDAP), biogeographic analysis (OBIS), long-term archive (DataOne, NCEI) or metadata discovery (InPort). The database will be spatially enabled by PostGIS for summarizing any and all data by Areas of Interest (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas. (Figure 1.1)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Process</span>"
     ]
@@ -230,23 +230,43 @@
     ]
   },
   {
+    "objectID": "status.html",
+    "href": "status.html",
+    "title": "7  Status",
+    "section": "",
+    "text": "8 Status",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Status</span>"
+    ]
+  },
+  {
+    "objectID": "status.html#section",
+    "href": "status.html#section",
+    "title": "7  Status",
+    "section": "8.1 2025-07-01",
+    "text": "8.1 2025-07-01\n\nThis report summarizes the key development activities, major accomplishments, and ongoing work for the first 6 monhts of 2025 across the CalCOFI GitHub repositories: api, apps, calcofi4db, calcofi4r, docs, server, workflows. The findings are based on issues and commits from January–July 2025.\n\n\n8.1.1 API Enhancements\n\n8.1.1.1 New Features & Data Integration\n\nExpanded API Options\n\nAdded ability to include bottle data and use relaxed criteria for net-to-cast matching (commit).\nSupported upcast/downcast data downloads (commit).\nAdded Zooplankton biomass and improved ichthyodata output (commit).\n\nPerformance & Maintenance\n\nImplemented docker compose restart for Plumber API service (commit).\n\nOngoing Work\n\nMigration of database contouring functions to API/app level for improved caching and rendering efficiency.\nDevelopment of a robust, user-friendly API for seamless DB integration (issue).\n\n\n\n\n\n\n8.1.2 Apps Development\n\n8.1.2.1 Visualization & User Interface\n\nContinuous Improvements\n\nMultiple commits indicate ongoing enhancement, likely focused on UI, data visualization, and integration with the API (see recent commit log).\nClose coordination between API and Apps for improved workflows and data access.\n\n\n\n\n\n\n8.1.3 calcofi4db: R Package & Data Management\n\n8.1.3.1 R Package Initialization & Data Ingestion\n\nNew R Package: calcofi4db\n\nInitial commit and setup (commit), including functions for ingesting CSV datasets and metadata.\nRefined change detection logic for source CSV files, improving tracking of table/field changes (commit).\nEnhanced documentation and site via pkgdown.\nImproved function naming and structure for ingestion (commits, commit).\n\n\n\n\n\n\n8.1.4 calcofi4r: Spatial & Ecological Data Tools\n\n8.1.4.1 Data Layers, Analysis, and Bug Fixes\n\nSpatial Management Layers\n\nOngoing integration of BOEM Wind Planning Areas, Marine Protected Areas, and SCCWRP management regions (issue, issue).\n\nAnalysis Functions\n\nImproved packages for ecological and spatial analysis, including new dependencies (commit).\n\nUser Feedback\n\nAddressing user-reported bugs such as deprecated function calls (issue).\n\n\n\n\n\n\n8.1.5 Documentation (docs)\n\n8.1.5.1 Infrastructure & Environment\n\nDocumentation Site Updates\n\nAdded documentation for new packages and ingestion workflows (commit).\nImproved environment handling for rendering with Quarto and Chromium (multiple commits Jan-Mar 2025).\nUpdated diagrams and edge labels for database documentation.\n\n\n\n\n\n\n8.1.6 Server\n\n8.1.6.1 Backend Infrastructure\n\nBackend Maintenance\n\nNumerous commits for improving server reliability, configuration, and deployment.\nIndicates active backend support for API and Apps.\n\n\n\n\n\n\n8.1.7 Workflows\n\n8.1.7.1 Data Pipeline, Integration, and Registration\n\nWorkflow Automation\n\nMultiple commits show ongoing development of data ingestion, harmonization, and visualization workflows (commit, commit).\n\nODIS Registration\n\nRegistering datasets with ODIS (using JSON-LD) for broader interoperability (issue).\n\nIntegration with External Data\n\nOngoing work to load and harmonize diverse ecological datasets (bottle data, larvae, zooplankton, etc.).\n\nSpatial Data Management\n\nContinued development of AOI (areas of interest), spatial buffer creation, and integration of management regions.\n\n\n\n\n\n\n8.1.8 Key Themes & Impact\n\n8.1.8.1 Integration & Interoperability\n\nStrong focus on connecting API, Apps, R packages, and backend infrastructure for seamless data access and visualization.\nEnhanced interoperability through ODIS registration and harmonized workflows.\n\n\n\n8.1.8.2 Data Accessibility & Usability\n\nImprovements to API and Apps make ecological data more accessible to researchers and managers.\nExpanded support for spatial management areas and ecological datasets.\n\n\n\n8.1.8.3 Infrastructure & Sustainability\n\nInvestments in documentation, backend reliability, and workflow automation contribute to long-term sustainability and reproducibility.\n\n\n\n\n\n8.1.9 For More Details\n\nSome results may be incomplete due to API limits.\n\nTo view all commits/issues for 2025, visit each repository’s GitHub UI and filter by year.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Status</span>"
+    ]
+  },
+  {
     "objectID": "refs.html",
     "href": "refs.html",
-    "title": "7  References",
+    "title": "8  References",
     "section": "",
-    "text": "7.1 R packages",
+    "text": "8.1 R packages",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>References</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>References</span>"
     ]
   },
   {
     "objectID": "refs.html#r-packages",
     "href": "refs.html#r-packages",
-    "title": "7  References",
+    "title": "8  References",
     "section": "",
     "text": "API: plumber (Schloerke and Allen 2024)\ndocs: Quarto (Allaire and Dervieux 2024)\napps: Shiny (Chang et al. 2024)\n\n\n\n\n\nAllaire, JJ, and Christophe Dervieux. 2024. Quarto: R Interface to Quarto Markdown Publishing System. https://github.com/quarto-dev/quarto-r.\n\n\nChang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert, and Barbara Borges. 2024. Shiny: Web Application Framework for r. https://shiny.posit.co/.\n\n\nSchloerke, Barret, and Jeff Allen. 2024. Plumber: An API Generator for r. https://www.rplumber.io.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>References</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>References</span>"
     ]
   }
 ]

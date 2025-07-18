@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for Open-Source Products at CalCOFI.io">
 
-<title>4&nbsp; API – CalCOFI.io Docs</title>
+<title>7&nbsp; Status – CalCOFI.io Docs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./db.html" rel="next">
-<link href="./apps.html" rel="prev">
+<link href="./refs.html" rel="next">
+<link href="./portals.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./status.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Status</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./api.html" class="sidebar-item-text sidebar-link active">
+  <a href="./api.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
@@ -195,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./status.html" class="sidebar-item-text sidebar-link">
+  <a href="./status.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
@@ -215,22 +215,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variables-get-list-of-variables-for-timeseries" id="toc-variables-get-list-of-variables-for-timeseries" class="nav-link active" data-scroll-target="#variables-get-list-of-variables-for-timeseries"><span class="header-section-number">4.1</span> <code>/variables</code>: get list of variables for timeseries</a></li>
-  <li><a href="#species_groups-get-species-groups-for-larvae" id="toc-species_groups-get-species-groups-for-larvae" class="nav-link" data-scroll-target="#species_groups-get-species-groups-for-larvae"><span class="header-section-number">4.2</span> <code>/species_groups</code>: get species groups for larvae</a></li>
-  <li><a href="#timeseries-get-time-series-data" id="toc-timeseries-get-time-series-data" class="nav-link" data-scroll-target="#timeseries-get-time-series-data"><span class="header-section-number">4.3</span> <code>/timeseries</code>: get time series data</a></li>
-  <li><a href="#cruises-get-list-of-cruises" id="toc-cruises-get-list-of-cruises" class="nav-link" data-scroll-target="#cruises-get-list-of-cruises"><span class="header-section-number">4.4</span> <code>/cruises</code>: get list of cruises</a></li>
-  <li><a href="#raster-get-raster-map-of-variable" id="toc-raster-get-raster-map-of-variable" class="nav-link" data-scroll-target="#raster-get-raster-map-of-variable"><span class="header-section-number">4.5</span> <code>/raster</code>: get raster map of variable</a></li>
-  <li><a href="#cruise_lines-get-station-lines-from-cruises" id="toc-cruise_lines-get-station-lines-from-cruises" class="nav-link" data-scroll-target="#cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">4.6</span> <code>/cruise_lines</code>: get station lines from cruises</a></li>
-  <li><a href="#cruise_line_profile" id="toc-cruise_line_profile" class="nav-link" data-scroll-target="#cruise_line_profile"><span class="header-section-number">4.7</span> <code>/cruise_line_profile</code></a></li>
+  <li><a href="#status" id="toc-status" class="nav-link active" data-scroll-target="#status"><span class="header-section-number">8</span> Status</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">8.1</span> 2025-07-01</a>
+  <ul class="collapse">
+  <li><a href="#api-enhancements" id="toc-api-enhancements" class="nav-link" data-scroll-target="#api-enhancements"><span class="header-section-number">8.1.1</span> API Enhancements</a></li>
+  <li><a href="#apps-development" id="toc-apps-development" class="nav-link" data-scroll-target="#apps-development"><span class="header-section-number">8.1.2</span> Apps Development</a></li>
+  <li><a href="#calcofi4db-r-package-data-management" id="toc-calcofi4db-r-package-data-management" class="nav-link" data-scroll-target="#calcofi4db-r-package-data-management"><span class="header-section-number">8.1.3</span> calcofi4db: R Package &amp; Data Management</a></li>
+  <li><a href="#calcofi4r-spatial-ecological-data-tools" id="toc-calcofi4r-spatial-ecological-data-tools" class="nav-link" data-scroll-target="#calcofi4r-spatial-ecological-data-tools"><span class="header-section-number">8.1.4</span> calcofi4r: Spatial &amp; Ecological Data Tools</a></li>
+  <li><a href="#documentation-docs" id="toc-documentation-docs" class="nav-link" data-scroll-target="#documentation-docs"><span class="header-section-number">8.1.5</span> Documentation (docs)</a></li>
+  <li><a href="#server" id="toc-server" class="nav-link" data-scroll-target="#server"><span class="header-section-number">8.1.6</span> Server</a></li>
+  <li><a href="#workflows" id="toc-workflows" class="nav-link" data-scroll-target="#workflows"><span class="header-section-number">8.1.7</span> Workflows</a></li>
+  <li><a href="#key-themes-impact" id="toc-key-themes-impact" class="nav-link" data-scroll-target="#key-themes-impact"><span class="header-section-number">8.1.8</span> Key Themes &amp; Impact</a></li>
+  <li><a href="#for-more-details" id="toc-for-more-details" class="nav-link" data-scroll-target="#for-more-details"><span class="header-section-number">8.1.9</span> For More Details</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/api.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/status.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">API</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Status</span></h1>
 </div>
 
 
@@ -247,39 +255,180 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The raw interface to the Application Programming Interface (API) is available at:</p>
+<section id="status" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Status</h1>
+<section id="section" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="section"><span class="header-section-number">8.1</span> 2025-07-01</h2>
+<!--
+Copilot (GPT-4.1) on Github
+PROMPT: Review all commits and issues for this year in these CalCOFI repositories: api, apps, calcofi4db, calcofi4r, docs, server, workflows. Summarize accomplishments and development work with high level headings and detailed descriptions.
+-->
+<p>This report summarizes the key development activities, major accomplishments, and ongoing work for the first 6 monhts of 2025 across the CalCOFI GitHub repositories: <strong>api, apps, calcofi4db, calcofi4r, docs, server, workflows</strong>. The findings are based on issues and commits from January–July 2025.</p>
+<hr>
+<section id="api-enhancements" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="api-enhancements"><span class="header-section-number">8.1.1</span> API Enhancements</h3>
+<section id="new-features-data-integration" class="level4" data-number="8.1.1.1">
+<h4 data-number="8.1.1.1" class="anchored" data-anchor-id="new-features-data-integration"><span class="header-section-number">8.1.1.1</span> New Features &amp; Data Integration</h4>
 <ul>
-<li><a href="https://api.calcofi.io">api.calcofi.io</a></li>
+<li><strong>Expanded API Options</strong>
+<ul>
+<li>Added ability to include bottle data and use relaxed criteria for net-to-cast matching (<a href="https://github.com/CalCOFI/api/commit/28f978fd4b5ca00c770f95dd57465b0384665fb6">commit</a>).</li>
+<li>Supported upcast/downcast data downloads (<a href="https://github.com/CalCOFI/api/commit/b02eccdf262cf9f525ee76a8c03d62efa2573955">commit</a>).</li>
+<li>Added Zooplankton biomass and improved ichthyodata output (<a href="https://github.com/CalCOFI/api/commit/307cd6fac26a6827b1b5c81f23913a1a1d">commit</a>).</li>
+</ul></li>
+<li><strong>Performance &amp; Maintenance</strong>
+<ul>
+<li>Implemented docker compose restart for Plumber API service (<a href="https://github.com/CalCOFI/api/commit/fae53fdfec9ec9dc48a8182d64f4e8e30c3e7100">commit</a>).</li>
+</ul></li>
+<li><strong>Ongoing Work</strong>
+<ul>
+<li>Migration of database contouring functions to API/app level for improved caching and rendering efficiency.</li>
+<li>Development of a robust, user-friendly API for seamless DB integration (<a href="https://github.com/CalCOFI/api/issues/6">issue</a>).</li>
+</ul></li>
 </ul>
-<p>Here we will provide more guidance on how to use the API functions with documented input arguments, output results and examples of use.</p>
-<section id="variables-get-list-of-variables-for-timeseries" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="variables-get-list-of-variables-for-timeseries"><span class="header-section-number">4.1</span> <code>/variables</code>: get list of variables for timeseries</h2>
-<p>Get list of variables for use in <code>/timeseries</code></p>
+<hr>
 </section>
-<section id="species_groups-get-species-groups-for-larvae" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="species_groups-get-species-groups-for-larvae"><span class="header-section-number">4.2</span> <code>/species_groups</code>: get species groups for larvae</h2>
-<p>Not yet working. Get list of species groups for use with variables <code>larvae_counts.count</code> in <code>/timeseries</code></p>
 </section>
-<section id="timeseries-get-time-series-data" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="timeseries-get-time-series-data"><span class="header-section-number">4.3</span> <code>/timeseries</code>: get time series data</h2>
+<section id="apps-development" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="apps-development"><span class="header-section-number">8.1.2</span> Apps Development</h3>
+<section id="visualization-user-interface" class="level4" data-number="8.1.2.1">
+<h4 data-number="8.1.2.1" class="anchored" data-anchor-id="visualization-user-interface"><span class="header-section-number">8.1.2.1</span> Visualization &amp; User Interface</h4>
+<ul>
+<li><strong>Continuous Improvements</strong>
+<ul>
+<li>Multiple commits indicate ongoing enhancement, likely focused on UI, data visualization, and integration with the API (see <a href="https://github.com/CalCOFI/apps/commits">recent commit log</a>).</li>
+<li>Close coordination between API and Apps for improved workflows and data access.</li>
+</ul></li>
+</ul>
+<hr>
 </section>
-<section id="cruises-get-list-of-cruises" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="cruises-get-list-of-cruises"><span class="header-section-number">4.4</span> <code>/cruises</code>: get list of cruises</h2>
-<p>Get list of cruises with summary stats as CSV table for time (<code>date_beg</code>)</p>
 </section>
-<section id="raster-get-raster-map-of-variable" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="raster-get-raster-map-of-variable"><span class="header-section-number">4.5</span> <code>/raster</code>: get raster map of variable</h2>
-<p>Get raster of variable</p>
+<section id="calcofi4db-r-package-data-management" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="calcofi4db-r-package-data-management"><span class="header-section-number">8.1.3</span> calcofi4db: R Package &amp; Data Management</h3>
+<section id="r-package-initialization-data-ingestion" class="level4" data-number="8.1.3.1">
+<h4 data-number="8.1.3.1" class="anchored" data-anchor-id="r-package-initialization-data-ingestion"><span class="header-section-number">8.1.3.1</span> R Package Initialization &amp; Data Ingestion</h4>
+<ul>
+<li><strong>New R Package: calcofi4db</strong>
+<ul>
+<li>Initial commit and setup (<a href="https://github.com/CalCOFI/calcofi4db/commit/f00e99a089b26b0def9a6362a942d25fcd75e37f">commit</a>), including functions for ingesting CSV datasets and metadata.</li>
+<li>Refined change detection logic for source CSV files, improving tracking of table/field changes (<a href="https://github.com/CalCOFI/calcofi4db/commit/2a29b9e66e9ec83440cc397d9de70b9c7917ba61">commit</a>).</li>
+<li>Enhanced documentation and site via pkgdown.</li>
+<li>Improved function naming and structure for ingestion (<a href="https://github.com/CalCOFI/calcofi4db/commit/b6cf4f6896d0707dc01fc6bcada4ae1b597060a8">commits</a>, <a href="https://github.com/CalCOFI/calcofi4db/commit/7748dea5b20aa34615da27f2869d21f4262ca344">commit</a>).</li>
+</ul></li>
+</ul>
+<hr>
 </section>
-<section id="cruise_lines-get-station-lines-from-cruises" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">4.6</span> <code>/cruise_lines</code>: get station lines from cruises</h2>
-<p>Get station lines from cruises (with more than one cast)</p>
 </section>
-<section id="cruise_line_profile" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="cruise_line_profile"><span class="header-section-number">4.7</span> <code>/cruise_line_profile</code></h2>
-<p>Get profile at depths for given variable of casts along line of stations</p>
+<section id="calcofi4r-spatial-ecological-data-tools" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="calcofi4r-spatial-ecological-data-tools"><span class="header-section-number">8.1.4</span> calcofi4r: Spatial &amp; Ecological Data Tools</h3>
+<section id="data-layers-analysis-and-bug-fixes" class="level4" data-number="8.1.4.1">
+<h4 data-number="8.1.4.1" class="anchored" data-anchor-id="data-layers-analysis-and-bug-fixes"><span class="header-section-number">8.1.4.1</span> Data Layers, Analysis, and Bug Fixes</h4>
+<ul>
+<li><strong>Spatial Management Layers</strong>
+<ul>
+<li>Ongoing integration of BOEM Wind Planning Areas, Marine Protected Areas, and SCCWRP management regions (<a href="https://github.com/CalCOFI/calcofi4r/issues/8">issue</a>, <a href="https://github.com/CalCOFI/calcofi4r/issues/7">issue</a>).</li>
+</ul></li>
+<li><strong>Analysis Functions</strong>
+<ul>
+<li>Improved packages for ecological and spatial analysis, including new dependencies (<a href="https://github.com/CalCOFI/calcofi4r/commit/c17243ae92eb0968bb0666ce4ee6101e88488e73">commit</a>).</li>
+</ul></li>
+<li><strong>User Feedback</strong>
+<ul>
+<li>Addressing user-reported bugs such as deprecated function calls (<a href="https://github.com/CalCOFI/calcofi4r/issues/9">issue</a>).</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="documentation-docs" class="level3" data-number="8.1.5">
+<h3 data-number="8.1.5" class="anchored" data-anchor-id="documentation-docs"><span class="header-section-number">8.1.5</span> Documentation (docs)</h3>
+<section id="infrastructure-environment" class="level4" data-number="8.1.5.1">
+<h4 data-number="8.1.5.1" class="anchored" data-anchor-id="infrastructure-environment"><span class="header-section-number">8.1.5.1</span> Infrastructure &amp; Environment</h4>
+<ul>
+<li><strong>Documentation Site Updates</strong>
+<ul>
+<li>Added documentation for new packages and ingestion workflows (<a href="https://github.com/CalCOFI/docs/commit/b350cec3bd3afda0dad0cbc48c8d223fa1956641">commit</a>).</li>
+<li>Improved environment handling for rendering with Quarto and Chromium (<a href="https://github.com/CalCOFI/docs/commits">multiple commits Jan-Mar 2025</a>).</li>
+<li>Updated diagrams and edge labels for database documentation.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="server" class="level3" data-number="8.1.6">
+<h3 data-number="8.1.6" class="anchored" data-anchor-id="server"><span class="header-section-number">8.1.6</span> Server</h3>
+<section id="backend-infrastructure" class="level4" data-number="8.1.6.1">
+<h4 data-number="8.1.6.1" class="anchored" data-anchor-id="backend-infrastructure"><span class="header-section-number">8.1.6.1</span> Backend Infrastructure</h4>
+<ul>
+<li><strong>Backend Maintenance</strong>
+<ul>
+<li>Numerous commits for improving server reliability, configuration, and deployment.</li>
+<li>Indicates active backend support for API and Apps.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="workflows" class="level3" data-number="8.1.7">
+<h3 data-number="8.1.7" class="anchored" data-anchor-id="workflows"><span class="header-section-number">8.1.7</span> Workflows</h3>
+<section id="data-pipeline-integration-and-registration" class="level4" data-number="8.1.7.1">
+<h4 data-number="8.1.7.1" class="anchored" data-anchor-id="data-pipeline-integration-and-registration"><span class="header-section-number">8.1.7.1</span> Data Pipeline, Integration, and Registration</h4>
+<ul>
+<li><strong>Workflow Automation</strong>
+<ul>
+<li>Multiple commits show ongoing development of data ingestion, harmonization, and visualization workflows (<a href="https://github.com/CalCOFI/workflows/commit/38f813aff82327f00622c083f591c1a3bce4e55d">commit</a>, <a href="https://github.com/CalCOFI/workflows/commit/81b6c27457c53f862873ce9a4021a759e0e5ad65">commit</a>).</li>
+</ul></li>
+<li><strong>ODIS Registration</strong>
+<ul>
+<li>Registering datasets with ODIS (using JSON-LD) for broader interoperability (<a href="https://github.com/CalCOFI/workflows/issues/24">issue</a>).</li>
+</ul></li>
+<li><strong>Integration with External Data</strong>
+<ul>
+<li>Ongoing work to load and harmonize diverse ecological datasets (bottle data, larvae, zooplankton, etc.).</li>
+</ul></li>
+<li><strong>Spatial Data Management</strong>
+<ul>
+<li>Continued development of AOI (areas of interest), spatial buffer creation, and integration of management regions.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="key-themes-impact" class="level3" data-number="8.1.8">
+<h3 data-number="8.1.8" class="anchored" data-anchor-id="key-themes-impact"><span class="header-section-number">8.1.8</span> Key Themes &amp; Impact</h3>
+<section id="integration-interoperability" class="level4" data-number="8.1.8.1">
+<h4 data-number="8.1.8.1" class="anchored" data-anchor-id="integration-interoperability"><span class="header-section-number">8.1.8.1</span> Integration &amp; Interoperability</h4>
+<ul>
+<li>Strong focus on connecting API, Apps, R packages, and backend infrastructure for seamless data access and visualization.</li>
+<li>Enhanced interoperability through ODIS registration and harmonized workflows.</li>
+</ul>
+</section>
+<section id="data-accessibility-usability" class="level4" data-number="8.1.8.2">
+<h4 data-number="8.1.8.2" class="anchored" data-anchor-id="data-accessibility-usability"><span class="header-section-number">8.1.8.2</span> Data Accessibility &amp; Usability</h4>
+<ul>
+<li>Improvements to API and Apps make ecological data more accessible to researchers and managers.</li>
+<li>Expanded support for spatial management areas and ecological datasets.</li>
+</ul>
+</section>
+<section id="infrastructure-sustainability" class="level4" data-number="8.1.8.3">
+<h4 data-number="8.1.8.3" class="anchored" data-anchor-id="infrastructure-sustainability"><span class="header-section-number">8.1.8.3</span> Infrastructure &amp; Sustainability</h4>
+<ul>
+<li>Investments in documentation, backend reliability, and workflow automation contribute to long-term sustainability and reproducibility.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="for-more-details" class="level3" data-number="8.1.9">
+<h3 data-number="8.1.9" class="anchored" data-anchor-id="for-more-details"><span class="header-section-number">8.1.9</span> For More Details</h3>
+<ul>
+<li>Some results may be incomplete due to API limits.<br>
+</li>
+<li>To view all commits/issues for 2025, visit each repository’s <a href="https://github.com/CalCOFI">GitHub UI</a> and filter by year.</li>
+</ul>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -684,13 +833,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./apps.html" class="pagination-link" aria-label="Applications">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span>
+      <a href="./portals.html" class="pagination-link" aria-label="Portals">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portals</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./db.html" class="pagination-link" aria-label="Database">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./refs.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -699,4 +848,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/api.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/status.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
