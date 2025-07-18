@@ -37,6 +37,7 @@ book:
     - api.qmd
     - db.qmd
     - portals.qmd
+    - status.qmd
     - refs.qmd
 
 bibliography: ["refs/packages.bib"]

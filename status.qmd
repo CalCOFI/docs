@@ -1,0 +1,117 @@
+---
+title: "Status"
+---
+
+# Status
+
+## 2025-07-01
+
+<!--
+Copilot (GPT-4.1) on Github
+PROMPT: Review all commits and issues for this year in these CalCOFI repositories: api, apps, calcofi4db, calcofi4r, docs, server, workflows. Summarize accomplishments and development work with high level headings and detailed descriptions.
+-->
+
+This report summarizes the key development activities, major accomplishments, and ongoing work for the first 6 monhts of 2025 across the CalCOFI GitHub repositories: **api, apps, calcofi4db, calcofi4r, docs, server, workflows**. The findings are based on issues and commits from January–July 2025.
+
+---
+
+### API Enhancements
+
+#### New Features & Data Integration
+- **Expanded API Options**  
+  - Added ability to include bottle data and use relaxed criteria for net-to-cast matching ([commit](https://github.com/CalCOFI/api/commit/28f978fd4b5ca00c770f95dd57465b0384665fb6)).
+  - Supported upcast/downcast data downloads ([commit](https://github.com/CalCOFI/api/commit/b02eccdf262cf9f525ee76a8c03d62efa2573955)).
+  - Added Zooplankton biomass and improved ichthyodata output ([commit](https://github.com/CalCOFI/api/commit/307cd6fac26a6827b1b5c81f23913a1a1d)).
+- **Performance & Maintenance**
+  - Implemented docker compose restart for Plumber API service ([commit](https://github.com/CalCOFI/api/commit/fae53fdfec9ec9dc48a8182d64f4e8e30c3e7100)).
+- **Ongoing Work**
+  - Migration of database contouring functions to API/app level for improved caching and rendering efficiency.
+  - Development of a robust, user-friendly API for seamless DB integration ([issue](https://github.com/CalCOFI/api/issues/6)).
+
+---
+
+### Apps Development
+
+#### Visualization & User Interface
+- **Continuous Improvements**
+  - Multiple commits indicate ongoing enhancement, likely focused on UI, data visualization, and integration with the API (see [recent commit log](https://github.com/CalCOFI/apps/commits)).
+  - Close coordination between API and Apps for improved workflows and data access.
+
+---
+
+### calcofi4db: R Package & Data Management
+
+#### R Package Initialization & Data Ingestion
+- **New R Package: calcofi4db**
+  - Initial commit and setup ([commit](https://github.com/CalCOFI/calcofi4db/commit/f00e99a089b26b0def9a6362a942d25fcd75e37f)), including functions for ingesting CSV datasets and metadata.
+  - Refined change detection logic for source CSV files, improving tracking of table/field changes ([commit](https://github.com/CalCOFI/calcofi4db/commit/2a29b9e66e9ec83440cc397d9de70b9c7917ba61)).
+  - Enhanced documentation and site via pkgdown.
+  - Improved function naming and structure for ingestion ([commits](https://github.com/CalCOFI/calcofi4db/commit/b6cf4f6896d0707dc01fc6bcada4ae1b597060a8), [commit](https://github.com/CalCOFI/calcofi4db/commit/7748dea5b20aa34615da27f2869d21f4262ca344)).
+
+---
+
+### calcofi4r: Spatial & Ecological Data Tools
+
+#### Data Layers, Analysis, and Bug Fixes
+- **Spatial Management Layers**
+  - Ongoing integration of BOEM Wind Planning Areas, Marine Protected Areas, and SCCWRP management regions ([issue](https://github.com/CalCOFI/calcofi4r/issues/8), [issue](https://github.com/CalCOFI/calcofi4r/issues/7)).
+- **Analysis Functions**
+  - Improved packages for ecological and spatial analysis, including new dependencies ([commit](https://github.com/CalCOFI/calcofi4r/commit/c17243ae92eb0968bb0666ce4ee6101e88488e73)).
+- **User Feedback**
+  - Addressing user-reported bugs such as deprecated function calls ([issue](https://github.com/CalCOFI/calcofi4r/issues/9)).
+
+---
+
+### Documentation (docs)
+
+#### Infrastructure & Environment
+- **Documentation Site Updates**
+  - Added documentation for new packages and ingestion workflows ([commit](https://github.com/CalCOFI/docs/commit/b350cec3bd3afda0dad0cbc48c8d223fa1956641)).
+  - Improved environment handling for rendering with Quarto and Chromium ([multiple commits Jan-Mar 2025](https://github.com/CalCOFI/docs/commits)).
+  - Updated diagrams and edge labels for database documentation.
+
+---
+
+### Server
+
+#### Backend Infrastructure
+- **Backend Maintenance**
+  - Numerous commits for improving server reliability, configuration, and deployment.
+  - Indicates active backend support for API and Apps.
+
+---
+
+### Workflows
+
+#### Data Pipeline, Integration, and Registration
+- **Workflow Automation**
+  - Multiple commits show ongoing development of data ingestion, harmonization, and visualization workflows ([commit](https://github.com/CalCOFI/workflows/commit/38f813aff82327f00622c083f591c1a3bce4e55d), [commit](https://github.com/CalCOFI/workflows/commit/81b6c27457c53f862873ce9a4021a759e0e5ad65)).
+- **ODIS Registration**
+  - Registering datasets with ODIS (using JSON-LD) for broader interoperability ([issue](https://github.com/CalCOFI/workflows/issues/24)).
+- **Integration with External Data**
+  - Ongoing work to load and harmonize diverse ecological datasets (bottle data, larvae, zooplankton, etc.).
+- **Spatial Data Management**
+  - Continued development of AOI (areas of interest), spatial buffer creation, and integration of management regions.
+
+---
+
+### Key Themes & Impact
+
+#### Integration & Interoperability
+- Strong focus on connecting API, Apps, R packages, and backend infrastructure for seamless data access and visualization.
+- Enhanced interoperability through ODIS registration and harmonized workflows.
+
+#### Data Accessibility & Usability
+- Improvements to API and Apps make ecological data more accessible to researchers and managers.
+- Expanded support for spatial management areas and ecological datasets.
+
+#### Infrastructure & Sustainability
+- Investments in documentation, backend reliability, and workflow automation contribute to long-term sustainability and reproducibility.
+
+---
+
+### For More Details
+
+- Some results may be incomplete due to API limits.  
+- To view all commits/issues for 2025, visit each repository’s [GitHub UI](https://github.com/CalCOFI) and filter by year.
+
