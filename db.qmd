@@ -103,26 +103,41 @@ Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all databas
   write_excel_csv(df, 'file.csv')                                       # implicit
   ```
 
-## Ingest datasets with documentation
+## Integrated database ingestion strategy
 
-Use Quarto documents with chunks of R code in the [workflows](https://github.com/CalCOFI/workflows/) Github repository to ingest datasets into the database. For example, see the [ingest_noaa-calcofi-db](https://calcofi.io/workflows/ingest_noaa-calcofi-db.html) workflow.
+### Overview
+
+The CalCOFI database uses a two-schema strategy for development and production:
+
+- **`dev` schema**: Development schema where new datasets, tables, fields, and relationships are ingested and QA/QC'd. This schema is recreated fresh with each ingestion run using the master ingestion script.
+- **`prod` schema**: Production schema for stable, versioned data used by public APIs, apps, and data portals (OBIS, EDI, ERDDAP). Once `dev` is validated, it's copied to `prod` with a version number.
+
+### Master ingestion workflow
+
+All datasets are ingested using a single master Quarto script [`calcofi4db/inst/ingest.qmd`](https://github.com/CalCOFI/calcofi4db/blob/main/inst/ingest.qmd) that:
+
+1. **Drops and recreates** the `dev` schema (fresh start each run)
+2. **Ingests multiple datasets** from Google Drive source files (CSV, potentially SHP/NC in future)
+3. **Applies transformations** using redefinition files (`tbls_redefine.csv`, `flds_redefine.csv`)
+4. **Creates relationships** (primary keys, foreign keys, indexes)
+5. **Records schema version** with metadata in `schema_version` table
+
+Each dataset section in the master script handles:
+
+- Reading CSV files from Google Drive
+- Transforming data according to redefinition rules
+- Loading into database tables
+- Adding table/field comments with metadata
 
 ```{mermaid}
 %%| label: fig-db_doc
-%%| fig-cap: "Database documentation scheme."
+%%| fig-cap: "Integrated database ingestion scheme."
 %%| file: diagrams/db_doc.mmd
 ```
 
 ### Using calcofi4db package
 
-The [calcofi4db](https://github.com/CalCOFI/calcofi4db) package provides functions to streamline dataset ingestion, metadata generation, and change detection. The standard workflow is:
-
-1. **Load data files**: `load_csv_files()` reads CSV files from a directory and prepares them for ingestion
-2. **Transform data**: `transform_data()` applies transformations according to redefinition files
-3. **Detect changes**: `detect_csv_changes()` compares data with existing database tables
-4. **Ingest data**: `ingest_csv_to_db()` writes data to the database with proper metadata
-
-For convenience, the high-level `ingest_dataset()` function combines these steps:
+The [calcofi4db](https://github.com/CalCOFI/calcofi4db) package provides streamlined functions for dataset ingestion:
 
 ```r
 library(calcofi4db)
@@ -139,62 +154,66 @@ con <- dbConnect(
   password = "postgres"
 )
 
-# Ingest a dataset
-result <- ingest_dataset(
-  con = con,
+# Read CSV files and metadata
+d <- read_csv_files(
   provider = "swfsc.noaa.gov",
-  dataset = "calcofi-db",
-  dir_data = "/path/to/data",
-  schema = "public",
-  dir_googledata = "https://drive.google.com/drive/folders/your-folder-id",
-  email = "your.email@example.com"
+  dataset = "calcofi-db"
 )
 
-# Examine changes and results
-result$changes
-result$stats
+# Transform data according to redefinitions
+transformed_data <- transform_data(d)
+
+# Ingest into dev schema
+ingest_csv_to_db(
+  con = con,
+  schema = "dev",
+  transformed_data = transformed_data,
+  d_flds_rd = d$d_flds_rd,
+  d_gdata = d$d_gdata,
+  workflow_info = d$workflow_info
+)
+
+# Record schema version
+record_schema_version(
+  con = con,
+  schema = "dev",
+  version = "1.0.0",
+  description = "Initial ingestion of NOAA CalCOFI Database",
+  script_permalink = "https://github.com/CalCOFI/calcofi4db/blob/main/inst/ingest.qmd"
+)
 ```
 
-### Workflow details
+### Schema versioning
 
-Google Drive \*.csv files get ingested with a **workflow** per **dataset** (in Github repository [calcofi/workflows](https://github.com/calcofi/workflows) as a Quarto document). Data definition CSV files (`tbls_redefine.csv` , `flds_redefine.csv`) are auto-generated (if missing) and manually updated to rename and describe tables and fields. After injecting the data for each of the tables, extra metadata is added to the `COMMENT`s of each table as JSON elements (links in markdown), including at the ***table*** level:
+Each successful ingestion creates a new schema version recorded in the `schema_version` table with:
 
--   **description**: general description describing contents and how each row is unique
--   **source**: CSV (linked to Google Drive source as markdown)
--   **source_created**: datetime stamp of when source was created on GoogleDrive
--   **workflow**: html (rendered Quarto document on Github)
--   **workflow_ingested**: datetime of ingestion
+- **version**: Semantic version number (e.g., "1.0.0", "1.1.0")
+- **description**: Changes introduced in this version
+- **date_created**: Timestamp of ingestion
+- **script_permalink**: GitHub permalink to the versioned ingestion script
 
-And at the ***field*** level:
+Versions are also archived as SQL dumps in Google Drive for reproducibility.
 
--   **description**: general description of the field
--   **units**: using the International System of Units (SI) as much as possible
+### Metadata and documentation
 
-These comments are then exposed by the API [db_tables](https://api.calcofi.io/db_tables) endpoint, which can be consumed and rendered into a tabular searchable catalog with [calcofi4r::cc_db_catalog](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
+After ingestion, metadata is stored in PostgreSQL `COMMENT`s as JSON at the **table** level:
 
-### Change detection strategy
+- **description**: General description and row uniqueness
+- **source**: CSV file link to Google Drive
+- **source_created**: Source file creation timestamp
+- **workflow**: Link to rendered ingestion script
+- **workflow_ingested**: Ingestion timestamp
 
-The `calcofi4db` package implements a comprehensive change detection strategy:
+And at the **field** level:
 
-1. **Table changes**:
-   - New tables are identified for initial creation
-   - Existing tables are identified for potential updates
+- **description**: Field description
+- **units**: SI units where applicable
 
-2. **Field changes**:
-   - Added fields: New columns in CSV not present in the database
-   - Removed fields: Columns in database not present in the CSV
-   - Type changes: Fields with different data types between CSV and database
+These comments are exposed via the API [db_tables](https://api.calcofi.io/db_tables) endpoint and rendered with [calcofi4r::cc_db_catalog](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
 
-3. **Data changes**:
-   - Row counts are compared between source and destination
-   - Data comparison is handled with checksum verification
+### Publishing to portals
 
-If changes are detected, they are displayed to the user who can decide whether to:
-- Create new tables
-- Modify existing table schemas
-- Update data with appropriate strategies (append, replace, merge)
-
-Additional workflows will publish the data to the various [Portals](https://calcofi.io/docs/portals.html) (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) and the [EML](https://docs.ropensci.org/EML/) R package, pulling directly from the structured metadata in the database (on table and field definitions).
+After `prod` schema is versioned, additional workflows publish data to [Portals](https://calcofi.io/docs/portals.html) (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) via the [EML](https://docs.ropensci.org/EML/) R package, pulling metadata directly from database comments.
 
 ### OR Describe tables and columns directly
 
