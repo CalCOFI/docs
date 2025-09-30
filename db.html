@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,14 +70,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./api.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-27c261d06b905028a18691de25d09dde.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -134,7 +135,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">CalCOFI.io Docs</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -259,13 +262,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">5.1.2</span> Name columns</a></li>
   </ul></li>
   <li><a href="#use-unicode-for-text" id="toc-use-unicode-for-text" class="nav-link" data-scroll-target="#use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</a></li>
-  <li><a href="#ingest-datasets-with-documentation" id="toc-ingest-datasets-with-documentation" class="nav-link" data-scroll-target="#ingest-datasets-with-documentation"><span class="header-section-number">5.3</span> Ingest datasets with documentation</a>
+  <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">5.3</span> Integrated database ingestion strategy</a>
   <ul class="collapse">
-  <li><a href="#using-calcofi4db-package" id="toc-using-calcofi4db-package" class="nav-link" data-scroll-target="#using-calcofi4db-package"><span class="header-section-number">5.3.1</span> Using calcofi4db package</a></li>
-  <li><a href="#workflow-details" id="toc-workflow-details" class="nav-link" data-scroll-target="#workflow-details"><span class="header-section-number">5.3.2</span> Workflow details</a></li>
-  <li><a href="#change-detection-strategy" id="toc-change-detection-strategy" class="nav-link" data-scroll-target="#change-detection-strategy"><span class="header-section-number">5.3.3</span> Change detection strategy</a></li>
-  <li><a href="#or-describe-tables-and-columns-directly" id="toc-or-describe-tables-and-columns-directly" class="nav-link" data-scroll-target="#or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.4</span> OR Describe tables and columns directly</a></li>
-  <li><a href="#display-tables-and-columns-with-metadata" id="toc-display-tables-and-columns-with-metadata" class="nav-link" data-scroll-target="#display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.5</span> Display tables and columns with metadata</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">5.3.1</span> Overview</a></li>
+  <li><a href="#master-ingestion-workflow" id="toc-master-ingestion-workflow" class="nav-link" data-scroll-target="#master-ingestion-workflow"><span class="header-section-number">5.3.2</span> Master ingestion workflow</a></li>
+  <li><a href="#using-calcofi4db-package" id="toc-using-calcofi4db-package" class="nav-link" data-scroll-target="#using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</a></li>
+  <li><a href="#schema-versioning" id="toc-schema-versioning" class="nav-link" data-scroll-target="#schema-versioning"><span class="header-section-number">5.3.4</span> Schema versioning</a></li>
+  <li><a href="#metadata-and-documentation" id="toc-metadata-and-documentation" class="nav-link" data-scroll-target="#metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</a></li>
+  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">5.3.6</span> Publishing to portals</a></li>
+  <li><a href="#or-describe-tables-and-columns-directly" id="toc-or-describe-tables-and-columns-directly" class="nav-link" data-scroll-target="#or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.7</span> OR Describe tables and columns directly</a></li>
+  <li><a href="#display-tables-and-columns-with-metadata" id="toc-display-tables-and-columns-with-metadata" class="nav-link" data-scroll-target="#display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.8</span> Display tables and columns with metadata</a></li>
   </ul></li>
   <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">5.4</span> Relationships between tables</a></li>
   <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">5.5</span> Spatial Tips</a></li>
@@ -330,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="5.2" class="anchored" data-anchor-id="use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</h2>
 <p>The <a href="https://www.postgresql.org/docs/current/multibyte.html#MULTIBYTE-SETTING">default character encoding for Postgresql</a> is unicode (<code>UTF8</code>), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.</p>
 <p>Logging into the server, we can see this with the following command:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> postgis psql <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> postgis psql <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>                                  List of databases
         Name        | Owner | Encoding |  Collate   |   Ctype    | Access privileges 
 --------------------+-------+----------+------------+------------+-------------------
@@ -350,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Use Unicode (<code>utf-8</code> in Python or <code>UTF8</code> in Postgresql) encoding for all database text values to support international characters and documentation (i.e., tabs, etc for markdown conversion).</p>
 <ul>
 <li><p>In <strong>Python</strong>, use <a href="https://pandas.pydata.org/docs/index.html"><strong><code>pandas</code></strong></a> to read (<a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"><code>read_csv()</code></a>) and write (<a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html"><code>to_csv()</code></a>) with UTF-8 encoding (i.e., <code>encoding='utf-8'</code>).:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>engine <span class="op">=</span> create_engine(<span class="st">'postgresql://user:password@localhost:5432/dbname'</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -364,9 +370,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_sql(<span class="st">'SELECT * FROM table_name'</span>, engine, encoding<span class="op">=</span><span class="st">'utf-8'</span>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># write to a csv file with UTF-8 encoding</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'file.csv'</span>, index<span class="op">=</span><span class="va">False</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'file.csv'</span>, index<span class="op">=</span><span class="va">False</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>In <strong>R</strong>, use <a href="https://readr.tidyverse.org/index.html"><strong><code>readr</code></strong></a> to read (<a href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_csv()</code></a>) and write (<a href="https://readr.tidyverse.org/reference/write_delim.html"><code>write_excel_csv()</code></a>) to force UTF-8 encoding.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RPostgres)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -385,12 +391,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># write to a csv file with UTF-8 encoding</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">write_excel_csv</span>(df, <span class="st">'file.csv'</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">'UTF-8'</span>))  <span class="co"># explicit</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_excel_csv</span>(df, <span class="st">'file.csv'</span>)                                       <span class="co"># implicit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_excel_csv</span>(df, <span class="st">'file.csv'</span>)                                       <span class="co"># implicit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 </section>
-<section id="ingest-datasets-with-documentation" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="ingest-datasets-with-documentation"><span class="header-section-number">5.3</span> Ingest datasets with documentation</h2>
-<p>Use Quarto documents with chunks of R code in the <a href="https://github.com/CalCOFI/workflows/">workflows</a> Github repository to ingest datasets into the database. For example, see the <a href="https://calcofi.io/workflows/ingest_noaa-calcofi-db.html">ingest_noaa-calcofi-db</a> workflow.</p>
+<section id="integrated-database-ingestion-strategy" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="integrated-database-ingestion-strategy"><span class="header-section-number">5.3</span> Integrated database ingestion strategy</h2>
+<section id="overview" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">5.3.1</span> Overview</h3>
+<p>The CalCOFI database uses a two-schema strategy for development and production:</p>
+<ul>
+<li><strong><code>dev</code> schema</strong>: Development schema where new datasets, tables, fields, and relationships are ingested and QA/QC’d.&nbsp;This schema is recreated fresh with each ingestion run using the master ingestion script.</li>
+<li><strong><code>prod</code> schema</strong>: Production schema for stable, versioned data used by public APIs, apps, and data portals (OBIS, EDI, ERDDAP). Once <code>dev</code> is validated, it’s copied to <code>prod</code> with a version number.</li>
+</ul>
+</section>
+<section id="master-ingestion-workflow" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="master-ingestion-workflow"><span class="header-section-number">5.3.2</span> Master ingestion workflow</h3>
+<p>All datasets are ingested using a single master Quarto script <a href="https://github.com/CalCOFI/calcofi4db/blob/main/inst/ingest.qmd"><code>calcofi4db/inst/ingest.qmd</code></a> that:</p>
+<ol type="1">
+<li><strong>Drops and recreates</strong> the <code>dev</code> schema (fresh start each run)</li>
+<li><strong>Ingests multiple datasets</strong> from Google Drive source files (CSV, potentially SHP/NC in future)</li>
+<li><strong>Applies transformations</strong> using redefinition files (<code>tbls_redefine.csv</code>, <code>flds_redefine.csv</code>)</li>
+<li><strong>Creates relationships</strong> (primary keys, foreign keys, indexes)</li>
+<li><strong>Records schema version</strong> with metadata in <code>schema_version</code> table</li>
+</ol>
+<p>Each dataset section in the master script handles:</p>
+<ul>
+<li>Reading CSV files from Google Drive</li>
+<li>Transforming data according to redefinition rules</li>
+<li>Loading into database tables</li>
+<li>Adding table/field comments with metadata</li>
+</ul>
 <div class="cell" data-file="diagrams/db_doc.mmd" data-layout-align="default">
 <div class="cell-output-display">
 <div id="fig-db_doc" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -484,23 +514,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-db_doc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.1: Database documentation scheme.
+Figure&nbsp;5.1: Integrated database ingestion scheme.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<section id="using-calcofi4db-package" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="using-calcofi4db-package"><span class="header-section-number">5.3.1</span> Using calcofi4db package</h3>
-<p>The <a href="https://github.com/CalCOFI/calcofi4db">calcofi4db</a> package provides functions to streamline dataset ingestion, metadata generation, and change detection. The standard workflow is:</p>
-<ol type="1">
-<li><strong>Load data files</strong>: <code>load_csv_files()</code> reads CSV files from a directory and prepares them for ingestion</li>
-<li><strong>Transform data</strong>: <code>transform_data()</code> applies transformations according to redefinition files</li>
-<li><strong>Detect changes</strong>: <code>detect_csv_changes()</code> compares data with existing database tables</li>
-<li><strong>Ingest data</strong>: <code>ingest_csv_to_db()</code> writes data to the database with proper metadata</li>
-</ol>
-<p>For convenience, the high-level <code>ingest_dataset()</code> function combines these steps:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
+</section>
+<section id="using-calcofi4db-package" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</h3>
+<p>The <a href="https://github.com/CalCOFI/calcofi4db">calcofi4db</a> package provides streamlined functions for dataset ingestion:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RPostgres)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -514,67 +538,71 @@ Figure&nbsp;5.1: Database documentation scheme.
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">"postgres"</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Ingest a dataset</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">ingest_dataset</span>(</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">con =</span> con,</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider =</span> <span class="st">"swfsc.noaa.gov"</span>,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset =</span> <span class="st">"calcofi-db"</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_data =</span> <span class="st">"/path/to/data"</span>,</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema =</span> <span class="st">"public"</span>,</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_googledata =</span> <span class="st">"https://drive.google.com/drive/folders/your-folder-id"</span>,</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">email =</span> <span class="st">"your.email@example.com"</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine changes and results</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>result<span class="sc">$</span>changes</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>result<span class="sc">$</span>stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV files and metadata</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv_files</span>(</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider =</span> <span class="st">"swfsc.noaa.gov"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset =</span> <span class="st">"calcofi-db"</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform data according to redefinitions</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>transformed_data <span class="ot">&lt;-</span> <span class="fu">transform_data</span>(d)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Ingest into dev schema</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ingest_csv_to_db</span>(</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">con =</span> con,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema =</span> <span class="st">"dev"</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">transformed_data =</span> transformed_data,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_flds_rd =</span> d<span class="sc">$</span>d_flds_rd,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_gdata =</span> d<span class="sc">$</span>d_gdata,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">workflow_info =</span> d<span class="sc">$</span>workflow_info</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Record schema version</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">record_schema_version</span>(</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">con =</span> con,</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema =</span> <span class="st">"dev"</span>,</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="st">"1.0.0"</span>,</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="st">"Initial ingestion of NOAA CalCOFI Database"</span>,</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">script_permalink =</span> <span class="st">"https://github.com/CalCOFI/calcofi4db/blob/main/inst/ingest.qmd"</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="workflow-details" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="workflow-details"><span class="header-section-number">5.3.2</span> Workflow details</h3>
-<p>Google Drive *.csv files get ingested with a <strong>workflow</strong> per <strong>dataset</strong> (in Github repository <a href="https://github.com/calcofi/workflows">calcofi/workflows</a> as a Quarto document). Data definition CSV files (<code>tbls_redefine.csv</code> , <code>flds_redefine.csv</code>) are auto-generated (if missing) and manually updated to rename and describe tables and fields. After injecting the data for each of the tables, extra metadata is added to the <code>COMMENT</code>s of each table as JSON elements (links in markdown), including at the <strong><em>table</em></strong> level:</p>
+<section id="schema-versioning" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="schema-versioning"><span class="header-section-number">5.3.4</span> Schema versioning</h3>
+<p>Each successful ingestion creates a new schema version recorded in the <code>schema_version</code> table with:</p>
 <ul>
-<li><strong>description</strong>: general description describing contents and how each row is unique</li>
-<li><strong>source</strong>: CSV (linked to Google Drive source as markdown)</li>
-<li><strong>source_created</strong>: datetime stamp of when source was created on GoogleDrive</li>
-<li><strong>workflow</strong>: html (rendered Quarto document on Github)</li>
-<li><strong>workflow_ingested</strong>: datetime of ingestion</li>
+<li><strong>version</strong>: Semantic version number (e.g., “1.0.0”, “1.1.0”)</li>
+<li><strong>description</strong>: Changes introduced in this version</li>
+<li><strong>date_created</strong>: Timestamp of ingestion</li>
+<li><strong>script_permalink</strong>: GitHub permalink to the versioned ingestion script</li>
 </ul>
-<p>And at the <strong><em>field</em></strong> level:</p>
+<p>Versions are also archived as SQL dumps in Google Drive for reproducibility.</p>
+</section>
+<section id="metadata-and-documentation" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</h3>
+<p>After ingestion, metadata is stored in PostgreSQL <code>COMMENT</code>s as JSON at the <strong>table</strong> level:</p>
 <ul>
-<li><strong>description</strong>: general description of the field</li>
-<li><strong>units</strong>: using the International System of Units (SI) as much as possible</li>
+<li><strong>description</strong>: General description and row uniqueness</li>
+<li><strong>source</strong>: CSV file link to Google Drive</li>
+<li><strong>source_created</strong>: Source file creation timestamp</li>
+<li><strong>workflow</strong>: Link to rendered ingestion script</li>
+<li><strong>workflow_ingested</strong>: Ingestion timestamp</li>
 </ul>
-<p>These comments are then exposed by the API <a href="https://api.calcofi.io/db_tables">db_tables</a> endpoint, which can be consumed and rendered into a tabular searchable catalog with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html">calcofi4r::cc_db_catalog</a>.</p>
+<p>And at the <strong>field</strong> level:</p>
+<ul>
+<li><strong>description</strong>: Field description</li>
+<li><strong>units</strong>: SI units where applicable</li>
+</ul>
+<p>These comments are exposed via the API <a href="https://api.calcofi.io/db_tables">db_tables</a> endpoint and rendered with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html">calcofi4r::cc_db_catalog</a>.</p>
 </section>
-<section id="change-detection-strategy" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="change-detection-strategy"><span class="header-section-number">5.3.3</span> Change detection strategy</h3>
-<p>The <code>calcofi4db</code> package implements a comprehensive change detection strategy:</p>
-<ol type="1">
-<li><strong>Table changes</strong>:
-<ul>
-<li>New tables are identified for initial creation</li>
-<li>Existing tables are identified for potential updates</li>
-</ul></li>
-<li><strong>Field changes</strong>:
-<ul>
-<li>Added fields: New columns in CSV not present in the database</li>
-<li>Removed fields: Columns in database not present in the CSV</li>
-<li>Type changes: Fields with different data types between CSV and database</li>
-</ul></li>
-<li><strong>Data changes</strong>:
-<ul>
-<li>Row counts are compared between source and destination</li>
-<li>Data comparison is handled with checksum verification</li>
-</ul></li>
-</ol>
-<p>If changes are detected, they are displayed to the user who can decide whether to: - Create new tables - Modify existing table schemas - Update data with appropriate strategies (append, replace, merge)</p>
-<p>Additional workflows will publish the data to the various <a href="https://calcofi.io/docs/portals.html">Portals</a> (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) and the <a href="https://docs.ropensci.org/EML/">EML</a> R package, pulling directly from the structured metadata in the database (on table and field definitions).</p>
+<section id="publishing-to-portals" class="level3" data-number="5.3.6">
+<h3 data-number="5.3.6" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">5.3.6</span> Publishing to portals</h3>
+<p>After <code>prod</code> schema is versioned, additional workflows publish data to <a href="https://calcofi.io/docs/portals.html">Portals</a> (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) via the <a href="https://docs.ropensci.org/EML/">EML</a> R package, pulling metadata directly from database comments.</p>
 </section>
-<section id="or-describe-tables-and-columns-directly" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.4</span> OR Describe tables and columns directly</h3>
+<section id="or-describe-tables-and-columns-directly" class="level3" data-number="5.3.7">
+<h3 data-number="5.3.7" class="anchored" data-anchor-id="or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.7</span> OR Describe tables and columns directly</h3>
 <ul>
 <li><p>Use the <code>COMMENT</code> clause to add descriptions to tables and columns, either through the GUI <a href="https://pgadmin.calcofi.io/">pgadmin.calcofi.io</a> (by right-clicking on the table or column and selecting <code>Properties</code>) or with SQL. For example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Note the use of <a href="https://www.markdownguide.org/cheat-sheet/"><strong>markdown</strong></a> for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:</p>
 <blockquote class="blockquote">
 <p>areas of interest (<code>aoi</code>) polygons for federal <strong>National Marine Sanctuaries</strong>; loaded by <em>workflow</em> <a href="https://calcofi.io/workflows/load_sanctuaries.html">load_sanctuaries</a></p>
@@ -582,8 +610,8 @@ Figure&nbsp;5.1: Database documentation scheme.
 <li><p>It is especially helpful to link to any <em><strong>workflows</strong></em> that are responsible for the ingesting or updating of the input data.</p></li>
 </ul>
 </section>
-<section id="display-tables-and-columns-with-metadata" class="level3" data-number="5.3.5">
-<h3 data-number="5.3.5" class="anchored" data-anchor-id="display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.5</span> Display tables and columns with metadata</h3>
+<section id="display-tables-and-columns-with-metadata" class="level3" data-number="5.3.8">
+<h3 data-number="5.3.8" class="anchored" data-anchor-id="display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.8</span> Display tables and columns with metadata</h3>
 <ul>
 <li>These descriptions can be viewed in the CalCOFI <strong>API</strong> <a href="https://api.calcofi.io">api.calcofi.io</a> as CSV tables (see code in <a href="https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990">calcofi/api: <code>plumber.R</code></a>):
 <ul>
@@ -681,13 +709,14 @@ fields:<br>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
