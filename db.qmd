@@ -114,7 +114,7 @@ The CalCOFI database uses a two-schema strategy for development and production:
 
 ### Master ingestion workflow
 
-All datasets are ingested using a single master Quarto script [`calcofi4db/inst/ingest.qmd`](https://github.com/CalCOFI/calcofi4db/blob/main/inst/ingest.qmd) that:
+All datasets are ingested using a single master Quarto script [`calcofi4db/inst/create_db.qmd`](https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd) that:
 
 1. **Drops and recreates** the `dev` schema (fresh start each run)
 2. **Ingests multiple datasets** from Google Drive source files (CSV, potentially SHP/NC in future)
