@@ -3,10 +3,10 @@ flowchart TB
     gd[("`<b>Source Data</b>
           Google Drive:
           calcofi/data/{provider}/{dataset}/*.csv`")]
-    iw["<b>Ingest Workflow</b>
-        workflows: ingest_{provider}_{dataset}.qmd"]
+    iw["<b>Ingest</b>
+        calcofi4db: create_db.qmd; sections by {provider},{dataset}"]
     dd["<b>Data Definitions</b>
-        workflows: /ingest/{provider}/{dataset}/:
+        calcofi4db: ingest/{provider}/{dataset}/:
         <ul>
           <li>tbls_redefine.csv</li>
           <li>flds_redefine.csv</li>
