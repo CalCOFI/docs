@@ -4,11 +4,19 @@ title: "Status"
 
 # Status
 
+## 2025-12-01
+
+<!--
+Copilot (GPT-5.1 Preview) on Github
+Review all commits since 2025-07-01 in these CalCOFI repositories: int-app, workflows, server, CalCOFI.github.io, docs, calcofi4db, calcofi4r. Summarize accomplishments and development work with high level headings and detailed descriptions.
+-->
+
+
 ## 2025-07-01
 
 <!--
 Copilot (GPT-4.1) on Github
-PROMPT: Review all commits and issues for this year in these CalCOFI repositories: api, apps, calcofi4db, calcofi4r, docs, server, workflows. Summarize accomplishments and development work with high level headings and detailed descriptions.
+PROMPT: Review all commits and issues since 2025-07-01 in these CalCOFI repositories: api, apps, calcofi4db, calcofi4r, docs, server, workflows. Summarize accomplishments and development work with high level headings and detailed descriptions.
 -->
 
 This report summarizes the key development activities, major accomplishments, and ongoing work for the first 6 monhts of 2025 across the CalCOFI GitHub repositories: **api, apps, calcofi4db, calcofi4r, docs, server, workflows**. The findings are based on issues and commits from January–July 2025.
