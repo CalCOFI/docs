@@ -270,8 +270,8 @@ Review all commits since 2025-07-01 in these CalCOFI repositories: int-app, work
 -->
 <p>Over the past several months, CalCOFI’s software and data systems have advanced significantly toward a unified, reliable, and user‑friendly platform for exploring and publishing CalCOFI data. Work has focused on four main areas: the integrated data app, the underlying database and workflows, pushing to OBIS, and organizing of CTD data.</p>
 <hr>
-<section id="a-more-capable-user-friendly-interactive-app" class="level4" data-number="8.1.0.1">
-<h4 data-number="8.1.0.1" class="anchored" data-anchor-id="a-more-capable-user-friendly-interactive-app"><span class="header-section-number">8.1.0.1</span> 1. A More Capable, User-Friendly Interactive App</h4>
+<section id="a-more-capable-user-friendly-integrated-app" class="level4" data-number="8.1.0.1">
+<h4 data-number="8.1.0.1" class="anchored" data-anchor-id="a-more-capable-user-friendly-integrated-app"><span class="header-section-number">8.1.0.1</span> 1. A More Capable, User-Friendly Integrated App</h4>
 <p>The <strong>CalCOFI integrated application (<code>int-app</code>)</strong> has evolved into a much richer and more intuitive tool for scientists and partners:</p>
 <ul>
 <li><p><strong>Taxonomy-aware exploration</strong><br>
@@ -299,7 +299,7 @@ Spatial maps now rely on efficient hexagon grids calculated in the database, imp
 <h4 data-number="8.1.0.3" class="anchored" data-anchor-id="unified-r-tools-and-documentation-around-duckdb"><span class="header-section-number">8.1.0.3</span> 3. Unified R Tools and Documentation Around DuckDB</h4>
 <p>Across the toolchain, CalCOFI has standardized on <strong>DuckDB</strong> as the core data engine:</p>
 <ul>
-<li>The <strong>R package (<code>calcofi4r</code>)</strong> now encapsulates key logic originally developed inside the interactive app, so the same high-quality data access and processing is available in scripts, reports, and analyses—not just in the web interface.</li>
+<li>The <strong>R package (<code>calcofi4r</code>)</strong> now encapsulates key logic originally developed inside the integrated app, so the same high-quality data access and processing is available in scripts, reports, and analyses—not just in the web interface.</li>
 <li>Both the app and R package can connect to <strong>local or remote DuckDB databases</strong>, improving performance and enabling offline or near‑offline workflows.</li>
 <li>Documentation in the <strong><code>docs</code> repository</strong> has been updated to describe the full data creation process (from raw data to ready‑to‑use databases) and to explain the new development/production database strategy. Status documents and helper scripts provide clearer visibility into project progress.</li>
 </ul>
@@ -326,7 +326,7 @@ Spatial maps now rely on efficient hexagon grids calculated in the database, imp
 <h4 data-number="8.1.0.5" class="anchored" data-anchor-id="improved-public-access-and-infrastructure"><span class="header-section-number">8.1.0.5</span> 5. Improved Public Access and Infrastructure</h4>
 <p>Finally, several changes improve how external users find and access CalCOFI tools:</p>
 <ul>
-<li>The <strong>public website (<code>CalCOFI.github.io</code>)</strong> now highlights key applications, including the interactive app and a pollutants-focused app, making them easier to discover.</li>
+<li>The <strong>public website (<code>CalCOFI.github.io</code>)</strong> now highlights key applications, including the integrated app and a pollutants-focused app, making them easier to discover.</li>
 <li>Server configuration has been updated so that <strong>Shiny apps are served from a new dedicated domain <code>app.calcofi.io</code></strong> (and still <code>shiny.calcofi.io</code>), clarifying the entry point for interactive tools and simplifying operations.</li>
 </ul>
 <hr>
