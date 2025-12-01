@@ -218,7 +218,10 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#status" id="toc-status" class="nav-link active" data-scroll-target="#status"><span class="header-section-number">8</span> Status</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">8.1</span> 2025-12-01</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">8.1</span> 2025-12-01</a>
+  <ul class="collapse">
+  <li><a href="#overall-impact" id="toc-overall-impact" class="nav-link" data-scroll-target="#overall-impact"><span class="header-section-number">8.1.1</span> Overall Impact</a></li>
+  </ul></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">8.2</span> 2025-07-01</a>
   <ul class="collapse">
   <li><a href="#api-enhancements" id="toc-api-enhancements" class="nav-link" data-scroll-target="#api-enhancements"><span class="header-section-number">8.2.1</span> API Enhancements</a></li>
@@ -265,6 +268,79 @@ ul.task-list li input[type="checkbox"] {
 Copilot (GPT-5.1 Preview) on Github
 Review all commits since 2025-07-01 in these CalCOFI repositories: int-app, workflows, server, CalCOFI.github.io, docs, calcofi4db, calcofi4r. Summarize accomplishments and development work with high level headings and detailed descriptions.
 -->
+<p>Over the past several months, CalCOFI’s software and data systems have advanced significantly toward a unified, reliable, and user‑friendly platform for exploring and publishing CalCOFI data. Work has focused on four main areas: the integrated data app, the underlying database and workflows, pushing to OBIS, and organizing of CTD data.</p>
+<hr>
+<section id="a-more-capable-user-friendly-interactive-app" class="level4" data-number="8.1.0.1">
+<h4 data-number="8.1.0.1" class="anchored" data-anchor-id="a-more-capable-user-friendly-interactive-app"><span class="header-section-number">8.1.0.1</span> 1. A More Capable, User-Friendly Interactive App</h4>
+<p>The <strong>CalCOFI integrated application (<code>int-app</code>)</strong> has evolved into a much richer and more intuitive tool for scientists and partners:</p>
+<ul>
+<li><p><strong>Taxonomy-aware exploration</strong><br>
+The app now understands species and their taxonomic relationships. Users can browse taxa hierarchies, see taxonomic ranks, and work with improved species metadata tied to authoritative sources (e.g., WoRMS, ITIS). This makes it easier to find and compare species and groups of species consistently.</p></li>
+<li><p><strong>Better visual experience and theming</strong><br>
+A new <strong>dark/light theme toggle</strong> has been implemented and refined so that maps, time series, and other plots remain readable and visually consistent. Navigation has been reorganized, with a clearer About page, a guided “tour” of the app, and more intuitive icons and labels, making the app easier to learn and use.</p></li>
+<li><p><strong>Stronger spatial and temporal tools</strong><br>
+Spatial maps now rely on efficient hexagon grids calculated in the database, improving performance and scalability. Default settings for time and depth matching have been tuned to yield better joins between environmental and biological data out of the box.</p></li>
+</ul>
+<p>Overall, the app is moving from a prototype to a <strong>polished, guided interface</strong> that better supports exploratory analysis and communication.</p>
+<hr>
+</section>
+<section id="a-stable-well-documented-database-foundation" class="level4" data-number="8.1.0.2">
+<h4 data-number="8.1.0.2" class="anchored" data-anchor-id="a-stable-well-documented-database-foundation"><span class="header-section-number">8.1.0.2</span> 2. A Stable, Well-Documented Database Foundation</h4>
+<p>The <strong>CalCOFI database package (<code>calcofi4db</code>)</strong> has been formalized and versioned, providing a solid foundation for all downstream tools:</p>
+<ul>
+<li><strong>Two stable releases</strong> (versions 1.0 and 1.1) have established a reliable baseline for the database, including bottle-level data.</li>
+<li>The project now follows a <strong>clear strategy for separate development and production databases</strong>, reducing risk when making changes and improving reproducibility.</li>
+<li>Data ingestion from NOAA and other sources has been <strong>hardened</strong>, with several rounds of fixes to handle edge cases and ensure that raw files are consistently and correctly translated into the database.</li>
+</ul>
+<p>In addition, the package’s <strong>online documentation site</strong> has been refreshed so that developers and analysts have up-to-date guidance on how data flow into and through the database.</p>
+<hr>
+</section>
+<section id="unified-r-tools-and-documentation-around-duckdb" class="level4" data-number="8.1.0.3">
+<h4 data-number="8.1.0.3" class="anchored" data-anchor-id="unified-r-tools-and-documentation-around-duckdb"><span class="header-section-number">8.1.0.3</span> 3. Unified R Tools and Documentation Around DuckDB</h4>
+<p>Across the toolchain, CalCOFI has standardized on <strong>DuckDB</strong> as the core data engine:</p>
+<ul>
+<li>The <strong>R package (<code>calcofi4r</code>)</strong> now encapsulates key logic originally developed inside the interactive app, so the same high-quality data access and processing is available in scripts, reports, and analyses—not just in the web interface.</li>
+<li>Both the app and R package can connect to <strong>local or remote DuckDB databases</strong>, improving performance and enabling offline or near‑offline workflows.</li>
+<li>Documentation in the <strong><code>docs</code> repository</strong> has been updated to describe the full data creation process (from raw data to ready‑to‑use databases) and to explain the new development/production database strategy. Status documents and helper scripts provide clearer visibility into project progress.</li>
+</ul>
+<p>This brings CalCOFI closer to a <strong>coherent, documented platform</strong> where analysts can move seamlessly between app-based exploration and scripted analysis.</p>
+<hr>
+</section>
+<section id="standards-compliant-publication-of-biological-data" class="level4" data-number="8.1.0.4">
+<h4 data-number="8.1.0.4" class="anchored" data-anchor-id="standards-compliant-publication-of-biological-data"><span class="header-section-number">8.1.0.4</span> 4. Standards-Compliant Publication of Biological Data</h4>
+<p>The <strong><code>workflows</code></strong> repository has seen major progress in turning CalCOFI’s biological datasets into <strong>publication-ready products</strong>:</p>
+<ul>
+<li>New workflows now <strong>publish larval data to OBIS</strong>, the global biodiversity information system, with repeatable recipes that combine biological observations with CTD (oceanographic) data.</li>
+<li>The underlying data model for <strong>events and occurrences</strong> has been strengthened to align with international standards (e.g., Darwin Core), including:
+<ul>
+<li>Clear hierarchies of sampling events,</li>
+<li>Better handling of life‑stage and size information (e.g., egg and larval stages),</li>
+<li>Automated generation of metadata files required for data archives.</li>
+</ul></li>
+<li>Additional integrity checks and foreign key relationships help ensure that data are correct and consistent before publication.</li>
+</ul>
+<p>These advances substantially improve CalCOFI’s ability to <strong>share high-quality, well-structured biodiversity data</strong> with the broader scientific community.</p>
+<hr>
+</section>
+<section id="improved-public-access-and-infrastructure" class="level4" data-number="8.1.0.5">
+<h4 data-number="8.1.0.5" class="anchored" data-anchor-id="improved-public-access-and-infrastructure"><span class="header-section-number">8.1.0.5</span> 5. Improved Public Access and Infrastructure</h4>
+<p>Finally, several changes improve how external users find and access CalCOFI tools:</p>
+<ul>
+<li>The <strong>public website (<code>CalCOFI.github.io</code>)</strong> now highlights key applications, including the interactive app and a pollutants-focused app, making them easier to discover.</li>
+<li>Server configuration has been updated so that <strong>Shiny apps are served from a new dedicated domain <code>app.calcofi.io</code></strong> (and still <code>shiny.calcofi.io</code>), clarifying the entry point for interactive tools and simplifying operations.</li>
+</ul>
+<hr>
+</section>
+<section id="overall-impact" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="overall-impact"><span class="header-section-number">8.1.1</span> Overall Impact</h3>
+<p>Together, these developments move CalCOFI toward a <strong>modern, integrated data platform</strong>:</p>
+<ul>
+<li>Scientists and partners gain a more powerful, user‑friendly app and R toolkit for exploring CalCOFI data.</li>
+<li>The underlying database and workflows are more robust, testable, and clearly documented.</li>
+<li>CalCOFI’s biological data are better positioned for <strong>global visibility and reuse</strong> through standards‑compliant publication channels like OBIS.</li>
+<li>Public‑facing web presence and infrastructure are cleaner and more aligned, making it easier for stakeholders to find and use CalCOFI resources.</li>
+</ul>
+</section>
 </section>
 <section id="section-1" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">8.2</span> 2025-07-01</h2>
