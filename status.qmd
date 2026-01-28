@@ -12,9 +12,7 @@ Review all commits since 2025-07-01 in these CalCOFI repositories: int-app, work
 Over the past several months, CalCOFI’s software and data systems have advanced significantly toward a unified, reliable, and user‑friendly platform for exploring and publishing CalCOFI data. Work has focused on four main areas: the integrated data app, the underlying database and workflows, pushing to OBIS, and organizing 
 of CTD data.
 
----
-
-#### 1. A More Capable, User-Friendly Integrated App
+### A More Capable, User-Friendly Integrated App
 
 The **CalCOFI integrated application (`int-app`)** has evolved into a much richer and more intuitive tool for scientists and partners:
 
@@ -31,7 +29,7 @@ Overall, the app is moving from a prototype to a **polished, guided interface** 
 
 ---
 
-#### 2. A Stable, Well-Documented Database Foundation
+### A Stable, Well-Documented Database Foundation
 
 The **CalCOFI database package (`calcofi4db`)** has been formalized and versioned, providing a solid foundation for all downstream tools:
 
@@ -43,7 +41,7 @@ In addition, the package’s **online documentation site** has been refreshed so
 
 ---
 
-#### 3. Unified R Tools and Documentation Around DuckDB
+### Unified R Tools and Documentation Around DuckDB
 
 Across the toolchain, CalCOFI has standardized on **DuckDB** as the core data engine:
 
@@ -55,7 +53,7 @@ This brings CalCOFI closer to a **coherent, documented platform** where analysts
 
 ---
 
-#### 4. Standards-Compliant Publication of Biological Data
+### Standards-Compliant Publication of Biological Data
 
 The **`workflows`** repository has seen major progress in turning CalCOFI’s biological datasets into **publication-ready products**:
 
@@ -70,7 +68,7 @@ These advances substantially improve CalCOFI’s ability to **share high-quality
 
 ---
 
-#### 5. Improved Public Access and Infrastructure
+### Improved Public Access and Infrastructure
 
 Finally, several changes improve how external users find and access CalCOFI tools:
 
