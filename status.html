@@ -218,7 +218,12 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"><span class="header-section-number">7.1</span> 2025-12-01</a>
   <ul class="collapse">
-  <li><a href="#overall-impact" id="toc-overall-impact" class="nav-link" data-scroll-target="#overall-impact"><span class="header-section-number">7.1.1</span> Overall Impact</a></li>
+  <li><a href="#a-more-capable-user-friendly-integrated-app" id="toc-a-more-capable-user-friendly-integrated-app" class="nav-link" data-scroll-target="#a-more-capable-user-friendly-integrated-app"><span class="header-section-number">7.1.1</span> A More Capable, User-Friendly Integrated App</a></li>
+  <li><a href="#a-stable-well-documented-database-foundation" id="toc-a-stable-well-documented-database-foundation" class="nav-link" data-scroll-target="#a-stable-well-documented-database-foundation"><span class="header-section-number">7.1.2</span> A Stable, Well-Documented Database Foundation</a></li>
+  <li><a href="#unified-r-tools-and-documentation-around-duckdb" id="toc-unified-r-tools-and-documentation-around-duckdb" class="nav-link" data-scroll-target="#unified-r-tools-and-documentation-around-duckdb"><span class="header-section-number">7.1.3</span> Unified R Tools and Documentation Around DuckDB</a></li>
+  <li><a href="#standards-compliant-publication-of-biological-data" id="toc-standards-compliant-publication-of-biological-data" class="nav-link" data-scroll-target="#standards-compliant-publication-of-biological-data"><span class="header-section-number">7.1.4</span> Standards-Compliant Publication of Biological Data</a></li>
+  <li><a href="#improved-public-access-and-infrastructure" id="toc-improved-public-access-and-infrastructure" class="nav-link" data-scroll-target="#improved-public-access-and-infrastructure"><span class="header-section-number">7.1.5</span> Improved Public Access and Infrastructure</a></li>
+  <li><a href="#overall-impact" id="toc-overall-impact" class="nav-link" data-scroll-target="#overall-impact"><span class="header-section-number">7.1.6</span> Overall Impact</a></li>
   </ul></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">7.2</span> 2025-07-01</a>
   <ul class="collapse">
@@ -264,9 +269,8 @@ Copilot (GPT-5.1 Preview) on Github
 Review all commits since 2025-07-01 in these CalCOFI repositories: int-app, workflows, server, CalCOFI.github.io, docs, calcofi4db, calcofi4r. Summarize accomplishments and development work with high level headings and detailed descriptions.
 -->
 <p>Over the past several months, CalCOFI’s software and data systems have advanced significantly toward a unified, reliable, and user‑friendly platform for exploring and publishing CalCOFI data. Work has focused on four main areas: the integrated data app, the underlying database and workflows, pushing to OBIS, and organizing of CTD data.</p>
-<hr>
-<section id="a-more-capable-user-friendly-integrated-app" class="level4" data-number="7.1.0.1">
-<h4 data-number="7.1.0.1" class="anchored" data-anchor-id="a-more-capable-user-friendly-integrated-app"><span class="header-section-number">7.1.0.1</span> 1. A More Capable, User-Friendly Integrated App</h4>
+<section id="a-more-capable-user-friendly-integrated-app" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="a-more-capable-user-friendly-integrated-app"><span class="header-section-number">7.1.1</span> A More Capable, User-Friendly Integrated App</h3>
 <p>The <strong>CalCOFI integrated application (<code>int-app</code>)</strong> has evolved into a much richer and more intuitive tool for scientists and partners:</p>
 <ul>
 <li><p><strong>Taxonomy-aware exploration</strong><br>
@@ -279,8 +283,8 @@ Spatial maps now rely on efficient hexagon grids calculated in the database, imp
 <p>Overall, the app is moving from a prototype to a <strong>polished, guided interface</strong> that better supports exploratory analysis and communication.</p>
 <hr>
 </section>
-<section id="a-stable-well-documented-database-foundation" class="level4" data-number="7.1.0.2">
-<h4 data-number="7.1.0.2" class="anchored" data-anchor-id="a-stable-well-documented-database-foundation"><span class="header-section-number">7.1.0.2</span> 2. A Stable, Well-Documented Database Foundation</h4>
+<section id="a-stable-well-documented-database-foundation" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="a-stable-well-documented-database-foundation"><span class="header-section-number">7.1.2</span> A Stable, Well-Documented Database Foundation</h3>
 <p>The <strong>CalCOFI database package (<code>calcofi4db</code>)</strong> has been formalized and versioned, providing a solid foundation for all downstream tools:</p>
 <ul>
 <li><strong>Two stable releases</strong> (versions 1.0 and 1.1) have established a reliable baseline for the database, including bottle-level data.</li>
@@ -290,8 +294,8 @@ Spatial maps now rely on efficient hexagon grids calculated in the database, imp
 <p>In addition, the package’s <strong>online documentation site</strong> has been refreshed so that developers and analysts have up-to-date guidance on how data flow into and through the database.</p>
 <hr>
 </section>
-<section id="unified-r-tools-and-documentation-around-duckdb" class="level4" data-number="7.1.0.3">
-<h4 data-number="7.1.0.3" class="anchored" data-anchor-id="unified-r-tools-and-documentation-around-duckdb"><span class="header-section-number">7.1.0.3</span> 3. Unified R Tools and Documentation Around DuckDB</h4>
+<section id="unified-r-tools-and-documentation-around-duckdb" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="unified-r-tools-and-documentation-around-duckdb"><span class="header-section-number">7.1.3</span> Unified R Tools and Documentation Around DuckDB</h3>
 <p>Across the toolchain, CalCOFI has standardized on <strong>DuckDB</strong> as the core data engine:</p>
 <ul>
 <li>The <strong>R package (<code>calcofi4r</code>)</strong> now encapsulates key logic originally developed inside the integrated app, so the same high-quality data access and processing is available in scripts, reports, and analyses—not just in the web interface.</li>
@@ -301,8 +305,8 @@ Spatial maps now rely on efficient hexagon grids calculated in the database, imp
 <p>This brings CalCOFI closer to a <strong>coherent, documented platform</strong> where analysts can move seamlessly between app-based exploration and scripted analysis.</p>
 <hr>
 </section>
-<section id="standards-compliant-publication-of-biological-data" class="level4" data-number="7.1.0.4">
-<h4 data-number="7.1.0.4" class="anchored" data-anchor-id="standards-compliant-publication-of-biological-data"><span class="header-section-number">7.1.0.4</span> 4. Standards-Compliant Publication of Biological Data</h4>
+<section id="standards-compliant-publication-of-biological-data" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="standards-compliant-publication-of-biological-data"><span class="header-section-number">7.1.4</span> Standards-Compliant Publication of Biological Data</h3>
 <p>The <strong><code>workflows</code></strong> repository has seen major progress in turning CalCOFI’s biological datasets into <strong>publication-ready products</strong>:</p>
 <ul>
 <li>New workflows now <strong>publish larval data to OBIS</strong>, the global biodiversity information system, with repeatable recipes that combine biological observations with CTD (oceanographic) data.</li>
@@ -317,8 +321,8 @@ Spatial maps now rely on efficient hexagon grids calculated in the database, imp
 <p>These advances substantially improve CalCOFI’s ability to <strong>share high-quality, well-structured biodiversity data</strong> with the broader scientific community.</p>
 <hr>
 </section>
-<section id="improved-public-access-and-infrastructure" class="level4" data-number="7.1.0.5">
-<h4 data-number="7.1.0.5" class="anchored" data-anchor-id="improved-public-access-and-infrastructure"><span class="header-section-number">7.1.0.5</span> 5. Improved Public Access and Infrastructure</h4>
+<section id="improved-public-access-and-infrastructure" class="level3" data-number="7.1.5">
+<h3 data-number="7.1.5" class="anchored" data-anchor-id="improved-public-access-and-infrastructure"><span class="header-section-number">7.1.5</span> Improved Public Access and Infrastructure</h3>
 <p>Finally, several changes improve how external users find and access CalCOFI tools:</p>
 <ul>
 <li>The <strong>public website (<code>CalCOFI.github.io</code>)</strong> now highlights key applications, including the integrated app and a pollutants-focused app, making them easier to discover.</li>
@@ -326,8 +330,8 @@ Spatial maps now rely on efficient hexagon grids calculated in the database, imp
 </ul>
 <hr>
 </section>
-<section id="overall-impact" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="overall-impact"><span class="header-section-number">7.1.1</span> Overall Impact</h3>
+<section id="overall-impact" class="level3" data-number="7.1.6">
+<h3 data-number="7.1.6" class="anchored" data-anchor-id="overall-impact"><span class="header-section-number">7.1.6</span> Overall Impact</h3>
 <p>Together, these developments move CalCOFI toward a <strong>modern, integrated data platform</strong>:</p>
 <ul>
 <li>Scientists and partners gain a more powerful, user‑friendly app and R toolkit for exploring CalCOFI data.</li>
