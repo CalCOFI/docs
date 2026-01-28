@@ -2,8 +2,6 @@
 title: "Status"
 ---
 
-# Status
-
 ## 2025-12-01
 
 <!--
