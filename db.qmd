@@ -11,7 +11,8 @@ We're circling the wagons to come up with the best conventions for naming. Here 
 
 ### Name tables
 
-- Table names are singular and use all lower case.
+- Table names are **singular** and use all lower case.
+  - Example: `cruise`, `site`, `species`, `lookup` (not `cruises`, `sites`, `lookups`)
 
 ### Name columns
 
@@ -26,6 +27,23 @@ We're circling the wagons to come up with the best conventions for naming. Here 
 - Suffix with **units** where applicable (e.g., `*_m` for meters, `*_km` for kilometers, `degc` for degrees Celsius). See [units vignette](https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html).
 
 - Set geometry column to **`geom`** (used by [PostGIS](https://postgis.net) spatial extension). If the table has multiple geometry columns, use `geom` for the default geometry column and `geom_{type}` for additional geometry columns (e.g., `geom_point`, `geom_line`, `geom_polygon`).
+
+### Primary key conventions
+
+**Prefer natural keys** (meaningful domain identifiers) over surrogate keys where stable:
+
+- `cruise_key` = 'YYMMKK' (e.g., `2401NH` = January 2024, New Horizon)
+- `ship_key` = 2-letter ship code (e.g., `NH`)
+- `tow_type_key` = tow type code (e.g., `CB`)
+
+**Sequential integer keys** should have explicit sort order documented for reproducibility:
+
+- `site_id` sorted by `cruise_key, orderocc`
+- `tow_id` sorted by `site_id, time_start`
+- `net_id` sorted by `tow_id, side`
+- `ichthyo_id` sorted by `net_id, species_id, life_stage, measurement_type, measurement_value`
+
+**Avoid UUIDs in output tables**: Use `_source_uuid` in Working DuckLake for provenance tracking only (stripped in frozen releases).
 
 ## Use Unicode for text
 
@@ -137,50 +155,91 @@ Each dataset section in the master script handles:
 
 ### Using calcofi4db package
 
-The [calcofi4db](https://github.com/CalCOFI/calcofi4db) package provides streamlined functions for dataset ingestion:
+The [calcofi4db](https://github.com/CalCOFI/calcofi4db) package provides streamlined functions for dataset ingestion.
+
+#### DuckLake Workflow (Recommended)
+
+The preferred approach uses DuckDB with provenance tracking:
+
+```r
+library(calcofi4db)
+
+# connect to working DuckLake (downloads from GCS if needed)
+con <- get_working_ducklake()
+
+# read CSV files from local directory or GCS archive
+# - syncs to GCS archive for immutable provenance tracking
+# - loads redefinition metadata for column renaming/typing
+d <- read_csv_files(
+  provider     = "swfsc.noaa.gov",
+  dataset      = "calcofi-db",
+  dir_data     = "~/My Drive/projects/calcofi/data-public",
+  metadata_dir = "metadata",
+  sync_archive = TRUE)
+
+# ingest dataset with automatic provenance tracking
+# - transforms data using redefinition files
+# - adds _source_file, _source_row, _source_uuid, _ingested_at columns
+# - handles uuid column detection automatically
+tbl_stats <- ingest_dataset(
+  con  = con,
+  d    = d,
+  mode = "replace")
+
+# save to GCS and close
+save_working_ducklake(con)
+close_duckdb(con)
+```
+
+The `ingest_dataset()` function handles:
+
+- Calling `transform_data()` to apply table/field redefinitions
+- Detecting UUID columns automatically for provenance tracking
+- Calling `ingest_to_working()` for each table with proper source file tracking
+- Returning ingestion statistics (rows input, rows after, timestamps)
+
+#### PostgreSQL Workflow (Legacy)
+
+For PostgreSQL ingestion (being gradually deprecated):
 
 ```r
 library(calcofi4db)
 library(DBI)
 library(RPostgres)
 
-# Connect to database
+# connect to database
 con <- dbConnect(
   Postgres(),
-  dbname = "gis",
-  host = "localhost",
-  port = 5432,
-  user = "admin",
-  password = "postgres"
-)
+  dbname   = "gis",
+  host     = "localhost",
+  port     = 5432,
+  user     = "admin",
+  password = "postgres")
 
-# Read CSV files and metadata
+# read CSV files and metadata
 d <- read_csv_files(
   provider = "swfsc.noaa.gov",
-  dataset = "calcofi-db"
-)
+  dataset  = "calcofi-db")
 
-# Transform data according to redefinitions
+# transform data according to redefinitions
 transformed_data <- transform_data(d)
 
-# Ingest into dev schema
+# ingest into dev schema
 ingest_csv_to_db(
-  con = con,
-  schema = "dev",
+  con              = con,
+  schema           = "dev",
   transformed_data = transformed_data,
-  d_flds_rd = d$d_flds_rd,
-  d_gdata = d$d_gdata,
-  workflow_info = d$workflow_info
-)
+  d_flds_rd        = d$d_flds_rd,
+  d_gdata          = d$d_gdata,
+  workflow_info    = d$workflow_info)
 
-# Record schema version
+# record schema version
 record_schema_version(
-  con = con,
-  schema = "dev",
-  version = "1.0.0",
-  description = "Initial ingestion of NOAA CalCOFI Database",
-  script_permalink = "https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd"
-)
+  con              = con,
+  schema           = "dev",
+  version          = "1.0.0",
+  description      = "Initial ingestion of NOAA CalCOFI Database",
+  script_permalink = "https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd")
 ```
 
 ### Schema versioning
