@@ -258,6 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#name-tables" id="toc-name-tables" class="nav-link" data-scroll-target="#name-tables"><span class="header-section-number">5.1.1</span> Name tables</a></li>
   <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">5.1.2</span> Name columns</a></li>
+  <li><a href="#primary-key-conventions" id="toc-primary-key-conventions" class="nav-link" data-scroll-target="#primary-key-conventions"><span class="header-section-number">5.1.3</span> Primary key conventions</a></li>
   </ul></li>
   <li><a href="#use-unicode-for-text" id="toc-use-unicode-for-text" class="nav-link" data-scroll-target="#use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</a></li>
   <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">5.3</span> Integrated database ingestion strategy</a>
@@ -311,7 +312,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="name-tables" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="name-tables"><span class="header-section-number">5.1.1</span> Name tables</h3>
 <ul>
-<li>Table names are singular and use all lower case.</li>
+<li>Table names are <strong>singular</strong> and use all lower case.
+<ul>
+<li>Example: <code>cruise</code>, <code>site</code>, <code>species</code>, <code>lookup</code> (not <code>cruises</code>, <code>sites</code>, <code>lookups</code>)</li>
+</ul></li>
 </ul>
 </section>
 <section id="name-columns" class="level3" data-number="5.1.2">
@@ -328,6 +332,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Suffix with <strong>units</strong> where applicable (e.g., <code>*_m</code> for meters, <code>*_km</code> for kilometers, <code>degc</code> for degrees Celsius). See <a href="https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html">units vignette</a>.</p></li>
 <li><p>Set geometry column to <strong><code>geom</code></strong> (used by <a href="https://postgis.net">PostGIS</a> spatial extension). If the table has multiple geometry columns, use <code>geom</code> for the default geometry column and <code>geom_{type}</code> for additional geometry columns (e.g., <code>geom_point</code>, <code>geom_line</code>, <code>geom_polygon</code>).</p></li>
 </ul>
+</section>
+<section id="primary-key-conventions" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="primary-key-conventions"><span class="header-section-number">5.1.3</span> Primary key conventions</h3>
+<p><strong>Prefer natural keys</strong> (meaningful domain identifiers) over surrogate keys where stable:</p>
+<ul>
+<li><code>cruise_key</code> = ‘YYMMKK’ (e.g., <code>2401NH</code> = January 2024, New Horizon)</li>
+<li><code>ship_key</code> = 2-letter ship code (e.g., <code>NH</code>)</li>
+<li><code>tow_type_key</code> = tow type code (e.g., <code>CB</code>)</li>
+</ul>
+<p><strong>Sequential integer keys</strong> should have explicit sort order documented for reproducibility:</p>
+<ul>
+<li><code>site_id</code> sorted by <code>cruise_key, orderocc</code></li>
+<li><code>tow_id</code> sorted by <code>site_id, time_start</code></li>
+<li><code>net_id</code> sorted by <code>tow_id, side</code></li>
+<li><code>ichthyo_id</code> sorted by <code>net_id, species_id, life_stage, measurement_type, measurement_value</code></li>
+</ul>
+<p><strong>Avoid UUIDs in output tables</strong>: Use <code>_source_uuid</code> in Working DuckLake for provenance tracking only (stripped in frozen releases).</p>
 </section>
 </section>
 <section id="use-unicode-for-text" class="level2" data-number="5.2">
@@ -521,48 +542,86 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 </section>
 <section id="using-calcofi4db-package" class="level3" data-number="5.3.3">
 <h3 data-number="5.3.3" class="anchored" data-anchor-id="using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</h3>
-<p>The <a href="https://github.com/CalCOFI/calcofi4db">calcofi4db</a> package provides streamlined functions for dataset ingestion:</p>
+<p>The <a href="https://github.com/CalCOFI/calcofi4db">calcofi4db</a> package provides streamlined functions for dataset ingestion.</p>
+<section id="ducklake-workflow-recommended" class="level4" data-number="5.3.3.1">
+<h4 data-number="5.3.3.1" class="anchored" data-anchor-id="ducklake-workflow-recommended"><span class="header-section-number">5.3.3.1</span> DuckLake Workflow (Recommended)</h4>
+<p>The preferred approach uses DuckDB with provenance tracking:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RPostgres)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to database</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Postgres</span>(),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">"gis"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">"localhost"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">port =</span> <span class="dv">5432</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">"admin"</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">"postgres"</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV files and metadata</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv_files</span>(</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider =</span> <span class="st">"swfsc.noaa.gov"</span>,</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset =</span> <span class="st">"calcofi-db"</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform data according to redefinitions</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>transformed_data <span class="ot">&lt;-</span> <span class="fu">transform_data</span>(d)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Ingest into dev schema</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ingest_csv_to_db</span>(</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">con =</span> con,</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema =</span> <span class="st">"dev"</span>,</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">transformed_data =</span> transformed_data,</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_flds_rd =</span> d<span class="sc">$</span>d_flds_rd,</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_gdata =</span> d<span class="sc">$</span>d_gdata,</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">workflow_info =</span> d<span class="sc">$</span>workflow_info</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Record schema version</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">record_schema_version</span>(</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">con =</span> con,</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema =</span> <span class="st">"dev"</span>,</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="st">"1.0.0"</span>,</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="st">"Initial ingestion of NOAA CalCOFI Database"</span>,</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">script_permalink =</span> <span class="st">"https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd"</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to working DuckLake (downloads from GCS if needed)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">get_working_ducklake</span>()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read CSV files from local directory or GCS archive</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - syncs to GCS archive for immutable provenance tracking</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># - loads redefinition metadata for column renaming/typing</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv_files</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider     =</span> <span class="st">"swfsc.noaa.gov"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset      =</span> <span class="st">"calcofi-db"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_data     =</span> <span class="st">"~/My Drive/projects/calcofi/data-public"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata_dir =</span> <span class="st">"metadata"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">sync_archive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ingest dataset with automatic provenance tracking</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># - transforms data using redefinition files</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># - adds _source_file, _source_row, _source_uuid, _ingested_at columns</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># - handles uuid column detection automatically</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>tbl_stats <span class="ot">&lt;-</span> <span class="fu">ingest_dataset</span>(</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">con  =</span> con,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">d    =</span> d,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"replace"</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># save to GCS and close</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">save_working_ducklake</span>(con)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">close_duckdb</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>ingest_dataset()</code> function handles:</p>
+<ul>
+<li>Calling <code>transform_data()</code> to apply table/field redefinitions</li>
+<li>Detecting UUID columns automatically for provenance tracking</li>
+<li>Calling <code>ingest_to_working()</code> for each table with proper source file tracking</li>
+<li>Returning ingestion statistics (rows input, rows after, timestamps)</li>
+</ul>
+</section>
+<section id="postgresql-workflow-legacy" class="level4" data-number="5.3.3.2">
+<h4 data-number="5.3.3.2" class="anchored" data-anchor-id="postgresql-workflow-legacy"><span class="header-section-number">5.3.3.2</span> PostgreSQL Workflow (Legacy)</h4>
+<p>For PostgreSQL ingestion (being gradually deprecated):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RPostgres)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to database</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Postgres</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname   =</span> <span class="st">"gis"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">host     =</span> <span class="st">"localhost"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">port     =</span> <span class="dv">5432</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">user     =</span> <span class="st">"admin"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">"postgres"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># read CSV files and metadata</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv_files</span>(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider =</span> <span class="st">"swfsc.noaa.gov"</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset  =</span> <span class="st">"calcofi-db"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># transform data according to redefinitions</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>transformed_data <span class="ot">&lt;-</span> <span class="fu">transform_data</span>(d)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ingest into dev schema</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ingest_csv_to_db</span>(</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">con              =</span> con,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema           =</span> <span class="st">"dev"</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">transformed_data =</span> transformed_data,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_flds_rd        =</span> d<span class="sc">$</span>d_flds_rd,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_gdata          =</span> d<span class="sc">$</span>d_gdata,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">workflow_info    =</span> d<span class="sc">$</span>workflow_info)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># record schema version</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">record_schema_version</span>(</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">con              =</span> con,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema           =</span> <span class="st">"dev"</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">version          =</span> <span class="st">"1.0.0"</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">description      =</span> <span class="st">"Initial ingestion of NOAA CalCOFI Database"</span>,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">script_permalink =</span> <span class="st">"https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 </section>
 <section id="schema-versioning" class="level3" data-number="5.3.4">
 <h3 data-number="5.3.4" class="anchored" data-anchor-id="schema-versioning"><span class="header-section-number">5.3.4</span> Schema versioning</h3>
@@ -600,7 +659,7 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 <h3 data-number="5.3.7" class="anchored" data-anchor-id="or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.7</span> OR Describe tables and columns directly</h3>
 <ul>
 <li><p>Use the <code>COMMENT</code> clause to add descriptions to tables and columns, either through the GUI <a href="https://pgadmin.calcofi.io/">pgadmin.calcofi.io</a> (by right-clicking on the table or column and selecting <code>Properties</code>) or with SQL. For example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Note the use of <a href="https://www.markdownguide.org/cheat-sheet/"><strong>markdown</strong></a> for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:</p>
 <blockquote class="blockquote">
 <p>areas of interest (<code>aoi</code>) polygons for federal <strong>National Marine Sanctuaries</strong>; loaded by <em>workflow</em> <a href="https://calcofi.io/workflows/load_sanctuaries.html">load_sanctuaries</a></p>
