@@ -1,0 +1,33 @@
+flowchart TB
+  %% nodes: H3 hexagon hierarchy paired with web-map zoom ranges
+  z0["<b>zoom 0–1</b><br/>world view"]:::zoom
+  z3["<b>zoom 2–4</b><br/>continent view"]:::zoom
+  z6["<b>zoom 5–7</b><br/>region view"]:::zoom
+  z9["<b>zoom 8–10</b><br/>coastline view"]:::zoom
+  z13["<b>zoom 11–13+</b><br/>city view"]:::zoom
+
+  r1["<b>H3 res 1</b><br/>~1106 km edge<br/>842 cells globally"]:::hex
+  r3["<b>H3 res 3</b><br/>~158 km edge"]:::hex
+  r5["<b>H3 res 5</b><br/>~22 km edge"]:::hex
+  r7["<b>H3 res 7</b><br/>~3.2 km edge"]:::hex
+  r10["<b>H3 res 10</b><br/>~7.5 m edge"]:::hex
+
+  sql["client SQL template:<br/><code>SELECT hex_h3res{{res}} AS cell_id, …</code><br/>server substitutes <code>{{res}}</code> per tile"]:::code
+
+  z0  --> r1
+  z3  --> r3
+  z6  --> r5
+  z9  --> r7
+  z13 --> r10
+
+  r1 -.contains.-> r3
+  r3 -.contains.-> r5
+  r5 -.contains.-> r7
+  r7 -.contains.-> r10
+
+  sql --- r5
+
+  %% styles
+  classDef zoom fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#000
+  classDef hex  fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#000
+  classDef code fill:#F3E8FF,stroke:#9333EA,stroke-width:1.5px,color:#000

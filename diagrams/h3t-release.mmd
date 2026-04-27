@@ -1,0 +1,37 @@
+flowchart LR
+  %% before release
+  subgraph before["<b>before release</b>"]
+    direction TB
+    u1["browser request<br/>?q=…&release=<b>v2026.04.01</b>"]:::req
+    c1[("Varnish<br/>cached tiles for<br/>release v2026.04.01")]:::cache
+    db1[("DuckDB<br/>calcofi_latest.duckdb<br/>→ v2026.04.01.duckdb")]:::db
+    u1 --> c1
+    c1 -.miss.-> db1
+  end
+
+  %% release event
+  rel{{"<b>new release published</b><br/>symlink swap:<br/>calcofi_latest.duckdb<br/>→ v2026.04.08.duckdb"}}:::event
+
+  %% after release
+  subgraph after["<b>after release</b>"]
+    direction TB
+    meta["int-app fetches<br/>/h3t/meta → release=v2026.04.08"]:::req
+    u2["browser request<br/>?q=…&release=<b>v2026.04.08</b>"]:::req
+    c2[("Varnish<br/>old URLs idle<br/>new URLs cache-miss")]:::cache
+    db2[("DuckDB<br/>v2026.04.08")]:::db
+    meta --> u2
+    u2 --> c2
+    c2 -.miss.-> db2
+    db2 --> c2
+  end
+
+  before --> rel --> after
+
+  %% styles
+  classDef req   fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#000
+  classDef cache fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#000
+  classDef db    fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#000
+  classDef event fill:#F0FDF4,stroke:#22C55E,stroke-width:2px,color:#000
+
+  style before fill:#F8FAFC,stroke:#CBD5E1,stroke-width:1.5px
+  style after  fill:#F8FAFC,stroke:#CBD5E1,stroke-width:1.5px

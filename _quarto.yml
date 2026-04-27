@@ -34,6 +34,7 @@ book:
     - index.qmd
     - reports.qmd
     - apps.qmd
+    - maps.qmd
     - api.qmd
     - db.qmd
     - portals.qmd

@@ -1,0 +1,25 @@
+sequenceDiagram
+  autonumber
+  participant U as User<br/>(int-app browser)
+  participant M as MapLibre<br/>+ h3j-h3t.js
+  participant CD as Caddy<br/>(reverse proxy)
+  participant V as Varnish<br/>(HTTP cache)
+  participant API as Plumber API<br/>(/h3t)
+  participant DB as DuckDB<br/>(read-only)
+
+  U->>M: pan / zoom map<br/>(picks species + variable)
+  M->>CD: GET /h3t/{z}/{x}/{y}.h3t<br/>?q=<base64-SQL>&release=v2026.04.08
+  CD->>V: forward
+  alt cache hit
+    V-->>M: h3j JSON (sub-100ms)
+  else cache miss
+    V->>API: forward
+    API->>API: decode base64 → SQL
+    API->>API: validate (sqlglot AST)<br/>SELECT-only, 16 KB cap
+    API->>API: substitute {{res}} from zoom<br/>wrap in viewport bbox
+    API->>DB: SELECT cell_id, value, n<br/>(3 s timeout, 50k row cap)
+    DB-->>API: hex rows
+    API-->>V: h3j JSON + ETag<br/>Cache-Control: max-age=600
+    V-->>M: h3j JSON
+  end
+  M->>U: render colored hexagons<br/>via h3tiles:// protocol

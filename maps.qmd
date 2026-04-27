@@ -1,0 +1,152 @@
+# Maps {#sec-maps}
+
+## Overview
+
+The CalCOFI [interactive app](https://shiny.calcofi.io) renders **hexagonal heatmaps** of species occurrence and oceanographic variables — sardine larvae densities, sea-surface temperature, salinity, chlorophyll — across the entire CalCOFI sampling area, at any zoom level, in seconds. The engine that makes this possible is **H3T**, a tile service that converts a database query into a stream of hexagon tiles on demand.
+
+![Side-by-side comparison in the [CalCOFI Integrated App](https://app.calcofi.io/int): hexagons summarizing **biology** (Pacific sardine larvae abundance, left) and **environment** (sea-surface temperature, right) over the same area, era, and quarters, with a swipeable divider for direct visual comparison. Both layers are powered by the H3T tile service.](figs/int-app_map-compare-bio-env.png){#fig-int-app-compare}
+
+This chapter explains how H3T works, visually, for both the curious oceanographer and the developer who wants to extend it. Throughout, the guiding principle is:
+
+> **DuckDB is the single source of truth.** H3T tiles are a performance layer built on top of it — never an authoritative copy of the data.
+
+## Why hexagons?
+
+H3 is [Uber's hexagonal hierarchical geospatial index](https://h3geo.org). Each cell is a hexagon, and every cell at resolution _N_ nests neatly inside one parent cell at resolution _N − 1_. Hexagons have three useful properties for ecological data:
+
+- **Equal area at a given resolution**, so densities are directly comparable across the map.
+- **Every neighbor is the same distance away** (unlike a square grid, which has both edge and corner neighbors).
+- **No latitude distortion** — a res-5 hex off Point Conception covers the same area as a res-5 hex off Cabo San Lucas.
+
+Compared to a raster of pixels, hexagons aggregate point observations (a net tow, a CTD cast, a larvae count) without imposing an arbitrary north–south orientation, and the parent–child nesting lets the same dataset render coarsely when you're zoomed out and finely when you're zoomed in.
+
+## The problem: aggregating millions of points at every zoom
+
+Before H3T, the int-app pre-computed every hex aggregation across **all 10 H3 resolutions** for every species and environmental variable at startup. The Shiny app then shipped the relevant resolution to the browser for each zoom change. This gave the app two problems:
+
+1. **Slow startup.** Building those aggregations against the full bottle and ichthyo tables took >10 s every time the app launched.
+2. **Heavy memory.** A multi-resolution `sf` grid for one variable is hundreds of megabytes; for dozens of variables it crowded out everything else on the Shiny server.
+
+This is the same class of problem that the [MarineSensitivity stack](https://marinesensitivity.org/docs/software.html) solved for rasters with a TiTiler factory + Varnish cache. H3T is the equivalent move for **hexagons**.
+
+## The solution: query-as-URL hexagonal tiles
+
+The architecture rests on three ideas, each covered below: the H3 resolution that's served depends on the zoom level; the entire tile request lifecycle is fronted by a cache; and a `release` parameter handles cache invalidation automatically when new data drops.
+
+### Resolution follows zoom
+
+When the user zooms out to see the whole California Current, they don't need 7-meter hexagons — a 22 km hex is finer than the underlying sampling grid anyway. When they zoom in to a single CalCOFI line, they want as much detail as the data supports. H3T maps web-map zoom levels to H3 resolutions on the server side: zoom 0–1 → res 1 (~1106 km hexes), zoom 5–7 → res 5 (~22 km hexes), zoom 11+ → res 10 (~7.5 m hexes), and so on (@fig-h3-pyramid).
+
+The trick is in the SQL: the int-app sends a **template** with a literal placeholder `hex_h3res{{res}}` (see `build_sp_sql()` in [`int-app/app/functions_h3t.R`](https://github.com/CalCOFI/int-app/blob/main/app/functions_h3t.R)), and the API substitutes the right resolution for each tile before executing. One query string, ten zoom levels, one shared cache namespace.
+
+```{mermaid}
+%%| label: fig-h3-pyramid
+%%| fig-cap: "Web-map zoom level determines which H3 resolution the server returns. The same SQL template — `hex_h3res{{res}}` — adapts to each tile by server-side substitution. Hexagons at finer resolutions nest inside their coarser parents, so the data hierarchy and the visual hierarchy stay aligned."
+%%| file: diagrams/h3-pyramid.mmd
+%%| fig-width: 7
+```
+
+### Request lifecycle
+
+When the user pans or zooms, MapLibre asks for tiles. Each tile URL looks like this:
+
+```
+h3tiles://h3t.calcofi.io/h3t/{z}/{x}/{y}.h3t?q=<base64-SQL>&release=v2026.04.08
+```
+
+The clever bit is the `q` parameter: it's the entire `SELECT` statement, base64-encoded with URL-safe characters (RFC 4648 §5). That means **the URL itself describes the data to render**, so two users asking for "average temperature for sardines, all quarters, 1949–2024" hit the exact same cache entry — no session state, no server-side query registry.
+
+What happens next is shown in @fig-h3t-sequence. Caddy terminates TLS and forwards to Varnish, which checks its cache. On a hit, the user gets back a chunk of h3j JSON in well under 100 ms. On a miss, Varnish forwards to the Plumber API, which:
+
+1. **Decodes** the base64 SQL.
+2. **Validates** it with [`sqlglot`](https://github.com/tobymao/sqlglot): single statement, must be `SELECT` (or `WITH … SELECT`), must project exactly `cell_id, value, [n]`, no `read_csv`/`attach`/`load`, no shell calls, no schema beyond the published tables.
+3. **Substitutes** `{{res}}` from the zoom level and wraps the inner query in a viewport bounding-box filter.
+4. **Executes** against a read-only DuckDB connection with a 3-second timeout and a 50,000-row cap.
+5. **Formats** the result as h3j JSON: `{"cells": [{"h3id": "8a1941a29a7ffff", "value": 12.37, "n": 42}, …]}`.
+
+The validation, read-only mode, timeout, and row cap are stacked guardrails: the public URL accepts arbitrary SQL because **none of the layers will let it do harm**. Even if a determined actor slipped a malformed statement past sqlglot, the DuckDB connection has no write permission, no extension load, and a hard execution budget.
+
+```{mermaid}
+%%| label: fig-h3t-sequence
+%%| fig-cap: "Tile request lifecycle. The browser asks for a tile by URL; Varnish caches identical URLs; on a miss, the Plumber API decodes and validates the SQL, runs it against a read-only DuckDB, and returns h3j-formatted hexagons. Validation + read-only DB + timeouts mean the public endpoint can accept arbitrary SQL safely."
+%%| file: diagrams/h3t-sequence.mmd
+%%| fig-width: 7
+```
+
+### Cache invalidation by release
+
+Caches are easy to fill but notoriously hard to clear. H3T sidesteps the hard part entirely with a single trick: the `release` query parameter (@fig-h3t-release).
+
+When CalCOFI publishes a new database release (e.g., `v2026.04.08`, see [Database](db.qmd)), a symlink at the API server is swapped to point at the new file. The next time the int-app loads, it asks `/h3t/meta` for the current release version, gets back `v2026.04.08`, and passes that into every subsequent tile URL. Because the URL is now different, Varnish **automatically cache-misses** — and the new tiles are generated against the fresh data on first request. Old tiles linger harmlessly in cache until evicted by LRU; they'd still serve correct data for their old release if anyone asked.
+
+No purge command, no cache key surgery. Just: change one parameter, get a clean cache layer for free.
+
+```{mermaid}
+%%| label: fig-h3t-release
+%%| fig-cap: "Cache invalidation by release. The `release` query parameter is part of every tile URL. When a new database release is published, the int-app picks up the new version from `/h3t/meta`, all subsequent tile URLs change, and Varnish refills naturally — no manual purge."
+%%| file: diagrams/h3t-release.mmd
+%%| fig-width: 7
+```
+
+## A worked example: sardine + temperature
+
+To make this concrete, here is the full life of one click in the int-app:
+
+1. **User picks** _Pacific sardine_ (`Sardinops sagax`) and _temperature_ in the sidebar, with date range 1949–2024 and all four quarters.
+2. **`build_sp_sql()`** assembles a SQL template:
+
+   ```sql
+   SELECT hex_h3res{{res}} AS cell_id,
+          AVG(std_tally)   AS value,
+          COUNT(*)         AS n
+     FROM bio_obs
+    WHERE scientific_name = 'Sardinops sagax'
+      AND quarter IN (1, 2, 3, 4)
+      AND time_start BETWEEN '1949-01-01' AND '2024-12-31'
+    GROUP BY 1
+   ```
+
+3. **`h3t_b64()`** base64-encodes the SQL → `q=U0VMRUNUIGhleF9oM3Jlc3t7cmVzfX0gQVMgY2VsbF9pZCwKICAgICAgIEFWRyhz...`.
+4. **`fetch_h3t_stats()`** calls `/h3t/stats?q=…&release=v2026.04.08` once to get `{min, max, p02, p98, n}`. The 2nd–98th percentiles drive a robust color scale that ignores outliers.
+5. **MapLibre** requests tiles as the user pans:
+
+   ```
+   h3tiles://h3t.calcofi.io/h3t/4/3/6.h3t?q=U0VMRUNU…&release=v2026.04.08
+   ```
+
+6. **Plumber** decodes, substitutes `{{res}}` (zoom 4 → res 3), wraps in a bounding-box filter for tile (4, 3, 6), runs the query, and returns:
+
+   ```json
+   {
+     "cells": [
+       { "h3id": "83390cfffffffff", "value": 12.37, "n": 42 },
+       { "h3id": "83390dfffffffff", "value": 14.02, "n": 38 },
+       { "h3id": "83390efffffffff", "value": 11.85, "n": 51 }
+     ]
+   }
+   ```
+
+7. **MapLibre** paints each hex by interpolating the stats palette between p02 and p98. The user sees a smooth choropleth update as new tiles arrive.
+
+The first time this query runs anywhere, it takes ~200–800 ms (Varnish miss, DuckDB execution). Every subsequent user requesting "sardines, all quarters, 1949–2024" hits Varnish and renders in under 100 ms.
+
+## How the data gets there
+
+The H3T service is the *last* link in the CalCOFI data pipeline, not the first:
+
+- Source data (Google Drive, NCEI, ERDDAP, SWFSC) is ingested through Quarto notebooks in [`CalCOFI/workflows`](https://github.com/CalCOFI/workflows) into a working DuckDB database.
+- A `release_database.qmd` step validates, freezes, and publishes a versioned DuckDB file to the API server.
+- The H3T API mounts that file read-only and serves tiles from it.
+
+For the schema details, see [Database](db.qmd). For the publish path, see [Portals](portals.qmd).
+
+## Repositories and code
+
+| Repository | Role |
+|---|---|
+| [CalCOFI/api-h3t](https://github.com/CalCOFI/api-h3t) | Plumber API, sqlglot validator, DuckDB driver, deployment configs |
+| [CalCOFI/int-app](https://github.com/CalCOFI/int-app) | Shiny consumer; SQL builders and map widgets in `app/functions_h3t.R` |
+| [bbest/mapgl @ feat/add-h3t-source](https://github.com/bbest/mapgl/tree/feat/add-h3t-source) | `add_h3t_source()` extension to the [mapgl R package](https://walker-data.com/mapgl/) |
+| [INSPIDE/h3j-h3t](https://github.com/INSPIDE/h3j-h3t) | JS protocol handler that turns h3j JSON into MapLibre features |
+
+For the full technical contract — every endpoint, every validation rule, every deployment knob — see the [`api-h3t` README](https://github.com/CalCOFI/api-h3t/blob/main/README.md) and `deploy.md`.
