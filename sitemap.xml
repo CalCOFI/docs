@@ -2,46 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://calcofi.io/docs/index.html</loc>
-    <lastmod>2026-02-05T05:26:17.227Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.488Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/reports.html</loc>
-    <lastmod>2026-02-05T05:26:17.228Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.488Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/apps.html</loc>
-    <lastmod>2026-02-05T05:26:17.224Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.482Z</lastmod>
+  </url>
+  <url>
+    <loc>https://calcofi.io/docs/maps.html</loc>
+    <lastmod>2026-04-27T12:57:18.488Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/api.html</loc>
-    <lastmod>2026-02-05T05:26:17.224Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.482Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/db.html</loc>
-    <lastmod>2026-02-05T05:26:17.225Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.483Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/portals.html</loc>
-    <lastmod>2026-02-05T05:26:17.228Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.488Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/status.html</loc>
-    <lastmod>2026-02-05T05:26:17.229Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.489Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/refs.html</loc>
-    <lastmod>2026-02-05T05:26:17.228Z</lastmod>
+    <lastmod>2026-04-27T12:57:18.488Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io-Docs.docx</loc>
-    <lastmod>2026-02-05T05:29:33.933Z</lastmod>
+    <lastmod>2026-04-27T13:00:16.403Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io-Docs.pdf</loc>
-    <lastmod>2026-02-05T05:30:22.935Z</lastmod>
+    <lastmod>2026-04-27T13:00:56.113Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io-Docs.epub</loc>
-    <lastmod>2026-02-05T05:30:25.156Z</lastmod>
+    <lastmod>2026-04-27T13:00:58.255Z</lastmod>
   </url>
 </urlset>

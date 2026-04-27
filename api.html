@@ -2,14 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="Documentation for Open-Source Products at CalCOFI.io">
 
-<title>4&nbsp; API – CalCOFI.io Docs</title>
+<title>5&nbsp; API – CalCOFI.io Docs</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -32,18 +35,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./db.html" rel="next">
-<link href="./apps.html" rel="prev">
+<link href="./maps.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-27c261d06b905028a18691de25d09dde.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -178,32 +180,38 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./maps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./db.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./portals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -216,13 +224,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variables-get-list-of-variables-for-timeseries" id="toc-variables-get-list-of-variables-for-timeseries" class="nav-link active" data-scroll-target="#variables-get-list-of-variables-for-timeseries"><span class="header-section-number">4.1</span> <code>/variables</code>: get list of variables for timeseries</a></li>
-  <li><a href="#species_groups-get-species-groups-for-larvae" id="toc-species_groups-get-species-groups-for-larvae" class="nav-link" data-scroll-target="#species_groups-get-species-groups-for-larvae"><span class="header-section-number">4.2</span> <code>/species_groups</code>: get species groups for larvae</a></li>
-  <li><a href="#timeseries-get-time-series-data" id="toc-timeseries-get-time-series-data" class="nav-link" data-scroll-target="#timeseries-get-time-series-data"><span class="header-section-number">4.3</span> <code>/timeseries</code>: get time series data</a></li>
-  <li><a href="#cruises-get-list-of-cruises" id="toc-cruises-get-list-of-cruises" class="nav-link" data-scroll-target="#cruises-get-list-of-cruises"><span class="header-section-number">4.4</span> <code>/cruises</code>: get list of cruises</a></li>
-  <li><a href="#raster-get-raster-map-of-variable" id="toc-raster-get-raster-map-of-variable" class="nav-link" data-scroll-target="#raster-get-raster-map-of-variable"><span class="header-section-number">4.5</span> <code>/raster</code>: get raster map of variable</a></li>
-  <li><a href="#cruise_lines-get-station-lines-from-cruises" id="toc-cruise_lines-get-station-lines-from-cruises" class="nav-link" data-scroll-target="#cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">4.6</span> <code>/cruise_lines</code>: get station lines from cruises</a></li>
-  <li><a href="#cruise_line_profile" id="toc-cruise_line_profile" class="nav-link" data-scroll-target="#cruise_line_profile"><span class="header-section-number">4.7</span> <code>/cruise_line_profile</code></a></li>
+  <li><a href="#variables-get-list-of-variables-for-timeseries" id="toc-variables-get-list-of-variables-for-timeseries" class="nav-link active" data-scroll-target="#variables-get-list-of-variables-for-timeseries"><span class="header-section-number">5.1</span> <code>/variables</code>: get list of variables for timeseries</a></li>
+  <li><a href="#species_groups-get-species-groups-for-larvae" id="toc-species_groups-get-species-groups-for-larvae" class="nav-link" data-scroll-target="#species_groups-get-species-groups-for-larvae"><span class="header-section-number">5.2</span> <code>/species_groups</code>: get species groups for larvae</a></li>
+  <li><a href="#timeseries-get-time-series-data" id="toc-timeseries-get-time-series-data" class="nav-link" data-scroll-target="#timeseries-get-time-series-data"><span class="header-section-number">5.3</span> <code>/timeseries</code>: get time series data</a></li>
+  <li><a href="#cruises-get-list-of-cruises" id="toc-cruises-get-list-of-cruises" class="nav-link" data-scroll-target="#cruises-get-list-of-cruises"><span class="header-section-number">5.4</span> <code>/cruises</code>: get list of cruises</a></li>
+  <li><a href="#raster-get-raster-map-of-variable" id="toc-raster-get-raster-map-of-variable" class="nav-link" data-scroll-target="#raster-get-raster-map-of-variable"><span class="header-section-number">5.5</span> <code>/raster</code>: get raster map of variable</a></li>
+  <li><a href="#cruise_lines-get-station-lines-from-cruises" id="toc-cruise_lines-get-station-lines-from-cruises" class="nav-link" data-scroll-target="#cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">5.6</span> <code>/cruise_lines</code>: get station lines from cruises</a></li>
+  <li><a href="#cruise_line_profile" id="toc-cruise_line_profile" class="nav-link" data-scroll-target="#cruise_line_profile"><span class="header-section-number">5.7</span> <code>/cruise_line_profile</code></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/api.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -231,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">API</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></h1>
 </div>
 
 
@@ -253,31 +261,31 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://api.calcofi.io">api.calcofi.io</a></li>
 </ul>
 <p>Here we will provide more guidance on how to use the API functions with documented input arguments, output results and examples of use.</p>
-<section id="variables-get-list-of-variables-for-timeseries" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="variables-get-list-of-variables-for-timeseries"><span class="header-section-number">4.1</span> <code>/variables</code>: get list of variables for timeseries</h2>
+<section id="variables-get-list-of-variables-for-timeseries" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="variables-get-list-of-variables-for-timeseries"><span class="header-section-number">5.1</span> <code>/variables</code>: get list of variables for timeseries</h2>
 <p>Get list of variables for use in <code>/timeseries</code></p>
 </section>
-<section id="species_groups-get-species-groups-for-larvae" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="species_groups-get-species-groups-for-larvae"><span class="header-section-number">4.2</span> <code>/species_groups</code>: get species groups for larvae</h2>
+<section id="species_groups-get-species-groups-for-larvae" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="species_groups-get-species-groups-for-larvae"><span class="header-section-number">5.2</span> <code>/species_groups</code>: get species groups for larvae</h2>
 <p>Not yet working. Get list of species groups for use with variables <code>larvae_counts.count</code> in <code>/timeseries</code></p>
 </section>
-<section id="timeseries-get-time-series-data" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="timeseries-get-time-series-data"><span class="header-section-number">4.3</span> <code>/timeseries</code>: get time series data</h2>
+<section id="timeseries-get-time-series-data" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="timeseries-get-time-series-data"><span class="header-section-number">5.3</span> <code>/timeseries</code>: get time series data</h2>
 </section>
-<section id="cruises-get-list-of-cruises" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="cruises-get-list-of-cruises"><span class="header-section-number">4.4</span> <code>/cruises</code>: get list of cruises</h2>
+<section id="cruises-get-list-of-cruises" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="cruises-get-list-of-cruises"><span class="header-section-number">5.4</span> <code>/cruises</code>: get list of cruises</h2>
 <p>Get list of cruises with summary stats as CSV table for time (<code>date_beg</code>)</p>
 </section>
-<section id="raster-get-raster-map-of-variable" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="raster-get-raster-map-of-variable"><span class="header-section-number">4.5</span> <code>/raster</code>: get raster map of variable</h2>
+<section id="raster-get-raster-map-of-variable" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="raster-get-raster-map-of-variable"><span class="header-section-number">5.5</span> <code>/raster</code>: get raster map of variable</h2>
 <p>Get raster of variable</p>
 </section>
-<section id="cruise_lines-get-station-lines-from-cruises" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">4.6</span> <code>/cruise_lines</code>: get station lines from cruises</h2>
+<section id="cruise_lines-get-station-lines-from-cruises" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">5.6</span> <code>/cruise_lines</code>: get station lines from cruises</h2>
 <p>Get station lines from cruises (with more than one cast)</p>
 </section>
-<section id="cruise_line_profile" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="cruise_line_profile"><span class="header-section-number">4.7</span> <code>/cruise_line_profile</code></h2>
+<section id="cruise_line_profile" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="cruise_line_profile"><span class="header-section-number">5.7</span> <code>/cruise_line_profile</code></h2>
 <p>Get profile at depths for given variable of casts along line of stations</p>
 
 
@@ -686,13 +694,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./apps.html" class="pagination-link" aria-label="Applications">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span>
+      <a href="./maps.html" class="pagination-link" aria-label="Maps">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./db.html" class="pagination-link" aria-label="Database">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

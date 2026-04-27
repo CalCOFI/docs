@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Documentation for Open-Source Products at CalCOFI.io">
+
+<title>4&nbsp; Maps – CalCOFI.io Docs</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./api.html" rel="next">
+<link href="./apps.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./maps.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">CalCOFI.io Docs</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/CalCOFI/docs/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io-Docs.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io-Docs.docx">
+              <i class="bi bi-file-word pe-1"></i>
+            Download Docx
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io-Docs.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Process</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maps.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./portals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./status.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./refs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">4.1</span> Overview</a></li>
+  <li><a href="#why-hexagons" id="toc-why-hexagons" class="nav-link" data-scroll-target="#why-hexagons"><span class="header-section-number">4.2</span> Why hexagons?</a></li>
+  <li><a href="#the-problem-aggregating-millions-of-points-at-every-zoom" id="toc-the-problem-aggregating-millions-of-points-at-every-zoom" class="nav-link" data-scroll-target="#the-problem-aggregating-millions-of-points-at-every-zoom"><span class="header-section-number">4.3</span> The problem: aggregating millions of points at every zoom</a></li>
+  <li><a href="#the-solution-query-as-url-hexagonal-tiles" id="toc-the-solution-query-as-url-hexagonal-tiles" class="nav-link" data-scroll-target="#the-solution-query-as-url-hexagonal-tiles"><span class="header-section-number">4.4</span> The solution: query-as-URL hexagonal tiles</a>
+  <ul class="collapse">
+  <li><a href="#resolution-follows-zoom" id="toc-resolution-follows-zoom" class="nav-link" data-scroll-target="#resolution-follows-zoom"><span class="header-section-number">4.4.1</span> Resolution follows zoom</a></li>
+  <li><a href="#request-lifecycle" id="toc-request-lifecycle" class="nav-link" data-scroll-target="#request-lifecycle"><span class="header-section-number">4.4.2</span> Request lifecycle</a></li>
+  <li><a href="#cache-invalidation-by-release" id="toc-cache-invalidation-by-release" class="nav-link" data-scroll-target="#cache-invalidation-by-release"><span class="header-section-number">4.4.3</span> Cache invalidation by release</a></li>
+  </ul></li>
+  <li><a href="#a-worked-example-sardine-temperature" id="toc-a-worked-example-sardine-temperature" class="nav-link" data-scroll-target="#a-worked-example-sardine-temperature"><span class="header-section-number">4.5</span> A worked example: sardine + temperature</a></li>
+  <li><a href="#how-the-data-gets-there" id="toc-how-the-data-gets-there" class="nav-link" data-scroll-target="#how-the-data-gets-there"><span class="header-section-number">4.6</span> How the data gets there</a></li>
+  <li><a href="#repositories-and-code" id="toc-repositories-and-code" class="nav-link" data-scroll-target="#repositories-and-code"><span class="header-section-number">4.7</span> Repositories and code</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/maps.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-maps" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
+<p>The CalCOFI <a href="https://shiny.calcofi.io">interactive app</a> renders <strong>hexagonal heatmaps</strong> of species occurrence and oceanographic variables — sardine larvae densities, sea-surface temperature, salinity, chlorophyll — across the entire CalCOFI sampling area, at any zoom level, in seconds. The engine that makes this possible is <strong>H3T</strong>, a tile service that converts a database query into a stream of hexagon tiles on demand.</p>
+<div id="fig-int-app-compare" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-int-app-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figs/int-app_map-compare-bio-env.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-int-app-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Side-by-side comparison in the <a href="https://app.calcofi.io/int">CalCOFI Integrated App</a>: hexagons summarizing <strong>biology</strong> (Pacific sardine larvae abundance, left) and <strong>environment</strong> (sea-surface temperature, right) over the same area, era, and quarters, with a swipeable divider for direct visual comparison. Both layers are powered by the H3T tile service.
+</figcaption>
+</figure>
+</div>
+<p>This chapter explains how H3T works, visually, for both the curious oceanographer and the developer who wants to extend it. Throughout, the guiding principle is:</p>
+<blockquote class="blockquote">
+<p><strong>DuckDB is the single source of truth.</strong> H3T tiles are a performance layer built on top of it — never an authoritative copy of the data.</p>
+</blockquote>
+</section>
+<section id="why-hexagons" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="why-hexagons"><span class="header-section-number">4.2</span> Why hexagons?</h2>
+<p>H3 is <a href="https://h3geo.org">Uber’s hexagonal hierarchical geospatial index</a>. Each cell is a hexagon, and every cell at resolution <em>N</em> nests neatly inside one parent cell at resolution <em>N − 1</em>. Hexagons have three useful properties for ecological data:</p>
+<ul>
+<li><strong>Equal area at a given resolution</strong>, so densities are directly comparable across the map.</li>
+<li><strong>Every neighbor is the same distance away</strong> (unlike a square grid, which has both edge and corner neighbors).</li>
+<li><strong>No latitude distortion</strong> — a res-5 hex off Point Conception covers the same area as a res-5 hex off Cabo San Lucas.</li>
+</ul>
+<p>Compared to a raster of pixels, hexagons aggregate point observations (a net tow, a CTD cast, a larvae count) without imposing an arbitrary north–south orientation, and the parent–child nesting lets the same dataset render coarsely when you’re zoomed out and finely when you’re zoomed in.</p>
+</section>
+<section id="the-problem-aggregating-millions-of-points-at-every-zoom" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="the-problem-aggregating-millions-of-points-at-every-zoom"><span class="header-section-number">4.3</span> The problem: aggregating millions of points at every zoom</h2>
+<p>Before H3T, the int-app pre-computed every hex aggregation across <strong>all 10 H3 resolutions</strong> for every species and environmental variable at startup. The Shiny app then shipped the relevant resolution to the browser for each zoom change. This gave the app two problems:</p>
+<ol type="1">
+<li><strong>Slow startup.</strong> Building those aggregations against the full bottle and ichthyo tables took &gt;10 s every time the app launched.</li>
+<li><strong>Heavy memory.</strong> A multi-resolution <code>sf</code> grid for one variable is hundreds of megabytes; for dozens of variables it crowded out everything else on the Shiny server.</li>
+</ol>
+<p>This is the same class of problem that the <a href="https://marinesensitivity.org/docs/software.html">MarineSensitivity stack</a> solved for rasters with a TiTiler factory + Varnish cache. H3T is the equivalent move for <strong>hexagons</strong>.</p>
+</section>
+<section id="the-solution-query-as-url-hexagonal-tiles" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="the-solution-query-as-url-hexagonal-tiles"><span class="header-section-number">4.4</span> The solution: query-as-URL hexagonal tiles</h2>
+<p>The architecture rests on three ideas, each covered below: the H3 resolution that’s served depends on the zoom level; the entire tile request lifecycle is fronted by a cache; and a <code>release</code> parameter handles cache invalidation automatically when new data drops.</p>
+<section id="resolution-follows-zoom" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="resolution-follows-zoom"><span class="header-section-number">4.4.1</span> Resolution follows zoom</h3>
+<p>When the user zooms out to see the whole California Current, they don’t need 7-meter hexagons — a 22 km hex is finer than the underlying sampling grid anyway. When they zoom in to a single CalCOFI line, they want as much detail as the data supports. H3T maps web-map zoom levels to H3 resolutions on the server side: zoom 0–1 → res 1 (~1106 km hexes), zoom 5–7 → res 5 (~22 km hexes), zoom 11+ → res 10 (~7.5 m hexes), and so on (<a href="#fig-h3-pyramid" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>).</p>
+<p>The trick is in the SQL: the int-app sends a <strong>template</strong> with a literal placeholder <code>hex_h3res{{res}}</code> (see <code>build_sp_sql()</code> in <a href="https://github.com/CalCOFI/int-app/blob/main/app/functions_h3t.R"><code>int-app/app/functions_h3t.R</code></a>), and the API substitutes the right resolution for each tile before executing. One query string, ten zoom levels, one shared cache namespace.</p>
+<div class="cell" data-file="diagrams/h3-pyramid.mmd" data-fig-width="7" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-h3-pyramid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-h3-pyramid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-h3-pyramid">flowchart TB
+  %% nodes: H3 hexagon hierarchy paired with web-map zoom ranges
+  z0["&lt;b&gt;zoom 0–1&lt;/b&gt;&lt;br/&gt;world view"]:::zoom
+  z3["&lt;b&gt;zoom 2–4&lt;/b&gt;&lt;br/&gt;continent view"]:::zoom
+  z6["&lt;b&gt;zoom 5–7&lt;/b&gt;&lt;br/&gt;region view"]:::zoom
+  z9["&lt;b&gt;zoom 8–10&lt;/b&gt;&lt;br/&gt;coastline view"]:::zoom
+  z13["&lt;b&gt;zoom 11–13+&lt;/b&gt;&lt;br/&gt;city view"]:::zoom
+
+  r1["&lt;b&gt;H3 res 1&lt;/b&gt;&lt;br/&gt;~1106 km edge&lt;br/&gt;842 cells globally"]:::hex
+  r3["&lt;b&gt;H3 res 3&lt;/b&gt;&lt;br/&gt;~158 km edge"]:::hex
+  r5["&lt;b&gt;H3 res 5&lt;/b&gt;&lt;br/&gt;~22 km edge"]:::hex
+  r7["&lt;b&gt;H3 res 7&lt;/b&gt;&lt;br/&gt;~3.2 km edge"]:::hex
+  r10["&lt;b&gt;H3 res 10&lt;/b&gt;&lt;br/&gt;~7.5 m edge"]:::hex
+
+  sql["client SQL template:&lt;br/&gt;&lt;code&gt;SELECT hex_h3res{{res}} AS cell_id, …&lt;/code&gt;&lt;br/&gt;server substitutes &lt;code&gt;{{res}}&lt;/code&gt; per tile"]:::code
+
+  z0  --&gt; r1
+  z3  --&gt; r3
+  z6  --&gt; r5
+  z9  --&gt; r7
+  z13 --&gt; r10
+
+  r1 -.contains.-&gt; r3
+  r3 -.contains.-&gt; r5
+  r5 -.contains.-&gt; r7
+  r7 -.contains.-&gt; r10
+
+  sql --- r5
+
+  %% styles
+  classDef zoom fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#000
+  classDef hex  fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#000
+  classDef code fill:#F3E8FF,stroke:#9333EA,stroke-width:1.5px,color:#000
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h3-pyramid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Web-map zoom level determines which H3 resolution the server returns. The same SQL template — <code>hex_h3res{{res}}</code> — adapts to each tile by server-side substitution. Hexagons at finer resolutions nest inside their coarser parents, so the data hierarchy and the visual hierarchy stay aligned.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="request-lifecycle" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="request-lifecycle"><span class="header-section-number">4.4.2</span> Request lifecycle</h3>
+<p>When the user pans or zooms, MapLibre asks for tiles. Each tile URL looks like this:</p>
+<pre><code>h3tiles://h3t.calcofi.io/h3t/{z}/{x}/{y}.h3t?q=&lt;base64-SQL&gt;&amp;release=v2026.04.08</code></pre>
+<p>The clever bit is the <code>q</code> parameter: it’s the entire <code>SELECT</code> statement, base64-encoded with URL-safe characters (RFC 4648 §5). That means <strong>the URL itself describes the data to render</strong>, so two users asking for “average temperature for sardines, all quarters, 1949–2024” hit the exact same cache entry — no session state, no server-side query registry.</p>
+<p>What happens next is shown in <a href="#fig-h3t-sequence" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>. Caddy terminates TLS and forwards to Varnish, which checks its cache. On a hit, the user gets back a chunk of h3j JSON in well under 100 ms. On a miss, Varnish forwards to the Plumber API, which:</p>
+<ol type="1">
+<li><strong>Decodes</strong> the base64 SQL.</li>
+<li><strong>Validates</strong> it with <a href="https://github.com/tobymao/sqlglot"><code>sqlglot</code></a>: single statement, must be <code>SELECT</code> (or <code>WITH … SELECT</code>), must project exactly <code>cell_id, value, [n]</code>, no <code>read_csv</code>/<code>attach</code>/<code>load</code>, no shell calls, no schema beyond the published tables.</li>
+<li><strong>Substitutes</strong> <code>{res}</code> from the zoom level and wraps the inner query in a viewport bounding-box filter.</li>
+<li><strong>Executes</strong> against a read-only DuckDB connection with a 3-second timeout and a 50,000-row cap.</li>
+<li><strong>Formats</strong> the result as h3j JSON: <code>{"cells": [{"h3id": "8a1941a29a7ffff", "value": 12.37, "n": 42}, …]}</code>.</li>
+</ol>
+<p>The validation, read-only mode, timeout, and row cap are stacked guardrails: the public URL accepts arbitrary SQL because <strong>none of the layers will let it do harm</strong>. Even if a determined actor slipped a malformed statement past sqlglot, the DuckDB connection has no write permission, no extension load, and a hard execution budget.</p>
+<div class="cell" data-file="diagrams/h3t-sequence.mmd" data-fig-width="7" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-h3t-sequence" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-h3t-sequence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-h3t-sequence">sequenceDiagram
+  autonumber
+  participant U as User&lt;br/&gt;(int-app browser)
+  participant M as MapLibre&lt;br/&gt;+ h3j-h3t.js
+  participant CD as Caddy&lt;br/&gt;(reverse proxy)
+  participant V as Varnish&lt;br/&gt;(HTTP cache)
+  participant API as Plumber API&lt;br/&gt;(/h3t)
+  participant DB as DuckDB&lt;br/&gt;(read-only)
+
+  U-&gt;&gt;M: pan / zoom map&lt;br/&gt;(picks species + variable)
+  M-&gt;&gt;CD: GET /h3t/{z}/{x}/{y}.h3t&lt;br/&gt;?q=&lt;base64-SQL&gt;&amp;release=v2026.04.08
+  CD-&gt;&gt;V: forward
+  alt cache hit
+    V--&gt;&gt;M: h3j JSON (sub-100ms)
+  else cache miss
+    V-&gt;&gt;API: forward
+    API-&gt;&gt;API: decode base64 → SQL
+    API-&gt;&gt;API: validate (sqlglot AST)&lt;br/&gt;SELECT-only, 16 KB cap
+    API-&gt;&gt;API: substitute {{res}} from zoom&lt;br/&gt;wrap in viewport bbox
+    API-&gt;&gt;DB: SELECT cell_id, value, n&lt;br/&gt;(3 s timeout, 50k row cap)
+    DB--&gt;&gt;API: hex rows
+    API--&gt;&gt;V: h3j JSON + ETag&lt;br/&gt;Cache-Control: max-age=600
+    V--&gt;&gt;M: h3j JSON
+  end
+  M-&gt;&gt;U: render colored hexagons&lt;br/&gt;via h3tiles:// protocol
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h3t-sequence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Tile request lifecycle. The browser asks for a tile by URL; Varnish caches identical URLs; on a miss, the Plumber API decodes and validates the SQL, runs it against a read-only DuckDB, and returns h3j-formatted hexagons. Validation + read-only DB + timeouts mean the public endpoint can accept arbitrary SQL safely.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cache-invalidation-by-release" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="cache-invalidation-by-release"><span class="header-section-number">4.4.3</span> Cache invalidation by release</h3>
+<p>Caches are easy to fill but notoriously hard to clear. H3T sidesteps the hard part entirely with a single trick: the <code>release</code> query parameter (<a href="#fig-h3t-release" class="quarto-xref">Figure&nbsp;<span>4.4</span></a>).</p>
+<p>When CalCOFI publishes a new database release (e.g., <code>v2026.04.08</code>, see <a href="./db.html">Database</a>), a symlink at the API server is swapped to point at the new file. The next time the int-app loads, it asks <code>/h3t/meta</code> for the current release version, gets back <code>v2026.04.08</code>, and passes that into every subsequent tile URL. Because the URL is now different, Varnish <strong>automatically cache-misses</strong> — and the new tiles are generated against the fresh data on first request. Old tiles linger harmlessly in cache until evicted by LRU; they’d still serve correct data for their old release if anyone asked.</p>
+<p>No purge command, no cache key surgery. Just: change one parameter, get a clean cache layer for free.</p>
+<div class="cell" data-file="diagrams/h3t-release.mmd" data-fig-width="7" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-h3t-release" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-h3t-release-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-h3t-release">flowchart LR
+  %% before release
+  subgraph before["&lt;b&gt;before release&lt;/b&gt;"]
+    direction TB
+    u1["browser request&lt;br/&gt;?q=…&amp;release=&lt;b&gt;v2026.04.01&lt;/b&gt;"]:::req
+    c1[("Varnish&lt;br/&gt;cached tiles for&lt;br/&gt;release v2026.04.01")]:::cache
+    db1[("DuckDB&lt;br/&gt;calcofi_latest.duckdb&lt;br/&gt;→ v2026.04.01.duckdb")]:::db
+    u1 --&gt; c1
+    c1 -.miss.-&gt; db1
+  end
+
+  %% release event
+  rel{{"&lt;b&gt;new release published&lt;/b&gt;&lt;br/&gt;symlink swap:&lt;br/&gt;calcofi_latest.duckdb&lt;br/&gt;→ v2026.04.08.duckdb"}}:::event
+
+  %% after release
+  subgraph after["&lt;b&gt;after release&lt;/b&gt;"]
+    direction TB
+    meta["int-app fetches&lt;br/&gt;/h3t/meta → release=v2026.04.08"]:::req
+    u2["browser request&lt;br/&gt;?q=…&amp;release=&lt;b&gt;v2026.04.08&lt;/b&gt;"]:::req
+    c2[("Varnish&lt;br/&gt;old URLs idle&lt;br/&gt;new URLs cache-miss")]:::cache
+    db2[("DuckDB&lt;br/&gt;v2026.04.08")]:::db
+    meta --&gt; u2
+    u2 --&gt; c2
+    c2 -.miss.-&gt; db2
+    db2 --&gt; c2
+  end
+
+  before --&gt; rel --&gt; after
+
+  %% styles
+  classDef req   fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#000
+  classDef cache fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#000
+  classDef db    fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#000
+  classDef event fill:#F0FDF4,stroke:#22C55E,stroke-width:2px,color:#000
+
+  style before fill:#F8FAFC,stroke:#CBD5E1,stroke-width:1.5px
+  style after  fill:#F8FAFC,stroke:#CBD5E1,stroke-width:1.5px
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h3t-release-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Cache invalidation by release. The <code>release</code> query parameter is part of every tile URL. When a new database release is published, the int-app picks up the new version from <code>/h3t/meta</code>, all subsequent tile URLs change, and Varnish refills naturally — no manual purge.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-worked-example-sardine-temperature" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="a-worked-example-sardine-temperature"><span class="header-section-number">4.5</span> A worked example: sardine + temperature</h2>
+<p>To make this concrete, here is the full life of one click in the int-app:</p>
+<ol type="1">
+<li><p><strong>User picks</strong> <em>Pacific sardine</em> (<code>Sardinops sagax</code>) and <em>temperature</em> in the sidebar, with date range 1949–2024 and all four quarters.</p></li>
+<li><p><strong><code>build_sp_sql()</code></strong> assembles a SQL template:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> hex_h3res{{res}} <span class="kw">AS</span> cell_id,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(std_tally)   <span class="kw">AS</span> <span class="fu">value</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>)         <span class="kw">AS</span> n</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> bio_obs</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> scientific_name <span class="op">=</span> <span class="st">'Sardinops sagax'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> quarter <span class="kw">IN</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> time_start <span class="kw">BETWEEN</span> <span class="st">'1949-01-01'</span> <span class="kw">AND</span> <span class="st">'2024-12-31'</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong><code>h3t_b64()</code></strong> base64-encodes the SQL → <code>q=U0VMRUNUIGhleF9oM3Jlc3t7cmVzfX0gQVMgY2VsbF9pZCwKICAgICAgIEFWRyhz...</code>.</p></li>
+<li><p><strong><code>fetch_h3t_stats()</code></strong> calls <code>/h3t/stats?q=…&amp;release=v2026.04.08</code> once to get <code>{min, max, p02, p98, n}</code>. The 2nd–98th percentiles drive a robust color scale that ignores outliers.</p></li>
+<li><p><strong>MapLibre</strong> requests tiles as the user pans:</p>
+<pre><code>h3tiles://h3t.calcofi.io/h3t/4/3/6.h3t?q=U0VMRUNU…&amp;release=v2026.04.08</code></pre></li>
+<li><p><strong>Plumber</strong> decodes, substitutes <code>{res}</code> (zoom 4 → res 3), wraps in a bounding-box filter for tile (4, 3, 6), runs the query, and returns:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"cells"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">"h3id"</span><span class="fu">:</span> <span class="st">"83390cfffffffff"</span><span class="fu">,</span> <span class="dt">"value"</span><span class="fu">:</span> <span class="fl">12.37</span><span class="fu">,</span> <span class="dt">"n"</span><span class="fu">:</span> <span class="dv">42</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">"h3id"</span><span class="fu">:</span> <span class="st">"83390dfffffffff"</span><span class="fu">,</span> <span class="dt">"value"</span><span class="fu">:</span> <span class="fl">14.02</span><span class="fu">,</span> <span class="dt">"n"</span><span class="fu">:</span> <span class="dv">38</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">"h3id"</span><span class="fu">:</span> <span class="st">"83390efffffffff"</span><span class="fu">,</span> <span class="dt">"value"</span><span class="fu">:</span> <span class="fl">11.85</span><span class="fu">,</span> <span class="dt">"n"</span><span class="fu">:</span> <span class="dv">51</span> <span class="fu">}</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>MapLibre</strong> paints each hex by interpolating the stats palette between p02 and p98. The user sees a smooth choropleth update as new tiles arrive.</p></li>
+</ol>
+<p>The first time this query runs anywhere, it takes ~200–800 ms (Varnish miss, DuckDB execution). Every subsequent user requesting “sardines, all quarters, 1949–2024” hits Varnish and renders in under 100 ms.</p>
+</section>
+<section id="how-the-data-gets-there" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="how-the-data-gets-there"><span class="header-section-number">4.6</span> How the data gets there</h2>
+<p>The H3T service is the <em>last</em> link in the CalCOFI data pipeline, not the first:</p>
+<ul>
+<li>Source data (Google Drive, NCEI, ERDDAP, SWFSC) is ingested through Quarto notebooks in <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> into a working DuckDB database.</li>
+<li>A <code>release_database.qmd</code> step validates, freezes, and publishes a versioned DuckDB file to the API server.</li>
+<li>The H3T API mounts that file read-only and serves tiles from it.</li>
+</ul>
+<p>For the schema details, see <a href="./db.html">Database</a>. For the publish path, see <a href="./portals.html">Portals</a>.</p>
+</section>
+<section id="repositories-and-code" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="repositories-and-code"><span class="header-section-number">4.7</span> Repositories and code</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Repository</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/CalCOFI/api-h3t">CalCOFI/api-h3t</a></td>
+<td>Plumber API, sqlglot validator, DuckDB driver, deployment configs</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/CalCOFI/int-app">CalCOFI/int-app</a></td>
+<td>Shiny consumer; SQL builders and map widgets in <code>app/functions_h3t.R</code></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/bbest/mapgl/tree/feat/add-h3t-source">bbest/mapgl @ feat/add-h3t-source</a></td>
+<td><code>add_h3t_source()</code> extension to the <a href="https://walker-data.com/mapgl/">mapgl R package</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/INSPIDE/h3j-h3t">INSPIDE/h3j-h3t</a></td>
+<td>JS protocol handler that turns h3j JSON into MapLibre features</td>
+</tr>
+</tbody>
+</table>
+<p>For the full technical contract — every endpoint, every validation rule, every deployment knob — see the <a href="https://github.com/CalCOFI/api-h3t/blob/main/README.md"><code>api-h3t</code> README</a> and <code>deploy.md</code>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/calcofi\.io\/docs\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./apps.html" class="pagination-link" aria-label="Applications">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./api.html" class="pagination-link" aria-label="API">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/maps.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
