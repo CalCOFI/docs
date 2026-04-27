@@ -16,8 +16,22 @@ execute:
   warning: false
 
 book:
-  title: "CalCOFI.io Docs"
-  description: "Documentation for Open-Source Products at CalCOFI.io"
+  title: "CalCOFI.io"
+  subtitle: "Documentation"
+  description: "Documentation for open-Source products at CalCOFI.io developed
+    for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)"
+  author:
+  - name: "Benjamin D. Best"
+    orcid: 0000-0002-2686-0784
+    email: ben@oceanmetrics.io
+    affiliations:
+      - name: Ocean Metrics LLC
+  - name: "Erin Satterthwaite"
+    email: esatterthwaite@ucsd.edu
+    affiliations:
+      - name: UC San Diego - Scripps Institution of Oceanography
+        city: San Diego
+        state: CA
   # author:
   #   - "![](/figs/contrib.rocks.svg)"
   date: today
