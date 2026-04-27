@@ -171,8 +171,8 @@ con <- get_working_ducklake()
 # - syncs to GCS archive for immutable provenance tracking
 # - loads redefinition metadata for column renaming/typing
 d <- read_csv_files(
-  provider     = "swfsc.noaa.gov",
-  dataset      = "calcofi-db",
+  provider     = "swfsc",
+  dataset      = "ichthyo",
   dir_data     = "~/My Drive/projects/calcofi/data-public",
   metadata_dir = "metadata",
   sync_archive = TRUE)
@@ -218,8 +218,8 @@ con <- dbConnect(
 
 # read CSV files and metadata
 d <- read_csv_files(
-  provider = "swfsc.noaa.gov",
-  dataset  = "calcofi-db")
+  provider = "swfsc",
+  dataset  = "ichthyo")
 
 # transform data according to redefinitions
 transformed_data <- transform_data(d)
