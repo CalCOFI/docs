@@ -114,7 +114,7 @@
     "href": "maps.html#repositories-and-code",
     "title": "4  Maps",
     "section": "4.7 Repositories and code",
-    "text": "4.7 Repositories and code\n\n\n\nRepository\nRole\n\n\n\n\nCalCOFI/api-h3t\nPlumber API, sqlglot validator, DuckDB driver, deployment configs\n\n\nCalCOFI/int-app\nShiny consumer; SQL builders and map widgets in app/functions_h3t.R\n\n\nbbest/mapgl @ feat/add-h3t-source\nadd_h3t_source() extension to the mapgl R package\n\n\nINSPIDE/h3j-h3t\nJS protocol handler that turns h3j JSON into MapLibre features\n\n\n\nFor the full technical contract — every endpoint, every validation rule, every deployment knob — see the api-h3t README and deploy.md.",
+    "text": "4.7 Repositories and code\n\n\n\nRepository\nRole\n\n\n\n\nCalCOFI/api-h3t\nPlumber API, sqlglot validator, DuckDB driver, deployment configs\n\n\nCalCOFI/int-app\nShiny consumer; SQL builders and map widgets in app/functions_h3t.R\n\n\nbbest/mapgl @ feat/add-h3t-source\nadd_h3t_source() extension to the mapgl R package\n\n\nbbest/h3j-h3t @ fix/maplibre-v3-compat\nfix h3t protocol for MapLibre v3+/v4 and multiple sources on one page in INSPIDE/h3j-h3t\n\n\n\nFor the full technical contract — every endpoint, every validation rule, every deployment knob — see the api-h3t README and deploy.md.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Maps</span>"
     ]
