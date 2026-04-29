@@ -147,6 +147,7 @@ For the schema details, see [Database](db.qmd). For the publish path, see [Porta
 | [CalCOFI/api-h3t](https://github.com/CalCOFI/api-h3t) | Plumber API, sqlglot validator, DuckDB driver, deployment configs |
 | [CalCOFI/int-app](https://github.com/CalCOFI/int-app) | Shiny consumer; SQL builders and map widgets in `app/functions_h3t.R` |
 | [bbest/mapgl @ feat/add-h3t-source](https://github.com/bbest/mapgl/tree/feat/add-h3t-source) | `add_h3t_source()` extension to the [mapgl R package](https://walker-data.com/mapgl/) |
-| [INSPIDE/h3j-h3t](https://github.com/INSPIDE/h3j-h3t) | JS protocol handler that turns h3j JSON into MapLibre features |
+| [bbest/h3j-h3t @ fix/maplibre-v3-compat](https://github.com/bbest/h3j-h3t/tree/fix/maplibre-v3-compat) | fix h3t protocol for MapLibre v3+/v4 and multiple sources on one page in [INSPIDE/h3j-h3t](https://github.com/INSPIDE/h3j-h3t) | 
+
 
 For the full technical contract — every endpoint, every validation rule, every deployment knob — see the [`api-h3t` README](https://github.com/CalCOFI/api-h3t/blob/main/README.md) and `deploy.md`.
