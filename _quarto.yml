@@ -41,7 +41,7 @@ book:
   repo-actions: [edit]
   downloads: [pdf, docx, epub]
   sharing: [twitter, facebook, linkedin]
-  # google-analytics: "G-V3HZN14Z8G" # TODO: add Google Analytics
+  google-analytics: "G-0HVK8TDMCF"
   search: true
   page-navigation: true
   chapters:
