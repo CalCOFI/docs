@@ -49,8 +49,10 @@ book:
     - reports.qmd
     - apps.qmd
     - maps.qmd
-    - api.qmd
     - db.qmd
+    - data-access.qmd
+    - helpers.qmd
+    - api.qmd
     - portals.qmd
     - status.qmd
     - refs.qmd

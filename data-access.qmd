@@ -1,0 +1,291 @@
+# Data Access
+
+CalCOFI [database](db.qmd) releases are published as **Parquet** files on a
+public Google Cloud Storage (GCS) bucket. You can query them directly with
+[DuckDB](https://duckdb.org) — from R, Python, the DuckDB CLI, or any DuckDB
+client — with **no credentials, no API server, and no full download**. DuckDB
+reads only the columns and row groups a query actually touches, straight over
+HTTPS.
+
+This page covers querying the release Parquet directly. For convenience-wrapped
+biological ↔ environmental matching, see [Matching Helpers](helpers.qmd).
+
+## Where the data lives
+
+Each release is a versioned folder:
+
+```
+gs://calcofi-db/ducklake/releases/{version}/
+├── catalog.json          # table list, row counts, "partitioned" flag
+├── relationships.json    # primary keys + foreign keys
+├── RELEASE_NOTES.md
+└── parquet/
+    ├── {table}.parquet                  # single-file tables
+    └── {table}/cruise_key=.../*.parquet # hive-partitioned tables
+```
+
+- Public HTTPS base:
+  `https://storage.googleapis.com/calcofi-db/ducklake/releases/{version}/parquet`
+- `{version}` is e.g. `v2026.05.14`; the current release pointer is at
+  [`releases/latest.txt`](https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt)
+  and the table list at `releases/{version}/catalog.json`.
+- Most tables are **single-file** (`{table}.parquet`). The large CTD tables
+  `ctd_thin` and `ctd_summary` are **hive-partitioned** by `cruise_key`
+  (`catalog.json` flags these with `"partitioned": true`).
+
+## Setup: the `httpfs` extension
+
+DuckDB reads remote Parquet through its `httpfs` extension. Spatial queries
+(e.g. distances between casts and tows) also need `spatial`. Both are one-time
+installs, then loaded per session:
+
+```sql
+INSTALL httpfs; LOAD httpfs;
+INSTALL spatial; LOAD spatial;   -- only if you use ST_* functions
+```
+
+## Single-file tables
+
+A single-file table is just an HTTPS URL handed to `read_parquet()`:
+
+```sql
+SELECT species_id, scientific_name, common_name, worms_id
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet')
+WHERE scientific_name = 'Sardinops sagax';
+```
+
+Joins work the same way — name each table's URL. The biological hierarchy is
+`ichthyo` → `net` → `tow` → `site` (and `ichthyo` → `species`); the
+environmental hierarchy is `bottle_measurement` → `bottle` → `casts`:
+
+```sql
+SELECT i.ichthyo_uuid, i.life_stage, i.tally, sp.scientific_name, t.time_start
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/ichthyo.parquet') i
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet') sp ON i.species_id = sp.species_id
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/net.parquet')     n  ON i.net_uuid   = n.net_uuid
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/tow.parquet')     t  ON n.tow_uuid   = t.tow_uuid
+WHERE sp.scientific_name = 'Sardinops sagax'
+LIMIT 10;
+```
+
+## Hive-partitioned tables
+
+`ctd_thin` and `ctd_summary` are partitioned into one folder per `cruise_key`.
+Reading them needs an **s3-style glob** (plain HTTPS URLs can't glob), so
+configure DuckDB's anonymous s3 access — GCS is s3-compatible:
+
+```sql
+INSTALL httpfs; LOAD httpfs;
+SET s3_region            = 'auto';
+SET s3_endpoint          = 'storage.googleapis.com';
+SET s3_url_style         = 'path';
+SET s3_access_key_id     = '';
+SET s3_secret_access_key = '';
+
+SELECT cruise_key, count(*) AS n
+FROM read_parquet(
+  's3://calcofi-db/ducklake/releases/v2026.05.14/parquet/ctd_thin/**/*.parquet',
+  hive_partitioning = true)
+GROUP BY cruise_key
+ORDER BY cruise_key;
+```
+
+Because `cruise_key` is the partition column, filtering on it lets DuckDB
+**prune** whole partitions — a single-cruise query never opens the other ~96
+folders.
+
+## From R
+
+Use `DBI` + `duckdb` directly:
+
+```r
+library(DBI)
+con <- dbConnect(duckdb::duckdb())
+dbExecute(con, "INSTALL httpfs; LOAD httpfs;")
+
+base <- "https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"
+d <- dbGetQuery(con, sprintf(
+  "SELECT scientific_name, common_name, worms_id
+   FROM read_parquet('%s/species.parquet')
+   WHERE common_name ILIKE '%%sardine%%'", base))
+```
+
+Or let the [`calcofi4r`](https://calcofi.io/calcofi4r) package register every
+release table as a view for you — it handles `httpfs`, the partitioned tables,
+and local caching:
+
+```r
+# remotes::install_github("calcofi/calcofi4r")
+library(calcofi4r)
+
+con <- cc_get_db()                       # latest release, tables as views
+DBI::dbListTables(con)
+
+# lazy dbplyr against the remote parquet
+library(dplyr)
+tbl(con, "species") |> filter(scientific_name == "Sardinops sagax")
+
+# or a one-off SQL query
+cc_query("SELECT count(*) FROM ichthyo")
+```
+
+## From Python
+
+```python
+import duckdb
+
+con = duckdb.connect()
+con.sql("INSTALL httpfs; LOAD httpfs;")
+
+base = "https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"
+df = con.sql(f"""
+  SELECT scientific_name, common_name, worms_id
+  FROM read_parquet('{base}/species.parquet')
+  WHERE common_name ILIKE '%sardine%'
+""").df()
+```
+
+## Reproducibility
+
+Because every query is plain SQL against immutable, versioned, public Parquet,
+a CalCOFI result is **reproducible by anyone** — pin the `{version}` and re-run
+the SQL.
+
+The [Integrated App](https://app.calcofi.io/int) builds on this: its data
+**download bundle** ships a `query/` folder alongside the data:
+
+```
+data/original/{bio,env}.csv          ← query/{bio,env}.sql
+data/integrated/integrated_*.csv     ← query/integrated_*.sql
+query/manifest.json                  release version, filters, GCS source URLs,
+                                     per-file row counts + md5 checksums
+query/REPRODUCE.md                   DuckDB-CLI / Python / R re-run snippets
+```
+
+Each `*.sql` file is fully interpolated, GCS-URL-based, and copy-paste runnable
+(prefixed with the `INSTALL`/`LOAD` it needs). Re-run `query/integrated_*.sql`
+in DuckDB and you get back exactly the rows in the matching `.csv` — the
+`manifest.json` md5 checksums let you confirm it. The same SQL is what
+[`calcofi4r::cc_match_bio_env()`](helpers.qmd) executes and attaches as
+`attr(x, "sql")`, so the app, the package, and a hand-written query are all the
+**same single source of truth**.
+
+## Worked example: sardine larvae + temperature {#sec-worked-example}
+
+The recurring example through these pages is *Pacific sardine
+(`Sardinops sagax`) larvae matched to CTD-bottle temperature, Q1 2018, with
+relaxed (5 km / 72 hr) matching*.
+
+::: {.callout-note}
+Q1 **2018** — not a more recent year — because CTD-bottle environmental data in
+the current release ends 2021-05, while net-tow biological data runs later. Q1
+2018 has ample overlap of both.
+:::
+
+Done as **direct SQL**, the query is a temporal interval join plus a spatial
+`ST_Distance_Sphere` filter. After the `INSTALL`/`LOAD` setup above, run the
+query below. This block is character-for-character what
+[`calcofi4r::cc_match_ichthyo_by_name()`](helpers.qmd) returns as
+`attr(d, "sql")` — the two produce the **identical 13 rows**. The
+[Integrated App](https://app.calcofi.io/int) download bundle builds
+`query/integrated_*.sql` with the same `cc_match_bio_env()` engine (its
+filter set is taxa + quarters + dates rather than `life_stage`, so a
+sardine / Q1 2018 bundle returns the egg + larva superset — same matching
+mechanics, same reproducibility):
+
+```sql
+WITH bio AS (
+SELECT
+  i.ichthyo_uuid::VARCHAR AS bio_id,
+  t.time_start            AS bio_datetime,
+  s.longitude             AS bio_lon,
+  s.latitude              AS bio_lat,
+  n.std_haul_factor * i.tally / nullif(n.prop_sorted, 0) AS bio_value,
+  sp.scientific_name,
+  sp.common_name,
+  sp.worms_id,
+  i.life_stage,
+  i.tally
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/ichthyo.parquet') i
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet') sp ON i.species_id = sp.species_id
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/net.parquet')     n  ON i.net_uuid   = n.net_uuid
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/tow.parquet')     t  ON n.tow_uuid   = t.tow_uuid
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/site.parquet')    s  ON t.site_uuid  = s.site_uuid
+WHERE i.tally IS NOT NULL
+    AND i.measurement_type IS NULL
+    AND t.time_start IS NOT NULL
+    AND s.longitude IS NOT NULL
+    AND s.latitude IS NOT NULL
+    AND sp.scientific_name IN ('Sardinops sagax')
+    AND i.life_stage IN ('larva')
+    AND t.time_start >= TIMESTAMP '2018-01-01'
+    AND t.time_start <= TIMESTAMP '2018-03-31'
+),
+env AS (
+SELECT
+  bm.bottle_measurement_id AS env_id,
+  c.datetime_utc           AS env_datetime,
+  c.lon_dec                AS env_lon,
+  c.lat_dec                AS env_lat,
+  bm.measurement_value     AS env_value,
+  b.depth_m                AS env_depth_m,
+  bm.measurement_type      AS measurement_type
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle_measurement.parquet') bm
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle.parquet') b ON bm.bottle_id = b.bottle_id
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/casts.parquet')  c ON b.cast_id    = c.cast_id
+WHERE bm.measurement_type = 'temperature'
+    AND bm.measurement_value IS NOT NULL
+    AND c.datetime_utc IS NOT NULL
+    AND c.lon_dec IS NOT NULL
+    AND c.lat_dec IS NOT NULL
+    AND c.datetime_utc >= TIMESTAMP '2018-01-01' - INTERVAL '72 hours'
+    AND c.datetime_utc <= TIMESTAMP '2018-03-31' + INTERVAL '72 hours'
+),
+matched AS (
+  -- temporal interval join: every env observation within ± max_time_hr
+  SELECT
+    bio.*,
+    env.* EXCLUDE (env_lon, env_lat),
+    abs(epoch(bio.bio_datetime) - epoch(env.env_datetime)) / 3600.0 AS time_diff_hr,
+    ST_Distance_Sphere(
+      ST_Point(bio.bio_lon, bio.bio_lat),
+      ST_Point(env.env_lon, env.env_lat)) / 1000.0                  AS dist_km
+  FROM bio
+  JOIN env
+    ON env.env_datetime BETWEEN bio.bio_datetime - INTERVAL '72 hours'
+                            AND bio.bio_datetime + INTERVAL '72 hours'
+),
+within AS (
+  -- spatial filter: keep pairs within max_dist_km
+  SELECT * FROM matched
+  WHERE dist_km <= 5
+),
+ranked AS (
+  SELECT
+    *,
+    min(time_diff_hr) OVER (PARTITION BY bio_id) AS mn_time_diff_hr,
+    min(dist_km)      OVER (PARTITION BY bio_id) AS mn_dist_km
+  FROM within
+)
+-- one row per bio observation (× measurement_type): env values aggregated
+SELECT
+  * EXCLUDE (
+    env_id, env_value, env_datetime, env_depth_m,
+    time_diff_hr, dist_km, mn_time_diff_hr, mn_dist_km),
+  count(*)                                            AS n_env,
+  avg(env_value)                                      AS env_value,
+  CASE WHEN count(*) = 1 THEN 0
+       ELSE coalesce(stddev_samp(env_value), 0) END   AS env_value_sd,
+  avg(env_depth_m)                                    AS env_depth_m,
+  min(env_datetime)                                   AS env_datetime_min,
+  max(env_datetime)                                   AS env_datetime_max,
+  avg(dist_km)                                        AS dist_km,
+  avg(time_diff_hr)                                   AS time_diff_hr
+FROM ranked
+WHERE time_diff_hr = mn_time_diff_hr
+GROUP BY ALL
+ORDER BY bio_id
+```
+
+The next page, [Matching Helpers](helpers.qmd), shows this same query as a
+one-liner.
