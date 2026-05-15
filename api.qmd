@@ -1,33 +1,66 @@
 # API
 
-The raw interface to the Application Programming Interface (API) is available at:
+::: {.callout-important}
+## Superseded by direct querying + `calcofi4r` helpers
+
+The Postgres-backed Plumber API at [api.calcofi.io](https://api.calcofi.io) is
+**being phased out**. CalCOFI data is now published as versioned, public
+**Parquet** files that you query directly with DuckDB — no API server, no
+credentials, no rate limits.
+
+- To query the data directly (SQL, R, Python), see **[Data Access](data-access.qmd)**.
+- For biological ↔ environmental matching (the old `zooplankton_biomass`,
+  `itis_ichthyodata` and `ichthyodata` endpoints), see
+  **[Matching Helpers](helpers.qmd)** — the `calcofi4r` functions
+  `cc_match_zooplankton_biomass()`, `cc_match_ichthyo_by_taxon()` and
+  `cc_match_ichthyo_by_name()`.
+
+The endpoint notes below are retained as a historical reference and a map from
+each API endpoint to its replacement.
+:::
+
+The raw interface to the legacy Application Programming Interface (API) is
+available at:
 
 - [api.calcofi.io](https://api.calcofi.io)
 
-Here we will provide more guidance on how to use the API functions with documented input arguments, output results and examples of use. 
+## Endpoint → replacement
 
-## `/variables`: get list of variables for timeseries
+| Legacy endpoint | Replacement |
+|---|---|
+| `/variables` | `calcofi4r::cc_list_measurement_types()` |
+| `/timeseries` | direct SQL aggregation — see [Data Access](data-access.qmd) |
+| `/cruises` | `calcofi4r::cc_read_cruise()` |
+| `/raster` | direct SQL + `calcofi4r::pts_to_rast_idw()` |
+| `/cruise_lines`, `/cruise_line_profile` | direct SQL against `ctd_cast` / `ctd_thin` |
+| `zooplankton_biomass` | `calcofi4r::cc_match_zooplankton_biomass()` ([Matching Helpers](helpers.qmd)) |
+| `itis_ichthyodata` | `calcofi4r::cc_match_ichthyo_by_taxon()` ([Matching Helpers](helpers.qmd)) |
+| `ichthyodata` | `calcofi4r::cc_match_ichthyo_by_name()` ([Matching Helpers](helpers.qmd)) |
 
-Get list of variables for use in `/timeseries`
+## Legacy endpoint reference
 
-## `/species_groups`: get species groups for larvae
+### `/variables`: get list of variables for timeseries
 
-Not yet working. Get list of species groups for use with variables `larvae_counts.count` in `/timeseries`
+Get list of variables for use in `/timeseries`.
 
+### `/species_groups`: get species groups for larvae
 
-## `/timeseries`: get time series data
+Not yet working. Get list of species groups for use with variables `larvae_counts.count` in `/timeseries`.
 
-## `/cruises`: get list of cruises
+### `/timeseries`: get time series data
 
-Get list of cruises with summary stats as CSV table for time (`date_beg`)
+### `/cruises`: get list of cruises
 
-## `/raster`: get raster map of variable
+Get list of cruises with summary stats as CSV table for time (`date_beg`).
 
-Get raster of variable
+### `/raster`: get raster map of variable
 
-## `/cruise_lines`: get station lines from cruises
+Get raster of variable.
 
-Get station lines from cruises (with more than one cast)
+### `/cruise_lines`: get station lines from cruises
 
-## `/cruise_line_profile`
-Get profile at depths for given variable of casts along line of stations
+Get station lines from cruises (with more than one cast).
+
+### `/cruise_line_profile`
+
+Get profile at depths for given variable of casts along line of stations.

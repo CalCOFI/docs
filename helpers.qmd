@@ -1,0 +1,170 @@
+# Matching Helpers
+
+The [`calcofi4r`](https://calcofi.io/calcofi4r) package provides helper
+functions that relate **biological** observations (net-tow ichthyoplankton or
+zooplankton biomass) to **environmental** observations (CTD-bottle
+measurements) by matching them in time and space — on the fly, against the
+public release [Parquet on GCS](data-access.qmd).
+
+These supersede the retired Postgres Plumber [API](api.qmd) endpoints
+`zooplankton_biomass`, `itis_ichthyodata` and `ichthyodata`, which depended on
+pre-built `uunet2ctd*` match tables that are no longer part of releases.
+
+## Install
+
+```r
+# remotes::install_github("calcofi/calcofi4r")
+library(calcofi4r)
+```
+
+The matching helpers need `calcofi4r` ≥ 1.2.0 and DuckDB with the `httpfs` and
+`spatial` extensions (the functions install/load these for you).
+
+## The wrappers
+
+Three wrappers cover the common cases. Each builds the matching SQL, runs it,
+and returns a tibble of **one row per biological observation** with the matched
+environmental value:
+
+| Function | Biological side | Replaces |
+|---|---|---|
+| `cc_match_ichthyo_by_name()` | ichthyoplankton, filtered by scientific name | `/ichthyodata` |
+| `cc_match_ichthyo_by_taxon()` | ichthyoplankton, filtered by a WoRMS taxon **and all its descendants** | `/itis_ichthyodata` |
+| `cc_match_zooplankton_biomass()` | net-tow displacement-volume biomass (`totalplankton` / `smallplankton`) | `/zooplankton_biomass` |
+
+```r
+# ichthyoplankton by scientific name
+d <- cc_match_ichthyo_by_name(
+  "Sardinops sagax", env_var = "temperature")
+
+# every descendant of a WoRMS taxon (recursive parentNameUsageID walk)
+d <- cc_match_ichthyo_by_taxon(
+  worms_id = 125724, env_var = "salinity")   # 125724 = genus Engraulis
+
+# zooplankton biomass
+d <- cc_match_zooplankton_biomass(
+  env_var = "temperature", biomass_type = "totalplankton")
+```
+
+## Worked example: sardine larvae + temperature
+
+The recurring example through these pages — *Pacific sardine
+(`Sardinops sagax`) larvae matched to CTD-bottle temperature, Q1 2018, with
+relaxed (5 km / 72 hr) matching* — is a single call:
+
+```r
+d <- cc_match_ichthyo_by_name(
+  "Sardinops sagax",
+  env_var        = "temperature",
+  life_stage     = "larva",
+  date_min       = "2018-01-01",
+  date_max       = "2018-03-31",
+  relax_matching = TRUE)
+```
+
+```r
+d[, c("scientific_name", "life_stage", "bio_datetime",
+      "bio_value", "n_env", "env_value", "dist_km", "time_diff_hr")]
+#> # A tibble: 13 × 8
+#>   scientific_name life_stage bio_datetime        bio_value n_env env_value dist_km time_diff_hr
+#>   <chr>           <chr>      <dttm>                  <dbl> <dbl>     <dbl>   <dbl>        <dbl>
+#> 1 Sardinops sagax larva      2018-02-05 00:44:00     116.     34      11.4   0.167         1.39
+#> 2 Sardinops sagax larva      2018-02-05 06:03:00      17.8    30      10.5   0.225         1.21
+#> 3 Sardinops sagax larva      2018-02-07 09:56:00     120.     33      10.4   …             …
+#> # … 10 more rows
+```
+
+`bio_value` is the standardized larval tally; `env_value` is the matched mean
+temperature (°C); `n_env` is how many bottle measurements were averaged;
+`dist_km` / `time_diff_hr` are the realized match offsets (within the 5 km /
+72 hr window). This returns the **identical 13 rows** as the [direct
+SQL](data-access.qmd#sec-worked-example) — `attr(d, "sql")` is that exact query.
+The [Integrated App](https://app.calcofi.io/int) download bundle uses the same
+`cc_match_bio_env()` engine for its `query/` folder.
+
+::: {.callout-note}
+Q1 **2018**, not a more recent year: CTD-bottle environmental data in the
+current release ends 2021-05, while net-tow biological data runs later. Q1 2018
+has ample overlap.
+:::
+
+## Reproducible SQL
+
+Every helper attaches the **exact, portable SQL** that produced the result, plus
+query metadata, as attributes:
+
+```r
+cat(attr(d, "sql"))           # the fully-interpolated, GCS-URL-based query
+str(attr(d, "query_meta"))    # package + release version, params, source URLs
+```
+
+`attr(d, "sql")` is character-for-character the query shown on the
+[Data Access](data-access.qmd#sec-worked-example) page — copy-paste it into the
+DuckDB CLI, Python, or a colleague's R session and it returns identical rows.
+That is the contract behind the [Integrated App](https://app.calcofi.io/int)
+download bundle's `query/` folder.
+
+To get the SQL **without running it** — e.g. to serialize or inspect it — pass
+`return_sql = TRUE`:
+
+```r
+sql <- cc_match_ichthyo_by_name("Sardinops sagax", return_sql = TRUE)
+cat(sql)
+```
+
+## The core engine: `cc_match_bio_env()`
+
+The wrappers are thin shells over `cc_match_bio_env()`, which takes a `bio` and
+an `env` SQL `SELECT` string and performs the match. Call it directly when you
+need a biological or environmental side the wrappers don't cover (custom
+filters, a different grouping, joining `bottle` to `cast_condition`, …):
+
+```r
+cc_match_bio_env(
+  bio, env,                                  # SELECT strings (see contract below)
+  max_dist_km = 2, max_time_hr = 6,          # match tolerances
+  join_method = "nearest_time",              # or "nearest_dist", "average"
+  version     = "latest",
+  collect     = TRUE,                        # FALSE → lazy dplyr::tbl
+  return_sql  = FALSE)                       # TRUE  → just the SQL string
+```
+
+**Contract.** `bio` must yield `bio_id`, `bio_datetime`, `bio_lon`, `bio_lat`,
+`bio_value` (plus any descriptive columns, carried through as grouping keys).
+`env` must yield exactly `env_id`, `env_datetime`, `env_lon`, `env_lat`,
+`env_value`, `env_depth_m`, `measurement_type`. Both typically `FROM
+read_parquet('https://…/{table}.parquet')` so the emitted SQL stays portable.
+
+## Parameters
+
+- **`max_dist_km`, `max_time_hr`** — the spatial and temporal match windows.
+  Defaults are 2 km / 6 hr; `relax_matching = TRUE` widens them to 5 km / 72 hr
+  (an explicit value always wins). This replaces the old API's `relax_matching`
+  boolean.
+- **`join_method`** — how the environmental observations inside the window are
+  reduced to one value per biological observation:
+  - `"nearest_time"` (default) — keep the closest in time, average ties;
+  - `"nearest_dist"` — keep the closest in space, average ties;
+  - `"average"` — average every observation in the window.
+
+  CalCOFI co-locates net tows and CTD casts, so in practice `nearest_time` and
+  `nearest_dist` usually agree and `average` differs only slightly.
+- **`life_stage`** (ichthyo wrappers) — restrict to e.g. `"larva"` or `"egg"`.
+- **`date_min`, `date_max`** — bound the biological side by tow start date.
+- **`depth_m_min`, `depth_m_max`** — bound the environmental bottle depths.
+- **`version`** — a release string like `"v2026.05.14"`, or `"latest"`.
+
+## Migrating from the API
+
+| Old API | New helper |
+|---|---|
+| `/ichthyodata` (`species`, `exact_match`) | `cc_match_ichthyo_by_name(scientific_name, exact_match=)` |
+| `/itis_ichthyodata` (`ITISid`) | `cc_match_ichthyo_by_taxon(worms_id)` — WoRMS, recursive subtree |
+| `/zooplankton_biomass` | `cc_match_zooplankton_biomass()` |
+| `relax_matching = TRUE` | `relax_matching = TRUE` (5 km / 72 hr) or explicit `max_dist_km` / `max_time_hr` |
+| `cruiseymd_min` / `cruiseymd_max` | `date_min` / `date_max` |
+| `stage` | `life_stage` |
+
+The taxon wrapper is the one real change: ITIS `path`-regex matching is gone;
+descendants are now resolved by a recursive walk of WoRMS
+`taxon.parentNameUsageID` against the release `taxon` table.
