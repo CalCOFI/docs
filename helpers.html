@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>3&nbsp; Applications – CalCOFI.io</title>
+<title>7&nbsp; Matching Helpers – CalCOFI.io</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,6 +24,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -34,8 +69,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./maps.html" rel="next">
-<link href="./reports.html" rel="prev">
+<link href="./api.html" rel="next">
+<link href="./data-access.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -95,7 +130,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./apps.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./helpers.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -183,7 +218,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./apps.html" class="sidebar-item-text sidebar-link active">
+  <a href="./apps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span></a>
   </div>
 </li>
@@ -207,7 +242,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
+  <a href="./helpers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
   </div>
 </li>
@@ -240,15 +275,27 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install"><span class="header-section-number">7.1</span> Install</a></li>
+  <li><a href="#the-wrappers" id="toc-the-wrappers" class="nav-link" data-scroll-target="#the-wrappers"><span class="header-section-number">7.2</span> The wrappers</a></li>
+  <li><a href="#worked-example-sardine-larvae-temperature" id="toc-worked-example-sardine-larvae-temperature" class="nav-link" data-scroll-target="#worked-example-sardine-larvae-temperature"><span class="header-section-number">7.3</span> Worked example: sardine larvae + temperature</a></li>
+  <li><a href="#reproducible-sql" id="toc-reproducible-sql" class="nav-link" data-scroll-target="#reproducible-sql"><span class="header-section-number">7.4</span> Reproducible SQL</a></li>
+  <li><a href="#the-core-engine-cc_match_bio_env" id="toc-the-core-engine-cc_match_bio_env" class="nav-link" data-scroll-target="#the-core-engine-cc_match_bio_env"><span class="header-section-number">7.5</span> The core engine: <code>cc_match_bio_env()</code></a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">7.6</span> Parameters</a></li>
+  <li><a href="#migrating-from-the-api" id="toc-migrating-from-the-api" class="nav-link" data-scroll-target="#migrating-from-the-api"><span class="header-section-number">7.7</span> Migrating from the API</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/helpers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></h1>
 </div>
 
 
@@ -265,13 +312,177 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </header>
 
 
+<p>The <a href="https://calcofi.io/calcofi4r"><code>calcofi4r</code></a> package provides helper functions that relate <strong>biological</strong> observations (net-tow ichthyoplankton or zooplankton biomass) to <strong>environmental</strong> observations (CTD-bottle measurements) by matching them in time and space — on the fly, against the public release <a href="./data-access.html">Parquet on GCS</a>.</p>
+<p>These supersede the retired Postgres Plumber <a href="./api.html">API</a> endpoints <code>zooplankton_biomass</code>, <code>itis_ichthyodata</code> and <code>ichthyodata</code>, which depended on pre-built <code>uunet2ctd*</code> match tables that are no longer part of releases.</p>
+<section id="install" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="install"><span class="header-section-number">7.1</span> Install</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github("calcofi/calcofi4r")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The matching helpers need <code>calcofi4r</code> ≥ 1.2.0 and DuckDB with the <code>httpfs</code> and <code>spatial</code> extensions (the functions install/load these for you).</p>
+</section>
+<section id="the-wrappers" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="the-wrappers"><span class="header-section-number">7.2</span> The wrappers</h2>
+<p>Three wrappers cover the common cases. Each builds the matching SQL, runs it, and returns a tibble of <strong>one row per biological observation</strong> with the matched environmental value:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Biological side</th>
+<th>Replaces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cc_match_ichthyo_by_name()</code></td>
+<td>ichthyoplankton, filtered by scientific name</td>
+<td><code>/ichthyodata</code></td>
+</tr>
+<tr class="even">
+<td><code>cc_match_ichthyo_by_taxon()</code></td>
+<td>ichthyoplankton, filtered by a WoRMS taxon <strong>and all its descendants</strong></td>
+<td><code>/itis_ichthyodata</code></td>
+</tr>
+<tr class="odd">
+<td><code>cc_match_zooplankton_biomass()</code></td>
+<td>net-tow displacement-volume biomass (<code>totalplankton</code> / <code>smallplankton</code>)</td>
+<td><code>/zooplankton_biomass</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ichthyoplankton by scientific name</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sardinops sagax"</span>, <span class="at">env_var =</span> <span class="st">"temperature"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># every descendant of a WoRMS taxon (recursive parentNameUsageID walk)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_taxon</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">worms_id =</span> <span class="dv">125724</span>, <span class="at">env_var =</span> <span class="st">"salinity"</span>)   <span class="co"># 125724 = genus Engraulis</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># zooplankton biomass</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_zooplankton_biomass</span>(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">env_var =</span> <span class="st">"temperature"</span>, <span class="at">biomass_type =</span> <span class="st">"totalplankton"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="worked-example-sardine-larvae-temperature" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="worked-example-sardine-larvae-temperature"><span class="header-section-number">7.3</span> Worked example: sardine larvae + temperature</h2>
+<p>The recurring example through these pages — <em>Pacific sardine (<code>Sardinops sagax</code>) larvae matched to CTD-bottle temperature, Q1 2018, with relaxed (5 km / 72 hr) matching</em> — is a single call:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sardinops sagax"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">env_var        =</span> <span class="st">"temperature"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">life_stage     =</span> <span class="st">"larva"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_min       =</span> <span class="st">"2018-01-01"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_max       =</span> <span class="st">"2018-03-31"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">relax_matching =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d[, <span class="fu">c</span>(<span class="st">"scientific_name"</span>, <span class="st">"life_stage"</span>, <span class="st">"bio_datetime"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bio_value"</span>, <span class="st">"n_env"</span>, <span class="st">"env_value"</span>, <span class="st">"dist_km"</span>, <span class="st">"time_diff_hr"</span>)]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 13 × 8</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   scientific_name life_stage bio_datetime        bio_value n_env env_value dist_km time_diff_hr</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;      &lt;dttm&gt;                  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Sardinops sagax larva      2018-02-05 00:44:00     116.     34      11.4   0.167         1.39</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Sardinops sagax larva      2018-02-05 06:03:00      17.8    30      10.5   0.225         1.21</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Sardinops sagax larva      2018-02-07 09:56:00     120.     33      10.4   …             …</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … 10 more rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>bio_value</code> is the standardized larval tally; <code>env_value</code> is the matched mean temperature (°C); <code>n_env</code> is how many bottle measurements were averaged; <code>dist_km</code> / <code>time_diff_hr</code> are the realized match offsets (within the 5 km / 72 hr window). This returns the <strong>identical 13 rows</strong> as the <a href="./data-access.html#sec-worked-example">direct SQL</a> — <code>attr(d, "sql")</code> is that exact query. The <a href="https://app.calcofi.io/int">Integrated App</a> download bundle uses the same <code>cc_match_bio_env()</code> engine for its <code>query/</code> folder.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Q1 <strong>2018</strong>, not a more recent year: CTD-bottle environmental data in the current release ends 2021-05, while net-tow biological data runs later. Q1 2018 has ample overlap.</p>
+</div>
+</div>
+</section>
+<section id="reproducible-sql" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="reproducible-sql"><span class="header-section-number">7.4</span> Reproducible SQL</h2>
+<p>Every helper attaches the <strong>exact, portable SQL</strong> that produced the result, plus query metadata, as attributes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">attr</span>(d, <span class="st">"sql"</span>))           <span class="co"># the fully-interpolated, GCS-URL-based query</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">attr</span>(d, <span class="st">"query_meta"</span>))    <span class="co"># package + release version, params, source URLs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>attr(d, "sql")</code> is character-for-character the query shown on the <a href="./data-access.html#sec-worked-example">Data Access</a> page — copy-paste it into the DuckDB CLI, Python, or a colleague’s R session and it returns identical rows. That is the contract behind the <a href="https://app.calcofi.io/int">Integrated App</a> download bundle’s <code>query/</code> folder.</p>
+<p>To get the SQL <strong>without running it</strong> — e.g.&nbsp;to serialize or inspect it — pass <code>return_sql = TRUE</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sql <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(<span class="st">"Sardinops sagax"</span>, <span class="at">return_sql =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sql)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-core-engine-cc_match_bio_env" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="the-core-engine-cc_match_bio_env"><span class="header-section-number">7.5</span> The core engine: <code>cc_match_bio_env()</code></h2>
+<p>The wrappers are thin shells over <code>cc_match_bio_env()</code>, which takes a <code>bio</code> and an <code>env</code> SQL <code>SELECT</code> string and performs the match. Call it directly when you need a biological or environmental side the wrappers don’t cover (custom filters, a different grouping, joining <code>bottle</code> to <code>cast_condition</code>, …):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_match_bio_env</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  bio, env,                                  <span class="co"># SELECT strings (see contract below)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_dist_km =</span> <span class="dv">2</span>, <span class="at">max_time_hr =</span> <span class="dv">6</span>,          <span class="co"># match tolerances</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">join_method =</span> <span class="st">"nearest_time"</span>,              <span class="co"># or "nearest_dist", "average"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">version     =</span> <span class="st">"latest"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">collect     =</span> <span class="cn">TRUE</span>,                        <span class="co"># FALSE → lazy dplyr::tbl</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">return_sql  =</span> <span class="cn">FALSE</span>)                       <span class="co"># TRUE  → just the SQL string</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Contract.</strong> <code>bio</code> must yield <code>bio_id</code>, <code>bio_datetime</code>, <code>bio_lon</code>, <code>bio_lat</code>, <code>bio_value</code> (plus any descriptive columns, carried through as grouping keys). <code>env</code> must yield exactly <code>env_id</code>, <code>env_datetime</code>, <code>env_lon</code>, <code>env_lat</code>, <code>env_value</code>, <code>env_depth_m</code>, <code>measurement_type</code>. Both typically <code>FROM read_parquet('https://…/{table}.parquet')</code> so the emitted SQL stays portable.</p>
+</section>
+<section id="parameters" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="parameters"><span class="header-section-number">7.6</span> Parameters</h2>
 <ul>
-<li><a href="https://shiny.calcofi.io/oceano">CalCOFI Oceanography</a><br>
-oceanographic summarization by arbitrary area of interest and sampling period</li>
-<li><a href="https://shiny.calcofi.io/capstone">UCSB Student Capstone</a></li>
+<li><strong><code>max_dist_km</code>, <code>max_time_hr</code></strong> — the spatial and temporal match windows. Defaults are 2 km / 6 hr; <code>relax_matching = TRUE</code> widens them to 5 km / 72 hr (an explicit value always wins). This replaces the old API’s <code>relax_matching</code> boolean.</li>
+<li><strong><code>join_method</code></strong> — how the environmental observations inside the window are reduced to one value per biological observation:
+<ul>
+<li><code>"nearest_time"</code> (default) — keep the closest in time, average ties;</li>
+<li><code>"nearest_dist"</code> — keep the closest in space, average ties;</li>
+<li><code>"average"</code> — average every observation in the window.</li>
 </ul>
+CalCOFI co-locates net tows and CTD casts, so in practice <code>nearest_time</code> and <code>nearest_dist</code> usually agree and <code>average</code> differs only slightly.</li>
+<li><strong><code>life_stage</code></strong> (ichthyo wrappers) — restrict to e.g.&nbsp;<code>"larva"</code> or <code>"egg"</code>.</li>
+<li><strong><code>date_min</code>, <code>date_max</code></strong> — bound the biological side by tow start date.</li>
+<li><strong><code>depth_m_min</code>, <code>depth_m_max</code></strong> — bound the environmental bottle depths.</li>
+<li><strong><code>version</code></strong> — a release string like <code>"v2026.05.14"</code>, or <code>"latest"</code>.</li>
+</ul>
+</section>
+<section id="migrating-from-the-api" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="migrating-from-the-api"><span class="header-section-number">7.7</span> Migrating from the API</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Old API</th>
+<th>New helper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/ichthyodata</code> (<code>species</code>, <code>exact_match</code>)</td>
+<td><code>cc_match_ichthyo_by_name(scientific_name, exact_match=)</code></td>
+</tr>
+<tr class="even">
+<td><code>/itis_ichthyodata</code> (<code>ITISid</code>)</td>
+<td><code>cc_match_ichthyo_by_taxon(worms_id)</code> — WoRMS, recursive subtree</td>
+</tr>
+<tr class="odd">
+<td><code>/zooplankton_biomass</code></td>
+<td><code>cc_match_zooplankton_biomass()</code></td>
+</tr>
+<tr class="even">
+<td><code>relax_matching = TRUE</code></td>
+<td><code>relax_matching = TRUE</code> (5 km / 72 hr) or explicit <code>max_dist_km</code> / <code>max_time_hr</code></td>
+</tr>
+<tr class="odd">
+<td><code>cruiseymd_min</code> / <code>cruiseymd_max</code></td>
+<td><code>date_min</code> / <code>date_max</code></td>
+</tr>
+<tr class="even">
+<td><code>stage</code></td>
+<td><code>life_stage</code></td>
+</tr>
+</tbody>
+</table>
+<p>The taxon wrapper is the one real change: ITIS <code>path</code>-regex matching is gone; descendants are now resolved by a recursive walk of WoRMS <code>taxon.parentNameUsageID</code> against the release <code>taxon</code> table.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -676,13 +887,13 @@ oceanographic summarization by arbitrary area of interest and sampling period</l
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./reports.html" class="pagination-link" aria-label="Reports">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports</span></span>
+      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./maps.html" class="pagination-link" aria-label="Maps">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./api.html" class="pagination-link" aria-label="API">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -691,4 +902,4 @@ oceanographic summarization by arbitrary area of interest and sampling period</l
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/apps.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/helpers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

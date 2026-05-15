@@ -2,50 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://calcofi.io/docs/index.html</loc>
-    <lastmod>2026-05-07T10:09:44.638Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.457Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/reports.html</loc>
-    <lastmod>2026-05-07T10:09:44.639Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.458Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/apps.html</loc>
-    <lastmod>2026-05-07T10:09:44.633Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.452Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/maps.html</loc>
-    <lastmod>2026-05-07T10:09:44.639Z</lastmod>
-  </url>
-  <url>
-    <loc>https://calcofi.io/docs/api.html</loc>
-    <lastmod>2026-05-07T10:09:44.632Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.458Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/db.html</loc>
-    <lastmod>2026-05-07T10:09:44.633Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.452Z</lastmod>
+  </url>
+  <url>
+    <loc>https://calcofi.io/docs/data-access.html</loc>
+    <lastmod>2026-05-15T13:11:53.452Z</lastmod>
+  </url>
+  <url>
+    <loc>https://calcofi.io/docs/helpers.html</loc>
+    <lastmod>2026-05-15T13:11:53.457Z</lastmod>
+  </url>
+  <url>
+    <loc>https://calcofi.io/docs/api.html</loc>
+    <lastmod>2026-05-15T13:11:53.451Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/portals.html</loc>
-    <lastmod>2026-05-07T10:09:44.639Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.458Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/status.html</loc>
-    <lastmod>2026-05-07T10:09:44.640Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.459Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/refs.html</loc>
-    <lastmod>2026-05-07T10:09:44.639Z</lastmod>
+    <lastmod>2026-05-15T13:11:53.458Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io.docx</loc>
-    <lastmod>2026-05-07T10:12:47.055Z</lastmod>
+    <lastmod>2026-05-15T13:14:57.000Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io.pdf</loc>
-    <lastmod>2026-05-07T10:13:34.731Z</lastmod>
+    <lastmod>2026-05-15T13:16:11.800Z</lastmod>
   </url>
   <url>
     <loc>https://calcofi.io/docs/CalCOFI.io.epub</loc>
-    <lastmod>2026-05-07T10:13:37.112Z</lastmod>
+    <lastmod>2026-05-15T13:16:14.471Z</lastmod>
   </url>
 </urlset>

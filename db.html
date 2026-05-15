@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>6&nbsp; Database – CalCOFI.io</title>
+<title>5&nbsp; Database – CalCOFI.io</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -69,8 +69,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./portals.html" rel="next">
-<link href="./api.html" rel="prev">
+<link href="./data-access.html" rel="next">
+<link href="./maps.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -133,7 +133,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./db.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./db.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -233,32 +233,44 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  <a href="./db.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./db.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></span></a>
+  <a href="./data-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./portals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -271,26 +283,26 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#database-naming-conventions" id="toc-database-naming-conventions" class="nav-link active" data-scroll-target="#database-naming-conventions"><span class="header-section-number">6.1</span> Database naming conventions</a>
+  <li><a href="#database-naming-conventions" id="toc-database-naming-conventions" class="nav-link active" data-scroll-target="#database-naming-conventions"><span class="header-section-number">5.1</span> Database naming conventions</a>
   <ul class="collapse">
-  <li><a href="#name-tables" id="toc-name-tables" class="nav-link" data-scroll-target="#name-tables"><span class="header-section-number">6.1.1</span> Name tables</a></li>
-  <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">6.1.2</span> Name columns</a></li>
-  <li><a href="#primary-key-conventions" id="toc-primary-key-conventions" class="nav-link" data-scroll-target="#primary-key-conventions"><span class="header-section-number">6.1.3</span> Primary key conventions</a></li>
+  <li><a href="#name-tables" id="toc-name-tables" class="nav-link" data-scroll-target="#name-tables"><span class="header-section-number">5.1.1</span> Name tables</a></li>
+  <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">5.1.2</span> Name columns</a></li>
+  <li><a href="#primary-key-conventions" id="toc-primary-key-conventions" class="nav-link" data-scroll-target="#primary-key-conventions"><span class="header-section-number">5.1.3</span> Primary key conventions</a></li>
   </ul></li>
-  <li><a href="#use-unicode-for-text" id="toc-use-unicode-for-text" class="nav-link" data-scroll-target="#use-unicode-for-text"><span class="header-section-number">6.2</span> Use Unicode for text</a></li>
-  <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">6.3</span> Integrated database ingestion strategy</a>
+  <li><a href="#use-unicode-for-text" id="toc-use-unicode-for-text" class="nav-link" data-scroll-target="#use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</a></li>
+  <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">5.3</span> Integrated database ingestion strategy</a>
   <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">6.3.1</span> Overview</a></li>
-  <li><a href="#master-ingestion-workflow" id="toc-master-ingestion-workflow" class="nav-link" data-scroll-target="#master-ingestion-workflow"><span class="header-section-number">6.3.2</span> Master ingestion workflow</a></li>
-  <li><a href="#using-calcofi4db-package" id="toc-using-calcofi4db-package" class="nav-link" data-scroll-target="#using-calcofi4db-package"><span class="header-section-number">6.3.3</span> Using calcofi4db package</a></li>
-  <li><a href="#schema-versioning" id="toc-schema-versioning" class="nav-link" data-scroll-target="#schema-versioning"><span class="header-section-number">6.3.4</span> Schema versioning</a></li>
-  <li><a href="#metadata-and-documentation" id="toc-metadata-and-documentation" class="nav-link" data-scroll-target="#metadata-and-documentation"><span class="header-section-number">6.3.5</span> Metadata and documentation</a></li>
-  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">6.3.6</span> Publishing to portals</a></li>
-  <li><a href="#or-describe-tables-and-columns-directly" id="toc-or-describe-tables-and-columns-directly" class="nav-link" data-scroll-target="#or-describe-tables-and-columns-directly"><span class="header-section-number">6.3.7</span> OR Describe tables and columns directly</a></li>
-  <li><a href="#display-tables-and-columns-with-metadata" id="toc-display-tables-and-columns-with-metadata" class="nav-link" data-scroll-target="#display-tables-and-columns-with-metadata"><span class="header-section-number">6.3.8</span> Display tables and columns with metadata</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">5.3.1</span> Overview</a></li>
+  <li><a href="#master-ingestion-workflow" id="toc-master-ingestion-workflow" class="nav-link" data-scroll-target="#master-ingestion-workflow"><span class="header-section-number">5.3.2</span> Master ingestion workflow</a></li>
+  <li><a href="#using-calcofi4db-package" id="toc-using-calcofi4db-package" class="nav-link" data-scroll-target="#using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</a></li>
+  <li><a href="#schema-versioning" id="toc-schema-versioning" class="nav-link" data-scroll-target="#schema-versioning"><span class="header-section-number">5.3.4</span> Schema versioning</a></li>
+  <li><a href="#metadata-and-documentation" id="toc-metadata-and-documentation" class="nav-link" data-scroll-target="#metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</a></li>
+  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">5.3.6</span> Publishing to portals</a></li>
+  <li><a href="#or-describe-tables-and-columns-directly" id="toc-or-describe-tables-and-columns-directly" class="nav-link" data-scroll-target="#or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.7</span> OR Describe tables and columns directly</a></li>
+  <li><a href="#display-tables-and-columns-with-metadata" id="toc-display-tables-and-columns-with-metadata" class="nav-link" data-scroll-target="#display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.8</span> Display tables and columns with metadata</a></li>
   </ul></li>
-  <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">6.4</span> Relationships between tables</a></li>
-  <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">6.5</span> Spatial Tips</a></li>
+  <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">5.4</span> Relationships between tables</a></li>
+  <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">5.5</span> Spatial Tips</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/db.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -299,7 +311,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></h1>
 </div>
 
 
@@ -316,8 +328,8 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </header>
 
 
-<section id="database-naming-conventions" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="database-naming-conventions"><span class="header-section-number">6.1</span> Database naming conventions</h2>
+<section id="database-naming-conventions" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="database-naming-conventions"><span class="header-section-number">5.1</span> Database naming conventions</h2>
 <blockquote class="blockquote">
 <p>There are only two hard things in Computer Science: cache invalidation and naming things. – Phil Karlton (Netscape architect)</p>
 </blockquote>
@@ -326,8 +338,8 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <li><a href="https://www.sqlshack.com/learn-sql-naming-conventions/">Learn SQL: Naming Conventions</a></li>
 <li><a href="https://drygast.net/blog/post/database_naming_conventions">Best Practices for Database Naming Conventions - Drygast.NET</a></li>
 </ul>
-<section id="name-tables" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="name-tables"><span class="header-section-number">6.1.1</span> Name tables</h3>
+<section id="name-tables" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="name-tables"><span class="header-section-number">5.1.1</span> Name tables</h3>
 <ul>
 <li>Table names are <strong>singular</strong> and use all lower case.
 <ul>
@@ -335,8 +347,8 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </ul></li>
 </ul>
 </section>
-<section id="name-columns" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="name-columns"><span class="header-section-number">6.1.2</span> Name columns</h3>
+<section id="name-columns" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="name-columns"><span class="header-section-number">5.1.2</span> Name columns</h3>
 <ul>
 <li><p>To name columns, use <a href="https://cran.r-project.org/web/packages/snakecase/vignettes/introducing-the-snakecase-package.html"><strong>snake-case</strong></a> (i.e., lower-case with underscores) so as to prevent the need to quote SQL statements. (TIP: Use <a href="https://sfirke.github.io/janitor/reference/clean_names.html"><code>janitor::clean_names()</code></a> to convert a table.)</p></li>
 <li><p>Unique <strong>identifiers</strong> are suffixed with:</p>
@@ -350,8 +362,8 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <li><p>Set geometry column to <strong><code>geom</code></strong> (used by <a href="https://postgis.net">PostGIS</a> spatial extension). If the table has multiple geometry columns, use <code>geom</code> for the default geometry column and <code>geom_{type}</code> for additional geometry columns (e.g., <code>geom_point</code>, <code>geom_line</code>, <code>geom_polygon</code>).</p></li>
 </ul>
 </section>
-<section id="primary-key-conventions" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="primary-key-conventions"><span class="header-section-number">6.1.3</span> Primary key conventions</h3>
+<section id="primary-key-conventions" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="primary-key-conventions"><span class="header-section-number">5.1.3</span> Primary key conventions</h3>
 <p><strong>Prefer natural keys</strong> (meaningful domain identifiers) over surrogate keys where stable:</p>
 <ul>
 <li><code>cruise_key</code> = ‘YYMMKK’ (e.g., <code>2401NH</code> = January 2024, New Horizon)</li>
@@ -368,8 +380,8 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <p><strong>Avoid UUIDs in output tables</strong>: Use <code>_source_uuid</code> in Working DuckLake for provenance tracking only (stripped in frozen releases).</p>
 </section>
 </section>
-<section id="use-unicode-for-text" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="use-unicode-for-text"><span class="header-section-number">6.2</span> Use Unicode for text</h2>
+<section id="use-unicode-for-text" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</h2>
 <p>The <a href="https://www.postgresql.org/docs/current/multibyte.html#MULTIBYTE-SETTING">default character encoding for Postgresql</a> is unicode (<code>UTF8</code>), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.</p>
 <p>Logging into the server, we can see this with the following command:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> postgis psql <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -430,18 +442,18 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_excel_csv</span>(df, <span class="st">'file.csv'</span>)                                       <span class="co"># implicit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 </section>
-<section id="integrated-database-ingestion-strategy" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="integrated-database-ingestion-strategy"><span class="header-section-number">6.3</span> Integrated database ingestion strategy</h2>
-<section id="overview" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">6.3.1</span> Overview</h3>
+<section id="integrated-database-ingestion-strategy" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="integrated-database-ingestion-strategy"><span class="header-section-number">5.3</span> Integrated database ingestion strategy</h2>
+<section id="overview" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">5.3.1</span> Overview</h3>
 <p>The CalCOFI database uses a two-schema strategy for development and production:</p>
 <ul>
 <li><strong><code>dev</code> schema</strong>: Development schema where new datasets, tables, fields, and relationships are ingested and QA/QC’d.&nbsp;This schema is recreated fresh with each ingestion run using the master ingestion script.</li>
 <li><strong><code>prod</code> schema</strong>: Production schema for stable, versioned data used by public APIs, apps, and data portals (OBIS, EDI, ERDDAP). Once <code>dev</code> is validated, it’s copied to <code>prod</code> with a version number.</li>
 </ul>
 </section>
-<section id="master-ingestion-workflow" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="master-ingestion-workflow"><span class="header-section-number">6.3.2</span> Master ingestion workflow</h3>
+<section id="master-ingestion-workflow" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="master-ingestion-workflow"><span class="header-section-number">5.3.2</span> Master ingestion workflow</h3>
 <p>All datasets are ingested using a single master Quarto script <a href="https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd"><code>calcofi4db/inst/create_db.qmd</code></a> that:</p>
 <ol type="1">
 <li><strong>Drops and recreates</strong> the <code>dev</code> schema (fresh start each run)</li>
@@ -550,18 +562,18 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-db_doc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: Integrated database ingestion scheme.
+Figure&nbsp;5.1: Integrated database ingestion scheme.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="using-calcofi4db-package" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="using-calcofi4db-package"><span class="header-section-number">6.3.3</span> Using calcofi4db package</h3>
+<section id="using-calcofi4db-package" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</h3>
 <p>The <a href="https://github.com/CalCOFI/calcofi4db">calcofi4db</a> package provides streamlined functions for dataset ingestion.</p>
-<section id="ducklake-workflow-recommended" class="level4" data-number="6.3.3.1">
-<h4 data-number="6.3.3.1" class="anchored" data-anchor-id="ducklake-workflow-recommended"><span class="header-section-number">6.3.3.1</span> DuckLake Workflow (Recommended)</h4>
+<section id="ducklake-workflow-recommended" class="level4" data-number="5.3.3.1">
+<h4 data-number="5.3.3.1" class="anchored" data-anchor-id="ducklake-workflow-recommended"><span class="header-section-number">5.3.3.1</span> DuckLake Workflow (Recommended)</h4>
 <p>The preferred approach uses DuckDB with provenance tracking:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -598,8 +610,8 @@ Figure&nbsp;6.1: Integrated database ingestion scheme.
 <li>Returning ingestion statistics (rows input, rows after, timestamps)</li>
 </ul>
 </section>
-<section id="postgresql-workflow-legacy" class="level4" data-number="6.3.3.2">
-<h4 data-number="6.3.3.2" class="anchored" data-anchor-id="postgresql-workflow-legacy"><span class="header-section-number">6.3.3.2</span> PostgreSQL Workflow (Legacy)</h4>
+<section id="postgresql-workflow-legacy" class="level4" data-number="5.3.3.2">
+<h4 data-number="5.3.3.2" class="anchored" data-anchor-id="postgresql-workflow-legacy"><span class="header-section-number">5.3.3.2</span> PostgreSQL Workflow (Legacy)</h4>
 <p>For PostgreSQL ingestion (being gradually deprecated):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
@@ -640,8 +652,8 @@ Figure&nbsp;6.1: Integrated database ingestion scheme.
 <span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">script_permalink =</span> <span class="st">"https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="schema-versioning" class="level3" data-number="6.3.4">
-<h3 data-number="6.3.4" class="anchored" data-anchor-id="schema-versioning"><span class="header-section-number">6.3.4</span> Schema versioning</h3>
+<section id="schema-versioning" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="schema-versioning"><span class="header-section-number">5.3.4</span> Schema versioning</h3>
 <p>Each successful ingestion creates a new schema version recorded in the <code>schema_version</code> table with:</p>
 <ul>
 <li><strong>version</strong>: Semantic version number (e.g., “1.0.0”, “1.1.0”)</li>
@@ -651,8 +663,8 @@ Figure&nbsp;6.1: Integrated database ingestion scheme.
 </ul>
 <p>Versions are also archived as SQL dumps in Google Drive for reproducibility.</p>
 </section>
-<section id="metadata-and-documentation" class="level3" data-number="6.3.5">
-<h3 data-number="6.3.5" class="anchored" data-anchor-id="metadata-and-documentation"><span class="header-section-number">6.3.5</span> Metadata and documentation</h3>
+<section id="metadata-and-documentation" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</h3>
 <p>After ingestion, metadata is stored in PostgreSQL <code>COMMENT</code>s as JSON at the <strong>table</strong> level:</p>
 <ul>
 <li><strong>description</strong>: General description and row uniqueness</li>
@@ -668,12 +680,12 @@ Figure&nbsp;6.1: Integrated database ingestion scheme.
 </ul>
 <p>These comments are exposed via the API <a href="https://api.calcofi.io/db_tables">db_tables</a> endpoint and rendered with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html">calcofi4r::cc_db_catalog</a>.</p>
 </section>
-<section id="publishing-to-portals" class="level3" data-number="6.3.6">
-<h3 data-number="6.3.6" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">6.3.6</span> Publishing to portals</h3>
+<section id="publishing-to-portals" class="level3" data-number="5.3.6">
+<h3 data-number="5.3.6" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">5.3.6</span> Publishing to portals</h3>
 <p>After <code>prod</code> schema is versioned, additional workflows publish data to <a href="https://calcofi.io/docs/portals.html">Portals</a> (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) via the <a href="https://docs.ropensci.org/EML/">EML</a> R package, pulling metadata directly from database comments.</p>
 </section>
-<section id="or-describe-tables-and-columns-directly" class="level3" data-number="6.3.7">
-<h3 data-number="6.3.7" class="anchored" data-anchor-id="or-describe-tables-and-columns-directly"><span class="header-section-number">6.3.7</span> OR Describe tables and columns directly</h3>
+<section id="or-describe-tables-and-columns-directly" class="level3" data-number="5.3.7">
+<h3 data-number="5.3.7" class="anchored" data-anchor-id="or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.7</span> OR Describe tables and columns directly</h3>
 <ul>
 <li><p>Use the <code>COMMENT</code> clause to add descriptions to tables and columns, either through the GUI <a href="https://pgadmin.calcofi.io/">pgadmin.calcofi.io</a> (by right-clicking on the table or column and selecting <code>Properties</code>) or with SQL. For example:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
@@ -684,8 +696,8 @@ Figure&nbsp;6.1: Integrated database ingestion scheme.
 <li><p>It is especially helpful to link to any <em><strong>workflows</strong></em> that are responsible for the ingesting or updating of the input data.</p></li>
 </ul>
 </section>
-<section id="display-tables-and-columns-with-metadata" class="level3" data-number="6.3.8">
-<h3 data-number="6.3.8" class="anchored" data-anchor-id="display-tables-and-columns-with-metadata"><span class="header-section-number">6.3.8</span> Display tables and columns with metadata</h3>
+<section id="display-tables-and-columns-with-metadata" class="level3" data-number="5.3.8">
+<h3 data-number="5.3.8" class="anchored" data-anchor-id="display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.8</span> Display tables and columns with metadata</h3>
 <ul>
 <li>These descriptions can be viewed in the CalCOFI <strong>API</strong> <a href="https://api.calcofi.io">api.calcofi.io</a> as CSV tables (see code in <a href="https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990">calcofi/api: <code>plumber.R</code></a>):
 <ul>
@@ -714,16 +726,16 @@ fields:<br>
 </ul>
 </section>
 </section>
-<section id="relationships-between-tables" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="relationships-between-tables"><span class="header-section-number">6.4</span> Relationships between tables</h2>
+<section id="relationships-between-tables" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="relationships-between-tables"><span class="header-section-number">5.4</span> Relationships between tables</h2>
 <ul>
 <li><p>See <a href="https://calcofi.io/workflows/clean_db.html">calcofi/workflows: <strong>clean_db</strong></a><br>
 </p></li>
 <li><p><code>TODO:</code> add calcofi/apps: db to show latest tables, columns and relationsips</p></li>
 </ul>
 </section>
-<section id="spatial-tips" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="spatial-tips"><span class="header-section-number">6.5</span> Spatial Tips</h2>
+<section id="spatial-tips" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="spatial-tips"><span class="header-section-number">5.5</span> Spatial Tips</h2>
 <ul>
 <li>Use <a href="https://postgis.net/docs/ST_Subdivide.html"><code>ST_Subdivide()</code></a> when running spatial joins on large polygons.</li>
 </ul>
@@ -1134,13 +1146,13 @@ fields:<br>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./api.html" class="pagination-link" aria-label="API">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></span>
+      <a href="./maps.html" class="pagination-link" aria-label="Maps">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./portals.html" class="pagination-link" aria-label="Portals">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Portals</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

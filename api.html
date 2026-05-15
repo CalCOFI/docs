@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>5&nbsp; API – CalCOFI.io</title>
+<title>8&nbsp; API – CalCOFI.io</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -34,8 +34,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./db.html" rel="next">
-<link href="./maps.html" rel="prev">
+<link href="./portals.html" rel="next">
+<link href="./helpers.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -95,7 +95,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -195,32 +195,44 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./api.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  <a href="./db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./db.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></span></a>
+  <a href="./data-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./api.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./portals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -233,13 +245,17 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variables-get-list-of-variables-for-timeseries" id="toc-variables-get-list-of-variables-for-timeseries" class="nav-link active" data-scroll-target="#variables-get-list-of-variables-for-timeseries"><span class="header-section-number">5.1</span> <code>/variables</code>: get list of variables for timeseries</a></li>
-  <li><a href="#species_groups-get-species-groups-for-larvae" id="toc-species_groups-get-species-groups-for-larvae" class="nav-link" data-scroll-target="#species_groups-get-species-groups-for-larvae"><span class="header-section-number">5.2</span> <code>/species_groups</code>: get species groups for larvae</a></li>
-  <li><a href="#timeseries-get-time-series-data" id="toc-timeseries-get-time-series-data" class="nav-link" data-scroll-target="#timeseries-get-time-series-data"><span class="header-section-number">5.3</span> <code>/timeseries</code>: get time series data</a></li>
-  <li><a href="#cruises-get-list-of-cruises" id="toc-cruises-get-list-of-cruises" class="nav-link" data-scroll-target="#cruises-get-list-of-cruises"><span class="header-section-number">5.4</span> <code>/cruises</code>: get list of cruises</a></li>
-  <li><a href="#raster-get-raster-map-of-variable" id="toc-raster-get-raster-map-of-variable" class="nav-link" data-scroll-target="#raster-get-raster-map-of-variable"><span class="header-section-number">5.5</span> <code>/raster</code>: get raster map of variable</a></li>
-  <li><a href="#cruise_lines-get-station-lines-from-cruises" id="toc-cruise_lines-get-station-lines-from-cruises" class="nav-link" data-scroll-target="#cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">5.6</span> <code>/cruise_lines</code>: get station lines from cruises</a></li>
-  <li><a href="#cruise_line_profile" id="toc-cruise_line_profile" class="nav-link" data-scroll-target="#cruise_line_profile"><span class="header-section-number">5.7</span> <code>/cruise_line_profile</code></a></li>
+  <li><a href="#endpoint-replacement" id="toc-endpoint-replacement" class="nav-link active" data-scroll-target="#endpoint-replacement"><span class="header-section-number">8.1</span> Endpoint → replacement</a></li>
+  <li><a href="#legacy-endpoint-reference" id="toc-legacy-endpoint-reference" class="nav-link" data-scroll-target="#legacy-endpoint-reference"><span class="header-section-number">8.2</span> Legacy endpoint reference</a>
+  <ul class="collapse">
+  <li><a href="#variables-get-list-of-variables-for-timeseries" id="toc-variables-get-list-of-variables-for-timeseries" class="nav-link" data-scroll-target="#variables-get-list-of-variables-for-timeseries"><span class="header-section-number">8.2.1</span> <code>/variables</code>: get list of variables for timeseries</a></li>
+  <li><a href="#species_groups-get-species-groups-for-larvae" id="toc-species_groups-get-species-groups-for-larvae" class="nav-link" data-scroll-target="#species_groups-get-species-groups-for-larvae"><span class="header-section-number">8.2.2</span> <code>/species_groups</code>: get species groups for larvae</a></li>
+  <li><a href="#timeseries-get-time-series-data" id="toc-timeseries-get-time-series-data" class="nav-link" data-scroll-target="#timeseries-get-time-series-data"><span class="header-section-number">8.2.3</span> <code>/timeseries</code>: get time series data</a></li>
+  <li><a href="#cruises-get-list-of-cruises" id="toc-cruises-get-list-of-cruises" class="nav-link" data-scroll-target="#cruises-get-list-of-cruises"><span class="header-section-number">8.2.4</span> <code>/cruises</code>: get list of cruises</a></li>
+  <li><a href="#raster-get-raster-map-of-variable" id="toc-raster-get-raster-map-of-variable" class="nav-link" data-scroll-target="#raster-get-raster-map-of-variable"><span class="header-section-number">8.2.5</span> <code>/raster</code>: get raster map of variable</a></li>
+  <li><a href="#cruise_lines-get-station-lines-from-cruises" id="toc-cruise_lines-get-station-lines-from-cruises" class="nav-link" data-scroll-target="#cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">8.2.6</span> <code>/cruise_lines</code>: get station lines from cruises</a></li>
+  <li><a href="#cruise_line_profile" id="toc-cruise_line_profile" class="nav-link" data-scroll-target="#cruise_line_profile"><span class="header-section-number">8.2.7</span> <code>/cruise_line_profile</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/api.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -248,7 +264,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">API</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></h1>
 </div>
 
 
@@ -265,39 +281,104 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </header>
 
 
-<p>The raw interface to the Application Programming Interface (API) is available at:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Superseded by direct querying + <code>calcofi4r</code> helpers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Postgres-backed Plumber API at <a href="https://api.calcofi.io">api.calcofi.io</a> is <strong>being phased out</strong>. CalCOFI data is now published as versioned, public <strong>Parquet</strong> files that you query directly with DuckDB — no API server, no credentials, no rate limits.</p>
+<ul>
+<li>To query the data directly (SQL, R, Python), see <strong><a href="./data-access.html">Data Access</a></strong>.</li>
+<li>For biological ↔︎ environmental matching (the old <code>zooplankton_biomass</code>, <code>itis_ichthyodata</code> and <code>ichthyodata</code> endpoints), see <strong><a href="./helpers.html">Matching Helpers</a></strong> — the <code>calcofi4r</code> functions <code>cc_match_zooplankton_biomass()</code>, <code>cc_match_ichthyo_by_taxon()</code> and <code>cc_match_ichthyo_by_name()</code>.</li>
+</ul>
+<p>The endpoint notes below are retained as a historical reference and a map from each API endpoint to its replacement.</p>
+</div>
+</div>
+<p>The raw interface to the legacy Application Programming Interface (API) is available at:</p>
 <ul>
 <li><a href="https://api.calcofi.io">api.calcofi.io</a></li>
 </ul>
-<p>Here we will provide more guidance on how to use the API functions with documented input arguments, output results and examples of use.</p>
-<section id="variables-get-list-of-variables-for-timeseries" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="variables-get-list-of-variables-for-timeseries"><span class="header-section-number">5.1</span> <code>/variables</code>: get list of variables for timeseries</h2>
-<p>Get list of variables for use in <code>/timeseries</code></p>
+<section id="endpoint-replacement" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="endpoint-replacement"><span class="header-section-number">8.1</span> Endpoint → replacement</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Legacy endpoint</th>
+<th>Replacement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/variables</code></td>
+<td><code>calcofi4r::cc_list_measurement_types()</code></td>
+</tr>
+<tr class="even">
+<td><code>/timeseries</code></td>
+<td>direct SQL aggregation — see <a href="./data-access.html">Data Access</a></td>
+</tr>
+<tr class="odd">
+<td><code>/cruises</code></td>
+<td><code>calcofi4r::cc_read_cruise()</code></td>
+</tr>
+<tr class="even">
+<td><code>/raster</code></td>
+<td>direct SQL + <code>calcofi4r::pts_to_rast_idw()</code></td>
+</tr>
+<tr class="odd">
+<td><code>/cruise_lines</code>, <code>/cruise_line_profile</code></td>
+<td>direct SQL against <code>ctd_cast</code> / <code>ctd_thin</code></td>
+</tr>
+<tr class="even">
+<td><code>zooplankton_biomass</code></td>
+<td><code>calcofi4r::cc_match_zooplankton_biomass()</code> (<a href="./helpers.html">Matching Helpers</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>itis_ichthyodata</code></td>
+<td><code>calcofi4r::cc_match_ichthyo_by_taxon()</code> (<a href="./helpers.html">Matching Helpers</a>)</td>
+</tr>
+<tr class="even">
+<td><code>ichthyodata</code></td>
+<td><code>calcofi4r::cc_match_ichthyo_by_name()</code> (<a href="./helpers.html">Matching Helpers</a>)</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="species_groups-get-species-groups-for-larvae" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="species_groups-get-species-groups-for-larvae"><span class="header-section-number">5.2</span> <code>/species_groups</code>: get species groups for larvae</h2>
-<p>Not yet working. Get list of species groups for use with variables <code>larvae_counts.count</code> in <code>/timeseries</code></p>
+<section id="legacy-endpoint-reference" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="legacy-endpoint-reference"><span class="header-section-number">8.2</span> Legacy endpoint reference</h2>
+<section id="variables-get-list-of-variables-for-timeseries" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="variables-get-list-of-variables-for-timeseries"><span class="header-section-number">8.2.1</span> <code>/variables</code>: get list of variables for timeseries</h3>
+<p>Get list of variables for use in <code>/timeseries</code>.</p>
 </section>
-<section id="timeseries-get-time-series-data" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="timeseries-get-time-series-data"><span class="header-section-number">5.3</span> <code>/timeseries</code>: get time series data</h2>
+<section id="species_groups-get-species-groups-for-larvae" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="species_groups-get-species-groups-for-larvae"><span class="header-section-number">8.2.2</span> <code>/species_groups</code>: get species groups for larvae</h3>
+<p>Not yet working. Get list of species groups for use with variables <code>larvae_counts.count</code> in <code>/timeseries</code>.</p>
 </section>
-<section id="cruises-get-list-of-cruises" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="cruises-get-list-of-cruises"><span class="header-section-number">5.4</span> <code>/cruises</code>: get list of cruises</h2>
-<p>Get list of cruises with summary stats as CSV table for time (<code>date_beg</code>)</p>
+<section id="timeseries-get-time-series-data" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="timeseries-get-time-series-data"><span class="header-section-number">8.2.3</span> <code>/timeseries</code>: get time series data</h3>
 </section>
-<section id="raster-get-raster-map-of-variable" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="raster-get-raster-map-of-variable"><span class="header-section-number">5.5</span> <code>/raster</code>: get raster map of variable</h2>
-<p>Get raster of variable</p>
+<section id="cruises-get-list-of-cruises" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="cruises-get-list-of-cruises"><span class="header-section-number">8.2.4</span> <code>/cruises</code>: get list of cruises</h3>
+<p>Get list of cruises with summary stats as CSV table for time (<code>date_beg</code>).</p>
 </section>
-<section id="cruise_lines-get-station-lines-from-cruises" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">5.6</span> <code>/cruise_lines</code>: get station lines from cruises</h2>
-<p>Get station lines from cruises (with more than one cast)</p>
+<section id="raster-get-raster-map-of-variable" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="raster-get-raster-map-of-variable"><span class="header-section-number">8.2.5</span> <code>/raster</code>: get raster map of variable</h3>
+<p>Get raster of variable.</p>
 </section>
-<section id="cruise_line_profile" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="cruise_line_profile"><span class="header-section-number">5.7</span> <code>/cruise_line_profile</code></h2>
-<p>Get profile at depths for given variable of casts along line of stations</p>
+<section id="cruise_lines-get-station-lines-from-cruises" class="level3" data-number="8.2.6">
+<h3 data-number="8.2.6" class="anchored" data-anchor-id="cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">8.2.6</span> <code>/cruise_lines</code>: get station lines from cruises</h3>
+<p>Get station lines from cruises (with more than one cast).</p>
+</section>
+<section id="cruise_line_profile" class="level3" data-number="8.2.7">
+<h3 data-number="8.2.7" class="anchored" data-anchor-id="cruise_line_profile"><span class="header-section-number">8.2.7</span> <code>/cruise_line_profile</code></h3>
+<p>Get profile at depths for given variable of casts along line of stations.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -703,13 +784,13 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./maps.html" class="pagination-link" aria-label="Maps">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span>
+      <a href="./helpers.html" class="pagination-link" aria-label="Matching Helpers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./db.html" class="pagination-link" aria-label="Database">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Database</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./portals.html" class="pagination-link" aria-label="Portals">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Portals</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
