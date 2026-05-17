@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CalCOFI Match — query 75 years of ocean data in your browser</title>
+  <meta name="description" content="Browser-only client for the three retired CalCOFI Plumber-API bio↔env matching endpoints, running DuckDB-WASM against public Parquet on Google Cloud Storage.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>CalCOFI Match <span class="badge">DuckDB-WASM</span></h1>
+  <p class="lead">
+    Query 75 years of California Current oceanography <strong>in your browser</strong>
+    — no install, no credentials, no server. The three retired Plumber-API bio↔env
+    endpoints (<code>ichthyodata</code>, <code>itis_ichthyodata</code>,
+    <code>zooplankton_biomass</code>), plus a free-form SQL shell, all running on
+    <a href="https://duckdb.org/docs/api/wasm/overview.html">DuckDB-WASM</a> +
+    public <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/">CalCOFI Parquet on GCS</a>.
+    The emitted SQL is character-identical to
+    <a href="https://calcofi.io/calcofi4r/reference/cc_match_bio_env.html"><code>calcofi4r::cc_match_*()</code></a>'s
+    <code>attr(d,&nbsp;"sql")</code> — see the
+    <a href="../helpers.html">Matching Helpers</a> chapter for the story.
+  </p>
+</header>
+
+<div id="status">Idle — fill the form and click <strong>Run</strong>. First click loads the DuckDB-WASM engine (~5 s).</div>
+
+<nav class="tabs" role="tablist" id="tabs">
+  <button role="tab" data-tab="by-name"  aria-selected="true">by name</button>
+  <button role="tab" data-tab="by-taxon" aria-selected="false">by taxon</button>
+  <button role="tab" data-tab="zoo"      aria-selected="false">zoo biomass</button>
+  <button role="tab" data-tab="custom"   aria-selected="false">custom (bio + env)</button>
+  <button role="tab" data-tab="shell"    aria-selected="false">SQL shell</button>
+</nav>
+
+<main>
+
+  <!-- ─────────── by name ─────────── -->
+  <form class="match-form" id="form-by-name" data-tab="by-name">
+    <div class="field span-2">
+      <label for="bn-scientific_name">scientific_name</label>
+      <input id="bn-scientific_name" name="scientific_name" type="text"
+             value="Sardinops sagax" required>
+      <span class="hint">Exact match against <code>species.scientific_name</code>. Mirrors <code>cc_match_ichthyo_by_name(scientific_name=)</code>.</span>
+    </div>
+    <div class="field">
+      <label for="bn-env_var">env_var</label>
+      <select id="bn-env_var" name="env_var" data-env-var></select>
+      <span class="hint"><code>bottle_measurement.measurement_type</code></span>
+    </div>
+    <div class="field check">
+      <span class="label">exact_match</span>
+      <div class="opts">
+        <label><input type="checkbox" name="exact_match" checked> exact (else <code>ILIKE</code>)</label>
+      </div>
+    </div>
+    <div class="field radio">
+      <span class="label">life_stage</span>
+      <div class="opts">
+        <label><input type="radio" name="life_stage" value="">any</label>
+        <label><input type="radio" name="life_stage" value="egg">egg</label>
+        <label><input type="radio" name="life_stage" value="larva" checked>larva</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="bn-date_min">date_min</label>
+      <input id="bn-date_min" name="date_min" type="date" value="2018-01-01">
+    </div>
+    <div class="field">
+      <label for="bn-date_max">date_max</label>
+      <input id="bn-date_max" name="date_max" type="date" value="2018-03-31">
+      <span class="hint">CTD-bottle env data ends 2021-05; Q1 2018 has overlap.</span>
+    </div>
+    <div class="field">
+      <label for="bn-depth_m_min">depth_m_min <span class="hint">(optional)</span></label>
+      <input id="bn-depth_m_min" name="depth_m_min" type="number" step="any" placeholder="0">
+    </div>
+    <div class="field">
+      <label for="bn-depth_m_max">depth_m_max <span class="hint">(optional)</span></label>
+      <input id="bn-depth_m_max" name="depth_m_max" type="number" step="any" placeholder="500">
+    </div>
+    <div class="field check">
+      <span class="label">relax_matching</span>
+      <div class="opts">
+        <label><input type="checkbox" name="relax_matching" checked> 5 km / 72 hr (else 2 km / 6 hr)</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="bn-max_dist_km">max_dist_km <span class="hint">(override)</span></label>
+      <input id="bn-max_dist_km" name="max_dist_km" type="number" step="any" placeholder="auto">
+    </div>
+    <div class="field">
+      <label for="bn-max_time_hr">max_time_hr <span class="hint">(override)</span></label>
+      <input id="bn-max_time_hr" name="max_time_hr" type="number" step="any" placeholder="auto">
+    </div>
+    <div class="field radio">
+      <span class="label">join_method</span>
+      <div class="opts">
+        <label><input type="radio" name="join_method" value="nearest_time" checked>nearest_time</label>
+        <label><input type="radio" name="join_method" value="nearest_dist">nearest_dist</label>
+        <label><input type="radio" name="join_method" value="average">average</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="bn-version">version</label>
+      <input id="bn-version" name="version" type="text" value="v2026.05.14" data-version>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="run">Run</button>
+      <span class="hint">Replaces the old <code>/ichthyodata</code> endpoint.</span>
+    </div>
+  </form>
+
+  <!-- ─────────── by taxon ─────────── -->
+  <form class="match-form hidden" id="form-by-taxon" data-tab="by-taxon">
+    <div class="field">
+      <label for="bt-worms_id">worms_id</label>
+      <input id="bt-worms_id" name="worms_id" type="number" step="1" min="1"
+             value="125724" required>
+      <span class="hint">WoRMS <code>taxonID</code>; matches that id AND every descendant via a recursive walk of <code>taxon.parentNameUsageID</code>. <code>125724</code> = genus <em>Engraulis</em>.</span>
+    </div>
+    <div class="field">
+      <label for="bt-env_var">env_var</label>
+      <select id="bt-env_var" name="env_var" data-env-var></select>
+    </div>
+    <div class="field radio">
+      <span class="label">life_stage</span>
+      <div class="opts">
+        <label><input type="radio" name="life_stage" value="" checked>any</label>
+        <label><input type="radio" name="life_stage" value="egg">egg</label>
+        <label><input type="radio" name="life_stage" value="larva">larva</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="bt-date_min">date_min</label>
+      <input id="bt-date_min" name="date_min" type="date" value="2018-01-01">
+    </div>
+    <div class="field">
+      <label for="bt-date_max">date_max</label>
+      <input id="bt-date_max" name="date_max" type="date" value="2018-03-31">
+    </div>
+    <div class="field check">
+      <span class="label">relax_matching</span>
+      <div class="opts">
+        <label><input type="checkbox" name="relax_matching" checked> 5 km / 72 hr</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="bt-max_dist_km">max_dist_km</label>
+      <input id="bt-max_dist_km" name="max_dist_km" type="number" step="any" placeholder="auto">
+    </div>
+    <div class="field">
+      <label for="bt-max_time_hr">max_time_hr</label>
+      <input id="bt-max_time_hr" name="max_time_hr" type="number" step="any" placeholder="auto">
+    </div>
+    <div class="field radio">
+      <span class="label">join_method</span>
+      <div class="opts">
+        <label><input type="radio" name="join_method" value="nearest_time" checked>nearest_time</label>
+        <label><input type="radio" name="join_method" value="nearest_dist">nearest_dist</label>
+        <label><input type="radio" name="join_method" value="average">average</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="bt-version">version</label>
+      <input id="bt-version" name="version" type="text" value="v2026.05.14" data-version>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="run">Run</button>
+      <span class="hint">Replaces the old <code>/itis_ichthyodata</code> endpoint (WoRMS replaces ITIS-path regex).</span>
+    </div>
+  </form>
+
+  <!-- ─────────── zoo biomass ─────────── -->
+  <form class="match-form hidden" id="form-zoo" data-tab="zoo">
+    <div class="field radio">
+      <span class="label">biomass_type</span>
+      <div class="opts">
+        <label><input type="radio" name="biomass_type" value="totalplankton" checked>totalplankton</label>
+        <label><input type="radio" name="biomass_type" value="smallplankton">smallplankton</label>
+      </div>
+      <span class="hint">Net-tow displacement-volume biomass (mL).</span>
+    </div>
+    <div class="field">
+      <label for="zo-env_var">env_var</label>
+      <select id="zo-env_var" name="env_var" data-env-var></select>
+    </div>
+    <div class="field">
+      <label for="zo-date_min">date_min</label>
+      <input id="zo-date_min" name="date_min" type="date" value="2018-01-01">
+    </div>
+    <div class="field">
+      <label for="zo-date_max">date_max</label>
+      <input id="zo-date_max" name="date_max" type="date" value="2018-12-31">
+    </div>
+    <div class="field check">
+      <span class="label">relax_matching</span>
+      <div class="opts">
+        <label><input type="checkbox" name="relax_matching" checked> 5 km / 72 hr</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="zo-max_dist_km">max_dist_km</label>
+      <input id="zo-max_dist_km" name="max_dist_km" type="number" step="any" placeholder="auto">
+    </div>
+    <div class="field">
+      <label for="zo-max_time_hr">max_time_hr</label>
+      <input id="zo-max_time_hr" name="max_time_hr" type="number" step="any" placeholder="auto">
+    </div>
+    <div class="field radio">
+      <span class="label">join_method</span>
+      <div class="opts">
+        <label><input type="radio" name="join_method" value="nearest_time" checked>nearest_time</label>
+        <label><input type="radio" name="join_method" value="nearest_dist">nearest_dist</label>
+        <label><input type="radio" name="join_method" value="average">average</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="zo-version">version</label>
+      <input id="zo-version" name="version" type="text" value="v2026.05.14" data-version>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="run">Run</button>
+      <span class="hint">Replaces the old <code>/zooplankton_biomass</code> endpoint.</span>
+    </div>
+  </form>
+
+  <!-- ─────────── custom (bio + env) ─────────── -->
+  <form class="match-form hidden full" id="form-custom" data-tab="custom">
+    <p class="hint" style="margin: 0 0 0.5rem;">
+      Power-user mode: drop in your own <code>bio</code> and <code>env</code>
+      <code>SELECT</code> sub-queries. Both must read from
+      <code>read_parquet('https://storage.googleapis.com/calcofi-db/.../{table}.parquet')</code>
+      and produce the contract columns documented in
+      <a href="https://calcofi.io/calcofi4r/reference/cc_match_bio_env.html"><code>?cc_match_bio_env</code></a>:
+      <code>bio</code> → <code>bio_id, bio_datetime, bio_lon, bio_lat, bio_value</code>;
+      <code>env</code> → <code>env_id, env_datetime, env_lon, env_lat, env_value, env_depth_m, measurement_type</code>.
+    </p>
+    <div class="field span-all">
+      <label for="cu-bio">bio (<code>SELECT</code> string)</label>
+      <textarea id="cu-bio" name="bio" rows="11" required></textarea>
+    </div>
+    <div class="field span-all">
+      <label for="cu-env">env (<code>SELECT</code> string)</label>
+      <textarea id="cu-env" name="env" rows="10" required></textarea>
+    </div>
+    <div class="field">
+      <label for="cu-max_dist_km">max_dist_km</label>
+      <input id="cu-max_dist_km" name="max_dist_km" type="number" step="any" value="5">
+    </div>
+    <div class="field">
+      <label for="cu-max_time_hr">max_time_hr</label>
+      <input id="cu-max_time_hr" name="max_time_hr" type="number" step="any" value="72">
+    </div>
+    <div class="field radio">
+      <span class="label">join_method</span>
+      <div class="opts">
+        <label><input type="radio" name="join_method" value="nearest_time" checked>nearest_time</label>
+        <label><input type="radio" name="join_method" value="nearest_dist">nearest_dist</label>
+        <label><input type="radio" name="join_method" value="average">average</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="cu-version">version</label>
+      <input id="cu-version" name="version" type="text" value="v2026.05.14" data-version>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="run">Run</button>
+      <span class="hint">Mirrors <code>cc_match_bio_env(bio, env, ...)</code>.</span>
+    </div>
+  </form>
+
+  <!-- ─────────── shell ─────────── -->
+  <form class="match-form hidden full" id="form-shell" data-tab="shell">
+    <p class="hint" style="margin: 0 0 0.5rem;">
+      Run any DuckDB SQL against the release Parquet — same engine as the wrapped tabs.
+      The <code>httpfs</code> and <code>spatial</code> extensions are already loaded.
+    </p>
+    <div class="field span-all">
+      <label for="sh-sql">SQL</label>
+      <textarea id="sh-sql" name="sql" rows="11" required></textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="run">Run</button>
+      <button type="button" class="secondary" id="sh-example">Load example</button>
+    </div>
+  </form>
+
+</main>
+
+<section id="output" class="hidden">
+  <nav class="subtabs" role="tablist" id="subtabs">
+    <button role="tab" data-subtab="results" aria-selected="true">Results</button>
+    <button role="tab" data-subtab="sql"     aria-selected="false">SQL</button>
+    <button role="tab" data-subtab="meta"    aria-selected="false">Metadata</button>
+  </nav>
+
+  <div id="panel-results" class="subpanel">
+    <div class="result-toolbar">
+      <span id="row-count"></span>
+      <span class="spacer"></span>
+      <button class="secondary" id="dl-csv">Download CSV</button>
+    </div>
+    <div id="table-wrap"></div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <div id="panel-sql" class="subpanel hidden">
+    <div class="result-toolbar">
+      <span class="hint">Fully interpolated, copy-paste runnable in any DuckDB client.</span>
+      <span class="spacer"></span>
+      <button class="secondary" id="copy-sql">Copy SQL</button>
+      <button class="secondary" id="dl-sql">Download <code>.sql</code></button>
+    </div>
+    <pre><code id="sql-text"></code></pre>
+  </div>
+
+  <div id="panel-meta" class="subpanel hidden">
+    <pre><code id="meta-text"></code></pre>
+  </div>
+</section>
+
+<footer>
+  Engine: <a href="https://duckdb.org/docs/api/wasm/overview.html">DuckDB-WASM</a> from
+  jsDelivr. SQL builder: <code><a href="match.js">match.js</a></code>, a 1:1 port of
+  <a href="https://github.com/CalCOFI/calcofi4r/blob/main/R/match.R"><code>calcofi4r/R/match.R</code></a>.
+  Source data: public Parquet on <code>gs://calcofi-db</code>
+  (<a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/">browse releases</a>).
+  Code: <a href="https://github.com/CalCOFI/docs/tree/main/match"><code>CalCOFI/docs/match</code></a>.
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

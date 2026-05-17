@@ -145,6 +145,62 @@ df = con.sql(f"""
 """).df()
 ```
 
+## From your browser
+
+DuckDB compiles to WebAssembly, so the *same engine* runs **client-side in your
+browser** — no server, no install, no R or Python. CalCOFI ships a ready-made
+form at **[/docs/match/](match/)** wrapping the three retired bio↔env Plumber
+endpoints (and a free-form SQL shell); pick a function, fill the form, click
+**Run**, and a Chromium / Firefox / Safari worker thread fetches Parquet
+range-by-range over HTTPS and joins them in-browser:
+
+[![CalCOFI Match — DuckDB-WASM in your browser](https://img.shields.io/badge/Open-CalCOFI%20Match-2780e3?style=for-the-badge)](match/)
+
+To embed DuckDB-WASM in your own page, the boilerplate is about 15 lines —
+load the bundle from a CDN, instantiate, `INSTALL httpfs` and you're ready:
+
+```html
+<script type="module">
+  import * as duckdb from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm";
+
+  const bundles = duckdb.getJsDelivrBundles();
+  const bundle  = await duckdb.selectBundle(bundles);
+  const worker  = await duckdb.createWorker(bundle.mainWorker);
+  const db      = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), worker);
+  await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+  const conn = await db.connect();
+  await conn.query("INSTALL httpfs; LOAD httpfs;");
+  await conn.query("INSTALL spatial; LOAD spatial;");
+
+  const base = "https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet";
+  const result = await conn.query(`
+    SELECT scientific_name, common_name, worms_id
+    FROM read_parquet('${base}/species.parquet')
+    WHERE common_name ILIKE '%sardine%'
+  `);
+  console.log(result.toArray());
+</script>
+```
+
+For arbitrary one-off SQL with no setup at all, paste a query into
+[**shell.duckdb.org**](https://shell.duckdb.org) — DuckDB's official
+DuckDB-WASM shell. Same WebAssembly engine, same public Parquet, identical
+rows.
+
+## Run it from anywhere
+
+The same portable SQL — what [`calcofi4r::cc_match_*()`](helpers.qmd) emits as
+`attr(d, "sql")`, what the [Integrated App](https://app.calcofi.io/int)
+download bundle ships in its `query/` folder, what is shown in
+[the worked example](#sec-worked-example) below — runs in any DuckDB client:
+
+| Where | How |
+|---|---|
+| **R**, on your laptop | [`calcofi4r::cc_match_ichthyo_by_name(...)`](helpers.qmd) — emits and runs the SQL; `attr(d, "sql")` hands it back |
+| **Python**, on a notebook server | `duckdb.connect().sql(open("query.sql").read()).df()` — see [From Python](#from-python) |
+| **shell**, on the command line | `duckdb < query.sql` |
+| **your web browser**, no install | **[CalCOFI Match](match/)** — point-and-click form, runs DuckDB-WASM client-side |
+
 ## Reproducibility
 
 Because every query is plain SQL against immutable, versioned, public Parquet,
@@ -167,8 +223,9 @@ Each `*.sql` file is fully interpolated, GCS-URL-based, and copy-paste runnable
 in DuckDB and you get back exactly the rows in the matching `.csv` — the
 `manifest.json` md5 checksums let you confirm it. The same SQL is what
 [`calcofi4r::cc_match_bio_env()`](helpers.qmd) executes and attaches as
-`attr(x, "sql")`, so the app, the package, and a hand-written query are all the
-**same single source of truth**.
+`attr(x, "sql")`, what the browser-based **[Match app](match/)** generates as
+its `SQL` panel, and what a hand-written query produces — **a single source of
+truth across R, Python, the CLI and JavaScript**.
 
 ## Worked example: sardine larvae + temperature {#sec-worked-example}
 

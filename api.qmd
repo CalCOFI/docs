@@ -19,6 +19,17 @@ The endpoint notes below are retained as a historical reference and a map from
 each API endpoint to its replacement.
 :::
 
+::: {.callout-tip}
+## Try the new client-side Match app
+
+The three retired bio↔env endpoints are now an interactive form at
+**[/docs/match/](match/)** that runs entirely in your browser. Pick a function,
+fill the form, click **Run**, see the rows — no server, no credentials, no
+install. DuckDB-WASM in a worker thread, public Parquet on Google Cloud
+Storage, the same portable SQL the
+[`calcofi4r::cc_match_*()`](helpers.qmd) helpers emit.
+:::
+
 The raw interface to the legacy Application Programming Interface (API) is
 available at:
 
@@ -26,16 +37,16 @@ available at:
 
 ## Endpoint → replacement
 
-| Legacy endpoint | Replacement |
-|---|---|
-| `/variables` | `calcofi4r::cc_list_measurement_types()` |
-| `/timeseries` | direct SQL aggregation — see [Data Access](data-access.qmd) |
-| `/cruises` | `calcofi4r::cc_read_cruise()` |
-| `/raster` | direct SQL + `calcofi4r::pts_to_rast_idw()` |
-| `/cruise_lines`, `/cruise_line_profile` | direct SQL against `ctd_cast` / `ctd_thin` |
-| `zooplankton_biomass` | `calcofi4r::cc_match_zooplankton_biomass()` ([Matching Helpers](helpers.qmd)) |
-| `itis_ichthyodata` | `calcofi4r::cc_match_ichthyo_by_taxon()` ([Matching Helpers](helpers.qmd)) |
-| `ichthyodata` | `calcofi4r::cc_match_ichthyo_by_name()` ([Matching Helpers](helpers.qmd)) |
+| Legacy endpoint | R helper (`calcofi4r`) | Browser |
+|---|---|---|
+| `/variables` | `cc_list_measurement_types()` | — |
+| `/timeseries` | direct SQL aggregation — see [Data Access](data-access.qmd) | [SQL shell](match/#tab=shell) |
+| `/cruises` | `cc_read_cruise()` | — |
+| `/raster` | direct SQL + `pts_to_rast_idw()` | — |
+| `/cruise_lines`, `/cruise_line_profile` | direct SQL against `ctd_cast` / `ctd_thin` | [SQL shell](match/#tab=shell) |
+| `zooplankton_biomass` | [`cc_match_zooplankton_biomass()`](helpers.qmd) | **[Match → zoo biomass](match/)** |
+| `itis_ichthyodata` | [`cc_match_ichthyo_by_taxon()`](helpers.qmd) | **[Match → by taxon](match/)** |
+| `ichthyodata` | [`cc_match_ichthyo_by_name()`](helpers.qmd) | **[Match → by name](match/)** |
 
 ## Legacy endpoint reference
 

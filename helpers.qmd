@@ -100,9 +100,10 @@ str(attr(d, "query_meta"))    # package + release version, params, source URLs
 
 `attr(d, "sql")` is character-for-character the query shown on the
 [Data Access](data-access.qmd#sec-worked-example) page — copy-paste it into the
-DuckDB CLI, Python, or a colleague's R session and it returns identical rows.
-That is the contract behind the [Integrated App](https://app.calcofi.io/int)
-download bundle's `query/` folder.
+DuckDB CLI, Python, a colleague's R session, or the browser-based
+**[Match app](match/)** and it returns identical rows. That is the contract
+behind the [Integrated App](https://app.calcofi.io/int) download bundle's
+`query/` folder.
 
 To get the SQL **without running it** — e.g. to serialize or inspect it — pass
 `return_sql = TRUE`:
@@ -111,6 +112,22 @@ To get the SQL **without running it** — e.g. to serialize or inspect it — pa
 sql <- cc_match_ichthyo_by_name("Sardinops sagax", return_sql = TRUE)
 cat(sql)
 ```
+
+## Run it from anywhere
+
+The portable SQL these helpers emit runs in any DuckDB client:
+
+| Where | How |
+|---|---|
+| **R**, on your laptop | `cc_match_ichthyo_by_name(...)` — this page |
+| **Python**, on a notebook server | `duckdb.connect().sql(open("query.sql").read()).df()` — see [Data Access → From Python](data-access.qmd#from-python) |
+| **shell**, on the command line | `duckdb < query.sql` |
+| **your web browser**, no install | **[CalCOFI Match](match/)** — point-and-click form for the three wrappers + custom SQL, runs DuckDB-WASM client-side |
+
+In each case the *exact same* generated SQL hits the *exact same* public GCS
+Parquet, so a colleague who only writes Python (or only opens browser tabs)
+gets the same rows you do — same `bio_id`s, same `env_value`s, same
+`time_diff_hr`s.
 
 ## The core engine: `cc_match_bio_env()`
 

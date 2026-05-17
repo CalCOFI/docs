@@ -3,6 +3,7 @@ project:
   output-dir: _book
   resources:
   - "/.nojekyll"
+  - "match/"   # standalone DuckDB-WASM Match app (see chapters: data-access, helpers, api)
   # pre-render:
   #   - libs/pre-render.R
   post-render:
