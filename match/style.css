@@ -1,0 +1,339 @@
+/* CalCOFI Match — style.css
+   Light, accessible. Echoes the docs cosmo Bootswatch palette. */
+
+:root {
+  --fg:        #2c3e50;
+  --muted:    #5d6d7e;
+  --bg:       #ffffff;
+  --panel:    #f8f9fa;
+  --border:   #dee2e6;
+  --accent:   #2780e3;  /* cosmo primary */
+  --accent-d: #1c69bf;
+  --warn:     #ff7518;
+  --error:    #ff0039;
+  --success:  #3fb618;
+  --mono:     ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --sans:     system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+body {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 4rem;
+}
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-d); }
+
+header { margin-bottom: 1rem; }
+header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+header h1 .badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 0.15em 0.6em;
+  vertical-align: 0.3em;
+  letter-spacing: 0.04em;
+}
+header p.lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+header p.lead strong { color: var(--fg); }
+
+/* ── status pill ─────────────────────────────────────────────────────────── */
+
+#status {
+  margin: 1rem 0;
+  padding: 0.5rem 0.85rem;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  background: var(--panel);
+  border-left: 4px solid var(--border);
+  color: var(--muted);
+}
+#status.busy    { border-left-color: var(--warn);    color: var(--fg); }
+#status.success { border-left-color: var(--success); color: var(--fg); }
+#status.error   {
+  border-left-color: var(--error);
+  color: var(--error);
+  background: #ffeef0;
+}
+
+/* ── tabs ────────────────────────────────────────────────────────────────── */
+
+nav.tabs, nav.subtabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+nav.tabs button, nav.subtabs button {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.5rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav.tabs button:hover, nav.subtabs button:hover { color: var(--fg); }
+nav.tabs button[aria-selected="true"],
+nav.subtabs button[aria-selected="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+nav.subtabs {
+  font-size: 0.9rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+/* ── forms ───────────────────────────────────────────────────────────────── */
+
+form.match-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.85rem 1rem;
+  margin: 0.5rem 0 0;
+}
+form.match-form.full { display: block; }
+.hidden { display: none !important; }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.field.span-2 { grid-column: span 2; }
+.field.span-3 { grid-column: span 3; }
+.field.span-all { grid-column: 1 / -1; }
+
+.field > label,
+.field > .label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+.field .hint {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.field input[type="text"],
+.field input[type="number"],
+.field input[type="date"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  border-color: var(--accent);
+}
+.field textarea {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.45;
+}
+.field.radio,
+.field.check {
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.field.radio .opts,
+.field.check .opts {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.field.radio label,
+.field.check label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: normal;
+  color: var(--fg);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+.field input[type="radio"],
+.field input[type="checkbox"] {
+  margin: 0;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+button.run, button.primary {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+button.run:hover, button.primary:hover { background: var(--accent-d); }
+button.run:disabled, button.primary:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+button.secondary {
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+}
+button.secondary:hover { background: var(--panel); }
+
+/* ── results panel ───────────────────────────────────────────────────────── */
+
+#output { margin-top: 1.5rem; }
+
+.subpanel { min-height: 8rem; }
+
+.result-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.result-toolbar .spacer { flex: 1; }
+.result-toolbar code {
+  background: var(--panel);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* sortable, sticky-header table */
+#table-wrap {
+  max-height: 60vh;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+table.results {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+table.results thead th {
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  z-index: 1;
+  text-align: left;
+  font-weight: 600;
+  padding: 0.45rem 0.6rem;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+table.results tbody td {
+  padding: 0.3rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  white-space: nowrap;
+}
+table.results tbody tr:hover { background: var(--panel); }
+table.results .num { text-align: right; }
+
+pre.codeblock,
+#panel-sql pre,
+#panel-meta pre {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.pagination button {
+  font: inherit;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+footer code {
+  background: var(--panel);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+}

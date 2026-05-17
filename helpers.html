@@ -284,9 +284,10 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
   <li><a href="#the-wrappers" id="toc-the-wrappers" class="nav-link" data-scroll-target="#the-wrappers"><span class="header-section-number">7.2</span> The wrappers</a></li>
   <li><a href="#worked-example-sardine-larvae-temperature" id="toc-worked-example-sardine-larvae-temperature" class="nav-link" data-scroll-target="#worked-example-sardine-larvae-temperature"><span class="header-section-number">7.3</span> Worked example: sardine larvae + temperature</a></li>
   <li><a href="#reproducible-sql" id="toc-reproducible-sql" class="nav-link" data-scroll-target="#reproducible-sql"><span class="header-section-number">7.4</span> Reproducible SQL</a></li>
-  <li><a href="#the-core-engine-cc_match_bio_env" id="toc-the-core-engine-cc_match_bio_env" class="nav-link" data-scroll-target="#the-core-engine-cc_match_bio_env"><span class="header-section-number">7.5</span> The core engine: <code>cc_match_bio_env()</code></a></li>
-  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">7.6</span> Parameters</a></li>
-  <li><a href="#migrating-from-the-api" id="toc-migrating-from-the-api" class="nav-link" data-scroll-target="#migrating-from-the-api"><span class="header-section-number">7.7</span> Migrating from the API</a></li>
+  <li><a href="#run-it-from-anywhere" id="toc-run-it-from-anywhere" class="nav-link" data-scroll-target="#run-it-from-anywhere"><span class="header-section-number">7.5</span> Run it from anywhere</a></li>
+  <li><a href="#the-core-engine-cc_match_bio_env" id="toc-the-core-engine-cc_match_bio_env" class="nav-link" data-scroll-target="#the-core-engine-cc_match_bio_env"><span class="header-section-number">7.6</span> The core engine: <code>cc_match_bio_env()</code></a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">7.7</span> Parameters</a></li>
+  <li><a href="#migrating-from-the-api" id="toc-migrating-from-the-api" class="nav-link" data-scroll-target="#migrating-from-the-api"><span class="header-section-number">7.8</span> Migrating from the API</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/helpers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -405,13 +406,44 @@ Note
 <p>Every helper attaches the <strong>exact, portable SQL</strong> that produced the result, plus query metadata, as attributes:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">attr</span>(d, <span class="st">"sql"</span>))           <span class="co"># the fully-interpolated, GCS-URL-based query</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">attr</span>(d, <span class="st">"query_meta"</span>))    <span class="co"># package + release version, params, source URLs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>attr(d, "sql")</code> is character-for-character the query shown on the <a href="./data-access.html#sec-worked-example">Data Access</a> page — copy-paste it into the DuckDB CLI, Python, or a colleague’s R session and it returns identical rows. That is the contract behind the <a href="https://app.calcofi.io/int">Integrated App</a> download bundle’s <code>query/</code> folder.</p>
+<p><code>attr(d, "sql")</code> is character-for-character the query shown on the <a href="./data-access.html#sec-worked-example">Data Access</a> page — copy-paste it into the DuckDB CLI, Python, a colleague’s R session, or the browser-based <strong><a href="match/">Match app</a></strong> and it returns identical rows. That is the contract behind the <a href="https://app.calcofi.io/int">Integrated App</a> download bundle’s <code>query/</code> folder.</p>
 <p>To get the SQL <strong>without running it</strong> — e.g.&nbsp;to serialize or inspect it — pass <code>return_sql = TRUE</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sql <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(<span class="st">"Sardinops sagax"</span>, <span class="at">return_sql =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sql)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="the-core-engine-cc_match_bio_env" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="the-core-engine-cc_match_bio_env"><span class="header-section-number">7.5</span> The core engine: <code>cc_match_bio_env()</code></h2>
+<section id="run-it-from-anywhere" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="run-it-from-anywhere"><span class="header-section-number">7.5</span> Run it from anywhere</h2>
+<p>The portable SQL these helpers emit runs in any DuckDB client:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Where</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>R</strong>, on your laptop</td>
+<td><code>cc_match_ichthyo_by_name(...)</code> — this page</td>
+</tr>
+<tr class="even">
+<td><strong>Python</strong>, on a notebook server</td>
+<td><code>duckdb.connect().sql(open("query.sql").read()).df()</code> — see <a href="./data-access.html#from-python">Data Access → From Python</a></td>
+</tr>
+<tr class="odd">
+<td><strong>shell</strong>, on the command line</td>
+<td><code>duckdb &lt; query.sql</code></td>
+</tr>
+<tr class="even">
+<td><strong>your web browser</strong>, no install</td>
+<td><strong><a href="match/">CalCOFI Match</a></strong> — point-and-click form for the three wrappers + custom SQL, runs DuckDB-WASM client-side</td>
+</tr>
+</tbody>
+</table>
+<p>In each case the <em>exact same</em> generated SQL hits the <em>exact same</em> public GCS Parquet, so a colleague who only writes Python (or only opens browser tabs) gets the same rows you do — same <code>bio_id</code>s, same <code>env_value</code>s, same <code>time_diff_hr</code>s.</p>
+</section>
+<section id="the-core-engine-cc_match_bio_env" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="the-core-engine-cc_match_bio_env"><span class="header-section-number">7.6</span> The core engine: <code>cc_match_bio_env()</code></h2>
 <p>The wrappers are thin shells over <code>cc_match_bio_env()</code>, which takes a <code>bio</code> and an <code>env</code> SQL <code>SELECT</code> string and performs the match. Call it directly when you need a biological or environmental side the wrappers don’t cover (custom filters, a different grouping, joining <code>bottle</code> to <code>cast_condition</code>, …):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_match_bio_env</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  bio, env,                                  <span class="co"># SELECT strings (see contract below)</span></span>
@@ -422,8 +454,8 @@ Note
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">return_sql  =</span> <span class="cn">FALSE</span>)                       <span class="co"># TRUE  → just the SQL string</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Contract.</strong> <code>bio</code> must yield <code>bio_id</code>, <code>bio_datetime</code>, <code>bio_lon</code>, <code>bio_lat</code>, <code>bio_value</code> (plus any descriptive columns, carried through as grouping keys). <code>env</code> must yield exactly <code>env_id</code>, <code>env_datetime</code>, <code>env_lon</code>, <code>env_lat</code>, <code>env_value</code>, <code>env_depth_m</code>, <code>measurement_type</code>. Both typically <code>FROM read_parquet('https://…/{table}.parquet')</code> so the emitted SQL stays portable.</p>
 </section>
-<section id="parameters" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="parameters"><span class="header-section-number">7.6</span> Parameters</h2>
+<section id="parameters" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="parameters"><span class="header-section-number">7.7</span> Parameters</h2>
 <ul>
 <li><strong><code>max_dist_km</code>, <code>max_time_hr</code></strong> — the spatial and temporal match windows. Defaults are 2 km / 6 hr; <code>relax_matching = TRUE</code> widens them to 5 km / 72 hr (an explicit value always wins). This replaces the old API’s <code>relax_matching</code> boolean.</li>
 <li><strong><code>join_method</code></strong> — how the environmental observations inside the window are reduced to one value per biological observation:
@@ -439,8 +471,8 @@ CalCOFI co-locates net tows and CTD casts, so in practice <code>nearest_time</co
 <li><strong><code>version</code></strong> — a release string like <code>"v2026.05.14"</code>, or <code>"latest"</code>.</li>
 </ul>
 </section>
-<section id="migrating-from-the-api" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="migrating-from-the-api"><span class="header-section-number">7.7</span> Migrating from the API</h2>
+<section id="migrating-from-the-api" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="migrating-from-the-api"><span class="header-section-number">7.8</span> Migrating from the API</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
