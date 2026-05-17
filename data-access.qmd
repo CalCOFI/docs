@@ -149,12 +149,10 @@ df = con.sql(f"""
 
 DuckDB compiles to WebAssembly, so the *same engine* runs **client-side in your
 browser** — no server, no install, no R or Python. CalCOFI ships a ready-made
-form at **[/docs/match/](match/)** wrapping the three retired bio↔env Plumber
-endpoints (and a free-form SQL shell); pick a function, fill the form, click
-**Run**, and a Chromium / Firefox / Safari worker thread fetches Parquet
-range-by-range over HTTPS and joins them in-browser:
-
-[![CalCOFI Match — DuckDB-WASM in your browser](https://img.shields.io/badge/Open-CalCOFI%20Match-2780e3?style=for-the-badge)](match/)
+form at **→ [Open the CalCOFI Match app](match/)** that wraps the three retired
+bio↔env Plumber endpoints (and a free-form SQL shell): pick a function, fill
+the form, click **Run**, and a Chromium / Firefox / Safari worker thread
+fetches Parquet range-by-range over HTTPS and joins them in-browser.
 
 To embed DuckDB-WASM in your own page, the boilerplate is about 15 lines —
 load the bundle from a CDN, instantiate, `INSTALL httpfs` and you're ready:
