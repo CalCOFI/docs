@@ -305,11 +305,11 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Try the new client-side Match app
+<span class="screen-reader-only">Tip</span>Try the new client-side query playground
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The three retired bio↔︎env endpoints are now an interactive form at <strong><a href="match/">/docs/match/</a></strong> that runs entirely in your browser. Pick a function, fill the form, click <strong>Run</strong>, see the rows — no server, no credentials, no install. DuckDB-WASM in a worker thread, public Parquet on Google Cloud Storage, the same portable SQL the <a href="./helpers.html"><code>calcofi4r::cc_match_*()</code></a> helpers emit.</p>
+<p>The three retired bio↔︎env endpoints — and many more queries besides — are now an interactive form at <strong><a href="https://calcofi.io/query/">calcofi.io/query/</a></strong> that runs entirely in your browser. Pick a query from the left-side accordion, fill the form, click <strong>Run</strong>, see the rows — no server, no credentials, no install. DuckDB-WASM in a worker thread, public Parquet on Google Cloud Storage, the same portable SQL the <a href="./helpers.html"><code>calcofi4r::cc_match_*()</code></a> helpers emit.</p>
 </div>
 </div>
 <p>The raw interface to the legacy Application Programming Interface (API) is available at:</p>
@@ -330,17 +330,17 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <tr class="odd">
 <td><code>/variables</code></td>
 <td><code>cc_list_measurement_types()</code></td>
-<td>—</td>
+<td><a href="https://calcofi.io/query/#browse--measurement-types">Query → measurement types</a></td>
 </tr>
 <tr class="even">
 <td><code>/timeseries</code></td>
 <td>direct SQL aggregation — see <a href="./data-access.html">Data Access</a></td>
-<td><a href="match/#tab=shell">SQL shell</a></td>
+<td><a href="https://calcofi.io/query/#sql-shell--shell">Query → SQL shell</a></td>
 </tr>
 <tr class="odd">
 <td><code>/cruises</code></td>
 <td><code>cc_read_cruise()</code></td>
-<td>—</td>
+<td><a href="https://calcofi.io/query/#browse--cruises">Query → cruises</a></td>
 </tr>
 <tr class="even">
 <td><code>/raster</code></td>
@@ -350,22 +350,22 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <tr class="odd">
 <td><code>/cruise_lines</code>, <code>/cruise_line_profile</code></td>
 <td>direct SQL against <code>ctd_cast</code> / <code>ctd_thin</code></td>
-<td><a href="match/#tab=shell">SQL shell</a></td>
+<td><a href="https://calcofi.io/query/#sql-shell--shell">Query → SQL shell</a></td>
 </tr>
 <tr class="even">
 <td><code>zooplankton_biomass</code></td>
 <td><a href="./helpers.html"><code>cc_match_zooplankton_biomass()</code></a></td>
-<td><strong><a href="match/">Match → zoo biomass</a></strong></td>
+<td><strong><a href="https://calcofi.io/query/#bio-env-matching--zoo-biomass">Query → zoo biomass</a></strong></td>
 </tr>
 <tr class="odd">
 <td><code>itis_ichthyodata</code></td>
 <td><a href="./helpers.html"><code>cc_match_ichthyo_by_taxon()</code></a></td>
-<td><strong><a href="match/">Match → by taxon</a></strong></td>
+<td><strong><a href="https://calcofi.io/query/#bio-env-matching--by-taxon">Query → by taxon</a></strong></td>
 </tr>
 <tr class="even">
 <td><code>ichthyodata</code></td>
 <td><a href="./helpers.html"><code>cc_match_ichthyo_by_name()</code></a></td>
-<td><strong><a href="match/">Match → by name</a></strong></td>
+<td><strong><a href="https://calcofi.io/query/#bio-env-matching--by-name">Query → by name</a></strong></td>
 </tr>
 </tbody>
 </table>
