@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.8.25" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+<meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)" />
+
+<title>4  Maps – CalCOFI.io</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0HVK8TDMCF"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
+</script>
+<script  src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script  src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link  href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn"
+      data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" 
+      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" role="link"
+        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="/index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="/">
+      CalCOFI.io
+      </a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/CalCOFI/docs/"  title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="/CalCOFI.io.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="/CalCOFI.io.docx">
+              <i class="bi bi-file-word pe-1"></i>
+            Download Docx
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="/CalCOFI.io.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>Process</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>Reports</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/apps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Applications</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/maps.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>Maps</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/data-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>Data Access</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/helpers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Matching Helpers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/portals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>Portals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/status.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>Status</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/refs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>References</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-maps" class="quarto-section-identifier"><span class="chapter-number">4</span>  <span class="chapter-title">Maps</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview"><span class="header-section-number">4.1</span> Overview</a></li>
+  <li><a href="#why-hexagons" id="toc-why-hexagons"><span class="header-section-number">4.2</span> Why hexagons?</a></li>
+  <li><a href="#the-problem-aggregating-millions-of-points-at-every-zoom" id="toc-the-problem-aggregating-millions-of-points-at-every-zoom"><span class="header-section-number">4.3</span> The problem: aggregating millions of points at every zoom</a></li>
+  <li><a href="#the-solution-query-as-url-hexagonal-tiles" id="toc-the-solution-query-as-url-hexagonal-tiles"><span class="header-section-number">4.4</span> The solution: query-as-URL hexagonal tiles</a>
+  <ul>
+  <li><a href="#resolution-follows-zoom" id="toc-resolution-follows-zoom"><span class="header-section-number">4.4.1</span> Resolution follows zoom</a></li>
+  <li><a href="#request-lifecycle" id="toc-request-lifecycle"><span class="header-section-number">4.4.2</span> Request lifecycle</a></li>
+  <li><a href="#cache-invalidation-by-release" id="toc-cache-invalidation-by-release"><span class="header-section-number">4.4.3</span> Cache invalidation by release</a></li>
+  </ul></li>
+  <li><a href="#a-worked-example-sardine-temperature" id="toc-a-worked-example-sardine-temperature"><span class="header-section-number">4.5</span> A worked example: sardine + temperature</a></li>
+  <li><a href="#how-the-data-gets-there" id="toc-how-the-data-gets-there"><span class="header-section-number">4.6</span> How the data gets there</a></li>
+  <li><a href="#repositories-and-code" id="toc-repositories-and-code"><span class="header-section-number">4.7</span> Repositories and code</a></li>
+  <li><a href="#matching-helpers" id="toc-matching-helpers"><span class="header-section-number">5</span> Matching Helpers</a>
+  <ul>
+  <li><a href="#install" id="toc-install"><span class="header-section-number">5.1</span> Install</a></li>
+  <li><a href="#the-wrappers" id="toc-the-wrappers"><span class="header-section-number">5.2</span> The wrappers</a></li>
+  <li><a href="#worked-example-sardine-larvae-temperature" id="toc-worked-example-sardine-larvae-temperature"><span class="header-section-number">5.3</span> Worked example: sardine larvae + temperature</a></li>
+  <li><a href="#reproducible-sql" id="toc-reproducible-sql"><span class="header-section-number">5.4</span> Reproducible SQL</a></li>
+  <li><a href="#the-core-engine-cc_match_bio_env" id="toc-the-core-engine-cc_match_bio_env"><span class="header-section-number">5.5</span> The core engine: <code>cc_match_bio_env()</code></a></li>
+  <li><a href="#parameters" id="toc-parameters"><span class="header-section-number">5.6</span> Parameters</a></li>
+  <li><a href="#migrating-from-the-api" id="toc-migrating-from-the-api"><span class="header-section-number">5.7</span> Migrating from the API</a></li>
+  </ul></li>
+  <li><a href="#api" id="toc-api"><span class="header-section-number">6</span> API</a>
+  <ul>
+  <li><a href="#endpoint-replacement" id="toc-endpoint-replacement"><span class="header-section-number">6.1</span> Endpoint → replacement</a></li>
+  <li><a href="#legacy-endpoint-reference" id="toc-legacy-endpoint-reference"><span class="header-section-number">6.2</span> Legacy endpoint reference</a>
+  <ul>
+  <li><a href="#variables-get-list-of-variables-for-timeseries" id="toc-variables-get-list-of-variables-for-timeseries"><span class="header-section-number">6.2.1</span> <code>/variables</code>: get list of variables for timeseries</a></li>
+  <li><a href="#species_groups-get-species-groups-for-larvae" id="toc-species_groups-get-species-groups-for-larvae"><span class="header-section-number">6.2.2</span> <code>/species_groups</code>: get species groups for larvae</a></li>
+  <li><a href="#timeseries-get-time-series-data" id="toc-timeseries-get-time-series-data"><span class="header-section-number">6.2.3</span> <code>/timeseries</code>: get time series data</a></li>
+  <li><a href="#cruises-get-list-of-cruises" id="toc-cruises-get-list-of-cruises"><span class="header-section-number">6.2.4</span> <code>/cruises</code>: get list of cruises</a></li>
+  <li><a href="#raster-get-raster-map-of-variable" id="toc-raster-get-raster-map-of-variable"><span class="header-section-number">6.2.5</span> <code>/raster</code>: get raster map of variable</a></li>
+  <li><a href="#cruise_lines-get-station-lines-from-cruises" id="toc-cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">6.2.6</span> <code>/cruise_lines</code>: get station lines from cruises</a></li>
+  <li><a href="#cruise_line_profile" id="toc-cruise_line_profile"><span class="header-section-number">6.2.7</span> <code>/cruise_line_profile</code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+<section id="overview" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Overview</h2>
+<p>The CalCOFI <a href="https://shiny.calcofi.io">interactive app</a> renders <strong>hexagonal heatmaps</strong> of species occurrence and oceanographic variables — sardine larvae densities, sea-surface temperature, salinity, chlorophyll — across the entire CalCOFI sampling area, at any zoom level, in seconds. The engine that makes this possible is <strong>H3T</strong>, a tile service that converts a database query into a stream of hexagon tiles on demand.</p>
+<div id="fig-int-app-compare" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-int-app-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figs/int-app_map-compare-bio-env.png" class="img-fluid" />
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-int-app-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 4.1: Side-by-side comparison in the <a href="https://app.calcofi.io/int">CalCOFI Integrated App</a>: hexagons summarizing <strong>biology</strong> (Pacific sardine larvae abundance, left) and <strong>environment</strong> (sea-surface temperature, right) over the same area, era, and quarters, with a swipeable divider for direct visual comparison. Both layers are powered by the H3T tile service.
+</figcaption>
+</figure>
+</div>
+<p>This chapter explains how H3T works, visually, for both the curious oceanographer and the developer who wants to extend it. Throughout, the guiding principle is:</p>
+<blockquote>
+<p><strong>DuckDB is the single source of truth.</strong> H3T tiles are a performance layer built on top of it — never an authoritative copy of the data.</p>
+</blockquote>
+</section>
+<section id="why-hexagons" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Why hexagons?</h2>
+<p>H3 is <a href="https://h3geo.org">Uber’s hexagonal hierarchical geospatial index</a>. Each cell is a hexagon, and every cell at resolution <em>N</em> nests neatly inside one parent cell at resolution <em>N − 1</em>. Hexagons have three useful properties for ecological data:</p>
+<ul>
+<li><strong>Equal area at a given resolution</strong>, so densities are directly comparable across the map.</li>
+<li><strong>Every neighbor is the same distance away</strong> (unlike a square grid, which has both edge and corner neighbors).</li>
+<li><strong>No latitude distortion</strong> — a res-5 hex off Point Conception covers the same area as a res-5 hex off Cabo San Lucas.</li>
+</ul>
+<p>Compared to a raster of pixels, hexagons aggregate point observations (a net tow, a CTD cast, a larvae count) without imposing an arbitrary north–south orientation, and the parent–child nesting lets the same dataset render coarsely when you’re zoomed out and finely when you’re zoomed in.</p>
+</section>
+<section id="the-problem-aggregating-millions-of-points-at-every-zoom" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> The problem: aggregating millions of points at every zoom</h2>
+<p>Before H3T, the int-app pre-computed every hex aggregation across <strong>all 10 H3 resolutions</strong> for every species and environmental variable at startup. The Shiny app then shipped the relevant resolution to the browser for each zoom change. This gave the app two problems:</p>
+<ol type="1">
+<li><strong>Slow startup.</strong> Building those aggregations against the full bottle and ichthyo tables took &gt;10 s every time the app launched.</li>
+<li><strong>Heavy memory.</strong> A multi-resolution <code>sf</code> grid for one variable is hundreds of megabytes; for dozens of variables it crowded out everything else on the Shiny server.</li>
+</ol>
+<p>This is the same class of problem that the <a href="https://marinesensitivity.org/docs/software.html">MarineSensitivity stack</a> solved for rasters with a TiTiler factory + Varnish cache. H3T is the equivalent move for <strong>hexagons</strong>.</p>
+</section>
+<section id="the-solution-query-as-url-hexagonal-tiles" class="level2" data-number="4.4">
+<h2 data-number="4.4"><span class="header-section-number">4.4</span> The solution: query-as-URL hexagonal tiles</h2>
+<p>The architecture rests on three ideas, each covered below: the H3 resolution that’s served depends on the zoom level; the entire tile request lifecycle is fronted by a cache; and a <code>release</code> parameter handles cache invalidation automatically when new data drops.</p>
+<section id="resolution-follows-zoom" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1"><span class="header-section-number">4.4.1</span> Resolution follows zoom</h3>
+<p>When the user zooms out to see the whole California Current, they don’t need 7-meter hexagons — a 22 km hex is finer than the underlying sampling grid anyway. When they zoom in to a single CalCOFI line, they want as much detail as the data supports. H3T maps web-map zoom levels to H3 resolutions on the server side: zoom 0–1 → res 1 (~1106 km hexes), zoom 5–7 → res 5 (~22 km hexes), zoom 11+ → res 10 (~7.5 m hexes), and so on (<a href="#fig-h3-pyramid" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-h3-pyramid</span></a>).</p>
+<p>The trick is in the SQL: the int-app sends a <strong>template</strong> with a literal placeholder <code>hex_h3res{{res}}</code> (see <code>build_sp_sql()</code> in <a href="https://github.com/CalCOFI/int-app/blob/main/app/functions_h3t.R"><code>int-app/app/functions_h3t.R</code></a>), and the API substitutes the right resolution for each tile before executing. One query string, ten zoom levels, one shared cache namespace.</p>
+<div class="cell" data-file="diagrams/h3-pyramid.mmd" data-fig-width="7" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-h3-pyramid" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-h3-pyramid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-h3-pyramid">flowchart TB
+  %% nodes: H3 hexagon hierarchy paired with web-map zoom ranges
+  z0[&quot;&lt;b&gt;zoom 0–1&lt;/b&gt;&lt;br/&gt;world view&quot;]:::zoom
+  z3[&quot;&lt;b&gt;zoom 2–4&lt;/b&gt;&lt;br/&gt;continent view&quot;]:::zoom
+  z6[&quot;&lt;b&gt;zoom 5–7&lt;/b&gt;&lt;br/&gt;region view&quot;]:::zoom
+  z9[&quot;&lt;b&gt;zoom 8–10&lt;/b&gt;&lt;br/&gt;coastline view&quot;]:::zoom
+  z13[&quot;&lt;b&gt;zoom 11–13+&lt;/b&gt;&lt;br/&gt;city view&quot;]:::zoom
+
+  r1[&quot;&lt;b&gt;H3 res 1&lt;/b&gt;&lt;br/&gt;~1106 km edge&lt;br/&gt;842 cells globally&quot;]:::hex
+  r3[&quot;&lt;b&gt;H3 res 3&lt;/b&gt;&lt;br/&gt;~158 km edge&quot;]:::hex
+  r5[&quot;&lt;b&gt;H3 res 5&lt;/b&gt;&lt;br/&gt;~22 km edge&quot;]:::hex
+  r7[&quot;&lt;b&gt;H3 res 7&lt;/b&gt;&lt;br/&gt;~3.2 km edge&quot;]:::hex
+  r10[&quot;&lt;b&gt;H3 res 10&lt;/b&gt;&lt;br/&gt;~7.5 m edge&quot;]:::hex
+
+  sql[&quot;client SQL template:&lt;br/&gt;&lt;code&gt;SELECT hex_h3res{{res}} AS cell_id, …&lt;/code&gt;&lt;br/&gt;server substitutes &lt;code&gt;{{res}}&lt;/code&gt; per tile&quot;]:::code
+
+  z0  --&gt; r1
+  z3  --&gt; r3
+  z6  --&gt; r5
+  z9  --&gt; r7
+  z13 --&gt; r10
+
+  r1 -.contains.-&gt; r3
+  r3 -.contains.-&gt; r5
+  r5 -.contains.-&gt; r7
+  r7 -.contains.-&gt; r10
+
+  sql --- r5
+
+  %% styles
+  classDef zoom fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#000
+  classDef hex  fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#000
+  classDef code fill:#F3E8FF,stroke:#9333EA,stroke-width:1.5px,color:#000
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h3-pyramid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 4.2: Web-map zoom level determines which H3 resolution the server returns. The same SQL template — <code>hex_h3res{{res}}</code> — adapts to each tile by server-side substitution. Hexagons at finer resolutions nest inside their coarser parents, so the data hierarchy and the visual hierarchy stay aligned.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="request-lifecycle" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2"><span class="header-section-number">4.4.2</span> Request lifecycle</h3>
+<p>When the user pans or zooms, MapLibre asks for tiles. Each tile URL looks like this:</p>
+<pre><code>h3tiles://h3t.calcofi.io/h3t/{z}/{x}/{y}.h3t?q=&lt;base64-SQL&gt;&amp;release=v2026.04.08</code></pre>
+<p>The clever bit is the <code>q</code> parameter: it’s the entire <code>SELECT</code> statement, base64-encoded with URL-safe characters (RFC 4648 §5). That means <strong>the URL itself describes the data to render</strong>, so two users asking for “average temperature for sardines, all quarters, 1949–2024” hit the exact same cache entry — no session state, no server-side query registry.</p>
+<p>What happens next is shown in <a href="#fig-h3t-sequence" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-h3t-sequence</span></a>. Caddy terminates TLS and forwards to Varnish, which checks its cache. On a hit, the user gets back a chunk of h3j JSON in well under 100 ms. On a miss, Varnish forwards to the Plumber API, which:</p>
+<ol type="1">
+<li><strong>Decodes</strong> the base64 SQL.</li>
+<li><strong>Validates</strong> it with <a href="https://github.com/tobymao/sqlglot"><code>sqlglot</code></a>: single statement, must be <code>SELECT</code> (or <code>WITH … SELECT</code>), must project exactly <code>cell_id, value, [n]</code>, no <code>read_csv</code>/<code>attach</code>/<code>load</code>, no shell calls, no schema beyond the published tables.</li>
+<li><strong>Substitutes</strong> <code>{res}</code> from the zoom level and wraps the inner query in a viewport bounding-box filter.</li>
+<li><strong>Executes</strong> against a read-only DuckDB connection with a 3-second timeout and a 50,000-row cap.</li>
+<li><strong>Formats</strong> the result as h3j JSON: <code>{"cells": [{"h3id": "8a1941a29a7ffff", "value": 12.37, "n": 42}, …]}</code>.</li>
+</ol>
+<p>The validation, read-only mode, timeout, and row cap are stacked guardrails: the public URL accepts arbitrary SQL because <strong>none of the layers will let it do harm</strong>. Even if a determined actor slipped a malformed statement past sqlglot, the DuckDB connection has no write permission, no extension load, and a hard execution budget.</p>
+<div class="cell" data-file="diagrams/h3t-sequence.mmd" data-fig-width="7" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-h3t-sequence" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-h3t-sequence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-h3t-sequence">sequenceDiagram
+  autonumber
+  participant U as User&lt;br/&gt;(int-app browser)
+  participant M as MapLibre&lt;br/&gt;+ h3j-h3t.js
+  participant CD as Caddy&lt;br/&gt;(reverse proxy)
+  participant V as Varnish&lt;br/&gt;(HTTP cache)
+  participant API as Plumber API&lt;br/&gt;(/h3t)
+  participant DB as DuckDB&lt;br/&gt;(read-only)
+
+  U-&gt;&gt;M: pan / zoom map&lt;br/&gt;(picks species + variable)
+  M-&gt;&gt;CD: GET /h3t/{z}/{x}/{y}.h3t&lt;br/&gt;?q=&lt;base64-SQL&gt;&amp;release=v2026.04.08
+  CD-&gt;&gt;V: forward
+  alt cache hit
+    V--&gt;&gt;M: h3j JSON (sub-100ms)
+  else cache miss
+    V-&gt;&gt;API: forward
+    API-&gt;&gt;API: decode base64 → SQL
+    API-&gt;&gt;API: validate (sqlglot AST)&lt;br/&gt;SELECT-only, 16 KB cap
+    API-&gt;&gt;API: substitute {{res}} from zoom&lt;br/&gt;wrap in viewport bbox
+    API-&gt;&gt;DB: SELECT cell_id, value, n&lt;br/&gt;(3 s timeout, 50k row cap)
+    DB--&gt;&gt;API: hex rows
+    API--&gt;&gt;V: h3j JSON + ETag&lt;br/&gt;Cache-Control: max-age=600
+    V--&gt;&gt;M: h3j JSON
+  end
+  M-&gt;&gt;U: render colored hexagons&lt;br/&gt;via h3tiles:// protocol
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h3t-sequence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 4.3: Tile request lifecycle. The browser asks for a tile by URL; Varnish caches identical URLs; on a miss, the Plumber API decodes and validates the SQL, runs it against a read-only DuckDB, and returns h3j-formatted hexagons. Validation + read-only DB + timeouts mean the public endpoint can accept arbitrary SQL safely.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cache-invalidation-by-release" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3"><span class="header-section-number">4.4.3</span> Cache invalidation by release</h3>
+<p>Caches are easy to fill but notoriously hard to clear. H3T sidesteps the hard part entirely with a single trick: the <code>release</code> query parameter (<a href="#fig-h3t-release" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-h3t-release</span></a>).</p>
+<p>When CalCOFI publishes a new database release (e.g., <code>v2026.04.08</code>, see <a href="db.qmd">Database</a>), a symlink at the API server is swapped to point at the new file. The next time the int-app loads, it asks <code>/h3t/meta</code> for the current release version, gets back <code>v2026.04.08</code>, and passes that into every subsequent tile URL. Because the URL is now different, Varnish <strong>automatically cache-misses</strong> — and the new tiles are generated against the fresh data on first request. Old tiles linger harmlessly in cache until evicted by LRU; they’d still serve correct data for their old release if anyone asked.</p>
+<p>No purge command, no cache key surgery. Just: change one parameter, get a clean cache layer for free.</p>
+<div class="cell" data-file="diagrams/h3t-release.mmd" data-fig-width="7" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-h3t-release" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-h3t-release-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-h3t-release">flowchart LR
+  %% before release
+  subgraph before[&quot;&lt;b&gt;before release&lt;/b&gt;&quot;]
+    direction TB
+    u1[&quot;browser request&lt;br/&gt;?q=…&amp;release=&lt;b&gt;v2026.04.01&lt;/b&gt;&quot;]:::req
+    c1[(&quot;Varnish&lt;br/&gt;cached tiles for&lt;br/&gt;release v2026.04.01&quot;)]:::cache
+    db1[(&quot;DuckDB&lt;br/&gt;calcofi_latest.duckdb&lt;br/&gt;→ v2026.04.01.duckdb&quot;)]:::db
+    u1 --&gt; c1
+    c1 -.miss.-&gt; db1
+  end
+
+  %% release event
+  rel{{&quot;&lt;b&gt;new release published&lt;/b&gt;&lt;br/&gt;symlink swap:&lt;br/&gt;calcofi_latest.duckdb&lt;br/&gt;→ v2026.04.08.duckdb&quot;}}:::event
+
+  %% after release
+  subgraph after[&quot;&lt;b&gt;after release&lt;/b&gt;&quot;]
+    direction TB
+    meta[&quot;int-app fetches&lt;br/&gt;/h3t/meta → release=v2026.04.08&quot;]:::req
+    u2[&quot;browser request&lt;br/&gt;?q=…&amp;release=&lt;b&gt;v2026.04.08&lt;/b&gt;&quot;]:::req
+    c2[(&quot;Varnish&lt;br/&gt;old URLs idle&lt;br/&gt;new URLs cache-miss&quot;)]:::cache
+    db2[(&quot;DuckDB&lt;br/&gt;v2026.04.08&quot;)]:::db
+    meta --&gt; u2
+    u2 --&gt; c2
+    c2 -.miss.-&gt; db2
+    db2 --&gt; c2
+  end
+
+  before --&gt; rel --&gt; after
+
+  %% styles
+  classDef req   fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#000
+  classDef cache fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#000
+  classDef db    fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#000
+  classDef event fill:#F0FDF4,stroke:#22C55E,stroke-width:2px,color:#000
+
+  style before fill:#F8FAFC,stroke:#CBD5E1,stroke-width:1.5px
+  style after  fill:#F8FAFC,stroke:#CBD5E1,stroke-width:1.5px
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h3t-release-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 4.4: Cache invalidation by release. The <code>release</code> query parameter is part of every tile URL. When a new database release is published, the int-app picks up the new version from <code>/h3t/meta</code>, all subsequent tile URLs change, and Varnish refills naturally — no manual purge.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-worked-example-sardine-temperature" class="level2" data-number="4.5">
+<h2 data-number="4.5"><span class="header-section-number">4.5</span> A worked example: sardine + temperature</h2>
+<p>To make this concrete, here is the full life of one click in the int-app:</p>
+<ol type="1">
+<li><p><strong>User picks</strong> <em>Pacific sardine</em> (<code>Sardinops sagax</code>) and <em>temperature</em> in the sidebar, with date range 1949–2024 and all four quarters.</p></li>
+<li><p><strong><code>build_sp_sql()</code></strong> assembles a SQL template:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> hex_h3res{{res}} <span class="kw">AS</span> cell_id,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(std_tally)   <span class="kw">AS</span> <span class="fu">value</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>)         <span class="kw">AS</span> n</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> bio_obs</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> scientific_name <span class="op">=</span> <span class="st">&#39;Sardinops sagax&#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> quarter <span class="kw">IN</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> time_start <span class="kw">BETWEEN</span> <span class="st">&#39;1949-01-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;2024-12-31&#39;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span></code></pre></div></li>
+<li><p><strong><code>h3t_b64()</code></strong> base64-encodes the SQL → <code>q=U0VMRUNUIGhleF9oM3Jlc3t7cmVzfX0gQVMgY2VsbF9pZCwKICAgICAgIEFWRyhz...</code>.</p></li>
+<li><p><strong><code>fetch_h3t_stats()</code></strong> calls <code>/h3t/stats?q=…&amp;release=v2026.04.08</code> once to get <code>{min, max, p02, p98, n}</code>. The 2nd–98th percentiles drive a robust color scale that ignores outliers.</p></li>
+<li><p><strong>MapLibre</strong> requests tiles as the user pans:</p>
+<pre><code>h3tiles://h3t.calcofi.io/h3t/4/3/6.h3t?q=U0VMRUNU…&amp;release=v2026.04.08</code></pre></li>
+<li><p><strong>Plumber</strong> decodes, substitutes <code>{res}</code> (zoom 4 → res 3), wraps in a bounding-box filter for tile (4, 3, 6), runs the query, and returns:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cells&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">&quot;h3id&quot;</span><span class="fu">:</span> <span class="st">&quot;83390cfffffffff&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="fl">12.37</span><span class="fu">,</span> <span class="dt">&quot;n&quot;</span><span class="fu">:</span> <span class="dv">42</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">&quot;h3id&quot;</span><span class="fu">:</span> <span class="st">&quot;83390dfffffffff&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="fl">14.02</span><span class="fu">,</span> <span class="dt">&quot;n&quot;</span><span class="fu">:</span> <span class="dv">38</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">&quot;h3id&quot;</span><span class="fu">:</span> <span class="st">&quot;83390efffffffff&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="fl">11.85</span><span class="fu">,</span> <span class="dt">&quot;n&quot;</span><span class="fu">:</span> <span class="dv">51</span> <span class="fu">}</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div></li>
+<li><p><strong>MapLibre</strong> paints each hex by interpolating the stats palette between p02 and p98. The user sees a smooth choropleth update as new tiles arrive.</p></li>
+</ol>
+<p>The first time this query runs anywhere, it takes ~200–800 ms (Varnish miss, DuckDB execution). Every subsequent user requesting “sardines, all quarters, 1949–2024” hits Varnish and renders in under 100 ms.</p>
+</section>
+<section id="how-the-data-gets-there" class="level2" data-number="4.6">
+<h2 data-number="4.6"><span class="header-section-number">4.6</span> How the data gets there</h2>
+<p>The H3T service is the <em>last</em> link in the CalCOFI data pipeline, not the first:</p>
+<ul>
+<li>Source data (Google Drive, NCEI, ERDDAP, SWFSC) is ingested through Quarto notebooks in <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> into a working DuckDB database.</li>
+<li>A <code>release_database.qmd</code> step validates, freezes, and publishes a versioned DuckDB file to the API server.</li>
+<li>The H3T API mounts that file read-only and serves tiles from it.</li>
+</ul>
+<p>For the schema details, see <a href="db.qmd">Database</a>. For the publish path, see <a href="portals.qmd">Portals</a>.</p>
+</section>
+<section id="repositories-and-code" class="level2" data-number="4.7">
+<h2 data-number="4.7"><span class="header-section-number">4.7</span> Repositories and code</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Repository</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/CalCOFI/api-h3t">CalCOFI/api-h3t</a></td>
+<td>Plumber API, sqlglot validator, DuckDB driver, deployment configs</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/CalCOFI/int-app">CalCOFI/int-app</a></td>
+<td>Shiny consumer; SQL builders and map widgets in <code>app/functions_h3t.R</code></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/bbest/mapgl/tree/feat/add-h3t-source">bbest/mapgl @ feat/add-h3t-source</a></td>
+<td><code>add_h3t_source()</code> extension to the <a href="https://walker-data.com/mapgl/">mapgl R package</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/bbest/h3j-h3t/tree/fix/maplibre-v3-compat">bbest/h3j-h3t @ fix/maplibre-v3-compat</a></td>
+<td>fix h3t protocol for MapLibre v3+/v4 and multiple sources on one page in <a href="https://github.com/INSPIDE/h3j-h3t">INSPIDE/h3j-h3t</a></td>
+</tr>
+</tbody>
+</table>
+<p>For the full technical contract — every endpoint, every validation rule, every deployment knob — see the <a href="https://github.com/CalCOFI/api-h3t/blob/main/README.md"><code>api-h3t</code> README</a> and <code>deploy.md</code>.</p>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl">CalCOFI.io</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU=">CalCOFI.io</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uZXh0"><span class="chapter-number">5</span>  <span class="chapter-title">Database</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1wcmV2"><span class="chapter-number">3</span>  <span class="chapter-title">Applications</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbmRleC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlByb2Nlc3M8L3NwYW4+"><span class="chapter-number">1</span>  <span class="chapter-title">Process</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZXBvcnRzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjI8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+UmVwb3J0czwvc3Bhbj4="><span class="chapter-number">2</span>  <span class="chapter-title">Reports</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9hcHBzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjM8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+QXBwbGljYXRpb25zPC9zcGFuPg=="><span class="chapter-number">3</span>  <span class="chapter-title">Applications</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9tYXBzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjQ8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TWFwczwvc3Bhbj4="><span class="chapter-number">4</span>  <span class="chapter-title">Maps</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkRhdGFiYXNlPC9zcGFuPg=="><span class="chapter-number">5</span>  <span class="chapter-title">Database</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXRhLWFjY2Vzcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz42PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkRhdGEtQWNjZXNzPC9zcGFuPg=="><span class="chapter-number">6</span>  <span class="chapter-title">Data Access</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9oZWxwZXJzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjc8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TWF0Y2hpbmctSGVscGVyczwvc3Bhbj4="><span class="chapter-number">7</span>  <span class="chapter-title">Matching Helpers</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9hcGkuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+ODwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5BUEk8L3NwYW4+"><span class="chapter-number">8</span>  <span class="chapter-title">API</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9wb3J0YWxzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjk8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+UG9ydGFsczwvc3Bhbj4="><span class="chapter-number">9</span>  <span class="chapter-title">Portals</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zdGF0dXMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTA8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+U3RhdHVzPC9zcGFuPg=="><span class="chapter-number">10</span>  <span class="chapter-title">Status</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWZzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjExPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlJlZmVyZW5jZXM8L3NwYW4+"><span class="chapter-number">11</span>  <span class="chapter-title">References</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLTxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5NYXBzPC9zcGFuPg=="><span class="chapter-number">4</span>  <span class="chapter-title">Maps</span></span></p>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGF0aXRsZQ=="><span id="sec-maps" class="quarto-section-identifier"><span class="chapter-number">4</span>  <span class="chapter-title">Maps</span></span> – CalCOFI.io</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="><span id="sec-maps" class="quarto-section-identifier"><span class="chapter-number">4</span>  <span class="chapter-title">Maps</span></span> – CalCOFI.io</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZHRpdGxl"><span id="sec-maps" class="quarto-section-identifier"><span class="chapter-number">4</span>  <span class="chapter-title">Maps</span></span> – CalCOFI.io</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ==">CalCOFI.io</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw==">Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZGRkZXNj">Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)</span></p>
+</div>
+</section>
+<section id="matching-helpers" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Matching Helpers</h1>
+<p>The <a href="https://calcofi.io/calcofi4r"><code>calcofi4r</code></a> package provides helper functions that relate <strong>biological</strong> observations (net-tow ichthyoplankton or zooplankton biomass) to <strong>environmental</strong> observations (CTD-bottle measurements) by matching them in time and space — on the fly, against the public release <a href="data-access.qmd">Parquet on GCS</a>.</p>
+<p>These supersede the retired Postgres Plumber <a href="api.qmd">API</a> endpoints <code>zooplankton_biomass</code>, <code>itis_ichthyodata</code> and <code>ichthyodata</code>, which depended on pre-built <code>uunet2ctd*</code> match tables that are no longer part of releases.</p>
+<section id="install" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Install</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;calcofi/calcofi4r&quot;)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span></code></pre></div>
+<p>The matching helpers need <code>calcofi4r</code> ≥ 1.2.0 and DuckDB with the <code>httpfs</code> and <code>spatial</code> extensions (the functions install/load these for you).</p>
+</section>
+<section id="the-wrappers" class="level2" data-number="5.2">
+<h2 data-number="5.2"><span class="header-section-number">5.2</span> The wrappers</h2>
+<p>Three wrappers cover the common cases. Each builds the matching SQL, runs it, and returns a tibble of <strong>one row per biological observation</strong> with the matched environmental value:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Biological side</th>
+<th>Replaces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cc_match_ichthyo_by_name()</code></td>
+<td>ichthyoplankton, filtered by scientific name</td>
+<td><code>/ichthyodata</code></td>
+</tr>
+<tr class="even">
+<td><code>cc_match_ichthyo_by_taxon()</code></td>
+<td>ichthyoplankton, filtered by a WoRMS taxon <strong>and all its descendants</strong></td>
+<td><code>/itis_ichthyodata</code></td>
+</tr>
+<tr class="odd">
+<td><code>cc_match_zooplankton_biomass()</code></td>
+<td>net-tow displacement-volume biomass (<code>totalplankton</code> / <code>smallplankton</code>)</td>
+<td><code>/zooplankton_biomass</code></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ichthyoplankton by scientific name</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Sardinops sagax&quot;</span>, <span class="at">env_var =</span> <span class="st">&quot;temperature&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># every descendant of a WoRMS taxon (recursive parentNameUsageID walk)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_taxon</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">worms_id =</span> <span class="dv">125620</span>, <span class="at">env_var =</span> <span class="st">&quot;salinity&quot;</span>)   <span class="co"># 125620 = genus Engraulis</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># zooplankton biomass</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_zooplankton_biomass</span>(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">env_var =</span> <span class="st">&quot;temperature&quot;</span>, <span class="at">biomass_type =</span> <span class="st">&quot;totalplankton&quot;</span>)</span></code></pre></div>
+</section>
+<section id="worked-example-sardine-larvae-temperature" class="level2" data-number="5.3">
+<h2 data-number="5.3"><span class="header-section-number">5.3</span> Worked example: sardine larvae + temperature</h2>
+<p>The recurring example through these pages — <em>Pacific sardine (<code>Sardinops sagax</code>) larvae matched to CTD-bottle temperature, Q1 2018, with relaxed (5 km / 72 hr) matching</em> — is a single call:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Sardinops sagax&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">env_var        =</span> <span class="st">&quot;temperature&quot;</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">life_stage     =</span> <span class="st">&quot;larva&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_min       =</span> <span class="st">&quot;2018-01-01&quot;</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_max       =</span> <span class="st">&quot;2018-03-31&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">relax_matching =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d[, <span class="fu">c</span>(<span class="st">&quot;scientific_name&quot;</span>, <span class="st">&quot;life_stage&quot;</span>, <span class="st">&quot;bio_datetime&quot;</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bio_value&quot;</span>, <span class="st">&quot;n_env&quot;</span>, <span class="st">&quot;env_value&quot;</span>, <span class="st">&quot;dist_km&quot;</span>, <span class="st">&quot;time_diff_hr&quot;</span>)]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 13 × 8</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   scientific_name life_stage bio_datetime        bio_value n_env env_value dist_km time_diff_hr</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;      &lt;dttm&gt;                  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Sardinops sagax larva      2018-02-05 00:44:00     116.     34      11.4   0.167         1.39</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Sardinops sagax larva      2018-02-05 06:03:00      17.8    30      10.5   0.225         1.21</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Sardinops sagax larva      2018-02-07 09:56:00     120.     33      10.4   …             …</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … 10 more rows</span></span></code></pre></div>
+<p><code>bio_value</code> is the standardized larval tally; <code>env_value</code> is the matched mean temperature (°C); <code>n_env</code> is how many bottle measurements were averaged; <code>dist_km</code> / <code>time_diff_hr</code> are the realized match offsets (within the 5 km / 72 hr window). This returns the <strong>same 13 rows</strong> as the <a href="data-access.qmd#sec-worked-example">direct SQL</a> and the <a href="https://calcofi.io/int-app">Interactive App</a> download bundle.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Q1 <strong>2018</strong>, not a more recent year: CTD-bottle environmental data in the current release ends 2021-05, while net-tow biological data runs later. Q1 2018 has ample overlap.</p>
+</div>
+</div>
+</section>
+<section id="reproducible-sql" class="level2" data-number="5.4">
+<h2 data-number="5.4"><span class="header-section-number">5.4</span> Reproducible SQL</h2>
+<p>Every helper attaches the <strong>exact, portable SQL</strong> that produced the result, plus query metadata, as attributes:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">attr</span>(d, <span class="st">&quot;sql&quot;</span>))           <span class="co"># the fully-interpolated, GCS-URL-based query</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">attr</span>(d, <span class="st">&quot;query_meta&quot;</span>))    <span class="co"># package + release version, params, source URLs</span></span></code></pre></div>
+<p><code>attr(d, "sql")</code> is character-for-character the query shown on the <a href="data-access.qmd#sec-worked-example">Data Access</a> page — copy-paste it into the DuckDB CLI, Python, or a colleague’s R session and it returns identical rows. That is the contract behind the <a href="https://calcofi.io/int-app">Interactive App</a> download bundle’s <code>query/</code> folder.</p>
+<p>To get the SQL <strong>without running it</strong> — e.g. to serialize or inspect it — pass <code>return_sql = TRUE</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sql <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(<span class="st">&quot;Sardinops sagax&quot;</span>, <span class="at">return_sql =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sql)</span></code></pre></div>
+</section>
+<section id="the-core-engine-cc_match_bio_env" class="level2" data-number="5.5">
+<h2 data-number="5.5"><span class="header-section-number">5.5</span> The core engine: <code>cc_match_bio_env()</code></h2>
+<p>The wrappers are thin shells over <code>cc_match_bio_env()</code>, which takes a <code>bio</code> and an <code>env</code> SQL <code>SELECT</code> string and performs the match. Call it directly when you need a biological or environmental side the wrappers don’t cover (custom filters, a different grouping, joining <code>bottle</code> to <code>cast_condition</code>, …):</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_match_bio_env</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  bio, env,                                  <span class="co"># SELECT strings (see contract below)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_dist_km =</span> <span class="dv">2</span>, <span class="at">max_time_hr =</span> <span class="dv">6</span>,          <span class="co"># match tolerances</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">join_method =</span> <span class="st">&quot;nearest_time&quot;</span>,              <span class="co"># or &quot;nearest_dist&quot;, &quot;average&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">version     =</span> <span class="st">&quot;latest&quot;</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">collect     =</span> <span class="cn">TRUE</span>,                        <span class="co"># FALSE → lazy dplyr::tbl</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">return_sql  =</span> <span class="cn">FALSE</span>)                       <span class="co"># TRUE  → just the SQL string</span></span></code></pre></div>
+<p><strong>Contract.</strong> <code>bio</code> must yield <code>bio_id</code>, <code>bio_datetime</code>, <code>bio_lon</code>, <code>bio_lat</code>, <code>bio_value</code> (plus any descriptive columns, carried through as grouping keys). <code>env</code> must yield exactly <code>env_id</code>, <code>env_datetime</code>, <code>env_lon</code>, <code>env_lat</code>, <code>env_value</code>, <code>env_depth_m</code>, <code>measurement_type</code>. Both typically <code>FROM read_parquet('https://…/{table}.parquet')</code> so the emitted SQL stays portable.</p>
+</section>
+<section id="parameters" class="level2" data-number="5.6">
+<h2 data-number="5.6"><span class="header-section-number">5.6</span> Parameters</h2>
+<ul>
+<li><strong><code>max_dist_km</code>, <code>max_time_hr</code></strong> — the spatial and temporal match windows. Defaults are 2 km / 6 hr; <code>relax_matching = TRUE</code> widens them to 5 km / 72 hr (an explicit value always wins). This replaces the old API’s <code>relax_matching</code> boolean.</li>
+<li><strong><code>join_method</code></strong> — how the environmental observations inside the window are reduced to one value per biological observation:
+<ul>
+<li><code>"nearest_time"</code> (default) — keep the closest in time, average ties;</li>
+<li><code>"nearest_dist"</code> — keep the closest in space, average ties;</li>
+<li><code>"average"</code> — average every observation in the window.</li>
+</ul>
+CalCOFI co-locates net tows and CTD casts, so in practice <code>nearest_time</code> and <code>nearest_dist</code> usually agree and <code>average</code> differs only slightly.</li>
+<li><strong><code>life_stage</code></strong> (ichthyo wrappers) — restrict to e.g. <code>"larva"</code> or <code>"egg"</code>.</li>
+<li><strong><code>date_min</code>, <code>date_max</code></strong> — bound the biological side by tow start date.</li>
+<li><strong><code>depth_m_min</code>, <code>depth_m_max</code></strong> — bound the environmental bottle depths.</li>
+<li><strong><code>version</code></strong> — a release string like <code>"v2026.05.14"</code>, or <code>"latest"</code>.</li>
+</ul>
+</section>
+<section id="migrating-from-the-api" class="level2" data-number="5.7">
+<h2 data-number="5.7"><span class="header-section-number">5.7</span> Migrating from the API</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Old API</th>
+<th>New helper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/ichthyodata</code> (<code>species</code>, <code>exact_match</code>)</td>
+<td><code>cc_match_ichthyo_by_name(scientific_name, exact_match=)</code></td>
+</tr>
+<tr class="even">
+<td><code>/itis_ichthyodata</code> (<code>ITISid</code>)</td>
+<td><code>cc_match_ichthyo_by_taxon(worms_id)</code> — WoRMS, recursive subtree</td>
+</tr>
+<tr class="odd">
+<td><code>/zooplankton_biomass</code></td>
+<td><code>cc_match_zooplankton_biomass()</code></td>
+</tr>
+<tr class="even">
+<td><code>relax_matching = TRUE</code></td>
+<td><code>relax_matching = TRUE</code> (5 km / 72 hr) or explicit <code>max_dist_km</code> / <code>max_time_hr</code></td>
+</tr>
+<tr class="odd">
+<td><code>cruiseymd_min</code> / <code>cruiseymd_max</code></td>
+<td><code>date_min</code> / <code>date_max</code></td>
+</tr>
+<tr class="even">
+<td><code>stage</code></td>
+<td><code>life_stage</code></td>
+</tr>
+</tbody>
+</table>
+<p>The taxon wrapper is the one real change: ITIS <code>path</code>-regex matching is gone; descendants are now resolved by a recursive walk of WoRMS <code>taxon.parentNameUsageID</code> against the release <code>taxon</code> table.</p>
+</section>
+</section>
+<section id="api" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> API</h1>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Superseded by direct querying + <code>calcofi4r</code> helpers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Postgres-backed Plumber API at <a href="https://api.calcofi.io">api.calcofi.io</a> is <strong>being phased out</strong>. CalCOFI data is now published as versioned, public <strong>Parquet</strong> files that you query directly with DuckDB — no API server, no credentials, no rate limits.</p>
+<ul>
+<li>To query the data directly (SQL, R, Python), see <strong><a href="data-access.qmd">Data Access</a></strong>.</li>
+<li>For biological ↔︎ environmental matching (the old <code>zooplankton_biomass</code>, <code>itis_ichthyodata</code> and <code>ichthyodata</code> endpoints), see <strong><a href="helpers.qmd">Matching Helpers</a></strong> — the <code>calcofi4r</code> functions <code>cc_match_zooplankton_biomass()</code>, <code>cc_match_ichthyo_by_taxon()</code> and <code>cc_match_ichthyo_by_name()</code>.</li>
+</ul>
+<p>The endpoint notes below are retained as a historical reference and a map from each API endpoint to its replacement.</p>
+</div>
+</div>
+<p>The raw interface to the legacy Application Programming Interface (API) is available at:</p>
+<ul>
+<li><a href="https://api.calcofi.io">api.calcofi.io</a></li>
+</ul>
+<section id="endpoint-replacement" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span> Endpoint → replacement</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Legacy endpoint</th>
+<th>Replacement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/variables</code></td>
+<td><code>calcofi4r::cc_list_measurement_types()</code></td>
+</tr>
+<tr class="even">
+<td><code>/timeseries</code></td>
+<td>direct SQL aggregation — see <a href="data-access.qmd">Data Access</a></td>
+</tr>
+<tr class="odd">
+<td><code>/cruises</code></td>
+<td><code>calcofi4r::cc_read_cruise()</code></td>
+</tr>
+<tr class="even">
+<td><code>/raster</code></td>
+<td>direct SQL + <code>calcofi4r::pts_to_rast_idw()</code></td>
+</tr>
+<tr class="odd">
+<td><code>/cruise_lines</code>, <code>/cruise_line_profile</code></td>
+<td>direct SQL against <code>ctd_cast</code> / <code>ctd_thin</code></td>
+</tr>
+<tr class="even">
+<td><code>zooplankton_biomass</code></td>
+<td><code>calcofi4r::cc_match_zooplankton_biomass()</code> (<a href="helpers.qmd">Matching Helpers</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>itis_ichthyodata</code></td>
+<td><code>calcofi4r::cc_match_ichthyo_by_taxon()</code> (<a href="helpers.qmd">Matching Helpers</a>)</td>
+</tr>
+<tr class="even">
+<td><code>ichthyodata</code></td>
+<td><code>calcofi4r::cc_match_ichthyo_by_name()</code> (<a href="helpers.qmd">Matching Helpers</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="legacy-endpoint-reference" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span> Legacy endpoint reference</h2>
+<section id="variables-get-list-of-variables-for-timeseries" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1"><span class="header-section-number">6.2.1</span> <code>/variables</code>: get list of variables for timeseries</h3>
+<p>Get list of variables for use in <code>/timeseries</code>.</p>
+</section>
+<section id="species_groups-get-species-groups-for-larvae" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2"><span class="header-section-number">6.2.2</span> <code>/species_groups</code>: get species groups for larvae</h3>
+<p>Not yet working. Get list of species groups for use with variables <code>larvae_counts.count</code> in <code>/timeseries</code>.</p>
+</section>
+<section id="timeseries-get-time-series-data" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3"><span class="header-section-number">6.2.3</span> <code>/timeseries</code>: get time series data</h3>
+</section>
+<section id="cruises-get-list-of-cruises" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4"><span class="header-section-number">6.2.4</span> <code>/cruises</code>: get list of cruises</h3>
+<p>Get list of cruises with summary stats as CSV table for time (<code>date_beg</code>).</p>
+</section>
+<section id="raster-get-raster-map-of-variable" class="level3" data-number="6.2.5">
+<h3 data-number="6.2.5"><span class="header-section-number">6.2.5</span> <code>/raster</code>: get raster map of variable</h3>
+<p>Get raster of variable.</p>
+</section>
+<section id="cruise_lines-get-station-lines-from-cruises" class="level3" data-number="6.2.6">
+<h3 data-number="6.2.6"><span class="header-section-number">6.2.6</span> <code>/cruise_lines</code>: get station lines from cruises</h3>
+<p>Get station lines from cruises (with more than one cast).</p>
+</section>
+<section id="cruise_line_profile" class="level3" data-number="6.2.7">
+<h3 data-number="6.2.7"><span class="header-section-number">6.2.7</span> <code>/cruise_line_profile</code></h3>
+<p>Get profile at depths for given variable of casts along line of stations.</p>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id = "quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/calcofi\.io\/docs\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a  href="/apps.html" class="pagination-link" aria-label="Applications">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Applications</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a  href="/db.html" class="pagination-link" aria-label="Database">
+        <span class="nav-page-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Database</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+</body>
+
+</html>
