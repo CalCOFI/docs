@@ -149,7 +149,7 @@ df = con.sql(f"""
 
 DuckDB compiles to WebAssembly, so the *same engine* runs **client-side in your
 browser** — no server, no install, no R or Python. CalCOFI ships a ready-made
-form at **→ [Open the CalCOFI Match app](match/)** that wraps the three retired
+form at **→ [Open CalCOFI Query](https://calcofi.io/query/)** that wraps the three retired
 bio↔env Plumber endpoints (and a free-form SQL shell): pick a function, fill
 the form, click **Run**, and a Chromium / Firefox / Safari worker thread
 fetches Parquet range-by-range over HTTPS and joins them in-browser.
@@ -197,7 +197,7 @@ download bundle ships in its `query/` folder, what is shown in
 | **R**, on your laptop | [`calcofi4r::cc_match_ichthyo_by_name(...)`](helpers.qmd) — emits and runs the SQL; `attr(d, "sql")` hands it back |
 | **Python**, on a notebook server | `duckdb.connect().sql(open("query.sql").read()).df()` — see [From Python](#from-python) |
 | **shell**, on the command line | `duckdb < query.sql` |
-| **your web browser**, no install | **[CalCOFI Match](match/)** — point-and-click form, runs DuckDB-WASM client-side |
+| **your web browser**, no install | **[CalCOFI Query](https://calcofi.io/query/)** — point-and-click form, runs DuckDB-WASM client-side |
 
 ## Reproducibility
 
@@ -221,7 +221,7 @@ Each `*.sql` file is fully interpolated, GCS-URL-based, and copy-paste runnable
 in DuckDB and you get back exactly the rows in the matching `.csv` — the
 `manifest.json` md5 checksums let you confirm it. The same SQL is what
 [`calcofi4r::cc_match_bio_env()`](helpers.qmd) executes and attaches as
-`attr(x, "sql")`, what the browser-based **[Match app](match/)** generates as
+`attr(x, "sql")`, what the browser-based **[CalCOFI Query](https://calcofi.io/query/)** generates as
 its `SQL` panel, and what a hand-written query produces — **a single source of
 truth across R, Python, the CLI and JavaScript**.
 
