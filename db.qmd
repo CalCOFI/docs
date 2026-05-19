@@ -198,115 +198,102 @@ The `ingest_dataset()` function handles:
 - Calling `ingest_to_working()` for each table with proper source file tracking
 - Returning ingestion statistics (rows input, rows after, timestamps)
 
-#### PostgreSQL Workflow (Legacy)
+### Release versioning
 
-For PostgreSQL ingestion (being gradually deprecated):
+Each rendered `release_database.qmd` writes a frozen, immutable release to
+`gs://calcofi-db/ducklake/releases/{version}/` where `version` is
+`vYYYY.MM.DD`. The release directory contains:
 
-```r
-library(calcofi4db)
-library(DBI)
-library(RPostgres)
+- `parquet/` — table files (single `.parquet` or hive-partitioned directories)
+- `catalog.json` — structural manifest (rows, partitioned, total_size)
+- `relationships.json` — primary keys and foreign keys
+- `metadata.json` — table and column descriptions, units, dataset block, measurement-type registry
+- `RELEASE_NOTES.md` — human-readable summary
 
-# connect to database
-con <- dbConnect(
-  Postgres(),
-  dbname   = "gis",
-  host     = "localhost",
-  port     = 5432,
-  user     = "admin",
-  password = "postgres")
-
-# read CSV files and metadata
-d <- read_csv_files(
-  provider = "swfsc",
-  dataset  = "ichthyo")
-
-# transform data according to redefinitions
-transformed_data <- transform_data(d)
-
-# ingest into dev schema
-ingest_csv_to_db(
-  con              = con,
-  schema           = "dev",
-  transformed_data = transformed_data,
-  d_flds_rd        = d$d_flds_rd,
-  d_gdata          = d$d_gdata,
-  workflow_info    = d$workflow_info)
-
-# record schema version
-record_schema_version(
-  con              = con,
-  schema           = "dev",
-  version          = "1.0.0",
-  description      = "Initial ingestion of NOAA CalCOFI Database",
-  script_permalink = "https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd")
-```
-
-### Schema versioning
-
-Each successful ingestion creates a new schema version recorded in the `schema_version` table with:
-
-- **version**: Semantic version number (e.g., "1.0.0", "1.1.0")
-- **description**: Changes introduced in this version
-- **date_created**: Timestamp of ingestion
-- **script_permalink**: GitHub permalink to the versioned ingestion script
-
-Versions are also archived as SQL dumps in Google Drive for reproducibility.
+A bucket-level `versions.json` lists every release and `latest.txt` points at the most recent one.
 
 ### Metadata and documentation
 
-After ingestion, metadata is stored in PostgreSQL `COMMENT`s as JSON at the **table** level:
+Sources of truth for table and column descriptions live in this repo (not
+in the database), so they are reviewable via PRs and travel with the
+code that produced them:
 
-- **description**: General description and row uniqueness
-- **source**: CSV file link to Google Drive
-- **source_created**: Source file creation timestamp
-- **workflow**: Link to rendered ingestion script
-- **workflow_ingested**: Ingestion timestamp
+- `metadata/{provider}/{dataset}/tbls_redefine.csv` — `tbl_new`,
+  `tbl_description`
+- `metadata/{provider}/{dataset}/flds_redefine.csv` — `tbl_new`, `fld_new`,
+  `fld_description`, `units`
+- `metadata/{provider}/{dataset}/metadata_derived.csv` — optional
+  markdown/units overlay for derived tables and columns
+- `metadata/release_tables.csv` and `metadata/release_columns.csv` — for
+  tables built inside `release_database.qmd` itself
+  (`cruise_summary`, `_spatial`, `_spatial_attr`, …)
+- `metadata/measurement_type.csv` — canonical measurement types with units
+- `metadata/dataset.csv` — dataset-level descriptions, citations, links
 
-And at the **field** level:
+These flow through two stages:
 
-- **description**: Field description
-- **units**: SI units where applicable
+1. **Per-ingest**: `calcofi4db::build_metadata_json()` (called inside
+   `finalize_ingest()`) writes
+   `data/parquet/{provider}_{dataset}/metadata.json` (schema version 1.0)
+   alongside the parquet outputs.
+2. **Per-release**: `calcofi4db::merge_metadata_json()` (called inside
+   `release_database.qmd`) merges every per-ingest sidecar plus the
+   release-only registries and writes
+   `gs://calcofi-db/ducklake/releases/{version}/metadata.json`
+   (schema version 1.1) with this shape:
 
-These comments are exposed via the API [db_tables](https://api.calcofi.io/db_tables) endpoint and rendered with [calcofi4r::cc_db_catalog](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
+   ```json
+   {
+     "schema_version": "1.1",
+     "release_version": "v2026.05.14",
+     "release_date":    "2026-05-14",
+     "datasets":          { "calcofi_bottle": { ... } },
+     "tables":            { "bottle":         { "name_long": "Bottle",
+                                                "description_md": "...",
+                                                "provider": "calcofi",
+                                                "dataset":  "bottle" } },
+     "columns":           { "bottle.depth_m": { "name_long": "Depth M",
+                                                "units":          "meters",
+                                                "description_md": "Bottle depth" } },
+     "measurement_types": { "temperature":    { "description": "...",
+                                                "units":       "degC",
+                                                "is_canonical": true } }
+   }
+   ```
+
+Markdown is supported anywhere in `description_md`; consumers should render
+it through a markdown parser when displaying.
+
+### Consuming descriptions
+
+From R, fetch the descriptions either column-by-column or as a full
+interactive catalog. Both calls hit the release `metadata.json` sidecar:
+
+```r
+library(calcofi4r)
+
+# schema + descriptions + units for a single table
+tbl <- cc_describe_table("bottle")
+attr(tbl, "description_md")    # table-level description
+
+# interactive datatable of every table and column in the release
+cc_db_catalog()
+cc_db_catalog(tables = c("bottle", "ichthyo"))
+cc_db_catalog(version = "v2026.05.14")
+```
+
+When writing a new ingest, populate `tbls_redefine.csv` and
+`flds_redefine.csv` (especially `fld_description` and `units`) before
+running the ingest notebook — `build_metadata_json()` reads them
+directly. The Claude Code `/generate-metadata` and `/validate-ingest`
+skills enforce this.
 
 ### Publishing to portals
 
-After `prod` schema is versioned, additional workflows publish data to [Portals](https://calcofi.io/docs/portals.html) (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) via the [EML](https://docs.ropensci.org/EML/) R package, pulling metadata directly from database comments.
-
-### OR Describe tables and columns directly
-
-- Use the `COMMENT` clause to add descriptions to tables and columns, either through the GUI [pgadmin.calcofi.io](https://pgadmin.calcofi.io/) (by right-clicking on the table or column and selecting `Properties`) or with SQL. For example:
-
-  ```sql
-  COMMENT ON TABLE public.aoi_fed_sanctuaries IS 'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)';
-  ```
-
-- Note the use of [**markdown**](https://www.markdownguide.org/cheat-sheet/) for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:
-   
-   > areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)
-
-- It is especially helpful to link to any _**workflows**_ that are responsible for the ingesting or updating of the input data.
-
-### Display tables and columns with metadata
-
-- These descriptions can be viewed in the CalCOFI **API** [api.calcofi.io](https://api.calcofi.io) as CSV tables (see code in [calcofi/api: `plumber.R`](https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990)):
-  - [api.calcofi.io`/db_tables`](https://api.calcofi.io/db_tables)\
-    fields:\
-    - `schema`: (only "public" so far)
-    - `table_type`: "table", "view", or "materialized view" (none yet)
-    - `table`: name of table
-    - `table_description`: description of table (possibly in markdown)
-  - [api.calcofi.io`/db_columns`](https://api.calcofi.io/db_columns)\
-    fields:\
-    - `schema`: (only "public" so far)
-    - `table_type`: "table", "view", or "materialized view" (none yet)
-    - `table`: name of table
-    - `column`: name of column
-    - `column_type`: data type of column
-    - `column_description`: description of column (possibly in markdown)
-
-- Fetch and display these descriptions into an interactive table with [`calcofi4r::`**`cc_db_catalog()`**](https://calcofi.io/calcofi4r/reference/cc_db_catalog.html).
+Workflows in `workflows/publish_*.qmd` push selected tables to external
+portals (ERDDAP, EDI, OBIS, NCEI). They read the release `metadata.json`
+to assemble Ecological Metadata Language (EML) and ERDDAP datasets.xml
+entries, so descriptions stay in sync across portals without re-keying.
 
 ## Relationships between tables
 
