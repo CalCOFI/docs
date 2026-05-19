@@ -295,11 +295,10 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">5.3.1</span> Overview</a></li>
   <li><a href="#master-ingestion-workflow" id="toc-master-ingestion-workflow" class="nav-link" data-scroll-target="#master-ingestion-workflow"><span class="header-section-number">5.3.2</span> Master ingestion workflow</a></li>
   <li><a href="#using-calcofi4db-package" id="toc-using-calcofi4db-package" class="nav-link" data-scroll-target="#using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</a></li>
-  <li><a href="#schema-versioning" id="toc-schema-versioning" class="nav-link" data-scroll-target="#schema-versioning"><span class="header-section-number">5.3.4</span> Schema versioning</a></li>
+  <li><a href="#release-versioning" id="toc-release-versioning" class="nav-link" data-scroll-target="#release-versioning"><span class="header-section-number">5.3.4</span> Release versioning</a></li>
   <li><a href="#metadata-and-documentation" id="toc-metadata-and-documentation" class="nav-link" data-scroll-target="#metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</a></li>
-  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">5.3.6</span> Publishing to portals</a></li>
-  <li><a href="#or-describe-tables-and-columns-directly" id="toc-or-describe-tables-and-columns-directly" class="nav-link" data-scroll-target="#or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.7</span> OR Describe tables and columns directly</a></li>
-  <li><a href="#display-tables-and-columns-with-metadata" id="toc-display-tables-and-columns-with-metadata" class="nav-link" data-scroll-target="#display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.8</span> Display tables and columns with metadata</a></li>
+  <li><a href="#consuming-descriptions" id="toc-consuming-descriptions" class="nav-link" data-scroll-target="#consuming-descriptions"><span class="header-section-number">5.3.6</span> Consuming descriptions</a></li>
+  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">5.3.7</span> Publishing to portals</a></li>
   </ul></li>
   <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">5.4</span> Relationships between tables</a></li>
   <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">5.5</span> Spatial Tips</a></li>
@@ -610,120 +609,71 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 <li>Returning ingestion statistics (rows input, rows after, timestamps)</li>
 </ul>
 </section>
-<section id="postgresql-workflow-legacy" class="level4" data-number="5.3.3.2">
-<h4 data-number="5.3.3.2" class="anchored" data-anchor-id="postgresql-workflow-legacy"><span class="header-section-number">5.3.3.2</span> PostgreSQL Workflow (Legacy)</h4>
-<p>For PostgreSQL ingestion (being gradually deprecated):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RPostgres)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to database</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Postgres</span>(),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname   =</span> <span class="st">"gis"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">host     =</span> <span class="st">"localhost"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">port     =</span> <span class="dv">5432</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">user     =</span> <span class="st">"admin"</span>,</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">"postgres"</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># read CSV files and metadata</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv_files</span>(</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider =</span> <span class="st">"swfsc"</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset  =</span> <span class="st">"ichthyo"</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># transform data according to redefinitions</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>transformed_data <span class="ot">&lt;-</span> <span class="fu">transform_data</span>(d)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ingest into dev schema</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ingest_csv_to_db</span>(</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">con              =</span> con,</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema           =</span> <span class="st">"dev"</span>,</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">transformed_data =</span> transformed_data,</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_flds_rd        =</span> d<span class="sc">$</span>d_flds_rd,</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_gdata          =</span> d<span class="sc">$</span>d_gdata,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">workflow_info    =</span> d<span class="sc">$</span>workflow_info)</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># record schema version</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">record_schema_version</span>(</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">con              =</span> con,</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema           =</span> <span class="st">"dev"</span>,</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">version          =</span> <span class="st">"1.0.0"</span>,</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">description      =</span> <span class="st">"Initial ingestion of NOAA CalCOFI Database"</span>,</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">script_permalink =</span> <span class="st">"https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-</section>
-<section id="schema-versioning" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="schema-versioning"><span class="header-section-number">5.3.4</span> Schema versioning</h3>
-<p>Each successful ingestion creates a new schema version recorded in the <code>schema_version</code> table with:</p>
+<section id="release-versioning" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="release-versioning"><span class="header-section-number">5.3.4</span> Release versioning</h3>
+<p>Each rendered <code>release_database.qmd</code> writes a frozen, immutable release to <code>gs://calcofi-db/ducklake/releases/{version}/</code> where <code>version</code> is <code>vYYYY.MM.DD</code>. The release directory contains:</p>
 <ul>
-<li><strong>version</strong>: Semantic version number (e.g., “1.0.0”, “1.1.0”)</li>
-<li><strong>description</strong>: Changes introduced in this version</li>
-<li><strong>date_created</strong>: Timestamp of ingestion</li>
-<li><strong>script_permalink</strong>: GitHub permalink to the versioned ingestion script</li>
+<li><code>parquet/</code> — table files (single <code>.parquet</code> or hive-partitioned directories)</li>
+<li><code>catalog.json</code> — structural manifest (rows, partitioned, total_size)</li>
+<li><code>relationships.json</code> — primary keys and foreign keys</li>
+<li><code>metadata.json</code> — table and column descriptions, units, dataset block, measurement-type registry</li>
+<li><code>RELEASE_NOTES.md</code> — human-readable summary</li>
 </ul>
-<p>Versions are also archived as SQL dumps in Google Drive for reproducibility.</p>
+<p>A bucket-level <code>versions.json</code> lists every release and <code>latest.txt</code> points at the most recent one.</p>
 </section>
 <section id="metadata-and-documentation" class="level3" data-number="5.3.5">
 <h3 data-number="5.3.5" class="anchored" data-anchor-id="metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</h3>
-<p>After ingestion, metadata is stored in PostgreSQL <code>COMMENT</code>s as JSON at the <strong>table</strong> level:</p>
+<p>Sources of truth for table and column descriptions live in this repo (not in the database), so they are reviewable via PRs and travel with the code that produced them:</p>
 <ul>
-<li><strong>description</strong>: General description and row uniqueness</li>
-<li><strong>source</strong>: CSV file link to Google Drive</li>
-<li><strong>source_created</strong>: Source file creation timestamp</li>
-<li><strong>workflow</strong>: Link to rendered ingestion script</li>
-<li><strong>workflow_ingested</strong>: Ingestion timestamp</li>
+<li><code>metadata/{provider}/{dataset}/tbls_redefine.csv</code> — <code>tbl_new</code>, <code>tbl_description</code></li>
+<li><code>metadata/{provider}/{dataset}/flds_redefine.csv</code> — <code>tbl_new</code>, <code>fld_new</code>, <code>fld_description</code>, <code>units</code></li>
+<li><code>metadata/{provider}/{dataset}/metadata_derived.csv</code> — optional markdown/units overlay for derived tables and columns</li>
+<li><code>metadata/release_tables.csv</code> and <code>metadata/release_columns.csv</code> — for tables built inside <code>release_database.qmd</code> itself (<code>cruise_summary</code>, <code>_spatial</code>, <code>_spatial_attr</code>, …)</li>
+<li><code>metadata/measurement_type.csv</code> — canonical measurement types with units</li>
+<li><code>metadata/dataset.csv</code> — dataset-level descriptions, citations, links</li>
 </ul>
-<p>And at the <strong>field</strong> level:</p>
-<ul>
-<li><strong>description</strong>: Field description</li>
-<li><strong>units</strong>: SI units where applicable</li>
-</ul>
-<p>These comments are exposed via the API <a href="https://api.calcofi.io/db_tables">db_tables</a> endpoint and rendered with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html">calcofi4r::cc_db_catalog</a>.</p>
+<p>These flow through two stages:</p>
+<ol type="1">
+<li><p><strong>Per-ingest</strong>: <code>calcofi4db::build_metadata_json()</code> (called inside <code>finalize_ingest()</code>) writes <code>data/parquet/{provider}_{dataset}/metadata.json</code> (schema version 1.0) alongside the parquet outputs.</p></li>
+<li><p><strong>Per-release</strong>: <code>calcofi4db::merge_metadata_json()</code> (called inside <code>release_database.qmd</code>) merges every per-ingest sidecar plus the release-only registries and writes <code>gs://calcofi-db/ducklake/releases/{version}/metadata.json</code> (schema version 1.1) with this shape:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"schema_version"</span><span class="fu">:</span> <span class="st">"1.1"</span><span class="fu">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"release_version"</span><span class="fu">:</span> <span class="st">"v2026.05.14"</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"release_date"</span><span class="fu">:</span>    <span class="st">"2026-05-14"</span><span class="fu">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"datasets"</span><span class="fu">:</span>          <span class="fu">{</span> <span class="dt">"calcofi_bottle"</span><span class="fu">:</span> <span class="fu">{</span> <span class="er">...</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"tables"</span><span class="fu">:</span>            <span class="fu">{</span> <span class="dt">"bottle"</span><span class="fu">:</span>         <span class="fu">{</span> <span class="dt">"name_long"</span><span class="fu">:</span> <span class="st">"Bottle"</span><span class="fu">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"description_md"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"provider"</span><span class="fu">:</span> <span class="st">"calcofi"</span><span class="fu">,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"dataset"</span><span class="fu">:</span>  <span class="st">"bottle"</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"columns"</span><span class="fu">:</span>           <span class="fu">{</span> <span class="dt">"bottle.depth_m"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"name_long"</span><span class="fu">:</span> <span class="st">"Depth M"</span><span class="fu">,</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"units"</span><span class="fu">:</span>          <span class="st">"meters"</span><span class="fu">,</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"description_md"</span><span class="fu">:</span> <span class="st">"Bottle depth"</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"measurement_types"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"temperature"</span><span class="fu">:</span>    <span class="fu">{</span> <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"units"</span><span class="fu">:</span>       <span class="st">"degC"</span><span class="fu">,</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"is_canonical"</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<p>Markdown is supported anywhere in <code>description_md</code>; consumers should render it through a markdown parser when displaying.</p>
 </section>
-<section id="publishing-to-portals" class="level3" data-number="5.3.6">
-<h3 data-number="5.3.6" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">5.3.6</span> Publishing to portals</h3>
-<p>After <code>prod</code> schema is versioned, additional workflows publish data to <a href="https://calcofi.io/docs/portals.html">Portals</a> (ERDDAP, EDI, OBIS, NCEI) using ecological metadata language (EML) via the <a href="https://docs.ropensci.org/EML/">EML</a> R package, pulling metadata directly from database comments.</p>
+<section id="consuming-descriptions" class="level3" data-number="5.3.6">
+<h3 data-number="5.3.6" class="anchored" data-anchor-id="consuming-descriptions"><span class="header-section-number">5.3.6</span> Consuming descriptions</h3>
+<p>From R, fetch the descriptions either column-by-column or as a full interactive catalog. Both calls hit the release <code>metadata.json</code> sidecar:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># schema + descriptions + units for a single table</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">cc_describe_table</span>(<span class="st">"bottle"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(tbl, <span class="st">"description_md"</span>)    <span class="co"># table-level description</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># interactive datatable of every table and column in the release</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>(<span class="at">tables =</span> <span class="fu">c</span>(<span class="st">"bottle"</span>, <span class="st">"ichthyo"</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>(<span class="at">version =</span> <span class="st">"v2026.05.14"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>When writing a new ingest, populate <code>tbls_redefine.csv</code> and <code>flds_redefine.csv</code> (especially <code>fld_description</code> and <code>units</code>) before running the ingest notebook — <code>build_metadata_json()</code> reads them directly. The Claude Code <code>/generate-metadata</code> and <code>/validate-ingest</code> skills enforce this.</p>
 </section>
-<section id="or-describe-tables-and-columns-directly" class="level3" data-number="5.3.7">
-<h3 data-number="5.3.7" class="anchored" data-anchor-id="or-describe-tables-and-columns-directly"><span class="header-section-number">5.3.7</span> OR Describe tables and columns directly</h3>
-<ul>
-<li><p>Use the <code>COMMENT</code> clause to add descriptions to tables and columns, either through the GUI <a href="https://pgadmin.calcofi.io/">pgadmin.calcofi.io</a> (by right-clicking on the table or column and selecting <code>Properties</code>) or with SQL. For example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMENT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.aoi_fed_sanctuaries <span class="kw">IS</span> <span class="st">'areas of interest (`aoi`) polygons for federal **National Marine Sanctuaries**; loaded by _workflow_ [load_sanctuaries](https://calcofi.io/workflows/load_sanctuaries.html)'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Note the use of <a href="https://www.markdownguide.org/cheat-sheet/"><strong>markdown</strong></a> for including links and formatting (e.g., bold, code, italics), such that the above SQL will render like so:</p>
-<blockquote class="blockquote">
-<p>areas of interest (<code>aoi</code>) polygons for federal <strong>National Marine Sanctuaries</strong>; loaded by <em>workflow</em> <a href="https://calcofi.io/workflows/load_sanctuaries.html">load_sanctuaries</a></p>
-</blockquote></li>
-<li><p>It is especially helpful to link to any <em><strong>workflows</strong></em> that are responsible for the ingesting or updating of the input data.</p></li>
-</ul>
-</section>
-<section id="display-tables-and-columns-with-metadata" class="level3" data-number="5.3.8">
-<h3 data-number="5.3.8" class="anchored" data-anchor-id="display-tables-and-columns-with-metadata"><span class="header-section-number">5.3.8</span> Display tables and columns with metadata</h3>
-<ul>
-<li>These descriptions can be viewed in the CalCOFI <strong>API</strong> <a href="https://api.calcofi.io">api.calcofi.io</a> as CSV tables (see code in <a href="https://github.com/CalCOFI/api/blob/8ad9d9ad62fd526d4b8da23357759f1ad196cb88/plumber.R#L916-L990">calcofi/api: <code>plumber.R</code></a>):
-<ul>
-<li><a href="https://api.calcofi.io/db_tables">api.calcofi.io<code>/db_tables</code></a><br>
-fields:<br>
-
-<ul>
-<li><code>schema</code>: (only “public” so far)</li>
-<li><code>table_type</code>: “table”, “view”, or “materialized view” (none yet)</li>
-<li><code>table</code>: name of table</li>
-<li><code>table_description</code>: description of table (possibly in markdown)</li>
-</ul></li>
-<li><a href="https://api.calcofi.io/db_columns">api.calcofi.io<code>/db_columns</code></a><br>
-fields:<br>
-
-<ul>
-<li><code>schema</code>: (only “public” so far)</li>
-<li><code>table_type</code>: “table”, “view”, or “materialized view” (none yet)</li>
-<li><code>table</code>: name of table</li>
-<li><code>column</code>: name of column</li>
-<li><code>column_type</code>: data type of column</li>
-<li><code>column_description</code>: description of column (possibly in markdown)</li>
-</ul></li>
-</ul></li>
-<li>Fetch and display these descriptions into an interactive table with <a href="https://calcofi.io/calcofi4r/reference/cc_db_catalog.html"><code>calcofi4r::</code><strong><code>cc_db_catalog()</code></strong></a>.</li>
-</ul>
+<section id="publishing-to-portals" class="level3" data-number="5.3.7">
+<h3 data-number="5.3.7" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">5.3.7</span> Publishing to portals</h3>
+<p>Workflows in <code>workflows/publish_*.qmd</code> push selected tables to external portals (ERDDAP, EDI, OBIS, NCEI). They read the release <code>metadata.json</code> to assemble Ecological Metadata Language (EML) and ERDDAP datasets.xml entries, so descriptions stay in sync across portals without re-keying.</p>
 </section>
 </section>
 <section id="relationships-between-tables" class="level2" data-number="5.4">
