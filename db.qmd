@@ -266,8 +266,17 @@ it through a markdown parser when displaying.
 
 ### Consuming descriptions
 
+The fastest way to browse the schema is the
+[**CalCOFI Schema explorer**](https://calcofi.io/schema/) —
+per-release ERD, sortable table/column lists with units, dataset
+provenance, and the measurement-type registry, all sourced from the
+release `metadata.json` sidecar on GCS. Deep-link to a specific
+release with `#erd?v=v2026.05.19` (or `#tables`, `#columns`,
+`#measurements`).
+
 From R, fetch the descriptions either column-by-column or as a full
-interactive catalog. Both calls hit the release `metadata.json` sidecar:
+interactive catalog. Both calls hit the same release `metadata.json`
+sidecar:
 
 ```r
 library(calcofi4r)

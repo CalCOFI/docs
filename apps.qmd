@@ -1,5 +1,9 @@
 # Applications
 
+- [CalCOFI Schema](https://calcofi.io/schema/)\
+  per-release schema browser: ERD, tables, columns (with units + descriptions), datasets, measurement-type registry — sourced from the release `metadata.json` sidecar on GCS
+- [CalCOFI Query](https://calcofi.io/query/)\
+  browser-only DuckDB-WASM playground against the public release Parquet on GCS
 - [CalCOFI Oceanography](https://shiny.calcofi.io/oceano)\
   oceanographic summarization by arbitrary area of interest and sampling period
 - [UCSB Student Capstone](https://shiny.calcofi.io/capstone)

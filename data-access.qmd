@@ -16,8 +16,9 @@ Each release is a versioned folder:
 
 ```
 gs://calcofi-db/ducklake/releases/{version}/
-├── catalog.json          # table list, row counts, "partitioned" flag
+├── catalog.json          # table list, row counts, "partitioned" flag, total_size
 ├── relationships.json    # primary keys + foreign keys
+├── metadata.json         # table/column descriptions, units, datasets, measurement types
 ├── RELEASE_NOTES.md
 └── parquet/
     ├── {table}.parquet                  # single-file tables
@@ -26,12 +27,17 @@ gs://calcofi-db/ducklake/releases/{version}/
 
 - Public HTTPS base:
   `https://storage.googleapis.com/calcofi-db/ducklake/releases/{version}/parquet`
-- `{version}` is e.g. `v2026.05.14`; the current release pointer is at
+- `{version}` is e.g. `v2026.05.19`; the current release pointer is at
   [`releases/latest.txt`](https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt)
   and the table list at `releases/{version}/catalog.json`.
 - Most tables are **single-file** (`{table}.parquet`). The large CTD tables
   `ctd_thin` and `ctd_summary` are **hive-partitioned** by `cruise_key`
   (`catalog.json` flags these with `"partitioned": true`).
+- To **see what's in each table** before writing a query, open the
+  [**CalCOFI Schema explorer**](https://calcofi.io/schema/) — ERD,
+  sortable tables/columns with units and descriptions, dataset provenance,
+  and the canonical measurement-type registry, all reading the same
+  `metadata.json` sidecar.
 
 ## Setup: the `httpfs` extension
 
