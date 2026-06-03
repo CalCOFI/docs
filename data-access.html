@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -321,16 +321,18 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <h2 data-number="6.1" class="anchored" data-anchor-id="where-the-data-lives"><span class="header-section-number">6.1</span> Where the data lives</h2>
 <p>Each release is a versioned folder:</p>
 <pre><code>gs://calcofi-db/ducklake/releases/{version}/
-├── catalog.json          # table list, row counts, "partitioned" flag
+├── catalog.json          # table list, row counts, "partitioned" flag, total_size
 ├── relationships.json    # primary keys + foreign keys
+├── metadata.json         # table/column descriptions, units, datasets, measurement types
 ├── RELEASE_NOTES.md
 └── parquet/
     ├── {table}.parquet                  # single-file tables
     └── {table}/cruise_key=.../*.parquet # hive-partitioned tables</code></pre>
 <ul>
 <li>Public HTTPS base: <code>https://storage.googleapis.com/calcofi-db/ducklake/releases/{version}/parquet</code></li>
-<li><code>{version}</code> is e.g.&nbsp;<code>v2026.05.14</code>; the current release pointer is at <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt"><code>releases/latest.txt</code></a> and the table list at <code>releases/{version}/catalog.json</code>.</li>
+<li><code>{version}</code> is e.g.&nbsp;<code>v2026.05.19</code>; the current release pointer is at <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt"><code>releases/latest.txt</code></a> and the table list at <code>releases/{version}/catalog.json</code>.</li>
 <li>Most tables are <strong>single-file</strong> (<code>{table}.parquet</code>). The large CTD tables <code>ctd_thin</code> and <code>ctd_summary</code> are <strong>hive-partitioned</strong> by <code>cruise_key</code> (<code>catalog.json</code> flags these with <code>"partitioned": true</code>).</li>
+<li>To <strong>see what’s in each table</strong> before writing a query, open the <a href="https://calcofi.io/schema/"><strong>CalCOFI Schema explorer</strong></a> — ERD, sortable tables/columns with units and descriptions, dataset provenance, and the canonical measurement-type registry, all reading the same <code>metadata.json</code> sidecar.</li>
 </ul>
 </section>
 <section id="setup-the-httpfs-extension" class="level2" data-number="6.2">
