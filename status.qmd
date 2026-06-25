@@ -2,6 +2,104 @@
 title: "Status"
 ---
 
+## 2026-07-01
+
+<!--
+Claude Code (Opus 4.8) — end-of-contract review.
+Sources: (1) git histories since 2025-12-01 across all CalCOFI repositories
+(workflows, calcofi4db, calcofi4r, server, docs, int-app, apps, query, erddap,
+schema, api-h3t, api-h3t-py, CalCOFI.github.io, and the 2026 student-capstone
+repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
+(3) deliverables in "CalCOFI - EcoQuants Quote, 2025-10 to 2026-06_v2"
+(Ingest / Visualize / Share; total $44,123).
+-->
+
+This report covers the second half of the **2025-10-01 to 2026-06-30** contract period (work since the 2025-12-01 status) and serves as the end-of-contract wrap-up. It is organized around the three contract components — **Ingest**, **Visualize**, and **Share** — and closes with a deliverables crosswalk against the Statement of Work. Headline outcomes: all eight must-complete (\*\*) datasets are ingested into a versioned, reproducible database; nine releases were published (v2026.03.25 → v2026.06.08, now 44 tables); a new on-the-fly hexagon tile service powers the integrated app; and CalCOFI data are now flowing to ERDDAP and OBIS, browsable through new schema and query explorers.
+
+---
+
+### 1. Ingest — A Versioned, Reproducible Integrated Database
+
+The bulk of the period's effort went into the ingestion pipeline (`workflows`) and its engine package (`calcofi4db`), which together turn heterogeneous source files into a single, versioned database.
+
+- **All must-complete datasets ingested.** Building on bottle, fish eggs & larvae (ichthyo), and CTD casts, the team added **DIC** (dissolved inorganic carbon), **phytoplankton** (Venrick, EDI #28, region-pooled grain with WoRMS taxonomy), **lobster phyllosoma** (EDI #33), **CUFES** (#35), **euphausiids/krill**, **PIC zooplankton**, and **bird & mammal census** data. Cephalopod/invertebrate counts were folded into the ichthyo dataset rather than maintained separately. Release **v2026.06.08** now spans **44 tables**.
+
+- **Frozen, reproducible releases (DuckLake + Parquet on GCS).** `release_database.qmd` acts as the pipeline "caboose": it validates, freezes, and uploads each release to a Google Cloud Storage bucket as Parquet, with an auto-generated entity-relationship diagram and a `metadata.json` sidecar carrying full table/column descriptions, units, and data types. Nine releases were cut between March and June 2026.
+
+- **A hardened, well-keyed data model.** Identifiers were standardized on stable keys — UUID-first source keys, `cruise_key` as `YYYY-MM-NODC`, and `sta_key → site_key`. The CTD data — by far the largest input — was tamed with a new adaptively-thinned **`ctd_thin`** table (5.5M rows / ~258 MB, preserving inflections via Douglas-Peucker) replacing the 15+ GB raw measurement table as the headline product, and several duplicate-key and phantom-cruise bugs were fixed.
+
+- **`calcofi4db` formalized (v2.4 → v2.8).** New capabilities include content-hash deduplication of Parquet uploads (ignoring provenance columns), YAML-authoritative dataset metadata, native `GEOMETRY` storage with `ST_Hilbert` spatial ordering, dependency VIEWs, and server-side GCS copy — which together cut a full pipeline run from 60+ minutes to ~4 minutes. A reusable set of **Claude Code ingest skills** (explore → generate-metadata → ingest → validate) and **cross-dataset match helpers** now make adding a new dataset largely turnkey.
+
+- **Data-lake migration.** Source contributions were migrated from a personal Google Drive to the organizational **CalCOFI Data Folder** shared drive, with `rclone`-based GDrive→GCS sync via a dedicated `calcofi-admin` service account (provisioned with Erin's help), establishing the long-term archive.
+
+---
+
+### 2. Visualize — On-the-Fly Hexagons, Management Areas, and Partner Dashboards
+
+- **On-the-fly hexagon tile service (the cached-endpoint deliverable).** The integrated app previously pre-computed hexagon summaries for all zoom levels across the entire study area. A new **H3T tile API** now summarizes only the current zoom level and map extent on demand. It was prototyped as an R/Plumber service (`api-h3t`), then rewritten as a FastAPI service (`api-h3t-py`) with multi-database support, fronted by Varnish caching and edge gzip/zstd compression at `h3t.calcofi.io`. The integrated app reads hex data from it behind a `USE_H3T` flag.
+
+- **Management areas of interest.** The integrated app (`int-app`) gained spatial layers for maritime zones, marine protected areas, and wind energy areas, plus a dark/light theme, reproducible query/data download bundles, and a direct connection to the `calcofi4r` Parquet database (replacing the old API dependency).
+
+- **Standalone and partner apps.** New/redesigned Shiny apps include **`ctd-viz`** (linked map/table, plotly transects, GEBCO bathymetry), a **`datacheck`** cross-dataset observation explorer with deep-linkable URLs, and a **cruises** explorer. Three 2026 student-capstone visualization products were also supported and now ship from GitHub Pages: the **UCSB Station Data Portal**, the **UCSB Larvae Dashboard**, and the **UCLA California Ocean & Coastal Monitoring Inventory** map — extending the partner coalition envisioned in the SOW.
+
+---
+
+### 3. Share — Publishing to ERDDAP & OBIS, plus Discovery Tools
+
+- **ERDDAP.** A CalCOFI-branded ERDDAP server was configured and deployed, serving multiple `EDDTableFromParquetFiles` datasets (bottle, phytoplankton, and others). A dedicated benchmark study compared Parquet, NetCDF (`EDDTableFromNcCFFiles`), and DuckDB serving backends to choose the best layout — prompted by the wide CTD table OOM-ing ERDDAP's heap, which remains the one open serving issue (see crosswalk).
+
+- **OBIS.** The fish eggs & larvae → OBIS workflow (Darwin Core + EML, joining biological observations to CTD environment by cruise) was refined to use the stable UUID keys and ichthyo-only scope.
+
+- **Discovery & documentation.** Two new browser-based, serverless tools were built and linked throughout the docs: a **Schema explorer** (`schema/` — diagram, tables, columns, datasets, measurements, with a cross-tab dataset filter and clickable ERD) and a **Query playground** (`query/` — a Jekyll + DuckDB-WASM SQL sandbox). `calcofi4r` was rewired to read release `metadata.json`, emits `llms.txt`, and documents bio↔environment matching helpers; the `docs` site added Data Access and Matching pages.
+
+- **Webinar series — pending.** The final Share deliverable (a recorded webinar series) has not yet been produced; a progress deck (Dec 2025 – Jun 2026) was assembled in its place.
+
+---
+
+### Deliverables Crosswalk
+
+Against the SOW (\*\* = must-complete by end of contract):
+
+**Ingest** — all must-complete datasets done:
+
+| Dataset | Status |
+|---|---|
+| Bottle Database \*\* | ✅ ingested |
+| Fish Eggs & Larvae \*\* | ✅ ingested (ichthyo) |
+| CTD Cast Files \*\* | ✅ ingested (`ctd_thin` + `ctd_cast`) |
+| Krill / euphausiids \*\* | ✅ ingested |
+| Zooplankton biovolume \*\* | ✅ ingested (PIC) |
+| Cephalopod / invertebrate \*\* | ✅ folded into ichthyo |
+| Phytoplankton (Venrick) \*\* | ✅ ingested (#28) |
+| DIC \*\* | ✅ ingested |
+| CUFES, lobster phyllosoma, bird/mammal census | ✅ ingested (beyond must-complete) |
+
+**Visualize:**
+
+| Deliverable | Status |
+|---|---|
+| Add management areas (sanctuaries, MPAs, wind areas) | ✅ added to int-app |
+| On-the-fly hexagon endpoint by extent/zoom | ✅ H3T tile API live |
+| Expand hex summaries across new datasets | 🔄 in progress as datasets land |
+
+**Share:**
+
+| Deliverable | Status |
+|---|---|
+| CTD Cast Files → ERDDAP \*\* | 🔄 wide-table OOM under investigation (backend benchmark) |
+| Bottle Database → ERDDAP \*\* | ✅ published |
+| Fish Eggs & Larvae → OBIS \*\* | ✅ workflow complete |
+| Other portals (EDI, NCEI, additional OBIS) | 🔄 / ⏳ as prioritized |
+| Recorded webinar series | ⏳ pending (progress deck delivered) |
+
+---
+
+### Program Coordination
+
+Beyond code, the period included sustained coordination with the CalCOFI program (Erin Satterthwaite and team): contributing to the **Data Management Plan**, gathering input on a **dataset search tool** (categorizing variables by EOVs), scoping **CalOOS/SCCOOS portal** integration, mentoring the UCSB/UCLA **capstone teams**, and contributing to an MBON ocean-indicators manuscript and several joint proposals (GOMO AI/Data pilots, IOOS OTT). EcoQuants LLC's CalCOFI work transitioned to **Ocean Metrics LLC** during this period.
+
+---
+
 ## 2025-12-01
 
 <!--
