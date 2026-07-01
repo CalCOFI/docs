@@ -4,7 +4,7 @@
 
 The CalCOFI [interactive app](https://shiny.calcofi.io) renders **hexagonal heatmaps** of species occurrence and oceanographic variables — sardine larvae densities, sea-surface temperature, salinity, chlorophyll — across the entire CalCOFI sampling area, at any zoom level, in seconds. The engine that makes this possible is **H3T**, a tile service that converts a database query into a stream of hexagon tiles on demand.
 
-![Side-by-side comparison in the [CalCOFI Integrated App](https://app.calcofi.io/int): hexagons summarizing **biology** (Pacific sardine larvae abundance, left) and **environment** (sea-surface temperature, right) over the same area, era, and quarters, with a swipeable divider for direct visual comparison. Both layers are powered by the H3T tile service.](figs/int-app_map-compare-bio-env.png){#fig-int-app-compare}
+![Side-by-side comparison in the [CalCOFI Integrated App](https://app.calcofi.io/db-viz-hex): hexagons summarizing **biology** (Pacific sardine larvae abundance, left) and **environment** (sea-surface temperature, right) over the same area, era, and quarters, with a swipeable divider for direct visual comparison. Both layers are powered by the H3T tile service.](figs/int-app_map-compare-bio-env.png){#fig-db-viz-hex-compare}
 
 This chapter explains how H3T works, visually, for both the curious oceanographer and the developer who wants to extend it. Throughout, the guiding principle is:
 
@@ -22,7 +22,7 @@ Compared to a raster of pixels, hexagons aggregate point observations (a net tow
 
 ## The problem: aggregating millions of points at every zoom
 
-Before H3T, the int-app pre-computed every hex aggregation across **all 10 H3 resolutions** for every species and environmental variable at startup. The Shiny app then shipped the relevant resolution to the browser for each zoom change. This gave the app two problems:
+Before H3T, the db-viz-hex pre-computed every hex aggregation across **all 10 H3 resolutions** for every species and environmental variable at startup. The Shiny app then shipped the relevant resolution to the browser for each zoom change. This gave the app two problems:
 
 1. **Slow startup.** Building those aggregations against the full bottle and ichthyo tables took >10 s every time the app launched.
 2. **Heavy memory.** A multi-resolution `sf` grid for one variable is hundreds of megabytes; for dozens of variables it crowded out everything else on the Shiny server.
@@ -37,7 +37,7 @@ The architecture rests on three ideas, each covered below: the H3 resolution tha
 
 When the user zooms out to see the whole California Current, they don't need 7-meter hexagons — a 22 km hex is finer than the underlying sampling grid anyway. When they zoom in to a single CalCOFI line, they want as much detail as the data supports. H3T maps web-map zoom levels to H3 resolutions on the server side: zoom 0–1 → res 1 (~1106 km hexes), zoom 5–7 → res 5 (~22 km hexes), zoom 11+ → res 10 (~7.5 m hexes), and so on (@fig-h3-pyramid).
 
-The trick is in the SQL: the int-app sends a **template** with a literal placeholder `hex_h3res{{res}}` (see `build_sp_sql()` in [`int-app/app/functions_h3t.R`](https://github.com/CalCOFI/int-app/blob/main/app/functions_h3t.R)), and the API substitutes the right resolution for each tile before executing. One query string, ten zoom levels, one shared cache namespace.
+The trick is in the SQL: the db-viz-hex sends a **template** with a literal placeholder `hex_h3res{{res}}` (see `build_sp_sql()` in [`db-viz-hex/app/functions_h3t.R`](https://github.com/CalCOFI/db-viz-hex/blob/main/app/functions_h3t.R)), and the API substitutes the right resolution for each tile before executing. One query string, ten zoom levels, one shared cache namespace.
 
 ```{mermaid}
 %%| label: fig-h3-pyramid
@@ -77,20 +77,20 @@ The validation, read-only mode, timeout, and row cap are stacked guardrails: the
 
 Caches are easy to fill but notoriously hard to clear. H3T sidesteps the hard part entirely with a single trick: the `release` query parameter (@fig-h3t-release).
 
-When CalCOFI publishes a new database release (e.g., `v2026.04.08`, see [Database](db.qmd)), a symlink at the API server is swapped to point at the new file. The next time the int-app loads, it asks `/h3t/meta` for the current release version, gets back `v2026.04.08`, and passes that into every subsequent tile URL. Because the URL is now different, Varnish **automatically cache-misses** — and the new tiles are generated against the fresh data on first request. Old tiles linger harmlessly in cache until evicted by LRU; they'd still serve correct data for their old release if anyone asked.
+When CalCOFI publishes a new database release (e.g., `v2026.04.08`, see [Database](db.qmd)), a symlink at the API server is swapped to point at the new file. The next time the db-viz-hex loads, it asks `/h3t/meta` for the current release version, gets back `v2026.04.08`, and passes that into every subsequent tile URL. Because the URL is now different, Varnish **automatically cache-misses** — and the new tiles are generated against the fresh data on first request. Old tiles linger harmlessly in cache until evicted by LRU; they'd still serve correct data for their old release if anyone asked.
 
 No purge command, no cache key surgery. Just: change one parameter, get a clean cache layer for free.
 
 ```{mermaid}
 %%| label: fig-h3t-release
-%%| fig-cap: "Cache invalidation by release. The `release` query parameter is part of every tile URL. When a new database release is published, the int-app picks up the new version from `/h3t/meta`, all subsequent tile URLs change, and Varnish refills naturally — no manual purge."
+%%| fig-cap: "Cache invalidation by release. The `release` query parameter is part of every tile URL. When a new database release is published, the db-viz-hex picks up the new version from `/h3t/meta`, all subsequent tile URLs change, and Varnish refills naturally — no manual purge."
 %%| file: diagrams/h3t-release.mmd
 %%| fig-width: 7
 ```
 
 ## A worked example: sardine + temperature
 
-To make this concrete, here is the full life of one click in the int-app:
+To make this concrete, here is the full life of one click in the db-viz-hex:
 
 1. **User picks** _Pacific sardine_ (`Sardinops sagax`) and _temperature_ in the sidebar, with date range 1949–2024 and all four quarters.
 2. **`build_sp_sql()`** assembles a SQL template:
@@ -145,7 +145,7 @@ For the schema details, see [Database](db.qmd). For the publish path, see [Porta
 | Repository | Role |
 |---|---|
 | [CalCOFI/api-h3t](https://github.com/CalCOFI/api-h3t) | Plumber API, sqlglot validator, DuckDB driver, deployment configs |
-| [CalCOFI/int-app](https://github.com/CalCOFI/int-app) | Shiny consumer; SQL builders and map widgets in `app/functions_h3t.R` |
+| [CalCOFI/db-viz-hex](https://github.com/CalCOFI/db-viz-hex) | Shiny consumer; SQL builders and map widgets in `app/functions_h3t.R` |
 | [bbest/mapgl @ feat/add-h3t-source](https://github.com/bbest/mapgl/tree/feat/add-h3t-source) | `add_h3t_source()` extension to the [mapgl R package](https://walker-data.com/mapgl/) |
 | [bbest/h3j-h3t @ fix/maplibre-v3-compat](https://github.com/bbest/h3j-h3t/tree/fix/maplibre-v3-compat) | fix h3t protocol for MapLibre v3+/v4 and multiple sources on one page in [INSPIDE/h3j-h3t](https://github.com/INSPIDE/h3j-h3t) | 
 

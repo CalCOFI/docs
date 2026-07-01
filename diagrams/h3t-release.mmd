@@ -15,7 +15,7 @@ flowchart LR
   %% after release
   subgraph after["<b>after release</b>"]
     direction TB
-    meta["int-app fetches<br/>/h3t/meta → release=v2026.04.08"]:::req
+    meta["db-viz-hex fetches<br/>/h3t/meta → release=v2026.04.08"]:::req
     u2["browser request<br/>?q=…&release=<b>v2026.04.08</b>"]:::req
     c2[("Varnish<br/>old URLs idle<br/>new URLs cache-miss")]:::cache
     db2[("DuckDB<br/>v2026.04.08")]:::db

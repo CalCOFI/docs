@@ -23,7 +23,7 @@ each API endpoint to its replacement.
 ## Try the new client-side query playground
 
 The three retired bio↔env endpoints — and many more queries besides — are
-now an interactive form at **[calcofi.io/query/](https://calcofi.io/query/)**
+now an interactive form at **[calcofi.io/db-query/](https://calcofi.io/db-query/)**
 that runs entirely in your browser. Pick a query from the left-side
 accordion, fill the form, click **Run**, see the rows — no server, no
 credentials, no install. DuckDB-WASM in a worker thread, public Parquet on
@@ -40,14 +40,14 @@ available at:
 
 | Legacy endpoint | R helper (`calcofi4r`) | Browser |
 |---|---|---|
-| `/variables` | `cc_list_measurement_types()` | [Query → measurement types](https://calcofi.io/query/#browse--measurement-types) |
-| `/timeseries` | direct SQL aggregation — see [Data Access](data-access.qmd) | [Query → SQL shell](https://calcofi.io/query/#sql-shell--shell) |
-| `/cruises` | `cc_read_cruise()` | [Query → cruises](https://calcofi.io/query/#browse--cruises) |
+| `/variables` | `cc_list_measurement_types()` | [Query → measurement types](https://calcofi.io/db-query/#browse--measurement-types) |
+| `/timeseries` | direct SQL aggregation — see [Data Access](data-access.qmd) | [Query → SQL shell](https://calcofi.io/db-query/#sql-shell--shell) |
+| `/cruises` | `cc_read_cruise()` | [Query → cruises](https://calcofi.io/db-query/#browse--cruises) |
 | `/raster` | direct SQL + `pts_to_rast_idw()` | — |
-| `/cruise_lines`, `/cruise_line_profile` | direct SQL against `ctd_cast` / `ctd_thin` | [Query → SQL shell](https://calcofi.io/query/#sql-shell--shell) |
-| `zooplankton_biomass` | [`cc_match_zooplankton_biomass()`](helpers.qmd) | **[Query → zoo biomass](https://calcofi.io/query/#bio-env-matching--zoo-biomass)** |
-| `itis_ichthyodata` | [`cc_match_ichthyo_by_taxon()`](helpers.qmd) | **[Query → by taxon](https://calcofi.io/query/#bio-env-matching--by-taxon)** |
-| `ichthyodata` | [`cc_match_ichthyo_by_name()`](helpers.qmd) | **[Query → by name](https://calcofi.io/query/#bio-env-matching--by-name)** |
+| `/cruise_lines`, `/cruise_line_profile` | direct SQL against `ctd_cast` / `ctd_thin` | [Query → SQL shell](https://calcofi.io/db-query/#sql-shell--shell) |
+| `zooplankton_biomass` | [`cc_match_zooplankton_biomass()`](helpers.qmd) | **[Query → zoo biomass](https://calcofi.io/db-query/#bio-env-matching--zoo-biomass)** |
+| `itis_ichthyodata` | [`cc_match_ichthyo_by_taxon()`](helpers.qmd) | **[Query → by taxon](https://calcofi.io/db-query/#bio-env-matching--by-taxon)** |
+| `ichthyodata` | [`cc_match_ichthyo_by_name()`](helpers.qmd) | **[Query → by name](https://calcofi.io/db-query/#bio-env-matching--by-name)** |
 
 ## Legacy endpoint reference
 

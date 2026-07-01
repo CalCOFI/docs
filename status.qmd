@@ -7,7 +7,7 @@ title: "Status"
 <!--
 Claude Code (Opus 4.8) — end-of-contract review.
 Sources: (1) git histories since 2025-12-01 across all CalCOFI repositories
-(workflows, calcofi4db, calcofi4r, server, docs, int-app, apps, query, erddap,
+(workflows, calcofi4db, calcofi4r, server, docs, db-viz-hex, apps, query, erddap,
 schema, api-h3t, api-h3t-py, CalCOFI.github.io, and the 2026 student-capstone
 repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 (3) deliverables in "CalCOFI - EcoQuants Quote, 2025-10 to 2026-06_v2"
@@ -38,7 +38,7 @@ The bulk of the period's effort went into the ingestion pipeline (`workflows`) a
 
 - **On-the-fly hexagon tile service (the cached-endpoint deliverable).** The integrated app previously pre-computed hexagon summaries for all zoom levels across the entire study area. A new **H3T tile API** now summarizes only the current zoom level and map extent on demand. It was prototyped as an R/Plumber service (`api-h3t`), then rewritten as a FastAPI service (`api-h3t-py`) with multi-database support, fronted by Varnish caching and edge gzip/zstd compression at `h3t.calcofi.io`. The integrated app reads hex data from it behind a `USE_H3T` flag.
 
-- **Management areas of interest.** The integrated app (`int-app`) gained spatial layers for maritime zones, marine protected areas, and wind energy areas, plus a dark/light theme, reproducible query/data download bundles, and a direct connection to the `calcofi4r` Parquet database (replacing the old API dependency).
+- **Management areas of interest.** The integrated app (`db-viz-hex`) gained spatial layers for maritime zones, marine protected areas, and wind energy areas, plus a dark/light theme, reproducible query/data download bundles, and a direct connection to the `calcofi4r` Parquet database (replacing the old API dependency).
 
 - **Standalone and partner apps.** New/redesigned Shiny apps include **`ctd-viz`** (linked map/table, plotly transects, GEBCO bathymetry), a **`datacheck`** cross-dataset observation explorer with deep-linkable URLs, and a **cruises** explorer. Three 2026 student-capstone visualization products were also supported and now ship from GitHub Pages: the **UCSB Station Data Portal**, the **UCSB Larvae Dashboard**, and the **UCLA California Ocean & Coastal Monitoring Inventory** map — extending the partner coalition envisioned in the SOW.
 
@@ -78,7 +78,7 @@ Against the SOW (\*\* = must-complete by end of contract):
 
 | Deliverable | Status |
 |---|---|
-| Add management areas (sanctuaries, MPAs, wind areas) | ✅ added to int-app |
+| Add management areas (sanctuaries, MPAs, wind areas) | ✅ added to db-viz-hex |
 | On-the-fly hexagon endpoint by extent/zoom | ✅ H3T tile API live |
 | Expand hex summaries across new datasets | 🔄 in progress as datasets land |
 
@@ -104,7 +104,7 @@ Beyond code, the period included sustained coordination with the CalCOFI program
 
 <!--
 Copilot (GPT-5.1 Preview) on Github
-Review all commits since 2025-07-01 in these CalCOFI repositories: int-app, workflows, server, CalCOFI.github.io, docs, calcofi4db, calcofi4r. Summarize accomplishments and development work with high level headings and detailed descriptions.
+Review all commits since 2025-07-01 in these CalCOFI repositories: db-viz-hex, workflows, server, CalCOFI.github.io, docs, calcofi4db, calcofi4r. Summarize accomplishments and development work with high level headings and detailed descriptions.
 -->
 
 Over the past several months, CalCOFI’s software and data systems have advanced significantly toward a unified, reliable, and user‑friendly platform for exploring and publishing CalCOFI data. Work has focused on four main areas: the integrated data app, the underlying database and workflows, pushing to OBIS, and organizing 
@@ -112,7 +112,7 @@ of CTD data.
 
 ### A More Capable, User-Friendly Integrated App
 
-The **CalCOFI integrated application (`int-app`)** has evolved into a much richer and more intuitive tool for scientists and partners:
+The **CalCOFI integrated application (`db-viz-hex`)** has evolved into a much richer and more intuitive tool for scientists and partners:
 
 - **Taxonomy-aware exploration**  
   The app now understands species and their taxonomic relationships. Users can browse taxa hierarchies, see taxonomic ranks, and work with improved species metadata tied to authoritative sources (e.g., WoRMS, ITIS). This makes it easier to find and compare species and groups of species consistently.

@@ -12,7 +12,7 @@ output_dir <- "~/Github/CalCOFI/_git-logs_{date_beg}-to-{Sys.Date()}" |> glue()
 # List of repository folders
 # from visiting https://github.com/orgs/CalCOFI/repositories sorted by Last pushed
 repos <- c(
-  "int-app", "workflows", "server", "CalCOFI.github.io",
+  "db-viz-hex", "workflows", "server", "CalCOFI.github.io",
   "docs", "calcofi4db", "calcofi4r")
 
 # Ensure output directory exists

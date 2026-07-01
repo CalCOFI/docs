@@ -267,7 +267,7 @@ it through a markdown parser when displaying.
 ### Consuming descriptions
 
 The fastest way to browse the schema is the
-[**CalCOFI Schema explorer**](https://calcofi.io/schema/) —
+[**CalCOFI Schema explorer**](https://calcofi.io/db-schema/) —
 per-release ERD, sortable table/column lists with units, dataset
 provenance, and the measurement-type registry, all sourced from the
 release `metadata.json` sidecar on GCS. Deep-link to a specific

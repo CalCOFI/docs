@@ -79,7 +79,7 @@ temperature (°C); `n_env` is how many bottle measurements were averaged;
 `dist_km` / `time_diff_hr` are the realized match offsets (within the 5 km /
 72 hr window). This returns the **identical 13 rows** as the [direct
 SQL](data-access.qmd#sec-worked-example) — `attr(d, "sql")` is that exact query.
-The [Integrated App](https://app.calcofi.io/int) download bundle uses the same
+The [Integrated App](https://app.calcofi.io/db-viz-hex) download bundle uses the same
 `cc_match_bio_env()` engine for its `query/` folder.
 
 ::: {.callout-note}
@@ -101,8 +101,8 @@ str(attr(d, "query_meta"))    # package + release version, params, source URLs
 `attr(d, "sql")` is character-for-character the query shown on the
 [Data Access](data-access.qmd#sec-worked-example) page — copy-paste it into the
 DuckDB CLI, Python, a colleague's R session, or the browser-based
-**[CalCOFI Query](https://calcofi.io/query/)** and it returns identical rows. That is the contract
-behind the [Integrated App](https://app.calcofi.io/int) download bundle's
+**[CalCOFI Query](https://calcofi.io/db-query/)** and it returns identical rows. That is the contract
+behind the [Integrated App](https://app.calcofi.io/db-viz-hex) download bundle's
 `query/` folder.
 
 To get the SQL **without running it** — e.g. to serialize or inspect it — pass
@@ -122,7 +122,7 @@ The portable SQL these helpers emit runs in any DuckDB client:
 | **R**, on your laptop | `cc_match_ichthyo_by_name(...)` — this page |
 | **Python**, on a notebook server | `duckdb.connect().sql(open("query.sql").read()).df()` — see [Data Access → From Python](data-access.qmd#from-python) |
 | **shell**, on the command line | `duckdb < query.sql` |
-| **your web browser**, no install | **[CalCOFI Query](https://calcofi.io/query/)** — point-and-click form for the three wrappers + custom SQL + a free-form SQL shell, all running DuckDB-WASM client-side |
+| **your web browser**, no install | **[CalCOFI Query](https://calcofi.io/db-query/)** — point-and-click form for the three wrappers + custom SQL + a free-form SQL shell, all running DuckDB-WASM client-side |
 
 In each case the *exact same* generated SQL hits the *exact same* public GCS
 Parquet, so a colleague who only writes Python (or only opens browser tabs)

@@ -34,7 +34,7 @@ gs://calcofi-db/ducklake/releases/{version}/
   `ctd_thin` and `ctd_summary` are **hive-partitioned** by `cruise_key`
   (`catalog.json` flags these with `"partitioned": true`).
 - To **see what's in each table** before writing a query, open the
-  [**CalCOFI Schema explorer**](https://calcofi.io/schema/) — ERD,
+  [**CalCOFI Schema explorer**](https://calcofi.io/db-schema/) — ERD,
   sortable tables/columns with units and descriptions, dataset provenance,
   and the canonical measurement-type registry, all reading the same
   `metadata.json` sidecar.
@@ -155,7 +155,7 @@ df = con.sql(f"""
 
 DuckDB compiles to WebAssembly, so the *same engine* runs **client-side in your
 browser** — no server, no install, no R or Python. CalCOFI ships a ready-made
-form at **→ [Open CalCOFI Query](https://calcofi.io/query/)** that wraps the three retired
+form at **→ [Open CalCOFI Query](https://calcofi.io/db-query/)** that wraps the three retired
 bio↔env Plumber endpoints (and a free-form SQL shell): pick a function, fill
 the form, click **Run**, and a Chromium / Firefox / Safari worker thread
 fetches Parquet range-by-range over HTTPS and joins them in-browser.
@@ -194,7 +194,7 @@ rows.
 ## Run it from anywhere
 
 The same portable SQL — what [`calcofi4r::cc_match_*()`](helpers.qmd) emits as
-`attr(d, "sql")`, what the [Integrated App](https://app.calcofi.io/int)
+`attr(d, "sql")`, what the [Integrated App](https://app.calcofi.io/db-viz-hex)
 download bundle ships in its `query/` folder, what is shown in
 [the worked example](#sec-worked-example) below — runs in any DuckDB client:
 
@@ -203,7 +203,7 @@ download bundle ships in its `query/` folder, what is shown in
 | **R**, on your laptop | [`calcofi4r::cc_match_ichthyo_by_name(...)`](helpers.qmd) — emits and runs the SQL; `attr(d, "sql")` hands it back |
 | **Python**, on a notebook server | `duckdb.connect().sql(open("query.sql").read()).df()` — see [From Python](#from-python) |
 | **shell**, on the command line | `duckdb < query.sql` |
-| **your web browser**, no install | **[CalCOFI Query](https://calcofi.io/query/)** — point-and-click form, runs DuckDB-WASM client-side |
+| **your web browser**, no install | **[CalCOFI Query](https://calcofi.io/db-query/)** — point-and-click form, runs DuckDB-WASM client-side |
 
 ## Reproducibility
 
@@ -211,7 +211,7 @@ Because every query is plain SQL against immutable, versioned, public Parquet,
 a CalCOFI result is **reproducible by anyone** — pin the `{version}` and re-run
 the SQL.
 
-The [Integrated App](https://app.calcofi.io/int) builds on this: its data
+The [Integrated App](https://app.calcofi.io/db-viz-hex) builds on this: its data
 **download bundle** ships a `query/` folder alongside the data:
 
 ```
@@ -227,7 +227,7 @@ Each `*.sql` file is fully interpolated, GCS-URL-based, and copy-paste runnable
 in DuckDB and you get back exactly the rows in the matching `.csv` — the
 `manifest.json` md5 checksums let you confirm it. The same SQL is what
 [`calcofi4r::cc_match_bio_env()`](helpers.qmd) executes and attaches as
-`attr(x, "sql")`, what the browser-based **[CalCOFI Query](https://calcofi.io/query/)** generates as
+`attr(x, "sql")`, what the browser-based **[CalCOFI Query](https://calcofi.io/db-query/)** generates as
 its `SQL` panel, and what a hand-written query produces — **a single source of
 truth across R, Python, the CLI and JavaScript**.
 
@@ -248,7 +248,7 @@ Done as **direct SQL**, the query is a temporal interval join plus a spatial
 query below. This block is character-for-character what
 [`calcofi4r::cc_match_ichthyo_by_name()`](helpers.qmd) returns as
 `attr(d, "sql")` — the two produce the **identical 13 rows**. The
-[Integrated App](https://app.calcofi.io/int) download bundle builds
+[Integrated App](https://app.calcofi.io/db-viz-hex) download bundle builds
 `query/integrated_*.sql` with the same `cc_match_bio_env()` engine (its
 filter set is taxa + quarters + dates rather than `life_stage`, so a
 sardine / Q1 2018 bundle returns the egg + larva superset — same matching
