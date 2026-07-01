@@ -332,7 +332,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <li>Public HTTPS base: <code>https://storage.googleapis.com/calcofi-db/ducklake/releases/{version}/parquet</code></li>
 <li><code>{version}</code> is e.g.&nbsp;<code>v2026.05.19</code>; the current release pointer is at <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt"><code>releases/latest.txt</code></a> and the table list at <code>releases/{version}/catalog.json</code>.</li>
 <li>Most tables are <strong>single-file</strong> (<code>{table}.parquet</code>). The large CTD tables <code>ctd_thin</code> and <code>ctd_summary</code> are <strong>hive-partitioned</strong> by <code>cruise_key</code> (<code>catalog.json</code> flags these with <code>"partitioned": true</code>).</li>
-<li>To <strong>see what’s in each table</strong> before writing a query, open the <a href="https://calcofi.io/schema/"><strong>CalCOFI Schema explorer</strong></a> — ERD, sortable tables/columns with units and descriptions, dataset provenance, and the canonical measurement-type registry, all reading the same <code>metadata.json</code> sidecar.</li>
+<li>To <strong>see what’s in each table</strong> before writing a query, open the <a href="https://calcofi.io/db-schema/"><strong>CalCOFI Schema explorer</strong></a> — ERD, sortable tables/columns with units and descriptions, dataset provenance, and the canonical measurement-type registry, all reading the same <code>metadata.json</code> sidecar.</li>
 </ul>
 </section>
 <section id="setup-the-httpfs-extension" class="level2" data-number="6.2">
@@ -416,7 +416,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </section>
 <section id="from-your-browser" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="from-your-browser"><span class="header-section-number">6.7</span> From your browser</h2>
-<p>DuckDB compiles to WebAssembly, so the <em>same engine</em> runs <strong>client-side in your browser</strong> — no server, no install, no R or Python. CalCOFI ships a ready-made form at <strong>→ <a href="https://calcofi.io/query/">Open CalCOFI Query</a></strong> that wraps the three retired bio↔︎env Plumber endpoints (and a free-form SQL shell): pick a function, fill the form, click <strong>Run</strong>, and a Chromium / Firefox / Safari worker thread fetches Parquet range-by-range over HTTPS and joins them in-browser.</p>
+<p>DuckDB compiles to WebAssembly, so the <em>same engine</em> runs <strong>client-side in your browser</strong> — no server, no install, no R or Python. CalCOFI ships a ready-made form at <strong>→ <a href="https://calcofi.io/db-query/">Open CalCOFI Query</a></strong> that wraps the three retired bio↔︎env Plumber endpoints (and a free-form SQL shell): pick a function, fill the form, click <strong>Run</strong>, and a Chromium / Firefox / Safari worker thread fetches Parquet range-by-range over HTTPS and joins them in-browser.</p>
 <p>To embed DuckDB-WASM in your own page, the boilerplate is about 15 lines — load the bundle from a CDN, instantiate, <code>INSTALL httpfs</code> and you’re ready:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="dt">&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> <span class="op">*</span> <span class="im">as</span> duckdb <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm"</span><span class="op">;</span></span>
@@ -442,7 +442,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </section>
 <section id="run-it-from-anywhere" class="level2" data-number="6.8">
 <h2 data-number="6.8" class="anchored" data-anchor-id="run-it-from-anywhere"><span class="header-section-number">6.8</span> Run it from anywhere</h2>
-<p>The same portable SQL — what <a href="./helpers.html"><code>calcofi4r::cc_match_*()</code></a> emits as <code>attr(d, "sql")</code>, what the <a href="https://app.calcofi.io/int">Integrated App</a> download bundle ships in its <code>query/</code> folder, what is shown in <a href="#sec-worked-example">the worked example</a> below — runs in any DuckDB client:</p>
+<p>The same portable SQL — what <a href="./helpers.html"><code>calcofi4r::cc_match_*()</code></a> emits as <code>attr(d, "sql")</code>, what the <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> download bundle ships in its <code>query/</code> folder, what is shown in <a href="#sec-worked-example">the worked example</a> below — runs in any DuckDB client:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -465,7 +465,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td><strong>your web browser</strong>, no install</td>
-<td><strong><a href="https://calcofi.io/query/">CalCOFI Query</a></strong> — point-and-click form, runs DuckDB-WASM client-side</td>
+<td><strong><a href="https://calcofi.io/db-query/">CalCOFI Query</a></strong> — point-and-click form, runs DuckDB-WASM client-side</td>
 </tr>
 </tbody>
 </table>
@@ -473,13 +473,13 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <section id="reproducibility" class="level2" data-number="6.9">
 <h2 data-number="6.9" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">6.9</span> Reproducibility</h2>
 <p>Because every query is plain SQL against immutable, versioned, public Parquet, a CalCOFI result is <strong>reproducible by anyone</strong> — pin the <code>{version}</code> and re-run the SQL.</p>
-<p>The <a href="https://app.calcofi.io/int">Integrated App</a> builds on this: its data <strong>download bundle</strong> ships a <code>query/</code> folder alongside the data:</p>
+<p>The <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> builds on this: its data <strong>download bundle</strong> ships a <code>query/</code> folder alongside the data:</p>
 <pre><code>data/original/{bio,env}.csv          ← query/{bio,env}.sql
 data/integrated/integrated_*.csv     ← query/integrated_*.sql
 query/manifest.json                  release version, filters, GCS source URLs,
                                      per-file row counts + md5 checksums
 query/REPRODUCE.md                   DuckDB-CLI / Python / R re-run snippets</code></pre>
-<p>Each <code>*.sql</code> file is fully interpolated, GCS-URL-based, and copy-paste runnable (prefixed with the <code>INSTALL</code>/<code>LOAD</code> it needs). Re-run <code>query/integrated_*.sql</code> in DuckDB and you get back exactly the rows in the matching <code>.csv</code> — the <code>manifest.json</code> md5 checksums let you confirm it. The same SQL is what <a href="./helpers.html"><code>calcofi4r::cc_match_bio_env()</code></a> executes and attaches as <code>attr(x, "sql")</code>, what the browser-based <strong><a href="https://calcofi.io/query/">CalCOFI Query</a></strong> generates as its <code>SQL</code> panel, and what a hand-written query produces — <strong>a single source of truth across R, Python, the CLI and JavaScript</strong>.</p>
+<p>Each <code>*.sql</code> file is fully interpolated, GCS-URL-based, and copy-paste runnable (prefixed with the <code>INSTALL</code>/<code>LOAD</code> it needs). Re-run <code>query/integrated_*.sql</code> in DuckDB and you get back exactly the rows in the matching <code>.csv</code> — the <code>manifest.json</code> md5 checksums let you confirm it. The same SQL is what <a href="./helpers.html"><code>calcofi4r::cc_match_bio_env()</code></a> executes and attaches as <code>attr(x, "sql")</code>, what the browser-based <strong><a href="https://calcofi.io/db-query/">CalCOFI Query</a></strong> generates as its <code>SQL</code> panel, and what a hand-written query produces — <strong>a single source of truth across R, Python, the CLI and JavaScript</strong>.</p>
 </section>
 <section id="sec-worked-example" class="level2" data-number="6.10">
 <h2 data-number="6.10" class="anchored" data-anchor-id="sec-worked-example"><span class="header-section-number">6.10</span> Worked example: sardine larvae + temperature</h2>
@@ -497,7 +497,7 @@ Note
 <p>Q1 <strong>2018</strong> — not a more recent year — because CTD-bottle environmental data in the current release ends 2021-05, while net-tow biological data runs later. Q1 2018 has ample overlap of both.</p>
 </div>
 </div>
-<p>Done as <strong>direct SQL</strong>, the query is a temporal interval join plus a spatial <code>ST_Distance_Sphere</code> filter. After the <code>INSTALL</code>/<code>LOAD</code> setup above, run the query below. This block is character-for-character what <a href="./helpers.html"><code>calcofi4r::cc_match_ichthyo_by_name()</code></a> returns as <code>attr(d, "sql")</code> — the two produce the <strong>identical 13 rows</strong>. The <a href="https://app.calcofi.io/int">Integrated App</a> download bundle builds <code>query/integrated_*.sql</code> with the same <code>cc_match_bio_env()</code> engine (its filter set is taxa + quarters + dates rather than <code>life_stage</code>, so a sardine / Q1 2018 bundle returns the egg + larva superset — same matching mechanics, same reproducibility):</p>
+<p>Done as <strong>direct SQL</strong>, the query is a temporal interval join plus a spatial <code>ST_Distance_Sphere</code> filter. After the <code>INSTALL</code>/<code>LOAD</code> setup above, run the query below. This block is character-for-character what <a href="./helpers.html"><code>calcofi4r::cc_match_ichthyo_by_name()</code></a> returns as <code>attr(d, "sql")</code> — the two produce the <strong>identical 13 rows</strong>. The <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> download bundle builds <code>query/integrated_*.sql</code> with the same <code>cc_match_bio_env()</code> engine (its filter set is taxa + quarters + dates rather than <code>life_stage</code>, so a sardine / Q1 2018 bundle returns the egg + larva superset — same matching mechanics, same reproducibility):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> bio <span class="kw">AS</span> (</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  i.ichthyo_uuid:<span class="ch">:VARCHAR</span> <span class="kw">AS</span> bio_id,</span>

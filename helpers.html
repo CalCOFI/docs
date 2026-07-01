@@ -386,7 +386,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Sardinops sagax larva      2018-02-05 06:03:00      17.8    30      10.5   0.225         1.21</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Sardinops sagax larva      2018-02-07 09:56:00     120.     33      10.4   …             …</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … 10 more rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>bio_value</code> is the standardized larval tally; <code>env_value</code> is the matched mean temperature (°C); <code>n_env</code> is how many bottle measurements were averaged; <code>dist_km</code> / <code>time_diff_hr</code> are the realized match offsets (within the 5 km / 72 hr window). This returns the <strong>identical 13 rows</strong> as the <a href="./data-access.html#sec-worked-example">direct SQL</a> — <code>attr(d, "sql")</code> is that exact query. The <a href="https://app.calcofi.io/int">Integrated App</a> download bundle uses the same <code>cc_match_bio_env()</code> engine for its <code>query/</code> folder.</p>
+<p><code>bio_value</code> is the standardized larval tally; <code>env_value</code> is the matched mean temperature (°C); <code>n_env</code> is how many bottle measurements were averaged; <code>dist_km</code> / <code>time_diff_hr</code> are the realized match offsets (within the 5 km / 72 hr window). This returns the <strong>identical 13 rows</strong> as the <a href="./data-access.html#sec-worked-example">direct SQL</a> — <code>attr(d, "sql")</code> is that exact query. The <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> download bundle uses the same <code>cc_match_bio_env()</code> engine for its <code>query/</code> folder.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -406,7 +406,7 @@ Note
 <p>Every helper attaches the <strong>exact, portable SQL</strong> that produced the result, plus query metadata, as attributes:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">attr</span>(d, <span class="st">"sql"</span>))           <span class="co"># the fully-interpolated, GCS-URL-based query</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">attr</span>(d, <span class="st">"query_meta"</span>))    <span class="co"># package + release version, params, source URLs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>attr(d, "sql")</code> is character-for-character the query shown on the <a href="./data-access.html#sec-worked-example">Data Access</a> page — copy-paste it into the DuckDB CLI, Python, a colleague’s R session, or the browser-based <strong><a href="https://calcofi.io/query/">CalCOFI Query</a></strong> and it returns identical rows. That is the contract behind the <a href="https://app.calcofi.io/int">Integrated App</a> download bundle’s <code>query/</code> folder.</p>
+<p><code>attr(d, "sql")</code> is character-for-character the query shown on the <a href="./data-access.html#sec-worked-example">Data Access</a> page — copy-paste it into the DuckDB CLI, Python, a colleague’s R session, or the browser-based <strong><a href="https://calcofi.io/db-query/">CalCOFI Query</a></strong> and it returns identical rows. That is the contract behind the <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> download bundle’s <code>query/</code> folder.</p>
 <p>To get the SQL <strong>without running it</strong> — e.g.&nbsp;to serialize or inspect it — pass <code>return_sql = TRUE</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sql <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(<span class="st">"Sardinops sagax"</span>, <span class="at">return_sql =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sql)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -436,7 +436,7 @@ Note
 </tr>
 <tr class="even">
 <td><strong>your web browser</strong>, no install</td>
-<td><strong><a href="https://calcofi.io/query/">CalCOFI Query</a></strong> — point-and-click form for the three wrappers + custom SQL + a free-form SQL shell, all running DuckDB-WASM client-side</td>
+<td><strong><a href="https://calcofi.io/db-query/">CalCOFI Query</a></strong> — point-and-click form for the three wrappers + custom SQL + a free-form SQL shell, all running DuckDB-WASM client-side</td>
 </tr>
 </tbody>
 </table>

@@ -658,7 +658,7 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 </section>
 <section id="consuming-descriptions" class="level3" data-number="5.3.6">
 <h3 data-number="5.3.6" class="anchored" data-anchor-id="consuming-descriptions"><span class="header-section-number">5.3.6</span> Consuming descriptions</h3>
-<p>The fastest way to browse the schema is the <a href="https://calcofi.io/schema/"><strong>CalCOFI Schema explorer</strong></a> — per-release ERD, sortable table/column lists with units, dataset provenance, and the measurement-type registry, all sourced from the release <code>metadata.json</code> sidecar on GCS. Deep-link to a specific release with <code>#erd?v=v2026.05.19</code> (or <code>#tables</code>, <code>#columns</code>, <code>#measurements</code>).</p>
+<p>The fastest way to browse the schema is the <a href="https://calcofi.io/db-schema/"><strong>CalCOFI Schema explorer</strong></a> — per-release ERD, sortable table/column lists with units, dataset provenance, and the measurement-type registry, all sourced from the release <code>metadata.json</code> sidecar on GCS. Deep-link to a specific release with <code>#erd?v=v2026.05.19</code> (or <code>#tables</code>, <code>#columns</code>, <code>#measurements</code>).</p>
 <p>From R, fetch the descriptions either column-by-column or as a full interactive catalog. Both calls hit the same release <code>metadata.json</code> sidecar:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>

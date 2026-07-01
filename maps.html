@@ -323,13 +323,13 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <section id="overview" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
 <p>The CalCOFI <a href="https://shiny.calcofi.io">interactive app</a> renders <strong>hexagonal heatmaps</strong> of species occurrence and oceanographic variables — sardine larvae densities, sea-surface temperature, salinity, chlorophyll — across the entire CalCOFI sampling area, at any zoom level, in seconds. The engine that makes this possible is <strong>H3T</strong>, a tile service that converts a database query into a stream of hexagon tiles on demand.</p>
-<div id="fig-int-app-compare" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-db-viz-hex-compare" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-int-app-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-db-viz-hex-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figs/int-app_map-compare-bio-env.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-int-app-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.1: Side-by-side comparison in the <a href="https://app.calcofi.io/int">CalCOFI Integrated App</a>: hexagons summarizing <strong>biology</strong> (Pacific sardine larvae abundance, left) and <strong>environment</strong> (sea-surface temperature, right) over the same area, era, and quarters, with a swipeable divider for direct visual comparison. Both layers are powered by the H3T tile service.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-db-viz-hex-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Side-by-side comparison in the <a href="https://app.calcofi.io/db-viz-hex">CalCOFI Integrated App</a>: hexagons summarizing <strong>biology</strong> (Pacific sardine larvae abundance, left) and <strong>environment</strong> (sea-surface temperature, right) over the same area, era, and quarters, with a swipeable divider for direct visual comparison. Both layers are powered by the H3T tile service.
 </figcaption>
 </figure>
 </div>
@@ -350,7 +350,7 @@ Figure&nbsp;4.1: Side-by-side comparison in the <a href="https://app.calcofi.io/
 </section>
 <section id="the-problem-aggregating-millions-of-points-at-every-zoom" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="the-problem-aggregating-millions-of-points-at-every-zoom"><span class="header-section-number">4.3</span> The problem: aggregating millions of points at every zoom</h2>
-<p>Before H3T, the int-app pre-computed every hex aggregation across <strong>all 10 H3 resolutions</strong> for every species and environmental variable at startup. The Shiny app then shipped the relevant resolution to the browser for each zoom change. This gave the app two problems:</p>
+<p>Before H3T, the db-viz-hex pre-computed every hex aggregation across <strong>all 10 H3 resolutions</strong> for every species and environmental variable at startup. The Shiny app then shipped the relevant resolution to the browser for each zoom change. This gave the app two problems:</p>
 <ol type="1">
 <li><strong>Slow startup.</strong> Building those aggregations against the full bottle and ichthyo tables took &gt;10 s every time the app launched.</li>
 <li><strong>Heavy memory.</strong> A multi-resolution <code>sf</code> grid for one variable is hundreds of megabytes; for dozens of variables it crowded out everything else on the Shiny server.</li>
@@ -363,7 +363,7 @@ Figure&nbsp;4.1: Side-by-side comparison in the <a href="https://app.calcofi.io/
 <section id="resolution-follows-zoom" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="resolution-follows-zoom"><span class="header-section-number">4.4.1</span> Resolution follows zoom</h3>
 <p>When the user zooms out to see the whole California Current, they don’t need 7-meter hexagons — a 22 km hex is finer than the underlying sampling grid anyway. When they zoom in to a single CalCOFI line, they want as much detail as the data supports. H3T maps web-map zoom levels to H3 resolutions on the server side: zoom 0–1 → res 1 (~1106 km hexes), zoom 5–7 → res 5 (~22 km hexes), zoom 11+ → res 10 (~7.5 m hexes), and so on (<a href="#fig-h3-pyramid" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>).</p>
-<p>The trick is in the SQL: the int-app sends a <strong>template</strong> with a literal placeholder <code>hex_h3res{{res}}</code> (see <code>build_sp_sql()</code> in <a href="https://github.com/CalCOFI/int-app/blob/main/app/functions_h3t.R"><code>int-app/app/functions_h3t.R</code></a>), and the API substitutes the right resolution for each tile before executing. One query string, ten zoom levels, one shared cache namespace.</p>
+<p>The trick is in the SQL: the db-viz-hex sends a <strong>template</strong> with a literal placeholder <code>hex_h3res{{res}}</code> (see <code>build_sp_sql()</code> in <a href="https://github.com/CalCOFI/db-viz-hex/blob/main/app/functions_h3t.R"><code>db-viz-hex/app/functions_h3t.R</code></a>), and the API substitutes the right resolution for each tile before executing. One query string, ten zoom levels, one shared cache namespace.</p>
 <div class="cell" data-file="diagrams/h3-pyramid.mmd" data-fig-width="7" data-layout-align="default">
 <div class="cell-output-display">
 <div id="fig-h3-pyramid" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -436,7 +436,7 @@ Figure&nbsp;4.2: Web-map zoom level determines which H3 resolution the server re
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-h3t-sequence">sequenceDiagram
   autonumber
-  participant U as User&lt;br/&gt;(int-app browser)
+  participant U as User&lt;br/&gt;(db-viz-hex browser)
   participant M as MapLibre&lt;br/&gt;+ h3j-h3t.js
   participant CD as Caddy&lt;br/&gt;(reverse proxy)
   participant V as Varnish&lt;br/&gt;(HTTP cache)
@@ -473,7 +473,7 @@ Figure&nbsp;4.3: Tile request lifecycle. The browser asks for a tile by URL; Var
 <section id="cache-invalidation-by-release" class="level3" data-number="4.4.3">
 <h3 data-number="4.4.3" class="anchored" data-anchor-id="cache-invalidation-by-release"><span class="header-section-number">4.4.3</span> Cache invalidation by release</h3>
 <p>Caches are easy to fill but notoriously hard to clear. H3T sidesteps the hard part entirely with a single trick: the <code>release</code> query parameter (<a href="#fig-h3t-release" class="quarto-xref">Figure&nbsp;<span>4.4</span></a>).</p>
-<p>When CalCOFI publishes a new database release (e.g., <code>v2026.04.08</code>, see <a href="./db.html">Database</a>), a symlink at the API server is swapped to point at the new file. The next time the int-app loads, it asks <code>/h3t/meta</code> for the current release version, gets back <code>v2026.04.08</code>, and passes that into every subsequent tile URL. Because the URL is now different, Varnish <strong>automatically cache-misses</strong> — and the new tiles are generated against the fresh data on first request. Old tiles linger harmlessly in cache until evicted by LRU; they’d still serve correct data for their old release if anyone asked.</p>
+<p>When CalCOFI publishes a new database release (e.g., <code>v2026.04.08</code>, see <a href="./db.html">Database</a>), a symlink at the API server is swapped to point at the new file. The next time the db-viz-hex loads, it asks <code>/h3t/meta</code> for the current release version, gets back <code>v2026.04.08</code>, and passes that into every subsequent tile URL. Because the URL is now different, Varnish <strong>automatically cache-misses</strong> — and the new tiles are generated against the fresh data on first request. Old tiles linger harmlessly in cache until evicted by LRU; they’d still serve correct data for their old release if anyone asked.</p>
 <p>No purge command, no cache key surgery. Just: change one parameter, get a clean cache layer for free.</p>
 <div class="cell" data-file="diagrams/h3t-release.mmd" data-fig-width="7" data-layout-align="default">
 <div class="cell-output-display">
@@ -498,7 +498,7 @@ Figure&nbsp;4.3: Tile request lifecycle. The browser asks for a tile by URL; Var
   %% after release
   subgraph after["&lt;b&gt;after release&lt;/b&gt;"]
     direction TB
-    meta["int-app fetches&lt;br/&gt;/h3t/meta → release=v2026.04.08"]:::req
+    meta["db-viz-hex fetches&lt;br/&gt;/h3t/meta → release=v2026.04.08"]:::req
     u2["browser request&lt;br/&gt;?q=…&amp;release=&lt;b&gt;v2026.04.08&lt;/b&gt;"]:::req
     c2[("Varnish&lt;br/&gt;old URLs idle&lt;br/&gt;new URLs cache-miss")]:::cache
     db2[("DuckDB&lt;br/&gt;v2026.04.08")]:::db
@@ -522,7 +522,7 @@ Figure&nbsp;4.3: Tile request lifecycle. The browser asks for a tile by URL; Var
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-h3t-release-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.4: Cache invalidation by release. The <code>release</code> query parameter is part of every tile URL. When a new database release is published, the int-app picks up the new version from <code>/h3t/meta</code>, all subsequent tile URLs change, and Varnish refills naturally — no manual purge.
+Figure&nbsp;4.4: Cache invalidation by release. The <code>release</code> query parameter is part of every tile URL. When a new database release is published, the db-viz-hex picks up the new version from <code>/h3t/meta</code>, all subsequent tile URLs change, and Varnish refills naturally — no manual purge.
 </figcaption>
 </figure>
 </div>
@@ -532,7 +532,7 @@ Figure&nbsp;4.4: Cache invalidation by release. The <code>release</code> query p
 </section>
 <section id="a-worked-example-sardine-temperature" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="a-worked-example-sardine-temperature"><span class="header-section-number">4.5</span> A worked example: sardine + temperature</h2>
-<p>To make this concrete, here is the full life of one click in the int-app:</p>
+<p>To make this concrete, here is the full life of one click in the db-viz-hex:</p>
 <ol type="1">
 <li><p><strong>User picks</strong> <em>Pacific sardine</em> (<code>Sardinops sagax</code>) and <em>temperature</em> in the sidebar, with date range 1949–2024 and all four quarters.</p></li>
 <li><p><strong><code>build_sp_sql()</code></strong> assembles a SQL template:</p>
@@ -585,7 +585,7 @@ Figure&nbsp;4.4: Cache invalidation by release. The <code>release</code> query p
 <td>Plumber API, sqlglot validator, DuckDB driver, deployment configs</td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/CalCOFI/int-app">CalCOFI/int-app</a></td>
+<td><a href="https://github.com/CalCOFI/db-viz-hex">CalCOFI/db-viz-hex</a></td>
 <td>Shiny consumer; SQL builders and map widgets in <code>app/functions_h3t.R</code></td>
 </tr>
 <tr class="odd">

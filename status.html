@@ -304,7 +304,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <!--
 Claude Code (Opus 4.8) — end-of-contract review.
 Sources: (1) git histories since 2025-12-01 across all CalCOFI repositories
-(workflows, calcofi4db, calcofi4r, server, docs, int-app, apps, query, erddap,
+(workflows, calcofi4db, calcofi4r, server, docs, db-viz-hex, apps, query, erddap,
 schema, api-h3t, api-h3t-py, CalCOFI.github.io, and the 2026 student-capstone
 repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 (3) deliverables in "CalCOFI - EcoQuants Quote, 2025-10 to 2026-06_v2"
@@ -328,7 +328,7 @@ repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 <h3 data-number="10.1.2" class="anchored" data-anchor-id="visualize-on-the-fly-hexagons-management-areas-and-partner-dashboards"><span class="header-section-number">10.1.2</span> 2. Visualize — On-the-Fly Hexagons, Management Areas, and Partner Dashboards</h3>
 <ul>
 <li><p><strong>On-the-fly hexagon tile service (the cached-endpoint deliverable).</strong> The integrated app previously pre-computed hexagon summaries for all zoom levels across the entire study area. A new <strong>H3T tile API</strong> now summarizes only the current zoom level and map extent on demand. It was prototyped as an R/Plumber service (<code>api-h3t</code>), then rewritten as a FastAPI service (<code>api-h3t-py</code>) with multi-database support, fronted by Varnish caching and edge gzip/zstd compression at <code>h3t.calcofi.io</code>. The integrated app reads hex data from it behind a <code>USE_H3T</code> flag.</p></li>
-<li><p><strong>Management areas of interest.</strong> The integrated app (<code>int-app</code>) gained spatial layers for maritime zones, marine protected areas, and wind energy areas, plus a dark/light theme, reproducible query/data download bundles, and a direct connection to the <code>calcofi4r</code> Parquet database (replacing the old API dependency).</p></li>
+<li><p><strong>Management areas of interest.</strong> The integrated app (<code>db-viz-hex</code>) gained spatial layers for maritime zones, marine protected areas, and wind energy areas, plus a dark/light theme, reproducible query/data download bundles, and a direct connection to the <code>calcofi4r</code> Parquet database (replacing the old API dependency).</p></li>
 <li><p><strong>Standalone and partner apps.</strong> New/redesigned Shiny apps include <strong><code>ctd-viz</code></strong> (linked map/table, plotly transects, GEBCO bathymetry), a <strong><code>datacheck</code></strong> cross-dataset observation explorer with deep-linkable URLs, and a <strong>cruises</strong> explorer. Three 2026 student-capstone visualization products were also supported and now ship from GitHub Pages: the <strong>UCSB Station Data Portal</strong>, the <strong>UCSB Larvae Dashboard</strong>, and the <strong>UCLA California Ocean &amp; Coastal Monitoring Inventory</strong> map — extending the partner coalition envisioned in the SOW.</p></li>
 </ul>
 <hr>
@@ -412,7 +412,7 @@ repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 <tbody>
 <tr class="odd">
 <td>Add management areas (sanctuaries, MPAs, wind areas)</td>
-<td>✅ added to int-app</td>
+<td>✅ added to db-viz-hex</td>
 </tr>
 <tr class="even">
 <td>On-the-fly hexagon endpoint by extent/zoom</td>
@@ -471,12 +471,12 @@ repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 <h2 data-number="10.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">10.2</span> 2025-12-01</h2>
 <!--
 Copilot (GPT-5.1 Preview) on Github
-Review all commits since 2025-07-01 in these CalCOFI repositories: int-app, workflows, server, CalCOFI.github.io, docs, calcofi4db, calcofi4r. Summarize accomplishments and development work with high level headings and detailed descriptions.
+Review all commits since 2025-07-01 in these CalCOFI repositories: db-viz-hex, workflows, server, CalCOFI.github.io, docs, calcofi4db, calcofi4r. Summarize accomplishments and development work with high level headings and detailed descriptions.
 -->
 <p>Over the past several months, CalCOFI’s software and data systems have advanced significantly toward a unified, reliable, and user‑friendly platform for exploring and publishing CalCOFI data. Work has focused on four main areas: the integrated data app, the underlying database and workflows, pushing to OBIS, and organizing of CTD data.</p>
 <section id="a-more-capable-user-friendly-integrated-app" class="level3" data-number="10.2.1">
 <h3 data-number="10.2.1" class="anchored" data-anchor-id="a-more-capable-user-friendly-integrated-app"><span class="header-section-number">10.2.1</span> A More Capable, User-Friendly Integrated App</h3>
-<p>The <strong>CalCOFI integrated application (<code>int-app</code>)</strong> has evolved into a much richer and more intuitive tool for scientists and partners:</p>
+<p>The <strong>CalCOFI integrated application (<code>db-viz-hex</code>)</strong> has evolved into a much richer and more intuitive tool for scientists and partners:</p>
 <ul>
 <li><p><strong>Taxonomy-aware exploration</strong><br>
 The app now understands species and their taxonomic relationships. Users can browse taxa hierarchies, see taxonomic ranks, and work with improved species metadata tied to authoritative sources (e.g., WoRMS, ITIS). This makes it easier to find and compare species and groups of species consistently.</p></li>
