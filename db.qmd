@@ -125,78 +125,29 @@ Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all databas
 
 ### Overview
 
-The CalCOFI database uses a two-schema strategy for development and production:
+The integrated database is built by the [`CalCOFI/workflows`](https://github.com/CalCOFI/workflows)
+pipeline: one `ingest_{provider}_{dataset}.qmd` notebook per dataset (orchestrated by
+`targets`, engine functions in [`calcofi4db`](https://github.com/CalCOFI/calcofi4db)) writes
+Parquet shards plus JSON sidecars; `release_database.qmd` assembles them in an in-memory
+DuckDB, validates, and freezes a versioned, immutable **release** on public Google Cloud
+Storage (next section). Consumers — the apps, `calcofi4r::cc_get_db()`, the
+[schema](https://calcofi.io/db-schema/) and [query](https://calcofi.io/db-query/) sites —
+read the release as Parquet over HTTPS with no credentials.
 
-- **`dev` schema**: Development schema where new datasets, tables, fields, and relationships are ingested and QA/QC'd. This schema is recreated fresh with each ingestion run using the master ingestion script.
-- **`prod` schema**: Production schema for stable, versioned data used by public APIs, apps, and data portals (OBIS, EDI, ERDDAP). Once `dev` is validated, it's copied to `prod` with a version number.
-
-### Master ingestion workflow
-
-All datasets are ingested using a single master Quarto script [`calcofi4db/inst/create_db.qmd`](https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd) that:
-
-1. **Drops and recreates** the `dev` schema (fresh start each run)
-2. **Ingests multiple datasets** from Google Drive source files (CSV, potentially SHP/NC in future)
-3. **Applies transformations** using redefinition files (`tbls_redefine.csv`, `flds_redefine.csv`)
-4. **Creates relationships** (primary keys, foreign keys, indexes)
-5. **Records schema version** with metadata in `schema_version` table
-
-Each dataset section in the master script handles:
-
-- Reading CSV files from Google Drive
-- Transforming data according to redefinition rules
-- Loading into database tables
-- Adding table/field comments with metadata
+Alongside the releases, a **PostgreSQL** database (`calcofi`, PostgreSQL 18 + PostGIS 3.6
+on the CalCOFI server) is the *working*, multi-user store for the CTD team's QA/QC:
+originals loaded verbatim and immutable, a flag/proposal ledger beside them, derived
+products on top. It is private and reached over SSH — see
+[Server Access](server-access.qmd). DuckDB's `postgres` extension joins the two worlds
+in one query (`calcofi4r::cc_pg_attach()`). (An earlier design ran the whole database in
+PostgreSQL with `dev`/`prod` schemas and a single `create_db.qmd`; that is superseded and
+only the legacy `gis` database remains, behind tile.calcofi.io.)
 
 ```{mermaid}
 %%| label: fig-db_doc
 %%| fig-cap: "Integrated database ingestion scheme."
 %%| file: diagrams/db_doc.mmd
 ```
-
-### Using calcofi4db package
-
-The [calcofi4db](https://github.com/CalCOFI/calcofi4db) package provides streamlined functions for dataset ingestion.
-
-#### DuckLake Workflow (Recommended)
-
-The preferred approach uses DuckDB with provenance tracking:
-
-```r
-library(calcofi4db)
-
-# connect to working DuckLake (downloads from GCS if needed)
-con <- get_working_ducklake()
-
-# read CSV files from local directory or GCS archive
-# - syncs to GCS archive for immutable provenance tracking
-# - loads redefinition metadata for column renaming/typing
-d <- read_csv_files(
-  provider     = "swfsc",
-  dataset      = "ichthyo",
-  dir_data     = "~/My Drive/projects/calcofi/data-public",
-  metadata_dir = "metadata",
-  sync_archive = TRUE)
-
-# ingest dataset with automatic provenance tracking
-# - transforms data using redefinition files
-# - adds _source_file, _source_row, _source_uuid, _ingested_at columns
-# - handles uuid column detection automatically
-tbl_stats <- ingest_dataset(
-  con  = con,
-  d    = d,
-  mode = "replace")
-
-# save to GCS and close
-save_working_ducklake(con)
-close_duckdb(con)
-```
-
-The `ingest_dataset()` function handles:
-
-- Calling `transform_data()` to apply table/field redefinitions
-- Detecting UUID columns automatically for provenance tracking
-- Calling `ingest_to_working()` for each table with proper source file tracking
-- Returning ingestion statistics (rows input, rows after, timestamps)
 
 ### Release versioning
 

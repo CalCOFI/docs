@@ -1,0 +1,332 @@
+# Server Access: SSH, SFTP & PostgreSQL {#sec-server-access}
+
+The CalCOFI server (`ssh.calcofi.io`, a Google Cloud VM in Iowa) hosts the apps, RStudio
+Server, ERDDAP — and, since August 2026, a **multi-user PostgreSQL database** that the
+CTD team uses for QA/QC: everyone reads and writes the same tables, originals stay
+immutable, flags and proposed fixes live beside them. This page is the one place that
+explains how to get in and how to connect, for **Mac** and **Windows**.
+
+::: {.callout-note}
+## Two databases, two access paths
+- The **public releases** (`v2026.08.14` …) are Parquet on a public bucket. No account, no
+  tunnel: [Data Access](data-access.qmd), `calcofi4r::cc_get_db()`, DuckDB, the browser.
+- The **working PostgreSQL database** (`calcofi`) is private and reachable only over SSH.
+  That is what the rest of this page is about.
+:::
+
+## Getting an account {#sec-account}
+
+Accounts are personal (no shared logins), key-only (no passwords over SSH), and named
+after your email local-part — `rswalethorp`, `bmgire`, `kdvogel`, `bhuang`,
+`esatterthwaite`, `bebest`. Each account gets:
+
+| what | where |
+|---|---|
+| SSH + SFTP login | `ssh.calcofi.io`, your home directory (small — keep big files under `~/ctd`) |
+| shared CTD folder | `~/ctd` → `/share/data/ctd/{incoming,archive,exports}` (group-writable) |
+| PostgreSQL role | same name as your username, in database `calcofi`; schemas `ctd` (curated), `work` (shared scratch), and your own schema (`rswalethorp.*`) |
+| pgAdmin web login | [pgadmin.calcofi.io](https://pgadmin.calcofi.io) with your email |
+| RStudio Server login | [rstudio.calcofi.io](https://rstudio.calcofi.io) — R in the browser, already on the server (no tunnel needed there) |
+
+**To request one: send Ben (bebest@ucsd.edu) your SSH *public* key.** Generate it once per
+computer:
+
+::: {.panel-tabset}
+
+## Mac (Terminal)
+
+```bash
+ssh-keygen -t ed25519 -C "you@ucsd.edu"      # accept the default file, set a passphrase
+cat ~/.ssh/id_ed25519.pub                      # this ONE line is what you send
+```
+
+## Windows (PowerShell)
+
+Windows 10/11 ships OpenSSH (`ssh`, `ssh-keygen`, `sftp`, `scp`) — the commands are the
+same as on Mac. Open **PowerShell** (not cmd):
+
+```powershell
+ssh-keygen -t ed25519 -C "you@ucsd.edu"      # accept the default file, set a passphrase
+Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub   # this ONE line is what you send
+```
+
+If `ssh-keygen` is not found: *Settings ▸ System ▸ Optional features ▸ Add ▸ OpenSSH
+Client*, then reopen PowerShell.
+
+## Windows (PuTTY)
+
+If you already use PuTTY: **PuTTYgen ▸ Generate** (EdDSA/Ed25519), set a passphrase,
+**Save private key** (`calcofi.ppk`), and copy the text in *"Public key for pasting into
+OpenSSH authorized_keys file"* — that is what you send. (A `.ppk` can also be imported into
+the built-in OpenSSH with *Conversions ▸ Export OpenSSH key*.)
+
+:::
+
+Never send the private key (`id_ed25519` without `.pub`). Lost laptop → tell Ben, the key
+is revoked and you send a new one.
+
+## Step 1 — SSH in {#sec-ssh}
+
+Put the server in your SSH config once, and every tool (ssh, sftp, R, VS Code) can use the
+short name `calcofi`. The `LocalForward` line is the database tunnel (next section).
+
+::: {.panel-tabset}
+
+## Mac (Terminal)
+
+Create or edit `~/.ssh/config` (e.g. `nano ~/.ssh/config`):
+
+```
+Host calcofi
+  HostName ssh.calcofi.io
+  User rswalethorp                 # <- your username
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 5432 localhost:5432 # database tunnel (see below)
+  ServerAliveInterval 60
+```
+
+Then:
+
+```bash
+ssh calcofi            # first time: answer "yes" to the host-key prompt
+```
+
+## Windows (PowerShell)
+
+Same file, at `C:\Users\<you>\.ssh\config` (create it with Notepad; no extension):
+
+```
+Host calcofi
+  HostName ssh.calcofi.io
+  User rswalethorp
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 5432 localhost:5432
+  ServerAliveInterval 60
+```
+
+```powershell
+ssh calcofi
+```
+
+## Windows (PuTTY)
+
+**Session**: Host Name `ssh.calcofi.io`, Port 22, Saved Sessions `calcofi`.
+**Connection ▸ Data**: Auto-login username = your username.
+**Connection ▸ SSH ▸ Auth ▸ Credentials**: Private key file = your `calcofi.ppk`.
+**Connection ▸ SSH ▸ Tunnels**: Source port `5432`, Destination `localhost:5432`, **Add**.
+Back on **Session**, **Save**, then **Open**. Keep the window open while you use the database.
+(Pageant can hold the key so you type the passphrase once per session.)
+
+:::
+
+You land in your home directory. Useful first commands:
+
+```bash
+ls -la ~/ctd/          # the shared CTD folder (incoming/ archive/ exports/)
+df -h /share           # how much disk is left — it is shared
+cat ~/.pgpass          # your database password (Step 2)
+```
+
+::: {.callout-tip}
+## VS Code
+The **Remote – SSH** extension reuses the same `~/.ssh/config`: *Remote-SSH: Connect to
+Host… ▸ calcofi* gives you a file browser, terminal and editor on the server. Handy for
+looking at files under `/share/data/ctd` without SFTP.
+:::
+
+## Step 2 — your database password {#sec-pgpass}
+
+Your PostgreSQL password was generated when the account was created and is stored **only**
+in a file in your home directory on the server — it was never emailed. Read it once:
+
+```bash
+cat ~/.pgpass
+# host:port:database:user:password — the last field is your CalCOFI database password
+# localhost:5432:*:rswalethorp:Xxxxxxxxxxxxxxxxxxxxxxxx
+# postgis:5432:*:rswalethorp:Xxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+`.pgpass` is the standard PostgreSQL password file: every PostgreSQL client (psql, R's
+`RPostgres`, Python's `psycopg`, pgAdmin desktop, DBeaver, DuckDB) reads it, so you never
+put the password in a script. Copy the `localhost` line into the same file **on your
+laptop**:
+
+::: {.panel-tabset}
+
+## Mac
+
+```bash
+nano ~/.pgpass         # paste the localhost:5432:*:<you>:<password> line, save
+chmod 600 ~/.pgpass    # required — libpq ignores the file if others can read it
+```
+
+## Windows
+
+The file is `%APPDATA%\postgresql\pgpass.conf` (usually
+`C:\Users\<you>\AppData\Roaming\postgresql\pgpass.conf`). Create the folder and the file
+with Notepad, one line: `localhost:5432:*:<you>:<password>`. No `chmod` needed on Windows.
+
+:::
+
+To change the password: `psql -h localhost calcofi -c '\password'` (through the tunnel),
+then update both `.pgpass` files. Until Google sign-in is enabled on pgAdmin, the **same
+password** is your [pgadmin.calcofi.io](https://pgadmin.calcofi.io) password (login = your
+email).
+
+## Step 3 — the database over the tunnel {#sec-tunnel}
+
+PostgreSQL is **not** exposed to the internet. Your SSH connection carries it: with the
+`LocalForward 5432 localhost:5432` line in place, *while `ssh calcofi` is open* (or
+`ssh -N calcofi`, which opens the tunnel without a shell), anything on your laptop that
+connects to `localhost:5432` is talking to the server's database.
+
+```bash
+ssh -N calcofi &                                  # tunnel only, in the background (Ctrl-C / kill to stop)
+psql -h localhost -d calcofi                       # password from ~/.pgpass; user = your OS user…
+psql -h localhost -d calcofi -U rswalethorp        # …or say it explicitly if they differ
+```
+
+Inside psql:
+
+```sql
+\dn                       -- schemas: ctd, work, public, yours
+\dt ctd.*                 -- curated CTD tables
+SHOW search_path;         -- "$user", work, ctd, public  (unqualified names land in YOUR schema)
+CREATE TABLE t AS SELECT 1 AS x;     -- -> rswalethorp.t, visible to colleagues
+CREATE TABLE work.t2 AS SELECT 1;    -- -> work.t2, shared scratch, writable by all
+```
+
+::: {.callout-warning}
+## "Address already in use" / port 5432 taken
+If `ssh` prints `bind [127.0.0.1]:5432: Address already in use`, something on your laptop
+(often a local Postgres or pgAdmin's bundled server) already owns 5432. Use **15432**
+instead in two places: `LocalForward 15432 localhost:5432` in `~/.ssh/config` (or the
+PuTTY Tunnels source port), and `port 15432` / `localhost:15432` wherever you connect
+(psql `-p 15432`, the `.pgpass` line, `PGPORT=15432` for R/Python).
+:::
+
+### Graphical clients
+
+| client | how | best for |
+|---|---|---|
+| **pgAdmin 4 desktop** ([download](https://www.pgadmin.org/download/)) | *Register ▸ Server*: General name `calcofi`; **Connection** host `localhost`, port `5432`, database `calcofi`, username *you*; **SSH Tunnel** tab: *Use SSH tunneling*, host `ssh.calcofi.io`, port 22, username *you*, authentication *Identity file* → your private key. It opens the tunnel itself — no terminal needed. | Windows users; browsing + query tool + ERD |
+| **pgadmin.calcofi.io** (web) | log in with your email + database password (Google sign-in coming); servers *calcofi (CTD QA/QC)* and *gis (legacy 2022)* are already registered — on first connect replace the username with **yours** and enter your password (the master password it asks for is a local encryption key of your choosing) | zero install, any machine |
+| **DBeaver** (free) | New connection ▸ PostgreSQL ▸ host `localhost`, db `calcofi`, user *you*; **SSH** tab ▸ host `ssh.calcofi.io`, user *you*, *Public Key* auth | people who already use it |
+| **RStudio Server** ([rstudio.calcofi.io](https://rstudio.calcofi.io)) | log in with your username + database password; in R use `host = "postgis"` (it is on the same network, no tunnel); `calcofi4r::cc_pg_connect()` works out of the box | R without installing anything |
+
+## From R {#sec-r}
+
+`calcofi4r` ≥ 1.8.0 (`remotes::install_github("calcofi/calcofi4r")`) resolves the host,
+your role and the tunnel for you:
+
+```r
+library(calcofi4r)
+con <- cc_pg_connect()                       # tunnel already open; role + password from ~/.pgpass
+con <- cc_pg_connect(tunnel = TRUE)          # …or let it run `ssh -N calcofi` for you (needs the ~/.ssh/config entry)
+con <- cc_pg_connect(port = 15432, tunnel = TRUE)   # if you had to move the local port
+
+DBI::dbListObjects(con, DBI::Id(schema = "ctd"))
+library(dplyr)
+tbl(con, I("ctd.cast")) |> filter(cruise_key == "2023-04-3322") |> collect()
+
+# write to your own schema or to work — and read it back from any other client
+DBI::dbWriteTable(con, DBI::Id(schema = "work", table = "my_check"), my_df, overwrite = TRUE)
+DBI::dbDisconnect(con)
+cc_pg_tunnel_close()                          # if you used tunnel = TRUE
+```
+
+Plain `RPostgres`, if you prefer:
+
+```r
+con <- DBI::dbConnect(RPostgres::Postgres(),
+  host = "localhost", port = 5432, dbname = "calcofi", user = "rswalethorp")  # password: ~/.pgpass
+```
+
+PostGIS geometry comes through `sf`: `sf::st_read(con, query = "SELECT * FROM ctd.cast")`.
+
+## From Python {#sec-python}
+
+Python reads the same `~/.pgpass` (psycopg is built on libpq):
+
+```python
+# pip install "psycopg[binary]" sqlalchemy pandas geopandas
+import pandas as pd
+from sqlalchemy import create_engine
+eng = create_engine("postgresql+psycopg://rswalethorp@localhost:5432/calcofi")  # no password in the URL
+df  = pd.read_sql("SELECT * FROM ctd.cast LIMIT 10", eng)
+
+import geopandas as gpd
+casts = gpd.read_postgis("SELECT * FROM ctd.cast", eng, geom_col="geom")
+
+df.to_sql("my_check", eng, schema="work", if_exists="replace", index=False)  # colleagues can read it
+```
+
+Or DuckDB from Python, attaching PostgreSQL (next section) — the same `.pgpass` applies.
+A `calcofi4py` package mirroring `calcofi4r` (`cc_get_db()`, `cc_pg_connect()`) is planned;
+until then these few lines are the whole recipe.
+
+## DuckDB ↔ PostgreSQL {#sec-duckdb-pg}
+
+DuckDB's `postgres` extension lets **one query** join the public release Parquet with the
+team's PostgreSQL tables — and write back. From R:
+
+```r
+con <- cc_get_db()                 # DuckDB with the release tables as views (public, no tunnel)
+cc_pg_attach(con)                  # ATTACH the PostgreSQL db as `pg` (through your tunnel)
+DBI::dbGetQuery(con, "
+  SELECT c.cruise_key, count(*) AS n
+  FROM pg.ctd.cast c
+  JOIN sample s ON s.sample_key = c.sample_key      -- release table
+  GROUP BY 1 ORDER BY 2 DESC LIMIT 5")
+cc_pg_attach(con, alias = "pgw", read_only = FALSE) # writable: CREATE TABLE pgw.work.x AS SELECT …
+```
+
+The same in any DuckDB (CLI, Python):
+
+```sql
+INSTALL postgres; LOAD postgres;
+ATTACH 'dbname=calcofi host=localhost port=5432 user=rswalethorp' AS pg (TYPE postgres, READ_ONLY);
+SELECT * FROM pg.ctd.cast LIMIT 5;
+SELECT * FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.14/parquet/sample.parquet') LIMIT 5;
+```
+
+## The CTD QA/QC database {#sec-ctd-db}
+
+Database `calcofi`, three kinds of schema:
+
+| schema | what | who writes |
+|---|---|---|
+| `ctd` | **curated**: the original cast files loaded verbatim and never edited (`ctd.file`, `ctd.scan`, `ctd.cast`), the flag/proposal ledger (`ctd.flag`), views that present originals + accepted flags side by side (`ctd.v_scan_qc`, `ctd.v_scan_clean`), derived products (`ctd.scan_1m`) | originals: the loader only; flags: everyone proposes, curators accept/reject |
+| `work` | shared scratch — anything goes, readable and writable by the whole team | everyone |
+| `<you>` | your personal schema (first on your `search_path`); colleagues can read it | you |
+
+The rules of the road: **originals never change** — a problem is a row in `ctd.flag`
+(which scan, which variable, what code, optional proposed value, why), a fix is an
+*accepted* flag, and every derived product is computed from originals + accepted flags so
+it can be regenerated. The schema and the flag vocabulary are being built with the team in
+August 2026; this section will grow with them.
+
+## Files: SFTP and the shared folder {#sec-sftp}
+
+```bash
+sftp calcofi                       # same key, same alias; cd ctd/incoming ; put file.zip ; get …
+scp big.zip calcofi:ctd/incoming/   # one-shot copy
+```
+
+GUI clients: **Cyberduck** (Mac/Windows), **FileZilla**, **WinSCP** (Windows; uses the
+`.ppk` or the OpenSSH key) — protocol SFTP, host `ssh.calcofi.io`, user *you*, key file.
+
+`/share/data/ctd` is owned by group `calcofi` with the group-write bit inherited, so files
+you upload are editable by teammates. Put **uploads in `incoming/`**, leave `archive/` to
+the loader, and use `exports/` for things you want others (or yourself, later) to download.
+Your home directory is on the small system disk — keep it for dotfiles and scripts.
+
+## Etiquette & limits {#sec-etiquette}
+
+- One 4-vCPU / 15 GB machine runs everything. `LIMIT` first, `\timing` on, and ask before
+  a `CREATE INDEX` on the big `ctd.scan` table.
+- Backups: nightly dump → Google Cloud Storage, weekly automated restore test. Still, a
+  `DROP TABLE` is a `DROP TABLE` — `work` is scratch, your schema is yours, `ctd` is
+  protected.
+- Disk is shared and finite; delete what you no longer need under `~/ctd`.
+- Problems, keys, password resets, new tables in `ctd`: Ben Best (bebest@ucsd.edu).

@@ -10,6 +10,11 @@ HTTPS.
 This page covers querying the release Parquet directly. For convenience-wrapped
 biological ↔ environmental matching, see [Matching Helpers](helpers.qmd).
 
+The releases are read-only snapshots. The CTD team's *working* database — multi-user
+PostgreSQL on the CalCOFI server, private, reached over SSH — is described in
+[Server Access](server-access.qmd), including how to join it with the releases from
+DuckDB.
+
 ## Where the data lives
 
 Each release is a versioned folder:

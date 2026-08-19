@@ -52,6 +52,7 @@ book:
     - maps.qmd
     - db.qmd
     - data-access.qmd
+    - server-access.qmd
     - helpers.qmd
     - api.qmd
     - portals.qmd
