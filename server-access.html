@@ -582,6 +582,12 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ATTACH <span class="st">'dbname=calcofi host=localhost port=5432 user=rswalethorp'</span> <span class="kw">AS</span> pg (<span class="kw">TYPE</span> postgres, READ_ONLY);</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> pg.ctd.<span class="fu">cast</span> <span class="kw">LIMIT</span> <span class="dv">5</span>;</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.14/parquet/sample.parquet'</span>) <span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>And the other direction — DuckDB <em>inside</em> PostgreSQL.</strong> The server runs the <a href="https://github.com/duckdb/pg_duckdb"><code>pg_duckdb</code></a> extension, so from psql / pgAdmin you can read the public release Parquet without leaving SQL:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> release.cruise <span class="kw">WHERE</span> <span class="dt">year</span> <span class="op">=</span> <span class="dv">2023</span>;        <span class="co">-- views over the current release (cruise, ship, dataset)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> r[<span class="st">'sample_key'</span>]:<span class="ch">:text</span>, r[<span class="st">'datetime_utc'</span>]:<span class="ch">:timestamp</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.14/parquet/sample.parquet'</span>) r</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> r[<span class="st">'dataset_key'</span>]:<span class="ch">:text</span> <span class="op">=</span> <span class="st">'calcofi_ctd-cast'</span> <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(<code>r['column']::type</code> is pg_duckdb’s row syntax. Big tables — <code>obs</code>, <code>obs_ctd_full</code> — are better filtered in DuckDB on your laptop than pulled through the server.)</p>
 </section>
 <section id="sec-ctd-db" class="level2" data-number="7.8">
 <h2 data-number="7.8" class="anchored" data-anchor-id="sec-ctd-db"><span class="header-section-number">7.8</span> The CTD QA/QC database</h2>
@@ -602,27 +608,41 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <tbody>
 <tr class="odd">
 <td><code>ctd</code></td>
-<td><strong>curated</strong>: the original cast files loaded verbatim and never edited (<code>ctd.file</code>, <code>ctd.scan</code>, <code>ctd.cast</code>), the flag/proposal ledger (<code>ctd.flag</code>), views that present originals + accepted flags side by side (<code>ctd.v_scan_qc</code>, <code>ctd.v_scan_clean</code>), derived products (<code>ctd.scan_1m</code>)</td>
-<td>originals: the loader only; flags: everyone proposes, curators accept/reject</td>
+<td><strong>curated</strong>: the calcofi.org db-CSV cast files loaded verbatim and never edited (<code>ctd.file</code>, <code>ctd.scan</code> — all 82 source columns, ~10.8 M scans; <code>ctd.scan_issue</code> keeps the handful of cells that could not be typed, as text; <code>ctd.scan_column</code> is the data dictionary), the flag ledger (<code>ctd.flag</code>, IODE codes in <code>ctd.qual_code</code>), derived <code>ctd.cast</code>, and views: <code>ctd.v_scan_best</code> (one archive+stage per cruise × direction), <code>ctd.v_scan_qc</code> (originals + <code>&lt;var&gt;_qc</code> / <code>&lt;var&gt;_fix</code> from accepted flags), <code>ctd.v_scan_clean</code> (fixes applied, accepted-bad nulled)</td>
+<td>originals: the loader only; flags: everyone proposes (<code>INSERT INTO ctd.flag (scan_id, variable, qual_code, reason, proposed_value)</code>), curators set <code>status</code> to accepted/rejected</td>
 </tr>
 <tr class="even">
+<td><code>release</code></td>
+<td>read-only views over the <strong>public DuckDB release</strong> Parquet via pg_duckdb (<code>release.cruise</code>, <code>release.ship</code>, <code>release.dataset</code>)</td>
+<td>nobody (regenerated per release)</td>
+</tr>
+<tr class="odd">
 <td><code>work</code></td>
 <td>shared scratch — anything goes, readable and writable by the whole team</td>
 <td>everyone</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>&lt;you&gt;</code></td>
 <td>your personal schema (first on your <code>search_path</code>); colleagues can read it</td>
 <td>you</td>
 </tr>
 </tbody>
 </table>
-<p>The rules of the road: <strong>originals never change</strong> — a problem is a row in <code>ctd.flag</code> (which scan, which variable, what code, optional proposed value, why), a fix is an <em>accepted</em> flag, and every derived product is computed from originals + accepted flags so it can be regenerated. The schema and the flag vocabulary are being built with the team in August 2026; this section will grow with them.</p>
+<p>The rules of the road: <strong>originals never change</strong> — a problem is a row in <code>ctd.flag</code> (which scan, which variable, what code, optional proposed value, why), a fix is an <em>accepted</em> flag, and every derived product is computed from originals + accepted flags so it can be regenerated. A first flag, end to end:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- propose: temperature spike on one scan (IODE 4 = bad); 5 = changed, with proposed_value</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> ctd.flag (scan_id, variable, qual_code, reason)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> scan_id, <span class="st">'temp1'</span>, <span class="dv">4</span>, <span class="st">'spike vs neighbours'</span> <span class="kw">FROM</span> ctd.v_scan_best</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> study <span class="op">=</span> <span class="st">'2304SH'</span> <span class="kw">AND</span> cast_id <span class="op">=</span> <span class="st">'2304_001d'</span> <span class="kw">AND</span> <span class="fu">depth</span> <span class="op">=</span> <span class="dv">57</span>;</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- review (curators): accept or reject; reviewed_by/at are filled in for you</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> ctd.flag <span class="kw">SET</span> status <span class="op">=</span> <span class="st">'accepted'</span>, review_note <span class="op">=</span> <span class="st">'agree'</span> <span class="kw">WHERE</span> flag_id <span class="op">=</span> <span class="dv">123</span>;</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- see it: the _qc column carries the code, v_scan_clean nulls the value</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">depth</span>, temp1, temp1_qc <span class="kw">FROM</span> ctd.v_scan_qc <span class="kw">WHERE</span> study <span class="op">=</span> <span class="st">'2304SH'</span> <span class="kw">AND</span> cast_id <span class="op">=</span> <span class="st">'2304_001d'</span> <span class="kw">AND</span> temp1_qc <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Every change to <code>ctd.flag</code> is kept in <code>ctd.flag_audit</code>. The schema and vocabulary are new (August 2026) — propose changes in <code>work</code>, and they will be folded into <code>ctd</code>.</p>
 </section>
 <section id="sec-sftp" class="level2" data-number="7.9">
 <h2 data-number="7.9" class="anchored" data-anchor-id="sec-sftp"><span class="header-section-number">7.9</span> Files: SFTP and the shared folder</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sftp</span> calcofi                       <span class="co"># same key, same alias; cd ctd/incoming ; put file.zip ; get …</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> big.zip calcofi:ctd/incoming/   <span class="co"># one-shot copy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sftp</span> calcofi                       <span class="co"># same key, same alias; cd ctd/incoming ; put file.zip ; get …</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> big.zip calcofi:ctd/incoming/   <span class="co"># one-shot copy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>GUI clients: <strong>Cyberduck</strong> (Mac/Windows), <strong>FileZilla</strong>, <strong>WinSCP</strong> (Windows; uses the <code>.ppk</code> or the OpenSSH key) — protocol SFTP, host <code>ssh.calcofi.io</code>, user <em>you</em>, key file.</p>
 <p><code>/share/data/ctd</code> is owned by group <code>calcofi</code> with the group-write bit inherited, so files you upload are editable by teammates. Put <strong>uploads in <code>incoming/</code></strong>, leave <code>archive/</code> to the loader, and use <code>exports/</code> for things you want others (or yourself, later) to download. Your home directory is on the small system disk — keep it for dotfiles and scripts.</p>
 </section>
