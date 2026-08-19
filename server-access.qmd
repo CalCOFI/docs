@@ -290,21 +290,49 @@ SELECT * FROM pg.ctd.cast LIMIT 5;
 SELECT * FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.14/parquet/sample.parquet') LIMIT 5;
 ```
 
+**And the other direction — DuckDB *inside* PostgreSQL.** The server runs the
+[`pg_duckdb`](https://github.com/duckdb/pg_duckdb) extension, so from psql / pgAdmin you can
+read the public release Parquet without leaving SQL:
+
+```sql
+SELECT * FROM release.cruise WHERE year = 2023;        -- views over the current release (cruise, ship, dataset)
+SELECT r['sample_key']::text, r['datetime_utc']::timestamp
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.14/parquet/sample.parquet') r
+WHERE r['dataset_key']::text = 'calcofi_ctd-cast' LIMIT 10;
+```
+
+(`r['column']::type` is pg_duckdb's row syntax. Big tables — `obs`, `obs_ctd_full` — are
+better filtered in DuckDB on your laptop than pulled through the server.)
+
 ## The CTD QA/QC database {#sec-ctd-db}
 
 Database `calcofi`, three kinds of schema:
 
 | schema | what | who writes |
 |---|---|---|
-| `ctd` | **curated**: the original cast files loaded verbatim and never edited (`ctd.file`, `ctd.scan`, `ctd.cast`), the flag/proposal ledger (`ctd.flag`), views that present originals + accepted flags side by side (`ctd.v_scan_qc`, `ctd.v_scan_clean`), derived products (`ctd.scan_1m`) | originals: the loader only; flags: everyone proposes, curators accept/reject |
+| `ctd` | **curated**: the calcofi.org db-CSV cast files loaded verbatim and never edited (`ctd.file`, `ctd.scan` — all 82 source columns, ~10.8 M scans; `ctd.scan_issue` keeps the handful of cells that could not be typed, as text; `ctd.scan_column` is the data dictionary), the flag ledger (`ctd.flag`, IODE codes in `ctd.qual_code`), derived `ctd.cast`, and views: `ctd.v_scan_best` (one archive+stage per cruise × direction), `ctd.v_scan_qc` (originals + `<var>_qc` / `<var>_fix` from accepted flags), `ctd.v_scan_clean` (fixes applied, accepted-bad nulled) | originals: the loader only; flags: everyone proposes (`INSERT INTO ctd.flag (scan_id, variable, qual_code, reason, proposed_value)`), curators set `status` to accepted/rejected |
+| `release` | read-only views over the **public DuckDB release** Parquet via pg_duckdb (`release.cruise`, `release.ship`, `release.dataset`) | nobody (regenerated per release) |
 | `work` | shared scratch — anything goes, readable and writable by the whole team | everyone |
 | `<you>` | your personal schema (first on your `search_path`); colleagues can read it | you |
 
 The rules of the road: **originals never change** — a problem is a row in `ctd.flag`
 (which scan, which variable, what code, optional proposed value, why), a fix is an
 *accepted* flag, and every derived product is computed from originals + accepted flags so
-it can be regenerated. The schema and the flag vocabulary are being built with the team in
-August 2026; this section will grow with them.
+it can be regenerated. A first flag, end to end:
+
+```sql
+-- propose: temperature spike on one scan (IODE 4 = bad); 5 = changed, with proposed_value
+INSERT INTO ctd.flag (scan_id, variable, qual_code, reason)
+SELECT scan_id, 'temp1', 4, 'spike vs neighbours' FROM ctd.v_scan_best
+WHERE study = '2304SH' AND cast_id = '2304_001d' AND depth = 57;
+-- review (curators): accept or reject; reviewed_by/at are filled in for you
+UPDATE ctd.flag SET status = 'accepted', review_note = 'agree' WHERE flag_id = 123;
+-- see it: the _qc column carries the code, v_scan_clean nulls the value
+SELECT depth, temp1, temp1_qc FROM ctd.v_scan_qc WHERE study = '2304SH' AND cast_id = '2304_001d' AND temp1_qc IS NOT NULL;
+```
+
+Every change to `ctd.flag` is kept in `ctd.flag_audit`. The schema and vocabulary are new
+(August 2026) — propose changes in `work`, and they will be folded into `ctd`.
 
 ## Files: SFTP and the shared folder {#sec-sftp}
 
