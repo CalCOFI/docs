@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -77,10 +80,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -245,32 +248,38 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./server-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Server Access: SSH, SFTP &amp; PostgreSQL</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./portals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -293,12 +302,10 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
   <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">5.3</span> Integrated database ingestion strategy</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">5.3.1</span> Overview</a></li>
-  <li><a href="#master-ingestion-workflow" id="toc-master-ingestion-workflow" class="nav-link" data-scroll-target="#master-ingestion-workflow"><span class="header-section-number">5.3.2</span> Master ingestion workflow</a></li>
-  <li><a href="#using-calcofi4db-package" id="toc-using-calcofi4db-package" class="nav-link" data-scroll-target="#using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</a></li>
-  <li><a href="#release-versioning" id="toc-release-versioning" class="nav-link" data-scroll-target="#release-versioning"><span class="header-section-number">5.3.4</span> Release versioning</a></li>
-  <li><a href="#metadata-and-documentation" id="toc-metadata-and-documentation" class="nav-link" data-scroll-target="#metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</a></li>
-  <li><a href="#consuming-descriptions" id="toc-consuming-descriptions" class="nav-link" data-scroll-target="#consuming-descriptions"><span class="header-section-number">5.3.6</span> Consuming descriptions</a></li>
-  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">5.3.7</span> Publishing to portals</a></li>
+  <li><a href="#release-versioning" id="toc-release-versioning" class="nav-link" data-scroll-target="#release-versioning"><span class="header-section-number">5.3.2</span> Release versioning</a></li>
+  <li><a href="#metadata-and-documentation" id="toc-metadata-and-documentation" class="nav-link" data-scroll-target="#metadata-and-documentation"><span class="header-section-number">5.3.3</span> Metadata and documentation</a></li>
+  <li><a href="#consuming-descriptions" id="toc-consuming-descriptions" class="nav-link" data-scroll-target="#consuming-descriptions"><span class="header-section-number">5.3.4</span> Consuming descriptions</a></li>
+  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">5.3.5</span> Publishing to portals</a></li>
   </ul></li>
   <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">5.4</span> Relationships between tables</a></li>
   <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">5.5</span> Spatial Tips</a></li>
@@ -445,29 +452,8 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <h2 data-number="5.3" class="anchored" data-anchor-id="integrated-database-ingestion-strategy"><span class="header-section-number">5.3</span> Integrated database ingestion strategy</h2>
 <section id="overview" class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">5.3.1</span> Overview</h3>
-<p>The CalCOFI database uses a two-schema strategy for development and production:</p>
-<ul>
-<li><strong><code>dev</code> schema</strong>: Development schema where new datasets, tables, fields, and relationships are ingested and QA/QC’d.&nbsp;This schema is recreated fresh with each ingestion run using the master ingestion script.</li>
-<li><strong><code>prod</code> schema</strong>: Production schema for stable, versioned data used by public APIs, apps, and data portals (OBIS, EDI, ERDDAP). Once <code>dev</code> is validated, it’s copied to <code>prod</code> with a version number.</li>
-</ul>
-</section>
-<section id="master-ingestion-workflow" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="master-ingestion-workflow"><span class="header-section-number">5.3.2</span> Master ingestion workflow</h3>
-<p>All datasets are ingested using a single master Quarto script <a href="https://github.com/CalCOFI/calcofi4db/blob/main/inst/create_db.qmd"><code>calcofi4db/inst/create_db.qmd</code></a> that:</p>
-<ol type="1">
-<li><strong>Drops and recreates</strong> the <code>dev</code> schema (fresh start each run)</li>
-<li><strong>Ingests multiple datasets</strong> from Google Drive source files (CSV, potentially SHP/NC in future)</li>
-<li><strong>Applies transformations</strong> using redefinition files (<code>tbls_redefine.csv</code>, <code>flds_redefine.csv</code>)</li>
-<li><strong>Creates relationships</strong> (primary keys, foreign keys, indexes)</li>
-<li><strong>Records schema version</strong> with metadata in <code>schema_version</code> table</li>
-</ol>
-<p>Each dataset section in the master script handles:</p>
-<ul>
-<li>Reading CSV files from Google Drive</li>
-<li>Transforming data according to redefinition rules</li>
-<li>Loading into database tables</li>
-<li>Adding table/field comments with metadata</li>
-</ul>
+<p>The integrated database is built by the <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> pipeline: one <code>ingest_{provider}_{dataset}.qmd</code> notebook per dataset (orchestrated by <code>targets</code>, engine functions in <a href="https://github.com/CalCOFI/calcofi4db"><code>calcofi4db</code></a>) writes Parquet shards plus JSON sidecars; <code>release_database.qmd</code> assembles them in an in-memory DuckDB, validates, and freezes a versioned, immutable <strong>release</strong> on public Google Cloud Storage (next section). Consumers — the apps, <code>calcofi4r::cc_get_db()</code>, the <a href="https://calcofi.io/db-schema/">schema</a> and <a href="https://calcofi.io/db-query/">query</a> sites — read the release as Parquet over HTTPS with no credentials.</p>
+<p>Alongside the releases, a <strong>PostgreSQL</strong> database (<code>calcofi</code>, PostgreSQL 18 + PostGIS 3.6 on the CalCOFI server) is the <em>working</em>, multi-user store for the CTD team’s QA/QC: originals loaded verbatim and immutable, a flag/proposal ledger beside them, derived products on top. It is private and reached over SSH — see <a href="./server-access.html">Server Access</a>. DuckDB’s <code>postgres</code> extension joins the two worlds in one query (<code>calcofi4r::cc_pg_attach()</code>). (An earlier design ran the whole database in PostgreSQL with <code>dev</code>/<code>prod</code> schemas and a single <code>create_db.qmd</code>; that is superseded and only the legacy <code>gis</code> database remains, behind tile.calcofi.io.)</p>
 <div class="cell" data-file="diagrams/db_doc.mmd" data-layout-align="default">
 <div class="cell-output-display">
 <div id="fig-db_doc" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -568,50 +554,8 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 </div>
 </div>
 </section>
-<section id="using-calcofi4db-package" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="using-calcofi4db-package"><span class="header-section-number">5.3.3</span> Using calcofi4db package</h3>
-<p>The <a href="https://github.com/CalCOFI/calcofi4db">calcofi4db</a> package provides streamlined functions for dataset ingestion.</p>
-<section id="ducklake-workflow-recommended" class="level4" data-number="5.3.3.1">
-<h4 data-number="5.3.3.1" class="anchored" data-anchor-id="ducklake-workflow-recommended"><span class="header-section-number">5.3.3.1</span> DuckLake Workflow (Recommended)</h4>
-<p>The preferred approach uses DuckDB with provenance tracking:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4db)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to working DuckLake (downloads from GCS if needed)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">get_working_ducklake</span>()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read CSV files from local directory or GCS archive</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - syncs to GCS archive for immutable provenance tracking</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># - loads redefinition metadata for column renaming/typing</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv_files</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider     =</span> <span class="st">"swfsc"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset      =</span> <span class="st">"ichthyo"</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_data     =</span> <span class="st">"~/My Drive/projects/calcofi/data-public"</span>,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata_dir =</span> <span class="st">"metadata"</span>,</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">sync_archive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ingest dataset with automatic provenance tracking</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># - transforms data using redefinition files</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># - adds _source_file, _source_row, _source_uuid, _ingested_at columns</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># - handles uuid column detection automatically</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>tbl_stats <span class="ot">&lt;-</span> <span class="fu">ingest_dataset</span>(</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">con  =</span> con,</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">d    =</span> d,</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"replace"</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># save to GCS and close</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">save_working_ducklake</span>(con)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">close_duckdb</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The <code>ingest_dataset()</code> function handles:</p>
-<ul>
-<li>Calling <code>transform_data()</code> to apply table/field redefinitions</li>
-<li>Detecting UUID columns automatically for provenance tracking</li>
-<li>Calling <code>ingest_to_working()</code> for each table with proper source file tracking</li>
-<li>Returning ingestion statistics (rows input, rows after, timestamps)</li>
-</ul>
-</section>
-</section>
-<section id="release-versioning" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="release-versioning"><span class="header-section-number">5.3.4</span> Release versioning</h3>
+<section id="release-versioning" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="release-versioning"><span class="header-section-number">5.3.2</span> Release versioning</h3>
 <p>Each rendered <code>release_database.qmd</code> writes a frozen, immutable release to <code>gs://calcofi-db/ducklake/releases/{version}/</code> where <code>version</code> is <code>vYYYY.MM.DD</code>. The release directory contains:</p>
 <ul>
 <li><code>parquet/</code> — table files (single <code>.parquet</code> or hive-partitioned directories)</li>
@@ -622,8 +566,8 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 </ul>
 <p>A bucket-level <code>versions.json</code> lists every release and <code>latest.txt</code> points at the most recent one.</p>
 </section>
-<section id="metadata-and-documentation" class="level3" data-number="5.3.5">
-<h3 data-number="5.3.5" class="anchored" data-anchor-id="metadata-and-documentation"><span class="header-section-number">5.3.5</span> Metadata and documentation</h3>
+<section id="metadata-and-documentation" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="metadata-and-documentation"><span class="header-section-number">5.3.3</span> Metadata and documentation</h3>
 <p>Sources of truth for table and column descriptions live in this repo (not in the database), so they are reviewable via PRs and travel with the code that produced them:</p>
 <ul>
 <li><code>metadata/{provider}/{dataset}/tbls_redefine.csv</code> — <code>tbl_new</code>, <code>tbl_description</code></li>
@@ -637,43 +581,43 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 <ol type="1">
 <li><p><strong>Per-ingest</strong>: <code>calcofi4db::build_metadata_json()</code> (called inside <code>finalize_ingest()</code>) writes <code>data/parquet/{provider}_{dataset}/metadata.json</code> (schema version 1.0) alongside the parquet outputs.</p></li>
 <li><p><strong>Per-release</strong>: <code>calcofi4db::merge_metadata_json()</code> (called inside <code>release_database.qmd</code>) merges every per-ingest sidecar plus the release-only registries and writes <code>gs://calcofi-db/ducklake/releases/{version}/metadata.json</code> (schema version 1.1) with this shape:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"schema_version"</span><span class="fu">:</span> <span class="st">"1.1"</span><span class="fu">,</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"release_version"</span><span class="fu">:</span> <span class="st">"v2026.05.14"</span><span class="fu">,</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"release_date"</span><span class="fu">:</span>    <span class="st">"2026-05-14"</span><span class="fu">,</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"datasets"</span><span class="fu">:</span>          <span class="fu">{</span> <span class="dt">"calcofi_bottle"</span><span class="fu">:</span> <span class="fu">{</span> <span class="er">...</span> <span class="fu">}</span> <span class="fu">},</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"tables"</span><span class="fu">:</span>            <span class="fu">{</span> <span class="dt">"bottle"</span><span class="fu">:</span>         <span class="fu">{</span> <span class="dt">"name_long"</span><span class="fu">:</span> <span class="st">"Bottle"</span><span class="fu">,</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"description_md"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"provider"</span><span class="fu">:</span> <span class="st">"calcofi"</span><span class="fu">,</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"dataset"</span><span class="fu">:</span>  <span class="st">"bottle"</span> <span class="fu">}</span> <span class="fu">},</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"columns"</span><span class="fu">:</span>           <span class="fu">{</span> <span class="dt">"bottle.depth_m"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"name_long"</span><span class="fu">:</span> <span class="st">"Depth M"</span><span class="fu">,</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"units"</span><span class="fu">:</span>          <span class="st">"meters"</span><span class="fu">,</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"description_md"</span><span class="fu">:</span> <span class="st">"Bottle depth"</span> <span class="fu">}</span> <span class="fu">},</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"measurement_types"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"temperature"</span><span class="fu">:</span>    <span class="fu">{</span> <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"units"</span><span class="fu">:</span>       <span class="st">"degC"</span><span class="fu">,</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"is_canonical"</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="fu">}</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"schema_version"</span><span class="fu">:</span> <span class="st">"1.1"</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"release_version"</span><span class="fu">:</span> <span class="st">"v2026.05.14"</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"release_date"</span><span class="fu">:</span>    <span class="st">"2026-05-14"</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"datasets"</span><span class="fu">:</span>          <span class="fu">{</span> <span class="dt">"calcofi_bottle"</span><span class="fu">:</span> <span class="fu">{</span> <span class="er">...</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"tables"</span><span class="fu">:</span>            <span class="fu">{</span> <span class="dt">"bottle"</span><span class="fu">:</span>         <span class="fu">{</span> <span class="dt">"name_long"</span><span class="fu">:</span> <span class="st">"Bottle"</span><span class="fu">,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"description_md"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"provider"</span><span class="fu">:</span> <span class="st">"calcofi"</span><span class="fu">,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"dataset"</span><span class="fu">:</span>  <span class="st">"bottle"</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"columns"</span><span class="fu">:</span>           <span class="fu">{</span> <span class="dt">"bottle.depth_m"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"name_long"</span><span class="fu">:</span> <span class="st">"Depth M"</span><span class="fu">,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"units"</span><span class="fu">:</span>          <span class="st">"meters"</span><span class="fu">,</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"description_md"</span><span class="fu">:</span> <span class="st">"Bottle depth"</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"measurement_types"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"temperature"</span><span class="fu">:</span>    <span class="fu">{</span> <span class="dt">"description"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"units"</span><span class="fu">:</span>       <span class="st">"degC"</span><span class="fu">,</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                                             <span class="dt">"is_canonical"</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ol>
 <p>Markdown is supported anywhere in <code>description_md</code>; consumers should render it through a markdown parser when displaying.</p>
 </section>
-<section id="consuming-descriptions" class="level3" data-number="5.3.6">
-<h3 data-number="5.3.6" class="anchored" data-anchor-id="consuming-descriptions"><span class="header-section-number">5.3.6</span> Consuming descriptions</h3>
+<section id="consuming-descriptions" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="consuming-descriptions"><span class="header-section-number">5.3.4</span> Consuming descriptions</h3>
 <p>The fastest way to browse the schema is the <a href="https://calcofi.io/db-schema/"><strong>CalCOFI Schema explorer</strong></a> — per-release ERD, sortable table/column lists with units, dataset provenance, and the measurement-type registry, all sourced from the release <code>metadata.json</code> sidecar on GCS. Deep-link to a specific release with <code>#erd?v=v2026.05.19</code> (or <code>#tables</code>, <code>#columns</code>, <code>#measurements</code>).</p>
 <p>From R, fetch the descriptions either column-by-column or as a full interactive catalog. Both calls hit the same release <code>metadata.json</code> sidecar:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># schema + descriptions + units for a single table</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">cc_describe_table</span>(<span class="st">"bottle"</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(tbl, <span class="st">"description_md"</span>)    <span class="co"># table-level description</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># interactive datatable of every table and column in the release</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>()</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>(<span class="at">tables =</span> <span class="fu">c</span>(<span class="st">"bottle"</span>, <span class="st">"ichthyo"</span>))</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>(<span class="at">version =</span> <span class="st">"v2026.05.14"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># schema + descriptions + units for a single table</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">cc_describe_table</span>(<span class="st">"bottle"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(tbl, <span class="st">"description_md"</span>)    <span class="co"># table-level description</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># interactive datatable of every table and column in the release</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>(<span class="at">tables =</span> <span class="fu">c</span>(<span class="st">"bottle"</span>, <span class="st">"ichthyo"</span>))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>(<span class="at">version =</span> <span class="st">"v2026.05.14"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>When writing a new ingest, populate <code>tbls_redefine.csv</code> and <code>flds_redefine.csv</code> (especially <code>fld_description</code> and <code>units</code>) before running the ingest notebook — <code>build_metadata_json()</code> reads them directly. The Claude Code <code>/generate-metadata</code> and <code>/validate-ingest</code> skills enforce this.</p>
 </section>
-<section id="publishing-to-portals" class="level3" data-number="5.3.7">
-<h3 data-number="5.3.7" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">5.3.7</span> Publishing to portals</h3>
+<section id="publishing-to-portals" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">5.3.5</span> Publishing to portals</h3>
 <p>Workflows in <code>workflows/publish_*.qmd</code> push selected tables to external portals (ERDDAP, EDI, OBIS, NCEI). They read the release <code>metadata.json</code> to assemble Ecological Metadata Language (EML) and ERDDAP datasets.xml entries, so descriptions stay in sync across portals without re-keying.</p>
 </section>
 </section>

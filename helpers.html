@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>7&nbsp; Matching Helpers – CalCOFI.io</title>
+<title>8&nbsp; Matching Helpers – CalCOFI.io</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,17 +73,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./api.html" rel="next">
-<link href="./data-access.html" rel="prev">
+<link href="./server-access.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -130,7 +133,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./helpers.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./helpers.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Matching Helpers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -242,32 +245,38 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./server-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Server Access: SSH, SFTP &amp; PostgreSQL</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./helpers.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./portals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -280,14 +289,14 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install"><span class="header-section-number">7.1</span> Install</a></li>
-  <li><a href="#the-wrappers" id="toc-the-wrappers" class="nav-link" data-scroll-target="#the-wrappers"><span class="header-section-number">7.2</span> The wrappers</a></li>
-  <li><a href="#worked-example-sardine-larvae-temperature" id="toc-worked-example-sardine-larvae-temperature" class="nav-link" data-scroll-target="#worked-example-sardine-larvae-temperature"><span class="header-section-number">7.3</span> Worked example: sardine larvae + temperature</a></li>
-  <li><a href="#reproducible-sql" id="toc-reproducible-sql" class="nav-link" data-scroll-target="#reproducible-sql"><span class="header-section-number">7.4</span> Reproducible SQL</a></li>
-  <li><a href="#run-it-from-anywhere" id="toc-run-it-from-anywhere" class="nav-link" data-scroll-target="#run-it-from-anywhere"><span class="header-section-number">7.5</span> Run it from anywhere</a></li>
-  <li><a href="#the-core-engine-cc_match_bio_env" id="toc-the-core-engine-cc_match_bio_env" class="nav-link" data-scroll-target="#the-core-engine-cc_match_bio_env"><span class="header-section-number">7.6</span> The core engine: <code>cc_match_bio_env()</code></a></li>
-  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">7.7</span> Parameters</a></li>
-  <li><a href="#migrating-from-the-api" id="toc-migrating-from-the-api" class="nav-link" data-scroll-target="#migrating-from-the-api"><span class="header-section-number">7.8</span> Migrating from the API</a></li>
+  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install"><span class="header-section-number">8.1</span> Install</a></li>
+  <li><a href="#the-wrappers" id="toc-the-wrappers" class="nav-link" data-scroll-target="#the-wrappers"><span class="header-section-number">8.2</span> The wrappers</a></li>
+  <li><a href="#worked-example-sardine-larvae-temperature" id="toc-worked-example-sardine-larvae-temperature" class="nav-link" data-scroll-target="#worked-example-sardine-larvae-temperature"><span class="header-section-number">8.3</span> Worked example: sardine larvae + temperature</a></li>
+  <li><a href="#reproducible-sql" id="toc-reproducible-sql" class="nav-link" data-scroll-target="#reproducible-sql"><span class="header-section-number">8.4</span> Reproducible SQL</a></li>
+  <li><a href="#run-it-from-anywhere" id="toc-run-it-from-anywhere" class="nav-link" data-scroll-target="#run-it-from-anywhere"><span class="header-section-number">8.5</span> Run it from anywhere</a></li>
+  <li><a href="#the-core-engine-cc_match_bio_env" id="toc-the-core-engine-cc_match_bio_env" class="nav-link" data-scroll-target="#the-core-engine-cc_match_bio_env"><span class="header-section-number">8.6</span> The core engine: <code>cc_match_bio_env()</code></a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">8.7</span> Parameters</a></li>
+  <li><a href="#migrating-from-the-api" id="toc-migrating-from-the-api" class="nav-link" data-scroll-target="#migrating-from-the-api"><span class="header-section-number">8.8</span> Migrating from the API</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/helpers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -296,7 +305,7 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matching Helpers</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Matching Helpers</span></h1>
 </div>
 
 
@@ -315,14 +324,14 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 
 <p>The <a href="https://calcofi.io/calcofi4r"><code>calcofi4r</code></a> package provides helper functions that relate <strong>biological</strong> observations (net-tow ichthyoplankton or zooplankton biomass) to <strong>environmental</strong> observations (CTD-bottle measurements) by matching them in time and space — on the fly, against the public release <a href="./data-access.html">Parquet on GCS</a>.</p>
 <p>These supersede the retired Postgres Plumber <a href="./api.html">API</a> endpoints <code>zooplankton_biomass</code>, <code>itis_ichthyodata</code> and <code>ichthyodata</code>, which depended on pre-built <code>uunet2ctd*</code> match tables that are no longer part of releases.</p>
-<section id="install" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="install"><span class="header-section-number">7.1</span> Install</h2>
+<section id="install" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="install"><span class="header-section-number">8.1</span> Install</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github("calcofi/calcofi4r")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The matching helpers need <code>calcofi4r</code> ≥ 1.2.0 and DuckDB with the <code>httpfs</code> and <code>spatial</code> extensions (the functions install/load these for you).</p>
 </section>
-<section id="the-wrappers" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="the-wrappers"><span class="header-section-number">7.2</span> The wrappers</h2>
+<section id="the-wrappers" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="the-wrappers"><span class="header-section-number">8.2</span> The wrappers</h2>
 <p>Three wrappers cover the common cases. Each builds the matching SQL, runs it, and returns a tibble of <strong>one row per biological observation</strong> with the matched environmental value:</p>
 <table class="caption-top table">
 <colgroup>
@@ -367,8 +376,8 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_zooplankton_biomass</span>(</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">env_var =</span> <span class="st">"temperature"</span>, <span class="at">biomass_type =</span> <span class="st">"totalplankton"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="worked-example-sardine-larvae-temperature" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="worked-example-sardine-larvae-temperature"><span class="header-section-number">7.3</span> Worked example: sardine larvae + temperature</h2>
+<section id="worked-example-sardine-larvae-temperature" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="worked-example-sardine-larvae-temperature"><span class="header-section-number">8.3</span> Worked example: sardine larvae + temperature</h2>
 <p>The recurring example through these pages — <em>Pacific sardine (<code>Sardinops sagax</code>) larvae matched to CTD-bottle temperature, Q1 2018, with relaxed (5 km / 72 hr) matching</em> — is a single call:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sardinops sagax"</span>,</span>
@@ -401,8 +410,8 @@ Note
 </div>
 </div>
 </section>
-<section id="reproducible-sql" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="reproducible-sql"><span class="header-section-number">7.4</span> Reproducible SQL</h2>
+<section id="reproducible-sql" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="reproducible-sql"><span class="header-section-number">8.4</span> Reproducible SQL</h2>
 <p>Every helper attaches the <strong>exact, portable SQL</strong> that produced the result, plus query metadata, as attributes:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">attr</span>(d, <span class="st">"sql"</span>))           <span class="co"># the fully-interpolated, GCS-URL-based query</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">attr</span>(d, <span class="st">"query_meta"</span>))    <span class="co"># package + release version, params, source URLs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -411,8 +420,8 @@ Note
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sql <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(<span class="st">"Sardinops sagax"</span>, <span class="at">return_sql =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(sql)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="run-it-from-anywhere" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="run-it-from-anywhere"><span class="header-section-number">7.5</span> Run it from anywhere</h2>
+<section id="run-it-from-anywhere" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="run-it-from-anywhere"><span class="header-section-number">8.5</span> Run it from anywhere</h2>
 <p>The portable SQL these helpers emit runs in any DuckDB client:</p>
 <table class="caption-top table">
 <thead>
@@ -442,8 +451,8 @@ Note
 </table>
 <p>In each case the <em>exact same</em> generated SQL hits the <em>exact same</em> public GCS Parquet, so a colleague who only writes Python (or only opens browser tabs) gets the same rows you do — same <code>bio_id</code>s, same <code>env_value</code>s, same <code>time_diff_hr</code>s.</p>
 </section>
-<section id="the-core-engine-cc_match_bio_env" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="the-core-engine-cc_match_bio_env"><span class="header-section-number">7.6</span> The core engine: <code>cc_match_bio_env()</code></h2>
+<section id="the-core-engine-cc_match_bio_env" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="the-core-engine-cc_match_bio_env"><span class="header-section-number">8.6</span> The core engine: <code>cc_match_bio_env()</code></h2>
 <p>The wrappers are thin shells over <code>cc_match_bio_env()</code>, which takes a <code>bio</code> and an <code>env</code> SQL <code>SELECT</code> string and performs the match. Call it directly when you need a biological or environmental side the wrappers don’t cover (custom filters, a different grouping, joining <code>bottle</code> to <code>cast_condition</code>, …):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_match_bio_env</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  bio, env,                                  <span class="co"># SELECT strings (see contract below)</span></span>
@@ -454,8 +463,8 @@ Note
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">return_sql  =</span> <span class="cn">FALSE</span>)                       <span class="co"># TRUE  → just the SQL string</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Contract.</strong> <code>bio</code> must yield <code>bio_id</code>, <code>bio_datetime</code>, <code>bio_lon</code>, <code>bio_lat</code>, <code>bio_value</code> (plus any descriptive columns, carried through as grouping keys). <code>env</code> must yield exactly <code>env_id</code>, <code>env_datetime</code>, <code>env_lon</code>, <code>env_lat</code>, <code>env_value</code>, <code>env_depth_m</code>, <code>measurement_type</code>. Both typically <code>FROM read_parquet('https://…/{table}.parquet')</code> so the emitted SQL stays portable.</p>
 </section>
-<section id="parameters" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="parameters"><span class="header-section-number">7.7</span> Parameters</h2>
+<section id="parameters" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="parameters"><span class="header-section-number">8.7</span> Parameters</h2>
 <ul>
 <li><strong><code>max_dist_km</code>, <code>max_time_hr</code></strong> — the spatial and temporal match windows. Defaults are 2 km / 6 hr; <code>relax_matching = TRUE</code> widens them to 5 km / 72 hr (an explicit value always wins). This replaces the old API’s <code>relax_matching</code> boolean.</li>
 <li><strong><code>join_method</code></strong> — how the environmental observations inside the window are reduced to one value per biological observation:
@@ -471,8 +480,8 @@ CalCOFI co-locates net tows and CTD casts, so in practice <code>nearest_time</co
 <li><strong><code>version</code></strong> — a release string like <code>"v2026.05.14"</code>, or <code>"latest"</code>.</li>
 </ul>
 </section>
-<section id="migrating-from-the-api" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="migrating-from-the-api"><span class="header-section-number">7.8</span> Migrating from the API</h2>
+<section id="migrating-from-the-api" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="migrating-from-the-api"><span class="header-section-number">8.8</span> Migrating from the API</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -919,13 +928,13 @@ CalCOFI co-locates net tows and CTD casts, so in practice <code>nearest_time</co
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span>
+      <a href="./server-access.html" class="pagination-link" aria-label="Server Access: SSH, SFTP &amp; PostgreSQL">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Server Access: SSH, SFTP &amp; PostgreSQL</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./api.html" class="pagination-link" aria-label="API">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
