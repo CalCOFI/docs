@@ -142,6 +142,19 @@ cc_query("SELECT count(*) FROM ichthyo")
 
 ## From Python
 
+[`calcofi4py`](https://github.com/CalCOFI/calcofi4py) registers every release table as a
+DuckDB view for you (partitioned + supplemental handling included), mirroring `calcofi4r`:
+
+```python
+# pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"
+import calcofi4py as cc
+con = cc.cc_get_db()                    # latest release; cc_get_db("v2026.08.14") to pin
+df  = con.sql("SELECT * FROM species WHERE common_name ILIKE '%sardine%'").df()
+cc.cc_query("SELECT count(*) FROM obs").fetchone()
+```
+
+Or plain `duckdb`, naming the Parquet URLs yourself:
+
 ```python
 import duckdb
 

@@ -246,24 +246,33 @@ PostGIS geometry comes through `sf`: `sf::st_read(con, query = "SELECT * FROM ct
 
 ## From Python {#sec-python}
 
-Python reads the same `~/.pgpass` (psycopg is built on libpq):
+[`calcofi4py`](https://github.com/CalCOFI/calcofi4py) mirrors `calcofi4r` — same verbs, same
+defaults, password from the same `~/.pgpass`:
 
 ```python
-# pip install "psycopg[binary]" sqlalchemy pandas geopandas
+# pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"
+import calcofi4py as cc
+
+con = cc.cc_pg_connect(tunnel=True)   # opens `ssh -N calcofi` for you; role + password from ~/.pgpass
+con.execute("SELECT count(*) FROM ctd.cast WHERE is_best_stage").fetchone()
+
 import pandas as pd
-from sqlalchemy import create_engine
-eng = create_engine("postgresql+psycopg://rswalethorp@localhost:5432/calcofi")  # no password in the URL
-df  = pd.read_sql("SELECT * FROM ctd.cast LIMIT 10", eng)
+casts = pd.read_sql("SELECT * FROM ctd.v_scan_qc WHERE study = '2304SH' AND cast_id = '2304_020d'", con)
 
-import geopandas as gpd
-casts = gpd.read_postgis("SELECT * FROM ctd.cast", eng, geom_col="geom")
-
-df.to_sql("my_check", eng, schema="work", if_exists="replace", index=False)  # colleagues can read it
+# propose a QC flag (curators accept/reject)
+con.execute("""
+  INSERT INTO ctd.flag (scan_id, variable, qual_code, reason)
+  SELECT scan_id, 'temp1', 4, 'spike vs neighbours'
+  FROM ctd.v_scan_best WHERE study=%s AND cast_id=%s AND depth=%s
+""", ("2304SH", "2304_001d", 57))
+con.commit()
+cc.cc_pg_tunnel_close()
 ```
 
-Or DuckDB from Python, attaching PostgreSQL (next section) — the same `.pgpass` applies.
-A `calcofi4py` package mirroring `calcofi4r` (`cc_get_db()`, `cc_pg_connect()`) is planned;
-until then these few lines are the whole recipe.
+It also wraps the public releases (`cc.cc_get_db()` — DuckDB with every release table as a
+view, versions pinnable) and the bridge (`cc.cc_pg_attach()`, next section). Prefer plain
+libraries? psycopg / SQLAlchemy / GeoPandas read the same `.pgpass` — connection string
+`postgresql+psycopg://<you>@localhost:5432/calcofi`, no password in the URL.
 
 ## DuckDB ↔ PostgreSQL {#sec-duckdb-pg}
 
@@ -281,7 +290,16 @@ DBI::dbGetQuery(con, "
 cc_pg_attach(con, alias = "pgw", read_only = FALSE) # writable: CREATE TABLE pgw.work.x AS SELECT …
 ```
 
-The same in any DuckDB (CLI, Python):
+The same from Python (`calcofi4py`) or any DuckDB CLI:
+
+```python
+import calcofi4py as cc
+con = cc.cc_get_db(tables=["cruise", "sample"])   # release views
+cc.cc_pg_attach(con)                               # + the PostgreSQL db as `pg`
+con.sql("SELECT count(*) FROM pg.ctd.flag").fetchone()
+```
+
+Raw SQL, in any DuckDB:
 
 ```sql
 INSTALL postgres; LOAD postgres;
