@@ -153,6 +153,30 @@ df  = con.sql("SELECT * FROM species WHERE common_name ILIKE '%sardine%'").df()
 cc.cc_query("SELECT count(*) FROM obs").fetchone()
 ```
 
+::: {.callout-important}
+## Apply the quality flags
+
+`obs.measurement_qual` carries each dataset's **own** flag vocabulary, uninterpreted —
+bottle (6 = OK but from CTD, 8 = suspect, 9 = missing), CTD cast files (1/2 = use the
+primary/secondary sensor, 8 = questionable, 9 = bad/missing), DIC WOCE (2 = good,
+3 = questionable, 4 = bad, 9 = missing); see
+[`metadata/measurement_qual.csv`](https://github.com/CalCOFI/workflows/blob/main/metadata/measurement_qual.csv).
+A flagged value is still a row. Filter it yourself, or use the one predicate the apps use:
+
+```r
+calcofi4r::cc_qual_ok_sql("o")     # append to any WHERE over obs / obs_ctd_full / sample_measurement
+```
+```python
+calcofi4py.qual_ok_sql("o")
+```
+```sql
+-- what both expand to (NULL-safe: an unflagged row is kept)
+AND COALESCE(NOT ((o.dataset_key IN ('calcofi_bottle', 'calcofi_ctd-cast')
+                     AND regexp_replace(o.measurement_qual, '\.0+$', '') IN ('8', '9'))
+               OR (o.dataset_key = 'calcofi_dic' AND o.measurement_qual IN ('3', '4', '9'))), TRUE)
+```
+:::
+
 Or plain `duckdb`, naming the Parquet URLs yourself:
 
 ```python
