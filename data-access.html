@@ -418,43 +418,62 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> cc.cc_get_db()                    <span class="co"># latest release; cc_get_db("v2026.08.14") to pin</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df  <span class="op">=</span> con.sql(<span class="st">"SELECT * FROM species WHERE common_name ILIKE '</span><span class="sc">%s</span><span class="st">ardine%'"</span>).df()</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cc.cc_query(<span class="st">"SELECT count(*) FROM obs"</span>).fetchone()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Apply the quality flags
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>obs.measurement_qual</code> carries each dataset’s <strong>own</strong> flag vocabulary, uninterpreted — bottle (6 = OK but from CTD, 8 = suspect, 9 = missing), CTD cast files (1/2 = use the primary/secondary sensor, 8 = questionable, 9 = bad/missing), DIC WOCE (2 = good, 3 = questionable, 4 = bad, 9 = missing); see <a href="https://github.com/CalCOFI/workflows/blob/main/metadata/measurement_qual.csv"><code>metadata/measurement_qual.csv</code></a>. A flagged value is still a row. Filter it yourself, or use the one predicate the apps use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>calcofi4r<span class="sc">::</span><span class="fu">cc_qual_ok_sql</span>(<span class="st">"o"</span>)     <span class="co"># append to any WHERE over obs / obs_ctd_full / sample_measurement</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>calcofi4py.qual_ok_sql(<span class="st">"o"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- what both expand to (NULL-safe: an unflagged row is kept)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AND</span> <span class="fu">COALESCE</span>(<span class="kw">NOT</span> ((o.dataset_key <span class="kw">IN</span> (<span class="st">'calcofi_bottle'</span>, <span class="st">'calcofi_ctd-cast'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="kw">AND</span> <span class="fu">regexp_replace</span>(o.measurement_qual, <span class="st">'\.0+$'</span>, <span class="st">''</span>) <span class="kw">IN</span> (<span class="st">'8'</span>, <span class="st">'9'</span>))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>               <span class="kw">OR</span> (o.dataset_key <span class="op">=</span> <span class="st">'calcofi_dic'</span> <span class="kw">AND</span> o.measurement_qual <span class="kw">IN</span> (<span class="st">'3'</span>, <span class="st">'4'</span>, <span class="st">'9'</span>))), <span class="kw">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 <p>Or plain <code>duckdb</code>, naming the Parquet URLs yourself:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>()</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"INSTALL httpfs; LOAD httpfs;"</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> <span class="st">"https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> con.sql(<span class="ss">f"""</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ss">  SELECT scientific_name, common_name, worms_id</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ss">  FROM read_parquet('</span><span class="sc">{</span>base<span class="sc">}</span><span class="ss">/species.parquet')</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ss">  WHERE common_name ILIKE '%sardine%'</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"INSTALL httpfs; LOAD httpfs;"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> <span class="st">"https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> con.sql(<span class="ss">f"""</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ss">  SELECT scientific_name, common_name, worms_id</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ss">  FROM read_parquet('</span><span class="sc">{</span>base<span class="sc">}</span><span class="ss">/species.parquet')</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ss">  WHERE common_name ILIKE '%sardine%'</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="from-your-browser" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="from-your-browser"><span class="header-section-number">6.7</span> From your browser</h2>
 <p>DuckDB compiles to WebAssembly, so the <em>same engine</em> runs <strong>client-side in your browser</strong> — no server, no install, no R or Python. CalCOFI ships a ready-made form at <strong>→ <a href="https://calcofi.io/db-query/">Open CalCOFI Query</a></strong> that wraps the three retired bio↔︎env Plumber endpoints (and a free-form SQL shell): pick a function, fill the form, click <strong>Run</strong>, and a Chromium / Firefox / Safari worker thread fetches Parquet range-by-range over HTTPS and joins them in-browser.</p>
 <p>To embed DuckDB-WASM in your own page, the boilerplate is about 15 lines — load the bundle from a CDN, instantiate, <code>INSTALL httpfs</code> and you’re ready:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="dt">&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> <span class="op">*</span> <span class="im">as</span> duckdb <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm"</span><span class="op">;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bundles <span class="op">=</span> duckdb<span class="op">.</span><span class="fu">getJsDelivrBundles</span>()<span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bundle  <span class="op">=</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">selectBundle</span>(bundles)<span class="op">;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> worker  <span class="op">=</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">createWorker</span>(bundle<span class="op">.</span><span class="at">mainWorker</span>)<span class="op">;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> db      <span class="op">=</span> <span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">AsyncDuckDB</span>(<span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">ConsoleLogger</span>()<span class="op">,</span> worker)<span class="op">;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> db<span class="op">.</span><span class="fu">instantiate</span>(bundle<span class="op">.</span><span class="at">mainModule</span><span class="op">,</span> bundle<span class="op">.</span><span class="at">pthreadWorker</span>)<span class="op">;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> conn <span class="op">=</span> <span class="cf">await</span> db<span class="op">.</span><span class="fu">connect</span>()<span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="st">"INSTALL httpfs; LOAD httpfs;"</span>)<span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="st">"INSTALL spatial; LOAD spatial;"</span>)<span class="op">;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> base <span class="op">=</span> <span class="st">"https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"</span><span class="op">;</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="vs">`</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="vs">    SELECT scientific_name, common_name, worms_id</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="vs">    FROM read_parquet('</span><span class="sc">${</span>base<span class="sc">}</span><span class="vs">/species.parquet')</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="vs">    WHERE common_name ILIKE '%sardine%'</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="vs">  `</span>)<span class="op">;</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result<span class="op">.</span><span class="fu">toArray</span>())<span class="op">;</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="dt">&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> <span class="op">*</span> <span class="im">as</span> duckdb <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm"</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bundles <span class="op">=</span> duckdb<span class="op">.</span><span class="fu">getJsDelivrBundles</span>()<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bundle  <span class="op">=</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">selectBundle</span>(bundles)<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> worker  <span class="op">=</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">createWorker</span>(bundle<span class="op">.</span><span class="at">mainWorker</span>)<span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> db      <span class="op">=</span> <span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">AsyncDuckDB</span>(<span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">ConsoleLogger</span>()<span class="op">,</span> worker)<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> db<span class="op">.</span><span class="fu">instantiate</span>(bundle<span class="op">.</span><span class="at">mainModule</span><span class="op">,</span> bundle<span class="op">.</span><span class="at">pthreadWorker</span>)<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> conn <span class="op">=</span> <span class="cf">await</span> db<span class="op">.</span><span class="fu">connect</span>()<span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="st">"INSTALL httpfs; LOAD httpfs;"</span>)<span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="st">"INSTALL spatial; LOAD spatial;"</span>)<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> base <span class="op">=</span> <span class="st">"https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"</span><span class="op">;</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="vs">`</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="vs">    SELECT scientific_name, common_name, worms_id</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="vs">    FROM read_parquet('</span><span class="sc">${</span>base<span class="sc">}</span><span class="vs">/species.parquet')</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="vs">    WHERE common_name ILIKE '%sardine%'</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="vs">  `</span>)<span class="op">;</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result<span class="op">.</span><span class="fu">toArray</span>())<span class="op">;</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For arbitrary one-off SQL with no setup at all, paste a query into <a href="https://shell.duckdb.org"><strong>shell.duckdb.org</strong></a> — DuckDB’s official DuckDB-WASM shell. Same WebAssembly engine, same public Parquet, identical rows.</p>
 </section>
 <section id="run-it-from-anywhere" class="level2" data-number="6.8">
@@ -515,97 +534,97 @@ Note
 </div>
 </div>
 <p>Done as <strong>direct SQL</strong>, the query is a temporal interval join plus a spatial <code>ST_Distance_Sphere</code> filter. After the <code>INSTALL</code>/<code>LOAD</code> setup above, run the query below. This block is character-for-character what <a href="./helpers.html"><code>calcofi4r::cc_match_ichthyo_by_name()</code></a> returns as <code>attr(d, "sql")</code> — the two produce the <strong>identical 13 rows</strong>. The <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> download bundle builds <code>query/integrated_*.sql</code> with the same <code>cc_match_bio_env()</code> engine (its filter set is taxa + quarters + dates rather than <code>life_stage</code>, so a sardine / Q1 2018 bundle returns the egg + larva superset — same matching mechanics, same reproducibility):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> bio <span class="kw">AS</span> (</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  i.ichthyo_uuid:<span class="ch">:VARCHAR</span> <span class="kw">AS</span> bio_id,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  t.time_start            <span class="kw">AS</span> bio_datetime,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  s.longitude             <span class="kw">AS</span> bio_lon,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  s.latitude              <span class="kw">AS</span> bio_lat,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  n.std_haul_factor <span class="op">*</span> i.tally <span class="op">/</span> <span class="fu">nullif</span>(n.prop_sorted, <span class="dv">0</span>) <span class="kw">AS</span> bio_value,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  sp.scientific_name,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  sp.common_name,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  sp.worms_id,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  i.life_stage,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  i.tally</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/ichthyo.parquet'</span>) i</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet'</span>) sp <span class="kw">ON</span> i.species_id <span class="op">=</span> sp.species_id</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/net.parquet'</span>)     n  <span class="kw">ON</span> i.net_uuid   <span class="op">=</span> n.net_uuid</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/tow.parquet'</span>)     t  <span class="kw">ON</span> n.tow_uuid   <span class="op">=</span> t.tow_uuid</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/site.parquet'</span>)    s  <span class="kw">ON</span> t.site_uuid  <span class="op">=</span> s.site_uuid</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> i.tally <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> i.measurement_type <span class="kw">IS</span> <span class="kw">NULL</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> t.time_start <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> s.longitude <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> s.latitude <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> sp.scientific_name <span class="kw">IN</span> (<span class="st">'Sardinops sagax'</span>)</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> i.life_stage <span class="kw">IN</span> (<span class="st">'larva'</span>)</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> t.time_start <span class="op">&gt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-01-01'</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> t.time_start <span class="op">&lt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-03-31'</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>env <span class="kw">AS</span> (</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  bm.bottle_measurement_id <span class="kw">AS</span> env_id,</span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  c.datetime_utc           <span class="kw">AS</span> env_datetime,</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  c.lon_dec                <span class="kw">AS</span> env_lon,</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  c.lat_dec                <span class="kw">AS</span> env_lat,</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  bm.measurement_value     <span class="kw">AS</span> env_value,</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  b.depth_m                <span class="kw">AS</span> env_depth_m,</span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  bm.measurement_type      <span class="kw">AS</span> measurement_type</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle_measurement.parquet'</span>) bm</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle.parquet'</span>) b <span class="kw">ON</span> bm.bottle_id <span class="op">=</span> b.bottle_id</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/casts.parquet'</span>)  c <span class="kw">ON</span> b.cast_id    <span class="op">=</span> c.cast_id</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> bm.measurement_type <span class="op">=</span> <span class="st">'temperature'</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> bm.measurement_value <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.datetime_utc <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.lon_dec <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.lat_dec <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.datetime_utc <span class="op">&gt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-01-01'</span> <span class="op">-</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.datetime_utc <span class="op">&lt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-03-31'</span> <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>matched <span class="kw">AS</span> (</span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- temporal interval join: every env observation within ± max_time_hr</span></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    bio.<span class="op">*</span>,</span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    env.<span class="op">*</span> EXCLUDE (env_lon, env_lat),</span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(epoch(bio.bio_datetime) <span class="op">-</span> epoch(env.env_datetime)) <span class="op">/</span> <span class="fl">3600.0</span> <span class="kw">AS</span> time_diff_hr,</span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>    ST_Distance_Sphere(</span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>      ST_Point(bio.bio_lon, bio.bio_lat),</span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>      ST_Point(env.env_lon, env.env_lat)) <span class="op">/</span> <span class="fl">1000.0</span>                  <span class="kw">AS</span> dist_km</span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> bio</span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> env</span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> env.env_datetime <span class="kw">BETWEEN</span> bio.bio_datetime <span class="op">-</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>                            <span class="kw">AND</span> bio.bio_datetime <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>within <span class="kw">AS</span> (</span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- spatial filter: keep pairs within max_dist_km</span></span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> matched</span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> dist_km <span class="op">&lt;=</span> <span class="dv">5</span></span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>ranked <span class="kw">AS</span> (</span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">min</span>(time_diff_hr) <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> bio_id) <span class="kw">AS</span> mn_time_diff_hr,</span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">min</span>(dist_km)      <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> bio_id) <span class="kw">AS</span> mn_dist_km</span>
-<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> within</span>
-<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="co">-- one row per bio observation (× measurement_type): env values aggregated</span></span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span> EXCLUDE (</span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>    env_id, env_value, env_datetime, env_depth_m,</span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>    time_diff_hr, dist_km, mn_time_diff_hr, mn_dist_km),</span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="op">*</span>)                                            <span class="kw">AS</span> n_env,</span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(env_value)                                      <span class="kw">AS</span> env_value,</span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">CASE</span> <span class="cf">WHEN</span> <span class="fu">count</span>(<span class="op">*</span>) <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">0</span></span>
-<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a>       <span class="cf">ELSE</span> <span class="fu">coalesce</span>(<span class="fu">stddev_samp</span>(env_value), <span class="dv">0</span>) <span class="cf">END</span>   <span class="kw">AS</span> env_value_sd,</span>
-<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(env_depth_m)                                    <span class="kw">AS</span> env_depth_m,</span>
-<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">min</span>(env_datetime)                                   <span class="kw">AS</span> env_datetime_min,</span>
-<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(env_datetime)                                   <span class="kw">AS</span> env_datetime_max,</span>
-<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(dist_km)                                        <span class="kw">AS</span> dist_km,</span>
-<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(time_diff_hr)                                   <span class="kw">AS</span> time_diff_hr</span>
-<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ranked</span>
-<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> time_diff_hr <span class="op">=</span> mn_time_diff_hr</span>
-<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ALL</span></span>
-<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> bio_id</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> bio <span class="kw">AS</span> (</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  i.ichthyo_uuid:<span class="ch">:VARCHAR</span> <span class="kw">AS</span> bio_id,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  t.time_start            <span class="kw">AS</span> bio_datetime,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  s.longitude             <span class="kw">AS</span> bio_lon,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  s.latitude              <span class="kw">AS</span> bio_lat,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  n.std_haul_factor <span class="op">*</span> i.tally <span class="op">/</span> <span class="fu">nullif</span>(n.prop_sorted, <span class="dv">0</span>) <span class="kw">AS</span> bio_value,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  sp.scientific_name,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  sp.common_name,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  sp.worms_id,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  i.life_stage,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  i.tally</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/ichthyo.parquet'</span>) i</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet'</span>) sp <span class="kw">ON</span> i.species_id <span class="op">=</span> sp.species_id</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/net.parquet'</span>)     n  <span class="kw">ON</span> i.net_uuid   <span class="op">=</span> n.net_uuid</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/tow.parquet'</span>)     t  <span class="kw">ON</span> n.tow_uuid   <span class="op">=</span> t.tow_uuid</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/site.parquet'</span>)    s  <span class="kw">ON</span> t.site_uuid  <span class="op">=</span> s.site_uuid</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> i.tally <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> i.measurement_type <span class="kw">IS</span> <span class="kw">NULL</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> t.time_start <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> s.longitude <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> s.latitude <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> sp.scientific_name <span class="kw">IN</span> (<span class="st">'Sardinops sagax'</span>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> i.life_stage <span class="kw">IN</span> (<span class="st">'larva'</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> t.time_start <span class="op">&gt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-01-01'</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> t.time_start <span class="op">&lt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-03-31'</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>env <span class="kw">AS</span> (</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  bm.bottle_measurement_id <span class="kw">AS</span> env_id,</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  c.datetime_utc           <span class="kw">AS</span> env_datetime,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  c.lon_dec                <span class="kw">AS</span> env_lon,</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  c.lat_dec                <span class="kw">AS</span> env_lat,</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  bm.measurement_value     <span class="kw">AS</span> env_value,</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  b.depth_m                <span class="kw">AS</span> env_depth_m,</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  bm.measurement_type      <span class="kw">AS</span> measurement_type</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle_measurement.parquet'</span>) bm</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle.parquet'</span>) b <span class="kw">ON</span> bm.bottle_id <span class="op">=</span> b.bottle_id</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/casts.parquet'</span>)  c <span class="kw">ON</span> b.cast_id    <span class="op">=</span> c.cast_id</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> bm.measurement_type <span class="op">=</span> <span class="st">'temperature'</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> bm.measurement_value <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.datetime_utc <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.lon_dec <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.lat_dec <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.datetime_utc <span class="op">&gt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-01-01'</span> <span class="op">-</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> c.datetime_utc <span class="op">&lt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2018-03-31'</span> <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>matched <span class="kw">AS</span> (</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- temporal interval join: every env observation within ± max_time_hr</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>    bio.<span class="op">*</span>,</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    env.<span class="op">*</span> EXCLUDE (env_lon, env_lat),</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(epoch(bio.bio_datetime) <span class="op">-</span> epoch(env.env_datetime)) <span class="op">/</span> <span class="fl">3600.0</span> <span class="kw">AS</span> time_diff_hr,</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>    ST_Distance_Sphere(</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>      ST_Point(bio.bio_lon, bio.bio_lat),</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>      ST_Point(env.env_lon, env.env_lat)) <span class="op">/</span> <span class="fl">1000.0</span>                  <span class="kw">AS</span> dist_km</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> bio</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> env</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> env.env_datetime <span class="kw">BETWEEN</span> bio.bio_datetime <span class="op">-</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>                            <span class="kw">AND</span> bio.bio_datetime <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'72 hours'</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>within <span class="kw">AS</span> (</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- spatial filter: keep pairs within max_dist_km</span></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> matched</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> dist_km <span class="op">&lt;=</span> <span class="dv">5</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>ranked <span class="kw">AS</span> (</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">min</span>(time_diff_hr) <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> bio_id) <span class="kw">AS</span> mn_time_diff_hr,</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">min</span>(dist_km)      <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> bio_id) <span class="kw">AS</span> mn_dist_km</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> within</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a><span class="co">-- one row per bio observation (× measurement_type): env values aggregated</span></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span> EXCLUDE (</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    env_id, env_value, env_datetime, env_depth_m,</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>    time_diff_hr, dist_km, mn_time_diff_hr, mn_dist_km),</span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="op">*</span>)                                            <span class="kw">AS</span> n_env,</span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(env_value)                                      <span class="kw">AS</span> env_value,</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">CASE</span> <span class="cf">WHEN</span> <span class="fu">count</span>(<span class="op">*</span>) <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">0</span></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>       <span class="cf">ELSE</span> <span class="fu">coalesce</span>(<span class="fu">stddev_samp</span>(env_value), <span class="dv">0</span>) <span class="cf">END</span>   <span class="kw">AS</span> env_value_sd,</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(env_depth_m)                                    <span class="kw">AS</span> env_depth_m,</span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">min</span>(env_datetime)                                   <span class="kw">AS</span> env_datetime_min,</span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(env_datetime)                                   <span class="kw">AS</span> env_datetime_max,</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(dist_km)                                        <span class="kw">AS</span> dist_km,</span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">avg</span>(time_diff_hr)                                   <span class="kw">AS</span> time_diff_hr</span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ranked</span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> time_diff_hr <span class="op">=</span> mn_time_diff_hr</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ALL</span></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> bio_id</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The next page, <a href="./helpers.html">Matching Helpers</a>, shows this same query as a one-liner.</p>
 
 
