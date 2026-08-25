@@ -1,4 +1,8 @@
-# Server Access: SSH, SFTP & PostgreSQL {#sec-server-access}
+---
+title: Server Access
+---
+
+## SSH, SFTP & PostgreSQL {#sec-server-access}
 
 The CalCOFI server (`ssh.calcofi.io`, a Google Cloud VM in Iowa) hosts the apps, RStudio
 Server, ERDDAP — and, since August 2026, a **multi-user PostgreSQL database** that the
