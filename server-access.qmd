@@ -14,6 +14,30 @@ explains how to get in and how to connect, for **Mac** and **Windows**.
   That is what the rest of this page is about.
 :::
 
+## The stack {#sec-server-stack}
+
+Everything the server runs is one **Docker Compose stack**, configured in the
+[CalCOFI/server](https://github.com/CalCOFI/server) repository — the config of
+record for every `*.calcofi.io` service (file an
+[issue](https://github.com/CalCOFI/server/issues) there for server problems):
+
+| service | container | serves |
+|---|---|---|
+| [Caddy](https://caddyserver.com/) | `caddy` | reverse proxy + HTTPS for every subdomain below ([`caddy/Caddyfile`](https://github.com/CalCOFI/server/blob/main/caddy/Caddyfile)) |
+| Shiny Server | `rstudio` | the interactive apps at [app.calcofi.io](https://app.calcofi.io/hex/) |
+| RStudio Server | `rstudio` | [rstudio.calcofi.io](https://rstudio.calcofi.io) — R in the browser, on the server |
+| PostgreSQL + PostGIS | `postgis` | the working `calcofi` database (below) and legacy `gis` |
+| pgAdmin | `pgadmin` | [pgadmin.calcofi.io](https://pgadmin.calcofi.io) — web UI onto PostgreSQL |
+| pg_tileserv | `pg_tileserv` | [tile.calcofi.io](https://tile.calcofi.io) — vector tiles from PostGIS |
+| ERDDAP | `erddap` | [erddap.calcofi.io](https://erddap.calcofi.io/erddap/) — tabular data services |
+| plumber | `plumber` | [api.calcofi.io](https://api.calcofi.io) — the R API |
+| Varnish | `varnish` | [h3t.calcofi.io](https://h3t.calcofi.io) — cached hexagon-tile API (see [Maps](maps.qmd)) |
+
+Caddy also fronts two static services with no container of their own:
+[file.calcofi.io](https://file.calcofi.io) (public files on the server's disk) and
+[storage.calcofi.io](https://storage.calcofi.io) (a browsable front door onto the
+public Google Cloud Storage buckets).
+
 ## Getting an account {#sec-account}
 
 Accounts are personal (no shared logins), key-only (no passwords over SSH), and named
