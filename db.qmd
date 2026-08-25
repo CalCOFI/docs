@@ -170,10 +170,14 @@ path.
   (`ducklake/tables/{table}/{content_hash}/{table}.parquet`, or
   `ducklake/tables/{table}/{col}={value}/{hash}/data_0.parquet`), `bytes`,
   `sha256`, `content_hash`, `since` (the first version that shipped this exact
-  object) and, for a partition, `partition_by` / `partition_value`. Objects
-  are immutable and shared between versions, so `since` is the per-table
-  "what changed"; `calcofi4r::cc_release_sources()` and
-  `calcofi4py.release_sources()` are the resolvers.
+  object), its own `compat_path` and, for a partition, `partition_by` /
+  `partition_value`. A partitioned table may also publish a whole-table
+  **twin** — the one object without `partition_by` (`obs` does) — for
+  https-only readers; it is read *instead of* the partitions, never alongside
+  them. Objects are immutable and shared between versions, so `since` is the
+  per-table "what changed"; `calcofi4r::cc_release_sources()` and
+  `calcofi4py.release_sources()` are the resolvers (the twin comes back as
+  `single_file`, excluded from `urls`).
 - `relationships.json` — primary keys and foreign keys
 - `metadata.json` — table and column descriptions, units, dataset block, measurement-type registry
 - `RELEASE_NOTES.md` — this version's section of `RELEASES.md` plus a generated

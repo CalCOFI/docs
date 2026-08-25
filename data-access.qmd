@@ -54,8 +54,9 @@ gs://calcofi-db/ducklake/
   hand.** From the v2026.09 releases each table entry in `catalog.json` carries
   `objects[]` — one object for a single-file table, one per partition for a
   partitioned one — with a bucket-relative `path`, `bytes`, `sha256`,
-  `content_hash` and `since`, the first version that shipped that exact
-  object. Objects are immutable and shared between versions: a release that
+  `content_hash`, `since` (the first version that shipped that exact object)
+  and its own `compat_path` (the legacy per-release path of that one file).
+  Objects are immutable and shared between versions: a release that
   changed three tables shares every other object with the release before it,
   so `since` is the per-table "what changed". The legacy
   `releases/{version}/parquet/{table}.parquet` copy remains only for the
@@ -175,6 +176,27 @@ Because `dataset_key` is the partition column, filtering on it lets DuckDB
 files. Nobody types that list: `calcofi4r::cc_read_parquet_sql()` /
 `calcofi4py.read_parquet_sql()` emit it from the catalog (next sections).
 
+A partitioned table may **also** publish one whole-table file — a single-file
+**twin** — and `obs` does. In the catalog it is the `objects[]` entry
+*without* `partition_by` (`ducklake/tables/obs/{content_hash}/obs.parquet`);
+the resolvers leave it out of `urls` and return it separately as
+`single_file` (`NA` / `None` for a table that has none). It exists for
+https-only readers that cannot take a list — browser DuckDB-WASM, a
+`read_parquet()` that wants one URL — which read `single_file` *instead of*
+the partition list. Read one or the other, **never both**: the twin holds the
+same rows as the partitions, so a query over both counts every row twice. The
+price of the twin is partition pruning — a `dataset_key` filter still works,
+but scans the one file. On releases before v2026.09 it is the plain
+per-release copy, `…/releases/{version}/parquet/obs.parquet`:
+
+```sql
+-- the single-file twin of obs, for readers that cannot take a list or glob
+SELECT dataset_key, count(*) AS n
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/obs.parquet')
+GROUP BY dataset_key
+ORDER BY dataset_key;
+```
+
 Releases **before v2026.09** (`v2026.08.25` and the consolidated versions
 before it) have no `objects[]`: their partitioned table is a directory under
 `parquet/`, and plain HTTPS URLs cannot glob a directory. Reading one needs an
@@ -230,8 +252,9 @@ the one place a catalog entry becomes URLs, for any version:
 ```r
 library(DBI)
 cat_ <- cc_catalog("latest")              # or a pinned "vYYYY.MM.DD"
-src  <- cc_release_sources(cat_, "obs")   # list(urls, hive, canonical, hashes, local_paths)
-src$urls                                  # one https URL per object (the legacy path or s3 glob before v2026.09)
+src  <- cc_release_sources(cat_, "obs")   # list(urls, hive, canonical, hashes, local_paths, single_file)
+src$urls                                  # one https URL per partition (the legacy path or s3 glob before v2026.09)
+src$single_file                           # obs's whole-table twin — read it OR src$urls, never both
 
 con <- dbConnect(duckdb::duckdb())
 dbExecute(con, "INSTALL httpfs; LOAD httpfs;")
@@ -289,7 +312,7 @@ import duckdb
 import calcofi4py as cc
 
 catalog = cc.cc_catalog("latest")                 # or "v2026.08.25"
-src     = cc.release_sources(catalog, "taxon")    # {"urls", "hive", "canonical", "hashes", "local_paths"}
+src     = cc.release_sources(catalog, "taxon")    # {"urls", "hive", "canonical", "hashes", "local_paths", "single_file"}
 
 con = duckdb.connect()
 con.sql("INSTALL httpfs; LOAD httpfs;")
@@ -334,14 +357,17 @@ load the bundle from a CDN, instantiate, `INSTALL httpfs` and you're ready:
   const version = (await (await fetch(`${root}/ducklake/releases/latest.txt`)).text()).trim();
   const catalog = await (await fetch(`${root}/ducklake/releases/${version}/catalog.json`)).json();
 
-  // resolve a table through the catalog: objects[].path → https URL, one per object
-  // (a partitioned table lists one per partition and needs hive_partitioning);
+  // resolve a table through the catalog: objects[].path → https URL. A partitioned
+  // table lists one object per partition (needs hive_partitioning) and may also
+  // publish a whole-table twin — the object WITHOUT partition_by (obs does); a
+  // browser reads the twin instead of the list, never both (that doubles every row).
   // catalogs before v2026.09 have no objects[] — fall back to the per-release path
   const readParquet = (name) => {
-    const t     = catalog.tables.find(t => t.name === name);
-    const paths = t.objects?.map(o => o.path)
-               ?? [`ducklake/releases/${version}/parquet/${name}.parquet`];
-    const urls  = paths.map(p => `'${root}/${p}'`).join(", ");
+    const t    = catalog.tables.find(t => t.name === name);
+    const objs = t.objects ?? [{ path: `ducklake/releases/${version}/parquet/${name}.parquet` }];
+    const twin = t.partitioned ? objs.find(o => !o.partition_by) : null;
+    if (twin) return `read_parquet('${root}/${twin.path}')`;
+    const urls = objs.map(o => `'${root}/${o.path}'`).join(", ");
     return `read_parquet([${urls}]${t.partitioned ? ", hive_partitioning = true" : ""})`;
   };
 
