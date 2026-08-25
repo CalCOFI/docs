@@ -45,6 +45,18 @@ book:
   google-analytics: "G-0HVK8TDMCF"
   search: true
   page-navigation: true
+  # calcofi.io brand contract (https://calcofi.io/brand/v1/): the CalCOFI favicon
+  # set; in the sidebar quarto owns, the CalCOFI logo linking to calcofi.io with
+  # the product title ("docs") beside it linking to this book's root. the theme
+  # half (both stylesheets, quarto's toggle bridged) is under format.html below.
+  # favicon.png is https://calcofi.io/brand/v1/favicon-32x32.png (quarto rewrites a URL here to ./https://...)
+  favicon: favicon.png
+  sidebar:
+    title: docs
+    logo:
+      light: {path: https://calcofi.io/brand/v1/logo_calcofi_light.svg, alt: CalCOFI}
+      dark: {path: https://calcofi.io/brand/v1/logo_calcofi.svg, alt: CalCOFI}
+    logo-href: https://calcofi.io
   chapters:
     - index.qmd
     - reports.qmd
@@ -65,7 +77,13 @@ link-citations: true
 
 format:
   html:
-    theme: cosmo
+    # light is listed first, so it is quarto's default and its localStorage
+    # "quarto-color-scheme" sentinel reads "alternate" for dark; brand-head.html
+    # seeds that sentinel from the cross-site theme and bridges the toggle
+    theme:
+      light: [cosmo, brand-light.scss]
+      dark: [cosmo, brand-dark.scss]
+    include-in-header: brand-head.html
     # css: libs/style.css
     toc: true
     number-sections: true

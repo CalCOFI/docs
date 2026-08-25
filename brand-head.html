@@ -1,0 +1,29 @@
+<!-- calcofi.io brand contract (https://calcofi.io/brand/v1/) for this quarto book.
+     quarto owns the sidebar and the dark/light toggle: window.quartoToggleColorScheme()
+     flips the quarto-dark / quarto-light class on <body> and stores its choice in
+     localStorage "quarto-color-scheme" as "default" (the FIRST theme in _quarto.yml,
+     light) or "alternate" (dark). the favicon and logo come from book.favicon and
+     book.sidebar in _quarto.yml; this file carries the theme half of the contract. -->
+<script>(function(){var m=/[?&]theme=(dark|light)\b/.exec(location.search),c=/(?:^|;\s*)cc_theme=(dark|light)/.exec(document.cookie),s=null;try{s=localStorage.getItem("theme")}catch(e){}var t=(m&&m[1])||(c&&c[1])||(s==="light"||s==="dark"?s:null)||"dark",d=document.documentElement;d.dataset.theme=t;d.setAttribute("data-bs-theme",t);d.style.colorScheme=t;
+/* seed quarto's sentinel before its before-body script reads it, so the first paint is already the resolved theme */
+try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")}catch(e){}})();</script>
+<link rel="stylesheet" href="https://calcofi.io/brand/v1/theme.css">
+<script defer src="https://calcofi.io/brand/v1/theme.js"></script>
+<script>(function(){
+  var root = document.documentElement;
+  function quartoDark() { return document.body.classList.contains("quarto-dark"); }
+  // brand -> quarto: flip quarto's scheme when it disagrees with the given theme
+  function pushToQuarto(t) {
+    if ((t === "dark") !== quartoDark() && window.quartoToggleColorScheme) window.quartoToggleColorScheme();
+  }
+  // quarto -> brand: the body class is what quarto's toggle changes; mirror it into ccTheme (cookie + event)
+  function pullFromQuarto() {
+    var t = quartoDark() ? "dark" : "light";
+    if (window.ccTheme && ccTheme.get() !== t) ccTheme.set(t);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    pushToQuarto(root.dataset.theme === "light" ? "light" : "dark");   // (a) on load the resolved theme wins (a ?theme= link, the cross-site cookie)
+    new MutationObserver(pullFromQuarto).observe(document.body, { attributes: true, attributeFilter: ["class"] });   // (b) quarto's toggle
+    document.addEventListener("cc:theme", function (e) { pushToQuarto(e.detail.theme); });   // (c) a brand toggle, if a page ever adds one
+  });
+})();</script>
