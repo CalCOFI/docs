@@ -153,15 +153,48 @@ only the legacy `gis` database remains, behind tile.calcofi.io.)
 
 Each rendered `release_database.qmd` writes a frozen, immutable release to
 `gs://calcofi-db/ducklake/releases/{version}/` where `version` is
-`vYYYY.MM.DD`. The release directory contains:
+`vYYYY.MM.DD`. The release directory holds the **sidecars** — the complete
+record of what the release is — and the `catalog.json` among them is the
+data-access contract: consumers resolve every table through it
+([Data Access](data-access.qmd#where-the-data-lives)) rather than building a
+path.
 
-- `parquet/` — table files (single `.parquet` or hive-partitioned directories)
-- `catalog.json` — structural manifest (rows, partitioned, total_size)
+- `catalog.json` — structural manifest: `version`, `release_date`,
+  `total_rows` / `total_size`, and per table `name`, `rows`, `partitioned`,
+  `supplemental`. From the v2026.09 releases it is **content-addressed**
+  (`layout: "canonical"`, plus the `writer` settings — compression, row-group
+  size — that make the bytes reproducible): each table carries `content_hash`
+  (a whole-table signature), `compat_path` (its legacy per-release path) and
+  `objects[]` — one object for a single-file table, one per partition for a
+  partitioned one — each with a bucket-relative `path`
+  (`ducklake/tables/{table}/{content_hash}/{table}.parquet`, or
+  `ducklake/tables/{table}/{col}={value}/{hash}/data_0.parquet`), `bytes`,
+  `sha256`, `content_hash`, `since` (the first version that shipped this exact
+  object) and, for a partition, `partition_by` / `partition_value`. Objects
+  are immutable and shared between versions, so `since` is the per-table
+  "what changed"; `calcofi4r::cc_release_sources()` and
+  `calcofi4py.release_sources()` are the resolvers.
 - `relationships.json` — primary keys and foreign keys
 - `metadata.json` — table and column descriptions, units, dataset block, measurement-type registry
-- `RELEASE_NOTES.md` — human-readable summary
+- `RELEASE_NOTES.md` — this version's section of `RELEASES.md` plus a generated
+  appendix (tables and rows from `catalog.json`, datasets, the consumer-contract
+  result, package versions)
+- `parquet/` — the legacy per-release copy of the tables (single `.parquet` or
+  hive-partitioned directories). Kept only for the promoted version, its
+  predecessor and the **consolidated** versions; elsewhere it is removed by
+  archive thinning (`metadata/release_policy.yml` in
+  [`CalCOFI/workflows`](https://github.com/CalCOFI/workflows), applied by
+  `scripts/thin_releases.R`), while the sidecars stay.
 
-A bucket-level `versions.json` lists every release and `latest.txt` points at the most recent one.
+Bucket-level, under `releases/`: `latest.txt` names the promoted version
+(promoted only after `test_release.qmd`'s consumer-contract suite passes);
+`versions.json` lists every release — `version`, `release_date`, `tables`,
+`total_rows`, `size_mb` — with `consolidated: true` on the milestone versions
+(`v2026.04.08`, `v2026.05.14`, `v2026.06.26`, `v2026.07.17`, `v2026.08.14`,
+`v2026.08.25`) and `retired: {retired_utc, to, reason}` on a thinned one, `to`
+being the consolidated version to use instead; and `RELEASES.md` is the
+running changelog across versions, newest first, with `# Unreleased`
+collecting changes until the next cut.
 
 ### Metadata and documentation
 

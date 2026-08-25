@@ -17,32 +17,95 @@ DuckDB.
 
 ## Where the data lives
 
-Each release is a versioned folder:
+A release is a versioned folder of **sidecars** — the record of what the release
+is — and its tables are Parquet **objects** that the release's `catalog.json`
+points at:
 
 ```
-gs://calcofi-db/ducklake/releases/{version}/
-├── catalog.json          # table list, row counts, "partitioned" flag, total_size
-├── relationships.json    # primary keys + foreign keys
-├── metadata.json         # table/column descriptions, units, datasets, measurement types
-├── RELEASE_NOTES.md
-└── parquet/
-    ├── {table}.parquet                  # single-file tables
-    └── {table}/cruise_key=.../*.parquet # hive-partitioned tables
+gs://calcofi-db/ducklake/
+├── releases/
+│   ├── latest.txt              # the promoted version, e.g. v2026.08.25
+│   ├── versions.json           # every version: date, tables, rows; consolidated / retired
+│   ├── RELEASES.md             # what changed between versions and why, newest first
+│   └── {version}/
+│       ├── catalog.json        # table list, rows, partitioned/supplemental flags,
+│       │                       #   and objects[] — where each table's bytes live
+│       ├── relationships.json  # primary keys + foreign keys
+│       ├── metadata.json       # table/column descriptions, units, datasets, measurement types
+│       ├── RELEASE_NOTES.md    # this version's RELEASES.md section + a generated appendix
+│       └── parquet/            # legacy per-release copy — promoted + consolidated versions only
+│           ├── {table}.parquet
+│           └── {table}/dataset_key=.../*.parquet
+└── tables/                     # content-addressed objects, from the v2026.09 releases
+    ├── {table}/{content_hash}/{table}.parquet
+    └── {table}/{col}={value}/{content_hash}/data_0.parquet
 ```
 
-- Public HTTPS base:
-  `https://storage.googleapis.com/calcofi-db/ducklake/releases/{version}/parquet`
-- `{version}` is e.g. `v2026.05.19`; the current release pointer is at
-  [`releases/latest.txt`](https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt)
-  and the table list at `releases/{version}/catalog.json`.
-- Most tables are **single-file** (`{table}.parquet`). The large CTD tables
-  `ctd_thin` and `ctd_summary` are **hive-partitioned** by `cruise_key`
-  (`catalog.json` flags these with `"partitioned": true`).
+- Public HTTPS root of the bucket:
+  `https://storage.googleapis.com/calcofi-db/` — every `path` in a catalog is
+  relative to it. `https://storage.calcofi.io/calcofi-db/` serves the same
+  bucket and redirects a legacy `releases/{version}/parquet/…` URL to the
+  canonical object where one still exists.
+- The promoted version is at
+  [`releases/latest.txt`](https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt);
+  the table list — and where each table's bytes live — at
+  `releases/{version}/catalog.json`.
+- **Resolve a table through the catalog; never build a `parquet/` path by
+  hand.** From the v2026.09 releases each table entry in `catalog.json` carries
+  `objects[]` — one object for a single-file table, one per partition for a
+  partitioned one — with a bucket-relative `path`, `bytes`, `sha256`,
+  `content_hash` and `since`, the first version that shipped that exact
+  object. Objects are immutable and shared between versions: a release that
+  changed three tables shares every other object with the release before it,
+  so `since` is the per-table "what changed". The legacy
+  `releases/{version}/parquet/{table}.parquet` copy remains only for the
+  promoted version and the consolidated ones (see [Versions](#sec-versions)).
+  The packages' resolvers — `calcofi4r::cc_release_sources()`,
+  `calcofi4py.release_sources()` — turn a catalog entry into URLs for any
+  version, including those before v2026.09.
+- Most tables are **single-file**. `obs` and the supplemental `obs_ctd_full` /
+  `obs_mets_full` are **hive-partitioned** by `dataset_key` (`catalog.json`
+  flags these with `"partitioned": true`); a partition object's `path` carries
+  its `dataset_key=…` segment, so `hive_partitioning = true` recovers the
+  column. Supplemental tables (`"supplemental": true`) are hosted and
+  cataloged but excluded from `cc_get_db()` by default — `obs_ctd_full` alone
+  is ~270 M rows.
 - To **see what's in each table** before writing a query, open the
   [**CalCOFI Schema explorer**](https://calcofi.io/db-schema/) — ERD,
   sortable tables/columns with units and descriptions, dataset provenance,
   and the canonical measurement-type registry, all reading the same
   `metadata.json` sidecar.
+
+## Versions {#sec-versions}
+
+- **`latest` vs pinned.** `latest.txt` names the *promoted* version — a
+  release is promoted only after its consumer-contract query suite passes, so
+  `latest` is safe to follow interactively and is what `cc_get_db()` defaults
+  to. Anything that must be reproducible — a paper, an app build, a download
+  bundle — pins a `vYYYY.MM.DD`. Releases are immutable: the same version
+  always returns the same rows.
+- **Consolidated vs retired.** Every version keeps its sidecars and notes, but
+  only some keep their bytes. The **consolidated** versions
+  (`"consolidated": true` in `versions.json`) mark a schema or data milestone
+  and keep their `parquet/` copy indefinitely — `v2026.04.08` (last of the
+  per-dataset schema), `v2026.05.14` (first `ctd_thin`), `v2026.06.26` (zoodb
+  and zooscan enter), `v2026.07.17` (unified `taxon`), `v2026.08.14` (last
+  before content-addressing) and `v2026.08.25` (`cruise_key` by date span,
+  depth ceiling, quality flags mapped) — plus, always, the promoted version
+  and its predecessor. Every other version is **retired** by archive thinning
+  once it is neither: its `versions.json` entry gains
+  `retired: {retired_utc, to, reason}`, where `to` is the consolidated version
+  to use instead, and `cc_get_db("v2026.08.10")` errors naming it rather than
+  failing table by table on 404s. When you pin, pin a consolidated version.
+- **What changed.** [`RELEASES.md`](https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md)
+  is the running changelog across versions — one section per release, newest
+  first, saying what was wrong, what is true now, and what it costs a consumer
+  (`**Consumers:**` lines). Each version's `RELEASE_NOTES.md` is its section
+  plus a generated appendix (tables and rows, datasets, the consumer-contract
+  result, package versions): `calcofi4r::cc_release_notes(version)` prints it,
+  and `cc_list_versions()` / `calcofi4py.cc_list_versions()` list
+  `versions.json`. Per table, `objects[].since` in the catalog says which
+  version last changed its bytes.
 
 ## Setup: the `httpfs` extension
 
@@ -57,33 +120,66 @@ INSTALL spatial; LOAD spatial;   -- only if you use ST_* functions
 
 ## Single-file tables
 
-A single-file table is just an HTTPS URL handed to `read_parquet()`:
+A single-file table is one HTTPS URL handed to `read_parquet()`. Take it from
+the catalog (the packages do this for you, below); typed by hand it must be a
+version whose `parquet/` copy is kept — `v2026.08.25` is consolidated, so this
+URL answers indefinitely:
 
 ```sql
-SELECT species_id, scientific_name, common_name, worms_id
-FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet')
+SELECT taxon_key, scientific_name, common_name, worms_id, rank
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/taxon.parquet')
 WHERE scientific_name = 'Sardinops sagax';
 ```
 
-Joins work the same way — name each table's URL. The biological hierarchy is
-`ichthyo` → `net` → `tow` → `site` (and `ichthyo` → `species`); the
-environmental hierarchy is `bottle_measurement` → `bottle` → `casts`:
+Joins work the same way — name each table's URL. The core model is small:
+`obs` holds one measured value per row (`realm` = `bio` | `env`) and points at
+the `sample` it came from (`sample_key`; `parent_sample_key` walks
+net → tow → site and bottle → cast) and, for biology, at `taxon`
+(`taxon_key`); event-level effort such as `std_haul_factor` is in
+`sample_measurement`:
 
 ```sql
-SELECT i.ichthyo_uuid, i.life_stage, i.tally, sp.scientific_name, t.time_start
-FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/ichthyo.parquet') i
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet') sp ON i.species_id = sp.species_id
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/net.parquet')     n  ON i.net_uuid   = n.net_uuid
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/tow.parquet')     t  ON n.tow_uuid   = t.tow_uuid
-WHERE sp.scientific_name = 'Sardinops sagax'
+SELECT s.sample_key, s.sample_type, s.datetime, s.latitude, s.longitude,
+       sm.measurement_type, sm.measurement_value
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/sample.parquet') s
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/sample_measurement.parquet') sm ON sm.sample_key = s.sample_key
+WHERE s.dataset_key = 'swfsc_ichthyo'
+  AND sm.measurement_type = 'std_haul_factor'
 LIMIT 10;
 ```
 
 ## Hive-partitioned tables
 
-`ctd_thin` and `ctd_summary` are partitioned into one folder per `cruise_key`.
-Reading them needs an **s3-style glob** (plain HTTPS URLs can't glob), so
-configure DuckDB's anonymous s3 access — GCS is s3-compatible:
+`obs` (and the supplemental `obs_ctd_full` / `obs_mets_full`) is partitioned
+into one folder per `dataset_key`. From the v2026.09 releases the catalog lists
+each partition as its own object, so a partitioned table is read as an
+**explicit list of HTTPS URLs** — `objects[].path` prefixed with the bucket
+root — with `hive_partitioning = true` to recover `dataset_key` from the
+`dataset_key=…` path segment. That runs in every DuckDB, the browser included:
+
+```sql
+-- the list is catalog.json ▸ tables[name = 'obs'] ▸ objects[].path, one per partition
+SELECT dataset_key, count(*) AS n
+FROM read_parquet([
+    'https://storage.googleapis.com/calcofi-db/ducklake/tables/obs/dataset_key=calcofi_bottle/{hash}/data_0.parquet',
+    'https://storage.googleapis.com/calcofi-db/ducklake/tables/obs/dataset_key=calcofi_ctd-cast/{hash}/data_0.parquet',
+    -- … one URL per partition, in catalog order
+    'https://storage.googleapis.com/calcofi-db/ducklake/tables/obs/dataset_key=swfsc_ichthyo/{hash}/data_0.parquet'
+  ], hive_partitioning = true)
+GROUP BY dataset_key
+ORDER BY dataset_key;
+```
+
+Because `dataset_key` is the partition column, filtering on it lets DuckDB
+**prune** whole partitions — a single-dataset query never opens the other
+files. Nobody types that list: `calcofi4r::cc_read_parquet_sql()` /
+`calcofi4py.read_parquet_sql()` emit it from the catalog (next sections).
+
+Releases **before v2026.09** (`v2026.08.25` and the consolidated versions
+before it) have no `objects[]`: their partitioned table is a directory under
+`parquet/`, and plain HTTPS URLs cannot glob a directory. Reading one needs an
+**s3-style glob**, so configure DuckDB's anonymous s3 access — GCS is
+s3-compatible:
 
 ```sql
 INSTALL httpfs; LOAD httpfs;
@@ -93,51 +189,57 @@ SET s3_url_style         = 'path';
 SET s3_access_key_id     = '';
 SET s3_secret_access_key = '';
 
-SELECT cruise_key, count(*) AS n
+SELECT dataset_key, count(*) AS n
 FROM read_parquet(
-  's3://calcofi-db/ducklake/releases/v2026.05.14/parquet/ctd_thin/**/*.parquet',
+  's3://calcofi-db/ducklake/releases/v2026.08.25/parquet/obs/**/*.parquet',
   hive_partitioning = true)
-GROUP BY cruise_key
-ORDER BY cruise_key;
+GROUP BY dataset_key
+ORDER BY dataset_key;
 ```
 
-Because `cruise_key` is the partition column, filtering on it lets DuckDB
-**prune** whole partitions — a single-cruise query never opens the other ~96
-folders.
+The resolvers return this form for those versions automatically.
 
 ## From R
 
-Use `DBI` + `duckdb` directly:
-
-```r
-library(DBI)
-con <- dbConnect(duckdb::duckdb())
-dbExecute(con, "INSTALL httpfs; LOAD httpfs;")
-
-base <- "https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"
-d <- dbGetQuery(con, sprintf(
-  "SELECT scientific_name, common_name, worms_id
-   FROM read_parquet('%s/species.parquet')
-   WHERE common_name ILIKE '%%sardine%%'", base))
-```
-
-Or let the [`calcofi4r`](https://calcofi.io/calcofi4r) package register every
-release table as a view for you — it handles `httpfs`, the partitioned tables,
-and local caching:
+Let the [`calcofi4r`](https://calcofi.io/calcofi4r) package register every
+release table as a view — it resolves each table through the catalog and
+handles `httpfs`, the partitioned tables, the supplemental opt-in and local
+caching (content-addressed, so a table unchanged between releases is cached
+once):
 
 ```r
 # remotes::install_github("calcofi/calcofi4r")
 library(calcofi4r)
 
-con <- cc_get_db()                       # latest release, tables as views
+con <- cc_get_db()                       # promoted release, tables as views
+con <- cc_get_db("v2026.08.25")          # pinned; a retired version errors, naming the replacement
 DBI::dbListTables(con)
 
 # lazy dbplyr against the remote parquet
 library(dplyr)
-tbl(con, "species") |> filter(scientific_name == "Sardinops sagax")
+tbl(con, "taxon") |> filter(scientific_name == "Sardinops sagax")
 
 # or a one-off SQL query
-cc_query("SELECT count(*) FROM ichthyo")
+cc_query("SELECT dataset_key, count(*) AS n FROM obs GROUP BY 1 ORDER BY 2 DESC")
+```
+
+To hand a table's URLs to DuckDB (or anything else) yourself, resolve them
+through the catalog rather than building a path — `cc_release_sources()` is
+the one place a catalog entry becomes URLs, for any version:
+
+```r
+library(DBI)
+cat_ <- cc_catalog("latest")              # or a pinned "vYYYY.MM.DD"
+src  <- cc_release_sources(cat_, "obs")   # list(urls, hive, canonical, hashes, local_paths)
+src$urls                                  # one https URL per object (the legacy path or s3 glob before v2026.09)
+
+con <- dbConnect(duckdb::duckdb())
+dbExecute(con, "INSTALL httpfs; LOAD httpfs;")
+d <- dbGetQuery(con, sprintf(
+  "SELECT scientific_name, common_name, worms_id
+   FROM %s
+   WHERE common_name ILIKE '%%sardine%%'",
+  cc_read_parquet_sql(cc_release_sources(cat_, "taxon"))))   # read_parquet('…') or read_parquet([...], hive_partitioning = true)
 ```
 
 ## From Python
@@ -148,8 +250,8 @@ DuckDB view for you (partitioned + supplemental handling included), mirroring `c
 ```python
 # pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"
 import calcofi4py as cc
-con = cc.cc_get_db()                    # latest release; cc_get_db("v2026.08.14") to pin
-df  = con.sql("SELECT * FROM species WHERE common_name ILIKE '%sardine%'").df()
+con = cc.cc_get_db()                    # promoted release; cc_get_db("v2026.08.25") to pin
+df  = con.sql("SELECT * FROM taxon WHERE common_name ILIKE '%sardine%'").df()
 cc.cc_query("SELECT count(*) FROM obs").fetchone()
 ```
 
@@ -177,21 +279,31 @@ AND COALESCE(NOT ((o.dataset_key IN ('calcofi_bottle', 'calcofi_ctd-cast')
 ```
 :::
 
-Or plain `duckdb`, naming the Parquet URLs yourself:
+Or plain `duckdb`, resolving the URLs through the catalog yourself
+(`release_sources()` mirrors `calcofi4r::cc_release_sources()`; a retired
+version raises `RetiredVersionError`, whose `.to` is the version to use
+instead):
 
 ```python
 import duckdb
+import calcofi4py as cc
+
+catalog = cc.cc_catalog("latest")                 # or "v2026.08.25"
+src     = cc.release_sources(catalog, "taxon")    # {"urls", "hive", "canonical", "hashes", "local_paths"}
 
 con = duckdb.connect()
 con.sql("INSTALL httpfs; LOAD httpfs;")
-
-base = "https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet"
 df = con.sql(f"""
   SELECT scientific_name, common_name, worms_id
-  FROM read_parquet('{base}/species.parquet')
+  FROM {cc.read_parquet_sql(src)}
   WHERE common_name ILIKE '%sardine%'
 """).df()
 ```
+
+Without the package the same resolution is a few lines of `json`: fetch
+`releases/{version}/catalog.json` and prefix each table's `objects[].path`
+with `https://storage.googleapis.com/calcofi-db/`, as the browser example
+below does.
 
 ## From your browser
 
@@ -218,10 +330,24 @@ load the bundle from a CDN, instantiate, `INSTALL httpfs` and you're ready:
   await conn.query("INSTALL httpfs; LOAD httpfs;");
   await conn.query("INSTALL spatial; LOAD spatial;");
 
-  const base = "https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet";
+  const root    = "https://storage.googleapis.com/calcofi-db";
+  const version = (await (await fetch(`${root}/ducklake/releases/latest.txt`)).text()).trim();
+  const catalog = await (await fetch(`${root}/ducklake/releases/${version}/catalog.json`)).json();
+
+  // resolve a table through the catalog: objects[].path → https URL, one per object
+  // (a partitioned table lists one per partition and needs hive_partitioning);
+  // catalogs before v2026.09 have no objects[] — fall back to the per-release path
+  const readParquet = (name) => {
+    const t     = catalog.tables.find(t => t.name === name);
+    const paths = t.objects?.map(o => o.path)
+               ?? [`ducklake/releases/${version}/parquet/${name}.parquet`];
+    const urls  = paths.map(p => `'${root}/${p}'`).join(", ");
+    return `read_parquet([${urls}]${t.partitioned ? ", hive_partitioning = true" : ""})`;
+  };
+
   const result = await conn.query(`
     SELECT scientific_name, common_name, worms_id
-    FROM read_parquet('${base}/species.parquet')
+    FROM ${readParquet("taxon")}
     WHERE common_name ILIKE '%sardine%'
   `);
   console.log(result.toArray());
@@ -251,7 +377,9 @@ download bundle ships in its `query/` folder, what is shown in
 
 Because every query is plain SQL against immutable, versioned, public Parquet,
 a CalCOFI result is **reproducible by anyone** — pin the `{version}` and re-run
-the SQL.
+the SQL. Pin a [consolidated](#sec-versions) version: its bytes are kept
+indefinitely, and a later release that shares an object with it shares the
+same bytes.
 
 The [Integrated App](https://app.calcofi.io/db-viz-hex) builds on this: its data
 **download bundle** ships a `query/` folder alongside the data:
@@ -289,7 +417,13 @@ Done as **direct SQL**, the query is a temporal interval join plus a spatial
 `ST_Distance_Sphere` filter. After the `INSTALL`/`LOAD` setup above, run the
 query below. This block is character-for-character what
 [`calcofi4r::cc_match_ichthyo_by_name()`](helpers.qmd) returns as
-`attr(d, "sql")` — the two produce the **identical 13 rows**. The
+`attr(d, "sql")` with `version = "v2026.08.25"` — the two produce the
+**identical 13 rows**. Every table in it was resolved through that release's
+catalog, and because `v2026.08.25` is [consolidated](#sec-versions) the URLs
+stay valid. On this pre-v2026.09 release the partitioned `obs` resolves to an
+`s3://` glob, so the query needs the
+[anonymous-s3 settings](#hive-partitioned-tables); from v2026.09 the same call
+emits an explicit HTTPS list that runs anywhere, the browser included. The
 [Integrated App](https://app.calcofi.io/db-viz-hex) download bundle builds
 `query/integrated_*.sql` with the same `cc_match_bio_env()` engine (its
 filter set is taxa + quarters + dates rather than `life_stage`, so a
@@ -299,50 +433,52 @@ mechanics, same reproducibility):
 ```sql
 WITH bio AS (
 SELECT
-  i.ichthyo_uuid::VARCHAR AS bio_id,
-  t.time_start            AS bio_datetime,
-  s.longitude             AS bio_lon,
-  s.latitude              AS bio_lat,
-  n.std_haul_factor * i.tally / nullif(n.prop_sorted, 0) AS bio_value,
-  sp.scientific_name,
-  sp.common_name,
-  sp.worms_id,
-  i.life_stage,
-  i.tally
-FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/ichthyo.parquet') i
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/species.parquet') sp ON i.species_id = sp.species_id
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/net.parquet')     n  ON i.net_uuid   = n.net_uuid
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/tow.parquet')     t  ON n.tow_uuid   = t.tow_uuid
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/site.parquet')    s  ON t.site_uuid  = s.site_uuid
-WHERE i.tally IS NOT NULL
-    AND i.measurement_type IS NULL
-    AND t.time_start IS NOT NULL
-    AND s.longitude IS NOT NULL
-    AND s.latitude IS NOT NULL
-    AND sp.scientific_name IN ('Sardinops sagax')
-    AND i.life_stage IN ('larva')
-    AND t.time_start >= TIMESTAMP '2018-01-01'
-    AND t.time_start <= TIMESTAMP '2018-03-31'
+  o.obs_id::VARCHAR AS bio_id,
+  o.datetime AS bio_datetime,
+  o.longitude AS bio_lon,
+  o.latitude AS bio_lat,
+  o.measurement_value * shf.measurement_value / nullif(ps.measurement_value, 0) AS bio_value,
+  o.measurement_value AS tally,
+  o.taxon_key,
+  t.scientific_name,
+  t.worms_id,
+  o.life_stage
+FROM read_parquet('s3://calcofi-db/ducklake/releases/v2026.08.25/parquet/obs/**/*.parquet', hive_partitioning = true) o
+JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/taxon.parquet') t ON t.taxon_key = o.taxon_key
+LEFT JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/sample_measurement.parquet') shf ON shf.sample_key = o.sample_key AND shf.measurement_type = 'std_haul_factor'
+LEFT JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/sample_measurement.parquet') ps ON ps.sample_key = o.sample_key AND ps.measurement_type = 'prop_sorted'
+WHERE o.realm = 'bio'
+    AND o.dataset_key = 'swfsc_ichthyo'
+    AND o.measurement_type = 'abundance'
+    AND o.measurement_value IS NOT NULL
+    AND COALESCE(NOT ((o.dataset_key = 'calcofi_bottle' AND regexp_replace(o.measurement_qual, '\.0+$', '') IN ('8', '9')) OR (o.dataset_key = 'calcofi_ctd-cast' AND regexp_replace(o.measurement_qual, '\.0+$', '') IN ('8', '9')) OR (o.dataset_key = 'calcofi_dic' AND regexp_replace(o.measurement_qual, '\.0+$', '') IN ('3', '4', '9'))), TRUE)
+    AND o.datetime IS NOT NULL
+    AND o.longitude IS NOT NULL
+    AND o.latitude IS NOT NULL
+    AND t.scientific_name IN ('Sardinops sagax')
+    AND o.life_stage IN ('larva')
+    AND o.datetime >= TIMESTAMP '2018-01-01'
+    AND o.datetime <= TIMESTAMP '2018-03-31'
 ),
 env AS (
 SELECT
-  bm.bottle_measurement_id AS env_id,
-  c.datetime_utc           AS env_datetime,
-  c.lon_dec                AS env_lon,
-  c.lat_dec                AS env_lat,
-  bm.measurement_value     AS env_value,
-  b.depth_m                AS env_depth_m,
-  bm.measurement_type      AS measurement_type
-FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle_measurement.parquet') bm
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/bottle.parquet') b ON bm.bottle_id = b.bottle_id
-JOIN read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.05.14/parquet/casts.parquet')  c ON b.cast_id    = c.cast_id
-WHERE bm.measurement_type = 'temperature'
-    AND bm.measurement_value IS NOT NULL
-    AND c.datetime_utc IS NOT NULL
-    AND c.lon_dec IS NOT NULL
-    AND c.lat_dec IS NOT NULL
-    AND c.datetime_utc >= TIMESTAMP '2018-01-01' - INTERVAL '72 hours'
-    AND c.datetime_utc <= TIMESTAMP '2018-03-31' + INTERVAL '72 hours'
+  obs_id AS env_id,
+  datetime AS env_datetime,
+  longitude AS env_lon,
+  latitude AS env_lat,
+  measurement_value AS env_value,
+  depth_min_m AS env_depth_m,
+  measurement_type AS measurement_type
+FROM read_parquet('s3://calcofi-db/ducklake/releases/v2026.08.25/parquet/obs/**/*.parquet', hive_partitioning = true)
+WHERE realm = 'env'
+    AND measurement_type = 'temperature'
+    AND measurement_value IS NOT NULL
+    AND COALESCE(NOT ((dataset_key = 'calcofi_bottle' AND regexp_replace(measurement_qual, '\.0+$', '') IN ('8', '9')) OR (dataset_key = 'calcofi_ctd-cast' AND regexp_replace(measurement_qual, '\.0+$', '') IN ('8', '9')) OR (dataset_key = 'calcofi_dic' AND regexp_replace(measurement_qual, '\.0+$', '') IN ('3', '4', '9'))), TRUE)
+    AND datetime IS NOT NULL
+    AND longitude IS NOT NULL
+    AND latitude IS NOT NULL
+    AND datetime >= TIMESTAMP '2018-01-01' - INTERVAL '72 hours'
+    AND datetime <= TIMESTAMP '2018-03-31' + INTERVAL '72 hours'
 ),
 matched AS (
   -- temporal interval join: every env observation within ± max_time_hr
