@@ -45,7 +45,7 @@ public Google Cloud Storage buckets).
 ## Getting an account {#sec-account}
 
 Accounts are personal (no shared logins), key-only (no passwords over SSH), and named
-after your email local-part — `rswalethorp`, `bmgire`, `kdvogel`, `bhuang`,
+after your email local-part — `rswalethorp`, `bmgire`, `kdvogel`, `bthuang`,
 `esatterthwaite`, `bebest`. Each account gets:
 
 | what | where |
