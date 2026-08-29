@@ -101,6 +101,23 @@ gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")}catch(e){}})();</script>
 <link rel="stylesheet" href="https://calcofi.io/brand/v1/theme.css">
 <script defer="" src="https://calcofi.io/brand/v1/theme.js"></script>
+<style>
+  /* quarto's toggle draws bootstrap's toggle-off / toggle-on switch — a glyph that says
+     nothing about what it does. Dress it in the brand pair instead (theme.css exports the
+     masks): the sun while the page is dark, the moon-in-sun while it is light — what a click
+     switches to, as on calcofi4py. Keyed on our data-theme rather than quarto's .alternate:
+     the bridge below keeps the two in step, and ours is already right at first paint.
+     !important on the image: quarto sets it per theme and per position at equal specificity. */
+  .quarto-color-scheme-toggle .bi::before {
+    background-image: none !important; background-color: currentColor;
+    width: 1.15rem !important; height: 1.15rem !important; vertical-align: -0.2em;
+    -webkit-mask: var(--cc-icon-moon) center / contain no-repeat;
+            mask: var(--cc-icon-moon) center / contain no-repeat;
+  }
+  :root:not([data-theme="light"]) .quarto-color-scheme-toggle .bi::before {
+    -webkit-mask-image: var(--cc-icon-sun); mask-image: var(--cc-icon-sun);
+  }
+</style>
 <script>(function(){
   var root = document.documentElement;
   function quartoDark() { return document.body.classList.contains("quarto-dark"); }
@@ -590,23 +607,23 @@ Table&nbsp;10.1: Portal Capabilities.
 </figcaption>
 <div aria-describedby="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="wmbywsaxuy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wmbywsaxuy table {
+<div id="nwubyeylzc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nwubyeylzc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wmbywsaxuy thead, #wmbywsaxuy tbody, #wmbywsaxuy tfoot, #wmbywsaxuy tr, #wmbywsaxuy td, #wmbywsaxuy th {
+#nwubyeylzc thead, #nwubyeylzc tbody, #nwubyeylzc tfoot, #nwubyeylzc tr, #nwubyeylzc td, #nwubyeylzc th {
   border-style: none;
 }
 
-#wmbywsaxuy p {
+#nwubyeylzc p {
   margin: 0;
   padding: 0;
 }
 
-#wmbywsaxuy .gt_table {
+#nwubyeylzc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -632,12 +649,12 @@ Table&nbsp;10.1: Portal Capabilities.
   border-left-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_caption {
+#nwubyeylzc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wmbywsaxuy .gt_title {
+#nwubyeylzc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -649,7 +666,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-bottom-width: 0;
 }
 
-#wmbywsaxuy .gt_subtitle {
+#nwubyeylzc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -661,7 +678,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-top-width: 0;
 }
 
-#wmbywsaxuy .gt_heading {
+#nwubyeylzc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -673,13 +690,13 @@ Table&nbsp;10.1: Portal Capabilities.
   border-right-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_bottom_border {
+#nwubyeylzc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_col_headings {
+#nwubyeylzc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -694,7 +711,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-right-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_col_heading {
+#nwubyeylzc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -714,7 +731,7 @@ Table&nbsp;10.1: Portal Capabilities.
   overflow-x: hidden;
 }
 
-#wmbywsaxuy .gt_column_spanner_outer {
+#nwubyeylzc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -726,15 +743,15 @@ Table&nbsp;10.1: Portal Capabilities.
   padding-right: 4px;
 }
 
-#wmbywsaxuy .gt_column_spanner_outer:first-child {
+#nwubyeylzc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wmbywsaxuy .gt_column_spanner_outer:last-child {
+#nwubyeylzc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wmbywsaxuy .gt_column_spanner {
+#nwubyeylzc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -746,11 +763,11 @@ Table&nbsp;10.1: Portal Capabilities.
   width: 100%;
 }
 
-#wmbywsaxuy .gt_spanner_row {
+#nwubyeylzc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wmbywsaxuy .gt_group_heading {
+#nwubyeylzc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -776,7 +793,7 @@ Table&nbsp;10.1: Portal Capabilities.
   text-align: left;
 }
 
-#wmbywsaxuy .gt_empty_group_heading {
+#nwubyeylzc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -791,15 +808,15 @@ Table&nbsp;10.1: Portal Capabilities.
   vertical-align: middle;
 }
 
-#wmbywsaxuy .gt_from_md > :first-child {
+#nwubyeylzc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wmbywsaxuy .gt_from_md > :last-child {
+#nwubyeylzc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wmbywsaxuy .gt_row {
+#nwubyeylzc .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -818,7 +835,7 @@ Table&nbsp;10.1: Portal Capabilities.
   overflow-x: hidden;
 }
 
-#wmbywsaxuy .gt_stub {
+#nwubyeylzc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -831,7 +848,7 @@ Table&nbsp;10.1: Portal Capabilities.
   padding-right: 5px;
 }
 
-#wmbywsaxuy .gt_stub_row_group {
+#nwubyeylzc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -845,15 +862,15 @@ Table&nbsp;10.1: Portal Capabilities.
   vertical-align: top;
 }
 
-#wmbywsaxuy .gt_row_group_first td {
+#nwubyeylzc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wmbywsaxuy .gt_row_group_first th {
+#nwubyeylzc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wmbywsaxuy .gt_summary_row {
+#nwubyeylzc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -863,16 +880,16 @@ Table&nbsp;10.1: Portal Capabilities.
   padding-right: 5px;
 }
 
-#wmbywsaxuy .gt_first_summary_row {
+#nwubyeylzc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_first_summary_row.thick {
+#nwubyeylzc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wmbywsaxuy .gt_last_summary_row {
+#nwubyeylzc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -882,7 +899,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-bottom-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_grand_summary_row {
+#nwubyeylzc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -892,7 +909,7 @@ Table&nbsp;10.1: Portal Capabilities.
   padding-right: 5px;
 }
 
-#wmbywsaxuy .gt_first_grand_summary_row {
+#nwubyeylzc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -902,7 +919,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-top-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_last_grand_summary_row_top {
+#nwubyeylzc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -912,11 +929,11 @@ Table&nbsp;10.1: Portal Capabilities.
   border-bottom-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_striped {
+#nwubyeylzc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wmbywsaxuy .gt_table_body {
+#nwubyeylzc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -925,7 +942,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-bottom-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_footnotes {
+#nwubyeylzc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -939,7 +956,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-right-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_footnote {
+#nwubyeylzc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -948,7 +965,7 @@ Table&nbsp;10.1: Portal Capabilities.
   padding-right: 5px;
 }
 
-#wmbywsaxuy .gt_sourcenotes {
+#nwubyeylzc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -962,7 +979,7 @@ Table&nbsp;10.1: Portal Capabilities.
   border-right-color: #D3D3D3;
 }
 
-#wmbywsaxuy .gt_sourcenote {
+#nwubyeylzc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -970,72 +987,72 @@ Table&nbsp;10.1: Portal Capabilities.
   padding-right: 5px;
 }
 
-#wmbywsaxuy .gt_left {
+#nwubyeylzc .gt_left {
   text-align: left;
 }
 
-#wmbywsaxuy .gt_center {
+#nwubyeylzc .gt_center {
   text-align: center;
 }
 
-#wmbywsaxuy .gt_right {
+#nwubyeylzc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wmbywsaxuy .gt_font_normal {
+#nwubyeylzc .gt_font_normal {
   font-weight: normal;
 }
 
-#wmbywsaxuy .gt_font_bold {
+#nwubyeylzc .gt_font_bold {
   font-weight: bold;
 }
 
-#wmbywsaxuy .gt_font_italic {
+#nwubyeylzc .gt_font_italic {
   font-style: italic;
 }
 
-#wmbywsaxuy .gt_super {
+#nwubyeylzc .gt_super {
   font-size: 65%;
 }
 
-#wmbywsaxuy .gt_footnote_marks {
+#nwubyeylzc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wmbywsaxuy .gt_asterisk {
+#nwubyeylzc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wmbywsaxuy .gt_indent_1 {
+#nwubyeylzc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wmbywsaxuy .gt_indent_2 {
+#nwubyeylzc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wmbywsaxuy .gt_indent_3 {
+#nwubyeylzc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wmbywsaxuy .gt_indent_4 {
+#nwubyeylzc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wmbywsaxuy .gt_indent_5 {
+#nwubyeylzc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wmbywsaxuy .katex-display {
+#nwubyeylzc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wmbywsaxuy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nwubyeylzc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
