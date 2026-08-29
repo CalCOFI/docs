@@ -9,6 +9,23 @@
 try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")}catch(e){}})();</script>
 <link rel="stylesheet" href="https://calcofi.io/brand/v1/theme.css">
 <script defer src="https://calcofi.io/brand/v1/theme.js"></script>
+<style>
+  /* quarto's toggle draws bootstrap's toggle-off / toggle-on switch — a glyph that says
+     nothing about what it does. Dress it in the brand pair instead (theme.css exports the
+     masks): the sun while the page is dark, the moon-in-sun while it is light — what a click
+     switches to, as on calcofi4py. Keyed on our data-theme rather than quarto's .alternate:
+     the bridge below keeps the two in step, and ours is already right at first paint.
+     !important on the image: quarto sets it per theme and per position at equal specificity. */
+  .quarto-color-scheme-toggle .bi::before {
+    background-image: none !important; background-color: currentColor;
+    width: 1.15rem !important; height: 1.15rem !important; vertical-align: -0.2em;
+    -webkit-mask: var(--cc-icon-moon) center / contain no-repeat;
+            mask: var(--cc-icon-moon) center / contain no-repeat;
+  }
+  :root:not([data-theme="light"]) .quarto-color-scheme-toggle .bi::before {
+    -webkit-mask-image: var(--cc-icon-sun); mask-image: var(--cc-icon-sun);
+  }
+</style>
 <script>(function(){
   var root = document.documentElement;
   function quartoDark() { return document.body.classList.contains("quarto-dark"); }
