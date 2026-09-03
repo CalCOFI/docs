@@ -387,7 +387,7 @@ Shared, under `metadata/`:
 | `release_tables.csv`, `release_columns.csv` | Descriptions for tables built inside `release_database.qmd` itself. |
 | `measurement_taxon.csv`, `taxon_override.csv` | How a taxon-bearing measurement name decomposes, and manual id resolution where a source taxon has no clean id. |
 | `taxon_lineage.csv`, `taxon_xref.csv` | **Generated caches** of the WoRMS/ITIS classification chains and the WoRMS↔ITIS cross-reference. Safe to delete; they refetch. |
-| `dataset.csv` | **Deprecated.** Dataset-level metadata is the `calcofi:` YAML block in each ingest notebook, which is what the release reads. The CSV drifted from the notebooks and orphaned observations. |
+| `dataset.csv` | **Deprecated.** Dataset-level metadata is the `calcofi:` YAML block in each ingest notebook, which is what the release reads (see [Cite This Data](cite.qmd) for how to cite them). The CSV drifted from the notebooks and orphaned observations. |
 
 These flow through two stages:
 
