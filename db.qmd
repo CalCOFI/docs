@@ -585,6 +585,21 @@ whether they are upwelling or downwelling, flow-cytometry gating that was never 
 A generic `publish_to-obis.qmd` over the core — replacing the per-dataset ichthyoplankton
 notebook — is planned rather than built; the registries above are what it was waiting for.
 
+**ERDDAP** (`publish_to-erddap.qmd`) discovers one config block per
+`dataset_key` from what the core actually holds, rather than a
+hand-maintained table list, and executes every view against the real
+release before writing its XML. Since the pre-release plan D-S1/D-S3
+(2026-09) the `{dataset_key}` observation grain reads `obs_bio` (bio
+datasets) or `obs_env` (env datasets) through the release catalog
+(`calcofi4r::cc_release_sources()`) — never a hand-built
+`releases/{v}/parquet` path — carrying the sample's own gear and effort
+(`tow_type`, `std_haul_factor`, `prop_sorted`, `volume_sampled_m3`) and
+the two canonical densities (`density_per_10m2`, `density_per_1000m3`,
+`effort_class`) inline, plus `flag_values`/`flag_meanings` on
+`measurement_qual` from `metadata/measurement_qual.csv`. A release cut
+before D-S1 (no `obs_bio`/`obs_env` in its catalog) falls back to the
+deprecated `obs` objects, with no effort/density columns.
+
 ## Relationships between tables
 
 Primary and foreign keys ship with every release as `relationships.json` beside
