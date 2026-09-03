@@ -1,13 +1,11 @@
 # Database
 
-## Database naming conventions
+## Naming conventions
 
 > There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton (Netscape architect)
 
-We're circling the wagons to come up with the best conventions for naming. Here are some ideas:
-
-- [Learn SQL: Naming Conventions](https://www.sqlshack.com/learn-sql-naming-conventions/)
-- [Best Practices for Database Naming Conventions - Drygast.NET](https://drygast.net/blog/post/database_naming_conventions)
+Background reading: [Learn SQL: Naming Conventions](https://www.sqlshack.com/learn-sql-naming-conventions/) ·
+[Best Practices for Database Naming Conventions](https://drygast.net/blog/post/database_naming_conventions).
 
 ### Name tables
 
@@ -18,32 +16,69 @@ We're circling the wagons to come up with the best conventions for naming. Here 
 
 - To name columns, use [**snake-case**](https://cran.r-project.org/web/packages/snakecase/vignettes/introducing-the-snakecase-package.html) (i.e., lower-case with underscores) so as to prevent the need to quote SQL statements. (TIP: Use [`janitor::clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html) to convert a table.)
 
-- Unique **identifiers** are suffixed with:
-  - `*_id` for unique integer keys;
-  - `*_uuid` for universally unique identifiers as defined by [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122) and stored in Postgres as [UUID Type](https://www.postgresql.org/docs/current/datatype-uuid.html).
-  - `*_key` for unique string keys;
-  - `*_seq` for auto-incrementing sequence integer keys.
+- Suffix with **units** where applicable (e.g., `*_m` for meters, `*_km` for kilometers, `*_degc` for degrees Celsius). See [units vignette](https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html).
 
-- Suffix with **units** where applicable (e.g., `*_m` for meters, `*_km` for kilometers, `degc` for degrees Celsius). See [units vignette](https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html).
+- Set the geometry column to **`geom`** (used by the [PostGIS](https://postgis.net) spatial extension). If a table has multiple geometry columns, use `geom` for the default and `geom_{type}` for the rest (`geom_point`, `geom_line`, `geom_polygon`).
 
-- Set geometry column to **`geom`** (used by [PostGIS](https://postgis.net) spatial extension). If the table has multiple geometry columns, use `geom` for the default geometry column and `geom_{type}` for additional geometry columns (e.g., `geom_point`, `geom_line`, `geom_polygon`).
+### Key conventions
 
-### Primary key conventions
+The **suffix says what kind of value it is**, and this is checked in review, because a
+character-valued identifier named `*_id` is a promise the data cannot keep:
 
-**Prefer natural keys** (meaningful domain identifiers) over surrogate keys where stable:
+| suffix | value | examples |
+|---|---|---|
+| `*_key` | a **string** natural key — meaningful, stable, human-readable | `cruise_key`, `site_key`, `grid_key`, `sample_key`, `taxon_key`, `dataset_key`, `ship_key` |
+| `*_id` | an **integer** key — a source counter or surrogate | `cast_id`, `bottle_id`, `species_id`, `obs_id`, `hex_id` |
+| `*_uuid` | the **provider's own** identifier for that record, as they mint it ([RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)) | `cruise_uuid`, `source_uuid`, `station_uuid` |
+| `*_seq` | an auto-incrementing sequence integer | — |
 
-- `cruise_key` = 'YYMMKK' (e.g., `2401NH` = January 2024, New Horizon)
-- `ship_key` = 2-letter ship code (e.g., `NH`)
-- `tow_type_key` = tow type code (e.g., `CB`)
+**Natural keys are preferred over surrogates wherever they are stable**, and the four that
+carry the integration are worth stating exactly:
 
-**Sequential integer keys** should have explicit sort order documented for reproducibility:
+- **`cruise_key` = `YYYY-MM-NODC`** (e.g. `1998-02-33JD`) — and the `YYYY-MM` is the month
+  SWFSC *designates* for the whole cruise, never the month a cast or tow happened to fall in.
+  A CalCOFI cruise routinely straddles a calendar boundary (5508BD ran 7 Aug – 25 Sep 1955),
+  and the neighbouring month is usually a **real** cruise of the same ship, so keying by event
+  month silently moves casts onto the wrong cruise with no foreign key ever failing. Events are
+  keyed by containment in the reference cruise's observed date span first, then by the source's
+  own designation, then by event month as a last resort — and which rule fired is recorded.
+- **`sample_key` = `{dataset_key}:{sample_type}:{id}`** (e.g.
+  `calcofi_bottle:cast:7644`) — globally unique across datasets *and* across event levels, so a
+  site, a tow, a net, a cast and a bottle can share one table without collision.
+- **`site_key`** is the CalCOFI station in `"line station"` form (`"090.0 062.0"`);
+  **`grid_key`** is the shared grid cell; **`dataset_key`** = `{provider}_{dataset}` is the
+  provenance stamp on every observation.
+- **`taxon_key`** is a lowercase authority prefix plus that authority's accepted id —
+  `worms:<AphiaID>`, or `itis:<TSN>` for birds, whose WoRMS taxonomy lags. See
+  [Taxonomy](#taxonomy) below.
 
-- `site_id` sorted by `cruise_key, orderocc`
-- `tow_id` sorted by `site_id, time_start`
-- `net_id` sorted by `tow_id, side`
-- `ichthyo_id` sorted by `net_id, species_id, life_stage, measurement_type, measurement_value`
+**Provider UUIDs are released as typed columns where the provider mints them.** They are not
+primary keys — the string keys above are — but they are the join back to the provider's own
+database, and dropping them would make that join impossible:
 
-**Avoid UUIDs in output tables**: Use `_source_uuid` in Working DuckLake for provenance tracking only (stripped in frozen releases).
+- **`cruise.cruise_uuid`** is NOAA/SWFSC's `CruiseId`, populated for every released cruise. It
+  is a **public** join key, not an internal artefact.
+- **`sample.source_uuid`** is the provider's identifier for *that event* — SWFSC's `site_uuid`
+  on a site row, `tow_uuid` on a tow, `net_uuid` on a net — and is NULL for the datasets whose
+  sources mint no UUID (15 of 16 do not).
+- **`sample.station_uuid`** is the SWFSC station occupation an event belongs to, resolved in the
+  release, with `station_uuid_method` saying how (the event's own site, its parent's, a match on
+  `(cruise_key, site_key, order_occ)`, or the single ichthyoplankton occupation within 24 hours).
+
+`_source_*` provenance columns — the wrangling-time record of which source file and row a value
+came from — are a different thing entirely and **are stripped at the freeze**; they never reach
+a release.
+
+::: {.callout-note}
+`sample.source_uuid`, `sample.station_uuid` and `station_uuid_method` are decided and land with
+the provider-UUID workstream; `cruise.cruise_uuid` ships today. Check
+`catalog.json`/`metadata.json` for the release you are reading, or the
+[schema explorer](https://calcofi.io/db-schema/).
+:::
+
+**Sequential integer keys carry a documented sort order** so a rebuild reproduces them:
+`site_id` by `(cruise_key, order_occ)`, `tow_id` by `(site_id, time_start)`, `net_id` by
+`(tow_id, side)`.
 
 ## Use Unicode for text
 
@@ -120,6 +155,124 @@ Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all databas
   write_excel_csv(df, 'file.csv', locale = locale(encoding = 'UTF-8'))  # explicit
   write_excel_csv(df, 'file.csv')                                       # implicit
   ```
+
+## The core data model
+
+Sixteen source datasets — ichthyoplankton, zooplankton, bottle hydrography, CTD casts, DIC,
+underway meteorology, seabird and mammal transects, and more — used to reach the database as
+~40 per-dataset tables. They now project into a small **core family** that every consumer
+reads. A dataset's projection lives in its own ingest notebook (the generic shapes live in
+`calcofi4db`), so adding a dataset never edits a shared `switch()`.
+
+| table | grain | tier |
+|---|---|---|
+| **`sample`** | one row per **physical sampling event** — site, tow, net, cast, bottle, underway record, transect, subsample, region pool — with the hierarchy as an adjacency list (`parent_sample_key`, plus `root_sample_key` for the top of the chain) | core |
+| **`obs`** | the **occurrence headline**: one scalar per row, `realm` = `bio` or `env`; a bio row carries `taxon_key` and `life_stage`, an env row a CTD/bottle measurement | core (a **view**, see below) |
+| **`obs_attribute`** | **sub-occurrence** detail — length- and stage-frequency bins (`bin_value`, `bin_label`, `count`) and categorical behaviour | core |
+| **`sample_measurement`** | **event-level effort and conditions** — a net's `volume_sampled` and `std_haul_factor`, a cast's surface observations | core |
+| **`obs_ctd_full`** | full-resolution CTD scans (~271 M rows); `obs` carries the thinned series | supplemental |
+| **`obs_mets_full`** | full-resolution underway meteorology (~20 M rows) | supplemental |
+
+An observation's provenance is denormalized onto it on purpose: `obs` carries `dataset_key`,
+`cruise_key`, `grid_key`, the position, the datetime and `hex_id` (H3 at resolution 10, so
+coarser aggregations use `h3_cell_to_parent(hex_id, res)` rather than a column per resolution),
+so a rollup groups without a join. `geom` lives on `sample` and on the reference tables, never
+on `obs`.
+
+### What the release publishes: `obs_bio` + `obs_env`, and `obs` as a view
+
+The assembly grain is `obs`; what the **release** publishes is the pair cut from it, because the
+questions consumers ask are shaped differently for the two realms:
+
+- **`obs_bio`** — one object, the bio realm, with the gear and effort of the row's *own* sampling
+  event inline (`tow_type`, `std_haul_factor`, `prop_sorted`, `volume_sampled_m3`) and the two
+  standardized densities derived once (`density_per_10m2`, `density_per_1000m3`) plus
+  `effort_class`. One taxon question = one file.
+- **`obs_env`** — one object **per `measurement_type`**. One variable = one small fetch, which is
+  what a browser-side reader (DuckDB-WASM cannot list a directory; the catalog gives it an
+  explicit file list) actually needs.
+
+Each is a strict superset of `obs` under a name mapping — `realm` is implied by which table you
+read, and `value` is `measurement_value` — and **`obs` itself is a view** the catalog carries
+(`catalog.json` → `views.obs`), a `UNION ALL` over the pair under `obs`'s original column names.
+`calcofi4r::cc_get_db()`, `calcofi4py` and the query site create it from the catalog, so
+`FROM obs` keeps working. Two consequences worth knowing:
+
+- The release **proves** the pair reproduces `obs` before it freezes — row counts, distinct
+  `obs_id`s and a hash signature of every column, per realm × dataset. The one allowed
+  difference is a *depth fallback*: a bio row with no depth of its own carries its tow's span.
+- `obs`'s physical objects still ship for one release, marked `deprecated` in the catalog with
+  `replaced_by: ["obs_bio", "obs_env"]`. **Migrate to the pair** — a consumer reading the view
+  needs no change, a consumer building a path to `obs.parquet` does.
+
+Do not rename `value`, `root_id` or `hex7` on the pair; new columns are appended and the view
+maps names, so consumers never have to.
+
+### Shared reference tables
+
+`cruise` (one row per cruise, with `cruise_uuid`, the ship, and the observed
+`date_min`/`date_max` span that keys every other dataset's events), `ship`, `grid` (the CalCOFI
+station grid, materialized deterministically from `calcofi4r::cc_grid`), `spatial` +
+`spatial_attribute` (boundary layers), `sample_spatial` (the sample→layer memberships),
+`region`, `lookup`, `dataset` (one row per released dataset, with its measured coverage and its
+citation), `measurement_type` (the measurement vocabulary, below) and `climatology`.
+
+**`climatology` is the one baseline every anomaly subtracts.** Until 2026-08-31 three products
+each computed their own and the same section read +1.4 °C in one and ~0 in another. It is a
+plain mean per dataset × `grid_key` × **calendar month** × 10 m depth bin × measurement type over
+**1993–2013**, kept only where ≥ 3 distinct cruises contribute, with the window stamped on every
+row. A cast's anomaly is its value minus the cell of *its own* calendar month; pooling months
+produces a seasonal-cycle map, not an anomaly.
+
+### Taxonomy {#taxonomy}
+
+Three shared tables replace the ~7 per-dataset taxon tables:
+
+- **`taxon`** — one row per taxon: `taxon_key` (`worms:<AphiaID>`, or `itis:<TSN>` when the
+  taxon's class is **Aves**, because WoRMS bird taxonomy lags), the cross-reference ids
+  (`worms_id`, `itis_id`, `gbif_id`), `parent_taxon_key`, `rank` and `rank_order`, the flattened
+  lineage (`kingdom`, `phylum`, `class`, `order_taxon`, `family`), `scientific_name`,
+  `common_name`, and `taxonomic_status` **with** `status_checked` — read the two together; a
+  status with no check date is not a fact.
+- **`dataset_taxon`** — the per-dataset vocabulary → `taxon_key` crosswalk. `obs` resolves its
+  `taxon_key` by joining this on `(dataset_key, ds_taxa_code)`, and `ds_source_json` records
+  whatever ids the *source* itself supplied, so the source and the authority can be audited
+  against each other.
+- **`taxon_group`** — groupings for rollups.
+
+Two distinctions that cost real data before they were written down. **The key authority and the
+cross-reference columns are different questions**: a bird keys `itis:` *and* carries a `worms_id`,
+because a consumer joining on `worms_id` would otherwise match zero seabirds. And **a key must be
+an accepted id** while a cross-reference is whatever the authority links — a deprecated TSN is
+re-keyed onto its accepted successor and the event is recorded in `taxon.notes`.
+
+When asserting lineage coverage, **split by rank position**: `family` is legitimately NULL above
+family rank, and `kingdom` is NULL for `worms:1` *Biota*. A blanket non-NULL assertion is wrong,
+and someone will "fix" it by inventing data.
+
+### Quality flags reach consumers only if consumers apply them
+
+`obs.measurement_qual` is **each dataset's own vocabulary, uninterpreted** — bottle 6 = ok-from-CTD,
+8 = suspect, 9 = missing; CTD 1/2 = use primary/secondary sensor, 8 = questionable, 9 = bad;
+DIC follows WOCE (2 good, 3 questionable, 4 bad, 9 missing). The registry is
+`metadata/measurement_qual.csv` in the workflows repo and it ships in `metadata.json`.
+
+In August 2026 a 2.18 ml/L oxygen spike at 1,144 m turned out to be a bottle flagged suspect in
+the source **since 1955** — it reached a plotted app because no consumer filtered on the column.
+There is now one predicate per language — `calcofi4r::cc_qual_ok_sql()`, `calcofi4py.qual_ok_sql()`,
+the query site's `qualOkSQL()` — NULL-safe, so an unflagged row is kept. **Apply it.** A value with
+a flag you do not read is not a value you can trust.
+
+### Depth is a coordinate, and it is bounded as one
+
+Every released depth is finite, non-negative and no deeper than **6,500 m**, on `obs`, on
+`sample` and on the supplemental tables; a violation fails the release rather than shipping.
+Separately, `sample.seafloor_depth_m` carries the GEBCO 2025 sea-floor depth at the sample's
+position (positive down, 0 on land, NULL outside the raster) so a consumer can judge a deep
+sample without fetching a raster. Where a sample's deepest attributed depth exceeds the deepest
+GEBCO cell near it, that is **reported and ratcheted, never deleted**: nearly all such cases are
+minute-rounded 1949–1975 positions on slopes and canyons — the measurement is fine, the place
+is imprecise.
 
 ## Integrated database ingestion strategy
 
@@ -200,35 +353,50 @@ being the consolidated version to use instead; and `RELEASES.md` is the
 running changelog across versions, newest first, with `# Unreleased`
 collecting changes until the next cut.
 
-### Metadata and documentation
+### Metadata registries — the single sources of truth
 
-Sources of truth for table and column descriptions live in this repo (not
-in the database), so they are reviewable via PRs and travel with the
-code that produced them:
+Descriptions, vocabularies and provenance live as reviewable CSVs in
+[`CalCOFI/workflows`](https://github.com/CalCOFI/workflows) — **not** in the database — so they
+travel with the code that produced them and change through pull requests.
 
-- `metadata/{provider}/{dataset}/tbls_redefine.csv` — `tbl_new`,
-  `tbl_description`
-- `metadata/{provider}/{dataset}/flds_redefine.csv` — `tbl_new`, `fld_new`,
-  `fld_description`, `units`
-- `metadata/{provider}/{dataset}/metadata_derived.csv` — optional
-  markdown/units overlay for derived tables and columns
-- `metadata/release_tables.csv` and `metadata/release_columns.csv` — for
-  tables built inside `release_database.qmd` itself
-  (`cruise_summary`, `_spatial`, `_spatial_attr`, …)
-- `metadata/measurement_type.csv` — canonical measurement types with units
-- `metadata/dataset.csv` — dataset-level descriptions, citations, links
+Per dataset, under `metadata/{provider}/{dataset}/`:
+
+- `tbls_redefine.csv` — `tbl_new`, `tbl_description`
+- `flds_redefine.csv` — `tbl_new`, `fld_new`, `fld_description`, `units`
+- `metadata_derived.csv` — optional markdown/units overlay for derived tables and columns
+- `questions.csv` — the **provider-question registry**: what we have asked the data's owners,
+  what they answered, and what we have *proposed* an answer to and want confirmed. Each question
+  has a durable global `id` and a short per-dataset `label` (`Q15`), a `status`
+  (`open` / `proposed` / `answered` / `wontfix`) and a `priority`.
+- `citation_authority.json` — a **generated cache** of what the source's own authority (EDI,
+  NCEI, ERDDAP, DataCite) says about the citation and licence. A proposal, never the record.
+
+Shared, under `metadata/`:
+
+| file | role |
+|---|---|
+| `field_dictionary.csv` | **Prescriptive** canonical field names, types, units and aliases; new datasets conform to it. `dwc_term` names the Darwin Core term a field publishes as. |
+| `measurement_type.csv` | The canonical measurement vocabulary — description, `units`, `category`, `variable` (which types measure the same thing comparably across datasets), `derivation` for a derived type, `is_canonical`, the validity bounds, and the controlled-vocabulary ids `nerc_p01` / `units_nerc_p06` (below). Released as a table. |
+| `measurement_qual.csv` | Each dataset's quality-flag vocabulary, uninterpreted. |
+| `category.csv` | The twelve data categories every dataset and measurement type is filed under. |
+| `provider.csv` | The curating organizations. **`provider` is the organization that holds and can license the data** — not the portal that serves it, and not a collection or lab inside it. |
+| `license.csv` | The licence ids a dataset may declare. |
+| `life_stage.csv` | Every distinct `obs.life_stage` value with its Darwin Core label and NERC S11 id. |
+| `gear.csv` | Every `sample.tow_type` code with its `samplingProtocol` sentence and NERC L22 device id. |
+| `relationships_cross.csv` | Cross-dataset foreign keys (intra-dataset ones live in each ingest's `relationships.json`). |
+| `release_tables.csv`, `release_columns.csv` | Descriptions for tables built inside `release_database.qmd` itself. |
+| `measurement_taxon.csv`, `taxon_override.csv` | How a taxon-bearing measurement name decomposes, and manual id resolution where a source taxon has no clean id. |
+| `taxon_lineage.csv`, `taxon_xref.csv` | **Generated caches** of the WoRMS/ITIS classification chains and the WoRMS↔ITIS cross-reference. Safe to delete; they refetch. |
+| `dataset.csv` | **Deprecated.** Dataset-level metadata is the `calcofi:` YAML block in each ingest notebook, which is what the release reads. The CSV drifted from the notebooks and orphaned observations. |
 
 These flow through two stages:
 
-1. **Per-ingest**: `calcofi4db::build_metadata_json()` (called inside
-   `finalize_ingest()`) writes
-   `data/parquet/{provider}_{dataset}/metadata.json` (schema version 1.0)
-   alongside the parquet outputs.
-2. **Per-release**: `calcofi4db::merge_metadata_json()` (called inside
-   `release_database.qmd`) merges every per-ingest sidecar plus the
-   release-only registries and writes
-   `gs://calcofi-db/ducklake/releases/{version}/metadata.json`
-   (schema version 1.1) with this shape:
+1. **Per ingest**: `calcofi4db::build_metadata_json()` writes
+   `data/parquet/{provider}_{dataset}/metadata.json` (schema version 1.0) beside the parquet
+   outputs, and reports its own documentation gaps.
+2. **Per release**: `calcofi4db::merge_metadata_json()` merges every per-ingest sidecar plus the
+   release-only registries into
+   `gs://calcofi-db/ducklake/releases/{version}/metadata.json` (schema version 1.1):
 
    ```json
    {
@@ -249,8 +417,49 @@ These flow through two stages:
    }
    ```
 
-Markdown is supported anywhere in `description_md`; consumers should render
-it through a markdown parser when displaying.
+Markdown is supported anywhere in `description_md`; consumers should render it through a
+markdown parser when displaying.
+
+### Coverage is measured, never asserted
+
+A dataset's temporal and spatial extent is **measured from the assembled data at release
+time** — `coverage_temporal_observed`, `coverage_spatial_observed` and `coverage_bbox` in
+`metadata.json`, and the corresponding columns on the released `dataset` table. Nothing
+hand-writes an extent.
+
+This is not pedantry. A hand-written extent is authored once while the data grows underneath
+it: at `v2026.08.06` seven of fifteen datasets were wrong — one claimed data through 2021-05
+that ends 2015-04, three said "present" while stalling in 2019, 2022 and 2023. Measurement is
+also honest about what it finds, which is how two coordinate bugs surfaced that the prose had
+hidden (a dropped minus sign putting a dataset at 124.9° **E**, and a dataset reaching latitude
+`0.0`). One dataset asserts its temporal half and says why in a comment: it is region-pooled and
+has no datetimes at all.
+
+### Citation and licence are a contract, and they are checked
+
+Every dataset carries `citation_main`, `license`, `doi`, `acknowledgement` and `contact` in its
+ingest notebook's YAML, and these are **checked, not trusted** — by the workflows index build
+and again by the release. A citation needs a year and a locator; `license` must be an active id
+in `license.csv` (`custom` requires a `license_url`; `unknown` or empty fails unless a provider
+question is open on that field); a `doi` is stored bare and must resolve. The check also asks the
+source's own authority — EDI's cite service, NCEI's "Cite as", an ERDDAP `.das`, DataCite — caches
+the answer, and **reports drift without ever writing into the notebook**: the author's string is
+the record.
+
+`source_accessed` is measured, not authored. And the release cites itself: `catalog.json` carries
+a `citation`, a `concept_doi` and, once minted, the version `doi`; the release notes open with
+"How to cite"; `CITATION.cff` and `.zenodo.json` are generated from the same source.
+
+```
+CalCOFI (2026). CalCOFI Integrated Database, release v2026.08.25 [Data set].
+Scripps Institution of Oceanography, NOAA Fisheries, and California Department
+of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN
+```
+
+**When you use these data, cite the release *and* the source datasets you used.** The release
+`dataset` table carries each source's own `citation_main`, `license`, `doi` and
+`acknowledgement` for exactly this purpose — one row per dataset, so a query that touched
+`dataset_key` already knows whom to credit.
 
 ### Consuming descriptions
 
@@ -287,19 +496,135 @@ skills enforce this.
 
 ### Publishing to portals
 
-Workflows in `workflows/publish_*.qmd` push selected tables to external
-portals (ERDDAP, EDI, OBIS, NCEI). They read the release `metadata.json`
-to assemble Ecological Metadata Language (EML) and ERDDAP datasets.xml
-entries, so descriptions stay in sync across portals without re-keying.
+Workflows in `workflows/publish_*.qmd` push selected tables to external portals — ERDDAP, EDI,
+OBIS, NCEI. They read the release `catalog.json` and `metadata.json` to assemble Ecological
+Metadata Language (EML), ERDDAP `datasets.xml` entries and netCDF attributes, so a description
+written once in a metadata registry reaches every portal without re-keying, and so no publish
+notebook builds a parquet path by hand.
+
+The netCDF and ERDDAP publishers are **generic** — parameterised by dataset, driven by the
+release — while the OBIS publisher is still per-dataset; see
+[Darwin Core / OBIS ENV-DATA mapping](#darwin-core-obis-env-data-mapping) for what a generic
+one reads.
+
+## Darwin Core / OBIS ENV-DATA mapping
+
+The core model was designed against the [OBIS ENV-DATA](https://doi.org/10.3389/fmars.2018.00251)
+pattern described by [De Pooter et al. (2017)](https://doi.org/10.3897/BDJ.5.e10989), so the
+shapes map one to one: `sample`'s adjacency list **is** an Event core, `obs`'s bio rows **are** an
+Occurrence extension, and the two measurement grains **are** extended Measurement-or-Fact tables.
+What was missing was never the shape — it was the *vocabulary*: an export had to guess which
+controlled term a CalCOFI measurement name meant, and the ichthyoplankton OBIS notebook did not
+guess, it wrote `measurementTypeID = NA`.
+
+The ids now live in the registries the release already publishes, so a portal export is a
+lookup rather than a judgement.
+
+| CalCOFI | Darwin Core / OBIS ENV-DATA | how it is constructed |
+|---|---|---|
+| **`sample`** (adjacency list) | **Event core** | `eventID` = `sample_key`; `parentEventID` = `parent_sample_key`; `eventDate` from `datetime` (a tow publishes as its start/end interval); `decimalLatitude` / `decimalLongitude`; `minimumDepthInMeters` / `maximumDepthInMeters` = `depth_min_m` / `depth_max_m`; `footprintWKT` from `geom`; `locationID` = `site_key`; **`samplingProtocol`** from `metadata/gear.csv` keyed on `tow_type`; **`sampleSizeValue`** = `volume_sampled_m3` with `sampleSizeUnit` = cubic metre |
+| **`obs_bio`** (`obs` where `realm = 'bio'`) | **Occurrence extension** | `occurrenceID` from `obs_id`; `eventID` = `sample_key`; **`scientificNameID`** built from `taxon_key` (`urn:lsid:marinespecies.org:taxname:<worms_id>`, or the ITIS TSN for a bird); `scientificName` from `taxon`; **`lifeStage`** + its NERC S11 id from `metadata/life_stage.csv`; **`organismQuantity`** = `density_per_10m2` or `density_per_1000m3` with `organismQuantityType` naming that denominator |
+| **`sample_measurement`** | **eMoF on Events** (net effort, cast conditions) | `measurementType` / `measurementValue` / `measurementUnit`, plus **`measurementTypeID`** = `measurement_type.nerc_p01` and **`measurementUnitID`** = `measurement_type.units_nerc_p06` |
+| **`obs_attribute`** | **eMoF on Occurrences** (length and stage frequency) | `bin_value` / `bin_label` / `count` → `measurementValue`; ids as above |
+| **`obs_env`** (`obs` where `realm = 'env'`) | **eMoF on the bottle or depth Event** | ids as above |
+
+`metadata/field_dictionary.csv` carries a `dwc_term` column holding the full term URI for the
+**12 of 57** canonical fields that one Darwin Core term means exactly. A field Darwin Core
+*splits* — `depth_m` becomes `minimumDepthInMeters` **and** `maximumDepthInMeters` — or has no
+term for is deliberately left empty rather than mapped approximately.
+
+### An id is filled only on an exact match
+
+**Empty means "no concept in the vocabulary says exactly this", never "nobody looked."** An id
+is written only when every facet the concept states — quantity, matrix, phase, method — is
+something the registry or the dataset's documented protocol actually supplies. A *generic*
+concept is an exact match at coarser specificity: NERC P01 `TEMPPR01`, *Temperature of the water
+body*, is exactly what a QC'd bottle temperature is. A concept that adds a facet nobody recorded
+is not: `IRRDUV01` pins PAR to a cosine-collector radiometer, which no CalCOFI metadata states,
+so PAR has no id.
+
+Filling an id you are not sure of is worse than leaving it empty. An empty
+`measurementTypeID` is a portal record that says "this measurement is not mapped"; a wrong one
+is a record that confidently says the wrong thing, at an aggregator that will never ask.
+
+Coverage as of `v2026.09`:
+
+| registry | column | filled |
+|---|---|---|
+| `measurement_type.csv` | `nerc_p01` (P01, `measurementTypeID`) | 115 / 200 |
+| `measurement_type.csv` | `units_nerc_p06` (P06, `measurementUnitID`) | 174 / 200 |
+| `life_stage.csv` | `nerc_s11` (S11, `lifeStage`) | 10 / 23 |
+| `gear.csv` | `nerc_l22` (L22, `samplingProtocol` device) | 4 / 11 |
+| `field_dictionary.csv` | `dwc_term` | 12 / 57 |
+
+Of the 85 measurement types with no P01, **29 are taxon-bearing** abundance, biomass or size
+types — P01 encodes the taxon *in the concept*, and CalCOFI carries it in `taxon_key`, so a
+per-type id there would be wrong rather than missing. Another 8 are event-level effort and
+sub-occurrence attributes BODC does not model as parameters. The genuine gaps are documented
+in `RELEASES.md`, and most of them are questions for a data provider rather than for the
+vocabulary: an unrecorded transmissometer wavelength, radiation channels that do not say
+whether they are upwelling or downwelling, flow-cytometry gating that was never written down.
+
+### Three caveats for anyone building an export
+
+- **`obs` is positive-only for ichthyoplankton.** A tow that was sorted and found nothing has
+  **no row**, so `occurrenceStatus = "absent"` cannot be derived from zero values. Absences come
+  from the sampling events (`sample`, root rows) minus the taxa observed on them — and a surveyed
+  year with no positives is indistinguishable from an unsurveyed year if you count rows instead
+  of events.
+- **`organismQuantityType` is the whole meaning of the number.** Areal (individuals per 10 m²,
+  from an oblique or vertical tow standardized by the haul factor) and volumetric (individuals
+  per 1000 m³, from a surface Manta tow or any tow with a filtered volume) are **not
+  interconvertible** without an integrated depth and a vertical-distribution assumption. Publish
+  the denominator with the number, never a bare count.
+- **Two `life_stage` values are not life stages.** Euphausiid `damaged` marks specimens too
+  damaged to stage (`occurrenceRemarks`), and ichthyoplankton `invert` is a provenance flag for
+  the merged invertebrate counts. `metadata/life_stage.csv` says so per value; do not pass either
+  through as `lifeStage`.
+
+A generic `publish_to-obis.qmd` over the core — replacing the per-dataset ichthyoplankton
+notebook — is planned rather than built; the registries above are what it was waiting for.
 
 ## Relationships between tables
 
-- See [calcofi/workflows: **clean_db**](https://calcofi.io/workflows/clean_db.html)\
+Primary and foreign keys ship with every release as `relationships.json` beside
+`catalog.json`, and the [**Schema explorer**](https://calcofi.io/db-schema/) draws them as an
+entity-relationship diagram per release (deep-link with `#erd?v=v2026.08.25`). Intra-dataset
+relationships are declared in each ingest's own `relationships.json`; cross-dataset ones live
+in `metadata/relationships_cross.csv` and are merged in at release time.
 
-- `TODO:` add calcofi/apps: db to show latest tables, columns and relationsips
+The joins worth memorising:
+
+```sql
+-- an observation to its sampling event, and up the hierarchy
+obs.sample_key        -> sample.sample_key
+sample.parent_sample_key -> sample.sample_key      -- adjacency list
+sample.root_sample_key   -> sample.sample_key      -- top of the chain
+
+-- provenance and place, denormalized onto obs so a rollup needs no join
+obs.dataset_key       -> dataset.dataset_key
+obs.cruise_key        -> cruise.cruise_key
+obs.grid_key          -> grid.grid_key
+
+-- what was measured, and of what
+obs.measurement_type  -> measurement_type.measurement_type
+obs.taxon_key         -> taxon.taxon_key
+(dataset_key, ds_taxa_code) -> dataset_taxon       -- the per-dataset vocabulary
+```
 
 ## Spatial Tips
 
 - Use [`ST_Subdivide()`](https://postgis.net/docs/ST_Subdivide.html) when running spatial joins on large polygons.
 
+- **All released geometry is tagged `EPSG:4326`**, normalized immediately before the freeze.
+  This matters because `ST_Point(lon, lat)` tags `OGC:CRS84` while `ST_Read()` over GeoJSON tags
+  `EPSG:4326` — the same WGS 84 longitude/latitude — and **DuckDB refuses `ST_Intersects` across
+  differing tags**. If you build geometry on one side of a join, tag both sides; do not coerce
+  one to match the other, or the next release will break you.
 
+- **`NaN` is not `NULL`, and it corrupts spatial queries beyond its own row.** A `NaN` coordinate
+  survives `IS NOT NULL`, and `ST_Point(NaN, NaN)` returns a real, non-NULL geometry that
+  survives `geom IS NOT NULL` too. Worse, its presence makes `ST_Intersects` return **different
+  counts at different thread counts**, dropping valid, unrelated pairs. The release normalizes
+  `NaN`/`Inf` to `NULL` before minting geometry — but if you build your own, test `isnan()` and
+  `isinf()` explicitly.
