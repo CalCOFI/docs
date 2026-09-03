@@ -67,6 +67,7 @@ book:
     - server-access.qmd
     - helpers.qmd
     - api.qmd
+    - cite.qmd
     - portals.qmd
     - status.qmd
     - refs.qmd
