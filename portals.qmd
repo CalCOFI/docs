@@ -135,7 +135,7 @@ The [Ecological Metadata Language (EML)](https://eml.ecoinformatics.org/) (and u
 
 The EML specification provides detailed structure for describing datasets, including:
 
--   Dataset identification and citation
+-   [Dataset identification and citation](cite.qmd)
 -   Geographic and temporal coverage
 -   Variable definitions and units
 -   Methods and protocols
@@ -189,3 +189,13 @@ CalCOFI is also developing an integrated database and tools that enable efficien
 -   Subset and download data
 -   Link:
     -   [calcofi.io](https://calcofi.io), App button
+
+### Citation
+
+-   How to cite the CalCOFI Integrated Database release, and how to cite an
+    individual dataset within it — checked citations, licenses and DOIs, one
+    row per dataset
+-   `cc_cite()` in `calcofi4r` / `calcofi4py`, for citing exactly the
+    datasets a query touched
+-   Link:
+    -   [Cite This Data](cite.qmd)
