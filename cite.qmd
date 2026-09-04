@@ -1,0 +1,202 @@
+# Cite This Data
+
+This is the **Data Sources & Attribution** page — the front door for "how do I cite
+CalCOFI data?" (Erin's ask #4, 2026-09-02, after a call with CCE-LTER's Mike Ohman and
+Kathy). Every CalCOFI product should point here rather than restate it: the release
+itself has a citation, and every dataset inside it carries its own — checked, not
+invented (see the attribution contract in
+[CalCOFI/workflows' `CLAUDE.md`](https://github.com/CalCOFI/workflows/blob/main/CLAUDE.md)
+and its `attribution` skill).
+
+::: {.callout-important}
+## Two things to cite, always
+
+If your work touches the CalCOFI Integrated Database, cite **both**: the release
+(the database as a whole — the assembly, the schema, the QA/QC) *and* every
+individual dataset your analysis actually used (the people who collected and
+curated the data). Citing only the release erases the contributing datasets;
+citing only a dataset erases the integration work that made it queryable
+alongside fifteen others.
+:::
+
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(calcofi4r, DBI, dplyr, gt, here, knitr, quiet = TRUE)
+con         <- calcofi4r::cc_get_db()
+catalog     <- tryCatch(calcofi4r::cc_catalog("latest"), error = function(e) NULL)
+rel_version <- if (!is.null(catalog)) catalog$version else "the connected release"
+```
+
+## Citing the database release
+
+```{r}
+#| label: release-citation
+#| echo: false
+#| results: asis
+
+# `cc_cite()` (calcofi4r >= 1.17.0, WS-A2) is the one place a release/dataset
+# citation is formatted — read `dataset` off the connection, never build a
+# citation string by hand. It is not yet on an installed calcofi4r as this page
+# renders (2026-09-03); `exists()` guards the call so the page renders either
+# way, and the fallback below reads the same fields cc_cite() would.
+has_cc_cite <- requireNamespace("calcofi4r", quietly = TRUE) &&
+  exists("cc_cite", where = asNamespace("calcofi4r"), inherits = FALSE)
+
+if (has_cc_cite) {
+  # cc_cite() always returns the release citation first, then one entry per
+  # dataset cited (every dataset, with x = NULL) — take just the first line
+  rel <- calcofi4r::cc_cite(con = con)[1]
+  cat(rel, "\n")
+} else {
+  rel <- if (!is.null(catalog) && !is.null(catalog$citation)) {
+    catalog$citation
+  } else {
+    # the same wording calcofi4db::release_citation() writes, computed here
+    # because this release predates the attribution contract (2026-09-03) and
+    # its catalog.json carries no `citation` of its own
+    sprintf(
+      "CalCOFI (%s). CalCOFI Integrated Database, release %s [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://calcofi.io/db-schema/?v=%s",
+      format(Sys.Date(), "%Y"), rel_version, rel_version)
+  }
+  cat(rel, "\n\n*(`cc_cite()` is not yet on the installed calcofi4r; this is the",
+      "equivalent citation, read from the release's own catalog and dataset table.)*\n")
+}
+```
+
+## Citing an individual dataset
+
+Every dataset in the release carries its own `citation_main`, a registered
+`license`, and — where the source gives one — a `doi` and `acknowledgement`
+(the columns are `dataset.doi`, `dataset.license_url`,
+`dataset.acknowledgement`, `dataset.contact`; see [the database
+schema](db.qmd)). These are new as of the 2026-09-03 attribution contract, so
+**a release cut before that date does not carry them yet** — the table below
+shows whatever the connected release actually has, and says so rather than
+leaving a blank column unexplained.
+
+```{r}
+#| label: dataset-table
+#| echo: false
+
+ds <- DBI::dbReadTable(con, "dataset")
+
+# columns the attribution contract added (calcofi4db >= 3.30.0); a release cut
+# before 2026-09-03 has none of them, and the promoted release at the time this
+# page was last rendered is one of those — this checks rather than assumes
+new_cols   <- c("doi", "license_url", "acknowledgement", "contact",
+                "source_accessed")
+have_new   <- intersect(new_cols, names(ds))
+missing_new <- setdiff(new_cols, names(ds))
+
+cols <- intersect(
+  c("provider", "dataset", "dataset_name", "citation_main", "license",
+    "license_url", "doi", "pi_names", "acknowledgement", "contact",
+    "source_accessed", "link_calcofi_org", "link_data_source"),
+  names(ds))
+
+ds |>
+  dplyr::select(dplyr::all_of(cols)) |>
+  dplyr::arrange(provider, dataset) |>
+  gt::gt() |>
+  gt::cols_label(.list = list(
+    provider = "provider", dataset = "dataset", dataset_name = "name",
+    citation_main = "citation", license = "license", license_url = "license URL",
+    doi = "DOI", pi_names = "PI(s)", acknowledgement = "acknowledgement",
+    contact = "contact", source_accessed = "source accessed",
+    link_calcofi_org = "calcofi.org", link_data_source = "data source")[cols]) |>
+  gt::fmt_url(columns = dplyr::any_of(c("link_calcofi_org", "link_data_source")),
+              label = "↗") |>
+  gt::sub_missing(missing_text = "") |>
+  gt::tab_options(table.width = gt::pct(100), table.font.size = "0.85em")
+```
+
+```{r}
+#| label: coverage-note
+#| echo: false
+#| results: asis
+if (length(missing_new) > 0) {
+  cat(sprintf(
+    "\n> This release (`%s`) predates the 2026-09-03 attribution contract, so **%s** %s not yet populated. They arrive with the next release cut after that contract; until then, treat an empty license/DOI/acknowledgement as \"not yet resolved,\" not \"the source has none.\"\n",
+    rel_version,
+    paste0("`", missing_new, "`", collapse = ", "),
+    if (length(missing_new) == 1) "is" else "are"))
+}
+```
+
+## Citing what you downloaded
+
+Every figure, CSV or Parquet subset you export from a CalCOFI product should
+carry citations for **only the datasets it actually used**, plus the release.
+`cc_cite()` accepts a `dataset_key` vector or a query result data frame — it
+resolves exactly the datasets present, in first-occurrence order, and errors
+naming any `dataset_key` it does not recognize rather than silently dropping
+one.
+
+::: {.panel-tabset}
+
+## R
+
+```{r}
+#| label: cite-r
+#| eval: !expr has_cc_cite
+
+# every dataset in the release, release citation first
+calcofi4r::cc_cite()
+
+# just the datasets a query touched
+calcofi4r::cc_cite("calcofi_dic")
+
+# from a query result directly (must carry a dataset_key column)
+dplyr::tbl(con, "obs") |>
+  dplyr::filter(dataset_key == "calcofi_dic") |>
+  head(5) |>
+  dplyr::collect() |>
+  calcofi4r::cc_cite()
+
+# a .bib file for a paper's reference manager
+calcofi4r::cc_cite(format = "bibtex") |> cat()
+```
+
+```{r}
+#| label: cite-r-fallback
+#| eval: !expr isFALSE(has_cc_cite)
+#| echo: false
+#| results: asis
+cat("*`cc_cite()` is not yet on the installed `calcofi4r` (it lands in 1.17.0,",
+    "alongside the columns above); once released, `calcofi4r::cc_cite()` and",
+    "`calcofi4r::cc_cite(\"calcofi_dic\")` work exactly as shown for R below.*\n")
+```
+
+## Python
+
+```python
+# pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"
+import calcofi4py as cc
+
+con = cc.cc_get_db()
+
+cc.cc_cite()                     # every dataset, release citation first
+cc.cc_cite("calcofi_dic")        # just one dataset
+cc.cc_cite(format="bibtex")      # a .bib file
+```
+
+:::
+
+## Reaching a data provider
+
+Each dataset's `contact` (a provider-chosen URL or `mailto:` link) is in the
+table above. To share a derived product, ask a question about the underlying
+data, or propose a correction, use that contact — or open an issue against
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/issues) if you are
+unsure who owns a dataset. Every dataset's provenance and open questions are
+also tracked in that repo's `metadata/{provider}/{dataset}/questions.csv`.
+
+## See also
+
+- [The database schema](db.qmd) — table/column reference, including the
+  `dataset` table's full column list.
+- [Data Access](data-access.qmd) — how to query the release from R, Python or
+  your browser.
+- [Portals](portals.qmd) — where the same data is discoverable outside
+  calcofi.io (EDI, NCEI, OBIS, ERDDAP).
