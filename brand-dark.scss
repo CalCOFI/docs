@@ -1,12 +1,13 @@
 /*-- scss:defaults --*/
-// calcofi.io brand tokens (https://calcofi.io/brand/v1/theme.css), dark ground
+$font-family-sans-serif: "Source Sans 3", "Source Sans Pro", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+// calcofi.io brand tokens (https://calcofi.io/brand/v2/theme.css), dark ground
 // (the brand default). cosmo's derived colours (sidebar-fg, navbar-fg, inputs,
 // popovers) follow from these via quarto's theme-contrast rules.
-$body-bg:      #1b1d20;
-$body-color:   #e6e9ed;
-$link-color:   #4dabf7;
-$border-color: #3a3f44;
-$navbar-bg:    #24272b;
-$sidebar-bg:   #24272b;
-$code-bg:      #24272b;
-$text-muted:   #9aa0a6;
+$body-bg:      #0f1a2e;
+$body-color:   #e9edf3;
+$link-color:   #4fb6e6;
+$border-color: #34486b;
+$navbar-bg:    #182b49;
+$sidebar-bg:   #182b49;
+$code-bg:      #182b49;
+$text-muted:   #9fb0c8;

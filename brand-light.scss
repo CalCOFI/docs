@@ -1,12 +1,13 @@
 /*-- scss:defaults --*/
-// calcofi.io brand tokens (https://calcofi.io/brand/v1/theme.css), light ground.
+$font-family-sans-serif: "Source Sans 3", "Source Sans Pro", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;  // brand v2 (fonts.css in brand-head.html)
+// calcofi.io brand tokens (https://calcofi.io/brand/v2/theme.css), light ground.
 // layered on cosmo, which already sits close to these; stated so the two
 // stylesheets are symmetric and the values are the brand's, not the theme's.
 $body-bg:      #ffffff;
-$body-color:   #212529;
-$link-color:   #2780e3;
-$border-color: #dee2e6;
-$navbar-bg:    #f8f9fa;
-$sidebar-bg:   #f8f9fa;
-$code-bg:      #f8f9fa;
-$text-muted:   #6c757d;
+$body-color:   #182b49;
+$link-color:   #00629b;
+$border-color: #dddddd;
+$navbar-bg:    #f5f5f5;
+$sidebar-bg:   #f5f5f5;
+$code-bg:      #f5f5f5;
+$text-muted:   #66686a;

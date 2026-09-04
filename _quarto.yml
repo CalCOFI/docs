@@ -45,17 +45,17 @@ book:
   google-analytics: "G-0HVK8TDMCF"
   search: true
   page-navigation: true
-  # calcofi.io brand contract (https://calcofi.io/brand/v1/): the CalCOFI favicon
+  # calcofi.io brand contract (https://calcofi.io/brand/v2/): the CalCOFI favicon
   # set; in the sidebar quarto owns, the CalCOFI logo linking to calcofi.io with
   # the product title ("docs") beside it linking to this book's root. the theme
   # half (both stylesheets, quarto's toggle bridged) is under format.html below.
-  # favicon.png is https://calcofi.io/brand/v1/favicon-32x32.png (quarto rewrites a URL here to ./https://...)
+  # favicon.png is https://calcofi.io/brand/v2/favicon-32x32.png (quarto rewrites a URL here to ./https://...)
   favicon: favicon.png
   sidebar:
     title: docs
     logo:
-      light: {path: https://calcofi.io/brand/v1/logo_calcofi_light.svg, alt: CalCOFI}
-      dark: {path: https://calcofi.io/brand/v1/logo_calcofi.svg, alt: CalCOFI}
+      light: {path: https://calcofi.io/brand/v2/logo_calcofi_light.svg, alt: CalCOFI}
+      dark: {path: https://calcofi.io/brand/v2/logo_calcofi.svg, alt: CalCOFI}
     logo-href: https://calcofi.io
   chapters:
     - index.qmd
@@ -67,7 +67,6 @@ book:
     - server-access.qmd
     - helpers.qmd
     - api.qmd
-    - cite.qmd
     - portals.qmd
     - status.qmd
     - refs.qmd
