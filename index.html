@@ -8,7 +8,7 @@
 
 <meta name="author" content="Benjamin D. Best">
 <meta name="author" content="Erin Satterthwaite">
-<meta name="dcterms.date" content="2026-09-04">
+<meta name="dcterms.date" content="2026-09-05">
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
 <title>CalCOFI.io</title>
@@ -523,7 +523,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026-09-04</p>
+      <p class="date">2026-09-05</p>
     </div>
   </div>
   
@@ -551,7 +551,7 @@ Figure&nbsp;1.1: CalCOFI data workflow.
 </figcaption>
 </figure>
 </div>
-<p>The original raw <strong>data</strong>, most often in tabular format [e.g., comma-separated value (*.csv)], gets <strong>ingest</strong>ed into the <strong>database</strong> by R <a href="https://github.com/CalCOFI/scripts">scripts</a> that use functions and lookup data tables in the R package <a href="https://calcofi.github.io/calcofi4r/reference/index.html"><strong><code>calcofi4r</code></strong></a> where functions are organized into <em>Read</em>, <em>Analyze</em> and <em>Visualize</em> concepts. The application programming interface (<strong>API</strong>) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (<strong>Apps</strong>) using Shiny (or any other web application framework) and <strong>reports</strong> using Rmarkdown (or any other report templating framework). Finally, R scripts will <strong>publish</strong> metadata (as <a href="https://docs.ropensci.org/EML">Ecological Metadata Language</a>) and data packages (e.g., in Darwin format) for discovery on a variety of data <em><strong>portals</strong></em> oriented around slicing the tabular or gridded data (<a href="https://coastwatch.pfeg.noaa.gov/erddap/information.html">ERDDAP</a>), biogeographic analysis (<a href="https://obis.org">OBIS</a>), long-term archive (<a href="https://www.dataone.org">DataOne</a>, <a href="https://www.ncei.noaa.gov">NCEI</a>) or metadata discovery (<a href="https://www.fisheries.noaa.gov/inport/">InPort</a>). The <strong>database</strong> will be spatially enabled by PostGIS for summarizing any and all data by <em><strong>Areas of Interest</strong></em> (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas. (<a href="#fig-sw-arch" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>)</p>
+<p>The original raw <strong>data</strong>, most often in tabular format [e.g., comma-separated value (*.csv)], gets <strong>ingest</strong>ed into the <strong>database</strong> by R <a href="https://github.com/CalCOFI/scripts">scripts</a> that use functions and lookup data tables in the R package <a href="https://calcofi.github.io/calcofi4r/reference/index.html"><strong><code>calcofi4r</code></strong></a> where functions are organized into <em>Read</em>, <em>Analyze</em> and <em>Visualize</em> concepts. The application programming interface (<strong>API</strong>) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (<strong>Apps</strong>) using Shiny (or any other web application framework) and <strong>reports</strong> using Rmarkdown (or any other report templating framework). Finally, R scripts will <strong>publish</strong> metadata (as <a href="https://docs.ropensci.org/EML">Ecological Metadata Language</a>) and data packages (e.g., in Darwin format) for discovery on a variety of data <em><strong>portals</strong></em> oriented around slicing the tabular or gridded data (<a href="https://coastwatch.pfeg.noaa.gov/erddap/information.html">ERDDAP</a>), biogeographic analysis (<a href="https://obis.org">OBIS</a>), long-term archive (<a href="https://www.dataone.org">DataOne</a>, <a href="https://www.ncei.noaa.gov">NCEI</a>) or metadata discovery (<a href="https://www.fisheries.noaa.gov/inport/">InPort</a>). Every one of those datasets — and every one still awaiting ingestion — also has a page of its own at <a href="https://calcofi.io/datasets/">calcofi.io/datasets/</a>: the <strong>dataset catalog</strong>, generated from the same database, joining every portal it reaches (see <a href="./portals.html">Portals</a>). The <strong>database</strong> will be spatially enabled by PostGIS for summarizing any and all data by <em><strong>Areas of Interest</strong></em> (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas. (<a href="#fig-sw-arch" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>)</p>
 
 
 </section>
