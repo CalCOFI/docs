@@ -2,71 +2,88 @@
 
 ## Overview
 
-CalCOFI data is available through various portals, each serving different purposes and user needs. This document outlines the main access points and their characteristics.
+CalCOFI data is available through various portals, each serving different purposes and user
+needs. Since 2026-09, every dataset — integrated into the database or still a holding — also has
+one calcofi.io page ([`/datasets/{dataset_key}/`](https://calcofi.io/datasets/)) joining every
+endpoint it can be reached through: the release Parquet, a CF netCDF, ERDDAP, and the archive or
+aggregator portals below, each with its own publication status. That page, not this chapter, is
+now the record — the tables here are generated from the same registries the page reads, so the
+two can never disagree.
 
 ## Data Flow
 
-While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from raw data to the integrated database to portals and meta-portals.
+While it would be ideal for CalCOFI data to be available through a single portal, each portal has
+its strengths and limitations. The following diagram illustrates one possible realization of data
+flow between CalCOFI data and the portals: from raw data to the integrated database to the dataset
+catalog to the portals and meta-portals.
 
 ```{mermaid}
 %%| label: fig-portals-flow
-%%| fig-cap: "Flow of data from raw to database to portals and meta-portals."
+%%| fig-cap: "Flow of data from raw to database to the dataset catalog to portals and meta-portals."
 %%| file: diagrams/portals_flow.mmd
 %%| fig-width: 6
 ```
 
-In practice, CalCOFI is a partnership with various contributing members, so the authoritative dataset might flow differently, such as from EDI to the database to the other portals. The other portals, such as OBIS or ERDDAP, serve different audiences or purposes. The meta-portals like ODIS and Data.gov then index these portals to provide broader discovery of CalCOFI datasets.
+In practice, CalCOFI is a partnership with various contributing members, so the authoritative
+dataset might flow differently, such as from EDI to the database to the other portals. The other
+portals, such as OBIS or ERDDAP, serve different audiences or purposes. The dataset catalog is
+what now feeds the meta-portals directly — ODIS crawls its sitemap and JSON-LD, Google Dataset
+Search its JSON-LD, and data.gov its DCAT-US `data.json` — rather than each meta-portal having to
+know about every downstream portal individually.
 
-## Portals
+## Portal capabilities
 
-While some portals serve as data repositories, others provide advanced data access and visualization tools. The following sections describe the main portals where CalCOFI data is available and their key features.
+While some portals serve as data repositories, others provide advanced data access and
+visualization tools, and a few are meta-portals that index the others rather than holding data
+themselves. The table below is generated from
+[`CalCOFI/workflows`' `metadata/portal.csv`](https://github.com/CalCOFI/workflows/blob/main/metadata/portal.csv)
+— the same registry `datasets.json`'s `registrations[]` and this book both read — so a portal
+added there (CalOOS and the IOOS Catalog joined in 2026-09) shows up here without anyone
+hand-editing a table.
 
 ```{r}
 #| label: tbl-portals
-#| tbl-cap: Portal Capabilities.
+#| tbl-cap: Portal capabilities, from `metadata/portal.csv` (CalCOFI/workflows).
+#| warning: false
 
 librarian::shelf(
-  dplyr, gt, here, readr, scales)
+  dplyr, glue, gt, here, purrr, readr, scales, tidyr)
 
-portals_csv <- here("data/portal_comparison.csv")
+portals_csv <- here("data/portal.csv")
 
-# Define the capability symbols and colors
-cap_symbols <- c(
-  "none"    = "✖",  # "\u2716",   # ✖
-  "partial" = "▲",  # "\u25B2",   # ▲
-  "full"    = "✔")  # "\u2714")   # ✔
-cap_colors <- c(
-  "none"    = "#FFCCCC",  # Light red
-  "partial" = "#FFF2CC",  # Light yellow
-  "full"    = "#CCFFCC")  # Light green
+# capability columns are "none" | "partial" | "full"; harvests_from_us and kind are
+# plain text (a mechanism id, or "none"), shown without the symbol treatment
+cap_cols <- c("full_archive", "versioning", "doi_issued", "query_by_xyt",
+             "query_by_taxa", "multiple_formats", "api_access")
+cap_symbols <- c("none" = "✖", "partial" = "▲", "full" = "✔")
+cap_colors  <- c("none" = "#FFCCCC", "partial" = "#FFF2CC", "full" = "#CCFFCC")
 
-# Create the gt table
-read_csv(portals_csv, show_col_types = F) |>
-  gt(rowname_col = "Portal") |> 
-  # Apply background colors based on capability levels
+# display label for each capability column, in the order they'll appear
+cap_labels <- c("Full Archive", "Versioning", "DOI Issued", "Query by xyt",
+                "Query by taxa", "Multiple formats", "API Access")
+
+portals_tbl <- read_csv(portals_csv, show_col_types = FALSE) |>
+  mutate(Portal = glue::glue("[{name}]({url})")) |>
+  select(Portal, kind, all_of(cap_cols), harvests_from_us)
+names(portals_tbl) <- c("Portal", "Kind", cap_labels, "Harvests from us")
+
+portals_tbl |>
+  gt(rowname_col = "Portal") |>
+  fmt_markdown(columns = "Portal") |>
   data_color(
-    # columns = everything(),
-    fn      = scales::col_factor(
-      palette = as.character(cap_colors),
-      levels  = names(cap_colors))) |> 
-  # Center align the text
-  cols_align(
-    align = "center",
-    columns = everything() ) |>
-  # Apply colored symbols
+    columns = all_of(cap_labels),
+    fn = scales::col_factor(palette = as.character(cap_colors), levels = names(cap_colors))) |>
+  cols_align(align = "center", columns = everything()) |>
   text_transform(
-    fn = function(x) {
-      cap_symbols[x] } ) |>
-  # Add a caption explaining the symbols and colors
-  tab_source_note(
-    source_note = md(
-      "**Capability Legend**: ✔ = full, ▲ = partial, ✖ = none")) |>
-  # Adjust the table's style for better aesthetics
-  tab_options(
-    table.width      = pct(100),
-    data_row.padding = px(5))
+    locations = cells_body(columns = all_of(cap_labels)),
+    fn = function(x) unname(cap_symbols[x])) |>
+  tab_source_note(source_note = md(
+    "**Capability legend**: ✔ = full, ▲ = partial, ✖ = none. **Harvests from
+    us** names the mechanism CalCOFI feeds that portal through (an ERDDAP WAF, a sitemap of
+    JSON-LD, an IPT upload, …), or `none` for a discovery-only aggregator with no CalCOFI-fed
+    channel yet.")) |>
+  tab_options(table.width = pct(100), data_row.padding = px(5))
 ```
-
 
 ### EDI
 **Environmental Data Initiative**
@@ -103,9 +120,14 @@ read_csv(portals_csv, show_col_types = F) |>
 -   Powerful filtering by space, time, and taxonomic parameters
 -   Multiple download formats (CSV, JSON, Darwin Core Archive)
 -   Full REST API access
+-   Published through the OBIS-USA Integrated Publishing Toolkit (`ipt-obis.gbif.us`), one
+    resource per dataset whose taxa resolve to WoRMS
 -   Links:
     -   [OBIS.org](https://obis.org)
-    -   CalCOFI datasets: [obis.org/dataset](https://obis.org/datasets) + "calcofi" Keyword
+    -   `swfsc_ichthyo` on OBIS: [*CalCOFI Fish Larvae & Egg Tows*](https://obis.org/dataset/0e223f55-c826-4513-ae9a-b04cbf2e189c)
+        (77,188 events, 463,655 occurrences, 610,816 eMoF; featured by OBIS 2026-04-15) — the
+        [dataset page](https://calcofi.io/datasets/swfsc_ichthyo/) carries the rest as they
+        publish
 
 ### ERDDAP
 **Environmental Research Division Data Access Program**
@@ -118,13 +140,40 @@ read_csv(portals_csv, show_col_types = F) |>
 -   No persistent identifiers but stable URLs
 -   Links:
     -   [ERDDAP](https://upwell.pfeg.noaa.gov/erddap/index.html)
-    -   CalCOFI datasets:
-        -   [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
-        -   [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
+    -   [erddap.calcofi.io](https://erddap.calcofi.io/erddap/index.html) — CalCOFI's own
+        ERDDAP over the release, every dataset's `infoUrl` pointing back at its
+        [dataset page](https://calcofi.io/datasets/)
+    -   [ERDDAP, OceanView - CalCOFI seabirds](https://oceanview.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=seabird+CalCOFI)
+    -   [ERDDAP, CoastWatch - CalCOFI oceanographic](https://coastwatch.pfeg.noaa.gov/erddap/search/index.html?page=1&itemsPerPage=1000&searchFor=CalCOFI)
+
+### Zenodo
+
+-   One DOI per integrated-database release, via the GitHub integration on
+    [CalCOFI/workflows](https://github.com/CalCOFI/workflows) — a concept DOI covers every
+    version, a version DOI each one
+-   Archives the pipeline itself at the release tag, plus `catalog.json` / `metadata.json`
+-   Link: [zenodo.org](https://zenodo.org)
+
+### CalOOS
+
+**The SCCOOS + CeNCOOS regional data portal**
+
+-   Registering erddap.calcofi.io gives every existing CoastWatch-fed module a calcofi.io
+    distribution beside it
+-   What data.ioos.us (the national IOOS Catalog) harvests for this region — likely the only
+    IOOS-level registration CalCOFI needs
+-   Link: [data.caloos.org](https://data.caloos.org)
 
 ## Metadata
 
-The [Ecological Metadata Language (EML)](https://eml.ecoinformatics.org/) (and using R package [EML](https://docs.ropensci.org/EML/) in workflows) serves as a key standard for describing ecological and environmental data. For CalCOFI, EML metadata files are generated alongside data files, providing structured documentation that enables interoperability across different data portals. This metadata-driven approach allows automated ingestion into various data systems while maintaining data integrity and provenance.
+The [Ecological Metadata Language (EML)](https://eml.ecoinformatics.org/) is the one metadata
+document CalCOFI's publishers share. Since 2026-09 the release writes one EML 2.2 document per
+dataset — `eml/{dataset_key}.xml`, built by `calcofi4db::build_eml()` directly from
+`datasets.json` and each dataset's descriptive sidecar, checked by `check_eml()` before it ships —
+rather than each publish notebook typing its own sampling methods, study extent and rights by
+hand. The Darwin Core Archive OBIS publishing uses and an EDI data package both start from the
+same document, so a provider correction to a dataset's abstract or creators reaches every
+publisher at once.
 
 ```{mermaid}
 %%| label: fig-portals-metadata
@@ -142,18 +191,33 @@ The EML specification provides detailed structure for describing datasets, inclu
 -   Quality control procedures
 -   Access and usage rights
 
-This standardized metadata enables automated data transformation and ingestion into various portal systems while preserving the original data context and quality information.
+This standardized metadata enables automated data transformation and ingestion into various portal
+systems while preserving the original data context and quality information.
 
 ## Meta-Portals
 
 ### Google Dataset Search
 
-The JSON-LD metadata in the Portal dataset web pages get indexed by [Google Dataset Search](https://datasetsearch.research.google.com/search?query=calcofi) through schema.org metadata. This ensures that CalCOFI data is discoverable through Google search and other search engines.
+The JSON-LD metadata on every calcofi.io dataset page gets indexed by
+[Google Dataset Search](https://datasetsearch.research.google.com/search?query=calcofi) through
+schema.org metadata. This ensures that CalCOFI data is discoverable through Google search and
+other search engines.
 
 ### ODIS
 **Ocean Data Information System**
 
-ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but focuses on ocean data. CalCOFI curates a sitemap of authoritative datasets to server to [ODIS.org](https://odis.org)
+ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but focuses on
+ocean data. ODISCat record 3318 points at calcofi.io's generated
+[`datasets/sitemap.xml`](https://calcofi.io/datasets/sitemap.xml), so a dataset's calcofi.io page
+is what [ODIS.org](https://odis.org) crawls — the record's `sameAs` then links each external
+portal record from there.
+
+### data.gov (DCAT-US)
+
+calcofi.io publishes a [`data.json`](https://calcofi.io/data.json) (Project Open Data / DCAT-US
+1.1), generated from `datasets.json` the same way the sitemap is — one entry per public dataset,
+with its licence, distributions and contact point. This is what a CKAN instance (data.gov, a
+university's, CDFW's) harvests with no work on our side.
 
 This federated approach ensures that CalCOFI data remains:
 
@@ -161,41 +225,88 @@ This federated approach ensures that CalCOFI data remains:
 -   Properly cited and attributed
 -   Integrated with global ocean data systems
 
-## CalCOFI.io Tools
+## The dataset catalog, and who registers where
 
-CalCOFI is also developing an integrated database and tools that enable efficient data access and analysis:
+`datasets.json` (`calcofi4db::build_dataset_catalog()`, calcofi4db ≥ 4.1.0) is the record this
+whole chapter is a rendering of: one entry per dataset, its `registrations[]` naming every portal
+above with a status of `published`, `planned` (usually linking the tracking issue) or `n/a`. The
+table below reads it **live**, straight from the promoted release, so it can never drift from what
+`calcofi.io/datasets/{dataset_key}/`'s own Access table shows.
 
-### APIs
+```{r}
+#| label: tbl-registrations
+#| tbl-cap: Per-dataset portal registrations, read live from the promoted release's `datasets.json`.
+#| warning: false
+#| results: asis
 
--   RESTful endpoints for programmatic access
--   Filtering by space, time, and taxonomic parameters
--   Relationship queries across tables
--   Links:
-    -   [api.calcofi.io](https://api.calcofi.io)
-    -   [tile.calcofi.io](https://tile.calcofi.io)
+librarian::shelf(dplyr, glue, gt, jsonlite, purrr, scales, tidyr)
 
-### Library
+release_base <- "https://storage.googleapis.com/calcofi-db/ducklake/releases"
+latest_version <- tryCatch(
+  trimws(readLines(file.path(release_base, "latest.txt"), warn = FALSE)[1]),
+  error = function(e) NA_character_)
 
--   Direct data access from R
--   Built-in analysis functions
--   Integration with tidyverse ecosystem
--   Link:
-    -   [calcofi.io/calcofi4r](https://calcofi.io/calcofi4r)
+catalog_record <- if (!is.na(latest_version)) tryCatch(
+  jsonlite::fromJSON(file.path(release_base, latest_version, "datasets.json"), simplifyVector = TRUE),
+  error = function(e) NULL) else NULL
 
-### Apps
+reg_status_symbols <- c("n/a" = "✖", "planned" = "▲", "published" = "✔")
+reg_status_colors  <- c("n/a" = "#FFCCCC", "planned" = "#FFF2CC", "published" = "#CCFFCC")
 
--   Interactive data exploration with Shiny applications
--   User-friendly interfaces
--   Subset and download data
--   Link:
-    -   [calcofi.io](https://calcofi.io), App button
+if (is.null(catalog_record) || is.null(catalog_record$datasets)) {
+  version_label <- if (is.na(latest_version)) "unresolved" else latest_version
+  cat(glue::glue(
+    "> The promoted release ({version_label}) carries no `datasets.json` yet ",
+    "(the dataset catalog ships from calcofi4db >= 4.1.0). This table renders automatically once ",
+    "one does — see `https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt`.\n"))
+} else {
+  ds <- catalog_record$datasets
+  reg_long <- purrr::map2_dfr(ds$dataset_key, ds$registrations, function(key, regs) {
+    if (is.null(regs) || !nrow(regs)) return(NULL)
+    tibble::tibble(dataset_key = key, portal = regs$portal, status = regs$status)
+  })
+  reg_wide <- reg_long |>
+    tidyr::pivot_wider(names_from = portal, values_from = status, values_fill = "n/a") |>
+    dplyr::left_join(dplyr::select(ds, dataset_key, dataset_name_short), by = "dataset_key") |>
+    dplyr::mutate(Dataset = glue::glue(
+      "[{dataset_name_short}](https://calcofi.io/datasets/{dataset_key}/)")) |>
+    dplyr::select(Dataset, dplyr::everything(), -dataset_key, -dataset_name_short) |>
+    dplyr::arrange(Dataset)
+  portal_cols <- setdiff(names(reg_wide), "Dataset")
 
-### Citation
+  reg_wide |>
+    gt(rowname_col = "Dataset") |>
+    fmt_markdown(columns = "Dataset") |>
+    data_color(
+      columns = all_of(portal_cols),
+      fn = scales::col_factor(palette = as.character(reg_status_colors), levels = names(reg_status_colors))) |>
+    cols_align(align = "center", columns = everything()) |>
+    text_transform(
+      locations = cells_body(columns = all_of(portal_cols)),
+      fn = function(x) unname(reg_status_symbols[x])) |>
+    tab_source_note(source_note = md(glue::glue(
+      "**Status legend**: ✔ = published, ▲ = planned, ✖ = n/a. Read from ",
+      "`{latest_version}`'s `datasets.json`; the same rows back each dataset's own page."))) |>
+    tab_options(table.width = pct(100), data_row.padding = px(5))
+}
+```
 
--   How to cite the CalCOFI Integrated Database release, and how to cite an
-    individual dataset within it — checked citations, licenses and DOIs, one
-    row per dataset
--   `cc_cite()` in `calcofi4r` / `calcofi4py`, for citing exactly the
-    datasets a query touched
--   Link:
-    -   [Cite This Data](cite.qmd)
+## Getting the data through calcofi.io
+
+The portals above are where CalCOFI data is discoverable *outside* calcofi.io; calcofi.io itself
+is a fourth way in, and it is where the record lives:
+
+-   **[The dataset catalog](https://calcofi.io/datasets/)** — one page per dataset (and per
+    holding not yet ingested), with its coverage, every distribution above, its citation and
+    provenance, and machine surfaces (`{key}.json`, `{key}.jsonld`, the sitemap and `data.json`
+    described above).
+-   **[Data Access](data-access.qmd)** — query the release Parquet directly from R, Python or a
+    browser with DuckDB; no credentials, no API server.
+-   **Libraries** — `calcofi4r::cc_datasets()` / `calcofi4py.cc_datasets()` read the same
+    `datasets.json` this page's tables do, into a data frame; `cc_get_db()` / `cc_query()` for the
+    data itself.
+-   **[Cite This Data](cite.qmd)** — `cc_cite()` in `calcofi4r` / `calcofi4py` for exactly the
+    datasets a query touched, checked citations, licences and DOIs.
+-   **[Apps](apps.qmd)** — interactive exploration (the Explorer, Station and Hexagon Explorers,
+    CTD Transects) without writing a query at all; each app's Sources panel links back to the same
+    dataset pages.

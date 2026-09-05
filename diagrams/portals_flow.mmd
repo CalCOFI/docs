@@ -9,6 +9,7 @@ graph TD
     lib[library]:::code
     app[apps]:::code
     flow[workflows]:::code
+    catalog[["dataset catalog (/datasets/)"]]:::catalog
   end
 
   subgraph portals[Portals]
@@ -16,23 +17,30 @@ graph TD
     obis[OBIS]:::portal
     erddap[ERDDAP]:::portal
     ncei[NCEI]:::portal
+    zenodo[Zenodo]:::portal
+    caloos[CalOOS]:::portal
   end
 
   subgraph meta[Meta-Portals]
     odis[ODIS]:::metaportal
     datagov[data.gov]:::metaportal
+    google[Google Dataset Search]:::metaportal
   end
 
   %% edges
   raw --> db
   db  --> api
   db  --> web
+  db  --> catalog
   api --> lib
   api --> app
   api --> flow
   flow  --> portals
-  portals -->|sitemap| odis
-  portals --> datagov
+  flow  --> catalog
+  catalog -->|one page per dataset, every endpoint| portals
+  catalog -->|sitemap.xml + JSON-LD| odis
+  catalog -->|data.json| datagov
+  catalog -->|JSON-LD| google
 
   %% Custom styles
   classDef source     fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
@@ -42,6 +50,7 @@ graph TD
   classDef code       fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px
   classDef portal     fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
   classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px
+  classDef catalog    fill:#FFF7ED,stroke:#EA580C,stroke-width:2px
 
   %% Style subgraphs
   style calcofi fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
