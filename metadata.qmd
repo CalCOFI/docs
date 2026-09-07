@@ -1,0 +1,157 @@
+# Metadata & the ingest loop {#sec-metadata}
+
+How a dataset gets into CalCOFI.io, where its words live, and what a data provider or a
+member of the data team edits — and what they never have to. This chapter is for people who
+own or curate a dataset; the engineering detail behind each step is in
+[`CalCOFI/workflows`](https://github.com/CalCOFI/workflows) and its `CLAUDE.md`.
+
+## One key, one record, one page
+
+Every dataset has one key, `{provider}_{dataset}` (`calcofi_bottle`, `swfsc_ichthyo`,
+`cce-lter_zooscan`), and that key names everything about it: its folder of metadata in git, its
+row in its provider's Google Sheet, its record in the release, and its page at
+[`calcofi.io/datasets/{key}/`](https://calcofi.io/datasets/). A dataset is in one of three
+states, and the key, the folder, the Sheet row and the page URL are the same in all three, so a
+link never breaks when a dataset moves forward:
+
+| state | what it means | where it shows |
+|---|---|---|
+| **holding** (`external`, `archived` or `planned`) | CalCOFI has or knows of the data, but it is not in the integrated database yet | the catalog grid under *not yet in the database*, with its links out |
+| **in the pipeline** (`in_release: false`) | an ingest notebook runs and produces outputs, but provider questions are still open | the workflow page only; nothing public until the switch flips |
+| **released** | the dataset is in a frozen release with a DOI | its full page, every endpoint, every app |
+
+## Where the words live
+
+Two kinds of fact describe a dataset, and they are kept apart on purpose:
+
+- **Authored** — abstract, methods, who made it, how to cite it, its licence and DOI, the
+  acknowledgement a use should carry. These live in one small file per dataset in git,
+  `metadata/{provider}/{dataset}/dataset_meta.yml`, and every public surface is generated from
+  it: the dataset page, the EML document the portals read, the citation the apps copy.
+- **Measured** — years and area covered, row counts, when the source was last fetched, whether
+  a DOI resolves. These are computed when a release is cut and are never typed; a hand-written
+  extent goes stale the moment the data grows underneath it.
+
+The authored fields are tiered, so a provider sees the few that matter first. The table reads
+the field registry live from the repository:
+
+```{r}
+#| label: tbl-meta-fields
+#| tbl-cap: Authored metadata fields, by tier (`metadata/dataset_meta_fields.csv` in CalCOFI/workflows). Read-only rows are what the release measures and shows beside the editable ones for context.
+#| warning: false
+
+librarian::shelf(dplyr, gt, readr, quiet = TRUE)
+
+flds <- read_csv(
+  "https://raw.githubusercontent.com/CalCOFI/workflows/main/metadata/dataset_meta_fields.csv",
+  show_col_types = FALSE) |>
+  mutate(
+    importance = factor(importance, c("required", "recommended", "optional")),
+    editable   = ifelse(editable, "edit", "read-only"),
+    guidance   = gsub("\\\\", "", guidance)) |>
+  arrange(importance, editable) |>
+  select(field, tier = importance, editable, guidance)
+
+flds |>
+  gt(groupname_col = "tier") |>
+  cols_label(field = "field", editable = "", guidance = "what it is for") |>
+  fmt_markdown(columns = guidance) |>
+  tab_style(style = cell_text(color = "#66686a"), locations = cells_body(columns = editable)) |>
+  tab_options(table.font.size = "90%")
+```
+
+## The Sheets, and what you may edit
+
+Each provider organization (`calcofi`, `swfsc`, `sio`, `cce-lter`, `cdfw`, `farallon`,
+`sccoos`) has **one Google Sheet**, generated from git and synced back to it. The data team
+sends each provider the link to their own Sheet; the set lives in a
+[Shared Drive folder](https://drive.google.com/drive/folders/1Tryjfd76TNU4nVPPSQiyQCy03uo0hlx6)
+owned by the CalCOFI service account, so nothing depends on one person's login. A Sheet has
+three kinds of tab:
+
+| tab | one row per | you edit | everything else |
+|---|---|---|---|
+| **a dataset's tab** (its key) | question we have asked about that dataset | `answer`, `status`, `answered_date`, `who` | protected |
+| **`metadata`** | (dataset, field) — long form, because abstracts are paragraphs | `value` (`edited_by` and `edited_date` fill themselves) | protected; measured fields shown read-only for context |
+| **`holdings`** (the CalCOFI Sheet only) | dataset not yet ingested, across all providers — the team's triage board | `status`, `priority`, `owner`, `next_step` | protected |
+
+Two rows deserve a note. **`visibility`** is a checkbox: `internal` keeps a dataset in the
+record and on the triage board but off every public page, the sitemap and `data.json` until the
+conversation with its provider is done. **`license`** must be one of the ids in the licence
+registry (`CC-BY-4.0`, `CC0-1.0`, `US-PD`, `custom` with a URL, …); anything else is refused when
+the Sheet is pulled, not discovered at release.
+
+## Questions, and what *proposed* means
+
+Every question we have for a dataset's owner is a row in
+`metadata/{provider}/{dataset}/questions.csv` (see [the registries](db.qmd)) and in that
+dataset's Sheet tab. A row has a short label (`Q07`), the question, the context we already know,
+a priority, and a `status`:
+
+- **`open`** — we need an answer we do not have.
+- **`proposed`** — we have already built or reasoned an answer and want it confirmed; the
+  `proposed_answer` column holds it. Most rows are `proposed`, so a provider approves a solution
+  rather than being handed a problem.
+- **`answered`** and **`wontfix`** — closed, with the answer kept beside the question.
+
+Questions reach a provider through the Sheet and, when a batch is ready, through one email
+drafted from the same rows. Answers come back the same way: the data team pulls the Sheet,
+the four answer columns are validated and written into `questions.csv` in one commit, and the
+next release carries whatever changed.
+
+## What happens after you edit
+
+Nothing happens on the Sheet itself. The data team runs a sync (`push` to regenerate the tabs
+from git, `pull` to bring edits back; both are dry runs until told otherwise), which rewrites only
+the changed values in the sidecar and leaves its history and comments intact. The next release —
+cut every few weeks, each with its own DOI — then regenerates every surface from the record:
+
+```{mermaid}
+%%| label: fig-catalog-flow
+%%| fig-cap: "Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish."
+%%| file: diagrams/catalog_flow.mmd
+%%| fig-width: 9
+```
+
+Between releases, a weekly job asks each portal what it says *now* about every dataset and
+holding — a new EDI revision, an OBIS re-index, an ERDDAP id that disappeared — and files a
+`proposed` question for the provider when something changed. It observes; it never edits the
+record.
+
+## A new dataset, end to end
+
+Bringing a dataset in is a loop of five steps with a person at every hand-off:
+
+1. **Explore** — profile the source (columns, coverage, keys, provider), and seed the first
+   questions from what the profile cannot answer.
+2. **Metadata** — map the source's fields onto the shared field dictionary and measurement
+   vocabulary; register the dataset's key, category and descriptive sidecar.
+3. **Ingest** — a notebook (`ingest_{provider}_{dataset}.qmd`) turns the source into the core
+   tables, with the provider's own identifiers kept as columns and the questions section at the
+   end.
+4. **Validate** — keys, ranges, taxa and coverage are checked; every finding is either fixed or
+   becomes a `proposed` question.
+5. **Release** — the dataset joins the next frozen release, gets its page, its EML and STAC
+   records, and its rows in the apps.
+
+A dataset can stop after step 3 with `in_release: false` while its questions are open. That
+is normal, and it is what the holdings triage board is for: a holding's `next_step` names which
+of these steps it is waiting on and who owns it.
+
+## Who to contact
+
+- **`data@calcofi.io`** reaches the CalCOFI data team, and is the contact printed in every
+  record and metadata document unless a dataset names its own.
+- **The feedback button** in the [Explorer](https://calcofi.io/explore/) captures the view you
+  are looking at (annotate it if you like) and sends it to the team, a tracking sheet and a
+  public issue; *Register a product* on the same dialog tells a provider what was made from
+  their data.
+- **GitHub issues** on [CalCOFI/workflows](https://github.com/CalCOFI/workflows/issues) for
+  anything about a dataset's ingest or metadata.
+
+## See also
+
+- [The database schema](db.qmd) — the metadata registries and the `dataset` table.
+- [Portals](portals.qmd) — where each dataset is archived and registered, and the policy per
+  dataset.
+- [Cite this data](cite.qmd) — the citations the record produces.
