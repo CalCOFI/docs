@@ -63,11 +63,13 @@ flds |>
 ## The Sheets, and what you may edit
 
 Each provider organization (`calcofi`, `swfsc`, `sio`, `cce-lter`, `cdfw`, `farallon`,
-`sccoos`) has **one Google Sheet**, generated from git and synced back to it. The data team
-sends each provider the link to their own Sheet; the set lives in a
-[Shared Drive folder](https://drive.google.com/drive/folders/1Tryjfd76TNU4nVPPSQiyQCy03uo0hlx6)
-owned by the CalCOFI service account, so nothing depends on one person's login. A Sheet has
-three kinds of tab:
+`sccoos`) has **one Google Sheet**, generated from git and synced back to it. It is titled
+*CalCOFI integrated database — questions for \<provider\>* and sits in a Shared Drive folder
+called [*questions*](https://drive.google.com/drive/folders/1Tryjfd76TNU4nVPPSQiyQCy03uo0hlx6)
+— the questions came first, and the name stayed when the metadata and holdings tabs joined the
+same spreadsheet (2026-09-05). The folder is owned by the CalCOFI service account, so nothing
+depends on one person's login, and the data team sends each provider the link to their own
+Sheet. A Sheet has three kinds of tab:
 
 | tab | one row per | you edit | everything else |
 |---|---|---|---|
