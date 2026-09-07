@@ -305,19 +305,24 @@ if (is.null(catalog_record) || is.null(catalog_record$datasets)) {
   reg_wide <- reg_long |>
     tidyr::pivot_wider(names_from = portal, values_from = status, values_fill = "n/a") |>
     dplyr::left_join(dplyr::select(ds, dataset_key, dataset_name_short), by = "dataset_key") |>
-    dplyr::mutate(Dataset = glue::glue(
-      "[{dataset_name_short}](https://calcofi.io/datasets/{dataset_key}/)")) |>
-    dplyr::select(Dataset, dplyr::everything(), -dataset_key, -dataset_name_short) |>
-    dplyr::arrange(Dataset)
-  portal_cols <- setdiff(names(reg_wide), "Dataset")
+    dplyr::mutate(Dataset = glue::glue("https://calcofi.io/datasets/{dataset_key}/"),
+                  name    = dataset_name_short) |>
+    dplyr::select(Dataset, name, dplyr::everything(), -dataset_key, -dataset_name_short) |>
+    dplyr::arrange(name)
+  portal_cols <- setdiff(names(reg_wide), c("Dataset", "name"))
 
+  # a markdown link in a cell breaks gt's Word export on a bare & in the name ("Picoplankton &
+  # Bacteria"; gt 1.3.0 unescapes the entity before parsing the cell as XML) — fmt_url() with the
+  # name as its label renders the same link in HTML and survives the docx and pdf downloads
   reg_wide |>
-    gt(rowname_col = "Dataset") |>
-    fmt_markdown(columns = "Dataset") |>
+    gt() |>
+    fmt_url(columns = "Dataset", label = from_column("name")) |>
+    cols_hide("name") |>
+    cols_align(align = "left", columns = "Dataset") |>
     data_color(
       columns = all_of(portal_cols),
       fn = scales::col_factor(palette = as.character(reg_status_colors), levels = names(reg_status_colors))) |>
-    cols_align(align = "center", columns = everything()) |>
+    cols_align(align = "center", columns = all_of(portal_cols)) |>
     text_transform(
       locations = cells_body(columns = all_of(portal_cols)),
       fn = function(x) unname(reg_status_symbols[x])) |>
@@ -395,11 +400,14 @@ if (is.null(pol)) {
 } else {
   pol |>
     dplyr::filter(!is.na(policy), nzchar(policy)) |>
-    dplyr::mutate(Dataset = glue::glue("[{dataset_name_short}](https://calcofi.io/datasets/{dataset_key}/)")) |>
-    dplyr::select(Dataset, `Archive of record, and why` = policy) |>
-    dplyr::arrange(Dataset) |>
-    gt(rowname_col = "Dataset") |>
-    fmt_markdown(columns = "Dataset") |>
+    dplyr::mutate(Dataset = glue::glue("https://calcofi.io/datasets/{dataset_key}/")) |>
+    dplyr::select(Dataset, name = dataset_name_short, `Archive of record, and why` = policy) |>
+    dplyr::arrange(name) |>
+    gt() |>
+    # fmt_url, not a markdown link: see tbl-registrations (gt's Word export and a bare &)
+    fmt_url(columns = "Dataset", label = from_column("name")) |>
+    cols_hide("name") |>
+    cols_align(align = "left", columns = "Dataset") |>
     tab_source_note(source_note = md(glue::glue("Read from {src_note}; the same sentence heads each dataset page's *Archives & portals* table."))) |>
     tab_options(table.width = pct(100), data_row.padding = px(5))
 }
