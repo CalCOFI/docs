@@ -13,15 +13,15 @@ two can never disagree.
 ## Data Flow
 
 While it would be ideal for CalCOFI data to be available through a single portal, each portal has
-its strengths and limitations. The following diagram illustrates one possible realization of data
-flow between CalCOFI data and the portals: from raw data to the integrated database to the dataset
-catalog to the portals and meta-portals.
+its strengths and limitations. The diagram below is the flow as it runs today: what we author and
+observe (left) becomes one record per dataset at release, that record generates every surface a
+portal can read, and each portal or meta-portal is pointed at one of those static files.
 
 ```{mermaid}
 %%| label: fig-portals-flow
-%%| fig-cap: "Flow of data from raw to database to the dataset catalog to portals and meta-portals."
-%%| file: diagrams/portals_flow.mmd
-%%| fig-width: 6
+%%| fig-cap: "Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW."
+%%| file: diagrams/catalog_flow.mmd
+%%| fig-width: 9
 ```
 
 In practice, CalCOFI is a partnership with various contributing members, so the authoritative

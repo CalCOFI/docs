@@ -1,0 +1,52 @@
+graph LR
+  %% one record per dataset, generated at release; every surface a portal sees is derived from it
+  subgraph src[Sources — in git and on GCS]
+    yml["ingest YAML + dataset_meta.yml<br/>⇄ the provider's Google Sheet"]:::source
+    reg["registries<br/>category · provider · license · holdings · distribution · portal"]:::source
+    side["release sidecars<br/>metadata.json · coverage.json · catalog.json"]:::source
+    obs["observed weekly<br/>EDI revisions · OBIS · ERDDAP · DOIs"]:::source
+  end
+  subgraph rec[The record — at release]
+    dj[("datasets.json<br/>one record per dataset_key")]:::record
+    eml["eml/{key}.xml"]:::record
+  end
+  subgraph surf[Generated surfaces]
+    page["calcofi.io/datasets/{key}/<br/>page + JSON-LD + sitemap"]:::surface
+    dcat["data.json (DCAT-US)"]:::surface
+    stac["STAC catalog + browser"]:::surface
+    dwca["Darwin Core Archive"]:::surface
+    edi["EDI data package"]:::surface
+    erd["ERDDAP globals + ISO 19115"]:::surface
+    code["apps · calcofi4r · calcofi4py"]:::surface
+  end
+  subgraph who[Who reads them]
+    gds["Google Dataset Search · ODIS"]:::reader
+    dgov["data.gov · any CKAN"]:::reader
+    pystac["pystac · QGIS · DuckDB"]:::reader
+    obisr["OBIS, via the OBIS-USA IPT"]:::reader
+    edir["EDI, via PASTA"]:::reader
+    ioos["CalOOS · IOOS Catalog"]:::reader
+    people["people"]:::reader
+  end
+  yml --> dj
+  reg --> dj
+  side --> dj
+  obs --> dj
+  dj --> eml
+  dj --> page & dcat & stac & code
+  eml --> dwca & edi & erd
+  page -. crawl .-> gds
+  dcat -. harvest .-> dgov
+  stac -. read .-> pystac
+  dwca -. IPT upload .-> obisr
+  edi -. upload, gated .-> edir
+  erd -. harvest the WAF .-> ioos
+  code --> people
+  classDef source  fill:#f5f0e6,stroke:#747678,color:#182b49
+  classDef record  fill:#fff3d1,stroke:#8a6500,stroke-width:2px,color:#182b49
+  classDef surface fill:#e7f0fa,stroke:#00629b,color:#182b49
+  classDef reader  fill:#ffffff,stroke:#747678,stroke-dasharray: 4 3,color:#182b49
+  style src  fill:#fafafa,stroke:#dddddd
+  style rec  fill:#fafafa,stroke:#dddddd
+  style surf fill:#fafafa,stroke:#dddddd
+  style who  fill:#fafafa,stroke:#dddddd

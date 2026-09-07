@@ -63,6 +63,7 @@ book:
     - apps.qmd
     - maps.qmd
     - db.qmd
+    - metadata.qmd
     - data-access.qmd
     - server-access.qmd
     - helpers.qmd
