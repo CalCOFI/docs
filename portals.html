@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>10&nbsp; Portals – CalCOFI.io</title>
+<title>11&nbsp; Portals – CalCOFI.io</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -315,7 +315,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./portals.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Portals</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./portals.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Portals</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -426,44 +426,50 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./metadata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./server-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Server Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Server Access</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./portals.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -476,26 +482,27 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">10.1</span> Overview</a></li>
-  <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow"><span class="header-section-number">10.2</span> Data Flow</a></li>
-  <li><a href="#portal-capabilities" id="toc-portal-capabilities" class="nav-link" data-scroll-target="#portal-capabilities"><span class="header-section-number">10.3</span> Portal capabilities</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">11.1</span> Overview</a></li>
+  <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow"><span class="header-section-number">11.2</span> Data Flow</a></li>
+  <li><a href="#portal-capabilities" id="toc-portal-capabilities" class="nav-link" data-scroll-target="#portal-capabilities"><span class="header-section-number">11.3</span> Portal capabilities</a>
   <ul class="collapse">
-  <li><a href="#edi" id="toc-edi" class="nav-link" data-scroll-target="#edi"><span class="header-section-number">10.3.1</span> EDI</a></li>
-  <li><a href="#ncei" id="toc-ncei" class="nav-link" data-scroll-target="#ncei"><span class="header-section-number">10.3.2</span> NCEI</a></li>
-  <li><a href="#obis" id="toc-obis" class="nav-link" data-scroll-target="#obis"><span class="header-section-number">10.3.3</span> OBIS</a></li>
-  <li><a href="#erddap" id="toc-erddap" class="nav-link" data-scroll-target="#erddap"><span class="header-section-number">10.3.4</span> ERDDAP</a></li>
-  <li><a href="#zenodo" id="toc-zenodo" class="nav-link" data-scroll-target="#zenodo"><span class="header-section-number">10.3.5</span> Zenodo</a></li>
-  <li><a href="#caloos" id="toc-caloos" class="nav-link" data-scroll-target="#caloos"><span class="header-section-number">10.3.6</span> CalOOS</a></li>
+  <li><a href="#edi" id="toc-edi" class="nav-link" data-scroll-target="#edi"><span class="header-section-number">11.3.1</span> EDI</a></li>
+  <li><a href="#ncei" id="toc-ncei" class="nav-link" data-scroll-target="#ncei"><span class="header-section-number">11.3.2</span> NCEI</a></li>
+  <li><a href="#obis" id="toc-obis" class="nav-link" data-scroll-target="#obis"><span class="header-section-number">11.3.3</span> OBIS</a></li>
+  <li><a href="#erddap" id="toc-erddap" class="nav-link" data-scroll-target="#erddap"><span class="header-section-number">11.3.4</span> ERDDAP</a></li>
+  <li><a href="#zenodo" id="toc-zenodo" class="nav-link" data-scroll-target="#zenodo"><span class="header-section-number">11.3.5</span> Zenodo</a></li>
+  <li><a href="#caloos" id="toc-caloos" class="nav-link" data-scroll-target="#caloos"><span class="header-section-number">11.3.6</span> CalOOS</a></li>
   </ul></li>
-  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata"><span class="header-section-number">10.4</span> Metadata</a></li>
-  <li><a href="#meta-portals" id="toc-meta-portals" class="nav-link" data-scroll-target="#meta-portals"><span class="header-section-number">10.5</span> Meta-Portals</a>
+  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata"><span class="header-section-number">11.4</span> Metadata</a></li>
+  <li><a href="#meta-portals" id="toc-meta-portals" class="nav-link" data-scroll-target="#meta-portals"><span class="header-section-number">11.5</span> Meta-Portals</a>
   <ul class="collapse">
-  <li><a href="#google-dataset-search" id="toc-google-dataset-search" class="nav-link" data-scroll-target="#google-dataset-search"><span class="header-section-number">10.5.1</span> Google Dataset Search</a></li>
-  <li><a href="#odis" id="toc-odis" class="nav-link" data-scroll-target="#odis"><span class="header-section-number">10.5.2</span> ODIS</a></li>
-  <li><a href="#data.gov-dcat-us" id="toc-data.gov-dcat-us" class="nav-link" data-scroll-target="#data.gov-dcat-us"><span class="header-section-number">10.5.3</span> data.gov (DCAT-US)</a></li>
+  <li><a href="#google-dataset-search" id="toc-google-dataset-search" class="nav-link" data-scroll-target="#google-dataset-search"><span class="header-section-number">11.5.1</span> Google Dataset Search</a></li>
+  <li><a href="#odis" id="toc-odis" class="nav-link" data-scroll-target="#odis"><span class="header-section-number">11.5.2</span> ODIS</a></li>
+  <li><a href="#data.gov-dcat-us" id="toc-data.gov-dcat-us" class="nav-link" data-scroll-target="#data.gov-dcat-us"><span class="header-section-number">11.5.3</span> data.gov (DCAT-US)</a></li>
   </ul></li>
-  <li><a href="#the-dataset-catalog-and-who-registers-where" id="toc-the-dataset-catalog-and-who-registers-where" class="nav-link" data-scroll-target="#the-dataset-catalog-and-who-registers-where"><span class="header-section-number">10.6</span> The dataset catalog, and who registers where</a></li>
-  <li><a href="#getting-the-data-through-calcofi.io" id="toc-getting-the-data-through-calcofi.io" class="nav-link" data-scroll-target="#getting-the-data-through-calcofi.io"><span class="header-section-number">10.7</span> Getting the data through calcofi.io</a></li>
+  <li><a href="#the-dataset-catalog-and-who-registers-where" id="toc-the-dataset-catalog-and-who-registers-where" class="nav-link" data-scroll-target="#the-dataset-catalog-and-who-registers-where"><span class="header-section-number">11.6</span> The dataset catalog, and who registers where</a></li>
+  <li><a href="#archive-of-record-per-dataset" id="toc-archive-of-record-per-dataset" class="nav-link" data-scroll-target="#archive-of-record-per-dataset"><span class="header-section-number">11.7</span> Archive of record, per dataset</a></li>
+  <li><a href="#getting-the-data-through-calcofi.io" id="toc-getting-the-data-through-calcofi.io" class="nav-link" data-scroll-target="#getting-the-data-through-calcofi.io"><span class="header-section-number">11.8</span> Getting the data through calcofi.io</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/portals.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -505,7 +512,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Portals</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Portals</span></h1>
 </div>
 
 
@@ -522,82 +529,76 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<section id="overview" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">10.1</span> Overview</h2>
+<section id="overview" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">11.1</span> Overview</h2>
 <p>CalCOFI data is available through various portals, each serving different purposes and user needs. Since 2026-09, every dataset — integrated into the database or still a holding — also has one calcofi.io page (<a href="https://calcofi.io/datasets/"><code>/datasets/{dataset_key}/</code></a>) joining every endpoint it can be reached through: the release Parquet, a CF netCDF, ERDDAP, and the archive or aggregator portals below, each with its own publication status. That page, not this chapter, is now the record — the tables here are generated from the same registries the page reads, so the two can never disagree.</p>
 </section>
-<section id="data-flow" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">10.2</span> Data Flow</h2>
-<p>While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The following diagram illustrates one possible realization of data flow between CalCOFI data and the portals: from raw data to the integrated database to the dataset catalog to the portals and meta-portals.</p>
-<div class="cell" data-file="diagrams/portals_flow.mmd" data-fig-width="6" data-layout-align="default">
+<section id="data-flow" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">11.2</span> Data Flow</h2>
+<p>While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The diagram below is the flow as it runs today: what we author and observe (left) becomes one record per dataset at release, that record generates every surface a portal can read, and each portal or meta-portal is pointed at one of those static files.</p>
+<div class="cell" data-file="diagrams/catalog_flow.mmd" data-fig-width="9" data-layout-align="default">
 <div class="cell-output-display">
 <div id="fig-portals-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-portals-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
-<pre class="mermaid mermaid-js" data-label="fig-portals-flow">graph TD
-  %% nodes with styles
-  raw([raw data]):::source
-
-  subgraph calcofi[CalCOFI.io]
-    db[(database)]:::database
-    web[CalCOFI.org]:::website
-    api[APIs]:::api
-    lib[library]:::code
-    app[apps]:::code
-    flow[workflows]:::code
-    catalog[["dataset catalog (/datasets/)"]]:::catalog
+<pre class="mermaid mermaid-js" data-label="fig-portals-flow">graph LR
+  %% one record per dataset, generated at release; every surface a portal sees is derived from it
+  subgraph src[Sources — in git and on GCS]
+    yml["ingest YAML + dataset_meta.yml&lt;br/&gt;⇄ the provider's Google Sheet"]:::source
+    reg["registries&lt;br/&gt;category · provider · license · holdings · distribution · portal"]:::source
+    side["release sidecars&lt;br/&gt;metadata.json · coverage.json · catalog.json"]:::source
+    obs["observed weekly&lt;br/&gt;EDI revisions · OBIS · ERDDAP · DOIs"]:::source
   end
-
-  subgraph portals[Portals]
-    edi[EDI]:::portal
-    obis[OBIS]:::portal
-    erddap[ERDDAP]:::portal
-    ncei[NCEI]:::portal
-    zenodo[Zenodo]:::portal
-    caloos[CalOOS]:::portal
+  subgraph rec[The record — at release]
+    dj[("datasets.json&lt;br/&gt;one record per dataset_key")]:::record
+    eml["eml/{key}.xml"]:::record
   end
-
-  subgraph meta[Meta-Portals]
-    odis[ODIS]:::metaportal
-    datagov[data.gov]:::metaportal
-    google[Google Dataset Search]:::metaportal
+  subgraph surf[Generated surfaces]
+    page["calcofi.io/datasets/{key}/&lt;br/&gt;page + JSON-LD + sitemap"]:::surface
+    dcat["data.json (DCAT-US)"]:::surface
+    stac["STAC catalog + browser"]:::surface
+    dwca["Darwin Core Archive"]:::surface
+    edi["EDI data package"]:::surface
+    erd["ERDDAP globals + ISO 19115"]:::surface
+    code["apps · calcofi4r · calcofi4py"]:::surface
   end
-
-  %% edges
-  raw --&gt; db
-  db  --&gt; api
-  db  --&gt; web
-  db  --&gt; catalog
-  api --&gt; lib
-  api --&gt; app
-  api --&gt; flow
-  flow  --&gt; portals
-  flow  --&gt; catalog
-  catalog --&gt;|one page per dataset, every endpoint| portals
-  catalog --&gt;|sitemap.xml + JSON-LD| odis
-  catalog --&gt;|data.json| datagov
-  catalog --&gt;|JSON-LD| google
-
-  %% Custom styles
-  classDef source     fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
-  classDef database   fill:#FEF3C7,stroke:#D97706,stroke-width:2px
-  classDef website    fill:#F3E8FF,stroke:#9333EA,stroke-width:2px
-  classDef api        fill:#E0E7FF,stroke:#6366F1,stroke-width:2px
-  classDef code       fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px
-  classDef portal     fill:#F0FDF4,stroke:#22C55E,stroke-width:2px
-  classDef metaportal fill:#FEF2F2,stroke:#DC2626,stroke-width:2px
-  classDef catalog    fill:#FFF7ED,stroke:#EA580C,stroke-width:2px
-
-  %% Style subgraphs
-  style calcofi fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
-  style portals fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
-  style meta fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px
+  subgraph who[Who reads them]
+    gds["Google Dataset Search · ODIS"]:::reader
+    dgov["data.gov · any CKAN"]:::reader
+    pystac["pystac · QGIS · DuckDB"]:::reader
+    obisr["OBIS, via the OBIS-USA IPT"]:::reader
+    edir["EDI, via PASTA"]:::reader
+    ioos["CalOOS · IOOS Catalog"]:::reader
+    people["people"]:::reader
+  end
+  yml --&gt; dj
+  reg --&gt; dj
+  side --&gt; dj
+  obs --&gt; dj
+  dj --&gt; eml
+  dj --&gt; page &amp; dcat &amp; stac &amp; code
+  eml --&gt; dwca &amp; edi &amp; erd
+  page -. crawl .-&gt; gds
+  dcat -. harvest .-&gt; dgov
+  stac -. read .-&gt; pystac
+  dwca -. IPT upload .-&gt; obisr
+  edi -. upload, gated .-&gt; edir
+  erd -. harvest the WAF .-&gt; ioos
+  code --&gt; people
+  classDef source  fill:#f5f0e6,stroke:#747678,color:#182b49
+  classDef record  fill:#fff3d1,stroke:#8a6500,stroke-width:2px,color:#182b49
+  classDef surface fill:#e7f0fa,stroke:#00629b,color:#182b49
+  classDef reader  fill:#ffffff,stroke:#747678,stroke-dasharray: 4 3,color:#182b49
+  style src  fill:#fafafa,stroke:#dddddd
+  style rec  fill:#fafafa,stroke:#dddddd
+  style surf fill:#fafafa,stroke:#dddddd
+  style who  fill:#fafafa,stroke:#dddddd
 </pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-portals-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.1: Flow of data from raw to database to the dataset catalog to portals and meta-portals.
+Figure&nbsp;11.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW.
 </figcaption>
 </figure>
 </div>
@@ -605,39 +606,39 @@ Figure&nbsp;10.1: Flow of data from raw to database to the dataset catalog to po
 </div>
 <p>In practice, CalCOFI is a partnership with various contributing members, so the authoritative dataset might flow differently, such as from EDI to the database to the other portals. The other portals, such as OBIS or ERDDAP, serve different audiences or purposes. The dataset catalog is what now feeds the meta-portals directly — ODIS crawls its sitemap and JSON-LD, Google Dataset Search its JSON-LD, and data.gov its DCAT-US <code>data.json</code> — rather than each meta-portal having to know about every downstream portal individually.</p>
 </section>
-<section id="portal-capabilities" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="portal-capabilities"><span class="header-section-number">10.3</span> Portal capabilities</h2>
+<section id="portal-capabilities" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="portal-capabilities"><span class="header-section-number">11.3</span> Portal capabilities</h2>
 <p>While some portals serve as data repositories, others provide advanced data access and visualization tools, and a few are meta-portals that index the others rather than holding data themselves. The table below is generated from <a href="https://github.com/CalCOFI/workflows/blob/main/metadata/portal.csv"><code>CalCOFI/workflows</code>’ <code>metadata/portal.csv</code></a> — the same registry <code>datasets.json</code>’s <code>registrations[]</code> and this book both read — so a portal added there (CalOOS and the IOOS Catalog joined in 2026-09) shows up here without anyone hand-editing a table.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T//RtmpVfTnoE/downloaded_packages</code></pre>
+    /var/folders/d8/hvxvltxn0fl4rmnd52sncbth0000gn/T//Rtmp2qOmG0/downloaded_packages</code></pre>
 </div>
 <div id="tbl-portals" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (CalCOFI/workflows).
+Table&nbsp;11.1: Portal capabilities, from <code>metadata/portal.csv</code> (CalCOFI/workflows).
 </figcaption>
 <div aria-describedby="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="ticsqtasxl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ticsqtasxl table {
+<div id="jadjdylegt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jadjdylegt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ticsqtasxl thead, #ticsqtasxl tbody, #ticsqtasxl tfoot, #ticsqtasxl tr, #ticsqtasxl td, #ticsqtasxl th {
+#jadjdylegt thead, #jadjdylegt tbody, #jadjdylegt tfoot, #jadjdylegt tr, #jadjdylegt td, #jadjdylegt th {
   border-style: none;
 }
 
-#ticsqtasxl p {
+#jadjdylegt p {
   margin: 0;
   padding: 0;
 }
 
-#ticsqtasxl .gt_table {
+#jadjdylegt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -663,12 +664,12 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-left-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_caption {
+#jadjdylegt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ticsqtasxl .gt_title {
+#jadjdylegt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -680,7 +681,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-width: 0;
 }
 
-#ticsqtasxl .gt_subtitle {
+#jadjdylegt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -692,7 +693,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-width: 0;
 }
 
-#ticsqtasxl .gt_heading {
+#jadjdylegt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -704,13 +705,13 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_bottom_border {
+#jadjdylegt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_col_headings {
+#jadjdylegt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -725,7 +726,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_col_heading {
+#jadjdylegt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -745,7 +746,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#ticsqtasxl .gt_column_spanner_outer {
+#jadjdylegt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -757,15 +758,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 4px;
 }
 
-#ticsqtasxl .gt_column_spanner_outer:first-child {
+#jadjdylegt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ticsqtasxl .gt_column_spanner_outer:last-child {
+#jadjdylegt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ticsqtasxl .gt_column_spanner {
+#jadjdylegt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -777,11 +778,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   width: 100%;
 }
 
-#ticsqtasxl .gt_spanner_row {
+#jadjdylegt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ticsqtasxl .gt_group_heading {
+#jadjdylegt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -807,7 +808,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   text-align: left;
 }
 
-#ticsqtasxl .gt_empty_group_heading {
+#jadjdylegt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -822,15 +823,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: middle;
 }
 
-#ticsqtasxl .gt_from_md > :first-child {
+#jadjdylegt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ticsqtasxl .gt_from_md > :last-child {
+#jadjdylegt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ticsqtasxl .gt_row {
+#jadjdylegt .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -849,7 +850,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#ticsqtasxl .gt_stub {
+#jadjdylegt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -862,7 +863,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ticsqtasxl .gt_stub_row_group {
+#jadjdylegt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -876,15 +877,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: top;
 }
 
-#ticsqtasxl .gt_row_group_first td {
+#jadjdylegt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ticsqtasxl .gt_row_group_first th {
+#jadjdylegt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ticsqtasxl .gt_summary_row {
+#jadjdylegt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -894,16 +895,16 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ticsqtasxl .gt_first_summary_row {
+#jadjdylegt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_first_summary_row.thick {
+#jadjdylegt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ticsqtasxl .gt_last_summary_row {
+#jadjdylegt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -913,7 +914,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_grand_summary_row {
+#jadjdylegt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -923,7 +924,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ticsqtasxl .gt_first_grand_summary_row {
+#jadjdylegt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -933,7 +934,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_last_grand_summary_row_top {
+#jadjdylegt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -943,11 +944,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_striped {
+#jadjdylegt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ticsqtasxl .gt_table_body {
+#jadjdylegt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -956,7 +957,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_footnotes {
+#jadjdylegt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -970,7 +971,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_footnote {
+#jadjdylegt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -979,7 +980,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ticsqtasxl .gt_sourcenotes {
+#jadjdylegt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -993,7 +994,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ticsqtasxl .gt_sourcenote {
+#jadjdylegt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1001,72 +1002,72 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ticsqtasxl .gt_left {
+#jadjdylegt .gt_left {
   text-align: left;
 }
 
-#ticsqtasxl .gt_center {
+#jadjdylegt .gt_center {
   text-align: center;
 }
 
-#ticsqtasxl .gt_right {
+#jadjdylegt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ticsqtasxl .gt_font_normal {
+#jadjdylegt .gt_font_normal {
   font-weight: normal;
 }
 
-#ticsqtasxl .gt_font_bold {
+#jadjdylegt .gt_font_bold {
   font-weight: bold;
 }
 
-#ticsqtasxl .gt_font_italic {
+#jadjdylegt .gt_font_italic {
   font-style: italic;
 }
 
-#ticsqtasxl .gt_super {
+#jadjdylegt .gt_super {
   font-size: 65%;
 }
 
-#ticsqtasxl .gt_footnote_marks {
+#jadjdylegt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ticsqtasxl .gt_asterisk {
+#jadjdylegt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ticsqtasxl .gt_indent_1 {
+#jadjdylegt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ticsqtasxl .gt_indent_2 {
+#jadjdylegt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ticsqtasxl .gt_indent_3 {
+#jadjdylegt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ticsqtasxl .gt_indent_4 {
+#jadjdylegt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ticsqtasxl .gt_indent_5 {
+#jadjdylegt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ticsqtasxl .katex-display {
+#jadjdylegt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ticsqtasxl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jadjdylegt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1293,8 +1294,8 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </figure>
 </div>
 </div>
-<section id="edi" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="edi"><span class="header-section-number">10.3.1</span> EDI</h3>
+<section id="edi" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="edi"><span class="header-section-number">11.3.1</span> EDI</h3>
 <p><strong>Environmental Data Initiative</strong></p>
 <ul>
 <li>Complete dataset archives using DataOne software and EML metadata</li>
@@ -1309,10 +1310,10 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 <li>CalCOFI datasets: <a href="http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&amp;q=CalCOFI&amp;fq=-scope:ecotrends&amp;fq=-scope:lter-landsat*&amp;fl=id,packageid,title,author,organization,pubdate,coordinates&amp;debug=false">EDI query “CalCOFI”</a></li>
 </ul></li>
 </ul>
-<p><strong>Publishing there is manual, in four steps</strong> (<code>publish_to-edi.qmd</code>, generic per dataset; the package is built from the release’s own <code>eml/{dataset_key}.xml</code> plus CSV entities exported from the core — for the bottle database three tables totalling 2.1 GB plus the shared vocabulary table). (1) An EDI account for the open <code>edi</code> scope, held by Erin, with Ben granted editor access through the EML <code>access</code> element — created once at dashboard.edirepository.org. (2) Set <code>EDI_USER</code>/<code>EDI_PASS</code> (or an EDI API key as <code>EDI_KEY</code>) wherever the pipeline runs and render the notebook: PASTA <strong>evaluate</strong> runs automatically against <strong>staging</strong> and the report lands beside the package; fix what it names and re-render. (3) Once evaluate is clean, render with <code>CALCOFI_PUBLISH_EDI=true</code> to <strong>create</strong> (or, on a later release, <strong>update</strong>) the package against <strong>production</strong> — this mints a DOI and a <code>scope.identifier.revision</code>, recorded in <code>metadata/edi_packages.csv</code>. (4) Add the DOI back as an <code>archive</code> row in <code>metadata/distribution.csv</code> (<code>portal: edi</code>) and as the dataset’s <code>doi</code> in its <code>metadata/{provider}/{dataset}/dataset_meta.yml</code>, so the record and the citation carry it from the next release on. CCE-LTER’s <code>knb-lter-cce</code> packages stay theirs and are never republished.</p>
+<p><strong>Publishing there is manual, in four steps</strong> (<code>publish_to-edi.qmd</code>, generic per dataset; the package is built from the release’s own <code>eml/{dataset_key}.xml</code> plus CSV entities exported from the core — for the bottle database three tables totalling 2.1 GB plus the shared vocabulary table). (1) An EDI account for the open <code>edi</code> scope, held by Erin, with Ben granted editor access through the EML <code>access</code> element — created once at dashboard.edirepository.org. Every render already stages the package at <code>gs://calcofi-db/publish/edi/{dataset_key}/{dataset_key}_{version}/</code> for review (the dataset page lists it as <em>built, not deposited</em>). (2) Set <code>EDI_USER</code>/<code>EDI_PASS</code> (or an EDI API key as <code>EDI_KEY</code>) wherever the pipeline runs and render the notebook: PASTA <strong>evaluate</strong> runs automatically against <strong>staging</strong> and the report lands beside the package; fix what it names and re-render. (3) Once evaluate is clean, render with <code>CALCOFI_PUBLISH_EDI=true</code> to <strong>create</strong> (or, on a later release, <strong>update</strong>) the package against <strong>production</strong> — this mints a DOI and a <code>scope.identifier.revision</code>, recorded in <code>metadata/edi_packages.csv</code>. (4) Add the DOI back as an <code>archive</code> row in <code>metadata/distribution.csv</code> (<code>portal: edi</code>) and as the dataset’s <code>doi</code> in its <code>metadata/{provider}/{dataset}/dataset_meta.yml</code>, so the record and the citation carry it from the next release on. CCE-LTER’s <code>knb-lter-cce</code> packages stay theirs and are never republished.</p>
 </section>
-<section id="ncei" class="level3" data-number="10.3.2">
-<h3 data-number="10.3.2" class="anchored" data-anchor-id="ncei"><span class="header-section-number">10.3.2</span> NCEI</h3>
+<section id="ncei" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="ncei"><span class="header-section-number">11.3.2</span> NCEI</h3>
 <p><strong>National Centers for Environmental Information</strong></p>
 <ul>
 <li>Long-term archival of oceanographic data</li>
@@ -1328,8 +1329,8 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </ul></li>
 </ul>
 </section>
-<section id="obis" class="level3" data-number="10.3.3">
-<h3 data-number="10.3.3" class="anchored" data-anchor-id="obis"><span class="header-section-number">10.3.3</span> OBIS</h3>
+<section id="obis" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="obis"><span class="header-section-number">11.3.3</span> OBIS</h3>
 <p><strong>Ocean Biodiversity Information System</strong></p>
 <ul>
 <li>Specialized in marine biodiversity data</li>
@@ -1345,10 +1346,10 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 <li><code>swfsc_ichthyo</code> on OBIS: <a href="https://obis.org/dataset/0e223f55-c826-4513-ae9a-b04cbf2e189c"><em>CalCOFI Fish Larvae &amp; Egg Tows</em></a> (77,188 events, 463,655 occurrences, 610,816 eMoF; featured by OBIS 2026-04-15) — the <a href="https://calcofi.io/datasets/swfsc_ichthyo/">dataset page</a> carries the rest as they publish</li>
 </ul></li>
 </ul>
-<p><strong>Uploading is manual, and deliberately so.</strong> <code>publish_to-obis.qmd</code> writes <code>data/darwincore/{dataset_key}/{dataset_key}_{version}.zip</code> and a <code>{dataset_key}_manifest.json</code>; nothing in the pipeline talks to a portal. CalCOFI has no IPT of its own — the resources live on the <strong>OBIS-USA IPT</strong>, <code>ipt-obis.gbif.us</code>, under Ben’s login. Before a first upload, the OBIS records that already cover the same source are listed (the notebook queries <code>api.obis.org/v3/dataset</code> and prints the curated rows from <code>metadata/distribution.csv</code>) and resolved <strong>with their owners</strong>: a provider’s own record is never duplicated, and a historical CalCOFI record is retired or cross-referenced only with its owner’s agreement. Then: open (or create) the resource → upload the zip’s files as the source → map the Event core plus the Occurrence and ExtendedMeasurementOrFact extensions exactly as <code>meta.xml</code> describes them → publish a new version. Afterwards, record the OBIS dataset id and the IPT resource id as <code>distribution.csv</code> rows (<code>portal = obis</code> / <code>ipt</code>, <code>kind = archive</code>) and stamp <code>uploaded_utc</code> + <code>uploaded_hash</code> into the manifest. That last step is what makes a dataset page honest: the record reports <code>built, not uploaded</code> / <code>published (vX)</code> / <code>stale — data changed in vY</code> by comparing the uploaded hash with the archive’s own, so it says when an upload is due. Re-upload only when the <code>content_hash</code> changed — it is deterministic over the archive’s CSV bytes.</p>
+<p><strong>Uploading is manual, and deliberately so.</strong> <code>publish_to-obis.qmd</code> writes <code>data/darwincore/{dataset_key}_{version}.zip</code> and a <code>{dataset_key}_manifest.json</code>, and stages both at <code>gs://calcofi-db/publish/dwca/{dataset_key}/</code> so a provider — and the dataset page, which lists the archive as <em>built, not deposited</em> — can inspect the bundle before any upload; nothing in the pipeline talks to a portal. CalCOFI has no IPT of its own — the resources live on the <strong>OBIS-USA IPT</strong>, <code>ipt-obis.gbif.us</code>, under Ben’s login. Before a first upload, the OBIS records that already cover the same source are listed (the notebook queries <code>api.obis.org/v3/dataset</code> and prints the curated rows from <code>metadata/distribution.csv</code>) and resolved <strong>with their owners</strong>: a provider’s own record is never duplicated, and a historical CalCOFI record is retired or cross-referenced only with its owner’s agreement. Then: open (or create) the resource → upload the zip’s files as the source → map the Event core plus the Occurrence and ExtendedMeasurementOrFact extensions exactly as <code>meta.xml</code> describes them → publish a new version. Afterwards, record the OBIS dataset id and the IPT resource id as <code>distribution.csv</code> rows (<code>portal = obis</code> / <code>ipt</code>, <code>kind = archive</code>) and stamp <code>uploaded_utc</code> + <code>uploaded_hash</code> into the manifest. That last step is what makes a dataset page honest: the record reports <code>built, not uploaded</code> / <code>published (vX)</code> / <code>stale — data changed in vY</code> by comparing the uploaded hash with the archive’s own, so it says when an upload is due. Re-upload only when the <code>content_hash</code> changed — it is deterministic over the archive’s CSV bytes.</p>
 </section>
-<section id="erddap" class="level3" data-number="10.3.4">
-<h3 data-number="10.3.4" class="anchored" data-anchor-id="erddap"><span class="header-section-number">10.3.4</span> ERDDAP</h3>
+<section id="erddap" class="level3" data-number="11.3.4">
+<h3 data-number="11.3.4" class="anchored" data-anchor-id="erddap"><span class="header-section-number">11.3.4</span> ERDDAP</h3>
 <p><strong>Environmental Research Division Data Access Program</strong></p>
 <ul>
 <li>Tabular and gridded data server</li>
@@ -1366,16 +1367,16 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </ul></li>
 </ul>
 </section>
-<section id="zenodo" class="level3" data-number="10.3.5">
-<h3 data-number="10.3.5" class="anchored" data-anchor-id="zenodo"><span class="header-section-number">10.3.5</span> Zenodo</h3>
+<section id="zenodo" class="level3" data-number="11.3.5">
+<h3 data-number="11.3.5" class="anchored" data-anchor-id="zenodo"><span class="header-section-number">11.3.5</span> Zenodo</h3>
 <ul>
 <li>One DOI per integrated-database release, via the GitHub integration on <a href="https://github.com/CalCOFI/workflows">CalCOFI/workflows</a> — a concept DOI covers every version, a version DOI each one</li>
 <li>Archives the pipeline itself at the release tag, plus <code>catalog.json</code> / <code>metadata.json</code></li>
 <li>Link: <a href="https://zenodo.org">zenodo.org</a></li>
 </ul>
 </section>
-<section id="caloos" class="level3" data-number="10.3.6">
-<h3 data-number="10.3.6" class="anchored" data-anchor-id="caloos"><span class="header-section-number">10.3.6</span> CalOOS</h3>
+<section id="caloos" class="level3" data-number="11.3.6">
+<h3 data-number="11.3.6" class="anchored" data-anchor-id="caloos"><span class="header-section-number">11.3.6</span> CalOOS</h3>
 <p><strong>The SCCOOS + CeNCOOS regional data portal</strong></p>
 <ul>
 <li>Registering erddap.calcofi.io gives every existing CoastWatch-fed module a calcofi.io distribution beside it</li>
@@ -1384,8 +1385,8 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </ul>
 </section>
 </section>
-<section id="metadata" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="metadata"><span class="header-section-number">10.4</span> Metadata</h2>
+<section id="metadata" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="metadata"><span class="header-section-number">11.4</span> Metadata</h2>
 <p>The <a href="https://eml.ecoinformatics.org/">Ecological Metadata Language (EML)</a> is the one metadata document CalCOFI’s publishers share. Since 2026-09 the release writes one EML 2.2 document per dataset — <code>eml/{dataset_key}.xml</code>, built by <code>calcofi4db::build_eml()</code> directly from <code>datasets.json</code> and each dataset’s descriptive sidecar, checked by <code>check_eml()</code> before it ships — rather than each publish notebook typing its own sampling methods, study extent and rights by hand. The Darwin Core Archive OBIS publishing uses and an EDI data package both start from the same document, so a provider correction to a dataset’s abstract or creators reaches every publisher at once.</p>
 <div class="cell" data-file="diagrams/portals_metadata.mmd" data-fig-width="6" data-layout-align="default">
 <div class="cell-output-display">
@@ -1428,7 +1429,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-portals-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.
+Figure&nbsp;11.2: Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.
 </figcaption>
 </figure>
 </div>
@@ -1445,19 +1446,19 @@ Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is 
 </ul>
 <p>This standardized metadata enables automated data transformation and ingestion into various portal systems while preserving the original data context and quality information.</p>
 </section>
-<section id="meta-portals" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="meta-portals"><span class="header-section-number">10.5</span> Meta-Portals</h2>
-<section id="google-dataset-search" class="level3" data-number="10.5.1">
-<h3 data-number="10.5.1" class="anchored" data-anchor-id="google-dataset-search"><span class="header-section-number">10.5.1</span> Google Dataset Search</h3>
+<section id="meta-portals" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="meta-portals"><span class="header-section-number">11.5</span> Meta-Portals</h2>
+<section id="google-dataset-search" class="level3" data-number="11.5.1">
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="google-dataset-search"><span class="header-section-number">11.5.1</span> Google Dataset Search</h3>
 <p>The JSON-LD metadata on every calcofi.io dataset page gets indexed by <a href="https://datasetsearch.research.google.com/search?query=calcofi">Google Dataset Search</a> through schema.org metadata. This ensures that CalCOFI data is discoverable through Google search and other search engines.</p>
 </section>
-<section id="odis" class="level3" data-number="10.5.2">
-<h3 data-number="10.5.2" class="anchored" data-anchor-id="odis"><span class="header-section-number">10.5.2</span> ODIS</h3>
+<section id="odis" class="level3" data-number="11.5.2">
+<h3 data-number="11.5.2" class="anchored" data-anchor-id="odis"><span class="header-section-number">11.5.2</span> ODIS</h3>
 <p><strong>Ocean Data Information System</strong></p>
 <p>ODIS uses the same technology as Google Dataset Search (schema.org, JSON-LD), but focuses on ocean data. ODISCat record 3318 points at calcofi.io’s generated <a href="https://calcofi.io/datasets/sitemap.xml"><code>datasets/sitemap.xml</code></a>, so a dataset’s calcofi.io page is what <a href="https://odis.org">ODIS.org</a> crawls — the record’s <code>sameAs</code> then links each external portal record from there.</p>
 </section>
-<section id="data.gov-dcat-us" class="level3" data-number="10.5.3">
-<h3 data-number="10.5.3" class="anchored" data-anchor-id="data.gov-dcat-us"><span class="header-section-number">10.5.3</span> data.gov (DCAT-US)</h3>
+<section id="data.gov-dcat-us" class="level3" data-number="11.5.3">
+<h3 data-number="11.5.3" class="anchored" data-anchor-id="data.gov-dcat-us"><span class="header-section-number">11.5.3</span> data.gov (DCAT-US)</h3>
 <p>calcofi.io publishes a <a href="https://calcofi.io/data.json"><code>data.json</code></a> (Project Open Data / DCAT-US 1.1), generated from <code>datasets.json</code> the same way the sitemap is — one entry per public dataset, with its licence, distributions and contact point. This is what a CKAN instance (data.gov, a university’s, CDFW’s) harvests with no work on our side.</p>
 <p>This federated approach ensures that CalCOFI data remains:</p>
 <ul>
@@ -1467,24 +1468,1188 @@ Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is 
 </ul>
 </section>
 </section>
-<section id="the-dataset-catalog-and-who-registers-where" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="the-dataset-catalog-and-who-registers-where"><span class="header-section-number">10.6</span> The dataset catalog, and who registers where</h2>
+<section id="the-dataset-catalog-and-who-registers-where" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="the-dataset-catalog-and-who-registers-where"><span class="header-section-number">11.6</span> The dataset catalog, and who registers where</h2>
 <p><code>datasets.json</code> (<code>calcofi4db::build_dataset_catalog()</code>, calcofi4db ≥ 4.1.0) is the record this whole chapter is a rendering of: one entry per dataset, its <code>registrations[]</code> naming every portal above with a status of <code>published</code>, <code>planned</code> (usually linking the tracking issue) or <code>n/a</code>. The table below reads it <strong>live</strong>, straight from the promoted release, so it can never drift from what <code>calcofi.io/datasets/{dataset_key}/</code>’s own Access table shows.</p>
 <div id="tbl-registrations" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-registrations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.2: Per-dataset portal registrations, read live from the promoted release’s <code>datasets.json</code>.
+Table&nbsp;11.2: Per-dataset portal registrations, read live from the promoted release’s <code>datasets.json</code>.
 </figcaption>
 <div aria-describedby="tbl-registrations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<blockquote class="blockquote">
-<p>The promoted release (v2026.09.04) carries no <code>datasets.json</code> yet (the dataset catalog ships from calcofi4db &gt;= 4.1.0). This table renders automatically once one does — see <code>https://storage.googleapis.com/calcofi-db/ducklake/releases/latest.txt</code>.</p>
-</blockquote>
+<div id="ennghbfkug" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ennghbfkug table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ennghbfkug thead, #ennghbfkug tbody, #ennghbfkug tfoot, #ennghbfkug tr, #ennghbfkug td, #ennghbfkug th {
+  border-style: none;
+}
+
+#ennghbfkug p {
+  margin: 0;
+  padding: 0;
+}
+
+#ennghbfkug .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ennghbfkug .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ennghbfkug .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ennghbfkug .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ennghbfkug .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ennghbfkug .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ennghbfkug .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ennghbfkug .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ennghbfkug .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ennghbfkug .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ennghbfkug .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ennghbfkug .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ennghbfkug .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ennghbfkug .gt_row {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ennghbfkug .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ennghbfkug .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ennghbfkug .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ennghbfkug .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ennghbfkug .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ennghbfkug .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ennghbfkug .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ennghbfkug .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ennghbfkug .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ennghbfkug .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ennghbfkug .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ennghbfkug .gt_left {
+  text-align: left;
+}
+
+#ennghbfkug .gt_center {
+  text-align: center;
+}
+
+#ennghbfkug .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ennghbfkug .gt_font_normal {
+  font-weight: normal;
+}
+
+#ennghbfkug .gt_font_bold {
+  font-weight: bold;
+}
+
+#ennghbfkug .gt_font_italic {
+  font-style: italic;
+}
+
+#ennghbfkug .gt_super {
+  font-size: 65%;
+}
+
+#ennghbfkug .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ennghbfkug .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ennghbfkug .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ennghbfkug .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ennghbfkug .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ennghbfkug .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ennghbfkug .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ennghbfkug .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ennghbfkug div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Dataset" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Dataset</th>
+<th id="erddap" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">erddap</th>
+<th id="obis" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">obis</th>
+<th id="edi" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">edi</th>
+<th id="ncei" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">ncei</th>
+<th id="caloos" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">caloos</th>
+<th id="zenodo" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">zenodo</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_ctd-cast/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CTD Cast Files</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_cufes/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CUFES Fish Eggs</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_dic/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Carbonate Chemistry / DIC</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cdfw_dungeness-crab/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Dungeness Crab Megalopae</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_euphausiids/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Euphausiids (Krill)</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_bottle/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Hydrographic Bottle</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_ichthyo/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Ichthyoplankton</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/sio_mesopelagic-fish/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Mesopelagic Fish</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_phyllosoma/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Phyllosoma (Lobster Larvae)</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_phytoplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Phytoplankton</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_picoplankton-bacteria/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Picoplankton &amp; Bacteria</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/farallon_bird-mammal/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Seabirds &amp; Marine Mammals</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_mets/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Underway Meteorological (METS)</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_zoodb/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">ZooDB (Holoplankton Community)</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_zooscan/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">ZooScan (Imaged Zooplankton)</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/sio_pic-zooplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Zooplankton Net Tows</a></span></td>
+<td class="gt_row gt_center" headers="erddap" style="background-color: #CCFFCC; color: #000000">✔</td>
+<td class="gt_row gt_center" headers="obis" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="edi" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="ncei" style="background-color: #FFCCCC; color: #000000">✖</td>
+<td class="gt_row gt_center" headers="caloos" style="background-color: #FFF2CC; color: #000000">▲</td>
+<td class="gt_row gt_center" headers="zenodo" style="background-color: #CCFFCC; color: #000000">✔</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_sourcenotes odd">
+<td colspan="7" class="gt_sourcenote"><strong>Status legend</strong>: ✔ = published, ▲ = planned, ✖ = n/a. Read from <code>v2026.09.06</code>’s <code>datasets.json</code>; the same rows back each dataset’s own page.</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
 </div>
 </figure>
 </div>
 </section>
-<section id="getting-the-data-through-calcofi.io" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="getting-the-data-through-calcofi.io"><span class="header-section-number">10.7</span> Getting the data through calcofi.io</h2>
+<section id="archive-of-record-per-dataset" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="archive-of-record-per-dataset"><span class="header-section-number">11.7</span> Archive of record, per dataset</h2>
+<p>Every dataset has <strong>one</strong> portal that holds its citable, DOI-bearing copy — its archive of record — and the others are either aggregators and services that read from it or do not apply. The rule is stated per dataset, in one sentence, in <code>metadata/dataset_status.csv</code>’s <code>publish_policy</code> column (CalCOFI/workflows), carried into <code>datasets.json</code> as <code>status.publish_policy</code> (calcofi4db ≥ 4.6.3) and shown on each dataset page above its <em>Archives &amp; portals</em> table. The rules behind the sentences:</p>
+<ul>
+<li><strong>A provider’s own archive is the archive of record, and is never republished.</strong> The nine CCE-LTER-adjacent datasets live in <code>knb-lter-cce</code> on EDI (phyllosoma, phytoplankton, euphausiids, picoplankton, the Farallon bird and mammal census) or in CCE-LTER’s DataZoo exports (ZooDB, ZooScan); DIC is NCEI accession 0301029; the mesopelagic fish and the Dungeness crab megalopae are UC San Diego Library deposits; CUFES is SWFSC’s CoastWatch ERDDAP dataset.</li>
+<li><strong>CalCOFI’s own program datasets get an EDI package from the release</strong> — bottle, CTD casts, METS — built by <code>publish_to-edi.qmd</code> from <code>eml/{dataset_key}.xml</code> and the release tables, staged at <code>gs://calcofi-db/publish/edi/</code> for review, deposited only with credentials and <code>CALCOFI_PUBLISH_EDI=true</code>. NCEI for these is planned through the SWFSC data manager.</li>
+<li><strong>OBIS is the archive of record for occurrences of named taxa.</strong> The SWFSC ichthyoplankton is published there (through the OBIS-USA IPT); every other biological dataset’s Darwin Core Archive is built and staged at <code>gs://calcofi-db/publish/dwca/</code> each release, and its upload is the provider’s call (planned). Environmental datasets do not apply.</li>
+<li><strong>NCEI is the provider’s to deposit for NOAA-collected data</strong> (SWFSC’s ichthyoplankton and CUFES), so it reads <code>n/a</code> on those rather than <code>planned</code>.</li>
+<li><strong>Zenodo</strong> holds the integrated database release itself, one DOI per version.</li>
+</ul>
+<div id="tbl-policy" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-policy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.3: Each dataset’s archive-of-record policy, read live from the promoted release’s <code>datasets.json</code> (the registry it comes from until a release carries it).
+</figcaption>
+<div aria-describedby="tbl-policy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="lkozinukxc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lkozinukxc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#lkozinukxc thead, #lkozinukxc tbody, #lkozinukxc tfoot, #lkozinukxc tr, #lkozinukxc td, #lkozinukxc th {
+  border-style: none;
+}
+
+#lkozinukxc p {
+  margin: 0;
+  padding: 0;
+}
+
+#lkozinukxc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#lkozinukxc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lkozinukxc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lkozinukxc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lkozinukxc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lkozinukxc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lkozinukxc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lkozinukxc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lkozinukxc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lkozinukxc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#lkozinukxc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lkozinukxc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lkozinukxc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lkozinukxc .gt_row {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lkozinukxc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lkozinukxc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lkozinukxc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lkozinukxc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lkozinukxc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lkozinukxc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lkozinukxc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lkozinukxc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lkozinukxc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lkozinukxc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lkozinukxc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lkozinukxc .gt_left {
+  text-align: left;
+}
+
+#lkozinukxc .gt_center {
+  text-align: center;
+}
+
+#lkozinukxc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lkozinukxc .gt_font_normal {
+  font-weight: normal;
+}
+
+#lkozinukxc .gt_font_bold {
+  font-weight: bold;
+}
+
+#lkozinukxc .gt_font_italic {
+  font-style: italic;
+}
+
+#lkozinukxc .gt_super {
+  font-size: 65%;
+}
+
+#lkozinukxc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#lkozinukxc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lkozinukxc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lkozinukxc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lkozinukxc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lkozinukxc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lkozinukxc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#lkozinukxc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#lkozinukxc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Dataset" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Dataset</th>
+<th id="Archive-of-record,-and-why" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Archive of record, and why</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_ctd-cast/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CTD Cast Files</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: none yet — a CalCOFI program dataset with no DOI-bearing deposit. EDI is the planned archive (package built and staged each release); NCEI planned through the SWFSC data manager. OBIS does not apply (no occurrences).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_cufes/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CUFES Fish Eggs</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: NOAA CoastWatch ERDDAP (erdCalCOFIcufes), SWFSC's own service and the ingest's source. NCEI is SWFSC's to deposit; EDI does not apply. OBIS: planned (Darwin Core Archive built and staged each release; the upload is SWFSC's call).</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_dic/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Carbonate Chemistry / DIC</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: NCEI accession 0301029, the provider's own deposit and the ingest's source. EDI and OBIS do not apply (a provider archive is never republished; no occurrences). CalOOS: planned registration.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cdfw_dungeness-crab/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Dungeness Crab Megalopae</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: UC San Diego Library Digital Collections deposit (CDFW's data, sorted at SIO). EDI does not apply; OBIS planned (Darwin Core Archive of the 24 megalopae occurrences built and staged each release; the upload is CDFW's call).</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_euphausiids/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Euphausiids (Krill)</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: CCE-LTER's EDI package knb-lter-cce.313, the ingest's source — CalCOFI never republishes a provider's package. OBIS: planned (a Darwin Core Archive is built and staged each release; the upload is the provider's call, issue #42 tracks the EDI side for zooplankton).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_bottle/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Hydrographic Bottle</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: none yet — a CalCOFI program dataset with no DOI-bearing deposit. EDI is the planned archive (the package is built from each release and staged for review; the deposit waits on the EDI account); NCEI planned through the SWFSC data manager. OBIS does not apply (no occurrences). Mirrored on NOAA CoastWatch ERDDAP.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_ichthyo/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Ichthyoplankton</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: OBIS, through the OBIS-USA IPT (published 2026-04, the Darwin Core Archive is rebuilt each release and staged for review before an upload). NCEI is SWFSC's to deposit as NOAA data, not CalCOFI's; EDI does not apply (not a CalCOFI program dataset). CalOOS: planned registration of the CoastWatch module.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/sio_mesopelagic-fish/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Mesopelagic Fish</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: UC San Diego Library Digital Collections (doi:10.6075/J0BZ64DH), the ingest's source. EDI deposit planned; OBIS planned (Darwin Core Archive built and staged each release).</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_phyllosoma/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Phyllosoma (Lobster Larvae)</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: CCE-LTER's EDI package knb-lter-cce.188.4, the ingest's source — never republished by CalCOFI. OBIS: planned (Darwin Core Archive built and staged each release).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_phytoplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Phytoplankton</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: CCE-LTER's EDI package knb-lter-cce.254.4, the ingest's source — never republished by CalCOFI. OBIS: planned (Darwin Core Archive built and staged each release; region-pooled events carry no date, so OBIS indexing is limited).</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_picoplankton-bacteria/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Picoplankton &amp; Bacteria</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: CCE-LTER's EDI package knb-lter-cce.159; the ingest reads the DataZoo export of it. Never republished by CalCOFI. OBIS does not apply (abundances, not occurrences of named taxa).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/farallon_bird-mammal/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Seabirds &amp; Marine Mammals</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: CCE-LTER's EDI package knb-lter-cce.255.3 (the Farallon Institute's deposit); the ingest reads NOAA OceanView ERDDAP. OBIS: planned, seabirds #43 and marine mammals #44 — the Darwin Core Archive is built and staged each release.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_mets/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Underway Meteorological (METS)</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: none yet — a CalCOFI program dataset. EDI is the planned archive (package built and staged each release); NCEI planned through the SWFSC data manager. OBIS does not apply (no occurrences).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_zoodb/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">ZooDB (Holoplankton Community)</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: none with a DOI — the ingest reads CCE-LTER's DataZoo export. An EDI package is CCE-LTER's to deposit (planned, not CalCOFI's); OBIS planned (Darwin Core Archive built and staged each release).</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_zooscan/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">ZooScan (Imaged Zooplankton)</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: none with a DOI — the ingest reads CCE-LTER's ZooScan portal export. An EDI package is CCE-LTER's to deposit (planned, not CalCOFI's); OBIS planned (Darwin Core Archive built and staged each release).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Dataset"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/sio_pic-zooplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Zooplankton Net Tows</a></span></td>
+<td class="gt_row gt_left" headers="Archive of record, and why">Archive of record: none yet — the SIO Pelagic Invertebrate Collection's own database export. EDI deposit planned (#42); OBIS planned (Darwin Core Archive built and staged each release). Mirrored on NOAA CoastWatch ERDDAP (erdCalCOFIzoovol).</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_sourcenotes odd">
+<td colspan="2" class="gt_sourcenote">Read from <code>metadata/dataset_status.csv</code> on CalCOFI/workflows main (the promoted release predates <code>status.publish_policy</code>); the same sentence heads each dataset page’s <em>Archives &amp; portals</em> table.</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="getting-the-data-through-calcofi.io" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="getting-the-data-through-calcofi.io"><span class="header-section-number">11.8</span> Getting the data through calcofi.io</h2>
 <p>The portals above are where CalCOFI data is discoverable <em>outside</em> calcofi.io; calcofi.io itself is a fourth way in, and it is where the record lives:</p>
 <ul>
 <li><strong><a href="https://calcofi.io/datasets/">The dataset catalog</a></strong> — one page per dataset (and per holding not yet ingested), with its coverage, every distribution above, its citation and provenance, and machine surfaces (<code>{key}.json</code>, <code>{key}.jsonld</code>, the sitemap and <code>data.json</code> described above).</li>
@@ -1914,12 +3079,12 @@ Table&nbsp;10.2: Per-dataset portal registrations, read live from the promoted r
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./api.html" class="pagination-link" aria-label="API">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">API</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./status.html" class="pagination-link" aria-label="Status">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Status</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Status</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
