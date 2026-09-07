@@ -311,13 +311,18 @@ if (is.null(catalog_record) || is.null(catalog_record$datasets)) {
     dplyr::arrange(name)
   portal_cols <- setdiff(names(reg_wide), c("Dataset", "name"))
 
-  # a markdown link in a cell breaks gt's Word export on a bare & in the name ("Picoplankton &
-  # Bacteria"; gt 1.3.0 unescapes the entity before parsing the cell as XML) — fmt_url() with the
-  # name as its label renders the same link in HTML and survives the docx and pdf downloads
+  # the dataset link is HTML-only. A markdown link cell breaks gt 1.3.0's Word export on a bare &
+  # in the name ("Picoplankton & Bacteria"); fmt_url() survives Word but writes the raw URL into
+  # LaTeX with an unescaped underscore, which fails the pdf download. In the pdf/docx/epub
+  # downloads the cell is the plain name, which gt escapes correctly in every format.
+  link_datasets <- function(tbl) {
+    if (knitr::is_html_output())
+      tbl |> gt() |> fmt_url(columns = "Dataset", label = from_column("name")) |> cols_hide("name")
+    else
+      tbl |> dplyr::select(-Dataset) |> dplyr::rename(Dataset = name) |> gt()
+  }
   reg_wide |>
-    gt() |>
-    fmt_url(columns = "Dataset", label = from_column("name")) |>
-    cols_hide("name") |>
+    link_datasets() |>
     cols_align(align = "left", columns = "Dataset") |>
     data_color(
       columns = all_of(portal_cols),
@@ -403,10 +408,11 @@ if (is.null(pol)) {
     dplyr::mutate(Dataset = glue::glue("https://calcofi.io/datasets/{dataset_key}/")) |>
     dplyr::select(Dataset, name = dataset_name_short, `Archive of record, and why` = policy) |>
     dplyr::arrange(name) |>
-    gt() |>
-    # fmt_url, not a markdown link: see tbl-registrations (gt's Word export and a bare &)
-    fmt_url(columns = "Dataset", label = from_column("name")) |>
-    cols_hide("name") |>
+    # the link is HTML-only, for the reasons given at tbl-registrations
+    (\(tbl) if (knitr::is_html_output())
+      tbl |> gt() |> fmt_url(columns = "Dataset", label = from_column("name")) |> cols_hide("name")
+    else
+      tbl |> dplyr::select(-Dataset) |> dplyr::rename(Dataset = name) |> gt())() |>
     cols_align(align = "left", columns = "Dataset") |>
     tab_source_note(source_note = md(glue::glue("Read from {src_note}; the same sentence heads each dataset page's *Archives & portals* table."))) |>
     tab_options(table.width = pct(100), data_row.padding = px(5))
