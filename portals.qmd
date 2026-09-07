@@ -103,7 +103,9 @@ portals_tbl |>
 package is built from the release's own `eml/{dataset_key}.xml` plus CSV entities exported from
 the core — for the bottle database three tables totalling 2.1 GB plus the shared vocabulary
 table). (1) An EDI account for the open `edi` scope, held by Erin, with Ben granted editor access
-through the EML `access` element — created once at dashboard.edirepository.org. (2) Set
+through the EML `access` element — created once at dashboard.edirepository.org. Every render
+already stages the package at `gs://calcofi-db/publish/edi/{dataset_key}/{dataset_key}_{version}/`
+for review (the dataset page lists it as *built, not deposited*). (2) Set
 `EDI_USER`/`EDI_PASS` (or an EDI API key as `EDI_KEY`) wherever the pipeline runs and render the
 notebook: PASTA **evaluate** runs automatically against **staging** and the report lands beside the
 package; fix what it names and re-render. (3) Once evaluate is clean, render with
@@ -147,8 +149,10 @@ packages stay theirs and are never republished.
 
 
 **Uploading is manual, and deliberately so.** `publish_to-obis.qmd` writes
-`data/darwincore/{dataset_key}/{dataset_key}_{version}.zip` and a `{dataset_key}_manifest.json`;
-nothing in the pipeline talks to a portal. CalCOFI has no IPT of its own — the resources live on the
+`data/darwincore/{dataset_key}_{version}.zip` and a `{dataset_key}_manifest.json`, and stages both
+at `gs://calcofi-db/publish/dwca/{dataset_key}/` so a provider — and the dataset page, which
+lists the archive as *built, not deposited* — can inspect the bundle before any upload; nothing
+in the pipeline talks to a portal. CalCOFI has no IPT of its own — the resources live on the
 **OBIS-USA IPT**, `ipt-obis.gbif.us`, under Ben's login. Before a first upload, the OBIS records that
 already cover the same source are listed (the notebook queries `api.obis.org/v3/dataset` and prints
 the curated rows from `metadata/distribution.csv`) and resolved **with their owners**: a provider's
@@ -320,6 +324,83 @@ if (is.null(catalog_record) || is.null(catalog_record$datasets)) {
     tab_source_note(source_note = md(glue::glue(
       "**Status legend**: ✔ = published, ▲ = planned, ✖ = n/a. Read from ",
       "`{latest_version}`'s `datasets.json`; the same rows back each dataset's own page."))) |>
+    tab_options(table.width = pct(100), data_row.padding = px(5))
+}
+```
+
+## Archive of record, per dataset
+
+Every dataset has **one** portal that holds its citable, DOI-bearing copy — its archive of record —
+and the others are either aggregators and services that read from it or do not apply. The rule
+is stated per dataset, in one sentence, in `metadata/dataset_status.csv`'s `publish_policy`
+column (CalCOFI/workflows), carried into `datasets.json` as `status.publish_policy` (calcofi4db
+≥ 4.6.3) and shown on each dataset page above its *Archives & portals* table. The rules behind
+the sentences:
+
+-   **A provider's own archive is the archive of record, and is never republished.** The nine
+    CCE-LTER-adjacent datasets live in `knb-lter-cce` on EDI (phyllosoma, phytoplankton,
+    euphausiids, picoplankton, the Farallon bird and mammal census) or in CCE-LTER's DataZoo
+    exports (ZooDB, ZooScan); DIC is NCEI accession 0301029; the mesopelagic fish and the
+    Dungeness crab megalopae are UC San Diego Library deposits; CUFES is SWFSC's CoastWatch
+    ERDDAP dataset.
+-   **CalCOFI's own program datasets get an EDI package from the release** — bottle, CTD casts,
+    METS — built by `publish_to-edi.qmd` from `eml/{dataset_key}.xml` and the release tables,
+    staged at `gs://calcofi-db/publish/edi/` for review, deposited only with credentials and
+    `CALCOFI_PUBLISH_EDI=true`. NCEI for these is planned through the SWFSC data manager.
+-   **OBIS is the archive of record for occurrences of named taxa.** The SWFSC ichthyoplankton
+    is published there (through the OBIS-USA IPT); every other biological dataset's Darwin Core
+    Archive is built and staged at `gs://calcofi-db/publish/dwca/` each release, and its upload
+    is the provider's call (planned). Environmental datasets do not apply.
+-   **NCEI is the provider's to deposit for NOAA-collected data** (SWFSC's ichthyoplankton and
+    CUFES), so it reads `n/a` on those rather than `planned`.
+-   **Zenodo** holds the integrated database release itself, one DOI per version.
+
+```{r}
+#| label: tbl-policy
+#| tbl-cap: Each dataset's archive-of-record policy, read live from the promoted release's `datasets.json` (the registry it comes from until a release carries it).
+#| warning: false
+#| results: asis
+
+librarian::shelf(dplyr, glue, gt, jsonlite, purrr, readr)
+
+release_base <- "https://storage.googleapis.com/calcofi-db/ducklake/releases"
+latest_version <- tryCatch(
+  trimws(readLines(file.path(release_base, "latest.txt"), warn = FALSE)[1]),
+  error = function(e) NA_character_)
+rec <- if (!is.na(latest_version)) tryCatch(
+  jsonlite::fromJSON(file.path(release_base, latest_version, "datasets.json"), simplifyVector = TRUE),
+  error = function(e) NULL) else NULL
+
+pol <- NULL
+if (!is.null(rec) && !is.null(rec$datasets$status$publish_policy)) {
+  pol <- tibble::tibble(dataset_key = rec$datasets$dataset_key,
+                        dataset_name_short = rec$datasets$dataset_name_short,
+                        policy = rec$datasets$status$publish_policy)
+  src_note <- glue::glue("`{latest_version}`'s `datasets.json`")
+} else {
+  # the record predates status.publish_policy: the registry it is read from
+  st <- tryCatch(readr::read_csv(
+    "https://raw.githubusercontent.com/CalCOFI/workflows/main/metadata/dataset_status.csv",
+    show_col_types = FALSE, na = ""), error = function(e) NULL)
+  if (!is.null(st) && "publish_policy" %in% names(st) && !is.null(rec)) {
+    pol <- tibble::tibble(dataset_key = rec$datasets$dataset_key,
+                          dataset_name_short = rec$datasets$dataset_name_short) |>
+      dplyr::left_join(st |> dplyr::mutate(dataset_key = paste0(provider, "_", dataset)) |>
+                         dplyr::select(dataset_key, policy = publish_policy), by = "dataset_key")
+    src_note <- "`metadata/dataset_status.csv` on CalCOFI/workflows main (the promoted release predates `status.publish_policy`)"
+  }
+}
+if (is.null(pol)) {
+  cat("> The policy table renders once a promoted release carries `datasets.json` and the registry is reachable.\n")
+} else {
+  pol |>
+    dplyr::filter(!is.na(policy), nzchar(policy)) |>
+    dplyr::mutate(Dataset = glue::glue("[{dataset_name_short}](https://calcofi.io/datasets/{dataset_key}/)")) |>
+    dplyr::select(Dataset, `Archive of record, and why` = policy) |>
+    dplyr::arrange(Dataset) |>
+    gt(rowname_col = "Dataset") |>
+    fmt_markdown(columns = "Dataset") |>
+    tab_source_note(source_note = md(glue::glue("Read from {src_note}; the same sentence heads each dataset page's *Archives & portals* table."))) |>
     tab_options(table.width = pct(100), data_row.padding = px(5))
 }
 ```
