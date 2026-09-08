@@ -13,6 +13,12 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# one publish at a time: two pushes a minute apart both ran to completion on 2026-09-08 and the
+# OLDER render published last, overwriting the newer page; a new push now cancels the run in flight
+concurrency:
+  group: publish-book
+  cancel-in-progress: true
+
 env:
   QUARTO_VERSION: 1.8.25
   R_VERSION: 4.5.1
