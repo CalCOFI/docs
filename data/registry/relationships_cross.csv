@@ -1,0 +1,72 @@
+table,column,ref_table,ref_column,note
+casts,cruise_key,cruise,cruise_key,every bottle cast links to a cruise
+casts,ship_key,ship,ship_key,cast ship resolved to NODC ship
+casts,grid_key,grid,grid_key,cast spatial grid assignment
+ctd_cast,cruise_key,cruise,cruise_key,every CTD cast links to a cruise
+ctd_cast,ship_key,ship,ship_key,CTD ship resolved to NODC ship
+ctd_cast,grid_key,grid,grid_key,CTD spatial grid assignment
+dic_sample,cast_id,casts,cast_id,DIC matched to bottle cast via site_key + datetime (issue #47)
+dic_sample,bottle_id,bottle,bottle_id,DIC matched to nearest Niskin bottle by depth_m
+euphausiids_tow,cruise_key,cruise,cruise_key,tow cruise derived as YYYY-MM-{ship_nodc} (81.9% matched)
+euphausiids_tow,ship_key,ship,ship_key,tow vessel resolved to NODC ship (98.3% matched)
+euphausiids_tow,grid_key,grid,grid_key,tow spatial grid assignment
+zooplankton_tow,cruise_key,cruise,cruise_key,tow cruise derived as YYYY-MM-{ship_nodc} (66.6% matched)
+zooplankton_tow,ship_key,ship,ship_key,tow vessel resolved to NODC ship
+zooplankton_tow,grid_key,grid,grid_key,tow spatial grid assignment (98.7% in CalCOFI grid)
+bird_mammal_transect,grid_key,grid,grid_key,transect-midpoint grid assignment (100% in CalCOFI grid)
+cufes_sample,cruise_key,cruise,cruise_key,underway sample cruise (78% matched)
+cufes_sample,ship_key,ship,ship_key,underway sample vessel resolved to NODC ship
+cufes_sample,grid_key,grid,grid_key,underway sample grid assignment (95% in CalCOFI grid)
+phyllosoma_tow,cruise_key,cruise,cruise_key,tow cruise via ship_nodc + date (88% matched)
+phyllosoma_tow,ship_key,ship,ship_key,tow vessel resolved via ship_nodc code (98% matched)
+phyllosoma_tow,grid_key,grid,grid_key,tow grid assignment (98% in CalCOFI grid)
+phyto_sample,cruise_key,cruise,cruise_key,region-pooled sample cruise matched by year-month (59%; no site_key/grid_key — region-pooled)
+zoodb_sample,cruise_key,cruise,cruise_key,sample cruise derived from cruise_orig + ship_nodc + date
+zoodb_sample,ship_key,ship,ship_key,unpooled tow vessel resolved to NODC ship
+zoodb_sample,grid_key,grid,grid_key,unpooled tow spatial grid assignment
+zooscan_sample,cruise_key,cruise,cruise_key,sample cruise parsed as YYYY-MM + ship_nodc from the cruise code
+zooscan_sample,ship_key,ship,ship_key,ship parsed from the 2-letter cruise-code suffix
+zooscan_sample,grid_key,grid,grid_key,station tow spatial grid assignment
+obs,sample_key,sample,sample_key,every observation belongs to a sampling event
+obs,dataset_key,dataset,dataset_key,observation provenance stamp
+obs,grid_key,grid,grid_key,observation spatial grid cell (nullable)
+obs,cruise_key,cruise,cruise_key,observation cruise (denormalized)
+obs,measurement_type,measurement_type,measurement_type,observation measured quantity vocabulary
+sample,parent_sample_key,sample,sample_key,adjacency-list parent event (site tow net; cast bottle)
+sample,dataset_key,dataset,dataset_key,sample provenance stamp
+sample,grid_key,grid,grid_key,sample spatial grid cell (nullable)
+sample,cruise_key,cruise,cruise_key,sample cruise
+obs_attribute,sample_key,sample,sample_key,frequency distribution belongs to a sampling event
+obs_attribute,measurement_type,measurement_type,measurement_type,binned attribute vocabulary
+sample_measurement,sample_key,sample,sample_key,effort measurement belongs to a sampling event
+sample_measurement,dataset_key,dataset,dataset_key,effort measurement provenance stamp
+sample_measurement,measurement_type,measurement_type,measurement_type,event-level measured quantity vocabulary
+obs_ctd_full,sample_key,sample,sample_key,full-resolution CTD scan belongs to a cast event
+obs_ctd_full,dataset_key,dataset,dataset_key,supplemental CTD provenance stamp
+obs_ctd_full,measurement_type,measurement_type,measurement_type,CTD measured quantity vocabulary
+obs,taxon_key,taxon,taxon_key,observation taxon (nullable; env + taxon-in-type rows are NULL)
+obs_attribute,taxon_key,taxon,taxon_key,sub-occurrence attribute taxon (nullable)
+dataset_taxon,taxon_key,taxon,taxon_key,dataset-local taxon resolves to the global taxon
+dataset_taxon,dataset_key,dataset,dataset_key,dataset that uses this local taxon vocabulary
+taxon_group,taxon_key,taxon,taxon_key,group membership references a taxon
+taxon,parent_taxon_key,taxon,taxon_key,"WoRMS lineage parent (self-reference, nullable)"
+sample_spatial,root_sample_key,sample,sample_key,exact polygon membership per root sample (Explorer plan D4; release_database browser_objects)
+sample_spatial,spatial_key,spatial,spatial_key,the polygon a root sample falls in
+sample_root,root_sample_key,sample,sample_key,root sampling event with the dense integer root_id the browser objects join on
+obs_bio,root_id,sample_root,root_id,bio observation's root sampling event (dense id; sample_root is supplemental)
+obs_env,root_id,sample_root,root_id,env observation's root sampling event (dense id; one object per measurement_type)
+obs_bio,sample_key,sample,sample_key,every bio observation belongs to a sampling event (the net / tow; D-S1: obs_bio is a core table)
+obs_env,sample_key,sample,sample_key,every env observation belongs to a sampling event (the bottle / cast; D-S1: obs_env is a core table)
+obs_bio,dataset_key,dataset,dataset_key,bio observation provenance stamp
+obs_env,dataset_key,dataset,dataset_key,env observation provenance stamp
+obs_bio,grid_key,grid,grid_key,bio observation spatial grid cell (nullable)
+obs_env,grid_key,grid,grid_key,env observation spatial grid cell (nullable)
+obs_bio,cruise_key,cruise,cruise_key,bio observation cruise (denormalized)
+obs_env,cruise_key,cruise,cruise_key,env observation cruise (denormalized)
+obs_bio,measurement_type,measurement_type,measurement_type,bio observation measured quantity vocabulary
+obs_env,measurement_type,measurement_type,measurement_type,env observation measured quantity vocabulary (the partition column)
+obs_bio,taxon_key,taxon,taxon_key,bio observation taxon (nullable; taxon-in-type rows are NULL)
+climatology,grid_key,grid,grid_key,the station a baseline cell belongs to (one climatology for every anomaly; release_database browser_objects)
+climatology,measurement_type,measurement_type,measurement_type,the measured quantity a baseline cell is a mean of
+climatology,dataset_key,dataset,dataset_key,the dataset a baseline cell is built from (one row per dataset)
+sample,station_uuid,sample,source_uuid,SWFSC station occupation (ichthyo site) this event belongs to; NULL when unmatched (calcofi4db >= 3.32.0 match_station_occupation())

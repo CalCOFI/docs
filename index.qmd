@@ -18,11 +18,6 @@ catalogs, the Darwin Core archives for OBIS, the EDI packages and ERDDAP's own m
 (@fig-catalog-flow). How a provider's words get into that record — and what they edit to change
 it — is the subject of [Metadata & the ingest loop](metadata.qmd).
 
-```{mermaid}
-%%| label: fig-catalog-flow
-%%| fig-cap: "Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish."
-%%| file: diagrams/catalog_flow.mmd
-%%| fig-width: 9
-```
+![Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish.](diagrams/catalog_flow.svg){#fig-catalog-flow}
 
 

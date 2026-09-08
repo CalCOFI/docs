@@ -9,3 +9,6 @@
 
 **/*.quarto_ipynb
 .positai
+
+# the pinned mermaid-cli (package.json); libs/render_diagrams.sh
+node_modules/

@@ -1,63 +1,116 @@
 name: Publish Quarto book
 
+# Two jobs, on purpose. The site (HTML) renders and publishes on its own and is the
+# only thing that can fail this workflow. The PDF and DOCX are built afterwards,
+# never block the site, and land as the assets of the rolling `documents` release
+# (https://github.com/CalCOFI/docs/releases/tag/documents), which the sidebar links.
+# Until 2026-09-08 one `quarto publish` rendered all four formats and a `&` in a dataset
+# name took the whole site down for a day (git log 2026-09-07). Diagrams are SVGs
+# pre-rendered by libs/render_diagrams.sh and committed, so no Chromium is installed here.
+
 on:
   push:
-     branches:
-       - main
+    branches: [main]
   workflow_dispatch:
 
+env:
+  QUARTO_VERSION: 1.8.25
+  R_VERSION: 4.5.1
+
 jobs:
-  build-deploy:
-    name: Render & publish Quarto book
-    runs-on: macOS-latest
-    # runs-on: ubuntu-latest
+  publish-html:
+    name: Render & publish the site
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install librsvg
-        # convert svg to png for pdf
-        run: brew install librsvg
-        # run: sudo apt-get install librsvg2-bin # librsvg2-dev
-
-      - name: Install Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-        # with:
-        #   tinytex: true  # for pdf but buggy on finding version
-
-      - name: Install TinyTeX
-        uses: r-lib/actions/setup-tinytex@v2
-
-      - name: Install chromium for Quarto
-        # for rendering Mermaid diagrams to pdf: https://quarto.org/docs/authoring/diagrams.html#chrome-install
-        run: quarto install chromium
-        env:
-          QUARTO_CHROMIUM_HEADLESS_MODE: new
-
-      # - name: Install qpdf
-      #   # to prevent R install from failing
-      #   run: brew install qpdf
-
-      - name: Install R
-        uses: r-lib/actions/setup-r@v2
-        # env:
-        #   HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: true
-        # with:
-        #   r-version: '4.4.0'     # 2024-09-04
-
-      - name: Install R dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: quarto-dev/quarto-actions/setup@v2
         with:
-          cache-version: 2
+          version: ${{ env.QUARTO_VERSION }}
 
-      - name: Quarto Render and Publish
-        # https://quarto.org/docs/publishing/github-pages.html#publishing
-        uses: quarto-dev/quarto-actions/publish@v2
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ env.R_VERSION }}
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 3
+
+      - name: Render (html) — libs/pre-render.R snapshots the record first
+        run: quarto render --to html
+        env:
+          CALCOFI_DOCS_REFRESH: "1"
+
+      - name: Check every external link answers
+        run: Rscript libs/check_links.R
+
+      - uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          render: "false"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          QUARTO_CHROMIUM_HEADLESS_MODE: new
 
+  build-documents:
+    name: Build the PDF and DOCX (non-blocking)
+    needs: publish-html
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: ${{ env.QUARTO_VERSION }}
+
+      - uses: r-lib/actions/setup-tinytex@v2
+
+      - name: librsvg (rasterises the SVG diagrams for LaTeX)
+        run: sudo apt-get update -q && sudo apt-get install -y -q librsvg2-bin
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ env.R_VERSION }}
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 3
+
+      - name: Render (docx)
+        run: quarto render --to docx
+        continue-on-error: true
+        env:
+          CALCOFI_DOCS_REFRESH: "1"
+
+      - name: Render (pdf)
+        run: quarto render --to pdf
+        continue-on-error: true
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: documents
+          path: |
+            _book/*.pdf
+            _book/*.docx
+          if-no-files-found: warn
+
+      - name: Publish as the assets of the rolling `documents` release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: documents
+          name: CalCOFI.io documentation — latest build
+          body: >-
+            The PDF and DOCX of https://calcofi.io/docs/, rebuilt on every push to main.
+            The assets are replaced each time; the tag does not move.
+          files: |
+            _book/*.pdf
+            _book/*.docx
+          fail_on_unmatched_files: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

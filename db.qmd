@@ -293,12 +293,6 @@ in one query (`calcofi4r::cc_pg_attach()`). (An earlier design ran the whole dat
 PostgreSQL with `dev`/`prod` schemas and a single `create_db.qmd`; that is superseded and
 only the legacy `gis` database remains, behind tile.calcofi.io.)
 
-```{mermaid}
-%%| label: fig-db_doc
-%%| fig-cap: "Integrated database ingestion scheme."
-%%| file: diagrams/db_doc.mmd
-```
-
 ### Release versioning
 
 Each rendered `release_database.qmd` writes a frozen, immutable release to

@@ -17,12 +17,7 @@ its strengths and limitations. The diagram below is the flow as it runs today: w
 observe (left) becomes one record per dataset at release, that record generates every surface a
 portal can read, and each portal or meta-portal is pointed at one of those static files.
 
-```{mermaid}
-%%| label: fig-portals-flow
-%%| fig-cap: "Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW."
-%%| file: diagrams/catalog_flow.mmd
-%%| fig-width: 9
-```
+![Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW.](diagrams/catalog_flow.svg){#fig-portals-flow}
 
 In practice, CalCOFI is a partnership with various contributing members, so the authoritative
 dataset might flow differently, such as from EDI to the database to the other portals. The other
@@ -49,7 +44,8 @@ hand-editing a table.
 librarian::shelf(
   dplyr, glue, gt, here, purrr, readr, scales, tidyr)
 
-portals_csv <- here("data/portal.csv")
+# the registry snapshot libs/pre-render.R writes from CalCOFI/workflows metadata/portal.csv
+portals_csv <- here("data/registry/portal.csv")
 
 # capability columns are "none" | "partial" | "full"; harvests_from_us and kind are
 # plain text (a mechanism id, or "none"), shown without the symbol treatment
@@ -126,7 +122,7 @@ packages stay theirs and are never republished.
 -   Data preserved in original submission formats
 -   Access through NCEI API services
 -   Links:
-    -   [NCEI Ocean Archive](https://www.ncei.noaa.gov/products/ocean-archive)
+    -   [NCEI Archive](https://www.ncei.noaa.gov/archive)
     -   CalCOFI datasets: [NCEI search "CalCOFI"](https://www.ncei.noaa.gov/access/search/index?q=CalCOFI)
 
 ### OBIS
@@ -212,12 +208,7 @@ hand. The Darwin Core Archive OBIS publishing uses and an EDI data package both 
 same document, so a provider correction to a dataset's abstract or creators reaches every
 publisher at once.
 
-```{mermaid}
-%%| label: fig-portals-metadata
-%%| fig-cap: "Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals."
-%%| file: diagrams/portals_metadata.mmd
-%%| fig-width: 6
-```
+![Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.](diagrams/portals_metadata.svg){#fig-portals-metadata width=70%}
 
 The EML specification provides detailed structure for describing datasets, including:
 
@@ -267,25 +258,20 @@ This federated approach ensures that CalCOFI data remains:
 `datasets.json` (`calcofi4db::build_dataset_catalog()`, calcofi4db ≥ 4.1.0) is the record this
 whole chapter is a rendering of: one entry per dataset, its `registrations[]` naming every portal
 above with a status of `published`, `planned` (usually linking the tracking issue) or `n/a`. The
-table below reads it **live**, straight from the promoted release, so it can never drift from what
-`calcofi.io/datasets/{dataset_key}/`'s own Access table shows.
+table below reads it from the promoted release (the snapshot under `data/` that every render
+refreshes), so it cannot drift from what `calcofi.io/datasets/{dataset_key}/`'s own Access table shows.
 
 ```{r}
 #| label: tbl-registrations
-#| tbl-cap: Per-dataset portal registrations, read live from the promoted release's `datasets.json`.
+#| tbl-cap: Per-dataset portal registrations, read from the promoted release's `datasets.json`.
 #| warning: false
 #| results: asis
 
-librarian::shelf(dplyr, glue, gt, jsonlite, purrr, scales, tidyr)
+librarian::shelf(dplyr, glue, gt, here, jsonlite, purrr, scales, tidyr)
 
-release_base <- "https://storage.googleapis.com/calcofi-db/ducklake/releases"
-latest_version <- tryCatch(
-  trimws(readLines(file.path(release_base, "latest.txt"), warn = FALSE)[1]),
-  error = function(e) NA_character_)
-
-catalog_record <- if (!is.na(latest_version)) tryCatch(
-  jsonlite::fromJSON(file.path(release_base, latest_version, "datasets.json"), simplifyVector = TRUE),
-  error = function(e) NULL) else NULL
+# the promoted release's datasets.json, as snapshotted by libs/pre-render.R
+latest_version <- jsonlite::fromJSON(here::here("data/_snapshot.json"))$version
+catalog_record <- jsonlite::fromJSON(here::here("data/release/datasets.json"), simplifyVector = TRUE)
 
 reg_status_symbols <- c("n/a" = "✖", "planned" = "▲", "published" = "✔")
 reg_status_colors  <- c("n/a" = "#FFCCCC", "planned" = "#FFF2CC", "published" = "#CCFFCC")
@@ -367,19 +353,14 @@ the sentences:
 
 ```{r}
 #| label: tbl-policy
-#| tbl-cap: Each dataset's archive-of-record policy, read live from the promoted release's `datasets.json` (the registry it comes from until a release carries it).
+#| tbl-cap: Each dataset's archive-of-record policy, read from the promoted release's `datasets.json` (the registry it comes from until a release carries it).
 #| warning: false
 #| results: asis
 
-librarian::shelf(dplyr, glue, gt, jsonlite, purrr, readr)
+librarian::shelf(dplyr, glue, gt, here, jsonlite, purrr, readr)
 
-release_base <- "https://storage.googleapis.com/calcofi-db/ducklake/releases"
-latest_version <- tryCatch(
-  trimws(readLines(file.path(release_base, "latest.txt"), warn = FALSE)[1]),
-  error = function(e) NA_character_)
-rec <- if (!is.na(latest_version)) tryCatch(
-  jsonlite::fromJSON(file.path(release_base, latest_version, "datasets.json"), simplifyVector = TRUE),
-  error = function(e) NULL) else NULL
+latest_version <- jsonlite::fromJSON(here::here("data/_snapshot.json"))$version
+rec <- jsonlite::fromJSON(here::here("data/release/datasets.json"), simplifyVector = TRUE)
 
 pol <- NULL
 if (!is.null(rec) && !is.null(rec$datasets$status$publish_policy)) {
@@ -389,8 +370,7 @@ if (!is.null(rec) && !is.null(rec$datasets$status$publish_policy)) {
   src_note <- glue::glue("`{latest_version}`'s `datasets.json`")
 } else {
   # the record predates status.publish_policy: the registry it is read from
-  st <- tryCatch(readr::read_csv(
-    "https://raw.githubusercontent.com/CalCOFI/workflows/main/metadata/dataset_status.csv",
+  st <- tryCatch(readr::read_csv(here::here("data/registry/dataset_status.csv"),
     show_col_types = FALSE, na = ""), error = function(e) NULL)
   if (!is.null(st) && "publish_policy" %in% names(st) && !is.null(rec)) {
     pol <- tibble::tibble(dataset_key = rec$datasets$dataset_key,

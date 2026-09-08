@@ -1,0 +1,548 @@
+{
+  "schema_version": "1.0",
+  "provider": "calcofi",
+  "dataset": "calcofi-db-release",
+  "primary_keys": {
+    "sample": "sample_key",
+    "obs": "obs_id",
+    "sample_measurement": "sample_measurement_id",
+    "measurement_type": "measurement_type",
+    "obs_attribute": "obs_attribute_id",
+    "taxon": "taxon_key",
+    "dataset_taxon": "ds_taxon_key",
+    "region": "region_key",
+    "grid": "grid_key",
+    "cruise": "cruise_key",
+    "ship": "ship_key"
+  },
+  "foreign_keys": [
+    {
+      "table": "sample",
+      "column": "parent_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "sample",
+      "column": "root_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "obs",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "dataset_taxon",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "taxon",
+      "column": "parent_taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "taxon_group",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "sample",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "sample",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "obs",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "obs",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "casts",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "casts",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "casts",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "ctd_cast",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "ctd_cast",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "ctd_cast",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "dic_sample",
+      "column": "cast_id",
+      "ref_table": "casts",
+      "ref_column": "cast_id"
+    },
+    {
+      "table": "dic_sample",
+      "column": "bottle_id",
+      "ref_table": "bottle",
+      "ref_column": "bottle_id"
+    },
+    {
+      "table": "euphausiids_tow",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "euphausiids_tow",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "euphausiids_tow",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "zooplankton_tow",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "zooplankton_tow",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "zooplankton_tow",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "bird_mammal_transect",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "cufes_sample",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "cufes_sample",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "cufes_sample",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "phyllosoma_tow",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "phyllosoma_tow",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "phyllosoma_tow",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "phyto_sample",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "zoodb_sample",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "zoodb_sample",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "zoodb_sample",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "zooscan_sample",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "zooscan_sample",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key"
+    },
+    {
+      "table": "zooscan_sample",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "obs",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "obs",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "obs",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "obs",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "sample",
+      "column": "parent_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "sample",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "sample",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "sample",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "obs",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "dataset_taxon",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "dataset_taxon",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "taxon_group",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "taxon",
+      "column": "parent_taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "sample_spatial",
+      "column": "root_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "sample_spatial",
+      "column": "spatial_key",
+      "ref_table": "spatial",
+      "ref_column": "spatial_key"
+    },
+    {
+      "table": "sample_root",
+      "column": "root_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs_bio",
+      "column": "root_id",
+      "ref_table": "sample_root",
+      "ref_column": "root_id"
+    },
+    {
+      "table": "obs_env",
+      "column": "root_id",
+      "ref_table": "sample_root",
+      "ref_column": "root_id"
+    },
+    {
+      "table": "obs_bio",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs_env",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key"
+    },
+    {
+      "table": "obs_bio",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "obs_env",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "obs_bio",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "obs_env",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "obs_bio",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "obs_env",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key"
+    },
+    {
+      "table": "obs_bio",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "obs_env",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "obs_bio",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key"
+    },
+    {
+      "table": "climatology",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key"
+    },
+    {
+      "table": "climatology",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type"
+    },
+    {
+      "table": "climatology",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key"
+    },
+    {
+      "table": "sample",
+      "column": "station_uuid",
+      "ref_table": "sample",
+      "ref_column": "source_uuid"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+life_stage,dwc_lifeStage,nerc_s11,life_stage_parent,datasets,note
+adult,adult,http://vocab.nerc.ac.uk/collection/S11/current/S1116/,,cce-lter_euphausiids,
+calyptopis,calyptopis,http://vocab.nerc.ac.uk/collection/S11/current/S1118/,,cce-lter_euphausiids,
+calyptopis C1,,,calyptopis,cce-lter_euphausiids,S11 has no calyptopis substage; export the verbatim value as lifeStage and the parent's id where a coarser stage is acceptable.
+calyptopis C2,,,calyptopis,cce-lter_euphausiids,S11 has no calyptopis substage.
+calyptopis C3,,,calyptopis,cce-lter_euphausiids,S11 has no calyptopis substage.
+damaged,,,,cce-lter_euphausiids,"Not a life stage: a BTEDB bucket for specimens too damaged to stage. Belongs in occurrenceRemarks, not lifeStage."
+egg,egg,http://vocab.nerc.ac.uk/collection/S11/current/S1122/,,swfsc_cufes; swfsc_ichthyo,
+furcilia,furcilia,http://vocab.nerc.ac.uk/collection/S11/current/S1123/,,cce-lter_euphausiids,
+furcilia F1,,,furcilia,cce-lter_euphausiids,S11 has no furcilia substage.
+furcilia F2,,,furcilia,cce-lter_euphausiids,S11 has no furcilia substage.
+furcilia F3,,,furcilia,cce-lter_euphausiids,S11 has no furcilia substage.
+furcilia F4,,,furcilia,cce-lter_euphausiids,S11 has no furcilia substage.
+furcilia F5,,,furcilia,cce-lter_euphausiids,S11 has no furcilia substage.
+furcilia F6,,,furcilia,cce-lter_euphausiids,S11 has no furcilia substage.
+furcilia F7,,,furcilia,cce-lter_euphausiids,S11 has no furcilia substage.
+invert,,,,swfsc_ichthyo,"Not a life stage: marks a record from the merged SWFSC invertebrate counts rather than a fish egg or larva. A taxonomic provenance flag; do not emit as lifeStage."
+juvenile,juvenile,http://vocab.nerc.ac.uk/collection/S11/current/S1127/,,cce-lter_euphausiids,
+larva,larva,http://vocab.nerc.ac.uk/collection/S11/current/S1128/,,swfsc_ichthyo,
+larvae,larva,http://vocab.nerc.ac.uk/collection/S11/current/S1128/,,cce-lter_euphausiids,"BTEDB's plural spelling of the same concept (unstaged larvae); grammatical number is not a facet, so the id is S11's `larva`. The two spellings in one release are a normalization gap on the euphausiid vocabulary."
+megalopa,megalopa,http://vocab.nerc.ac.uk/collection/S11/current/S1167/,,cdfw_dungeness-crab,
+metanauplius,metanauplius,http://vocab.nerc.ac.uk/collection/S11/current/S1169/,,cce-lter_euphausiids,
+phyllosoma,,,,calcofi_phyllosoma,S11 has no phyllosoma concept (the achelatan larval stage); the 11 numbered stages live in obs_attribute as bins.
+zoea,zoea,http://vocab.nerc.ac.uk/collection/S11/current/S1137/,,cdfw_dungeness-crab,

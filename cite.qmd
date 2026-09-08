@@ -20,15 +20,13 @@ alongside fifteen others.
 ```{r}
 #| label: setup
 #| include: false
-librarian::shelf(calcofi4r, DBI, dplyr, gt, here, knitr, quiet = TRUE)
+librarian::shelf(dplyr, gt, here, jsonlite, knitr, readr, quiet = TRUE)
 
-# the promoted release, over https. a network failure at render time must not
-# take the book down (portals.qmd degrades the same way), so the connection is
-# guarded and every chunk below checks `has_con`.
-con     <- tryCatch(calcofi4r::cc_get_db(), error = function(e) NULL)
-has_con <- !is.null(con)
-catalog <- tryCatch(calcofi4r::cc_catalog("latest"), error = function(e) NULL)
-rel_version <- if (!is.null(catalog)) catalog$version else "the promoted release"
+# the promoted release, as snapshotted by libs/pre-render.R (the one place the
+# network is touched at render time)
+snap    <- jsonlite::fromJSON(here("data/_snapshot.json"))
+catalog <- jsonlite::fromJSON(here("data/release/catalog.json"), simplifyVector = FALSE)
+ds      <- readr::read_csv(here("data/release/dataset.csv"), show_col_types = FALSE)
 ```
 
 ## Citing the database release
@@ -38,24 +36,24 @@ rel_version <- if (!is.null(catalog)) catalog$version else "the promoted release
 #| echo: false
 #| results: asis
 
-# cc_cite() (calcofi4r >= 1.17.0) is the one place a release or dataset citation
-# is formatted: it reads `dataset` off the connection and the catalog's own
-# `citation`, so nothing here builds a citation string by hand. It returns the
-# release citation first, then one entry per dataset; the first line is the release.
-if (has_con) {
-  cat(calcofi4r::cc_cite(con = con)[1], "\n")
-} else if (!is.null(catalog) && !is.null(catalog$citation)) {
-  cat(catalog$citation, "\n")
-} else {
-  cat("*The release could not be reached when this page was rendered; its citation is the",
-      "`citation` field of `catalog.json` for the version in `latest.txt`.*\n")
-}
+# catalog.json carries the release's own citation (calcofi4db::release_citation()
+# writes it at the freeze); cc_cite() in R and Python read the same field, so
+# nothing here builds a citation string by hand.
+cat(catalog$citation, "\n")
 ```
 
 Every release also has a DOI of its own, minted on Zenodo when the release is tagged, and one
 **concept DOI** that always resolves to the newest release. Cite the version DOI in a paper — it
 names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are
-in `catalog.json` (`doi`, `concept_doi`) and in the release notes' *How to cite*.
+in `catalog.json` (`doi`, `concept_doi`) and in the release notes' *How to cite*:
+
+```{r}
+#| label: dois
+#| echo: false
+#| results: asis
+cat(sprintf("- this release, `%s`: <https://doi.org/%s>\n- the concept DOI, every release: <https://doi.org/%s>\n",
+            catalog$version, catalog$doi, catalog$concept_doi))
+```
 
 ## Citing an individual dataset
 
@@ -63,41 +61,32 @@ Every dataset in the release carries its own `citation_main`, a registered `lice
 the source gives one — a `doi`, an `acknowledgement` and a `contact`. The columns are `dataset.doi`,
 `dataset.license_url`, `dataset.acknowledgement`, `dataset.contact` and `dataset.source_accessed`
 (measured at release, never typed; see [the database](db.qmd)). They have shipped since
-v2026.09.04. The table reads the promoted release, so it shows what that release carries.
+v2026.09.04. The table is the `dataset` table of the promoted release, `r snap$version`.
 
 ```{r}
 #| label: dataset-table
 #| echo: false
-#| results: asis
 
-if (has_con) {
-  ds <- DBI::dbReadTable(con, "dataset")
+cols <- intersect(
+  c("provider", "dataset", "dataset_name", "citation_main", "license",
+    "license_url", "doi", "pi_names", "acknowledgement", "contact",
+    "source_accessed", "link_calcofi_org", "link_data_source"),
+  names(ds))
 
-  cols <- intersect(
-    c("provider", "dataset", "dataset_name", "citation_main", "license",
-      "license_url", "doi", "pi_names", "acknowledgement", "contact",
-      "source_accessed", "link_calcofi_org", "link_data_source"),
-    names(ds))
-
-  ds |>
-    dplyr::select(dplyr::all_of(cols)) |>
-    dplyr::arrange(provider, dataset) |>
-    gt::gt() |>
-    gt::cols_label(.list = list(
-      provider = "provider", dataset = "dataset", dataset_name = "name",
-      citation_main = "citation", license = "license", license_url = "license URL",
-      doi = "DOI", pi_names = "PI(s)", acknowledgement = "acknowledgement",
-      contact = "contact", source_accessed = "source accessed",
-      link_calcofi_org = "calcofi.org", link_data_source = "data source")[cols]) |>
-    gt::fmt_url(columns = dplyr::any_of(c("link_calcofi_org", "link_data_source")),
-                label = "↗") |>
-    gt::sub_missing(missing_text = "") |>
-    gt::tab_options(table.width = gt::pct(100), table.font.size = "0.85em")
-} else {
-  cat("*The release could not be reached when this page was rendered. The same table is the",
-      "`dataset` table of any release — `calcofi4r::cc_get_db()` then `dbReadTable(con, \"dataset\")` —",
-      "and each dataset's page at [calcofi.io/datasets](https://calcofi.io/datasets/) shows its citation.*\n")
-}
+ds |>
+  dplyr::select(dplyr::all_of(cols)) |>
+  dplyr::arrange(provider, dataset) |>
+  gt::gt() |>
+  gt::cols_label(.list = list(
+    provider = "provider", dataset = "dataset", dataset_name = "name",
+    citation_main = "citation", license = "license", license_url = "license URL",
+    doi = "DOI", pi_names = "PI(s)", acknowledgement = "acknowledgement",
+    contact = "contact", source_accessed = "source accessed",
+    link_calcofi_org = "calcofi.org", link_data_source = "data source")[cols]) |>
+  gt::fmt_url(columns = dplyr::any_of(c("link_calcofi_org", "link_data_source")),
+              label = "↗") |>
+  gt::sub_missing(missing_text = "") |>
+  gt::tab_options(table.width = gt::pct(100), table.font.size = "0.85em")
 ```
 
 ## Citing what you downloaded
@@ -115,23 +104,23 @@ one.
 
 ```{r}
 #| label: cite-r
-#| eval: !expr has_con
+#| eval: false
+#| echo: true
+library(calcofi4r)                # remotes::install_github("calcofi/calcofi4r")
+con <- cc_get_db()                # the promoted release, over https
 
-# every dataset in the release, release citation first
-calcofi4r::cc_cite(con = con)
-
-# just the datasets a query touched
-calcofi4r::cc_cite("calcofi_dic", con = con)
+cc_cite(con = con)                # every dataset in the release, release citation first
+cc_cite("calcofi_dic", con = con) # just the datasets a query touched
 
 # from a query result directly (must carry a dataset_key column)
 dplyr::tbl(con, "obs") |>
   dplyr::filter(dataset_key == "calcofi_dic") |>
   head(5) |>
   dplyr::collect() |>
-  calcofi4r::cc_cite(con = con)
+  cc_cite(con = con)
 
 # a .bib file for a paper's reference manager
-calcofi4r::cc_cite(format = "bibtex", con = con) |> cat()
+cc_cite(format = "bibtex", con = con) |> cat()
 ```
 
 ## Python

@@ -1,0 +1,10 @@
+{
+  "fetched_utc": "2026-09-08T00:28:53Z",
+  "version": "v2026.09.06",
+  "n_datasets": 16,
+  "sources": {
+    "releases": "https://storage.googleapis.com/calcofi-db/ducklake/releases",
+    "workflows": "https://raw.githubusercontent.com/CalCOFI/workflows/main",
+    "site": "https://raw.githubusercontent.com/CalCOFI/CalCOFI.github.io/main"
+  }
+}

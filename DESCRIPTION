@@ -6,14 +6,16 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-2686-0784")),
     person("Erin", "Satterthwaite", , "esatterthwaite@ucsd.edu", role = "aut"))
 Description: The Quarto book at https://calcofi.io/docs/. This DESCRIPTION exists so
-    r-lib/actions/setup-r-dependencies installs what the chapters' R chunks load;
-    it is not a package.
+    r-lib/actions/setup-r-dependencies installs what libs/pre-render.R and the
+    chapters' R chunks load; it is not a package. The chapters read the snapshot
+    under data/ that pre-render writes, so no chapter needs calcofi4r at render time.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports:
-    calcofi4r,
+    curl,
     DBI,
     dplyr,
+    duckdb,
     glue,
     gt,
     here,
@@ -28,5 +30,3 @@ Imports:
     tibble,
     tidyr,
     yaml
-Remotes:
-    calcofi/calcofi4r

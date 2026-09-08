@@ -1,0 +1,574 @@
+# Products shown on calcofi.io. One card per product; `section` controls
+# placement. Cards are named for the thing itself — the repo or app name used
+# everywhere else (db-viz-hex, not "Integrated App") — so a card, its source,
+# its status page and its usage report are obviously the same product. Student
+# contributions keep human-friendly titles.
+#
+# Canonical app URLs follow uptime/.upptimerc.yml (https://app.calcofi.io/<app>/).
+#
+# status:       active (default, no badge) | interim | superseded | archived
+# superseded_by: key of the replacing product (renders "superseded by <link>")
+# extra_links:  [{label, url}] — extra deep links in the card's link row
+# shots:        themed — the product honours ?theme= and has images/<key>_{dark,light}.png
+#               (img: then just names the dark one as a fallback)
+#               (scripts/shots.py); the card swaps them with the site's theme toggle
+# added:        YYYY-MM-DD — when the site started carrying the product (back-filled 2026-09-07 from
+#               each product's first commit in this file; the four renamed to db-* on 2026-07-01
+#               existed under their old keys since 2026-06-10). The ship's log (_plugins/news.rb)
+#               makes a "New: <title>" entry of it, and the header's News link wears a dot for 30 days
+# credits:      {org, year, team[]} — shown on student contributions
+# group:        an eyebrow group inside a section (Explore's `across` / `one`), from sections[].groups
+# lenses:       the spatial grains an Explore app shows the data at — ids from sections[explore].lenses
+#               (stations · hexagons · cruises · regions · sections · contours); drawn as suffix
+#               icons after the card's title and on a dataset page's Access > Explore row
+# dataset_url_realm: bio | env — the deep link only selects a dataset of this realm; a dataset of
+#               the other realm gets the plain app link (db-viz-hex's ?datasets= is taxa-only)
+# dataset_url_env: a second template for the env realm where the app opens on an environmental
+#               dataset by a different parameter (db-viz-hex's ?env= selects the dataset's leading
+#               variable and turns Compare on); with it set, dataset_url_realm governs dataset_url only
+# datasets:     the dataset_keys this product covers — a list, or `all` (every dataset in the
+#               release record). Validated at build against _data/datasets.json's datasets[] and
+#               holdings[]: an unknown key FAILS the build (plan D-2). It is also the reverse index
+#               behind each dataset page's Access > Explore rows, so this is the ONE place a
+#               product-to-dataset link is written.
+
+sections:
+  - id: datasets
+    emoji: "🗂"
+    title: Datasets
+    blurb: >-
+      Find what has been collected. One record per dataset — coverage, every endpoint it can be
+      reached through, its licence and how to cite it — by category, with the holdings CalCOFI has
+      but has not ingested yet.
+  - id: explore
+    emoji: "🔭"
+    featured: true
+    title: Explore
+    # the lenses, with the brand glyph each is drawn as (brand/v2/icons/, lens-*)
+    lenses:
+      - { id: stations, title: Stations, blurb: one value per station, the CalCOFI grid as points }
+      - { id: hexagons, title: Hexagons, blurb: H3 hexagons, aggregated at a chosen resolution }
+      - { id: cruises, title: Cruises, blurb: one cruise at a time, along its track }
+      - { id: regions, title: Regions, blurb: pooled over a boundary or a region }
+      - { id: sections, title: Sections, blurb: a vertical section along a CalCOFI line }
+      - { id: contours, title: Contours, blurb: interpolated maps of one variable }
+    groups:
+      - id: across
+        title: Across datasets
+        blurb: >-
+          The Explorer brings the spatial grains together as lenses in one app; the others each go
+          deep on one grain — station, hexagon, cruise, or contour.
+      - id: one
+        title: One dataset
+        blurb: >-
+          Apps focused on a single dataset or data source.
+    blurb: >-
+      Explore CalCOFI data in the browser — across every ingested dataset, or deep on one.
+  - id: access
+    emoji: "☁️"
+    title: Access
+    blurb: >-
+      The ways to get the data: standards-based services, public cloud storage, browser SQL, and
+      the R and Python packages that read a release directly.
+  - id: build
+    emoji: "🛠"
+    title: Build
+    blurb: >-
+      The pipeline behind every release and the documentation tying it together — the ingest
+      workflows, the database tooling, the schema browser and the technical docs.
+  - id: students
+    emoji: "🎓"
+    title: Students
+    blurb: >-
+      Capstone and fellowship projects by university students partnering with CalCOFI.
+
+products:
+
+  # ── explore · across datasets ────────────────────────────────────────────
+
+  - key: explore
+    added: 2026-08-29
+    title: CalCOFI Explorer
+    uptime: explore
+    usage: explore
+    section: explore
+    group: across
+    lenses: [stations, hexagons, contours, cruises, regions, sections]
+    datasets: all
+    live_url: https://calcofi.io/explore/
+    # dataset_url: the deep link a dataset page builds for this product — {key} is the dataset_key.
+    # This is the ONE place a product-to-dataset link is written (UI plan Decision 10); a product
+    # with no template gets a row that says it opens the app, not the dataset.
+    dataset_url: https://calcofi.io/explore/?datasets={key}
+    source_url: https://github.com/CalCOFI/explore
+    img: images/explore_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    extra_links:
+      - label: Hexagons
+        url: https://calcofi.io/explore/?lens=hex&res=5
+      - label: Sections
+        url: https://calcofi.io/explore/?lens=section&var=temperature&line=90
+      - label: Contours
+        url: https://calcofi.io/explore/?lens=contour&var=temperature
+    description: >-
+      One app, six lenses — stations, hexagons, contours, cruises, regions and sections — for one
+      organism or one ocean variable at a time over the frozen release. The queries run in your
+      browser (no server), every view is a URL you can share, every download carries its SQL, and
+      feedback comes with an annotated screenshot.
+    tech: [DuckDB-WASM, TypeScript, MapLibre, deck.gl, Plotly]
+
+  - key: db-viz-station
+    added: 2026-07-16
+    title: Station Explorer
+    uptime: db-viz-station
+    usage: db-viz-station
+    section: explore
+    group: across
+    lenses: [stations]
+    datasets: all
+    live_url: https://app.calcofi.io/station/
+    dataset_url: https://app.calcofi.io/station/?dataset={key}
+    source_url: https://github.com/CalCOFI/db-viz-station
+    img: images/db-viz-station_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Discover what's measured at each CalCOFI station — station × dataset
+      coverage (time, depth, observations, surveys) built from the integrated
+      release database, with variable search and dataset crosswalk. Continues
+      the 2026 UCSB student capstone.
+    tech: [DuckDB, JavaScript, MapLibre]
+
+  - key: db-viz-hex
+    added: 2026-06-10
+    title: Hexagon Explorer
+    uptime: db-viz-hex
+    usage: db-viz-hex
+    section: explore
+    group: across
+    lenses: [hexagons]
+    datasets: all
+    live_url: https://app.calcofi.io/hex/
+    dataset_url: https://app.calcofi.io/hex/?datasets={key}
+    # ?datasets= drives the TAXA-dataset group only (the environmental variable is chosen
+    # separately), so it deep-links a biological dataset; an environmental one deep-links
+    # through ?env=, which opens with Compare on and the dataset's leading variable selected
+    # (db-viz-hex since 2026-09-07) — so every dataset page now says "opens on this dataset"
+    dataset_url_realm: bio
+    dataset_url_env: https://app.calcofi.io/hex/?env={key}
+    source_url: https://github.com/CalCOFI/db-viz-hex
+    img: images/db-viz-hex_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Explore decades of fish larvae and oceanographic bottle data together —
+      filter by taxa, depth and season over dynamic hexagon maps, time series
+      and depth profiles.
+    tech: [R, Shiny, DuckDB, H3, MapLibre]
+
+  - key: db-viz-cruise
+    added: 2026-06-10
+    title: Cruise Explorer
+    uptime: db-viz-cruise
+    usage: db-viz-cruise
+    section: explore
+    group: across
+    lenses: [cruises]
+    datasets: all
+    live_url: https://app.calcofi.io/cruise/
+    dataset_url: https://app.calcofi.io/cruise/?datasets={key}
+    source_url: https://github.com/CalCOFI/apps/tree/main/db-viz-cruise
+    img: images/db-viz-cruise_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Cross-dataset observation explorer — compare coverage across cruises,
+      datasets and depths, with shareable deep-link URLs.
+    tech: [R, Shiny, DuckDB]
+
+  - key: oceano
+    added: 2026-06-10
+    title: Contour Explorer
+    uptime: oceano
+    usage: oceano
+    section: explore
+    group: across
+    lenses: [contours]
+    datasets: [calcofi_bottle]
+    status: superseded   # retired 2026-09-07: app.calcofi.io/contour/ redirects to the Explorer's Contours lens
+    superseded_by: explore
+    live_url: https://calcofi.io/explore/?lens=contour&var=temperature
+    source_url: https://github.com/CalCOFI/apps/tree/main/oceano
+    img: images/oceano.png
+    description: >-
+      Visualize and download CalCOFI oceanographic data in map, time-series
+      and depth-profile views.
+
+# ── explore · one dataset ────────────────────────────────────────────────────
+  
+  - key: ctd-transects
+    added: 2026-08-07
+    title: CTD Transects
+    uptime: ctd-transects
+    usage: ctd-transects
+    section: explore
+    group: one
+    lenses: [sections]
+    datasets: [calcofi_ctd-cast]
+    live_url: https://calcofi.io/ctd-transects/
+    source_url: https://github.com/CalCOFI/ctd-transects
+    img: images/ctd-transects_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Cross-shelf temperature, salinity, oxygen, density and fluorescence
+      sections along every CalCOFI line, for every cruise since 1993 — drawn
+      nearshore to offshore with no station picking, and mapped so you can see
+      where each transect is. Opens on the anomaly against each station's
+      day-of-year climatology (warmer or colder than usual, and by how much),
+      with the measured value one click away. Flags each cruise's processing
+      stage, and shows the uncorrected sensor series on cruises whose bottle
+      merge has not run.
+    tech: [DuckDB, Plotly, JavaScript]
+
+  - key: ctd-viz
+    added: 2026-06-10
+    title: CTD Explorer
+    uptime: ctd-viz
+    usage: ctd-viz
+    section: explore
+    group: one
+    lenses: [stations, contours]
+    datasets: [calcofi_ctd-cast]
+    live_url: https://app.calcofi.io/ctd/
+    source_url: https://github.com/CalCOFI/apps/tree/main/ctd-viz
+    img: images/ctd-viz_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Visualize CTD casts — temperature, salinity, oxygen and more — by
+      cruise, station and depth, from individual profiles to whole-grid maps.
+    tech: [R, Shiny, DuckDB, MapLibre]
+
+  - key: pollutants
+    added: 2026-06-10
+    title: Pollutants Explorer
+    uptime: pollutants
+    usage: pollutants
+    section: explore
+    group: one
+    live_url: https://app.calcofi.io/pollutants/
+    source_url: https://github.com/CalCOFI/pollutants-app
+    img: images/pollutants_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Map pollutants in the Southern California Bight from the Regional
+      Monitoring Program via SCCWRP.
+
+  # ── access (services, then the browser SQL and the two packages) ─────────
+  - key: erddap
+    added: 2026-06-10
+    title: erddap
+    uptime: erddap
+    usage: erddap
+    section: access
+    datasets: all
+    live_url: https://erddap.calcofi.io/
+    source_url: https://github.com/CalCOFI/erddap
+    img: images/erddap_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      CalCOFI datasets served through NOAA's ERDDAP — subset and download in
+      CSV, NetCDF, JSON and more, or connect from analysis tools.
+
+  - key: storage
+    added: 2026-07-28
+    title: storage
+    uptime: storage
+    usage: storage
+    section: access
+    datasets: all
+    live_url: https://storage.calcofi.io/
+    source_url: https://github.com/CalCOFI/server
+    img: images/storage_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Browse the public CalCOFI cloud buckets over HTTPS — versioned database
+      releases, source files and project outputs, with folder listings that
+      the raw storage host does not provide.
+    extra_links:
+      - { label: netcdf, url: "https://storage.calcofi.io/calcofi-files-public/netcdf/" }
+
+  # ── access / build interleaved: calcofi4r, calcofi4py, db-query are Access ─
+  - key: calcofi4r
+    added: 2026-06-10
+    title: calcofi4r
+    uptime: calcofi4r
+    usage: calcofi4r
+    section: access
+    datasets: all
+    live_url: https://calcofi.io/calcofi4r/
+    source_url: https://github.com/CalCOFI/calcofi4r
+    img: images/calcofi4r_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      R package of helper functions to read, analyze and visualize CalCOFI
+      data — connects directly to versioned database releases.
+    tech: [R]
+
+  - key: calcofi4db
+    added: 2026-06-10
+    title: calcofi4db
+    uptime: calcofi4db
+    usage: calcofi4db
+    section: build
+    datasets: all
+    live_url: https://calcofi.io/calcofi4db/
+    source_url: https://github.com/CalCOFI/calcofi4db
+    img: images/calcofi4db_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      R package of database tools for ingest workflows — cloud storage,
+      Parquet conversion, DuckDB management and frozen releases.
+    tech: [R]
+
+  - key: calcofi4py
+    added: 2026-08-20
+    title: calcofi4py
+    uptime: calcofi4py
+    usage: calcofi4py
+    section: access
+    datasets: all
+    live_url: https://calcofi.io/calcofi4py/
+    source_url: https://github.com/CalCOFI/calcofi4py
+    img: images/calcofi4py_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Python package mirroring calcofi4r — query the versioned database
+      releases with DuckDB and the CTD team's PostgreSQL working database,
+      credentials-free via .pgpass.
+    tech: [Python]
+
+  - key: db-query
+    added: 2026-06-10
+    title: db-query
+    uptime: db-query
+    usage: db-query
+    section: access
+    datasets: all
+    live_url: https://calcofi.io/db-query/
+    source_url: https://github.com/CalCOFI/db-query
+    img: images/db-query_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Run SQL on the CalCOFI database right in your browser — DuckDB-WASM
+      reads the released Parquet files directly; no server, no credentials.
+    tech: [SQL, DuckDB-WASM]
+
+  - key: db-schema
+    added: 2026-06-10
+    title: db-schema
+    uptime: db-schema
+    usage: db-schema
+    section: build
+    datasets: all
+    live_url: https://calcofi.io/db-schema/
+    source_url: https://github.com/CalCOFI/db-schema
+    img: images/db-schema_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Browse tables, columns, datasets and entity-relationship diagrams of
+      each versioned database release.
+
+  - key: workflows
+    added: 2026-06-10
+    title: workflows
+    uptime: workflows
+    usage: workflows
+    section: build
+    datasets: all
+    live_url: https://calcofi.io/workflows/
+    source_url: https://github.com/CalCOFI/workflows
+    img: images/workflows_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      Reproducible Quarto notebooks that ingest each dataset into the
+      versioned database — the pipeline behind every release.
+    tech: [R, Quarto, DuckDB, Parquet]
+
+  - key: docs
+    added: 2026-06-10
+    title: docs
+    uptime: docs
+    usage: docs
+    section: build
+    datasets: all
+    live_url: https://calcofi.io/docs/
+    source_url: https://github.com/CalCOFI/docs
+    img: images/docs_dark.png   # fallback; the card shows the _dark/_light pair
+    shots: themed
+    description: >-
+      The book on the CalCOFI.io data system — how to explore, access and cite the
+      data; the database, its keys and its releases; how to contribute a dataset;
+      the team's tools; and the data management plan.
+
+  # ── students (sorted by year desc, then title) ───────────────────────────
+  - key: ucla-monitoring-map
+    added: 2026-06-10
+    title: CA Ocean & Coastal Monitoring Map
+    uptime: ucla-monitoring-map
+    usage: ucla-monitoring-map
+    section: students
+    lenses: [hexagons]
+    live_url: https://calcofi.io/2026-ucla-cal-ocean-coastal-monitoring-map/
+    source_url: https://github.com/CalCOFI/2026-ucla-cal-ocean-coastal-monitoring-map
+    img: images/ucla-coastal-monitoring-map.png
+    description: >-
+      Statewide inventory of California ocean and coastal monitoring programs
+      within 12 nmi of the coast — hex-grid coverage at 1/3/5 km, survey
+      transects, discharger stations, bathymetry, monitoring gaps, wind energy
+      areas, and marine protected areas.
+    credits:
+      org: UCLA Capstone
+      year: 2026
+      team: Betty Huang
+
+  - key: ucsb-larvae-dashboard
+    added: 2026-06-18
+    title: Larvae Dashboard
+    uptime: ucsb-larvae-dashboard
+    usage: ucsb-larvae-dashboard
+    section: students
+    datasets: [swfsc_ichthyo]
+    status: archived   # GitHub repo archived 2026-07-29; the site keeps serving
+    live_url: https://app.calcofi.io/2026-ucsb-larvae-dashboard/
+    source_url: https://github.com/CalCOFI/2026-ucsb-larvae-dashboard
+    img: images/ucsb-larvae-dashboard.png
+    description: >-
+      Explore CalCOFI fish-larvae (ichthyoplankton) abundance over time and
+      space — filter by species or habitat across seasons and decades, with
+      trend, correlation, stability and spatial views plus CSV/PDF export.
+    credits:
+      org: UCSB Data Science Capstone
+      year: 2026
+      team: [Joy Chang, Abhijit Brahme, A. Senthil, Chengcheng Fang, Kaeya Mehta, Shenyi Jiang]
+
+  - key: ucsb-station-portal
+    added: 2026-06-10
+    title: Station Data Portal
+    uptime: ucsb-station-portal
+    usage: ucsb-station-portal
+    section: students
+    lenses: [stations]
+    datasets: [cce-lter_euphausiids, cce-lter_zoodb]
+    status: archived
+    superseded_by: db-viz-station
+    live_url: https://calcofi.io/2026-ucsb-station-data-portal/
+    source_url: https://github.com/CalCOFI/2026-ucsb-station-data-portal
+    img: images/ucsb-station-portal.png
+    description: >-
+      Map-based discovery of what is measured at each of 115 CalCOFI stations,
+      with live variable search and auto-generated ERDDAP, Euphausiid and
+      ZooDB queries.
+    credits:
+      org: UCSB Data Science Capstone
+      year: 2026
+      team: [Nicole Xu, Aashish Krishnan, Qiongwen (Lucy) Cao]
+
+  - key: marmam
+    added: 2026-06-10
+    title: Marine Mammal App
+    uptime: marmam
+    usage: marmam
+    section: students
+    status: archived   # GitHub repo archived 2026-07-29; the site keeps serving
+    live_url: https://app.calcofi.io/marmam/
+    source_url: https://github.com/CalCOFI/marmam-app
+    img: images/marmam-app.png
+    description: >-
+      Marine mammal eDNA detections and visual sightings visualized against
+      oceanographic conditions on the CalCOFI grid.
+    credits:
+      org: UCSB Data Science Capstone
+      year: 2025
+
+  - key: calcofi-75th-timeline
+    added: 2026-07-14
+    title: 75th Anniversary Timeline
+    section: students
+    live_url: https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=12x10Qrf0UAyUT2BQ_TA3wTDgQJHYqov0fEQV42VtByU&font=Default&lang=en
+    source_url: https://docs.google.com/spreadsheets/d/12x10Qrf0UAyUT2BQ_TA3wTDgQJHYqov0fEQV42VtByU/edit?usp=sharing
+    img: images/calcofi-75th-timeline.png
+    description: >-
+      An interactive TimelineJS journey through 75 years of CalCOFI milestones
+      — from the 1949 founding after the sardine collapse to the NORPAC
+      expedition, the 1957–58 El Niño, CTD sampling, and the first all-female
+      research cruise.
+    credits:
+      org: CalCOFI–CA Sea Grant Data Storytelling Internship
+      year: 2024
+      team: Anneliese (Annie) Adams
+
+  - key: hypoxia-story
+    added: 2026-06-10
+    title: Hypoxia Story
+    uptime: hypoxia-story
+    usage: hypoxia-story
+    section: students
+    datasets: [calcofi_bottle]
+    status: archived   # GitHub repo archived 2026-07-29; the site keeps serving
+    live_url: https://calcofi.io/hypoxia-story/
+    source_url: https://github.com/CalCOFI/hypoxia-story
+    img: images/hypoxia.png
+    description: >-
+      A scrollable story of hypoxia in the California Current Ecosystem and
+      its changing oxygen levels over the past 71 years.
+    credits:
+      org: CalCOFI–CA Sea Grant Data Storytelling Internship
+      year: 2024
+      team: [Mallika Gupta, Anneliese (Annie) Adams]
+
+  - key: offshore-wind-monitoring
+    added: 2026-07-14
+    title: Offshore Wind Monitoring
+    section: students
+    live_url: https://elizathomas.shinyapps.io/california_ofw_monitoring/
+    img: images/offshore-wind-monitoring.png
+    description: >-
+      An interactive map for planning ocean monitoring around California's
+      floating offshore wind areas — toggle Essential Ocean Variables and
+      long-term monitoring programs to reveal gaps in baseline datasets.
+    credits:
+      org: SIO Masters Capstone
+      year: 2024
+      team: Eliza Thomas
+
+  - key: saferseafood
+    added: 2026-06-10
+    title: SaferSeafood App
+    uptime: saferseafood
+    usage: saferseafood
+    section: students
+    status: archived   # GitHub repo archived 2026-07-29; the site keeps serving
+    live_url: https://app.calcofi.io/SaferSeafood/
+    source_url: https://github.com/CalCOFI/SaferSeafood
+    img: images/saferseafood.png
+    description: >-
+      Personalized fish-consumption advisories for Southern California
+      anglers — DDT levels predicted by species and catch location.
+    credits:
+      org: UCSB Bren MEDS Capstone
+      year: 2024
+
+  - key: capstone
+    added: 2026-06-10
+    title: Capstone App
+    uptime: capstone
+    usage: capstone
+    section: students
+    datasets: [calcofi_bottle]
+    status: archived
+    live_url: https://app.calcofi.io/capstone/
+    source_url: https://github.com/PK0207/CalCOFI22
+    img: images/capstone.png
+    description: >-
+      Spatial and temporal visualization of the CalCOFI bottle dataset — the
+      first student capstone built on the database.
+    credits:
+      org: UCSB CCDSP Fellowship
+      year: 2022

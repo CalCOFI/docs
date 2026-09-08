@@ -35,7 +35,7 @@ record for every `*.calcofi.io` service (file an
 | pg_tileserv | `pg_tileserv` | [tile.calcofi.io](https://tile.calcofi.io) — vector tiles from PostGIS |
 | ERDDAP | `erddap` | [erddap.calcofi.io](https://erddap.calcofi.io/erddap/) — tabular data services |
 | plumber | `plumber` | [api.calcofi.io](https://api.calcofi.io) — the R API |
-| Varnish | `varnish` | [h3t.calcofi.io](https://h3t.calcofi.io) — cached hexagon-tile API (see [Maps](maps.qmd)) |
+| Varnish + the H3T API (FastAPI) | `varnish`, `h3t_api_py` | [h3t.calcofi.io](https://h3t.calcofi.io/docs) — the cached hexagon-tile API behind the Hexagon Explorer (superseded by the [Explorer](https://calcofi.io/explore/), kept serving) |
 
 Caddy also fronts two static services with no container of their own:
 [file.calcofi.io](https://file.calcofi.io) (public files on the server's disk) and

@@ -3,9 +3,11 @@ project:
   output-dir: _book
   resources:
   - "/.nojekyll"
-  - "match/"   # standalone DuckDB-WASM Match app (see chapters: data-access, helpers, api)
-  # pre-render:
-  #   - libs/pre-render.R
+  - "match/"   # standalone DuckDB-WASM Match app (see chapters: data-access, api)
+  # the one place the network is touched at render time: snapshots the promoted
+  # release's sidecars, the workflows registries and the product cards under data/
+  pre-render:
+    - libs/pre-render.R
   post-render:
     - libs/post-render.R
 
@@ -19,6 +21,8 @@ execute:
 book:
   title: "CalCOFI.io"
   subtitle: "Documentation"
+  # the file name of the pdf/docx built by the second CI job and linked from sidebar.tools
+  output-file: "CalCOFI.io-docs"
   description: "Documentation for open-Source products at CalCOFI.io developed
     for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)"
   author:
@@ -33,14 +37,11 @@ book:
       - name: UC San Diego - Scripps Institution of Oceanography
         city: San Diego
         state: CA
-  # author:
-  #   - "![](/figs/contrib.rocks.svg)"
   date: today
   date-format: "YYYY-MM-DD"
   site-url: https://calcofi.io/docs/
   repo-url: https://github.com/CalCOFI/docs/
   repo-actions: [edit]
-  downloads: [pdf, docx, epub]
   sharing: [twitter, facebook, linkedin]
   google-analytics: "G-0HVK8TDMCF"
   search: true
@@ -58,11 +59,20 @@ book:
       light: {path: https://calcofi.io/brand/v2/logo_calcofi_h_light.svg, alt: CalCOFI}
       dark: {path: https://calcofi.io/brand/v2/logo_calcofi_h.svg, alt: CalCOFI}
     logo-href: https://calcofi.io
+    # the pdf and docx are built by the non-blocking second CI job and published as the
+    # assets of the rolling `documents` release, so these links never dangle when a
+    # LaTeX or Word export fails (see .github/workflows/render_book.yml)
+    tools:
+      - icon: file-earmark-pdf
+        text: PDF
+        href: https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.pdf
+      - icon: file-earmark-word
+        text: DOCX
+        href: https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.docx
   chapters:
     - index.qmd
     - reports.qmd
     - apps.qmd
-    - maps.qmd
     - db.qmd
     - metadata.qmd
     - data-access.qmd
@@ -87,9 +97,10 @@ format:
       light: [cosmo, brand-light.scss]
       dark: [cosmo, brand-dark.scss]
     include-in-header: brand-head.html
-    # css: libs/style.css
     toc: true
     number-sections: true
+    # every figure — the pre-rendered SVG diagrams above all — opens full-size
+    lightbox: true
   docx:
     toc: true
     echo: false
@@ -98,11 +109,5 @@ format:
     keep-md: true # see libs/post-render.R
   pdf:
     documentclass: scrreprt
-    # keep-tex: true  # for debugging
-    # include-in-header: libs/preamble.tex
     nocite: |
       @*
-  epub: default
-
-
-

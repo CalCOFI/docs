@@ -1,3 +1,8 @@
+---
+aliases:
+  - maps.html
+---
+
 # Applications
 
 - [CalCOFI Schema](https://calcofi.io/db-schema/)\

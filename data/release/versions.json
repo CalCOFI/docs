@@ -1,0 +1,356 @@
+{
+  "versions": [
+    {
+      "version": "v2026.09.06",
+      "release_date": "2026-09-06",
+      "tables": 23,
+      "total_rows": 348657010,
+      "size_mb": 2350.5,
+      "doi": "10.5281/zenodo.22514953",
+      "consolidated": false
+    },
+    {
+      "version": "v2026.09.04",
+      "release_date": "2026-09-04",
+      "tables": 23,
+      "total_rows": 348657010,
+      "size_mb": 2351.4,
+      "doi": "10.5281/zenodo.22310858",
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.25",
+      "release_date": "2026-08-25",
+      "tables": 18,
+      "total_rows": 320260205,
+      "size_mb": 1998.4,
+      "consolidated": true
+    },
+    {
+      "version": "v2026.08.14",
+      "release_date": "2026-08-14",
+      "tables": 18,
+      "total_rows": 307537056,
+      "size_mb": 1929.5,
+      "consolidated": true
+    },
+    {
+      "version": "v2026.08.11",
+      "release_date": "2026-08-11",
+      "tables": 18,
+      "total_rows": 323912311,
+      "size_mb": 2016.3,
+      "retired": {
+        "retired_utc": "2026-08-25T15:01:49Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.10",
+      "release_date": "2026-08-11",
+      "tables": 18,
+      "total_rows": 323912364,
+      "size_mb": 2016.7,
+      "retired": {
+        "retired_utc": "2026-08-25T15:01:57Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.08",
+      "release_date": "2026-08-08",
+      "tables": 18,
+      "total_rows": 309122838,
+      "size_mb": 1947,
+      "retired": {
+        "retired_utc": "2026-08-25T15:02:05Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.07",
+      "release_date": "2026-08-07",
+      "tables": 18,
+      "total_rows": 323733662,
+      "size_mb": 2023.9,
+      "retired": {
+        "retired_utc": "2026-08-25T15:02:13Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.06",
+      "release_date": "2026-08-06",
+      "tables": 18,
+      "total_rows": 255137845,
+      "size_mb": 1635.9,
+      "retired": {
+        "retired_utc": "2026-08-25T15:02:21Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.05",
+      "release_date": "2026-08-05",
+      "tables": 18,
+      "total_rows": 255137845,
+      "size_mb": 1635.9,
+      "retired": {
+        "retired_utc": "2026-08-25T15:02:29Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.04",
+      "release_date": "2026-08-04",
+      "tables": 18,
+      "total_rows": 255155031,
+      "size_mb": 1635,
+      "retired": {
+        "retired_utc": "2026-08-25T15:02:37Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.03",
+      "release_date": "2026-08-03",
+      "tables": 18,
+      "total_rows": 255037035,
+      "size_mb": 2056.9,
+      "retired": {
+        "retired_utc": "2026-08-25T15:02:45Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.08.02",
+      "release_date": "2026-08-02",
+      "tables": 18,
+      "total_rows": 255037035,
+      "size_mb": 2087.3,
+      "retired": {
+        "retired_utc": "2026-08-25T15:02:54Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.07.30",
+      "release_date": "2026-07-30",
+      "tables": 17,
+      "total_rows": 233730737,
+      "size_mb": 1710,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:02Z",
+        "to": "v2026.08.14",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.08.14 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.07.17",
+      "release_date": "2026-07-17",
+      "tables": 17,
+      "total_rows": 236577241,
+      "size_mb": 1943,
+      "consolidated": true
+    },
+    {
+      "version": "v2026.07.16",
+      "release_date": "2026-07-16",
+      "tables": 17,
+      "total_rows": 236577241,
+      "size_mb": 1944.6,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:09Z",
+        "to": "v2026.07.17",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.07.17 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.07.15",
+      "release_date": "2026-07-15",
+      "tables": 22,
+      "total_rows": 236371206,
+      "size_mb": 5472.3,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:17Z",
+        "to": "v2026.07.17",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.07.17 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.06.26",
+      "release_date": "2026-06-26",
+      "tables": 50,
+      "total_rows": 133966996,
+      "size_mb": 3553.7,
+      "consolidated": true
+    },
+    {
+      "version": "v2026.06.08",
+      "release_date": "2026-06-08",
+      "tables": 44,
+      "total_rows": 133807311,
+      "size_mb": 3552.9,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:27Z",
+        "to": "v2026.06.26",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.06.26 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.06.07",
+      "release_date": "2026-06-07",
+      "tables": 28,
+      "total_rows": 133015544,
+      "size_mb": 3547.1,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:34Z",
+        "to": "v2026.06.26",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.06.26 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.05.20",
+      "release_date": "2026-05-20",
+      "tables": 28,
+      "total_rows": 133022102,
+      "size_mb": 5503,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:42Z",
+        "to": "v2026.06.26",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.06.26 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.05.19",
+      "release_date": "2026-05-19",
+      "tables": 28,
+      "total_rows": 133022102,
+      "size_mb": 5503.2,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:50Z",
+        "to": "v2026.06.26",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.06.26 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.05.15",
+      "release_date": "2026-05-15",
+      "tables": 28,
+      "total_rows": 133013839,
+      "size_mb": 0,
+      "retired": {
+        "retired_utc": "2026-08-25T15:03:58Z",
+        "to": "v2026.06.26",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.06.26 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.05.14",
+      "release_date": "2026-05-14",
+      "tables": 28,
+      "total_rows": 133013839,
+      "size_mb": 0,
+      "consolidated": true
+    },
+    {
+      "version": "v2026.04.08",
+      "release_date": "2026-04-08",
+      "tables": 28,
+      "total_rows": 357418040,
+      "size_mb": 0,
+      "consolidated": true
+    },
+    {
+      "version": "v2026.04.06",
+      "release_date": "2026-04-06",
+      "tables": 29,
+      "total_rows": 361200542,
+      "size_mb": 0,
+      "retired": {
+        "retired_utc": "2026-08-25T15:04:06Z",
+        "to": "v2026.04.08",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.04.08 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.04.03",
+      "release_date": "2026-04-03",
+      "tables": 29,
+      "total_rows": 361183451,
+      "size_mb": 0,
+      "retired": {
+        "retired_utc": "2026-08-25T15:04:14Z",
+        "to": "v2026.04.08",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.04.08 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.04.02",
+      "release_date": "2026-04-02",
+      "tables": 43,
+      "total_rows": 361152303,
+      "size_mb": 11498.3,
+      "retired": {
+        "retired_utc": "2026-08-25T15:04:23Z",
+        "to": "v2026.04.08",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.04.08 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.03.25",
+      "release_date": "2026-03-25",
+      "tables": 18,
+      "total_rows": 354898020,
+      "size_mb": 11263.2,
+      "retired": {
+        "retired_utc": "2026-08-25T15:04:32Z",
+        "to": "v2026.04.08",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.04.08 instead"
+      },
+      "consolidated": false
+    },
+    {
+      "version": "v2026.03.14",
+      "release_date": "2026-03-14",
+      "tables": 20,
+      "total_rows": 357001188,
+      "size_mb": 11330.4,
+      "retired": {
+        "retired_utc": "2026-08-25T15:04:40Z",
+        "to": "v2026.04.08",
+        "reason": "archive thinning (metadata/release_policy.yml): parquet removed, sidecars and RELEASE_NOTES.md kept; read v2026.04.08 instead"
+      },
+      "consolidated": false
+    }
+  ]
+}

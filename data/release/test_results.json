@@ -1,0 +1,500 @@
+{
+  "release_version": "v2026.09.06",
+  "tested_at": "2026-09-06T09:05:02Z",
+  "n_pass": 69,
+  "n_fail": 0,
+  "n_skip": 4,
+  "results": [
+    {
+      "query": "bio-env-matching/by-name.md",
+      "label": "by scientific name",
+      "status": "skip",
+      "reason": "sql_builder=matchIchthyoByName"
+    },
+    {
+      "query": "bio-env-matching/by-taxon.md",
+      "label": "by taxon",
+      "status": "skip",
+      "reason": "sql_builder=matchIchthyoByTaxon"
+    },
+    {
+      "query": "bio-env-matching/custom.md",
+      "label": "custom (bio + env)",
+      "status": "skip",
+      "reason": "sql_builder=matchBioEnv"
+    },
+    {
+      "query": "bio-env-matching/zoo-biomass.md",
+      "label": "zooplankton biomass",
+      "status": "skip",
+      "reason": "sql_builder=matchZooplanktonBiomass"
+    },
+    {
+      "query": "browse/cruises.md",
+      "label": "cruises",
+      "status": "pass",
+      "rows": 200,
+      "ms": 3196.8
+    },
+    {
+      "query": "browse/measurement-types.md",
+      "label": "measurement types",
+      "status": "pass",
+      "rows": 170,
+      "ms": 386.8
+    },
+    {
+      "query": "browse/species.md",
+      "label": "species",
+      "status": "pass",
+      "rows": 1,
+      "ms": 1126.1
+    },
+    {
+      "query": "datasets/bottle.md",
+      "label": "bottle measurements",
+      "status": "pass",
+      "rows": 500,
+      "ms": 9072.5
+    },
+    {
+      "query": "datasets/ichthyo.md",
+      "label": "ichthyoplankton",
+      "status": "pass",
+      "rows": 300,
+      "ms": 6475.1
+    },
+    {
+      "query": "quick-facts/release.md",
+      "label": "release facts",
+      "status": "pass",
+      "rows": 10,
+      "ms": 42038.4
+    },
+    {
+      "query": "spatial/bbox.md",
+      "label": "casts in bbox",
+      "status": "pass",
+      "rows": 288,
+      "ms": 2487
+    },
+    {
+      "query": "sql-shell/shell.md",
+      "label": "shell",
+      "status": "pass",
+      "rows": 1,
+      "ms": 397.1
+    },
+    {
+      "query": "temporal/date-range.md",
+      "label": "casts in date range",
+      "status": "pass",
+      "rows": 294,
+      "ms": 627.3
+    },
+    {
+      "query": "consumer: spatial layer with attributes (joined on spatial_key)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1705,
+      "ms": 2120.5
+    },
+    {
+      "query": "integrity: every spatial_attribute row resolves to a spatial feature",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 636.1
+    },
+    {
+      "query": "integrity: spatial_key is unique",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 243.1
+    },
+    {
+      "query": "consumer: sample joins spatial (CRS tags must agree)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 29135,
+      "ms": 15050.6
+    },
+    {
+      "query": "consumer: obs_bio carries the D8 densities for the default taxon (sardine larvae per 10 m2)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 6158,
+      "ms": 878.3
+    },
+    {
+      "query": "integrity: obs_bio effort_class is the D8 vocabulary",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 889.3
+    },
+    {
+      "query": "integrity: obs_bio never derives a density without effort",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 1022.6
+    },
+    {
+      "query": "consumer: one env variable is one object (temperature, quality-filtered)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 883827,
+      "ms": 2943.5
+    },
+    {
+      "query": "integrity: every sample_spatial root resolves to sample_root",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 2744.8
+    },
+    {
+      "query": "integrity: sample_spatial (root_id, spatial_key) is unique",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 936.8
+    },
+    {
+      "query": "consumer: a region summary joins obs_bio to sample_spatial on root_id",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 70089,
+      "ms": 2101.7
+    },
+    {
+      "query": "integrity: no non-finite coordinates in sample",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 1794.2
+    },
+    {
+      "query": "integrity: seabirds still key itis:, not worms:",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 121,
+      "ms": 1364
+    },
+    {
+      "query": "integrity: taxonomic_status is fetched, not stamped",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1,
+      "ms": 198.7
+    },
+    {
+      "query": "consumer: sample event grain (bottle cast)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 35644,
+      "ms": 201.8
+    },
+    {
+      "query": "consumer: cruise enriched per-dataset counts",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 842,
+      "ms": 196.7
+    },
+    {
+      "query": "consumer: climatology month-matched cell (line 90 st 60, July, 0 m, temperature_ave)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1,
+      "ms": 2840.9
+    },
+    {
+      "query": "integrity: climatology carries one window, stamped on every row",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 6842.3
+    },
+    {
+      "query": "integrity: climatology depth_bin is a 10 m floor bin within 0-500",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 3869.3
+    },
+    {
+      "query": "consumer: obs -> sample.station_uuid resolves to an ichthyo site (bottle)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 707257,
+      "ms": 10717
+    },
+    {
+      "query": "consumer: match env (bottle temperature) [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 884402,
+      "ms": 12941.2
+    },
+    {
+      "query": "consumer: match/download bio (ichthyo abundance x taxon x effort) [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 482250,
+      "ms": 4197.2
+    },
+    {
+      "query": "integrity: every non-null obs.taxon_key resolves to taxon [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 11624.7
+    },
+    {
+      "query": "consumer: seabird/mammal taxa reachable by worms_id (db-viz-hex get_sp) [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 68776,
+      "ms": 628
+    },
+    {
+      "query": "integrity: no farallon obs left unreachable by an authority id (worms_id or itis_id) [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 663.5
+    },
+    {
+      "query": "consumer: station coverage rollup (obs GROUP BY grid,dataset) [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1269,
+      "ms": 9466.2
+    },
+    {
+      "query": "consumer: obs readable over HTTPS as the browser reads it (db-query match.js) [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1258665,
+      "ms": 1700
+    },
+    {
+      "query": "contract: obs.measurement_type all in registry [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 5486.8
+    },
+    {
+      "query": "contract: obs.sample_key resolves in sample [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 6905.4
+    },
+    {
+      "query": "contract: obs.hex_id present where lat/lng [obs]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 14368.9
+    },
+    {
+      "query": "consumer: match env (bottle temperature) [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 884402,
+      "ms": 1072.5
+    },
+    {
+      "query": "consumer: match/download bio (ichthyo abundance x taxon x effort) [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 482250,
+      "ms": 1943.3
+    },
+    {
+      "query": "integrity: every non-null obs.taxon_key resolves to taxon [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 12550.1
+    },
+    {
+      "query": "consumer: seabird/mammal taxa reachable by worms_id (db-viz-hex get_sp) [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 68776,
+      "ms": 4070.9
+    },
+    {
+      "query": "integrity: no farallon obs left unreachable by an authority id (worms_id or itis_id) [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 3929.3
+    },
+    {
+      "query": "consumer: station coverage rollup (obs GROUP BY grid,dataset) [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1269,
+      "ms": 21373.1
+    },
+    {
+      "query": "consumer: obs readable over HTTPS as the browser reads it (db-query match.js) [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1258665,
+      "ms": 1103
+    },
+    {
+      "query": "contract: obs.measurement_type all in registry [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 3439.9
+    },
+    {
+      "query": "contract: obs.sample_key resolves in sample [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 15905.5
+    },
+    {
+      "query": "contract: obs.hex_id present where lat/lng [obs view]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 37484.2
+    },
+    {
+      "query": "consumer: match env (bottle temperature) [obs_env]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 884402,
+      "ms": 3687.1
+    },
+    {
+      "query": "consumer: match/download bio (ichthyo abundance x taxon x effort) [obs_bio]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 482250,
+      "ms": 958.1
+    },
+    {
+      "query": "integrity: every non-null obs_bio.taxon_key resolves to taxon [obs_bio]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 399.5
+    },
+    {
+      "query": "consumer: seabird/mammal taxa reachable by worms_id [obs_bio]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 68776,
+      "ms": 397.1
+    },
+    {
+      "query": "integrity: no farallon obs_bio left unreachable by an authority id (worms_id or itis_id) [obs_bio]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 440.9
+    },
+    {
+      "query": "consumer: station coverage rollup (obs_bio + obs_env GROUP BY grid,dataset) [pair]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1269,
+      "ms": 3137.7
+    },
+    {
+      "query": "consumer: obs_bio single object readable over HTTPS (Explorer, db-query) [obs_bio]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 1258665,
+      "ms": 222.6
+    },
+    {
+      "query": "contract: pair measurement_type all in registry [pair]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 3995.4
+    },
+    {
+      "query": "contract: pair sample_key resolves in sample [pair]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 4324
+    },
+    {
+      "query": "contract: pair hex_id present where lat/lng [pair]",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 3354.9
+    },
+    {
+      "query": "integrity: the obs view reproduces obs row counts (bio = obs_bio, env = obs_env)",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 24110.9
+    },
+    {
+      "query": "integrity: the obs view has obs's 18 columns in order",
+      "label": "consumer-contract",
+      "status": "pass",
+      "rows": 0,
+      "ms": 2220
+    },
+    {
+      "query": "catalog: datasets.json validates against datasets.schema.json",
+      "label": "dataset-catalog",
+      "status": "pass"
+    },
+    {
+      "query": "catalog: schema_version is 1.1 [1.1]",
+      "label": "dataset-catalog",
+      "status": "pass"
+    },
+    {
+      "query": "catalog: every ERDDAP grain is described (grain_without_description: 0; registration_without_id: 0 warn; bbox_implausible: 5 warn)",
+      "label": "dataset-catalog",
+      "status": "pass"
+    },
+    {
+      "query": "catalog: n(datasets) == n(metadata.json datasets) [16 vs 16]",
+      "label": "dataset-catalog",
+      "status": "pass"
+    },
+    {
+      "query": "catalog: no blocking finding (check_dataset_catalog: 0 error, 9 warn, 5 exempt)",
+      "label": "dataset-catalog",
+      "status": "pass"
+    },
+    {
+      "query": "stac: every child collection and this release's item fetched (35 children)",
+      "label": "dataset-catalog",
+      "status": "pass"
+    },
+    {
+      "query": "stac: one item per public dataset at v2026.09.06 [16 vs 16]",
+      "label": "dataset-catalog",
+      "status": "pass"
+    },
+    {
+      "query": "stac: check_stac 0 errors (52 ok, 1 warn)",
+      "label": "dataset-catalog",
+      "status": "pass"
+    }
+  ]
+}

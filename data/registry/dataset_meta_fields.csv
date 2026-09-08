@@ -1,0 +1,33 @@
+field,importance,eml_path,guidance,editable
+description,required,dataset/abstract,"One-paragraph summary used on calcofi.io cards and tables; becomes the EML abstract when `abstract` is empty.",TRUE
+abstract,required,dataset/abstract,"Full EML abstract: what the dataset is, why it exists, what is in it. Falls back to `description` when empty.",TRUE
+methods_md,required,dataset/methods/methodStep/description,"How the data were collected or measured (instruments, protocols). Markdown; becomes an EML methodStep.",TRUE
+study_extent,required,dataset/methods/sampling/studyExtent/description,"The spatial/temporal/thematic scope actually sampled -- what defines one observation.",TRUE
+sampling_description,required,dataset/methods/sampling/samplingDescription,"The sampling design in prose: gear, frequency, station pattern.",TRUE
+quality_control_md,recommended,dataset/methods/qualityControl/description,"QC steps applied before release (flags, corrections, validation).",TRUE
+maintenance,recommended,dataset/maintenance/description,"Update frequency / ongoing vs. completed / how new data enters the series.",TRUE
+creators,required,dataset/creator,"One per line: Name · Organization · orcid · email. The people/orgs who created the dataset.",TRUE
+associated_parties,recommended,dataset/associatedParty,"Other contributors and their role (dataManager, principalInvestigator, ...), same `Name · Org · orcid · email` form as creators.",TRUE
+contact,required,dataset/contact,"An email or URL a user can reach about this dataset. Falls back to the CalCOFI role address when empty.",TRUE
+keywords,required,dataset/keywordSet/keyword,"Free-text keywords, one per line or semicolon-separated.",TRUE
+keywords_gcmd,recommended,dataset/keywordSet/keyword[@keywordThesaurus='GCMD Science Keywords'],"GCMD Science Keywords controlled-vocabulary terms -- what IOOS/NCEI/data.gov facet on.",TRUE
+funding,recommended,dataset/project/funding,"Funding sources / grant numbers.",TRUE
+acknowledgement,recommended,dataset/acknowledgement,"Acknowledgement text a use of this data is required or expected to carry.",TRUE
+citation_main,recommended,additionalMetadata/citation,"The canonical how-to-cite string for this dataset.",TRUE
+citation_others,optional,additionalMetadata/citation,"Other citations relevant to this dataset (companion papers, prior versions), one per line.",TRUE
+license,required,dataset/intellectualRights,"An id from metadata/license.csv (CC-BY-4.0, CC0-1.0, US-PD, custom, unknown). `custom` requires license_url.",TRUE
+license_url,recommended,dataset/intellectualRights,"Required when license = custom: URL to the provider's own terms.",TRUE
+doi,recommended,dataset/alternateIdentifier,"Bare DOI (10.xxxx/...), no https:// prefix, expected to resolve.",TRUE
+pi_names,recommended,dataset/creator,"Principal investigator name(s), semicolon-separated; superseded by `creators` once populated.",TRUE
+link_calcofi_org,recommended,dataset/distribution/online/url,"The calcofi.org landing page for this dataset, if any.",TRUE
+link_data_source,recommended,dataset/distribution/online/url,"The portal/download URL the data is actually fetched from.",TRUE
+link_others,optional,dataset/distribution/online/url,"Other relevant URLs (companion DOIs, related pages), one per line.",TRUE
+coverage_temporal,optional,dataset/coverage/temporalCoverage,"Asserted ONLY when the data provably cannot answer it (see CLAUDE.md 'Coverage is measured, never asserted'); otherwise leave empty -- the release measures it.",TRUE
+coverage_spatial,optional,dataset/coverage/geographicCoverage,"Asserted ONLY when the data provably cannot answer it; otherwise leave empty -- the release measures it.",TRUE
+visibility,required,,"public or internal (checkbox). internal keeps the dataset out of public pages, the sitemap and data.json until the provider conversation is done.",TRUE
+coverage_temporal_observed,optional,dataset/coverage/temporalCoverage,"Measured at release from the assembled core (observed_coverage()). Read-only context.",FALSE
+coverage_spatial_observed,optional,dataset/coverage/geographicCoverage,"Measured at release from the assembled core (observed_coverage()). Read-only context.",FALSE
+source_accessed,optional,,"When the source was last fetched (resolve_source_accessed()). Read-only context.",FALSE
+n_obs,optional,,"Row count in `obs` for this dataset at the last release. Read-only context.",FALSE
+year_min,optional,,"Earliest observed year in the release. Read-only context.",FALSE
+year_max,optional,,"Latest observed year in the release. Read-only context.",FALSE

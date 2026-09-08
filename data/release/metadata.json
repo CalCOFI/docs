@@ -1,0 +1,4913 @@
+{
+  "schema_version": "1.2",
+  "release_version": "v2026.09.06",
+  "release_date": "2026-09-06",
+  "datasets": {
+    "calcofi_bottle": {
+      "provider": "calcofi",
+      "dataset": "bottle",
+      "dataset_name": "CalCOFI Bottle Database",
+      "dataset_name_short": "Hydrographic Bottle",
+      "category": "Physical Oceanography",
+      "color": "#4dabf7",
+      "description": "Hydrographic bottle data including temperature, salinity, oxygen, nutrients, pigments, and C14 from CalCOFI cruises.\n",
+      "citation_main": "CalCOFI. (2023). CalCOFI Bottle Database 194903-202105. CalCOFI.org.",
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/oceanographic-data/bottle-database/",
+      "link_data_source": "https://calcofi.org/downloads/database/CalCOFI_Database_194903-202105_csv_16October2023.zip",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": null,
+      "pi_names": null,
+      "doi": null,
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "sample_measurement",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_calcofi_bottle.html",
+      "coverage_temporal_observed": "1949-02 to 2021-05",
+      "coverage_spatial_observed": "18.4–47.9°N, 164.1–106.0°W",
+      "coverage_bbox": {
+        "lat_min": 18.4167,
+        "lat_max": 47.9167,
+        "lon_min": -164.0833,
+        "lon_max": -105.9667
+      }
+    },
+    "calcofi_ctd-cast": {
+      "provider": "calcofi",
+      "dataset": "ctd-cast",
+      "dataset_name": "CalCOFI CTD Cast Files",
+      "dataset_name_short": "CTD Cast Files",
+      "category": "Physical Oceanography",
+      "color": "#3bc9db",
+      "description": "CTD downcast profiles with temperature, salinity, oxygen, fluorescence, and other sensors at standard depths. 1 m-binned final data for 1993-2002 come from the SIO-CalCOFI Technical Group's own archive (J. Wilkinson), which covers the decade calcofi.org does not publish finals for; 1998 and 2003 onward come from calcofi.org. Where both publish the same cruise, calcofi.org is used; the two agree on 130 of 140 comparable files, and the four cruises that differ are recorded in question calcofi_ctd-cast_20.\n",
+      "citation_main": "CalCOFI. (2023). CalCOFI CTD Cast Files. CalCOFI.org.",
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/oceanographic-data/ctd-cast-files/",
+      "link_data_source": "https://calcofi.org/data/oceanographic-data/ctd-cast-files/",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": null,
+      "pi_names": null,
+      "doi": null,
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "obs_ctd_full",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_calcofi_ctd-cast.html",
+      "coverage_temporal_observed": "1993-08 to 2026-07",
+      "coverage_spatial_observed": "29.8–37.8°N, 126.5–117.3°W",
+      "coverage_bbox": {
+        "lat_min": 29.8268,
+        "lat_max": 37.8491,
+        "lon_min": -126.4843,
+        "lon_max": -117.2734
+      }
+    },
+    "calcofi_dic": {
+      "provider": "calcofi",
+      "dataset": "dic",
+      "dataset_name": "CalCOFI DIC",
+      "dataset_name_short": "Carbonate Chemistry / DIC",
+      "category": "Carbonate System",
+      "color": "#63e6be",
+      "description": "Discrete profile dissolved inorganic carbon (DIC) and total alkalinity (TA) from CalCOFI Niskin bottle samples, quality-controlled using WOCE flagging.\n",
+      "citation_main": "Keeling, C.D.; Lueker, T.J.; Emanuele, G.; Dickson, A.G.; Martz, T.R.; Wolfe, W.H.; Mau, A. (2025). Discrete profile dissolved inorganic carbon, total alkalinity, water temperature and salinity measurements for CalCOFI (NCEI Accession 0301029). NOAA NCEI. https://doi.org/10.25921/3w9f-jd72",
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/oceanographic-data/dic/",
+      "link_data_source": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0301029",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "CC-BY-4.0",
+      "pi_names": "Todd Martz; Aaron Mau",
+      "doi": "10.25921/3w9f-jd72",
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_calcofi_dic.html",
+      "coverage_temporal_observed": "1983-03 to 2021-07",
+      "coverage_spatial_observed": "28.1–37.0°N, 125.1–117.3°W",
+      "coverage_bbox": {
+        "lat_min": 28.1401,
+        "lat_max": 37.0425,
+        "lon_min": -125.0533,
+        "lon_max": -117.3054
+      }
+    },
+    "calcofi_mets": {
+      "provider": "calcofi",
+      "dataset": "mets",
+      "dataset_name": "CalCOFI METS (Underway TSG/Meteorology)",
+      "dataset_name_short": "Underway Meteorological (METS)",
+      "category": "Meteorology & Sea State",
+      "color": "#74c0fc",
+      "description": "Shipboard underway thermosalinograph (TSG) and meteorology data, ~1-minute resolution, recorded continuously along the cruise track.\n",
+      "citation_main": "CalCOFI. Underway (METS) TSG/Meteorology Data. CalCOFI.org.",
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/oceanographic-data/underway/",
+      "link_data_source": "https://calcofi.org/data/oceanographic-data/underway/",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": null,
+      "pi_names": null,
+      "doi": null,
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "obs_mets_full",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_calcofi_mets.html",
+      "coverage_temporal_observed": "2004-01 to 2022-11",
+      "coverage_spatial_observed": "29.8–37.9°N, 125.8–117.2°W",
+      "coverage_bbox": {
+        "lat_min": 29.8225,
+        "lat_max": 37.8658,
+        "lon_min": -125.7906,
+        "lon_max": -117.153
+      }
+    },
+    "calcofi_phyllosoma": {
+      "provider": "calcofi",
+      "dataset": "phyllosoma",
+      "dataset_name": "CalCOFI Lobster Phyllosoma",
+      "dataset_name_short": "Phyllosoma (Lobster Larvae)",
+      "category": "Zooplankton",
+      "color": "#f783ac",
+      "description": "Spiny lobster (Panulirus interruptus) phyllosoma larvae counts by developmental stage from CalCOFI net tows, 1951-2008. Source: EDI knb-lter-cce.188.4 (Koslow).\n",
+      "citation_main": "CalCOFI - Scripps Institution of Oceanography and T. Koslow. 2017. Data pertaining to lobster phyllosoma, Panulirus interruptus, collection methods, locations, identification and staging (1951-2008, months of July and August) ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa",
+      "citation_others": null,
+      "link_calcofi_org": null,
+      "link_data_source": "https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-cce.188.4",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "custom",
+      "pi_names": "J. Anthony Koslow",
+      "doi": "10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa",
+      "license_url": "https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-cce.188.4",
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "obs_attribute",
+        "taxon",
+        "dataset_taxon",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_calcofi_phyllosoma.html",
+      "coverage_temporal_observed": "1951-07 to 2009-07",
+      "coverage_spatial_observed": "31.8–35.1°N, 121.5–117.3°W",
+      "coverage_bbox": {
+        "lat_min": 31.8464,
+        "lat_max": 35.1216,
+        "lon_min": -121.5483,
+        "lon_max": -117.2736
+      }
+    },
+    "calcofi_phytoplankton": {
+      "provider": "calcofi",
+      "dataset": "phytoplankton",
+      "dataset_name": "CalCOFI Phytoplankton (Venrick)",
+      "dataset_name_short": "Phytoplankton",
+      "category": "Phytoplankton",
+      "color": "#12b886",
+      "description": "Abundance and species composition of phytoplankton (385 taxonomic categories) in the California Current, 1996-2022, by inverted-microscope counts (E. Venrick). Samples from the near-surface \"second depth\" are pooled across stations into four regions (NE, SE, Alley, Offshore; Hayward & Venrick 1998) before counting, so the grain is cruise x region, not per-station. Source: EDI knb-lter-cce.254.4.\n",
+      "citation_main": "CalCOFI - Scripps Institution of Oceanography, California Current Ecosystem LTER, and E. Venrick. 2023. Temporal and spatial changes of the abundance and species composition of phytoplankton in the California Current from samples collected aboard CalCOFI cruises from summer 1996 through 2022. ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/60edabfbfd85c623fce05822befaa071",
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/marine-ecosystem-data/phytoplankton-bacterioplankton/",
+      "link_data_source": "https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-cce.254.4",
+      "coverage_temporal": "1996 to 2022",
+      "coverage_spatial": null,
+      "license": "CC0-1.0",
+      "pi_names": "Elizabeth L. Venrick",
+      "doi": "10.6073/pasta/60edabfbfd85c623fce05822befaa071",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "taxon",
+        "dataset_taxon",
+        "taxon_group",
+        "region",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html",
+      "coverage_spatial_observed": "32.4–33.6°N, 121.7–118.8°W",
+      "coverage_bbox": {
+        "lat_min": 32.4352,
+        "lat_max": 33.5668,
+        "lon_min": -121.6543,
+        "lon_max": -118.7603
+      }
+    },
+    "cce-lter_euphausiids": {
+      "provider": "cce-lter",
+      "dataset": "euphausiids",
+      "dataset_name": "CCE-LTER Euphausiid Abundance",
+      "dataset_name_short": "Euphausiids (Krill)",
+      "category": "Euphausiids (Krill)",
+      "color": "#b197fc",
+      "description": "Species- and life-stage-resolved euphausiid (krill) abundance from CalCOFI / CCE-LTER net tows (BTEDB export), 1951-present, one row per tow x species x life stage. Supersedes the prior single-Abundance- column ingest, which had no taxonomic scope (Q02, now resolved) — units remain provisional pending provider confirmation (Q01).\n",
+      "citation_main": "Ohman, M.D. 2022. California Current Ecosystem Euphausiid data, Brinton and Townsend Euphausiid Database (BTEDB) ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4a92a0044bcd1523a4f994ece874a57d",
+      "citation_others": null,
+      "link_calcofi_org": null,
+      "link_data_source": "https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-cce&identifier=313",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "custom",
+      "pi_names": "Rasmus Swalethorp; Linsey Sala",
+      "doi": "10.6073/pasta/4a92a0044bcd1523a4f994ece874a57d",
+      "license_url": "https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-cce.313.1",
+      "acknowledgement": "Data originate from the Brinton and Townsend Euphausiid Database of the Pelagic Invertebrate Collection, Scripps Institution of Oceanography. Supported in recent years by NSF grants to M.D. Ohman and the CCE-LTER site.",
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "taxon",
+        "dataset_taxon",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_cce-lter_euphausiids.html",
+      "coverage_temporal_observed": "1951-01 to 2019-04",
+      "coverage_spatial_observed": "28.0–46.6°N, 133.5–117.3°W",
+      "coverage_bbox": {
+        "lat_min": 28,
+        "lat_max": 46.6,
+        "lon_min": -133.467,
+        "lon_max": -117.283
+      }
+    },
+    "cce-lter_picoplankton-bacteria": {
+      "provider": "cce-lter",
+      "dataset": "picoplankton-bacteria",
+      "dataset_name": "Picoplankton and Bacteria Abundance (CalCOFI Cruise)",
+      "dataset_name_short": "Picoplankton & Bacteria",
+      "category": "Picoplankton & Bacteria",
+      "color": "#94d82d",
+      "description": "Picophytoplankton (Prochlorococcus, Synechococcus, picoeukaryotes) and heterotrophic bacteria abundances analyzed by flow cytometry (FCM) from CCE-CalCOFI Augmented cruises in the California Current System, 2004-2023 (ongoing). Seawater collected from Niskin bottles at 3-8 depths per station; cells fixed shipboard with paraformaldehyde, stained with a DNA-specific dye, and enumerated on an Altra flow cytometer with dual argon-ion lasers.\n",
+      "citation_main": "Landry, M. (2004-2023). Picoplankton and Bacteria Abundance (CalCOFI Cruise). CCE LTER.",
+      "citation_others": null,
+      "link_calcofi_org": null,
+      "link_data_source": "https://oceaninformatics.ucsd.edu/datazoo/catalogs/ccelter/datasets/159",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": null,
+      "pi_names": "Michael Landry",
+      "doi": null,
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_cce-lter_picoplankton-bacteria.html",
+      "coverage_temporal_observed": "2004-11 to 2023-07",
+      "coverage_spatial_observed": "29.8–35.6°N, 124.3–117.3°W",
+      "coverage_bbox": {
+        "lat_min": 29.83,
+        "lat_max": 35.6379,
+        "lon_min": -124.33,
+        "lon_max": -117.295
+      }
+    },
+    "cce-lter_zoodb": {
+      "provider": "cce-lter",
+      "dataset": "zoodb",
+      "dataset_name": "ZooDB Holoplankton Community",
+      "dataset_name_short": "ZooDB (Holoplankton Community)",
+      "category": "Zooplankton",
+      "color": "#38d9a9",
+      "description": "Holoplankton abundance and carbon biomass by 33 higher taxa (copepods to family, plus amphipods, chaetognaths, salps, pyrosomes, pteropods, ostracods, foraminifera, radiolaria and more) from CalCOFI net tows, 1951-2021, enumerated by microscopy (Ohman Lab / SIO Pelagic Invertebrate Collection). One row per (sample, taxon, measurement_type); unpooled tows are station-resolved, pooled samples are per-cruise regional composites. Raw (uncorrected) abundance per 1000 m3 and per m2, plus biomass mg C/m2.\n",
+      "citation_main": null,
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/marine-ecosystem-data/zooplankton/",
+      "link_data_source": "https://oceaninformatics.ucsd.edu/zoodb/",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "custom",
+      "pi_names": "Mark D. Ohman; Bertha Lavaniegos; Linsey Sala",
+      "doi": null,
+      "license_url": "https://oceaninformatics.ucsd.edu/zoodb/",
+      "acknowledgement": "Plankton sample analysis supported by NSF grants to M.D. Ohman and the CCE-LTER site, and by the SIO Pelagic Invertebrate Collection.",
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "taxon",
+        "dataset_taxon",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_cce-lter_zoodb.html",
+      "coverage_temporal_observed": "1951-03 to 2015-04",
+      "coverage_spatial_observed": "30.8–37.6°N, 125.8–117.3°W",
+      "coverage_bbox": {
+        "lat_min": 30.75,
+        "lat_max": 37.62,
+        "lon_min": -125.78,
+        "lon_max": -117.3
+      }
+    },
+    "cce-lter_zooscan": {
+      "provider": "cce-lter",
+      "dataset": "zooscan",
+      "dataset_name": "ZooScan PRPOOS Zooplankton",
+      "dataset_name_short": "ZooScan (Imaged Zooplankton)",
+      "category": "Zooplankton",
+      "color": "#a9e34b",
+      "description": "Zooplankton abundance, carbon biomass, and size (Feret diameter, individual carbon content) from ZooScan optical imaging of CalCOFI / CCE-LTER PRPOOS net tows on lines 80, 87 and 90, 2005-present, machine-classified into 23 bioclasses (copepod groups, euphausiids, chaetognaths, appendicularians, salps, doliolids, pteropods, rhizaria and more). One row per (sample, taxon, measurement_type); per-station tows. Source: SIO Ocean Informatics ZooScan portal (Ohman Lab; interface by Marina Frants).\n",
+      "citation_main": null,
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/marine-ecosystem-data/zooplankton/",
+      "link_data_source": "https://oceaninformatics.ucsd.edu/zooscandb/",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "custom",
+      "pi_names": "Mark D. Ohman; Marina Frants",
+      "doi": null,
+      "license_url": "https://oceaninformatics.ucsd.edu/zooscandb/",
+      "acknowledgement": "Plankton sample analysis supported by NSF grants to M.D. Ohman and the CCE-LTER site.",
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "taxon",
+        "dataset_taxon",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_cce-lter_zooscan.html",
+      "coverage_temporal_observed": "2005-07 to 2026-04",
+      "coverage_spatial_observed": "30.4–34.5°N, 124.0–117.8°W",
+      "coverage_bbox": {
+        "lat_min": 30.42,
+        "lat_max": 34.45,
+        "lon_min": -124,
+        "lon_max": -117.77
+      }
+    },
+    "cdfw_dungeness-crab": {
+      "provider": "cdfw",
+      "dataset": "dungeness-crab",
+      "dataset_name": "CDFW Dungeness Crab Megalopae",
+      "dataset_name_short": "Dungeness Crab Megalopae",
+      "category": "Zooplankton",
+      "color": "#f76707",
+      "description": "Dungeness crab (Metacarcinus magister) megalopae and larval decapods picked from archived CalCOFI oblique-tow plankton samples, examined for the California Department of Fish and Wildlife. Two efforts: a 2008-2014 time series of 310 sorted samples (A. Klemmedson, 2015) yielding 24 M. magister megalopae from 14 samples, and 216 archived samples from the 1949-2009 sorting log that were examined and found free of M. magister (1984-2009, E. Jones, as of 2012-02-15). Only examined samples are published — the log's remaining unsorted rows are a fact of the archive's inventory, not a sample of this dataset. Spring cruises, CalBOBL oblique tows, lines < 80 / stations < 90. Counts are occurrence in the examined aliquot, not standardized density. Sorting was performed at the SIO Pelagic Invertebrate Collection, where the removed megalopae are archived in vials.\n",
+      "citation_main": "Rogers-Bennett, L.; Jones, E.; Klemmedson, A. (2026). CDFW Dungeness Crab Megalopae from archived CalCOFI plankton samples (1949-2014). California Department of Fish and Wildlife, published through CalCOFI / Scripps Institution of Oceanography.\n",
+      "citation_others": null,
+      "link_calcofi_org": null,
+      "link_data_source": "https://library.ucsd.edu/dc/search?q=CalCOFI+Dungeness+crab+megalopae",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "CC-BY-4.0",
+      "pi_names": "Laura Rogers-Bennett",
+      "doi": null,
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "obs_attribute",
+        "sample_measurement",
+        "taxon",
+        "dataset_taxon"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_cdfw_dungeness-crab.html",
+      "coverage_temporal_observed": "1984-05 to 2014-05",
+      "coverage_spatial_observed": "33.5–51.0°N, 132.2–120.7°W",
+      "coverage_bbox": {
+        "lat_min": 33.46,
+        "lat_max": 51.05,
+        "lon_min": -132.25,
+        "lon_max": -120.675
+      }
+    },
+    "farallon_bird-mammal": {
+      "provider": "farallon",
+      "dataset": "bird-mammal",
+      "dataset_name": "CalCOFI Bird & Mammal Census",
+      "dataset_name_short": "Seabirds & Marine Mammals",
+      "category": "Seabirds & Marine Mammals",
+      "color": "#ff8787",
+      "description": "Bird and mammal observations along CalCOFI (and NMFS, CPR) cruise transects, 1987-present. Transect effort, counts, and species live from NOAA ERDDAP (CAC_FI_SBAS_tr / CAC_FI_SBAS_obs / CAC_FI_SBAS_sp); behavior lookups curated via CCE-LTER DataZoo 255 (PI Bill Sydeman).\n",
+      "citation_main": null,
+      "citation_others": null,
+      "link_calcofi_org": null,
+      "link_data_source": "https://oceanview.pfeg.noaa.gov/erddap/tabledap/CAC_FI_SBAS_obs.html",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "custom",
+      "pi_names": "Bill Sydeman",
+      "doi": null,
+      "license_url": "https://oceanview.pfeg.noaa.gov/CalCOFI/app/resources/docs/Data_Sharing_Agreement_FarallonInstitute.pdf",
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "obs_attribute",
+        "taxon",
+        "dataset_taxon",
+        "taxon_group"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html",
+      "coverage_temporal_observed": "1987-05 to 2022-10",
+      "coverage_spatial_observed": "29.8–37.8°N, 126.5–117.2°W",
+      "coverage_bbox": {
+        "lat_min": 29.77,
+        "lat_max": 37.84,
+        "lon_min": -126.47,
+        "lon_max": -117.18
+      }
+    },
+    "sio_mesopelagic-fish": {
+      "provider": "sio",
+      "dataset": "mesopelagic-fish",
+      "dataset_name": "UCSD SIO Mesopelagic Fish",
+      "dataset_name_short": "Mesopelagic Fish",
+      "category": "Mesopelagic Fish",
+      "color": "#5c7cfa",
+      "description": "Species-resolved mesopelagic fish counts (90 named species + 1 unidentified-fish catch-all) from MOHT (Matsuda-Oozeki-Hu Trawl) micronekton net tows, 7 CalCOFI cruises 2010-2012, all on RV New Horizon (NODC 32NM). Larval-fish counts in the same source file are a separate table, not included here.\n",
+      "citation_main": "Koslow, J. Anthony (2016). CalCOFI Trawl Data. In California Cooperative Oceanic Fisheries Investigations (CalCOFI): Acoustic and Trawl Data. UC San Diego Library Digital Collections. https://doi.org/10.6075/J0BZ64DH\n",
+      "citation_others": null,
+      "link_calcofi_org": null,
+      "link_data_source": "https://library.ucsd.edu/dc/object/bb9217084g",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "CC-BY-4.0",
+      "pi_names": "J. Anthony Koslow",
+      "doi": "10.6075/J0BZ64DH",
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "taxon",
+        "dataset_taxon",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_sio_mesopelagic-fish.html",
+      "coverage_temporal_observed": "2010-01 to 2012-02",
+      "coverage_spatial_observed": "29.8–35.0°N, 124.3–117.4°W",
+      "coverage_bbox": {
+        "lat_min": 29.8062,
+        "lat_max": 34.956,
+        "lon_min": -124.2861,
+        "lon_max": -117.3567
+      }
+    },
+    "sio_pic-zooplankton": {
+      "provider": "sio",
+      "dataset": "pic-zooplankton",
+      "dataset_name": "SIO PIC Zooplankton Net Tows",
+      "dataset_name_short": "Zooplankton Net Tows",
+      "category": "Zooplankton",
+      "color": "#69db7c",
+      "description": "Zooplankton net-tow sample registry from the SIO Pelagic Invertebrate Collection, scoped to CalCOFI-program expeditions. Position, time, depth, and gear metadata per tow. Includes the historical grid (1950s-80s inshore, Gulf of California and Baja lines), not just the modern pattern. Biovolume measurements are not in the source file and are pending from the provider (see Questions for Data Providers).\n",
+      "citation_main": null,
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/marine-ecosystem-data/zooplankton/",
+      "link_data_source": null,
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": null,
+      "pi_names": "Rasmus Swalethorp; Ed Weber; Linsey Sala",
+      "doi": null,
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": "sample",
+      "workflow_url": "https://calcofi.io/workflows/ingest_sio_pic-zooplankton.html",
+      "coverage_temporal_observed": "1939-05 to 2024-04",
+      "coverage_spatial_observed": "19.9–51.0°N, 164.1–107.1°W",
+      "coverage_bbox": {
+        "lat_min": 19.917,
+        "lat_max": 51.05,
+        "lon_min": -164.083,
+        "lon_max": -107.1
+      }
+    },
+    "swfsc_cufes": {
+      "provider": "swfsc",
+      "dataset": "cufes",
+      "dataset_name": "CalCOFI Underway CUFES Fish Eggs",
+      "dataset_name_short": "CUFES Fish Eggs",
+      "category": "Fish Eggs & Larvae",
+      "color": "#ffd43b",
+      "description": "Continuous Underway Fish Egg Sampler (CUFES) egg counts (sardine, anchovy, jack mackerel, hake, squid, other) with underway environmental conditions, from CalCOFI cruises (1996-present). Source: NOAA CoastWatch ERDDAP erdCalCOFIcufes.\n",
+      "citation_main": null,
+      "citation_others": null,
+      "link_calcofi_org": null,
+      "link_data_source": "https://coastwatch.pfeg.noaa.gov/erddap/tabledap/erdCalCOFIcufes.html",
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": "custom",
+      "pi_names": "Noelle Bowlin",
+      "doi": null,
+      "license_url": "https://coastwatch.pfeg.noaa.gov/erddap/tabledap/erdCalCOFIcufes.das",
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "taxon",
+        "dataset_taxon",
+        "measurement_type"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_swfsc_cufes.html",
+      "coverage_temporal_observed": "1996-03 to 2022-04",
+      "coverage_spatial_observed": "29.8–54.7°N, 134.1–117.2°W",
+      "coverage_bbox": {
+        "lat_min": 29.8331,
+        "lat_max": 54.7431,
+        "lon_min": -134.1163,
+        "lon_max": -117.2157
+      }
+    },
+    "swfsc_ichthyo": {
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "dataset_name": "SWFSC Ichthyoplankton",
+      "dataset_name_short": "Ichthyoplankton",
+      "category": "Fish Eggs & Larvae",
+      "color": "#ffa94d",
+      "description": "Ichthyoplankton (fish eggs and larvae) collected by bongo and manta net tows on CalCOFI cruises, processed by SWFSC.\n",
+      "citation_main": "NOAA Fisheries SWFSC. CalCOFI Ichthyoplankton Database.",
+      "citation_others": null,
+      "link_calcofi_org": "https://calcofi.org/data/marine-ecosystem-data/fish-eggs-larvae/",
+      "link_data_source": null,
+      "coverage_temporal": null,
+      "coverage_spatial": null,
+      "license": null,
+      "pi_names": null,
+      "doi": null,
+      "license_url": null,
+      "acknowledgement": null,
+      "contact": null,
+      "tables": [
+        "sample",
+        "obs",
+        "obs_attribute",
+        "sample_measurement",
+        "taxon",
+        "dataset_taxon",
+        "cruise",
+        "ship",
+        "lookup",
+        "grid"
+      ],
+      "workflow_url": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html",
+      "coverage_temporal_observed": "1951-01 to 2023-01",
+      "coverage_spatial_observed": "0.0–54.4°N, 179.8–77.2°W",
+      "coverage_bbox": {
+        "lat_min": 0.0017,
+        "lat_max": 54.385,
+        "lon_min": -179.8217,
+        "lon_max": -77.2283
+      }
+    }
+  },
+  "tables": {
+    "sample": {
+      "name_long": "Sample",
+      "description_md": "One row per physical sampling event at its native grain (site, tow, net, cast, bottle, underway, transect, region pool). An adjacency list: `parent_sample_key` points at the containing event and `root_sample_key` at the top of the chain, so counting distinct events at any level is a single `GROUP BY`.",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "obs": {
+      "name_long": "Observation",
+      "description_md": "The occurrence-headline long table: one scalar measurement per row, environmental (`realm = 'env'`) and biological (`realm = 'bio'`) together. Biological taxon is the global `taxon_key`; sub-occurrence detail (length/stage bins, behavior) lives in `obs_attribute`, and event-level effort in `sample_measurement`.",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "sample_measurement": {
+      "name_long": "Sample Measurement",
+      "description_md": "Event-level (effort) measurements: quantities that describe the sampling event itself rather than anything observed in it — net volume filtered, standard haul factor, proportion sorted, bottle cast conditions. Kept apart from `obs` so effort is never mistaken for an observation.",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "measurement_type": {
+      "name_long": "Measurement Type",
+      "description_md": "",
+      "provider": "swfsc",
+      "dataset": "cufes",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_cufes.html"
+    },
+    "dataset": {
+      "name_long": "Dataset",
+      "description_md": "",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "obs_ctd_full": {
+      "name_long": "Observation (Full CTD)",
+      "description_md": "Supplemental full-resolution CTD scans, identical in shape to `obs`. Excluded from the default table list and the ERD because of its size; opt in with `cc_get_db(supplemental = TRUE)`. The default `obs` carries CTD via the adaptively thinned `ctd_thin`.",
+      "provider": "calcofi",
+      "dataset": "ctd-cast",
+      "workflow": "https://calcofi.io/workflows/ingest_calcofi_ctd-cast.html",
+      "supplemental": true
+    },
+    "obs_mets_full": {
+      "name_long": "Obs Mets Full",
+      "description_md": "",
+      "provider": "calcofi",
+      "dataset": "mets",
+      "workflow": "https://calcofi.io/workflows/ingest_calcofi_mets.html",
+      "supplemental": true
+    },
+    "obs_attribute": {
+      "name_long": "Observation Attribute",
+      "description_md": "Sub-occurrence attribution: the breakdown *within* an `obs` headline row. Covers numeric frequency distributions (length bins, stage numbers) and categorical breakdowns (seabird behavior). Counts here sum to the headline where the source is internally consistent.",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "taxon": {
+      "name_long": "Taxon",
+      "description_md": "Taxonomic hierarchy for species via WoRMS and ITIS authorities (built from spp.duckdb via recursive CTEs)",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "dataset_taxon": {
+      "name_long": "Dataset Taxon",
+      "description_md": "Crosswalk from each dataset's own taxon vocabulary to the global `taxon_key`. `obs` resolves its taxon by joining this on (`dataset_key`, `ds_taxa_code`), so a dataset can keep its local codes without leaking them into the shared model.",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "taxon_group": {
+      "name_long": "Taxon Group",
+      "description_md": "Portable groupings of taxa (phytoplankton functional groups, seabirds, marine mammals). Many taxa per group; a taxon may belong to several.",
+      "provider": "farallon",
+      "dataset": "bird-mammal",
+      "workflow": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html"
+    },
+    "region": {
+      "name_long": "Region",
+      "description_md": "The 4 pooled regions defined on the CalCOFI grid (Hayward & Venrick 1998), with the member station codes the source declares and a POLYGON derived from them: each declared station claims the water nearest to it, clipped to the convex hull of all 34 stations and dissolved by region, so the four tile their pooled domain with no overlap and no gaps. Stations are placed by the `+proj=calcofi` transform rather than a grid lookup, which is what lets the six intermediate inshore stations with no cell in the regularized grid resolve. latitude/longitude is an interior representative point, not a centroid (the regions are concave). Land is not erased. See questions Q01.",
+      "provider": "calcofi",
+      "dataset": "phytoplankton",
+      "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+    },
+    "grid": {
+      "name_long": "Grid",
+      "description_md": "CalCOFI survey grid polygons with standard and historical station patterns",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "cruise": {
+      "name_long": "Cruise",
+      "description_md": "unique by ship and year-month",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "ship": {
+      "name_long": "Ship",
+      "description_md": "unique ship with many cruises",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "lookup": {
+      "name_long": "Lookup",
+      "description_md": "Unified vocabulary lookup table for egg stages, larva stages, and tow types",
+      "provider": "swfsc",
+      "dataset": "ichthyo",
+      "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+    },
+    "spatial": {
+      "name_long": "Spatial Layers",
+      "description_md": "Geometries for ancillary spatial layers (CA jurisdictions NOAA boundaries marine protected areas etc.) keyed by spatial_key. Sourced from metadata/spatial_layers.csv. Companion to spatial_attribute.",
+      "provider": "calcofi",
+      "dataset": "spatial"
+    },
+    "spatial_attribute": {
+      "name_long": "Spatial Layer Attributes",
+      "description_md": "Non-geometry attributes for features in spatial in long entity-attribute-value form (spatial_key layer fld and one typed val_* column). Allows attribute schemas to differ across layers without column proliferation.",
+      "provider": "calcofi",
+      "dataset": "spatial"
+    },
+    "obs_bio": {
+      "name_long": "Biological Observations",
+      "description_md": "The bio realm of the observations — one row per taxon occurrence headline (count, density or biomass) with the gear and effort of its own sampling event inline (`tow_type`, `std_haul_factor`, `prop_sorted`, `volume_sampled_m3`), the two standardized densities (`density_per_10m2`, `density_per_1000m3`) and `effort_class`, `qual_ok`, `root_id` (→ `sample_root`), `sample_key` (→ `sample`, the net / tow itself), `hex_id` (H3 res 10) and `hex7`. A strict superset of `obs`'s bio rows under a name mapping (`value` = `measurement_value`, realm implied); `obs` is a view over this table and `obs_env`. One object (~26 MB), read whole by the CalCOFI Explorer. Depth is the observation's, falling back to its sample's span (a net tow) and its root's.",
+      "provider": "calcofi",
+      "dataset": "calcofi-db-release"
+    },
+    "obs_env": {
+      "name_long": "Environmental Observations",
+      "description_md": "The env realm of the observations — one row per measured scalar (bottle, CTD headline series `ctd_thin`, DIC, METS, picoplankton) with the same columns as `obs_bio` (effort and taxon NULL), `qual_ok` evaluated, `root_id` (→ `sample_root`), `sample_key` (→ `sample`, the bottle / cast), `hex_id` and `hex7`. Hive-partitioned by `measurement_type` so one variable is one object (~4 MB median); `obs` is a view over `obs_bio` and this table. A strict superset of `obs`'s env rows under a name mapping (`value` = `measurement_value`).",
+      "provider": "calcofi",
+      "dataset": "calcofi-db-release"
+    },
+    "climatology": {
+      "name_long": "Climatology",
+      "description_md": "The one seasonal baseline every CalCOFI anomaly is a departure from (calcofi4db::build_climatology(), release_database.qmd browser_objects). A plain mean of the env realm of obs per dataset × station (grid_key) × calendar month × 10 m floor depth bin × measurement type across the window stamped on every row (clim_yr_min–clim_yr_max, 1993–2013), kept only where at least 3 distinct cruises contribute. Calendar month because CalCOFI's quarterly cruises give many years per month at a station but few days; 10 m floor bins (labelled by the shallow edge) because obs carries the thinned CTD series and 5 m off-grid bins sample only the profile's inflection points. Partitioned by measurement_type. ctd-transects, the Explorer's Sections lens and calcofi4r::cc_climatology() subtract this table; a cell that is absent has no baseline and its anomaly is blank, never zero.",
+      "provider": "calcofi",
+      "dataset": "calcofi-db-release"
+    }
+  },
+  "columns": {
+    "dataset.provider": {
+      "name_long": "Provider",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.dataset": {
+      "name_long": "Dataset",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.dataset_name": {
+      "name_long": "Dataset Name",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.dataset_name_short": {
+      "name_long": "Dataset Name Short",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.category": {
+      "name_long": "Category",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.color": {
+      "name_long": "Color",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.description": {
+      "name_long": "Description",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.citation_main": {
+      "name_long": "Citation Main",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.citation_others": {
+      "name_long": "Citation Others",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.link_calcofi_org": {
+      "name_long": "Link Calcofi Org",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.link_data_source": {
+      "name_long": "Link Data Source",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.link_others": {
+      "name_long": "Link Others",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.tables": {
+      "name_long": "Tables",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.coverage_temporal": {
+      "name_long": "Coverage Temporal",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.coverage_spatial": {
+      "name_long": "Coverage Spatial",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.license": {
+      "name_long": "License",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.pi_names": {
+      "name_long": "Pi Names",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.doi": {
+      "name_long": "Doi",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.license_url": {
+      "name_long": "License Url",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.acknowledgement": {
+      "name_long": "Acknowledgement",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "dataset.contact": {
+      "name_long": "Contact",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.measurement_type": {
+      "name_long": "Measurement Type",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.description": {
+      "name_long": "Description",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.units": {
+      "name_long": "Units",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.valid_min": {
+      "name_long": "Valid Min",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "measurement_type.valid_max": {
+      "name_long": "Valid Max",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "measurement_type.valid_depth_min_m": {
+      "name_long": "Valid Depth Min M",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "measurement_type.valid_depth_max_m": {
+      "name_long": "Valid Depth Max M",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "measurement_type.derivation": {
+      "name_long": "Derivation",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.is_canonical": {
+      "name_long": "Is Canonical",
+      "units": null,
+      "description_md": "",
+      "data_type": "BOOLEAN"
+    },
+    "measurement_type._source_column": {
+      "name_long": " Source Column",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type._source_table": {
+      "name_long": " Source Table",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type._source_datasets": {
+      "name_long": " Source Datasets",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type._qual_column": {
+      "name_long": " Qual Column",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type._prec_column": {
+      "name_long": " Prec Column",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.grain": {
+      "name_long": "Grain",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.denominator": {
+      "name_long": "Denominator",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.category": {
+      "name_long": "Category",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.variable": {
+      "name_long": "Variable",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.nerc_p01": {
+      "name_long": "Nerc P01",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.units_nerc_p06": {
+      "name_long": "Units Nerc P06",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.provider": {
+      "name_long": "Provider",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "measurement_type.dataset": {
+      "name_long": "Dataset",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs.obs_id": {
+      "name_long": "Observation ID",
+      "description_md": "Surrogate key, renumbered globally when the release concatenates the per-dataset shards.",
+      "data_type": "BIGINT"
+    },
+    "obs.realm": {
+      "name_long": "Realm",
+      "description_md": "`env` for physical/chemical measurements, `bio` for organism observations.",
+      "data_type": "VARCHAR"
+    },
+    "obs.dataset_key": {
+      "name_long": "Dataset Key",
+      "description_md": "Provenance stamp: `provider_dataset`.",
+      "data_type": "VARCHAR"
+    },
+    "obs.sample_key": {
+      "name_long": "Sample Key",
+      "description_md": "The sampling event this observation came from; joins `sample`.",
+      "data_type": "VARCHAR"
+    },
+    "obs.grid_key": {
+      "name_long": "Grid Key",
+      "description_md": "CalCOFI station grid cell, denormalized from `sample` so rollups need no join. NULL for region-pooled data.",
+      "data_type": "VARCHAR"
+    },
+    "obs.cruise_key": {
+      "name_long": "Cruise Key",
+      "description_md": "Cruise, denormalized from `sample` so rollups need no join.",
+      "data_type": "VARCHAR"
+    },
+    "obs.latitude": {
+      "name_long": "Latitude",
+      "units": "decimal degrees",
+      "description_md": "Observation latitude (WGS84).",
+      "data_type": "DOUBLE"
+    },
+    "obs.longitude": {
+      "name_long": "Longitude",
+      "units": "decimal degrees",
+      "description_md": "Observation longitude (WGS84).",
+      "data_type": "DOUBLE"
+    },
+    "obs.datetime": {
+      "name_long": "Datetime",
+      "description_md": "Observation time (UTC). NULL for region-pooled data with no event time.",
+      "data_type": "TIMESTAMP"
+    },
+    "obs.depth_min_m": {
+      "name_long": "Depth Min",
+      "units": "m",
+      "description_md": "Shallowest depth this observation represents.",
+      "data_type": "DOUBLE"
+    },
+    "obs.depth_max_m": {
+      "name_long": "Depth Max",
+      "units": "m",
+      "description_md": "Deepest depth this observation represents; equal to `depth_min_m` for point measurements (bottle, CTD scan).",
+      "data_type": "DOUBLE"
+    },
+    "obs.taxon_key": {
+      "name_long": "Taxon Key",
+      "description_md": "Global taxon key, `worms:<AphiaID>` or `itis:<TSN>` for birds. NULL for `env` rows. Joins `taxon`.",
+      "data_type": "VARCHAR"
+    },
+    "obs.life_stage": {
+      "name_long": "Life Stage",
+      "description_md": "Life stage where the source resolves one (larva, adult, juvenile, egg, phyllosoma).",
+      "data_type": "VARCHAR"
+    },
+    "obs.measurement_type": {
+      "name_long": "Measurement Type",
+      "description_md": "Measured quantity; joins the `measurement_type` vocabulary.",
+      "data_type": "VARCHAR"
+    },
+    "obs.measurement_value": {
+      "name_long": "Measurement Value",
+      "description_md": "The measured value, in the units `measurement_type` declares.",
+      "data_type": "DOUBLE"
+    },
+    "obs.measurement_qual": {
+      "name_long": "Measurement Qualifier",
+      "description_md": "Source quality flag, verbatim.",
+      "data_type": "VARCHAR"
+    },
+    "obs.measurement_prec": {
+      "name_long": "Measurement Precision",
+      "description_md": "Source-reported precision where available.",
+      "data_type": "DOUBLE"
+    },
+    "obs.hex_id": {
+      "name_long": "Hex ID",
+      "description_md": "H3 cell at resolution 10, stored as UBIGINT. Aggregate coarser at query time with `h3_cell_to_parent(hex_id, res)` — there is no per-resolution column ladder.",
+      "data_type": "UBIGINT"
+    },
+    "sample.sample_key": {
+      "name_long": "Sample Key",
+      "description_md": "Globally unique event key, namespaced `dataset_key:sample_type:id` so the same integer id in two datasets — or at two event levels in one dataset — never collides.",
+      "data_type": "VARCHAR"
+    },
+    "sample.sample_type": {
+      "name_long": "Sample Type",
+      "description_md": "Event grain: `site`, `tow`, `net`, `cast`, `bottle`, `underway`, `transect` or `region_pool`.",
+      "data_type": "VARCHAR"
+    },
+    "sample.parent_sample_key": {
+      "name_long": "Parent Sample Key",
+      "description_md": "The containing event (net → tow → site; bottle → cast). NULL at the top of the chain. Flat adjacency list: attributes are not inherited.",
+      "data_type": "VARCHAR"
+    },
+    "sample.root_sample_key": {
+      "name_long": "Root Sample Key",
+      "description_md": "Top of this event's containment chain; equals `sample_key` for single-level datasets. Use `count(DISTINCT root_sample_key)` to count stations/casts irrespective of grain.",
+      "data_type": "VARCHAR"
+    },
+    "sample.dataset_key": {
+      "name_long": "Dataset Key",
+      "description_md": "Provenance stamp: `provider_dataset`.",
+      "data_type": "VARCHAR"
+    },
+    "sample.grid_key": {
+      "name_long": "Grid Key",
+      "description_md": "CalCOFI station grid cell. NULL where the dataset has no station assignment (region-pooled phytoplankton).",
+      "data_type": "VARCHAR"
+    },
+    "sample.site_key": {
+      "name_long": "Site Key",
+      "description_md": "CalCOFI station natural key as the source records it (line/station, e.g. `090.0 060.0`). Present on 13 of the 18 source event tables, so it is carried on the event dimension rather than lost to consolidation; `grid_key` is the derived grid cell, this is the source's own station id.",
+      "data_type": "VARCHAR"
+    },
+    "sample.cruise_key": {
+      "name_long": "Cruise Key",
+      "description_md": "CalCOFI cruise natural key `YYYY-MM-NODC`.",
+      "data_type": "VARCHAR"
+    },
+    "sample.order_occ": {
+      "name_long": "Order of Occupation",
+      "description_md": "Order in which the station was occupied on the cruise. Source spelling varies (`order_occ`, `ord_occ`) and CTD stores it as text; normalised to an integer here.",
+      "data_type": "INTEGER"
+    },
+    "sample.latitude": {
+      "name_long": "Latitude",
+      "units": "decimal degrees",
+      "description_md": "Event latitude (WGS84).",
+      "data_type": "DOUBLE"
+    },
+    "sample.longitude": {
+      "name_long": "Longitude",
+      "units": "decimal degrees",
+      "description_md": "Event longitude (WGS84).",
+      "data_type": "DOUBLE"
+    },
+    "sample.datetime": {
+      "name_long": "Datetime",
+      "description_md": "Event start time (UTC).",
+      "data_type": "TIMESTAMP"
+    },
+    "sample.depth_min_m": {
+      "name_long": "Depth Min",
+      "units": "m",
+      "description_md": "Shallowest depth sampled by this event.",
+      "data_type": "DOUBLE"
+    },
+    "sample.depth_max_m": {
+      "name_long": "Depth Max",
+      "units": "m",
+      "description_md": "Deepest depth sampled by this event.",
+      "data_type": "DOUBLE"
+    },
+    "sample.tow_type": {
+      "name_long": "Tow Type",
+      "description_md": "Net gear code where the dataset records one (C1/CB/CV/PV oblique or vertical, MT manta); NULL for gears and datasets without one. Needed to compute gear-appropriate CPUE.",
+      "data_type": "VARCHAR"
+    },
+    "sample.data_stage": {
+      "name_long": "Data Stage",
+      "description_md": "The source's own processing state for this event: `final` (post-cruise calibrations applied) or `preliminary` (**not for publication** — the source warns that oxygen, nitrate and chlorophyll may change significantly once calibrated). Populated by `calcofi_ctd-cast`; NULL where the dataset draws no such distinction, which is not a claim that the data are final.",
+      "data_type": "VARCHAR"
+    },
+    "sample.geom": {
+      "name_long": "Geometry",
+      "description_md": "Point geometry minted from `longitude`/`latitude` (OGC:CRS84).",
+      "data_type": "GEOMETRY('EPSG:4326')"
+    },
+    "sample.source_uuid": {
+      "name_long": "Source Uuid",
+      "units": null,
+      "description_md": "",
+      "data_type": "UUID"
+    },
+    "sample_measurement.sample_measurement_id": {
+      "name_long": "Sample Measurement ID",
+      "description_md": "Surrogate key.",
+      "data_type": "BIGINT"
+    },
+    "sample_measurement.sample_key": {
+      "name_long": "Sample Key",
+      "description_md": "The sampling event this effort measurement describes; joins `sample`.",
+      "data_type": "VARCHAR"
+    },
+    "sample_measurement.dataset_key": {
+      "name_long": "Dataset Key",
+      "description_md": "Provenance stamp: `provider_dataset`.",
+      "data_type": "VARCHAR"
+    },
+    "sample_measurement.measurement_type": {
+      "name_long": "Measurement Type",
+      "description_md": "Measured quantity; joins the `measurement_type` vocabulary.",
+      "data_type": "VARCHAR"
+    },
+    "sample_measurement.measurement_value": {
+      "name_long": "Measurement Value",
+      "description_md": "The measured value, in the units `measurement_type` declares.",
+      "data_type": "DOUBLE"
+    },
+    "sample_measurement.measurement_qual": {
+      "name_long": "Measurement Qualifier",
+      "description_md": "Source quality flag, verbatim.",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.obs_id": {
+      "name_long": "Obs Id",
+      "units": null,
+      "description_md": "",
+      "data_type": "BIGINT"
+    },
+    "obs_ctd_full.realm": {
+      "name_long": "Realm",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.dataset_key": {
+      "name_long": "Dataset Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.sample_key": {
+      "name_long": "Sample Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.grid_key": {
+      "name_long": "Grid Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.cruise_key": {
+      "name_long": "Cruise Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.latitude": {
+      "name_long": "Latitude",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_ctd_full.longitude": {
+      "name_long": "Longitude",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_ctd_full.datetime": {
+      "name_long": "Datetime",
+      "units": null,
+      "description_md": "",
+      "data_type": "TIMESTAMP"
+    },
+    "obs_ctd_full.depth_min_m": {
+      "name_long": "Depth Min M",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_ctd_full.depth_max_m": {
+      "name_long": "Depth Max M",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_ctd_full.taxon_key": {
+      "name_long": "Taxon Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.life_stage": {
+      "name_long": "Life Stage",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.measurement_type": {
+      "name_long": "Measurement Type",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.measurement_value": {
+      "name_long": "Measurement Value",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_ctd_full.measurement_qual": {
+      "name_long": "Measurement Qual",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_ctd_full.measurement_prec": {
+      "name_long": "Measurement Prec",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_ctd_full.hex_id": {
+      "name_long": "Hex Id",
+      "units": null,
+      "description_md": "",
+      "data_type": "UBIGINT"
+    },
+    "obs_mets_full.obs_id": {
+      "name_long": "Obs Id",
+      "units": null,
+      "description_md": "",
+      "data_type": "BIGINT"
+    },
+    "obs_mets_full.realm": {
+      "name_long": "Realm",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.dataset_key": {
+      "name_long": "Dataset Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.sample_key": {
+      "name_long": "Sample Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.grid_key": {
+      "name_long": "Grid Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.cruise_key": {
+      "name_long": "Cruise Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.latitude": {
+      "name_long": "Latitude",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_mets_full.longitude": {
+      "name_long": "Longitude",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_mets_full.datetime": {
+      "name_long": "Datetime",
+      "units": null,
+      "description_md": "",
+      "data_type": "TIMESTAMP"
+    },
+    "obs_mets_full.depth_min_m": {
+      "name_long": "Depth Min M",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_mets_full.depth_max_m": {
+      "name_long": "Depth Max M",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_mets_full.taxon_key": {
+      "name_long": "Taxon Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.life_stage": {
+      "name_long": "Life Stage",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.measurement_type": {
+      "name_long": "Measurement Type",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.measurement_value": {
+      "name_long": "Measurement Value",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_mets_full.measurement_qual": {
+      "name_long": "Measurement Qual",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_mets_full.measurement_prec": {
+      "name_long": "Measurement Prec",
+      "units": null,
+      "description_md": "",
+      "data_type": "DOUBLE"
+    },
+    "obs_mets_full.hex_id": {
+      "name_long": "Hex Id",
+      "units": null,
+      "description_md": "",
+      "data_type": "UBIGINT"
+    },
+    "dataset_taxon.ds_taxon_key": {
+      "name_long": "Dataset Taxon Key",
+      "description_md": "Key of this crosswalk row, `<dataset-or-known-list>:<local code>`.",
+      "data_type": "VARCHAR"
+    },
+    "dataset_taxon.dataset_key": {
+      "name_long": "Dataset Key",
+      "description_md": "The dataset whose vocabulary this row belongs to.",
+      "data_type": "VARCHAR"
+    },
+    "dataset_taxon.taxon_key": {
+      "name_long": "Taxon Key",
+      "description_md": "The global taxon it resolves to; joins `taxon`.",
+      "data_type": "VARCHAR"
+    },
+    "dataset_taxon.ds_scientific_name": {
+      "name_long": "Dataset Scientific Name",
+      "description_md": "Scientific name as the source dataset spells it.",
+      "data_type": "VARCHAR"
+    },
+    "dataset_taxon.ds_common_name": {
+      "name_long": "Dataset Common Name",
+      "description_md": "Common name as the source dataset spells it.",
+      "data_type": "VARCHAR"
+    },
+    "dataset_taxon.ds_taxa_code": {
+      "name_long": "Dataset Taxa Code",
+      "description_md": "The dataset's own code, as stored on its measurement rows.",
+      "data_type": "VARCHAR"
+    },
+    "dataset_taxon.ds_source_json": {
+      "name_long": "Ds Source Json",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "obs_attribute.obs_attribute_id": {
+      "name_long": "Observation Attribute ID",
+      "description_md": "Surrogate key.",
+      "data_type": "BIGINT"
+    },
+    "obs_attribute.dataset_key": {
+      "name_long": "Dataset Key",
+      "description_md": "Provenance stamp: `provider_dataset`.",
+      "data_type": "VARCHAR"
+    },
+    "obs_attribute.sample_key": {
+      "name_long": "Sample Key",
+      "description_md": "The sampling event; joins `sample`.",
+      "data_type": "VARCHAR"
+    },
+    "obs_attribute.taxon_key": {
+      "name_long": "Taxon Key",
+      "description_md": "Global taxon key; joins `taxon`.",
+      "data_type": "VARCHAR"
+    },
+    "obs_attribute.life_stage": {
+      "name_long": "Life Stage",
+      "description_md": "Life stage the attribution applies to.",
+      "data_type": "VARCHAR"
+    },
+    "obs_attribute.measurement_type": {
+      "name_long": "Measurement Type",
+      "description_md": "The attribute being broken down: `body_length`, `stage` or `behavior`.",
+      "data_type": "VARCHAR"
+    },
+    "obs_attribute.bin_value": {
+      "name_long": "Bin Value",
+      "description_md": "Numeric bin — length in mm, stage number. NULL for categorical attributes.",
+      "data_type": "DOUBLE"
+    },
+    "obs_attribute.bin_label": {
+      "name_long": "Bin Label",
+      "description_md": "Category label — stage description, behavior name. NULL for purely numeric bins.",
+      "data_type": "VARCHAR"
+    },
+    "obs_attribute.count": {
+      "name_long": "Count",
+      "units": "individuals",
+      "description_md": "Number of individuals in this bin.",
+      "data_type": "INTEGER"
+    },
+    "obs_attribute.measurement_qual": {
+      "name_long": "Measurement Qualifier",
+      "description_md": "Source quality flag, verbatim.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.taxon_key": {
+      "name_long": "Taxon Key",
+      "description_md": "Global taxon key: lowercase authority prefix plus id, `worms:127023` or `itis:176754`.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.worms_id": {
+      "name_long": "WoRMS ID",
+      "description_md": "WoRMS AphiaID.",
+      "data_type": "INTEGER"
+    },
+    "taxon.itis_id": {
+      "name_long": "ITIS ID",
+      "description_md": "ITIS Taxonomic Serial Number.",
+      "data_type": "INTEGER"
+    },
+    "taxon.gbif_id": {
+      "name_long": "GBIF ID",
+      "description_md": "GBIF backbone taxon key.",
+      "data_type": "INTEGER"
+    },
+    "taxon.ncbi_id": {
+      "name_long": "NCBI ID",
+      "description_md": "NCBI Taxonomy id.",
+      "data_type": "INTEGER"
+    },
+    "taxon.inat_id": {
+      "name_long": "iNaturalist ID",
+      "description_md": "iNaturalist taxon id.",
+      "data_type": "INTEGER"
+    },
+    "taxon.scientific_name": {
+      "name_long": "Scientific Name",
+      "description_md": "Accepted scientific name.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.common_name": {
+      "name_long": "Common Name",
+      "description_md": "Common name where one is recorded.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.rank": {
+      "name_long": "Rank",
+      "description_md": "Taxonomic rank.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.rank_order": {
+      "name_long": "Rank Order",
+      "description_md": "Ordinal for sorting ranks from kingdom down.",
+      "data_type": "INTEGER"
+    },
+    "taxon.taxonomic_status": {
+      "name_long": "Taxonomic Status",
+      "description_md": "Status as fetched from the keying authority (accepted, unaccepted, superseded combination, ...). Read it with `status_checked` — before v2026.08.05 this column was the literal string \"accepted\" on every row, stamped rather than fetched.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.status_checked": {
+      "name_long": "Status Checked",
+      "description_md": "Date `taxonomic_status` was last confirmed against the authority. A status with no check date is not a fact.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.parent_taxon_key": {
+      "name_long": "Parent Taxon Key",
+      "description_md": "Lineage parent; walk this to expand a taxon to its descendants.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.kingdom": {
+      "name_long": "Kingdom",
+      "description_md": "Kingdom.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.phylum": {
+      "name_long": "Phylum",
+      "description_md": "Phylum.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.class": {
+      "name_long": "Class",
+      "description_md": "Class.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.order_taxon": {
+      "name_long": "Order",
+      "description_md": "Order (named `order_taxon` because `order` is a SQL keyword).",
+      "data_type": "VARCHAR"
+    },
+    "taxon.family": {
+      "name_long": "Family",
+      "description_md": "Family.",
+      "data_type": "VARCHAR"
+    },
+    "taxon.notes": {
+      "name_long": "Notes",
+      "description_md": "Append-only provenance log, one datestamped line per entry: how each id was resolved and any re-key onto an authority-accepted id (e.g. `itis:174553` Puffinus griseus -> `itis:1255050` Ardenna grisea). The dataset's own original code and name stay in `dataset_taxon`.",
+      "data_type": "VARCHAR"
+    },
+    "region.region_key": {
+      "name_long": "Region",
+      "description_md": "Pooled-region code: NE, SE, Alley, or Offshore (primary key).",
+      "data_type": "VARCHAR"
+    },
+    "region.description": {
+      "name_long": "Description",
+      "description_md": "Region description (Northern Inshore, Southern Inshore, California Current, Central Pacific).",
+      "data_type": "VARCHAR"
+    },
+    "region.latitude": {
+      "name_long": "Latitude",
+      "units": "decimal degrees",
+      "description_md": "Provisional region centroid latitude (mean of member CalCOFI stations; Q01).",
+      "data_type": "DOUBLE"
+    },
+    "region.longitude": {
+      "name_long": "Longitude",
+      "units": "decimal degrees",
+      "description_md": "Provisional region centroid longitude (mean of member CalCOFI stations; Q01).",
+      "data_type": "DOUBLE"
+    },
+    "region.n_stations": {
+      "name_long": "Number of Stations",
+      "description_md": "Count of CalCOFI grid stations defining the region.",
+      "data_type": "INTEGER"
+    },
+    "region.station_codes": {
+      "name_long": "Station Codes",
+      "description_md": "Member CalCOFI line.station codes (Hayward & Venrick 1998).",
+      "data_type": "VARCHAR"
+    },
+    "region.geom": {
+      "name_long": "Geom",
+      "units": null,
+      "description_md": "",
+      "data_type": "GEOMETRY('EPSG:4326')"
+    },
+    "taxon_group.taxon_group_key": {
+      "name_long": "Taxon Group Key",
+      "description_md": "Group key, `<dataset-or-known-list>:<group>`.",
+      "data_type": "VARCHAR"
+    },
+    "taxon_group.description": {
+      "name_long": "Description",
+      "description_md": "Human-readable description of the group.",
+      "data_type": "VARCHAR"
+    },
+    "taxon_group.taxon_key": {
+      "name_long": "Taxon Key",
+      "description_md": "A member taxon; joins `taxon`.",
+      "data_type": "VARCHAR"
+    },
+    "cruise.cruise_uuid": {
+      "name_long": "Cruise Uuid",
+      "units": null,
+      "description_md": "CalCOFI species identifier, primary key in species table",
+      "data_type": "UUID"
+    },
+    "cruise.date_ym": {
+      "name_long": "Date Ym",
+      "units": null,
+      "description_md": "Cruise year and month — the YYYY-MM half of cruise_key.",
+      "data_type": "DATE"
+    },
+    "cruise.ship_key": {
+      "name_long": "Ship Key",
+      "units": null,
+      "description_md": "FK to ship; the natural key of the vessel that ran the cruise.",
+      "data_type": "VARCHAR"
+    },
+    "cruise._source_file": {
+      "name_long": " Source File",
+      "units": null,
+      "description_md": "Provenance: the source file this row was read from.",
+      "data_type": "VARCHAR"
+    },
+    "cruise._source_row": {
+      "name_long": " Source Row",
+      "units": null,
+      "description_md": "Provenance: 1-based row number within _source_file, so a value can be traced back to its line.",
+      "data_type": "INTEGER"
+    },
+    "cruise._ingested_at": {
+      "name_long": " Ingested At",
+      "units": null,
+      "description_md": "Provenance: UTC timestamp of the ingest run that produced this row.",
+      "data_type": "TIMESTAMP"
+    },
+    "cruise._source_uuid": {
+      "name_long": " Source Uuid",
+      "units": null,
+      "description_md": "Provenance: the UUID the source record carried where it minted one.",
+      "data_type": "VARCHAR"
+    },
+    "cruise.cruise_key": {
+      "name_long": "Cruise Key",
+      "description_md": "Natural primary key in YYMMKK format (2-digit year + 2-digit month + ship_key)",
+      "data_type": "VARCHAR"
+    },
+    "cruise.date_min": {
+      "name_long": "Date Min",
+      "units": null,
+      "description_md": "",
+      "data_type": "DATE"
+    },
+    "cruise.date_max": {
+      "name_long": "Date Max",
+      "units": null,
+      "description_md": "",
+      "data_type": "DATE"
+    },
+    "grid.grid_key": {
+      "name_long": "Grid Key",
+      "description_md": "Natural primary key (e.g. st60-ln80 or st60-ln80_hist for historical)",
+      "data_type": "VARCHAR"
+    },
+    "grid.station": {
+      "name_long": "Station",
+      "description_md": "Offshore component of CalCOFI coordinate system",
+      "data_type": "DOUBLE"
+    },
+    "grid.line": {
+      "name_long": "Line",
+      "description_md": "Alongshore component of CalCOFI coordinate system",
+      "data_type": "DOUBLE"
+    },
+    "grid.shore": {
+      "name_long": "Shore",
+      "description_md": "Shore classification (nearshore, offshore, etc.)",
+      "data_type": "VARCHAR"
+    },
+    "grid.pattern": {
+      "name_long": "Pattern",
+      "description_md": "Station pattern: 'standard' or 'historical'",
+      "data_type": "VARCHAR"
+    },
+    "grid.spacing": {
+      "name_long": "Spacing",
+      "description_md": "Station spacing in nautical miles",
+      "data_type": "INTEGER"
+    },
+    "grid.zone": {
+      "name_long": "Zone",
+      "description_md": "Combined shore-pattern zone label",
+      "data_type": "VARCHAR"
+    },
+    "grid.area_km2": {
+      "name_long": "Area",
+      "units": "km^2",
+      "description_md": "Grid cell area",
+      "data_type": "DOUBLE"
+    },
+    "grid.geom": {
+      "name_long": "Geometry",
+      "description_md": "Polygon geometry (WGS84 EPSG:4326) of grid cell",
+      "data_type": "GEOMETRY('EPSG:4326')"
+    },
+    "grid.geom_ctr": {
+      "name_long": "Geometry Center",
+      "description_md": "Point geometry (WGS84 EPSG:4326) of grid cell centroid",
+      "data_type": "GEOMETRY('EPSG:4326')"
+    },
+    "lookup.lookup_id": {
+      "name_long": "Lookup ID",
+      "description_md": "Sequential integer primary key",
+      "data_type": "INTEGER"
+    },
+    "lookup.lookup_type": {
+      "name_long": "Lookup Type",
+      "description_md": "Category: 'egg_stage', 'larva_stage', or 'tow_type'",
+      "data_type": "VARCHAR"
+    },
+    "lookup.lookup_num": {
+      "name_long": "Lookup Number",
+      "description_md": "Numeric code for the lookup value",
+      "data_type": "INTEGER"
+    },
+    "lookup.lookup_chr": {
+      "name_long": "Lookup Character",
+      "description_md": "Character code for the lookup value (e.g. YOLK, PREF)",
+      "data_type": "VARCHAR"
+    },
+    "lookup.description": {
+      "name_long": "Description",
+      "description_md": "Human-readable description of the lookup value",
+      "data_type": "VARCHAR"
+    },
+    "lookup._source_file": {
+      "name_long": " Source File",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "lookup._source_row": {
+      "name_long": " Source Row",
+      "units": null,
+      "description_md": "",
+      "data_type": "INTEGER"
+    },
+    "lookup._ingested_at": {
+      "name_long": " Ingested At",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "lookup._source_uuid": {
+      "name_long": " Source Uuid",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "ship.ship_key": {
+      "name_long": "Ship Key",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "ship.ship_name": {
+      "name_long": "Ship Name",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "ship.ship_nodc": {
+      "name_long": "Ship Nodc",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "ship._source_file": {
+      "name_long": " Source File",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "ship._source_row": {
+      "name_long": " Source Row",
+      "units": null,
+      "description_md": "",
+      "data_type": "INTEGER"
+    },
+    "ship._ingested_at": {
+      "name_long": " Ingested At",
+      "units": null,
+      "description_md": "",
+      "data_type": "TIMESTAMP"
+    },
+    "ship._source_uuid": {
+      "name_long": " Source Uuid",
+      "units": null,
+      "description_md": "",
+      "data_type": "VARCHAR"
+    },
+    "cruise.year": {
+      "name_long": "Year",
+      "units": null,
+      "description_md": "Cruise year extracted from date_ym.",
+      "data_type": "INTEGER"
+    },
+    "cruise.month": {
+      "name_long": "Month",
+      "units": null,
+      "description_md": "Cruise month extracted from date_ym.",
+      "data_type": "INTEGER"
+    },
+    "cruise.ship_name": {
+      "name_long": "Ship Name",
+      "units": null,
+      "description_md": "Ship name as resolved against NODC ship registry.",
+      "data_type": "VARCHAR"
+    },
+    "cruise.ship_nodc": {
+      "name_long": "Ship NODC",
+      "units": null,
+      "description_md": "NODC ship code.",
+      "data_type": "VARCHAR"
+    },
+    "cruise.ichthyo": {
+      "name_long": "Ichthyo Sites",
+      "units": "count",
+      "description_md": "Distinct sites sampled by SWFSC ichthyo on this cruise.",
+      "data_type": "BIGINT"
+    },
+    "cruise.bottle": {
+      "name_long": "Bottle Sites",
+      "units": "count",
+      "description_md": "Distinct sites sampled by CalCOFI bottle casts on this cruise.",
+      "data_type": "BIGINT"
+    },
+    "cruise.ctd_cast": {
+      "name_long": "CTD Sites",
+      "units": "count",
+      "description_md": "Distinct sites sampled by CTD casts on this cruise.",
+      "data_type": "BIGINT"
+    },
+    "cruise.dic": {
+      "name_long": "DIC Sites",
+      "units": "count",
+      "description_md": "Distinct sites with NCEI DIC samples on this cruise.",
+      "data_type": "BIGINT"
+    },
+    "spatial.spatial_key": {
+      "name_long": "Spatial Key",
+      "units": null,
+      "description_md": "Primary key, `layer:id` (e.g. `ca_county_boundaries:1`). Join `spatial_attribute` on THIS, not on `id` — `id` is per-layer sequential, so a county and a sanctuary both have id 1 and joining on it alone silently mixes layers.",
+      "data_type": "VARCHAR"
+    },
+    "spatial.id": {
+      "name_long": "Feature ID",
+      "units": null,
+      "description_md": "Per-layer sequential integer feature id. Kept because it is still meaningful within a layer; it is NOT unique across the table.",
+      "data_type": "INTEGER"
+    },
+    "spatial.layer": {
+      "name_long": "Layer",
+      "units": null,
+      "description_md": "Spatial layer slug from metadata/spatial_layers.csv (e.g. ca_county_boundaries).",
+      "data_type": "VARCHAR"
+    },
+    "spatial.name": {
+      "name_long": "Name",
+      "units": null,
+      "description_md": "Per-feature label taken from the layer's name_field, or the layer name itself for dissolved layers.",
+      "data_type": "VARCHAR"
+    },
+    "spatial.geom": {
+      "name_long": "Geometry",
+      "units": null,
+      "description_md": "Feature geometry in WGS84 (EPSG:4326).",
+      "data_type": "GEOMETRY('EPSG:4326')"
+    },
+    "spatial_attribute.spatial_key": {
+      "name_long": "Spatial Key",
+      "units": null,
+      "description_md": "FK to spatial.spatial_key — the feature this attribute belongs to.",
+      "data_type": "VARCHAR"
+    },
+    "spatial_attribute.id": {
+      "name_long": "Feature ID",
+      "units": null,
+      "description_md": "Per-layer feature id matching spatial.id within the same layer. Redundant with spatial_key; kept for readability.",
+      "data_type": "INTEGER"
+    },
+    "spatial_attribute.layer": {
+      "name_long": "Layer",
+      "units": null,
+      "description_md": "Spatial layer slug matching spatial.layer.",
+      "data_type": "VARCHAR"
+    },
+    "spatial_attribute.fld": {
+      "name_long": "Field",
+      "units": null,
+      "description_md": "Name of the source attribute column this row carries. The table is entity-attribute-value — one row per (feature, source column) — so layers with entirely unrelated attribute schemas share one table.",
+      "data_type": "VARCHAR"
+    },
+    "spatial_attribute.val_dbl": {
+      "name_long": "Value (double)",
+      "units": null,
+      "description_md": "Value when the source column was numeric; NULL otherwise. Exactly ONE val_* column is populated per row, chosen by the source column's R type, so read the one matching fld or COALESCE across them as text.",
+      "data_type": "DOUBLE"
+    },
+    "spatial_attribute.val_int": {
+      "name_long": "Value (integer)",
+      "units": null,
+      "description_md": "Value when the source column was integer; NULL otherwise.",
+      "data_type": "INTEGER"
+    },
+    "spatial_attribute.val_chr": {
+      "name_long": "Value (text)",
+      "units": null,
+      "description_md": "Value when the source column was character or factor; NULL otherwise. Also the fallback for any type with no dedicated column.",
+      "data_type": "VARCHAR"
+    },
+    "spatial_attribute.val_date": {
+      "name_long": "Value (date)",
+      "units": null,
+      "description_md": "Value when the source column was a Date; NULL otherwise.",
+      "data_type": "DATE"
+    },
+    "spatial_attribute.val_lgl": {
+      "name_long": "Value (logical)",
+      "units": null,
+      "description_md": "Value when the source column was logical; NULL otherwise.",
+      "data_type": "BOOLEAN"
+    },
+    "sample_root.root_id": {
+      "name_long": "Root ID",
+      "units": null,
+      "description_md": "Dense integer id of a root sampling event (`sample` with no parent), numbered deterministically over `sample_key`; the join key shared by `obs_bio`, `obs_env` and `sample_spatial`.",
+      "data_type": "INTEGER"
+    },
+    "sample_root.root_sample_key": {
+      "name_long": "Root Sample Key",
+      "units": null,
+      "description_md": "The `sample.sample_key` this root id stands for.",
+      "data_type": "VARCHAR"
+    },
+    "sample_root.seafloor_depth_m": {
+      "name_long": "Seafloor Depth",
+      "units": "m",
+      "description_md": "GEBCO seafloor depth at the root sample's position (positive down), from `sample`.",
+      "data_type": "DOUBLE"
+    },
+    "sample_spatial.root_id": {
+      "name_long": "Root ID",
+      "units": null,
+      "description_md": "Root sampling event (`sample_root.root_id`).",
+      "data_type": "INTEGER"
+    },
+    "sample_spatial.root_sample_key": {
+      "name_long": "Root Sample Key",
+      "units": null,
+      "description_md": "The root `sample.sample_key`.",
+      "data_type": "VARCHAR"
+    },
+    "sample_spatial.layer": {
+      "name_long": "Layer",
+      "units": null,
+      "description_md": "Spatial layer name (`spatial.layer`); polygon layers only — boundary lines and ports never hold a sample.",
+      "data_type": "VARCHAR"
+    },
+    "sample_spatial.spatial_key": {
+      "name_long": "Spatial Key",
+      "units": null,
+      "description_md": "The polygon (`spatial.spatial_key`) the root sample's position falls in; exact `ST_Intersects`, computed once at release.",
+      "data_type": "VARCHAR"
+    },
+    "sample_spatial.spatial_name": {
+      "name_long": "Spatial Name",
+      "units": null,
+      "description_md": "Display name of the polygon (`spatial.name`).",
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.obs_id": {
+      "name_long": "Observation ID",
+      "units": null,
+      "description_md": "`obs.obs_id` — the row this slim copy stands for.",
+      "data_type": "BIGINT"
+    },
+    "obs_env.obs_id": {
+      "name_long": "Observation ID",
+      "units": null,
+      "description_md": "`obs.obs_id` — the row this slim copy stands for.",
+      "data_type": "BIGINT"
+    },
+    "obs_bio.root_id": {
+      "name_long": "Root ID",
+      "units": null,
+      "description_md": "Root sampling event (`sample_root.root_id`).",
+      "data_type": "INTEGER"
+    },
+    "obs_env.root_id": {
+      "name_long": "Root ID",
+      "units": null,
+      "description_md": "Root sampling event (`sample_root.root_id`).",
+      "data_type": "INTEGER"
+    },
+    "obs_bio.year": {
+      "name_long": "Year",
+      "units": null,
+      "description_md": "Calendar year of `datetime`.",
+      "data_type": "SMALLINT"
+    },
+    "obs_env.year": {
+      "name_long": "Year",
+      "units": null,
+      "description_md": "Calendar year of `datetime`.",
+      "data_type": "SMALLINT"
+    },
+    "obs_bio.quarter": {
+      "name_long": "Quarter",
+      "units": null,
+      "description_md": "Calendar quarter (1–4) of `datetime`.",
+      "data_type": "TINYINT"
+    },
+    "obs_env.quarter": {
+      "name_long": "Quarter",
+      "units": null,
+      "description_md": "Calendar quarter (1–4) of `datetime`.",
+      "data_type": "TINYINT"
+    },
+    "obs_bio.depth_bin": {
+      "name_long": "Depth Bin",
+      "units": "m",
+      "description_md": "`floor(depth_min_m / 10) * 10`; the observation's depth, falling back to its sample's and its root's.",
+      "data_type": "INTEGER"
+    },
+    "obs_env.depth_bin": {
+      "name_long": "Depth Bin",
+      "units": "m",
+      "description_md": "`floor(depth_min_m / 10) * 10`; the observation's depth, falling back to its sample's and its root's.",
+      "data_type": "INTEGER"
+    },
+    "obs_bio.units": {
+      "name_long": "Units",
+      "units": null,
+      "description_md": "`measurement_type.units` of `value`.",
+      "data_type": "VARCHAR"
+    },
+    "obs_env.units": {
+      "name_long": "Units",
+      "units": null,
+      "description_md": "`measurement_type.units` of `value`.",
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.value": {
+      "name_long": "Value",
+      "units": null,
+      "description_md": "`obs.measurement_value`.",
+      "data_type": "DOUBLE"
+    },
+    "obs_env.value": {
+      "name_long": "Value",
+      "units": null,
+      "description_md": "`obs.measurement_value`.",
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.qual_ok": {
+      "name_long": "Quality OK",
+      "units": null,
+      "description_md": "`calcofi4r::cc_qual_ok_sql()` evaluated at release: FALSE for a dataset's own bad/missing codes (bottle & CTD 8, 9; DIC 3, 4, 9), TRUE otherwise, NULL never.",
+      "data_type": "BOOLEAN"
+    },
+    "obs_env.qual_ok": {
+      "name_long": "Quality OK",
+      "units": null,
+      "description_md": "`calcofi4r::cc_qual_ok_sql()` evaluated at release: FALSE for a dataset's own bad/missing codes (bottle & CTD 8, 9; DIC 3, 4, 9), TRUE otherwise, NULL never.",
+      "data_type": "BOOLEAN"
+    },
+    "obs_bio.tow_type": {
+      "name_long": "Tow Type",
+      "units": null,
+      "description_md": "Gear of the observation's own sample (`sample.tow_type`: C1/CB/CV/PV oblique–vertical, MT manta).",
+      "data_type": "VARCHAR"
+    },
+    "obs_env.tow_type": {
+      "name_long": "Tow Type",
+      "units": null,
+      "description_md": "Gear of the observation's own sample (`sample.tow_type`: C1/CB/CV/PV oblique–vertical, MT manta).",
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.std_haul_factor": {
+      "name_long": "Standard Haul Factor",
+      "units": null,
+      "description_md": "Effort of the observation's own sample (`sample_measurement`).",
+      "data_type": "DOUBLE"
+    },
+    "obs_env.std_haul_factor": {
+      "name_long": "Standard Haul Factor",
+      "units": null,
+      "description_md": "Effort of the observation's own sample (`sample_measurement`).",
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.prop_sorted": {
+      "name_long": "Proportion Sorted",
+      "units": null,
+      "description_md": "Effort of the observation's own sample (`sample_measurement`); 0 or NULL means all of it was sorted.",
+      "data_type": "DOUBLE"
+    },
+    "obs_env.prop_sorted": {
+      "name_long": "Proportion Sorted",
+      "units": null,
+      "description_md": "Effort of the observation's own sample (`sample_measurement`); 0 or NULL means all of it was sorted.",
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.volume_sampled_m3": {
+      "name_long": "Volume Sampled",
+      "units": "m3",
+      "description_md": "Effort of the observation's own sample (`sample_measurement.volume_sampled`).",
+      "data_type": "DOUBLE"
+    },
+    "obs_env.volume_sampled_m3": {
+      "name_long": "Volume Sampled",
+      "units": "m3",
+      "description_md": "Effort of the observation's own sample (`sample_measurement.volume_sampled`).",
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.density_per_10m2": {
+      "name_long": "Density per 10 m²",
+      "units": "count/10m2",
+      "description_md": "Areal, depth-integrated: `count × std_haul_factor / prop_sorted` for C1/CB/CV/PV tows, published per-m² × 10; NULL where the effort is not in the release (`calcofi4r::cc_density_sql()`).",
+      "data_type": "DOUBLE"
+    },
+    "obs_env.density_per_10m2": {
+      "name_long": "Density per 10 m²",
+      "units": "count/10m2",
+      "description_md": "Areal, depth-integrated: `count × std_haul_factor / prop_sorted` for C1/CB/CV/PV tows, published per-m² × 10; NULL where the effort is not in the release (`calcofi4r::cc_density_sql()`).",
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.density_per_1000m3": {
+      "name_long": "Density per 1000 m³",
+      "units": "count/1000m3",
+      "description_md": "Volumetric: `count / prop_sorted / volume_sampled_m3 × 1000` for any tow with a volume, published per-1000 m³ as is; never converted from the areal density.",
+      "data_type": "DOUBLE"
+    },
+    "obs_env.density_per_1000m3": {
+      "name_long": "Density per 1000 m³",
+      "units": "count/1000m3",
+      "description_md": "Volumetric: `count / prop_sorted / volume_sampled_m3 × 1000` for any tow with a volume, published per-1000 m³ as is; never converted from the areal density.",
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.effort_class": {
+      "name_long": "Effort Class",
+      "units": null,
+      "description_md": "`count_with_effort` | `raw_count_no_effort` | `density_as_published` | `other_unit` — what the row can be standardized to; rows without effort are an ingest task, not a UI caveat.",
+      "data_type": "VARCHAR"
+    },
+    "obs_env.effort_class": {
+      "name_long": "Effort Class",
+      "units": null,
+      "description_md": "`count_with_effort` | `raw_count_no_effort` | `density_as_published` | `other_unit` — what the row can be standardized to; rows without effort are an ingest task, not a UI caveat.",
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.hex7": {
+      "name_long": "H3 Cell (res 7)",
+      "units": null,
+      "description_md": "One `UBIGINT` H3 cell at resolution 7 (parent of `hex_id`); coarser parents are bit arithmetic (`calcofi4db::h3_parent_sql()`), no extension needed.",
+      "data_type": "UBIGINT"
+    },
+    "obs_env.hex7": {
+      "name_long": "H3 Cell (res 7)",
+      "units": null,
+      "description_md": "One `UBIGINT` H3 cell at resolution 7 (parent of `hex_id`); coarser parents are bit arithmetic (`calcofi4db::h3_parent_sql()`), no extension needed.",
+      "data_type": "UBIGINT"
+    },
+    "obs_bio.sample_key": {
+      "name_long": "Sample Key",
+      "units": null,
+      "description_md": "The observation's own sampling event (`sample.sample_key`, namespaced `dataset:type:id`) — the net or tow, not just the root (`root_id`); `sample_measurement` and `obs_attribute` join on it.",
+      "data_type": "VARCHAR"
+    },
+    "obs_env.sample_key": {
+      "name_long": "Sample Key",
+      "units": null,
+      "description_md": "The observation's own sampling event (`sample.sample_key`, namespaced `dataset:type:id`) — the bottle or cast, not just the root (`root_id`).",
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.measurement_prec": {
+      "name_long": "Measurement Precision",
+      "units": null,
+      "description_md": "Precision of `value` as the source reports it (`obs.measurement_prec`); NULL where the source states none.",
+      "data_type": "DOUBLE"
+    },
+    "obs_env.measurement_prec": {
+      "name_long": "Measurement Precision",
+      "units": null,
+      "description_md": "Precision of `value` as the source reports it (`obs.measurement_prec`); NULL where the source states none.",
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.hex_id": {
+      "name_long": "H3 Cell (res 10)",
+      "units": null,
+      "description_md": "The `UBIGINT` H3 cell at `CC_H3_RES_MAX` (resolution 10) of the observation's position, as on `obs`; `hex7` is its resolution-7 parent.",
+      "data_type": "UBIGINT"
+    },
+    "obs_env.hex_id": {
+      "name_long": "H3 Cell (res 10)",
+      "units": null,
+      "description_md": "The `UBIGINT` H3 cell at `CC_H3_RES_MAX` (resolution 10) of the observation's position, as on `obs`; `hex7` is its resolution-7 parent.",
+      "data_type": "UBIGINT"
+    },
+    "climatology.dataset_key": {
+      "name_long": "Dataset Key",
+      "units": null,
+      "description_md": "Dataset the baseline is built from (`dataset.dataset_key`); one row per dataset so a CTD-only consumer filters and a cross-dataset one pools weighted by `clim_n` (`sum(clim_mean * clim_n) / sum(clim_n)` is exactly the mean over the pooled observations).",
+      "data_type": "VARCHAR"
+    },
+    "climatology.grid_key": {
+      "name_long": "Grid Key",
+      "units": null,
+      "description_md": "CalCOFI grid cell (`grid.grid_key`). Nearshore cells hold several real stations (`st30-ln90` holds 90.30, 90.28, 90.27.7 and 88.5/30.1), which is why the floor is in cruises.",
+      "data_type": "VARCHAR"
+    },
+    "climatology.month": {
+      "name_long": "Month",
+      "units": null,
+      "description_md": "Calendar month 1–12 of the observations' `datetime`. The anomaly of a cast is its value minus the cell of the cast's own calendar month.",
+      "data_type": "TINYINT"
+    },
+    "climatology.depth_bin": {
+      "name_long": "Depth Bin",
+      "units": "m",
+      "description_md": "10 m floor bin of `obs.depth_min_m` (`floor(depth_min_m / 10) * 10`, the `obs_env.depth_bin` convention), labelled by its shallow edge; 0–500.",
+      "data_type": "INTEGER"
+    },
+    "climatology.measurement_type": {
+      "name_long": "Measurement Type",
+      "units": null,
+      "description_md": "The measured quantity (`measurement_type.measurement_type`); the table's partition column.",
+      "data_type": "VARCHAR"
+    },
+    "climatology.clim_mean": {
+      "name_long": "Climatological Mean",
+      "units": null,
+      "description_md": "Mean of the quality-passing (`cc_qual_ok_sql()`) finite values in the cell over `clim_yr_min`–`clim_yr_max`; in the type's own units.",
+      "data_type": "DOUBLE"
+    },
+    "climatology.clim_sd": {
+      "name_long": "Climatological SD",
+      "units": null,
+      "description_md": "Sample standard deviation of the same values; NULL when `clim_n` = 1. `anomaly / clim_sd` expresses a departure in baseline standard deviations.",
+      "data_type": "DOUBLE"
+    },
+    "climatology.clim_n": {
+      "name_long": "N Observations",
+      "units": null,
+      "description_md": "Observations in the cell.",
+      "data_type": "INTEGER"
+    },
+    "climatology.n_cruises": {
+      "name_long": "N Cruises",
+      "units": null,
+      "description_md": "Distinct cruises in the cell; a cell needs at least 3 to exist.",
+      "data_type": "INTEGER"
+    },
+    "climatology.clim_yr_min": {
+      "name_long": "Window Start",
+      "units": null,
+      "description_md": "First year of the baseline window (inclusive); stamped on every row so the parquet alone says what the mean is a mean of.",
+      "data_type": "SMALLINT"
+    },
+    "climatology.clim_yr_max": {
+      "name_long": "Window End",
+      "units": null,
+      "description_md": "Last year of the baseline window (inclusive).",
+      "data_type": "SMALLINT"
+    },
+    "cruise.cruise_key_method": {
+      "data_type": "VARCHAR"
+    },
+    "cruise.cruise_key_datasets": {
+      "data_type": "VARCHAR"
+    },
+    "dataset.dataset_key": {
+      "data_type": "VARCHAR"
+    },
+    "dataset.source_accessed": {
+      "data_type": "DATE"
+    },
+    "dataset.source_accessed_method": {
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.dataset_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.grid_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.cruise_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.latitude": {
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.longitude": {
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.datetime": {
+      "data_type": "TIMESTAMP"
+    },
+    "obs_bio.depth_min_m": {
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.depth_max_m": {
+      "data_type": "DOUBLE"
+    },
+    "obs_bio.taxon_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.life_stage": {
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.measurement_type": {
+      "data_type": "VARCHAR"
+    },
+    "obs_bio.measurement_qual": {
+      "data_type": "VARCHAR"
+    },
+    "obs_env.dataset_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_env.grid_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_env.cruise_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_env.latitude": {
+      "data_type": "DOUBLE"
+    },
+    "obs_env.longitude": {
+      "data_type": "DOUBLE"
+    },
+    "obs_env.datetime": {
+      "data_type": "TIMESTAMP"
+    },
+    "obs_env.depth_min_m": {
+      "data_type": "DOUBLE"
+    },
+    "obs_env.depth_max_m": {
+      "data_type": "DOUBLE"
+    },
+    "obs_env.taxon_key": {
+      "data_type": "VARCHAR"
+    },
+    "obs_env.life_stage": {
+      "data_type": "VARCHAR"
+    },
+    "obs_env.measurement_type": {
+      "data_type": "VARCHAR"
+    },
+    "obs_env.measurement_qual": {
+      "data_type": "VARCHAR"
+    },
+    "sample.seafloor_depth_m": {
+      "data_type": "DOUBLE"
+    },
+    "sample.station_uuid": {
+      "data_type": "UUID"
+    },
+    "sample.station_uuid_method": {
+      "data_type": "VARCHAR"
+    },
+    "sample_root.dataset_key": {
+      "data_type": "VARCHAR"
+    },
+    "sample_root.sample_type": {
+      "data_type": "VARCHAR"
+    },
+    "sample_root.grid_key": {
+      "data_type": "VARCHAR"
+    },
+    "sample_root.cruise_key": {
+      "data_type": "VARCHAR"
+    },
+    "sample_root.order_occ": {
+      "data_type": "INTEGER"
+    },
+    "sample_root.latitude": {
+      "data_type": "DOUBLE"
+    },
+    "sample_root.longitude": {
+      "data_type": "DOUBLE"
+    },
+    "sample_root.datetime": {
+      "data_type": "TIMESTAMP"
+    },
+    "sample_root.depth_min_m": {
+      "data_type": "DOUBLE"
+    },
+    "sample_root.depth_max_m": {
+      "data_type": "DOUBLE"
+    },
+    "sample_root.tow_type": {
+      "data_type": "VARCHAR"
+    }
+  },
+  "measurement_types": {
+    "abundance": {
+      "description": "Specimen count per net tow (headline occurrence; standardize via std_haul_factor)",
+      "units": "count",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "calcofi_phyllosoma",
+        "cdfw_dungeness-crab",
+        "sio_mesopelagic-fish",
+        "swfsc_cufes",
+        "swfsc_ichthyo"
+      ]
+    },
+    "air_temp_c": {
+      "description": "Air temperature",
+      "units": "deg_C",
+      "is_canonical": true,
+      "valid_min": -50,
+      "valid_max": 60,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "alkalinity": {
+      "description": "Total alkalinity",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 5000,
+      "datasets": [
+        "calcofi_dic"
+      ]
+    },
+    "alkalinity_rep1": {
+      "description": "Total alkalinity replicate 1",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 5000,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "alkalinity_rep2": {
+      "description": "Total alkalinity replicate 2",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "ammonia": {
+      "description": "Ammonia concentration (QC'd)",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 100,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "anchovy_eggs": {
+      "description": "Northern anchovy egg count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "swfsc_cufes"
+      ]
+    },
+    "atm_pressure_mb": {
+      "description": "Atmospheric pressure (ship level)",
+      "units": "mb",
+      "is_canonical": true,
+      "valid_min": 800,
+      "valid_max": 1100,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "atm_pressure_slc_mb": {
+      "description": "Atmospheric pressure (sea-level corrected)",
+      "units": "mb",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "barometric_pressure": {
+      "description": "Barometric pressure",
+      "units": "millibars",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "beam_attenuation": {
+      "description": "Beam attenuation coefficient",
+      "units": "1/m",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "behavior": {
+      "description": "Seabird/marine-mammal behavior category (obs_attribute; e.g. Flying, Feeding)",
+      "units": null,
+      "is_canonical": true,
+      "datasets": [
+        "farallon_bird-mammal"
+      ]
+    },
+    "body_length": {
+      "description": "Larva body length (obs_freq binned attribute)",
+      "units": "mm",
+      "is_canonical": true,
+      "datasets": [
+        "swfsc_ichthyo"
+      ]
+    },
+    "bottom_depth": {
+      "description": "Water depth at the sampling event (sea floor depth beneath the cast)",
+      "units": "m",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "bottom_depth_m": {
+      "description": "Bottom depth (single-beam)",
+      "units": "m",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "bottom_depth_mb_m": {
+      "description": "Bottom depth (multibeam)",
+      "units": "m",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "btl_ammonium": {
+      "description": "Bottle ammonium",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 100,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_chlorophyll_a": {
+      "description": "Bottle chlorophyll-a",
+      "units": "ug/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 100,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_depth": {
+      "description": "Bottle trip depth",
+      "units": "m",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 11000,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_nitrate": {
+      "description": "Bottle nitrate",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 100,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_nitrite": {
+      "description": "Bottle nitrite",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 10,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_phaeopigment": {
+      "description": "Bottle phaeopigment",
+      "units": "ug/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 100,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_phosphate": {
+      "description": "Bottle phosphate",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 10,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_silicate": {
+      "description": "Bottle silicate",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 300,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "btl_temperature": {
+      "description": "Bottle temperature",
+      "units": "degC",
+      "is_canonical": true,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "c14_dark": {
+      "description": "14C assimilation dark/control bottle",
+      "units": "mgC/m3/hld",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "c14_mean": {
+      "description": "Mean 14C assimilation of replicates 1 and 2",
+      "units": "mgC/m3/hld",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "c14_rep1": {
+      "description": "14C assimilation replicate 1",
+      "units": "mgC/m3/hld",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "c14_rep2": {
+      "description": "14C assimilation replicate 2",
+      "units": "mgC/m3/hld",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "carapace_length": {
+      "description": "Carapace length of an individual crab larva (rostrum tip to posterior margin of carapace)",
+      "units": "mm",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 100,
+      "datasets": [
+        "cdfw_dungeness-crab"
+      ]
+    },
+    "chl_fluor": {
+      "description": "Fluorescence (calibrated)",
+      "units": "ug/L",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "chlorophyll_a": {
+      "description": "Chlorophyll-a measured fluorometrically",
+      "units": "ug/L",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "cloud_amount": {
+      "description": "Cloud amount in oktas (WMO 2700)",
+      "units": "oktas",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "cloud_type": {
+      "description": "WMO cloud type code (WMO 0500)",
+      "units": null,
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "count": {
+      "description": "Organism count per survey transect",
+      "units": "count",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "farallon_bird-mammal"
+      ]
+    },
+    "ctdtemp_its90": {
+      "description": "CTD temperature (ITS-90 scale)",
+      "units": "degC",
+      "is_canonical": true,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_dic"
+      ]
+    },
+    "dic": {
+      "description": "Dissolved inorganic carbon",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 5000,
+      "datasets": [
+        "calcofi_dic"
+      ]
+    },
+    "dic_pco2_raw": {
+      "description": "Underway DIC raw pCO2",
+      "units": null,
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "dic_ph_raw": {
+      "description": "Underway DIC raw pH",
+      "units": null,
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "dic_rep1": {
+      "description": "Dissolved inorganic carbon replicate 1",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 5000,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "dic_rep2": {
+      "description": "Dissolved inorganic carbon replicate 2",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "dic_salinity_psu": {
+      "description": "Underway DIC system salinity",
+      "units": "PSU",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "dic_temp_c": {
+      "description": "Underway DIC system temperature",
+      "units": "deg_C",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "dic_valve": {
+      "description": "Underway DIC valve state",
+      "units": null,
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "dry_air_temp": {
+      "description": "Dry air temperature from sling psychrometer",
+      "units": "degC",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "dynamic_height": {
+      "description": "Dynamic height",
+      "units": "dyn m",
+      "is_canonical": true,
+      "valid_min": -50,
+      "valid_max": 50,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "est_chlorophyll_a_cruise_corr": {
+      "description": "Est. chlorophyll-a cruise-corrected",
+      "units": "ug/L",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 1000,
+      "valid_depth_min_m": 0,
+      "valid_depth_max_m": 200,
+      "derivation": "Fluorometer voltage converted to chlorophyll-a by regression against bottle chlorophyll-a, applied to the 1 m bin-averaged voltage over 0-200 m ONLY - undefined deeper by construction, not by absence of data. Bottle-corrected with ONE regression per cruise, fitted from 4-second-averaged sensor data against all the cruise's bottles (n ~ 1400, fliers omitted).",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "est_chlorophyll_a_sta_corr": {
+      "description": "Est. chlorophyll-a station-corrected",
+      "units": "ug/L",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 1000,
+      "valid_depth_min_m": 0,
+      "valid_depth_max_m": 200,
+      "derivation": "Fluorometer voltage converted to chlorophyll-a by regression against bottle chlorophyll-a, applied to the 1 m bin-averaged voltage over 0-200 m ONLY - undefined deeper by construction, not by absence of data. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "est_nitrate_cruise_corr": {
+      "description": "Est. nitrate cruise-corrected",
+      "units": "umol/L",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 200,
+      "derivation": "ISUS nitrate sensor voltage converted to nitrate by regression against bottle nitrate. Bottle-corrected with ONE regression per cruise, fitted from 4-second-averaged sensor data against all the cruise's bottles (n ~ 1400, fliers omitted).",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "est_nitrate_sta_corr": {
+      "description": "Est. nitrate station-corrected",
+      "units": "umol/L",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 200,
+      "derivation": "ISUS nitrate sensor voltage converted to nitrate by regression against bottle nitrate. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "euphausiid_abundance": {
+      "description": "Euphausiid (krill) abundance per net tow, by species and life stage; vertically integrated individuals beneath 1 m2 of sea surface (EDI knb-lter-cce.313.1).",
+      "units": "numberPerMeterSquared",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_euphausiids"
+      ]
+    },
+    "fluorescence_v": {
+      "description": "Fluorescence voltage",
+      "units": "V",
+      "is_canonical": true,
+      "valid_min": -1,
+      "valid_max": 15,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "hake_eggs": {
+      "description": "Pacific hake egg count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "swfsc_cufes"
+      ]
+    },
+    "het_bacteria": {
+      "description": "Heterotrophic bacteria abundance (FCM)",
+      "units": "number/ml",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_picoplankton-bacteria"
+      ]
+    },
+    "isus_v": {
+      "description": "ISUS nitrate voltage",
+      "units": "V",
+      "is_canonical": true,
+      "valid_min": -1,
+      "valid_max": 10,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "jack_mackerel_eggs": {
+      "description": "Jack mackerel egg count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "swfsc_cufes"
+      ]
+    },
+    "light_pct": {
+      "description": "Light intensity of incubation tubes",
+      "units": "%",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 100,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "long_wave_rad": {
+      "description": "Longwave radiation",
+      "units": "W/m2",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "nitrate": {
+      "description": "Nitrate concentration",
+      "units": "umol/L",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "nitrite": {
+      "description": "Nitrite concentration",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 10,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "other_fish_eggs": {
+      "description": "Other fish egg count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "swfsc_cufes"
+      ]
+    },
+    "oxygen": {
+      "description": "Dissolved oxygen",
+      "units": null,
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 20,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "oxygen_btl_ml_l": {
+      "description": "Bottle dissolved oxygen",
+      "units": "ml/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 15,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_btl_umol_kg": {
+      "description": "Bottle dissolved oxygen",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 700,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_ml_l": {
+      "description": "Dissolved oxygen (QC'd)",
+      "units": "ml/L",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "oxygen_ml_l_1": {
+      "description": "DO sensor 1 (uncorrected)",
+      "units": "ml/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 15,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_ml_l_1_cruise_corr": {
+      "description": "DO sensor 1 cruise-corrected",
+      "units": "ml/L",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with ONE regression per cruise, fitted from 4-second-averaged sensor data against all the cruise's bottles (n ~ 1400, fliers omitted).",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_ml_l_1_sta_corr": {
+      "description": "DO sensor 1 station-corrected",
+      "units": "ml/L",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_ml_l_2": {
+      "description": "DO sensor 2 (uncorrected)",
+      "units": "ml/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 15,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_ml_l_2_cruise_corr": {
+      "description": "DO sensor 2 cruise-corrected",
+      "units": "ml/L",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with ONE regression per cruise, fitted from 4-second-averaged sensor data against all the cruise's bottles (n ~ 1400, fliers omitted).",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_ml_l_2_sta_corr": {
+      "description": "DO sensor 2 station-corrected",
+      "units": "ml/L",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_ml_l_ave_sta_corr": {
+      "description": "DO average station-corrected",
+      "units": "ml/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 15,
+      "derivation": "Mean of the two station-corrected oxygen sensors. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_sat_pct": {
+      "description": "Dissolved oxygen saturation",
+      "units": "percent",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 200,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "oxygen_saturation": {
+      "description": "Oxygen percent saturation",
+      "units": "%",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "oxygen_saturation_1": {
+      "description": "Oxygen saturation sensor 1",
+      "units": "%",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_saturation_2": {
+      "description": "Oxygen saturation sensor 2",
+      "units": "%",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_temp_c": {
+      "description": "Oxygen sensor temperature",
+      "units": "deg_C",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "oxygen_umol_kg": {
+      "description": "Dissolved oxygen (QC'd)",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "oxygen_umol_kg_1": {
+      "description": "DO sensor 1 (uncorrected)",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 700,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_umol_kg_1_cruise_corr": {
+      "description": "DO sensor 1 cruise-corrected",
+      "units": "umol/kg",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with ONE regression per cruise, fitted from 4-second-averaged sensor data against all the cruise's bottles (n ~ 1400, fliers omitted).",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_umol_kg_1_sta_corr": {
+      "description": "DO sensor 1 station-corrected",
+      "units": "umol/kg",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_umol_kg_2": {
+      "description": "DO sensor 2 (uncorrected)",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 700,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_umol_kg_2_cruise_corr": {
+      "description": "DO sensor 2 cruise-corrected",
+      "units": "umol/kg",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with ONE regression per cruise, fitted from 4-second-averaged sensor data against all the cruise's bottles (n ~ 1400, fliers omitted).",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_umol_kg_2_sta_corr": {
+      "description": "DO sensor 2 station-corrected",
+      "units": "umol/kg",
+      "is_canonical": false,
+      "derivation": "Sensor oxygen corrected by regression against the bottle oxygens. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "oxygen_umol_kg_ave_sta_corr": {
+      "description": "DO average station-corrected",
+      "units": "umol/kg",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 700,
+      "derivation": "Mean of the two station-corrected oxygen sensors. Bottle-corrected with a regression fitted PER CAST, from 1 m bin-averaged sensor data against that cast's bottles (n ~ 20, fliers omitted). The providers state station-corrected data are the best. Requires a 500 m cast with roughly ten or more bottles, so a null here is by design on shallow or bottle-poor casts.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "par": {
+      "description": "Photosynthetically active radiation",
+      "units": "uE/m2/s",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "par_surf": {
+      "description": "Surface photosynthetically active radiation",
+      "units": null,
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "ph": {
+      "description": "pH",
+      "units": "pH",
+      "is_canonical": true,
+      "valid_min": 6,
+      "valid_max": 9,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "ph_rep1": {
+      "description": "pH replicate 1",
+      "units": "pH",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "ph_rep2": {
+      "description": "pH replicate 2",
+      "units": "pH",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "phaeopigment": {
+      "description": "Phaeopigment measured fluorometrically",
+      "units": "ug/L",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "phosphate": {
+      "description": "Phosphate concentration",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 10,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "phyllosoma_stage_1": {
+      "description": "Phyllosoma stage 1 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_10": {
+      "description": "Phyllosoma stage 10 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_11": {
+      "description": "Phyllosoma stage 11 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_2": {
+      "description": "Phyllosoma stage 2 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_3": {
+      "description": "Phyllosoma stage 3 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_4": {
+      "description": "Phyllosoma stage 4 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_5": {
+      "description": "Phyllosoma stage 5 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_6": {
+      "description": "Phyllosoma stage 6 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_7": {
+      "description": "Phyllosoma stage 7 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_8": {
+      "description": "Phyllosoma stage 8 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phyllosoma_stage_9": {
+      "description": "Phyllosoma stage 9 count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "phytoplankton_abundance": {
+      "description": "Phytoplankton abundance by inverted-microscope count (cells/L)",
+      "units": "cells/L",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phytoplankton"
+      ]
+    },
+    "picoeukaryotes": {
+      "description": "Picoeukaryote abundance (FCM)",
+      "units": "number/ml",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_picoplankton-bacteria"
+      ]
+    },
+    "potential_temperature_1": {
+      "description": "Potential temperature sensor 1",
+      "units": "degC",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "potential_temperature_2": {
+      "description": "Potential temperature sensor 2",
+      "units": "degC",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "pred_chl": {
+      "description": "Estimated chlorophyll-a",
+      "units": "ug/L",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "pred_sal_psu": {
+      "description": "Model-predicted salinity",
+      "units": null,
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "pred_sst_c": {
+      "description": "Model-predicted sea-surface temperature (distinct from Pred_TSGTemp)",
+      "units": null,
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "pred_temp_c": {
+      "description": "Model-predicted temperature",
+      "units": null,
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "pressure": {
+      "description": "Pressure",
+      "units": "dbar",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 6500,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "prochlorococcus": {
+      "description": "Prochlorococcus abundance (FCM); ~80% populated, see Q01",
+      "units": "number/ml",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_picoplankton-bacteria"
+      ]
+    },
+    "prop_sorted": {
+      "description": "Fraction of the sample sorted (event-level effort)",
+      "units": "dimensionless",
+      "is_canonical": true,
+      "datasets": [
+        "cdfw_dungeness-crab",
+        "swfsc_ichthyo"
+      ]
+    },
+    "r_ammonium": {
+      "description": "Reported ammonium concentration (pre-QC)",
+      "units": "umol/L",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 100,
+      "derivation": "reported value interpolated to standard depth (pre-QC, decodr); carries no quality code by design; not an input for further interpolation",
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "r_depth": {
+      "description": "Reported depth from pressure (pre-QC)",
+      "units": "m",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 11000,
+      "derivation": "reported value interpolated to standard depth (pre-QC, decodr); carries no quality code by design; not an input for further interpolation",
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "r_dynamic_height": {
+      "description": "Reported dynamic height (no QC'd counterpart)",
+      "units": "dyn m",
+      "is_canonical": false,
+      "valid_min": -10,
+      "valid_max": 10,
+      "derivation": "reported value interpolated to standard depth (pre-QC, decodr); carries no quality code by design; not an input for further interpolation",
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "r_oxygen_umol_kg": {
+      "description": "Reported oxygen (pre-QC)",
+      "units": "umol/kg",
+      "is_canonical": false,
+      "derivation": "reported value interpolated to standard depth (pre-QC, decodr); carries no quality code by design; not an input for further interpolation",
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "r_salinity_sva": {
+      "description": "Reported Specific Volume Anomaly (pre-QC); WARNING: different parameter/scale than salinity PSS-78",
+      "units": "10^-8 m3/kg",
+      "is_canonical": false,
+      "derivation": "reported value interpolated to standard depth (pre-QC, decodr); carries no quality code by design; not an input for further interpolation",
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "r_temperature": {
+      "description": "Reported potential temperature (pre-QC)",
+      "units": "degC",
+      "is_canonical": false,
+      "derivation": "reported value interpolated to standard depth (pre-QC, decodr); carries no quality code by design; not an input for further interpolation",
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "rel_humidity_pct": {
+      "description": "Relative humidity",
+      "units": "percent",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "salinity": {
+      "description": "Salinity - Practical Salinity Scale 1978 (QC'd)",
+      "units": "PSS-78",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "salinity_1": {
+      "description": "Salinity sensor 1 (uncorrected)",
+      "units": "PSU",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "salinity_1_corr": {
+      "description": "Salinity sensor 1 cruise-corrected",
+      "units": "PSU",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 45,
+      "derivation": "Sensor salinity offset-corrected from bottle salinities BELOW 350 m and applied at all depths, separately for the primary and secondary sensors - a different scheme from the oxygen/nitrate/chlorophyll regressions.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "salinity_2": {
+      "description": "Salinity sensor 2 (uncorrected)",
+      "units": "PSU",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "salinity_2_corr": {
+      "description": "Salinity sensor 2 cruise-corrected",
+      "units": "PSU",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 45,
+      "derivation": "Sensor salinity offset-corrected from bottle salinities BELOW 350 m and applied at all depths, separately for the primary and secondary sensors - a different scheme from the oxygen/nitrate/chlorophyll regressions.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "salinity_ave_corr": {
+      "description": "Average salinity corrected",
+      "units": "PSU",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 45,
+      "derivation": "Mean of the two corrected salinity sensors, each offset-corrected from bottle salinities below 350 m and applied at all depths.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "salinity_btl": {
+      "description": "Bottle salinity",
+      "units": "PSU",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "salinity_pss78": {
+      "description": "Practical salinity (PSS-78)",
+      "units": "PSS-78",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_dic"
+      ]
+    },
+    "sardine_eggs": {
+      "description": "Sardine egg count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "swfsc_cufes"
+      ]
+    },
+    "secchi_depth": {
+      "description": "Secchi disk depth",
+      "units": "meters",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "settled_volume_ml": {
+      "description": "Settled volume of the preserved plankton sample (event-level context)",
+      "units": "ml",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 10000,
+      "datasets": [
+        "cdfw_dungeness-crab"
+      ]
+    },
+    "short_wave_rad": {
+      "description": "Shortwave radiation",
+      "units": "W/m2",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "sigma_theta": {
+      "description": "Potential density (Sigma Theta)",
+      "units": "kg/m3",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "sigma_theta_1": {
+      "description": "Potential density sensor 1",
+      "units": "kg/m3",
+      "is_canonical": true,
+      "valid_min": 15,
+      "valid_max": 35,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "sigma_theta_2": {
+      "description": "Potential density sensor 2",
+      "units": "kg/m3",
+      "is_canonical": false,
+      "valid_min": 15,
+      "valid_max": 35,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "silicate": {
+      "description": "Silicate concentration",
+      "units": "umol/L",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 300,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "small_plankton_biomass": {
+      "description": "Small plankton displacement-volume biomass (event-level)",
+      "units": "mL",
+      "is_canonical": true,
+      "datasets": [
+        "swfsc_ichthyo"
+      ]
+    },
+    "spar": {
+      "description": "Surface PAR",
+      "units": "uE/m2/s",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "specific_volume_anomaly": {
+      "description": "Specific volume anomaly",
+      "units": "10^-8 m3/kg",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "squid_eggs": {
+      "description": "Squid egg count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "swfsc_cufes"
+      ]
+    },
+    "ss_conductivity": {
+      "description": "Sea surface conductivity (independent sensor)",
+      "units": "S/m",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 10,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "sss_psu": {
+      "description": "Sea surface salinity (raw)",
+      "units": "PSU",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "sss_psu_corrected": {
+      "description": "Corrected sea surface salinity",
+      "units": "PSU",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "sst_c": {
+      "description": "Sea surface temperature (raw)",
+      "units": "deg_C",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "sst_c_corrected": {
+      "description": "Corrected sea surface temperature",
+      "units": "deg_C",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "stage": {
+      "description": "Egg or larva developmental stage (obs_freq binned attribute; labeled via lookup)",
+      "units": null,
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_phyllosoma",
+        "swfsc_ichthyo"
+      ]
+    },
+    "std_haul_factor": {
+      "description": "Standardized haul factor (Smith & Richardson 1977; event-level effort)",
+      "units": "dimensionless",
+      "is_canonical": true,
+      "datasets": [
+        "swfsc_ichthyo"
+      ]
+    },
+    "sw_ph": {
+      "description": "Seawater pH",
+      "units": null,
+      "is_canonical": true,
+      "valid_min": 6,
+      "valid_max": 9,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "synechococcus": {
+      "description": "Synechococcus abundance (FCM)",
+      "units": "number/ml",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_picoplankton-bacteria"
+      ]
+    },
+    "temperature": {
+      "description": "Water temperature (QC'd)",
+      "units": "degC",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "temperature_1": {
+      "description": "Temperature sensor 1",
+      "units": "degC",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "temperature_2": {
+      "description": "Temperature sensor 2",
+      "units": "degC",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "temperature_ave": {
+      "description": "Average temperature",
+      "units": "degC",
+      "is_canonical": true,
+      "valid_min": -2,
+      "valid_max": 40,
+      "derivation": "Mean of the two temperature sensors.",
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "total_phyllosoma": {
+      "description": "Total phyllosoma larvae count",
+      "units": "count",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_phyllosoma"
+      ]
+    },
+    "total_plankton_biomass": {
+      "description": "Total plankton displacement-volume biomass (event-level)",
+      "units": "mL",
+      "is_canonical": true,
+      "datasets": [
+        "swfsc_ichthyo"
+      ]
+    },
+    "transmissometer": {
+      "description": "Light transmissometer",
+      "units": "%",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_ctd-cast"
+      ]
+    },
+    "transmissometer_v": {
+      "description": "Transmissometer voltage",
+      "units": "V",
+      "is_canonical": false,
+      "valid_min": -1,
+      "valid_max": 15,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg1_conductivity": {
+      "description": "TSG unit 1 conductivity",
+      "units": "S/m",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg1_density": {
+      "description": "TSG unit 1 density",
+      "units": "kg/m3",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg1_salinity_psu": {
+      "description": "TSG unit 1 salinity",
+      "units": "PSU",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg1_salinity_psu_calibrated": {
+      "description": "Calibrated salinity",
+      "units": "PSU",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg1_sound_velocity": {
+      "description": "TSG unit 1 sound velocity",
+      "units": "m/s",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg1_temp_c": {
+      "description": "TSG unit 1 temperature (physical sensor unconfirmed -- mets_03)",
+      "units": "deg_C",
+      "is_canonical": true,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg1_temp_c_calibrated": {
+      "description": "Calibrated temperature",
+      "units": "deg_C",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg2_conductivity": {
+      "description": "TSG unit 2 conductivity",
+      "units": "S/m",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 10,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg2_density": {
+      "description": "TSG unit 2 density",
+      "units": "kg/m3",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg2_salinity_psu": {
+      "description": "TSG unit 2 salinity",
+      "units": "PSU",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg2_sound_velocity": {
+      "description": "TSG unit 2 sound velocity",
+      "units": "m/s",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg2_temp_c": {
+      "description": "TSG unit 2 temperature (physical sensor unconfirmed -- mets_03)",
+      "units": "deg_C",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg2b_temp_c": {
+      "description": "A SECOND unit-2 temperature appearing alongside TSG_Temp_2 in one file",
+      "units": "deg_C",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg3_conductivity": {
+      "description": "TSG unit 3 conductivity",
+      "units": "S/m",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg3_density": {
+      "description": "TSG unit 3 density",
+      "units": "kg/m3",
+      "is_canonical": false,
+      "valid_min": 900,
+      "valid_max": 1100,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg3_salinity_psu": {
+      "description": "TSG unit 3 salinity",
+      "units": "PSU",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg3_sound_velocity": {
+      "description": "TSG unit 3 sound velocity",
+      "units": "m/s",
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg3_temp_c": {
+      "description": "TSG unit 3 temperature (physical sensor unconfirmed -- mets_03)",
+      "units": "deg_C",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg5_salinity_psu": {
+      "description": "TSG unit 5 salinity",
+      "units": "PSU",
+      "is_canonical": false,
+      "valid_min": 0,
+      "valid_max": 45,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "tsg5_temp_c": {
+      "description": "TSG unit 5 temperature (physical sensor unconfirmed -- mets_03)",
+      "units": "deg_C",
+      "is_canonical": false,
+      "valid_min": -2,
+      "valid_max": 40,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "unknown_measurement_1": {
+      "description": "Unidentified measurement (NaN in every file inspected)",
+      "units": null,
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "unknown_measurement_2": {
+      "description": "Unidentified measurement (NaN in every file inspected)",
+      "units": null,
+      "is_canonical": false,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "uws_flow": {
+      "description": "Underway seawater flow rate",
+      "units": "L/min",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "visibility": {
+      "description": "WMO visibility code (WMO 4300)",
+      "units": null,
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "volume_sampled": {
+      "description": "Volume of water filtered by the net (event-level effort)",
+      "units": "m3",
+      "is_canonical": true,
+      "datasets": [
+        "swfsc_ichthyo"
+      ]
+    },
+    "water_color": {
+      "description": "Water color on Forel-Ule scale",
+      "units": "Forel-Ule",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "wave_direction": {
+      "description": "Wave direction (abbreviated 360 degree azimuth)",
+      "units": "degrees",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "wave_height": {
+      "description": "Wave height",
+      "units": "feet",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "wave_period": {
+      "description": "Wave period",
+      "units": "seconds",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "weather_code": {
+      "description": "WMO weather code (WMO 4501)",
+      "units": null,
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "wet_air_temp": {
+      "description": "Wet air temperature from sling psychrometer",
+      "units": "degC",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "wind_dir_deg": {
+      "description": "Wind direction",
+      "units": "degrees",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 360,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "wind_direction": {
+      "description": "Wind direction (abbreviated 360 degree azimuth)",
+      "units": "degrees",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "wind_speed": {
+      "description": "Wind speed",
+      "units": "knots",
+      "is_canonical": true,
+      "datasets": [
+        "calcofi_bottle"
+      ]
+    },
+    "wind_speed_ms": {
+      "description": "Wind speed",
+      "units": "m/s",
+      "is_canonical": true,
+      "valid_min": 0,
+      "valid_max": 120,
+      "datasets": [
+        "calcofi_mets"
+      ]
+    },
+    "zooplankton_abundance": {
+      "description": "Zooplankton numerical abundance (volumetric density) per net tow, by higher taxon. Raw (uncorrected for net type).",
+      "units": "count/1000m3",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_zoodb"
+      ]
+    },
+    "zooplankton_abundance_areal": {
+      "description": "Zooplankton areal abundance (depth-integrated density) per net tow, by higher taxon. Raw (uncorrected).",
+      "units": "count/m2",
+      "is_canonical": false,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_zoodb"
+      ]
+    },
+    "zooplankton_biomass_carbon": {
+      "description": "Zooplankton carbon biomass per net tow, by higher taxon. Raw (uncorrected for net type).",
+      "units": "mgC/m2",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_zoodb"
+      ]
+    },
+    "zooscan_abundance": {
+      "description": "Zooplankton areal abundance from ZooScan optical imaging, by image-classified bioclass.",
+      "units": "count/m2",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_zooscan"
+      ]
+    },
+    "zooscan_biomass_carbon": {
+      "description": "Estimated zooplankton carbon biomass from ZooScan optical imaging, by bioclass.",
+      "units": "mgC/m2",
+      "is_canonical": true,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_zooscan"
+      ]
+    },
+    "zooscan_carbon_individual": {
+      "description": "Mean individual carbon content from ZooScan optical imaging, by bioclass.",
+      "units": "ugC",
+      "is_canonical": false,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_zooscan"
+      ]
+    },
+    "zooscan_feret_diameter": {
+      "description": "Mean Feret diameter (organism size) from ZooScan optical imaging, by bioclass.",
+      "units": "mm",
+      "is_canonical": false,
+      "valid_min": 0,
+      "datasets": [
+        "cce-lter_zooscan"
+      ]
+    }
+  },
+  "contributions": {
+    "sample": {
+      "total_rows": 1469155,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_bottle",
+          "rows": 931015,
+          "pct": 63.4,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_bottle.html"
+        },
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 213122,
+          "pct": 14.5,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        },
+        {
+          "provider_dataset": "sio_pic-zooplankton",
+          "rows": 82343,
+          "pct": 5.6,
+          "workflow": "https://calcofi.io/workflows/ingest_sio_pic-zooplankton.html"
+        },
+        {
+          "provider_dataset": "calcofi_mets",
+          "rows": 77795,
+          "pct": 5.3,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_mets.html"
+        },
+        {
+          "provider_dataset": "farallon_bird-mammal",
+          "rows": 64421,
+          "pct": 4.4,
+          "workflow": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html"
+        },
+        {
+          "provider_dataset": "swfsc_cufes",
+          "rows": 49572,
+          "pct": 3.4,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_cufes.html"
+        },
+        {
+          "provider_dataset": "calcofi_ctd-cast",
+          "rows": 19242,
+          "pct": 1.3,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_ctd-cast.html"
+        },
+        {
+          "provider_dataset": "cce-lter_picoplankton-bacteria",
+          "rows": 16017,
+          "pct": 1.1,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_picoplankton-bacteria.html"
+        },
+        {
+          "provider_dataset": "cce-lter_euphausiids",
+          "rows": 7482,
+          "pct": 0.5,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_euphausiids.html"
+        },
+        {
+          "provider_dataset": "calcofi_dic",
+          "rows": 3261,
+          "pct": 0.2,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_dic.html"
+        },
+        {
+          "provider_dataset": "calcofi_phyllosoma",
+          "rows": 1859,
+          "pct": 0.1,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phyllosoma.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zooscan",
+          "rows": 1483,
+          "pct": 0.1,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zooscan.html"
+        },
+        {
+          "provider_dataset": "cdfw_dungeness-crab",
+          "rows": 526,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_cdfw_dungeness-crab.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zoodb",
+          "rows": 506,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zoodb.html"
+        },
+        {
+          "provider_dataset": "calcofi_phytoplankton",
+          "rows": 409,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+        },
+        {
+          "provider_dataset": "sio_mesopelagic-fish",
+          "rows": 102,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_sio_mesopelagic-fish.html"
+        }
+      ]
+    },
+    "obs": {
+      "total_rows": 26265248,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_ctd-cast",
+          "rows": 13295014,
+          "pct": 50.6,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_ctd-cast.html"
+        },
+        {
+          "provider_dataset": "calcofi_bottle",
+          "rows": 11135600,
+          "pct": 42.4,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_bottle.html"
+        },
+        {
+          "provider_dataset": "calcofi_mets",
+          "rows": 511459,
+          "pct": 1.9,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_mets.html"
+        },
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 482250,
+          "pct": 1.8,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        },
+        {
+          "provider_dataset": "swfsc_cufes",
+          "rows": 284097,
+          "pct": 1.1,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_cufes.html"
+        },
+        {
+          "provider_dataset": "calcofi_phytoplankton",
+          "rows": 159804,
+          "pct": 0.6,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zooscan",
+          "rows": 126692,
+          "pct": 0.5,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zooscan.html"
+        },
+        {
+          "provider_dataset": "cce-lter_euphausiids",
+          "rows": 100505,
+          "pct": 0.4,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_euphausiids.html"
+        },
+        {
+          "provider_dataset": "farallon_bird-mammal",
+          "rows": 69661,
+          "pct": 0.3,
+          "workflow": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html"
+        },
+        {
+          "provider_dataset": "cce-lter_picoplankton-bacteria",
+          "rows": 60802,
+          "pct": 0.2,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_picoplankton-bacteria.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zoodb",
+          "rows": 30948,
+          "pct": 0.1,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zoodb.html"
+        },
+        {
+          "provider_dataset": "calcofi_dic",
+          "rows": 3708,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_dic.html"
+        },
+        {
+          "provider_dataset": "calcofi_phyllosoma",
+          "rows": 1859,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phyllosoma.html"
+        },
+        {
+          "provider_dataset": "cdfw_dungeness-crab",
+          "rows": 1456,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_cdfw_dungeness-crab.html"
+        },
+        {
+          "provider_dataset": "sio_mesopelagic-fish",
+          "rows": 1393,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_sio_mesopelagic-fish.html"
+        }
+      ]
+    },
+    "sample_measurement": {
+      "total_rows": 589603,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 320110,
+          "pct": 54.3,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        },
+        {
+          "provider_dataset": "calcofi_bottle",
+          "rows": 268876,
+          "pct": 45.6,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_bottle.html"
+        },
+        {
+          "provider_dataset": "cdfw_dungeness-crab",
+          "rows": 617,
+          "pct": 0.1,
+          "workflow": "https://calcofi.io/workflows/ingest_cdfw_dungeness-crab.html"
+        }
+      ]
+    },
+    "measurement_type": {
+      "total_rows": 200,
+      "over_attributed": true,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_bottle",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_bottle.html"
+        },
+        {
+          "provider_dataset": "calcofi_ctd-cast",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_ctd-cast.html"
+        },
+        {
+          "provider_dataset": "calcofi_dic",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_dic.html"
+        },
+        {
+          "provider_dataset": "calcofi_mets",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_mets.html"
+        },
+        {
+          "provider_dataset": "calcofi_phyllosoma",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phyllosoma.html"
+        },
+        {
+          "provider_dataset": "calcofi_phytoplankton",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+        },
+        {
+          "provider_dataset": "cce-lter_euphausiids",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_euphausiids.html"
+        },
+        {
+          "provider_dataset": "cce-lter_picoplankton-bacteria",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_picoplankton-bacteria.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zoodb",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zoodb.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zooscan",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zooscan.html"
+        },
+        {
+          "provider_dataset": "sio_mesopelagic-fish",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_sio_mesopelagic-fish.html"
+        },
+        {
+          "provider_dataset": "swfsc_cufes",
+          "rows": 200,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_cufes.html"
+        }
+      ]
+    },
+    "obs_ctd_full": {
+      "total_rows": 271394164,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_ctd-cast",
+          "rows": 271394164,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_ctd-cast.html"
+        }
+      ]
+    },
+    "obs_mets_full": {
+      "total_rows": 19927416,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_mets",
+          "rows": 19927416,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_mets.html"
+        }
+      ]
+    },
+    "obs_attribute": {
+      "total_rows": 458184,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 369978,
+          "pct": 80.7,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        },
+        {
+          "provider_dataset": "farallon_bird-mammal",
+          "rows": 87813,
+          "pct": 19.2,
+          "workflow": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html"
+        },
+        {
+          "provider_dataset": "calcofi_phyllosoma",
+          "rows": 369,
+          "pct": 0.1,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phyllosoma.html"
+        },
+        {
+          "provider_dataset": "cdfw_dungeness-crab",
+          "rows": 24,
+          "pct": 0,
+          "workflow": "https://calcofi.io/workflows/ingest_cdfw_dungeness-crab.html"
+        }
+      ]
+    },
+    "taxon": {
+      "total_rows": 2614,
+      "over_attributed": true,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_phyllosoma",
+          "rows": 13,
+          "pct": 0.5,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phyllosoma.html"
+        },
+        {
+          "provider_dataset": "calcofi_phytoplankton",
+          "rows": 542,
+          "pct": 20.7,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+        },
+        {
+          "provider_dataset": "cce-lter_euphausiids",
+          "rows": 54,
+          "pct": 2.1,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_euphausiids.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zoodb",
+          "rows": 75,
+          "pct": 2.9,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zoodb.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zooscan",
+          "rows": 42,
+          "pct": 1.6,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zooscan.html"
+        },
+        {
+          "provider_dataset": "cdfw_dungeness-crab",
+          "rows": 17,
+          "pct": 0.7,
+          "workflow": "https://calcofi.io/workflows/ingest_cdfw_dungeness-crab.html"
+        },
+        {
+          "provider_dataset": "farallon_bird-mammal",
+          "rows": 266,
+          "pct": 10.2,
+          "workflow": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html"
+        },
+        {
+          "provider_dataset": "sio_mesopelagic-fish",
+          "rows": 206,
+          "pct": 7.9,
+          "workflow": "https://calcofi.io/workflows/ingest_sio_mesopelagic-fish.html"
+        },
+        {
+          "provider_dataset": "swfsc_cufes",
+          "rows": 33,
+          "pct": 1.3,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_cufes.html"
+        },
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 1686,
+          "pct": 64.5,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        }
+      ]
+    },
+    "dataset_taxon": {
+      "total_rows": 1917,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_phyllosoma",
+          "rows": 1,
+          "pct": 0.1,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phyllosoma.html"
+        },
+        {
+          "provider_dataset": "calcofi_phytoplankton",
+          "rows": 393,
+          "pct": 20.5,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+        },
+        {
+          "provider_dataset": "cce-lter_euphausiids",
+          "rows": 37,
+          "pct": 1.9,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_euphausiids.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zoodb",
+          "rows": 33,
+          "pct": 1.7,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zoodb.html"
+        },
+        {
+          "provider_dataset": "cce-lter_zooscan",
+          "rows": 23,
+          "pct": 1.2,
+          "workflow": "https://calcofi.io/workflows/ingest_cce-lter_zooscan.html"
+        },
+        {
+          "provider_dataset": "cdfw_dungeness-crab",
+          "rows": 3,
+          "pct": 0.2,
+          "workflow": "https://calcofi.io/workflows/ingest_cdfw_dungeness-crab.html"
+        },
+        {
+          "provider_dataset": "farallon_bird-mammal",
+          "rows": 164,
+          "pct": 8.6,
+          "workflow": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html"
+        },
+        {
+          "provider_dataset": "sio_mesopelagic-fish",
+          "rows": 90,
+          "pct": 4.7,
+          "workflow": "https://calcofi.io/workflows/ingest_sio_mesopelagic-fish.html"
+        },
+        {
+          "provider_dataset": "swfsc_cufes",
+          "rows": 6,
+          "pct": 0.3,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_cufes.html"
+        },
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 1167,
+          "pct": 60.9,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        }
+      ]
+    },
+    "taxon_group": {
+      "total_rows": 441,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_phytoplankton",
+          "rows": 311,
+          "pct": 70.5,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+        },
+        {
+          "provider_dataset": "farallon_bird-mammal",
+          "rows": 130,
+          "pct": 29.5,
+          "workflow": "https://calcofi.io/workflows/ingest_farallon_bird-mammal.html"
+        }
+      ]
+    },
+    "region": {
+      "total_rows": 4,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "calcofi_phytoplankton",
+          "rows": 4,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_calcofi_phytoplankton.html"
+        }
+      ]
+    },
+    "cruise": {
+      "total_rows": 842,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 691,
+          "pct": 82.1,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        }
+      ]
+    },
+    "ship": {
+      "total_rows": 49,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 48,
+          "pct": 98,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        }
+      ]
+    },
+    "lookup": {
+      "total_rows": 26,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 26,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        }
+      ]
+    },
+    "grid": {
+      "total_rows": 218,
+      "over_attributed": false,
+      "by_dataset": [
+        {
+          "provider_dataset": "swfsc_ichthyo",
+          "rows": 218,
+          "pct": 100,
+          "workflow": "https://calcofi.io/workflows/ingest_swfsc_ichthyo.html"
+        }
+      ]
+    }
+  },
+  "erd_legend": [
+    {
+      "provider_dataset": "calcofi_bottle",
+      "color": "#f5cad9"
+    },
+    {
+      "provider_dataset": "calcofi_ctd-cast",
+      "color": "#e0ccf0"
+    },
+    {
+      "provider_dataset": "calcofi_dic",
+      "color": "#ffd2bb"
+    },
+    {
+      "provider_dataset": "calcofi_mets",
+      "color": "#cce5ff"
+    },
+    {
+      "provider_dataset": "calcofi_phyllosoma",
+      "color": "#e0bbf0"
+    },
+    {
+      "provider_dataset": "calcofi_phytoplankton",
+      "color": "#b5e8b0"
+    },
+    {
+      "provider_dataset": "cce-lter_euphausiids",
+      "color": "#d2f0bb"
+    },
+    {
+      "provider_dataset": "cce-lter_picoplankton-bacteria",
+      "color": "#bbe0f0"
+    },
+    {
+      "provider_dataset": "cce-lter_zoodb",
+      "color": "#d9c2f0"
+    },
+    {
+      "provider_dataset": "cce-lter_zooscan",
+      "color": "#c2e8f0"
+    },
+    {
+      "provider_dataset": "cdfw_dungeness-crab",
+      "color": "#f5d5b8"
+    },
+    {
+      "provider_dataset": "farallon_bird-mammal",
+      "color": "#f0d2e8"
+    },
+    {
+      "provider_dataset": "sio_mesopelagic-fish",
+      "color": "#bbe0f0"
+    },
+    {
+      "provider_dataset": "sio_pic-zooplankton",
+      "color": "#bbe0f0"
+    },
+    {
+      "provider_dataset": "swfsc_cufes",
+      "color": "#f0e8bb"
+    },
+    {
+      "provider_dataset": "swfsc_ichthyo",
+      "color": "#cdebc6"
+    }
+  ]
+}

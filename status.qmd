@@ -202,7 +202,7 @@ This report summarizes the key development activities, major accomplishments, an
 - **Expanded API Options**  
   - Added ability to include bottle data and use relaxed criteria for net-to-cast matching ([commit](https://github.com/CalCOFI/api/commit/28f978fd4b5ca00c770f95dd57465b0384665fb6)).
   - Supported upcast/downcast data downloads ([commit](https://github.com/CalCOFI/api/commit/b02eccdf262cf9f525ee76a8c03d62efa2573955)).
-  - Added Zooplankton biomass and improved ichthyodata output ([commit](https://github.com/CalCOFI/api/commit/307cd6fac26a6827b1b5c81f23913a1a1d)).
+  - Added Zooplankton biomass and improved ichthyodata output (commit 307cd6f).
 - **Performance & Maintenance**
   - Implemented docker compose restart for Plumber API service ([commit](https://github.com/CalCOFI/api/commit/fae53fdfec9ec9dc48a8182d64f4e8e30c3e7100)).
 - **Ongoing Work**
