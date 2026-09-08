@@ -67,30 +67,36 @@ v2026.09.04. The table is the `dataset` table of the promoted release, `r snap$v
 #| label: dataset-table
 #| echo: false
 
-cols <- intersect(
-  c("provider", "dataset", "dataset_name", "citation_main", "license",
-    "license_url", "doi", "pi_names", "acknowledgement", "contact",
-    "source_accessed", "link_calcofi_org", "link_data_source"),
-  names(ds))
-# the two link columns are HTML-only: fmt_url() writes the raw URL into LaTeX with an
-# unescaped underscore and the pdf fails on it (the same guard as portals.qmd's tables)
-if (!knitr::is_html_output())
-  cols <- setdiff(cols, c("link_calcofi_org", "link_data_source"))
-
-ds |>
+# the columns a citation needs; the rest of the dataset table (PIs, acknowledgement,
+# links, when the source was fetched) is on each dataset's page at calcofi.io/datasets/{key}/
+cols <- intersect(c("dataset_key", "citation_main", "license", "doi", "contact"), names(ds))
+d <- ds |>
   dplyr::select(dplyr::all_of(cols)) |>
-  dplyr::arrange(provider, dataset) |>
-  gt::gt() |>
-  gt::cols_label(.list = list(
-    provider = "provider", dataset = "dataset", dataset_name = "name",
-    citation_main = "citation", license = "license", license_url = "license URL",
-    doi = "DOI", pi_names = "PI(s)", acknowledgement = "acknowledgement",
-    contact = "contact", source_accessed = "source accessed",
-    link_calcofi_org = "calcofi.org", link_data_source = "data source")[cols]) |>
-  gt::fmt_url(columns = dplyr::any_of(c("link_calcofi_org", "link_data_source")),
-              label = "↗") |>
-  gt::sub_missing(missing_text = "") |>
-  gt::tab_options(table.width = gt::pct(100), table.font.size = "0.85em")
+  dplyr::arrange(dataset_key) |>
+  dplyr::mutate(doi = ifelse(is.na(doi) | !nzchar(doi), NA, paste0("https://doi.org/", doi)),
+                page = paste0("https://calcofi.io/datasets/", dataset_key, "/"))
+# fmt_url() writes the raw URL into LaTeX with an unescaped underscore and the pdf fails on it
+# (the same guard as portals.qmd's tables): links are HTML-only
+if (knitr::is_html_output()) {
+  d |>
+    gt::gt() |>
+    gt::fmt_url(columns = page, label = gt::from_column("dataset_key")) |>
+    gt::fmt_url(columns = doi, label = "doi") |>
+    gt::cols_hide(dataset_key) |>
+    gt::cols_move_to_start(page) |>
+    gt::cols_label(page = "dataset", citation_main = "citation", license = "license", doi = "DOI", contact = "contact") |>
+    gt::cols_width(page ~ gt::pct(20), citation_main ~ gt::pct(50), license ~ gt::pct(10), doi ~ gt::pct(6), contact ~ gt::pct(14)) |>
+    gt::sub_missing(missing_text = "") |>
+    gt::tab_options(table.width = gt::pct(100), table.font.size = "0.85em")
+} else {
+  d |>
+    dplyr::select(-page) |>
+    dplyr::mutate(doi = sub("^https://doi.org/", "", doi)) |>
+    gt::gt() |>
+    gt::cols_label(dataset_key = "dataset", citation_main = "citation", license = "license", doi = "DOI", contact = "contact") |>
+    gt::sub_missing(missing_text = "") |>
+    gt::tab_options(table.width = gt::pct(100), table.font.size = "0.85em")
+}
 ```
 
 ## Citing what you downloaded

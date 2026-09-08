@@ -15,3 +15,9 @@ $text-muted:   #66686a;
 /*-- scss:rules --*/
 // the v2 lockup in quarto's sidebar logo slot: the brand's page height, never a fixed 32 px mark
 .sidebar-logo { height: 36px; width: auto; max-width: 100%; }
+.cc-diagram-wrap .svg-pan-zoom-control-background { fill: #dddddd; }
+.cc-diagram-wrap .svg-pan-zoom-control-element    { fill: #182b49; }
+// gt tables: a long URL or DOI must wrap rather than push the table off the page, and a stub
+// column (portal names, dataset keys) must never wrap letter by letter
+.gt_table td, .gt_table th { overflow-wrap: break-word; }
+.gt_table .gt_stub { min-width: 11em; overflow-wrap: normal; }

@@ -15,3 +15,57 @@ $text-muted:   #9fb0c8;
 /*-- scss:rules --*/
 // the v2 lockup in quarto's sidebar logo slot: the brand's page height, never a fixed 32 px mark
 .sidebar-logo { height: 36px; width: auto; max-width: 100%; }
+
+// ---- code blocks: cosmo's dark derivation left <pre> text at the muted grey ----------------
+pre, pre code, code { color: #e9edf3; }
+pre { background: #182b49; border: 1px solid #34486b; }
+div.sourceCode, pre.sourceCode { background: #182b49; }
+
+// ---- the diagrams (libs/diagram.js inlines the SVG, so its parts can be recoloured) ---------
+// mermaid scopes its own <style> to the svg id, so every rule here is !important
+.cc-diagram-wrap {
+  .cluster rect            { fill: #16233b !important; stroke: #34486b !important; }
+  .cluster-label text      { fill: #9fb0c8 !important; }
+  .label text, .label span, text { fill: #e9edf3 !important; color: #e9edf3 !important; }
+  // the flowchart node classes (diagrams/*.mmd classDef names), dark fills, light strokes
+  .node rect, .node path, .node polygon, .node circle { fill: #26324a !important; stroke: #8fa3c2 !important; }
+  .node.source   rect, .node.source   path { fill: #3a3629 !important; stroke: #b3a98a !important; }
+  .node.step     rect, .node.step     path { fill: #4a4020 !important; stroke: #d9b84a !important; }
+  .node.artifact rect, .node.artifact path { fill: #4a3616 !important; stroke: #e39b3a !important; }
+  .node.surface  rect, .node.surface  path { fill: #143a5c !important; stroke: #4fb6e6 !important; }
+  .node.people   rect, .node.people   path { fill: #26324a !important; stroke: #8fa3c2 !important; }
+  .node.pg       rect, .node.pg       path { fill: #26324a !important; stroke: #8fa3c2 !important; }
+  .flowchart-link, .relationshipLine { stroke: #9fb0c8 !important; }
+  .marker, .arrowMarkerPath { fill: #9fb0c8 !important; stroke: #9fb0c8 !important; }
+  .edgeLabel .background, .edgeLabel rect { fill: #0f1a2e !important; stroke: none !important; }
+  // the ER diagram: entity boxes, attribute rows, dividers
+  .outer-path    { fill: #182b49 !important; stroke: #6b8ab8 !important; }
+  .row-rect-odd  { fill: #182b49 !important; stroke: #34486b !important; }
+  .row-rect-even { fill: #14213a !important; stroke: #34486b !important; }
+  .divider       { stroke: #34486b !important; }
+  // svg-pan-zoom's controls
+  .svg-pan-zoom-control-background { fill: #34486b !important; }
+  .svg-pan-zoom-control-element    { fill: #e9edf3 !important; }
+}
+
+// ---- gt tables: gt writes a white table with #333 text per table id; the release's data_color
+// cells (inline background-color) keep their colours -------------------------------------------
+.gt_table { background-color: transparent !important; color: #e9edf3 !important; border-color: #34486b !important; }
+.gt_table th, .gt_table td:not([style*="background-color"]) {
+  background-color: transparent !important; color: #e9edf3 !important; border-color: #34486b !important;
+}
+.gt_table .gt_striped:not([style*="background-color"]) { background-color: rgba(255, 255, 255, 0.045) !important; }
+.gt_table .gt_col_heading, .gt_table .gt_column_spanner, .gt_table .gt_group_heading, .gt_table .gt_row_group_first {
+  background-color: #182b49 !important; color: #e9edf3 !important; border-color: #34486b !important;
+}
+.gt_table .gt_sourcenote, .gt_table .gt_footnote, .gt_table .gt_caption { color: #9fb0c8 !important; background-color: transparent !important; }
+.gt_table a { color: #4fb6e6 !important; }
+.gt_table td[style*="background-color"] { color: #182b49 !important; }
+.gt_table tfoot, .gt_table .gt_sourcenotes, .gt_table .gt_sourcenote, .gt_table .gt_footnotes, .gt_table .gt_footnote {
+  background-color: transparent !important; color: #9fb0c8 !important; border-color: #34486b !important;
+}
+.gt_table code { background-color: #182b49; color: #e9edf3; }
+// gt tables: a long URL or DOI must wrap rather than push the table off the page, and a stub
+// column (portal names, dataset keys) must never wrap letter by letter
+.gt_table td, .gt_table th { overflow-wrap: break-word; }
+.gt_table .gt_stub { min-width: 11em; overflow-wrap: normal; }

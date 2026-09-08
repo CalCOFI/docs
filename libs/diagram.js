@@ -35,7 +35,14 @@
     try { text = await (await fetch(src)).text(); } catch (e) { return; }   // leave the <img>
     const id = `cc-diagram-${++n}`;
     // mermaid scopes its <style> to the svg id; keep the two in step and unique per page
-    text = text.replace(/my-svg/g, id);
+    text = text.replace(/my-svg/g, id)
+      // mermaid writes a classDef's `color:` as an inline `fill:… !important` on every <text>,
+      // which no stylesheet can override; drop it so brand-dark.scss can recolour the labels
+      .replace(/ style="fill:#[0-9a-fA-F]{3,6} !important"/g, "")
+      // …and every other inline `!important` (classDef fills, cluster styles): an inline style
+      // still beats the stylesheet without it, so the light look is unchanged, and the dark
+      // theme's !important rules can win
+      .replace(/(style="[^"]*?)\s*!important/g, (m, a) => a).replace(/\s!important(?=[;"])/g, "");
     // size only the ROOT element: every rect and image inside keeps its own width/height
     text = text.replace(/^(\s*<svg\b[^>]*)>/, (m, open) =>
       open.replace(/\s(width|height)="[^"]*"/g, "") + ' width="100%" height="100%">');
