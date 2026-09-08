@@ -13,8 +13,8 @@ loop documents itself. The provider-facing side of the same loop — what a prov
 
 ## The shared artifacts
 
-Everything a step produces lands in a registry or a sidecar that the next step reads; nothing is
-typed twice.
+Everything a step produces lands in a registry or a sidecar that the next step reads
+(@tbl-ingest-artifacts); nothing is typed twice.
 
 | artifact | role |
 |---|---|
@@ -26,6 +26,8 @@ typed twice.
 | `metadata/dataset_status.csv` | one row per dataset; each step writes its stage column |
 | `metadata/relationships_cross.csv` | the foreign keys that cross datasets; every edge is measured at release ([Keys and integrity](keys.qmd)) |
 | `data/parquet/{provider}_{dataset}/` | the ingest's JSON sidecars — `manifest.json`, `metadata.json`, `relationships.json` — tracked in git; the parquet itself stages outside the repo and mirrors to the bucket |
+
+: Where each step of the loop leaves what the next one reads. {#tbl-ingest-artifacts}
 
 ## The five steps
 

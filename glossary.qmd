@@ -87,4 +87,6 @@ full-resolution CTD and meteorology series, the root-sample join twin.
 organism in the authority that carries it. → [The database](db.qmd)
 
 **working store** — the CTD team's PostgreSQL database: originals verbatim, flags beside them,
-feeding the next release but never read by consumers. → [CTD QA/QC](ctd-qaqc.qmd)
+built to feed the next release through a nightly snapshot and never read by a consumer. Running
+and available since August 2026; not yet the team's practice, so today CTD flags still arrive
+with the provider's files. → [CTD QA/QC](ctd-qaqc.qmd)

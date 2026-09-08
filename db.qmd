@@ -39,6 +39,10 @@ reads. A dataset's projection lives in its own ingest notebook (the generic shap
 | **`obs_ctd_full`** | full-resolution CTD scans (~271 M rows); `obs_env` carries the thinned series | supplemental |
 | **`obs_mets_full`** | full-resolution underway meteorology (~20 M rows) | supplemental |
 
+: The core family: what one row of each table stands for, and whether it is in the default set. {#tbl-core}
+
+@tbl-core is the whole model in nine rows; @tbl-inventory below is every table the release
+actually ships.
 An observation's provenance is denormalized onto it on purpose: `obs` carries `dataset_key`,
 `cruise_key`, `grid_key`, the position, the datetime and `hex_id` (H3 at resolution 10, so
 coarser aggregations use `h3_cell_to_parent(hex_id, res)` rather than a column per resolution),
@@ -182,10 +186,12 @@ Storage (next section). Consumers — the apps, `calcofi4r::cc_get_db()`, the
 [schema](https://calcofi.io/db-schema/) and [query](https://calcofi.io/db-query/) sites —
 read the release as Parquet over HTTPS with no credentials.
 
-Alongside the releases, a **PostgreSQL** database (`calcofi`, PostgreSQL 18 + PostGIS 3.6
-on the CalCOFI server) is the *working*, multi-user store for the CTD team's QA/QC:
+Alongside the releases stands a **PostgreSQL** database (`calcofi`, PostgreSQL 18 + PostGIS 3.6
+on the CalCOFI server) built as a *working*, multi-user store for the CTD team's QA/QC:
 originals loaded verbatim and immutable, a flag/proposal ledger beside them, derived
-products on top. It is private and reached over SSH — see
+products on top. It is **available but not yet adopted** — the team's flags still arrive with
+the provider's files — and no part of the pipeline reads it live in either case; the bridge is
+a nightly parquet snapshot ([CTD QA/QC](ctd-qaqc.qmd)). It is private and reached over SSH — see
 [Server Access](server-access.qmd). DuckDB's `postgres` extension joins the two worlds
 in one query (`calcofi4r::cc_pg_attach()`). (An earlier design ran the whole database in
 PostgreSQL with `dev`/`prod` schemas and a single `create_db.qmd`; that is superseded and
@@ -243,7 +249,9 @@ Shared, under `metadata/`:
 | `taxon_lineage.csv`, `taxon_xref.csv` | **Generated caches** of the WoRMS/ITIS classification chains and the WoRMS↔ITIS cross-reference. Safe to delete; they refetch. |
 | `dataset.csv` | **Deprecated.** A dataset's structural keys are the `calcofi:` YAML block in its ingest notebook; its descriptive metadata (abstract, citation, license, DOI, contact, …) is the `metadata/{provider}/{dataset}/dataset_meta.yml` sidecar, and the release reads the two merged (see [Metadata & the ingest loop](metadata.qmd) and [Cite This Data](cite.qmd)). The CSV drifted from the notebooks and orphaned observations. |
 
-These flow through two stages:
+: The shared registries under `metadata/` in `CalCOFI/workflows`, and what each is the record of. {#tbl-registries}
+
+The per-dataset files above and the shared registries of @tbl-registries flow through two stages:
 
 1. **Per ingest**: `calcofi4db::build_metadata_json()` writes
    `data/parquet/{provider}_{dataset}/metadata.json` (schema version 1.0) beside the parquet
@@ -386,9 +394,9 @@ deprecated `obs` objects, with no effort/density columns.
 ## Darwin Core / OBIS ENV-DATA mapping
 
 The core model was designed against the [OBIS ENV-DATA](https://doi.org/10.3389/fmars.2018.00251)
-pattern described by [De Pooter et al. (2017)](https://doi.org/10.3897/BDJ.5.e10989), so the
-shapes map one to one: `sample`'s adjacency list **is** an Event core, `obs`'s bio rows **are** an
-Occurrence extension, and the two measurement grains **are** extended Measurement-or-Fact tables.
+pattern described by @depooter2017, so the shapes map one to one: `sample`'s adjacency list
+**is** an Event core, `obs`'s bio rows **are** an Occurrence extension, and the two measurement
+grains **are** extended Measurement-or-Fact tables.
 What was missing was never the shape — it was the *vocabulary*: an export had to guess which
 controlled term a CalCOFI measurement name meant, and the ichthyoplankton OBIS notebook did not
 guess, it wrote `measurementTypeID = NA`.
@@ -404,6 +412,10 @@ lookup rather than a judgement.
 | **`obs_attribute`** | **eMoF on Occurrences** (length and stage frequency) | `bin_value` / `bin_label` / `count` → `measurementValue`; ids as above |
 | **`obs_env`** (`obs` where `realm = 'env'`) | **eMoF on the bottle or depth Event** | ids as above |
 
+: How each core table publishes as Darwin Core under the OBIS ENV-DATA pattern. {#tbl-dwc}
+
+Every row of @tbl-dwc is a lookup in a registry the release already publishes, not a judgement
+made at export time.
 `metadata/field_dictionary.csv` carries a `dwc_term` column holding the full term URI for the
 **12 of 57** canonical fields that one Darwin Core term means exactly. A field Darwin Core
 *splits* — `depth_m` becomes `minimumDepthInMeters` **and** `maximumDepthInMeters` — or has no
@@ -433,6 +445,9 @@ Coverage as of `v2026.09`:
 | `gear.csv` | `nerc_l22` (L22, `samplingProtocol` device) | 4 / 11 |
 | `field_dictionary.csv` | `dwc_term` | 12 / 57 |
 
+: Controlled-vocabulary coverage per registry — filled only on an exact match. {#tbl-vocab-coverage}
+
+The gaps in @tbl-vocab-coverage are deliberate, and mostly not gaps.
 Of the 85 measurement types with no P01, **29 are taxon-bearing** abundance, biomass or size
 types — P01 encodes the taxon *in the concept*, and CalCOFI carries it in `taxon_key`, so a
 per-type id there would be wrong rather than missing. Another 8 are event-level effort and

@@ -1,10 +1,13 @@
-# References
+# References {#sec-refs}
 
-```{r, include=FALSE}
-redo <- "F"
-if (redo){  # limit requirement for Quarto render on Github Action
-}
-```
+## Works cited
+
+Everything cited in the book, from `refs/refs.bib` and `refs/packages.bib`. The data itself is
+cited differently — the release and each source dataset have their own citations, generated from
+the record: see [Cite this data](cite.qmd).
+
+::: {#refs}
+:::
 
 ## R packages
 

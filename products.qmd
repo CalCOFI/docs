@@ -32,6 +32,9 @@ cards <- cards |>
 
 ## Every product
 
+@tbl-products is every card on the landing page, by section, with where the product lives, where
+its source is and how it is doing.
+
 ```{r}
 #| label: tbl-products
 #| tbl-cap: The products on calcofi.io, by section, from the landing page's cards (`_data/products.yml` in CalCOFI/CalCOFI.github.io). Usage per product is at [calcofi.io/analytics](https://calcofi.io/analytics/).

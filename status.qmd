@@ -27,10 +27,13 @@ The state of the system at the start of the new contract, by phase. The promoted
 `r catalog$version` (`r nrow(ds)` datasets, `r length(catalog$tables)` tables,
 `r fmt_n(catalog$total_rows)` rows, DOI `r catalog$doi`).
 
-**Ingest.** Sixteen datasets run through one pipeline of reproducible notebooks; the CTD team's
+**Ingest.** Sixteen datasets run through one pipeline of reproducible notebooks. The CTD team's
 PostgreSQL working store (2026-08-19) holds the cast archive verbatim with a flag ledger whose
-accepted flags reach the next ingest through a nightly snapshot. Open: the bottle database
-migration (Task 1) waits on the profile database and training.
+accepted flags would reach the next ingest through a nightly snapshot; it is built, running and
+documented, but **not yet adopted** — CTD flags still arrive with the provider's files, so the
+overview figure shows the system without it ([CTD QA/QC](ctd-qaqc.qmd) has the figure with it
+in). Open: adoption by the CTD team; the bottle database migration (Task 1) waits on the profile
+database and training.
 
 **Integrate.** Every event keys to its cruise by date span (v2026.08.25); provider UUIDs are
 released as columns beside the natural keys (v2026.09.04); as of this entry every released table
@@ -109,7 +112,8 @@ The bulk of the period's effort went into the ingestion pipeline (`workflows`) a
 
 ### Deliverables Crosswalk
 
-Against the SOW (\*\* = must-complete by end of contract):
+Against the SOW (\*\* = must-complete by end of contract); @tbl-sow-ingest, @tbl-sow-visualize and
+@tbl-sow-share are that crosswalk, deliverable by deliverable:
 
 **Ingest** — all must-complete datasets done:
 
@@ -125,6 +129,8 @@ Against the SOW (\*\* = must-complete by end of contract):
 | DIC \*\* | ✅ ingested |
 | CUFES, lobster phyllosoma, bird/mammal census | ✅ ingested (beyond must-complete) |
 
+: Ingest deliverables of the 2025-10 – 2026-06 contract, against the SOW. {#tbl-sow-ingest}
+
 **Visualize:**
 
 | Deliverable | Status |
@@ -132,6 +138,8 @@ Against the SOW (\*\* = must-complete by end of contract):
 | Add management areas (sanctuaries, MPAs, wind areas) | ✅ added to db-viz-hex |
 | On-the-fly hexagon endpoint by extent/zoom | ✅ H3T tile API live |
 | Expand hex summaries across new datasets | 🔄 in progress as datasets land |
+
+: Visualize deliverables of the 2025-10 – 2026-06 contract. {#tbl-sow-visualize}
 
 **Share:**
 
@@ -142,6 +150,8 @@ Against the SOW (\*\* = must-complete by end of contract):
 | Fish Eggs & Larvae → OBIS \*\* | ✅ workflow complete |
 | Other portals (EDI, NCEI, additional OBIS) | 🔄 / ⏳ as prioritized |
 | Recorded webinar series | ⏳ pending (progress deck delivered) |
+
+: Share deliverables of the 2025-10 – 2026-06 contract. {#tbl-sow-share}
 
 ---
 

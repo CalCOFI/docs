@@ -34,10 +34,15 @@ tabs <- purrr::map_dfr(catalog$tables, \(t) tibble::tibble(
 
 | | the public release | the working store |
 |---|---|---|
-| what | every dataset, integrated, frozen per version, cited by DOI | the CTD team's multi-user PostgreSQL: originals verbatim, a flag ledger beside them |
+| what | every dataset, integrated, frozen per version, cited by DOI | the CTD team's multi-user PostgreSQL: originals verbatim, a flag ledger beside them — built and running, **not yet the team's practice** ([CTD QA/QC](ctd-qaqc.qmd)) |
 | who | anyone | the CTD team and the data team |
 | how | DuckDB over HTTPS: this page | an SSH tunnel: [Server access](server-access.qmd) |
-| when it changes | at each release, never in place | continuously; accepted flags reach the next release |
+| when it changes | at each release, never in place | continuously, once adopted; accepted flags would reach the next release through a nightly snapshot, never a live read |
+
+: The two ways into CalCOFI data. Everything else on this page is the left-hand column. {#tbl-two-paths}
+
+@tbl-two-paths is the whole choice: unless you are on the CTD team, the public release is the
+only path you need.
 
 ## Where the data lives
 
@@ -115,8 +120,8 @@ tabs |>
   tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
 ```
 
-A **supplemental** table (`obs_ctd_full`, the full-resolution CTD scans; `obs_mets_full`; the
-`sample_root` join twin) is hosted and catalogued but left out of `cc_get_db()`'s default set —
+@tbl-tables is the whole inventory, tier by tier. A **supplemental** table (`obs_ctd_full`, the
+full-resolution CTD scans; `obs_mets_full`; the `sample_root` join twin) is hosted and catalogued but left out of `cc_get_db()`'s default set —
 `obs_ctd_full` alone is ~270 M rows. Ask for it (`supplemental = TRUE`) and filter early.
 
 ## From R
@@ -274,14 +279,17 @@ consumer did; that is why the column exists.
 ## Matching biology to environment
 
 Relating a net tow's catch to the water it was towed through is the question the database exists
-to answer, and `calcofi4r` answers it in one call: three wrappers match **biological** observations
-to **environmental** ones in time and space, on the fly, against the release.
+to answer, and `calcofi4r` answers it in one call: the three wrappers of @tbl-match match
+**biological** observations to **environmental** ones in time and space, on the fly, against the
+release.
 
 | function | biological side |
 |---|---|
 | `cc_match_ichthyo_by_name()` | ichthyoplankton, filtered by scientific name |
 | `cc_match_ichthyo_by_taxon()` | ichthyoplankton, a WoRMS taxon **and all its descendants** (a recursive walk of `taxon.parent_taxon_key`) |
 | `cc_match_zooplankton_biomass()` | net-tow displacement-volume biomass (`totalplankton` / `smallplankton`) |
+
+: The three matching wrappers and the biological side each takes. {#tbl-match}
 
 ```r
 d <- cc_match_ichthyo_by_name(
@@ -333,5 +341,7 @@ no longer exists. Every endpoint has a replacement that reads the release direct
 | `ichthyodata` | `cc_match_ichthyo_by_name()` |
 | `relax_matching`, `cruiseymd_min/max`, `stage` | `relax_matching`, `date_min/max`, `life_stage` |
 
-[Appendix A](api.qmd) keeps the old endpoint reference.
+: What each retired `api.calcofi.io` endpoint became. {#tbl-retired}
+
+[Appendix A](api.qmd) keeps the old endpoint reference in full; @tbl-retired is the short form.
 :::

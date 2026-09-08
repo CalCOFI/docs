@@ -47,7 +47,7 @@ compact <- function(g) tab_options(g, table.width = pct(100), data_row.padding =
 The field dictionary is **prescriptive**: a new dataset's columns are mapped onto these names at
 ingest, and the aliases record what each source called them. `dwc_term` is the Darwin Core term a
 field publishes as, filled only where one term means exactly this (`r sum(nzchar(fld$dwc_term))`
-of `r nrow(fld)` today).
+of `r nrow(fld)` today). @tbl-fields is the dictionary itself.
 
 ```{r}
 #| label: tbl-fields
@@ -69,7 +69,8 @@ categories every dataset and type belongs to. A type carries its units, the phys
 value must lie within (`valid_min` / `valid_max` — enforced per dataset at ingest, and a release
 fails on a value outside them), the depth range over which it is defined, how a *derived* type
 was produced, and — where one concept says exactly this — the NERC P01 concept and P06 unit a
-Darwin Core export emits. `is_canonical` marks the headline types the apps offer first.
+Darwin Core export emits. `is_canonical` marks the headline types the apps offer first. The categories are @tbl-categories,
+the types themselves @tbl-measurement-types.
 
 ```{r}
 #| label: tbl-categories
@@ -104,8 +105,8 @@ mt |>
 
 ## Life stages and gear
 
-Two more registries carry the values that appear on observations and events, each with the
-Darwin Core label and the NERC concept where one is exact. Two life-stage values are recorded as
+Two more registries — @tbl-life-stages and @tbl-gear — carry the values that appear on
+observations and events, each with the Darwin Core label and the NERC concept where one is exact. Two life-stage values are recorded as
 *not* life stages (euphausiid `damaged`, ichthyoplankton `invert`) and are never published as one.
 
 ```{r}
@@ -131,7 +132,7 @@ gear |>
 **A provider is the organization that curates — holds and can license — the data**, never the
 portal that serves it and never a collection or lab inside it. CalCOFI program data is `calcofi`
 even when served from NCEI or EDI; the Pelagic Invertebrate Collection is a *dataset* of provider
-`sio`. Every provider an ingest names must be registered, or the build stops.
+`sio`. Every provider an ingest names must be registered in @tbl-providers, or the build stops.
 
 ```{r}
 #| label: tbl-providers
@@ -151,7 +152,7 @@ ingest notebook, its folder of metadata, its row in the provider's Sheet, its re
 release and its page at `calcofi.io/datasets/{key}/`. The human names — `dataset_name` and the
 short form the apps show — are declared once, in the ingest notebook's `calcofi:` block, and every
 surface reads them from there. This is the nomenclature the data management plan's Task 13 asks to
-be agreed; the table is the current state of it.
+be agreed; @tbl-datasets is the current state of it.
 
 ```{r}
 #| label: tbl-datasets
@@ -161,6 +162,8 @@ ds |>
   dplyr::select(dataset_key, `name` = dataset_name, `short name` = dataset_name_short, provider, category, license) |>
   gt() |> sub_missing(missing_text = "") |> mono(c(dataset_key, provider, category, license)) |> compact()
 ```
+
+A dataset's `license` is one of the ids in @tbl-licenses, and nothing else is accepted.
 
 ```{r}
 #| label: tbl-licenses
@@ -178,7 +181,7 @@ Every dataset arrived with its own names, and every one of them is recorded: the
 `aliases` column lists what each standard field was called in the sources, and each ingest keeps a
 crosswalk, `metadata/{provider}/{dataset}/flds_redefine.csv`, from every source column to its
 standard name and type. Nothing is renamed in a source file; the mapping is applied at ingest and
-kept so the provider's own names remain answerable.
+kept so the provider's own names remain answerable; @tbl-crosswalk-summary counts them per dataset.
 
 ```{r}
 #| label: setup-crosswalk

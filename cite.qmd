@@ -61,10 +61,12 @@ Every dataset in the release carries its own `citation_main`, a registered `lice
 the source gives one — a `doi`, an `acknowledgement` and a `contact`. The columns are `dataset.doi`,
 `dataset.license_url`, `dataset.acknowledgement`, `dataset.contact` and `dataset.source_accessed`
 (measured at release, never typed; see [the database](db.qmd)). They have shipped since
-v2026.09.04. The table is the `dataset` table of the promoted release, `r snap$version`.
+v2026.09.04. @tbl-dataset-citations is the `dataset` table of the promoted release,
+`r snap$version`.
 
 ```{r}
-#| label: dataset-table
+#| label: tbl-dataset-citations
+#| tbl-cap: !expr paste0("Every dataset of ", snap$version, " with the citation, licence, DOI and contact a use should carry.")
 #| echo: false
 
 # the columns a citation needs; the rest of the dataset table (PIs, acknowledgement,

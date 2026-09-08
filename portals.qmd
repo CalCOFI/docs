@@ -13,7 +13,7 @@ two can never disagree.
 ## Data Flow
 
 While it would be ideal for CalCOFI data to be available through a single portal, each portal has
-its strengths and limitations. The diagram below is the flow as it runs today: what we author and
+its strengths and limitations. @fig-portals-flow is the flow as it runs today: what we author and
 observe (left) becomes one record per dataset at release, that record generates every surface a
 portal can read, and each portal or meta-portal is pointed at one of those static files.
 
@@ -30,7 +30,7 @@ know about every downstream portal individually.
 
 While some portals serve as data repositories, others provide advanced data access and
 visualization tools, and a few are meta-portals that index the others rather than holding data
-themselves. The table below is generated from
+themselves. @tbl-portals is generated from
 [`CalCOFI/workflows`' `metadata/portal.csv`](https://github.com/CalCOFI/workflows/blob/main/metadata/portal.csv)
 — the same registry `datasets.json`'s `registrations[]` and this book both read — so a portal
 added there (CalOOS and the IOOS Catalog joined in 2026-09) shows up here without anyone
@@ -130,7 +130,8 @@ packages stay theirs and are never republished.
 
 -   Specialized in marine biodiversity data
 -   Standardized using DarwinCore fields
--   Extended measurements supported via [extendedMeasurementOrFact](https://manual.obis.org/format_emof.html)
+-   Extended measurements supported via [extendedMeasurementOrFact](https://manual.obis.org/format_emof.html),
+    the OBIS-ENV-DATA pattern [@depooter2017]
 -   Powerful filtering by space, time, and taxonomic parameters
 -   Multiple download formats (CSV, JSON, Darwin Core Archive)
 -   Full REST API access
@@ -210,7 +211,8 @@ publisher at once.
 
 ![Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.](diagrams/portals_metadata.svg){#fig-portals-metadata .cc-diagram .nolightbox width=70%}
 
-The EML specification provides detailed structure for describing datasets, including:
+The EML specification (@fig-portals-metadata) provides detailed structure for describing
+datasets, including:
 
 -   [Dataset identification and citation](cite.qmd)
 -   Geographic and temporal coverage
@@ -257,8 +259,7 @@ This federated approach ensures that CalCOFI data remains:
 
 `datasets.json` (`calcofi4db::build_dataset_catalog()`, calcofi4db ≥ 4.1.0) is the record this
 whole chapter is a rendering of: one entry per dataset, its `registrations[]` naming every portal
-above with a status of `published`, `planned` (usually linking the tracking issue) or `n/a`. The
-table below reads it from the promoted release (the snapshot under `data/` that every render
+above with a status of `published`, `planned` (usually linking the tracking issue) or `n/a`. @tbl-registrations reads it from the promoted release (the snapshot under `data/` that every render
 refreshes), so it cannot drift from what `calcofi.io/datasets/{dataset_key}/`'s own Access table shows.
 
 ```{r}
@@ -351,6 +352,8 @@ the sentences:
     CUFES), so it reads `n/a` on those rather than `planned`.
 -   **Zenodo** holds the integrated database release itself, one DOI per version.
 
+@tbl-policy states that policy per dataset, as the record carries it.
+
 ```{r}
 #| label: tbl-policy
 #| tbl-cap: Each dataset's archive-of-record policy, read from the promoted release's `datasets.json` (the registry it comes from until a release carries it).
@@ -415,6 +418,6 @@ is a fourth way in, and it is where the record lives:
     data itself.
 -   **[Cite This Data](cite.qmd)** — `cc_cite()` in `calcofi4r` / `calcofi4py` for exactly the
     datasets a query touched, checked citations, licences and DOIs.
--   **[Apps](apps.qmd)** — interactive exploration (the Explorer, Station and Hexagon Explorers,
+-   **[Explore](explore.qmd)** — interactive exploration (the Explorer, Station and Hexagon Explorers,
     CTD Transects) without writing a query at all; each app's Sources panel links back to the same
     dataset pages.

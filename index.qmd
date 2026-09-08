@@ -26,12 +26,13 @@ DOI [`r catalog$doi`](https://doi.org/`r catalog$doi`). Every number on this pag
 the release when the book renders; nothing here is typed.
 :::
 
-![The system, read left to right along the phases of the data management plan. Provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; from the release come the record each portal reads and the products people use. The CTD team's working store stands beside it, feeding accepted flags into the next ingest.](diagrams/system.svg){#fig-system .cc-diagram .nolightbox}
+![The system, read left to right along the phases of the data management plan. Provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; from the release come the record each portal reads and the products people use.](diagrams/system.svg){#fig-system .cc-diagram .nolightbox}
 
 ## Five phases, one system
 
 The SIO-CalCOFI data management plan organizes the work into five phases. They are also the
-book's spine: each phase has a product that realizes it and a chapter that explains it.
+book's spine: each phase has a product that realizes it and a chapter that explains it, and
+@fig-system reads left to right along them.
 
 - **Ingest.** Each source dataset — a bottle database, a CTD archive, a net-tow spreadsheet — is
   turned into the shared schema by one reproducible notebook, with the provider's own identifiers
@@ -62,6 +63,10 @@ book's spine: each phase has a product that realizes it and a chapter that expla
 | on the CTD team | [CTD QA/QC, start to release](ctd-qaqc.qmd) | [Server access](server-access.qmd) |
 | on the data team, or building a CalCOFI.io product | [Ingesting a dataset](ingest-loop.qmd) | [Products, brand and uptime](products.qmd), [Architecture](architecture.qmd) |
 | reporting on the program | [The data management plan](dmp.qmd) | [Status](status.qmd) |
+
+: Where to start, by who you are and what you came for. {#tbl-doors}
+
+Pick your row in @tbl-doors; every chapter links onward to the next one you are likely to want.
 
 ## How this book is kept true
 

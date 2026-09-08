@@ -3,11 +3,11 @@
 CalCOFI.io is a **federated** system: the data stay with the organizations that collect them,
 one pipeline integrates a copy into a versioned database, and everything people use — the
 explorer, the packages, the dataset pages, the portals — reads that database rather than each
-other. This chapter walks the system end to end, names where every URL is served from, and sets
-the 2022 design beside the 2026 one. It is the documentation of the federated architecture and
+other. This chapter walks the system end to end (@fig-architecture), names where every URL is served
+from, and sets the 2022 design beside the 2026 one. It is the documentation of the federated architecture and
 its access paths that the [data management plan](dmp.qmd) asks for under Task 14.
 
-![The system along the phases of the plan: provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; the record and every product derive from the release; the CTD team's working store stands beside it.](diagrams/system.svg){#fig-architecture .cc-diagram .nolightbox}
+![The system along the phases of the plan: provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; the record and every product derive from the release. Everything a consumer reads is the release.](diagrams/system.svg){#fig-architecture .cc-diagram .nolightbox}
 
 ## Sources
 
@@ -66,18 +66,29 @@ Everything people use reads the release, and the same bytes:
 - [**erddap.calcofi.io**](https://erddap.calcofi.io/erddap/), a CalCOFI-branded ERDDAP serving the
   release's tables for the community that reads ERDDAP;
 - the **Shiny applications** on the CalCOFI server (`app.calcofi.io/…`), the first generation of
-  viewers, now superseded by the Explorer and kept serving.
+  viewers, now superseded by the Explorer and kept serving;
+- **this book** ([calcofi.io/docs](https://calcofi.io/docs/)), which is a consumer like the
+  rest: its pre-render snapshots the promoted release's sidecars — `catalog.json`,
+  `integrity.json`, `metadata.json`, `relationships.json`, `datasets.json`, the `dataset` table
+  and the release notes — plus the registries in `CalCOFI/workflows`, and every table of fact in
+  it is generated from that snapshot. Because the snapshot is of the *promoted* release, the book
+  shows the previous version until it re-renders, so `scripts/deploy_consumers.sh` dispatches its
+  workflow after `latest.txt` moves, a `release-promoted` dispatch triggers it, and it rebuilds
+  weekly regardless.
 
-→ [Explore](explore.qmd), [Products, brand and uptime](products.qmd)
+→ [Explore](explore.qmd), [Products, brand and uptime](products.qmd), [Releases](releases.qmd)
 
-## The working store
+## The working store — available, not yet adopted
 
-Beside the read-only releases, the CTD team's **PostgreSQL** database on the CalCOFI server
-(PostgreSQL 18, PostGIS, `pg_duckdb`) holds the cast archive verbatim and the team's flag ledger,
-reached over SSH. It is never read by a consumer: the accepted flags are snapshotted nightly to
-the bucket and the next CTD ingest applies them, so the team's judgement reaches the release
-through the pipeline like everything else. → [CTD QA/QC](ctd-qaqc.qmd), [Server
-access](server-access.qmd)
+One piece of the system is built but not yet in use, and the figure above leaves it out for that
+reason. The CTD team's **PostgreSQL** database on the CalCOFI server (PostgreSQL 18, PostGIS,
+`pg_duckdb`, reached over SSH) holds the cast archive verbatim with a flag ledger beside it, and
+a nightly snapshot of its accepted flags is written to the bucket for the next CTD ingest to
+apply. The accounts, the schema and the bridge all work; the team has not adopted it as its
+QA/QC practice, so today CTD flags still arrive with the provider's files. Nothing in the
+pipeline reads the live database in either case. The figure with it in, and what adopting it
+would change, are in [CTD QA/QC](ctd-qaqc.qmd); the how-to is [Server
+access](server-access.qmd).
 
 ## Where every URL is served from
 
@@ -99,11 +110,17 @@ access](server-access.qmd)
 | `rstudio.`, `pgadmin.`, `ssh.calcofi.io` | RStudio Server, pgAdmin, SSH and the PostgreSQL tunnel | the CalCOFI server |
 | `tile.calcofi.io`, `file.calcofi.io` | vector tiles from PostGIS; public files on disk | the CalCOFI server |
 
+: Every `calcofi.io` address, what it serves and what serves it. {#tbl-urls}
+
+@tbl-urls is the whole surface area: everything on GitHub Pages rebuilds itself from a
+repository, and everything else is one machine.
 The server is one Docker Compose stack, configured in [CalCOFI/server](https://github.com/CalCOFI/server)
 — the configuration of record for every `*.calcofi.io` service. Everything on GitHub Pages
 rebuilds itself on push and costs nothing to host.
 
 ## Then and now
+
+@fig-arch-2022 is the design this one replaced.
 
 ![The 2022 design: sources ingested by scripts into a PostGIS database, an API feeding Shiny apps and reports, and a *publish* step to the portals that was intent rather than code.](figs/sw_arch.svg){#fig-arch-2022 .cc-diagram .nolightbox}
 
@@ -112,6 +129,6 @@ an API, so every reader was a request to one server; its *publish* box was a pla
 keeps the boxes and changes what connects them: the database is parquet on a public bucket that
 any DuckDB reads directly — the browser included, so the flagship application has no server at
 all; the API is retired; the *publish* box is generated from one record per dataset at every
-release; and the PostgreSQL that remains is a working store for one team, feeding the pipeline
-rather than serving it. What did not change is the intent: one integrated, versioned, citable
+release; and the PostgreSQL that remains serves no consumer at all — it is a working store
+offered to one team, feeding the pipeline through a nightly file rather than answering queries. What did not change is the intent: one integrated, versioned, citable
 database that every product reads, so that a correction made once reaches everyone.

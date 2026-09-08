@@ -62,6 +62,9 @@ over HTTPS with no credentials:
   paints first), `grid.geojson`, `spatial.geojson`, `spatial_layers.json`, a static `stac/`
   catalog, `erd.mmd`, `test_results.json`, and `RELEASE_NOTES.md`.
 
+@tbl-objects is that catalog rendered: every table of the promoted release, how many objects
+carry it, and the version its bytes last changed in.
+
 ```{r}
 #| label: tbl-objects
 #| tbl-cap: !expr paste0("The tables of ", catalog$version, " as the catalog describes them — objects, partitioning, size, and the release whose bytes each table last changed in.")
@@ -84,7 +87,8 @@ kept for the promoted version, the one before it, and the **consolidated** miles
 paper, a docs example or an app pins; the rest is thinned, and a thinned version's `retired`
 marker names the consolidated one to read instead (`metadata/release_policy.yml` in
 `CalCOFI/workflows` decides; `scripts/thin_releases.R` applies it). The content-addressed store
-means a kept object is stored once however many versions share it.
+means a kept object is stored once however many versions share it. @tbl-versions is every version,
+newest first, with what is kept of each.
 
 ```{r}
 #| label: tbl-versions
@@ -165,6 +169,8 @@ outright:
 
 {{< include _gates.qmd >}}
 
+: The gates that stop a release outright. {#tbl-gates}
+
 And the ones that report and ratchet — a number that may only ever go down between releases, so a
 regression fails but a known backlog does not:
 
@@ -177,6 +183,11 @@ regression fails but a known backlog does not:
 | `check_dataset_catalog()` / `check_eml_catalog()` | the record and each EML document validate against their schemas (fails) |
 | `observed_coverage()` | each dataset's temporal and spatial extent, measured from the data — never typed (report) |
 
+: The gates that report and ratchet rather than stop the release. {#tbl-ratchets}
+
+A failure in @tbl-gates stops the release; a number in @tbl-ratchets that went up since the last
+release stops it too, and one that went down becomes the new ceiling.
+
 ```{r}
 #| label: contract-result
 #| echo: false
@@ -187,6 +198,10 @@ if (!is.null(tests)) cat(sprintf(
 ```
 
 A release that passes is uploaded, tested once more from the bucket by `test_release.qmd`, and
-only then promoted; the read-only consumers (the Explorer, ERDDAP, the apps) are refreshed
-afterwards. A **staging** run exercises the whole path under a separate prefix without touching
+only then promoted; the read-only consumers are refreshed afterwards by
+`scripts/deploy_consumers.sh` — the Explorer, ERDDAP and the Shiny apps on the CalCOFI server,
+and the ones hosted on GitHub Actions, which the script dispatches: `db-viz-station`,
+`ctd-transects` and **this book**, whose pre-render snapshots the promoted release's
+`catalog.json`, `integrity.json` and sidecars and so describes the previous version until it
+re-renders ([Architecture](architecture.qmd)). A **staging** run exercises the whole path under a separate prefix without touching
 the promoted release or the shared object store.

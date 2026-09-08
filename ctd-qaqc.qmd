@@ -1,6 +1,6 @@
 # CTD QA/QC, start to release {#sec-ctd-qaqc}
 
-For the CTD team. The casts you quality-control live in two places on purpose: a **working
+For the CTD team. The casts you quality-control can live in two places on purpose: a **working
 store** you can edit — a multi-user PostgreSQL database on the CalCOFI server where every cast
 file is loaded verbatim and never changed, and your flags and proposed fixes sit in a ledger
 beside it — and the **frozen release** everyone else reads, which the ledger feeds. This page is
@@ -8,11 +8,45 @@ the path from one to the other: what the store holds, how a flag travels, where 
 reaches the release. Accounts, keys, the tunnel and the clients are in [Server
 access](server-access.qmd).
 
+::: {.callout-note appearance="simple"}
+**Available, not yet adopted.** The store is built, loaded and working — but it is not yet the
+team's QA/QC practice, so today CalCOFI's CTD flags reach the release the way every other
+dataset's do: inside the provider's own files. That is why the system figure in
+[Architecture](architecture.qmd) does not show it, and why this chapter has its own
+(@fig-system-ctd). Nothing below is a plan; it all runs today.
+:::
+
+## Where the store sits in the system
+
+![The whole system with the CTD working store in it: the team proposes and reviews flags in `ctd.flag`, the server writes the accepted rows to `flag_accepted.parquet` every night, and the next CTD ingest applies them as `measurement_qual`. The pipeline never reads the live database — only that file — and `pg_duckdb` lets the store read the release back. Compare the overview figure in [Architecture](architecture.qmd), which is the same system without this box.](diagrams/system_ctd.svg){#fig-system-ctd .cc-diagram .nolightbox}
+
+@fig-system-ctd is the ingest → integrate → publish path of the overview figure with one box
+added on the left. **What is built and running**, since 2026-08-19: PostgreSQL 18 with PostGIS
+3.6 and `pg_duckdb` on the CalCOFI server; 409 cast files and **10,812,360 scans** loaded
+verbatim in all 82 source columns; the `ctd.flag` ledger with its audit trail and the
+`v_scan_qc` / `v_scan_clean` views over it; 20,521 best-stage casts, 1993–2026; personal
+accounts, a tunnel and clients in R and Python ([Server access](server-access.qmd)); and the
+nightly job that writes every accepted flag to
+`gs://calcofi-db/qc/ctd/flag_accepted.parquet`.
+
+**The pipeline never reads the live database.** The bridge is that one parquet file, so an
+ingest runs on a laptop, on the server or in CI without a tunnel, a credential or a database
+being up — and the flags it applies are a dated, immutable snapshot rather than whatever the
+ledger happened to say mid-run.
+
+**What adopting it would change**: a flag accepted in the ledger reaches the next release on its
+own, with nobody touching the release, re-exporting a cast file or asking the data team to
+re-ingest anything — and the reasoning behind each flag stays in the database, attributable and
+reversible. **What happens instead today**: flags arrive with the provider's files, so a
+correction waits for the next archive delivery, and the judgement behind it lives wherever the
+person who made it kept it. Both paths end in the same column, `measurement_qual`, uninterpreted.
+
 ## The store, in one figure
 
 ![The CTD archive is loaded verbatim and never edited; a flag is a row beside it; the accepted flags are snapshotted nightly and applied by the next CTD ingest, so the release carries the team's judgement without anyone touching the release.](diagrams/ctd_flow.svg){#fig-ctd-flow .cc-diagram .nolightbox}
 
-Database `calcofi`, three kinds of schema:
+@fig-ctd-flow is the store itself, close up, and @tbl-ctd-schemas is what it holds. Database
+`calcofi`, three kinds of schema:
 
 | schema | holds | who writes |
 |---|---|---|
@@ -20,6 +54,8 @@ Database `calcofi`, three kinds of schema:
 | `release` | read-only views over the public release through `pg_duckdb` — `release.cruise`, `release.ship`, `release.dataset` — so a query can join the archive to the release without leaving psql | nobody; regenerated per release |
 | `work` | shared scratch, readable and writable by the whole team | everyone |
 | `<you>` | your own schema, first on your `search_path`; colleagues can read it | you |
+
+: The schemas of database `calcofi` and who writes to each; [Server access](server-access.qmd) has the longer form. {#tbl-ctd-schemas}
 
 The rules of the road: **originals never change.** A problem is a row in `ctd.flag` — which scan,
 which variable, what code, an optional proposed value, why; a fix is an *accepted* flag; every
@@ -35,7 +71,8 @@ derived product is computed from originals plus accepted flags, so it can always
    `reviewed_at` fill themselves, and `ctd.flag_audit` keeps the history.
 3. **See it.** `ctd.v_scan_qc` shows the code beside the value; `ctd.v_scan_clean` applies it.
    Nothing else in the store moves.
-4. **It reaches the release.** Every night the server writes the accepted rows to
+4. **It reaches the release.** This is the step that waits on adoption, and it needs nothing
+   built. Every night the server writes the accepted rows to
    `gs://calcofi-db/qc/ctd/flag_accepted.parquet`. The CTD ingest notebook reads that file — never
    the live database, so the pipeline can run anywhere — and applies each accepted flag as the
    scan's `measurement_qual`; the release notebook then compares the snapshot's count with what

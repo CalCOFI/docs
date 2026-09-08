@@ -4,7 +4,7 @@ The Plumber API at `api.calcofi.io` served the first generation of CalCOFI.io: a
 database of the ingested tables and pre-built match tables between net tows and CTD casts, with
 endpoints for time series, cruises, rasters and the biology-to-environment matches. It was
 superseded in 2026 by the frozen parquet releases, which any DuckDB — including one running in a
-browser tab — reads directly with no server, no credentials and no rate limit. This appendix is
+browser tab — reads directly with no server, no credentials and no rate limit. @tbl-api-endpoints is
 the map from each endpoint to what replaced it; [Access the data](data-access.qmd) is the guide.
 
 | endpoint | what it did | now |
@@ -19,6 +19,8 @@ the map from each endpoint to what replaced it; [Access the data](data-access.qm
 | `itis_ichthyodata` | larval counts for an ITIS taxon and its descendants, matched | `cc_match_ichthyo_by_taxon()` — WoRMS, recursive |
 | `ichthyodata` | larval counts by scientific name, matched | `cc_match_ichthyo_by_name()` |
 | `relax_matching`, `cruiseymd_min/max`, `stage` | the match parameters | `relax_matching` (5 km / 72 h), `date_min/max`, `life_stage` |
+
+: Every endpoint the retired `api.calcofi.io` served, what it did, and what reads the release in its place. {#tbl-api-endpoints}
 
 The three matching endpoints, and many more queries, are also a point-and-click form at
 [calcofi.io/db-query](https://calcofi.io/db-query/), running DuckDB in the browser over the same

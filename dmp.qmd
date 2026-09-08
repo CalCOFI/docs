@@ -29,6 +29,8 @@ Updated `r dmp$updated` from the [action sheet](`r dmp$source`). Period: `r dmp$
 
 ## The tasks, by phase
 
+@tbl-dmp is the plan as the action sheet holds it, grouped by the five phases.
+
 ```{r}
 #| label: tbl-dmp
 #| tbl-cap: The plan's tasks (1–17 from the proposal; 18 onward added by the team), with the lead, the status the sheet reports, and where in this book the deliverable lives.
@@ -48,7 +50,7 @@ tasks |>
 ## Year 1: what the contractor delivers, by quarter
 
 Ocean Metrics is the plan's senior data-science contractor, and its Year 1 statement of work
-(2026-09-01 to 2027-08-31) puts each of its deliverables in a quarter. The ones that are
+(2026-09-01 to 2027-08-31) puts each of its deliverables in a quarter (@tbl-sow-year1). The ones that are
 documentation land in this book:
 
 | quarter | due | deliverables |
@@ -57,6 +59,8 @@ documentation land in this book:
 | Q2 | 2027-02-28 | bottle migration QA/QC against the release; CTD profile integration validated by the release gates; the naming guide and mapping tables circulated for review; NetID/UUID advisory (Task 9); the invertebrate–ichthyoplankton crosswalk (Tasks 7–8); webinar 1, the product showcase |
 | Q3 | 2027-05-31 | the naming guide and dataset nomenclature agreed and applied (Tasks 12–13); schema-normalization recommendations (Task 10); the eDNA-to-OBIS pipeline (Task 5); the data inventory with variable-based discovery, beta (Task 14) |
 | Q4 | 2027-08-31 | the inventory released, with the federated-architecture and data-access documentation (Task 14: [Architecture](architecture.qmd)); webinar 2, the technical deep-dives; contributions to the mid-term report and the seed of the living plan (Tasks 15–16) |
+
+: Year 1 of the Ocean Metrics statement of work, quarter by quarter. {#tbl-sow-year1}
 
 ## How to read a status
 

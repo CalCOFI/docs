@@ -24,7 +24,7 @@ one column per variable is fine (the ingest turns it long), as long as each row 
 Names are not the hard part — the data team maps your columns onto the standard names at ingest
 and keeps a crosswalk of what you called them ([Naming conventions](naming.qmd#legacy-names-mapped)).
 What cannot be recovered afterwards is a missing time zone, an undocumented unit, a count with no
-effort, or a species with no name that resolves. Those are the mandatory fields.
+effort, or a species with no name that resolves. Those are the mandatory fields of @tbl-mandatory.
 
 ## Mandatory: what, when, where
 
@@ -37,6 +37,8 @@ effort, or a species with no name that resolves. Those are the mandatory fields.
 | **the organism**, for a biological count | a scientific name, and where you have it an identifier from WoRMS (`AphiaID`), ITIS or GBIF; a life stage if the count is stage-specific | `Sardinops sagax`, WoRMS `217452`, `larva` |
 | **the effort**, for a count | what the count is per: the volume filtered, the area or time surveyed, the fraction of the sample sorted | `467.3 m³`; `0.48` sorted |
 | **who made it** | the organization that holds and can license the data, a contact, and how you want it cited | `Scripps Institution of Oceanography` |
+
+: What every dataset must carry, in the form the ingest can read it. {#tbl-mandatory}
 
 ## Optional: what makes it CalCOFI
 
@@ -82,7 +84,9 @@ A net-tow dataset that carries everything above, as one row per taxon per tow:
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1902SR | 93.3 | 26.4 | 12 | CB | 2019-02-06T23:48:00Z | 33.48066 | -117.769 | 210 | 467.3 | 0.48 | Sardinops sagax | 217452 | larva | 42 | |
 
-The data team's ingest would map `cruise` to `cruise_key` (`2019-02-33P4` after resolving the
+: One row of a net-tow dataset that carries every mandatory field, and the optional ones that make it CalCOFI. {#tbl-example-row}
+
+From @tbl-example-row the data team's ingest would map `cruise` to `cruise_key` (`2019-02-33P4` after resolving the
 ship), `line` and `station` to `site_key` (`093.3 026.4`), the tow to a `sample` row with `tow_type`
 `CB`, each count to an `obs_bio` row with `taxon_key` `worms:217452` and `life_stage` `larva`,
 `volume_sampled_m3` and `prop_sorted` to `sample_measurement`, and keep your `tow_number` beside
@@ -106,8 +110,8 @@ Write to **data@calcofi.io** to start.
 ## Reconciled with the database
 
 The guide's first drafts and the database's registries disagreed on a handful of names. The
-registry is the record, so the guide follows it; each is noted here so nobody reintroduces the
-older form.
+registry is the record, so the guide follows it; each is noted in @tbl-reconciled so nobody
+reintroduces the older form.
 
 | the draft said | the registry has | why |
 |---|---|---|
@@ -118,3 +122,5 @@ older form.
 | `cruise_id` in the long form `1949-03-01-C-31CR` | an **alias** of `cruise_key` in the dictionary, not a field | legacy names are kept in the crosswalk, not in the schema |
 | `M2` as the MOCNESS 10 m frame | the registry names `M2` **MOCNESS (3 m²)** — to be checked against the source with SWFSC | the gear registry is the record; if the source says otherwise the registry changes, not the guide |
 | no `OBLIQUE` gear | **`OBLIQUE`** — an oblique tow whose gear was not recorded | the registry lists every code that appears in the data |
+
+: Where the guide's drafts and the database's registries disagreed, and what the registry has. {#tbl-reconciled}

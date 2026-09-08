@@ -1,10 +1,9 @@
 graph LR
-  %% the CalCOFI.io data system, read left to right along the DMP's phases:
-  %% ingest -> integrate -> publish -> visualize. synthesize is this book and the
-  %% status page, so it is the frame, not a box.
-  %% The CTD team's PostgreSQL working store is deliberately NOT here: it is built
-  %% and running but not yet the team's practice, and this figure shows the system
-  %% as it operates. It has its own figure, diagrams/system_ctd.mmd, in ctd-qaqc.qmd.
+  %% the same system as diagrams/system.mmd, WITH the CTD team's PostgreSQL working
+  %% store and the nightly flag_accepted.parquet bridge that would carry the team's
+  %% accepted flags into the next ingest. The store is built and running; it is not
+  %% yet the team's working practice, which is why the overview figure leaves it out
+  %% and this one — in ctd-qaqc.qmd — puts it back.
 
   subgraph ingest[Ingest]
     drive["provider files<br/>Google Shared Drive ⇄ GCS"]:::source
@@ -30,11 +29,22 @@ graph LR
     pkgs["calcofi4r · calcofi4py<br/>db-query · db-schema"]:::surface
   end
 
+  subgraph work[The working store — available, not yet adopted]
+    team["the CTD team<br/>propose · review a flag"]:::people
+    pg[("PostgreSQL 18 + PostGIS + pg_duckdb<br/>ctd.scan — 10.8 M scans verbatim<br/>ctd.flag ledger · ctd.flag_audit")]:::pg
+    snap["gs://calcofi-db/qc/ctd/<br/>flag_accepted.parquet<br/>written nightly"]:::artifact
+  end
+
   drive --> nb --> shards --> rel
   q -.-> nb
   rel --> frozen --> rec
   rec --> pages & erddap & dwca
   frozen --> explore & pkgs & erddap
+  %% the bridge: the pipeline never reads the live database, only the nightly snapshot
+  team --> pg
+  pg -- "accepted flags, nightly" --> snap
+  snap -. "applied as measurement_qual" .-> nb
+  pg -. "reads the release, pg_duckdb" .- frozen
   %% invisible links rank the access block after the published surfaces
   pages ~~~ explore
   dwca ~~~ pkgs
@@ -43,8 +53,10 @@ graph LR
   classDef step     fill:#fff7d6,stroke:#c9a227,color:#182b49
   classDef artifact fill:#fbe9c9,stroke:#d97706,color:#182b49
   classDef surface  fill:#e6f2fb,stroke:#00629b,color:#182b49
-  classDef people   fill:#eef1f5,stroke:#6b7a90,color:#182b49
+  classDef people   fill:#e6f2fb,stroke:#00629b,color:#182b49
+  classDef pg       fill:#eef1f5,stroke:#6b7a90,color:#182b49
   style ingest     fill:#fafafa,stroke:#cfd6de
   style integrate  fill:#fafafa,stroke:#cfd6de
   style publish    fill:#fafafa,stroke:#cfd6de
   style visualize  fill:#fafafa,stroke:#cfd6de
+  style work       fill:#fafafa,stroke:#cfd6de,stroke-dasharray:4 3

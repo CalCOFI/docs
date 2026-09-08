@@ -109,7 +109,9 @@ book:
     - glossary.qmd
     - refs.qmd
 
-bibliography: ["refs/packages.bib"]
+# refs/refs.bib is the literature; refs/packages.bib the software. Cite with [@key];
+# the bibliography renders in the References appendix (refs.qmd, the ::: {#refs} div).
+bibliography: ["refs/refs.bib", "refs/packages.bib"]
 bibliographystyle: apa
 link-citations: true
 

@@ -29,7 +29,8 @@ fk <- purrr::map_dfr(rels$foreign_keys, \(f) tibble::tibble(
 
 ## The rules
 
-**The suffix says what kind of value a column holds**, and this is checked in review, because a
+**The suffix says what kind of value a column holds** (@tbl-suffixes), and this is checked in
+review, because a
 character-valued identifier named `*_id` is a promise the data cannot keep:
 
 | suffix | value | examples |
@@ -38,6 +39,8 @@ character-valued identifier named `*_id` is a promise the data cannot keep:
 | `*_id` | an **integer** key — a source counter or a surrogate the release mints | `cast_id`, `bottle_id`, `obs_id`, `root_id` |
 | `*_uuid` | the **provider's own** identifier for that record, as they mint it ([RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)) | `cruise_uuid`, `source_uuid`, `station_uuid` |
 | `*_seq` | an auto-incrementing sequence integer | — |
+
+: What each column-name suffix promises about the value the column holds. {#tbl-suffixes}
 
 (`hex_id` is the one integer that is neither a counter nor a surrogate: an H3 cell index at
 resolution 10, so coarser hexagons are `h3_cell_to_parent(hex_id, res)` rather than a column per
@@ -103,10 +106,10 @@ at the freeze.
 
 ## The contract, per table
 
-Every released table declares a primary key, and every foreign key between released tables is
-declared in the release's `relationships.json` (`calcofi4db::core_relationships()` for the core
+Every released table declares a primary key, and every foreign key between released tables —
+every arrow in @fig-core-erd — is declared in the release's `relationships.json` (`calcofi4db::core_relationships()` for the core
 family and the tables the release builds; `metadata/relationships_cross.csv` for the edges that
-cross datasets). The table reads that file for `r snap$version`.
+cross datasets). @tbl-contract reads that file for `r snap$version`.
 
 ```{r}
 #| label: tbl-contract
@@ -185,7 +188,7 @@ as_tibble(integ$foreign_keys) |>
   tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
 ```
 
-Two things the tables do not show, on purpose:
+Two things @tbl-pk and @tbl-fk do not show, on purpose:
 
 - **A NULL is not an orphan.** Where a column is NULL the row has nothing to point at — an
   environmental observation has no taxon, a region-pooled sample has no grid cell, a root sample
@@ -206,6 +209,11 @@ only ratchets — is on the [Releases](releases.qmd#sec-release-gates) page; the
 keys are:
 
 {{< include _gates.qmd >}}
+
+: The gates that stop a release outright, of which the first three are key gates. {#tbl-gates-keys}
+
+The first three rows of @tbl-gates-keys are the key gates proper; the last three catch a key
+problem on its way to a consumer.
 
 ## Walking the keys
 

@@ -8,9 +8,21 @@ name: Publish Quarto book
 # name took the whole site down for a day (git log 2026-09-07). Diagrams are SVGs
 # pre-rendered by libs/render_diagrams.sh and committed, so no Chromium is installed here.
 
+# The book is a CONSUMER of the database release: libs/pre-render.R snapshots the
+# PROMOTED release's sidecars at render time, so after `latest.txt` moves the site
+# keeps showing the previous version's inventory, keys and counts until it renders
+# again — silently, with nothing on the page to say so. Hence three triggers besides
+# a push: `release-promoted`, sent by CalCOFI/workflows' scripts/deploy_consumers.sh
+# after promotion; a weekly schedule as the safety net if that dispatch is missed;
+# and workflow_dispatch to run it by hand
+# (`gh workflow run render_book.yml --ref main -R CalCOFI/docs`).
 on:
   push:
     branches: [main]
+  repository_dispatch:
+    types: [release-promoted]
+  schedule:
+    - cron: "17 11 * * 1"   # Mondays 11:17 UTC
   workflow_dispatch:
 
 # one publish at a time: two pushes a minute apart both ran to completion on 2026-09-08 and the

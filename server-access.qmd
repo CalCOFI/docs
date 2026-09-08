@@ -5,17 +5,21 @@ title: Server Access
 ## SSH, SFTP & PostgreSQL {#sec-server-access}
 
 The CalCOFI server (`ssh.calcofi.io`, a Google Cloud VM in Iowa) hosts the apps, RStudio
-Server, ERDDAP — and, since August 2026, a **multi-user PostgreSQL database** that the
-CTD team uses for QA/QC: everyone reads and writes the same tables, originals stay
-immutable, flags and proposed fixes live beside them. This page is the one place that
-explains how to get in and how to connect, for **Mac** and **Windows**.
+Server, ERDDAP — and, since August 2026, a **multi-user PostgreSQL database** for CTD
+QA/QC: everyone reads and writes the same tables, originals stay immutable, flags and
+proposed fixes live beside them. The database is **available, not yet adopted** — it is
+built, loaded and accounts work, but it is not yet the CTD team's routine, so the overview
+figure in [Architecture](architecture.qmd) leaves it out and [CTD QA/QC](ctd-qaqc.qmd) says
+what adopting it would change. This page is the one place that explains how to get in and
+how to connect, for **Mac** and **Windows** — everything below works today.
 
 ::: {.callout-note}
 ## Two databases, two access paths
 - The **public releases** are parquet on a public bucket. No account, no tunnel:
   [Access the data](data-access.qmd), `calcofi4r::cc_get_db()`, DuckDB, the browser.
 - The **working PostgreSQL database** (`calcofi`) is private and reachable only over SSH.
-  That is what the rest of this page is about.
+  That is what the rest of this page is about. It is offered to the CTD team rather than
+  required of them; nothing in the pipeline reads it live either way.
 :::
 
 ## The stack {#sec-server-stack}
@@ -37,6 +41,9 @@ record for every `*.calcofi.io` service (file an
 | plumber | `plumber` | [api.calcofi.io](https://api.calcofi.io) — the R API |
 | Varnish + the H3T API (FastAPI) | `varnish`, `h3t_api_py` | [h3t.calcofi.io](https://h3t.calcofi.io/docs) — the cached hexagon-tile API behind the Hexagon Explorer (superseded by the [Explorer](https://calcofi.io/explore/), kept serving) |
 
+: The Docker Compose services on the CalCOFI server, from `CalCOFI/server`. {#tbl-server-stack}
+
+@tbl-server-stack is the whole machine.
 Caddy also fronts two static services with no container of their own:
 [file.calcofi.io](https://file.calcofi.io) (public files on the server's disk) and
 [storage.calcofi.io](https://storage.calcofi.io) (a browsable front door onto the
@@ -46,7 +53,7 @@ public Google Cloud Storage buckets).
 
 Accounts are personal (no shared logins), key-only (no passwords over SSH), and named
 after your email local-part — `rswalethorp`, `bmgire`, `kdvogel`, `bthuang`,
-`esatterthwaite`, `bebest`. Each account gets:
+`esatterthwaite`, `bebest`. Each account gets what @tbl-account lists:
 
 | what | where |
 |---|---|
@@ -55,6 +62,8 @@ after your email local-part — `rswalethorp`, `bmgire`, `kdvogel`, `bthuang`,
 | PostgreSQL role | same name as your username, in database `calcofi`; schemas `ctd` (curated), `work` (shared scratch), and your own schema (`rswalethorp.*`) |
 | pgAdmin web login | [pgadmin.calcofi.io](https://pgadmin.calcofi.io) with your email |
 | RStudio Server login | [rstudio.calcofi.io](https://rstudio.calcofi.io) — R in the browser, already on the server (no tunnel needed there) |
+
+: What one account gets you. {#tbl-account}
 
 **To request one: send Ben (bebest@ucsd.edu) your SSH *public* key.** Generate it once per
 computer:
@@ -242,6 +251,10 @@ PuTTY Tunnels source port), and `port 15432` / `localhost:15432` wherever you co
 | **DBeaver** (free) | New connection ▸ PostgreSQL ▸ host `localhost`, db `calcofi`, user *you*; **SSH** tab ▸ host `ssh.calcofi.io`, user *you*, *Public Key* auth | people who already use it |
 | **RStudio Server** ([rstudio.calcofi.io](https://rstudio.calcofi.io)) | log in with your username + database password; in R use `host = "postgis"` (it is on the same network, no tunnel); `calcofi4r::cc_pg_connect()` works out of the box | R without installing anything |
 
+: Graphical clients onto the working database, and who each suits. {#tbl-pg-clients}
+
+Any of @tbl-pg-clients will do; pgAdmin on the web needs nothing installed at all.
+
 ## From R {#sec-r}
 
 `calcofi4r` ≥ 1.8.0 (`remotes::install_github("calcofi/calcofi4r")`) resolves the host,
@@ -371,6 +384,9 @@ Database `calcofi`, three kinds of schema:
 | `work` | shared scratch — anything goes, readable and writable by the whole team | everyone |
 | `<you>` | your personal schema (first on your `search_path`); colleagues can read it | you |
 
+: The schemas of database `calcofi`, what each holds and who may write to it. {#tbl-ctd-schemas-server}
+
+@tbl-ctd-schemas-server is the same layout [CTD QA/QC](ctd-qaqc.qmd) describes, in more detail.
 The rules of the road: **originals never change** — a problem is a row in `ctd.flag`
 (which scan, which variable, what code, optional proposed value, why), a fix is an
 *accepted* flag, and every derived product is computed from originals + accepted flags so
