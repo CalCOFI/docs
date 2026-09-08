@@ -42,6 +42,12 @@ book:
       - name: UC San Diego - Scripps Institution of Oceanography
         city: San Diego
         state: CA
+  - name: "Betty Huang"
+    email: bthuang@ucsd.edu
+    affiliations:
+      - name: UC San Diego - Scripps Institution of Oceanography
+        city: San Diego
+        state: CA
   date: today
   date-format: "YYYY-MM-DD"
   site-url: https://calcofi.io/docs/
