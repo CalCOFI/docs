@@ -133,6 +133,35 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- feedback (2026-09-08): the fleet's feedback dialog — calcofi.io/assets/feedback.{css,js}, the Explorer's
+     annotated-screenshot dialog ported to plain JS — with this book's own trigger: a speech-bubble sidebar
+     tool inserted just before quarto's theme toggle on DOMContentLoaded (feedback.js binds on DOM ready and
+     reads endpoint / repo / app from the button). The endpoint is the "CalCOFI app feedback" Apps Script the
+     Explorer and calcofi.io use (calcofi4r::cc_feedback_script()); app "docs" — the script maps an app to
+     the repo its public issue is filed in, and needs `docs = "CalCOFI/docs"` in its repos= for that step. -->
+<link rel="stylesheet" href="https://calcofi.io/assets/feedback.css">
+<script defer="" src="https://calcofi.io/assets/feedback.js"></script>
+<style>
+  /* the sidebar tool: quarto's tools are 1 rem bootstrap glyphs on the sidebar's text colour; the bubble is an
+     inline SVG at the same size, so it sits level with the share and toggle icons */
+  .cc-feedback.quarto-navigation-tool { display: inline-flex; align-items: center; vertical-align: middle; }
+  .cc-feedback.quarto-navigation-tool svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+  /* the dialog's buttons and inputs inherit bootstrap's font-size / line-height; hold them to the brand's */
+  dialog.fb { font-size: 16px; }
+  dialog.fb code { color: var(--fg); background: var(--panel); }   /* not bootstrap's pink */
+</style>
+<script>document.addEventListener("DOMContentLoaded", function () {
+  var toggle = document.querySelector(".quarto-color-scheme-toggle");
+  if (!toggle || document.querySelector(".cc-feedback")) return;
+  var a = document.createElement("a");
+  a.href = ""; a.className = "cc-feedback quarto-navigation-tool px-1"; a.title = "Send feedback — with a screenshot of this page"; a.setAttribute("aria-label", "Send feedback");
+  a.setAttribute("data-endpoint", "https://script.google.com/macros/s/AKfycby8SIv9aBTXGBqKpPxLGox6YV2ZvqXwxvpwFq7Z9uFWLS8ik38_bADnMKlOJ_JolcfI/exec");
+  a.setAttribute("data-repo", "CalCOFI/docs"); a.setAttribute("data-app", "docs");
+  a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M4,4V17.17L5.17,16H20V4H4M6,7H18V9H6V7M6,11H15V13H6V11Z"/></svg>';
+  toggle.parentNode.insertBefore(a, toggle);
+  if (window.ccFeedback) ccFeedback.mount();   // the fleet script may already have run its own ready hook
+});</script>
+
 <!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
      class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
 <link rel="stylesheet" href="libs/diagram.css">
@@ -659,23 +688,23 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </figcaption>
 <div aria-describedby="tbl-meta-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="vbueehtves" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vbueehtves table {
+<div id="kwbteufvkj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kwbteufvkj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vbueehtves thead, #vbueehtves tbody, #vbueehtves tfoot, #vbueehtves tr, #vbueehtves td, #vbueehtves th {
+#kwbteufvkj thead, #kwbteufvkj tbody, #kwbteufvkj tfoot, #kwbteufvkj tr, #kwbteufvkj td, #kwbteufvkj th {
   border-style: none;
 }
 
-#vbueehtves p {
+#kwbteufvkj p {
   margin: 0;
   padding: 0;
 }
 
-#vbueehtves .gt_table {
+#kwbteufvkj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -701,12 +730,12 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-left-color: #D3D3D3;
 }
 
-#vbueehtves .gt_caption {
+#kwbteufvkj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vbueehtves .gt_title {
+#kwbteufvkj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -718,7 +747,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-width: 0;
 }
 
-#vbueehtves .gt_subtitle {
+#kwbteufvkj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -730,7 +759,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-width: 0;
 }
 
-#vbueehtves .gt_heading {
+#kwbteufvkj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -742,13 +771,13 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#vbueehtves .gt_bottom_border {
+#kwbteufvkj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vbueehtves .gt_col_headings {
+#kwbteufvkj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -763,7 +792,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#vbueehtves .gt_col_heading {
+#kwbteufvkj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -783,7 +812,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#vbueehtves .gt_column_spanner_outer {
+#kwbteufvkj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -795,15 +824,15 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 4px;
 }
 
-#vbueehtves .gt_column_spanner_outer:first-child {
+#kwbteufvkj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vbueehtves .gt_column_spanner_outer:last-child {
+#kwbteufvkj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vbueehtves .gt_column_spanner {
+#kwbteufvkj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -815,11 +844,11 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   width: 100%;
 }
 
-#vbueehtves .gt_spanner_row {
+#kwbteufvkj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vbueehtves .gt_group_heading {
+#kwbteufvkj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -845,7 +874,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   text-align: left;
 }
 
-#vbueehtves .gt_empty_group_heading {
+#kwbteufvkj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -860,15 +889,15 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: middle;
 }
 
-#vbueehtves .gt_from_md > :first-child {
+#kwbteufvkj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vbueehtves .gt_from_md > :last-child {
+#kwbteufvkj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vbueehtves .gt_row {
+#kwbteufvkj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -887,7 +916,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#vbueehtves .gt_stub {
+#kwbteufvkj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -900,7 +929,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#vbueehtves .gt_stub_row_group {
+#kwbteufvkj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -914,15 +943,15 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: top;
 }
 
-#vbueehtves .gt_row_group_first td {
+#kwbteufvkj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vbueehtves .gt_row_group_first th {
+#kwbteufvkj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vbueehtves .gt_summary_row {
+#kwbteufvkj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -932,16 +961,16 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#vbueehtves .gt_first_summary_row {
+#kwbteufvkj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vbueehtves .gt_first_summary_row.thick {
+#kwbteufvkj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vbueehtves .gt_last_summary_row {
+#kwbteufvkj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -951,7 +980,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#vbueehtves .gt_grand_summary_row {
+#kwbteufvkj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -961,7 +990,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#vbueehtves .gt_first_grand_summary_row {
+#kwbteufvkj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -971,7 +1000,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-color: #D3D3D3;
 }
 
-#vbueehtves .gt_last_grand_summary_row_top {
+#kwbteufvkj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -981,11 +1010,11 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#vbueehtves .gt_striped {
+#kwbteufvkj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vbueehtves .gt_table_body {
+#kwbteufvkj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -994,7 +1023,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#vbueehtves .gt_footnotes {
+#kwbteufvkj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1008,7 +1037,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#vbueehtves .gt_footnote {
+#kwbteufvkj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1017,7 +1046,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#vbueehtves .gt_sourcenotes {
+#kwbteufvkj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1031,7 +1060,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#vbueehtves .gt_sourcenote {
+#kwbteufvkj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1039,72 +1068,72 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#vbueehtves .gt_left {
+#kwbteufvkj .gt_left {
   text-align: left;
 }
 
-#vbueehtves .gt_center {
+#kwbteufvkj .gt_center {
   text-align: center;
 }
 
-#vbueehtves .gt_right {
+#kwbteufvkj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vbueehtves .gt_font_normal {
+#kwbteufvkj .gt_font_normal {
   font-weight: normal;
 }
 
-#vbueehtves .gt_font_bold {
+#kwbteufvkj .gt_font_bold {
   font-weight: bold;
 }
 
-#vbueehtves .gt_font_italic {
+#kwbteufvkj .gt_font_italic {
   font-style: italic;
 }
 
-#vbueehtves .gt_super {
+#kwbteufvkj .gt_super {
   font-size: 65%;
 }
 
-#vbueehtves .gt_footnote_marks {
+#kwbteufvkj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vbueehtves .gt_asterisk {
+#kwbteufvkj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vbueehtves .gt_indent_1 {
+#kwbteufvkj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vbueehtves .gt_indent_2 {
+#kwbteufvkj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vbueehtves .gt_indent_3 {
+#kwbteufvkj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vbueehtves .gt_indent_4 {
+#kwbteufvkj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vbueehtves .gt_indent_5 {
+#kwbteufvkj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vbueehtves .katex-display {
+#kwbteufvkj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vbueehtves div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kwbteufvkj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

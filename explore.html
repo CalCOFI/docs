@@ -133,6 +133,35 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- feedback (2026-09-08): the fleet's feedback dialog — calcofi.io/assets/feedback.{css,js}, the Explorer's
+     annotated-screenshot dialog ported to plain JS — with this book's own trigger: a speech-bubble sidebar
+     tool inserted just before quarto's theme toggle on DOMContentLoaded (feedback.js binds on DOM ready and
+     reads endpoint / repo / app from the button). The endpoint is the "CalCOFI app feedback" Apps Script the
+     Explorer and calcofi.io use (calcofi4r::cc_feedback_script()); app "docs" — the script maps an app to
+     the repo its public issue is filed in, and needs `docs = "CalCOFI/docs"` in its repos= for that step. -->
+<link rel="stylesheet" href="https://calcofi.io/assets/feedback.css">
+<script defer="" src="https://calcofi.io/assets/feedback.js"></script>
+<style>
+  /* the sidebar tool: quarto's tools are 1 rem bootstrap glyphs on the sidebar's text colour; the bubble is an
+     inline SVG at the same size, so it sits level with the share and toggle icons */
+  .cc-feedback.quarto-navigation-tool { display: inline-flex; align-items: center; vertical-align: middle; }
+  .cc-feedback.quarto-navigation-tool svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+  /* the dialog's buttons and inputs inherit bootstrap's font-size / line-height; hold them to the brand's */
+  dialog.fb { font-size: 16px; }
+  dialog.fb code { color: var(--fg); background: var(--panel); }   /* not bootstrap's pink */
+</style>
+<script>document.addEventListener("DOMContentLoaded", function () {
+  var toggle = document.querySelector(".quarto-color-scheme-toggle");
+  if (!toggle || document.querySelector(".cc-feedback")) return;
+  var a = document.createElement("a");
+  a.href = ""; a.className = "cc-feedback quarto-navigation-tool px-1"; a.title = "Send feedback — with a screenshot of this page"; a.setAttribute("aria-label", "Send feedback");
+  a.setAttribute("data-endpoint", "https://script.google.com/macros/s/AKfycby8SIv9aBTXGBqKpPxLGox6YV2ZvqXwxvpwFq7Z9uFWLS8ik38_bADnMKlOJ_JolcfI/exec");
+  a.setAttribute("data-repo", "CalCOFI/docs"); a.setAttribute("data-app", "docs");
+  a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M4,4V17.17L5.17,16H20V4H4M6,7H18V9H6V7M6,11H15V13H6V11Z"/></svg>';
+  toggle.parentNode.insertBefore(a, toggle);
+  if (window.ccFeedback) ccFeedback.mount();   // the fleet script may already have run its own ready hook
+});</script>
+
 <!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
      class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
 <link rel="stylesheet" href="libs/diagram.css">
@@ -648,23 +677,23 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
 </figcaption>
 <div aria-describedby="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="uidwxotdlr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uidwxotdlr table {
+<div id="redpwyuoyk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#redpwyuoyk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uidwxotdlr thead, #uidwxotdlr tbody, #uidwxotdlr tfoot, #uidwxotdlr tr, #uidwxotdlr td, #uidwxotdlr th {
+#redpwyuoyk thead, #redpwyuoyk tbody, #redpwyuoyk tfoot, #redpwyuoyk tr, #redpwyuoyk td, #redpwyuoyk th {
   border-style: none;
 }
 
-#uidwxotdlr p {
+#redpwyuoyk p {
   margin: 0;
   padding: 0;
 }
 
-#uidwxotdlr .gt_table {
+#redpwyuoyk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -690,12 +719,12 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-left-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_caption {
+#redpwyuoyk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uidwxotdlr .gt_title {
+#redpwyuoyk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -707,7 +736,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-width: 0;
 }
 
-#uidwxotdlr .gt_subtitle {
+#redpwyuoyk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -719,7 +748,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-top-width: 0;
 }
 
-#uidwxotdlr .gt_heading {
+#redpwyuoyk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -731,13 +760,13 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_bottom_border {
+#redpwyuoyk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_col_headings {
+#redpwyuoyk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -752,7 +781,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_col_heading {
+#redpwyuoyk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -772,7 +801,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#uidwxotdlr .gt_column_spanner_outer {
+#redpwyuoyk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -784,15 +813,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 4px;
 }
 
-#uidwxotdlr .gt_column_spanner_outer:first-child {
+#redpwyuoyk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uidwxotdlr .gt_column_spanner_outer:last-child {
+#redpwyuoyk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uidwxotdlr .gt_column_spanner {
+#redpwyuoyk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -804,11 +833,11 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   width: 100%;
 }
 
-#uidwxotdlr .gt_spanner_row {
+#redpwyuoyk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uidwxotdlr .gt_group_heading {
+#redpwyuoyk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -834,7 +863,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   text-align: left;
 }
 
-#uidwxotdlr .gt_empty_group_heading {
+#redpwyuoyk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -849,15 +878,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: middle;
 }
 
-#uidwxotdlr .gt_from_md > :first-child {
+#redpwyuoyk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uidwxotdlr .gt_from_md > :last-child {
+#redpwyuoyk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uidwxotdlr .gt_row {
+#redpwyuoyk .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -876,7 +905,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#uidwxotdlr .gt_stub {
+#redpwyuoyk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -889,7 +918,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#uidwxotdlr .gt_stub_row_group {
+#redpwyuoyk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -903,15 +932,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: top;
 }
 
-#uidwxotdlr .gt_row_group_first td {
+#redpwyuoyk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uidwxotdlr .gt_row_group_first th {
+#redpwyuoyk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uidwxotdlr .gt_summary_row {
+#redpwyuoyk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -921,16 +950,16 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#uidwxotdlr .gt_first_summary_row {
+#redpwyuoyk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_first_summary_row.thick {
+#redpwyuoyk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uidwxotdlr .gt_last_summary_row {
+#redpwyuoyk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -940,7 +969,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_grand_summary_row {
+#redpwyuoyk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -950,7 +979,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#uidwxotdlr .gt_first_grand_summary_row {
+#redpwyuoyk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -960,7 +989,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-top-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_last_grand_summary_row_top {
+#redpwyuoyk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -970,11 +999,11 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_striped {
+#redpwyuoyk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uidwxotdlr .gt_table_body {
+#redpwyuoyk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -983,7 +1012,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_footnotes {
+#redpwyuoyk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -997,7 +1026,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_footnote {
+#redpwyuoyk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1006,7 +1035,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#uidwxotdlr .gt_sourcenotes {
+#redpwyuoyk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1020,7 +1049,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#uidwxotdlr .gt_sourcenote {
+#redpwyuoyk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1028,72 +1057,72 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#uidwxotdlr .gt_left {
+#redpwyuoyk .gt_left {
   text-align: left;
 }
 
-#uidwxotdlr .gt_center {
+#redpwyuoyk .gt_center {
   text-align: center;
 }
 
-#uidwxotdlr .gt_right {
+#redpwyuoyk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uidwxotdlr .gt_font_normal {
+#redpwyuoyk .gt_font_normal {
   font-weight: normal;
 }
 
-#uidwxotdlr .gt_font_bold {
+#redpwyuoyk .gt_font_bold {
   font-weight: bold;
 }
 
-#uidwxotdlr .gt_font_italic {
+#redpwyuoyk .gt_font_italic {
   font-style: italic;
 }
 
-#uidwxotdlr .gt_super {
+#redpwyuoyk .gt_super {
   font-size: 65%;
 }
 
-#uidwxotdlr .gt_footnote_marks {
+#redpwyuoyk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uidwxotdlr .gt_asterisk {
+#redpwyuoyk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uidwxotdlr .gt_indent_1 {
+#redpwyuoyk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uidwxotdlr .gt_indent_2 {
+#redpwyuoyk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uidwxotdlr .gt_indent_3 {
+#redpwyuoyk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uidwxotdlr .gt_indent_4 {
+#redpwyuoyk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uidwxotdlr .gt_indent_5 {
+#redpwyuoyk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uidwxotdlr .katex-display {
+#redpwyuoyk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uidwxotdlr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#redpwyuoyk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1163,23 +1192,23 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
 </figcaption>
 <div aria-describedby="tbl-students-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="bfdokaxtvg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bfdokaxtvg table {
+<div id="nlslqgixju" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nlslqgixju table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bfdokaxtvg thead, #bfdokaxtvg tbody, #bfdokaxtvg tfoot, #bfdokaxtvg tr, #bfdokaxtvg td, #bfdokaxtvg th {
+#nlslqgixju thead, #nlslqgixju tbody, #nlslqgixju tfoot, #nlslqgixju tr, #nlslqgixju td, #nlslqgixju th {
   border-style: none;
 }
 
-#bfdokaxtvg p {
+#nlslqgixju p {
   margin: 0;
   padding: 0;
 }
 
-#bfdokaxtvg .gt_table {
+#nlslqgixju .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1205,12 +1234,12 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-left-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_caption {
+#nlslqgixju .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bfdokaxtvg .gt_title {
+#nlslqgixju .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1222,7 +1251,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-width: 0;
 }
 
-#bfdokaxtvg .gt_subtitle {
+#nlslqgixju .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1234,7 +1263,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-top-width: 0;
 }
 
-#bfdokaxtvg .gt_heading {
+#nlslqgixju .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1246,13 +1275,13 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_bottom_border {
+#nlslqgixju .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_col_headings {
+#nlslqgixju .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1267,7 +1296,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_col_heading {
+#nlslqgixju .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1287,7 +1316,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#bfdokaxtvg .gt_column_spanner_outer {
+#nlslqgixju .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1299,15 +1328,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 4px;
 }
 
-#bfdokaxtvg .gt_column_spanner_outer:first-child {
+#nlslqgixju .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bfdokaxtvg .gt_column_spanner_outer:last-child {
+#nlslqgixju .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bfdokaxtvg .gt_column_spanner {
+#nlslqgixju .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1319,11 +1348,11 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   width: 100%;
 }
 
-#bfdokaxtvg .gt_spanner_row {
+#nlslqgixju .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bfdokaxtvg .gt_group_heading {
+#nlslqgixju .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1349,7 +1378,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   text-align: left;
 }
 
-#bfdokaxtvg .gt_empty_group_heading {
+#nlslqgixju .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1364,15 +1393,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   vertical-align: middle;
 }
 
-#bfdokaxtvg .gt_from_md > :first-child {
+#nlslqgixju .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bfdokaxtvg .gt_from_md > :last-child {
+#nlslqgixju .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bfdokaxtvg .gt_row {
+#nlslqgixju .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1391,7 +1420,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#bfdokaxtvg .gt_stub {
+#nlslqgixju .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1404,7 +1433,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#bfdokaxtvg .gt_stub_row_group {
+#nlslqgixju .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1418,15 +1447,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   vertical-align: top;
 }
 
-#bfdokaxtvg .gt_row_group_first td {
+#nlslqgixju .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bfdokaxtvg .gt_row_group_first th {
+#nlslqgixju .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bfdokaxtvg .gt_summary_row {
+#nlslqgixju .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1436,16 +1465,16 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#bfdokaxtvg .gt_first_summary_row {
+#nlslqgixju .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_first_summary_row.thick {
+#nlslqgixju .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bfdokaxtvg .gt_last_summary_row {
+#nlslqgixju .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1455,7 +1484,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_grand_summary_row {
+#nlslqgixju .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1465,7 +1494,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#bfdokaxtvg .gt_first_grand_summary_row {
+#nlslqgixju .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1475,7 +1504,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-top-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_last_grand_summary_row_top {
+#nlslqgixju .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1485,11 +1514,11 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_striped {
+#nlslqgixju .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bfdokaxtvg .gt_table_body {
+#nlslqgixju .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1498,7 +1527,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_footnotes {
+#nlslqgixju .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1512,7 +1541,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_footnote {
+#nlslqgixju .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1521,7 +1550,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#bfdokaxtvg .gt_sourcenotes {
+#nlslqgixju .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1535,7 +1564,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#bfdokaxtvg .gt_sourcenote {
+#nlslqgixju .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1543,72 +1572,72 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#bfdokaxtvg .gt_left {
+#nlslqgixju .gt_left {
   text-align: left;
 }
 
-#bfdokaxtvg .gt_center {
+#nlslqgixju .gt_center {
   text-align: center;
 }
 
-#bfdokaxtvg .gt_right {
+#nlslqgixju .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bfdokaxtvg .gt_font_normal {
+#nlslqgixju .gt_font_normal {
   font-weight: normal;
 }
 
-#bfdokaxtvg .gt_font_bold {
+#nlslqgixju .gt_font_bold {
   font-weight: bold;
 }
 
-#bfdokaxtvg .gt_font_italic {
+#nlslqgixju .gt_font_italic {
   font-style: italic;
 }
 
-#bfdokaxtvg .gt_super {
+#nlslqgixju .gt_super {
   font-size: 65%;
 }
 
-#bfdokaxtvg .gt_footnote_marks {
+#nlslqgixju .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bfdokaxtvg .gt_asterisk {
+#nlslqgixju .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bfdokaxtvg .gt_indent_1 {
+#nlslqgixju .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bfdokaxtvg .gt_indent_2 {
+#nlslqgixju .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bfdokaxtvg .gt_indent_3 {
+#nlslqgixju .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bfdokaxtvg .gt_indent_4 {
+#nlslqgixju .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bfdokaxtvg .gt_indent_5 {
+#nlslqgixju .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bfdokaxtvg .katex-display {
+#nlslqgixju .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bfdokaxtvg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nlslqgixju div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
