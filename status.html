@@ -664,7 +664,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <!-- The baseline at the start of the 2026-09-01 → 2027-08-31 SoW (Year 1 of the DMP), written
      with the revamp of this book; the first quarterly entry follows on 2026-11-30. -->
 <p>The state of the system at the start of the new contract, by phase. The promoted release is v2026.09.06 (16 datasets, 23 tables, 348,657,010 rows, DOI 10.5281/zenodo.22514953).</p>
-<p><strong>Ingest.</strong> Sixteen datasets run through one pipeline of reproducible notebooks; the CTD team’s PostgreSQL working store (2026-08-19) holds the cast archive verbatim with a flag ledger whose accepted flags reach the next ingest through a nightly snapshot. Open: the bottle database migration (Task 1) waits on the profile database and training.</p>
+<p><strong>Ingest.</strong> Sixteen datasets run through one pipeline of reproducible notebooks. The CTD team’s PostgreSQL working store (2026-08-19) holds the cast archive verbatim with a flag ledger whose accepted flags would reach the next ingest through a nightly snapshot; it is built, running and documented, but <strong>not yet adopted</strong> — CTD flags still arrive with the provider’s files, so the overview figure shows the system without it (<a href="./ctd-qaqc.html">CTD QA/QC</a> has the figure with it in). Open: adoption by the CTD team; the bottle database migration (Task 1) waits on the profile database and training.</p>
 <p><strong>Integrate.</strong> Every event keys to its cruise by date span (v2026.08.25); provider UUIDs are released as columns beside the natural keys (v2026.09.04); as of this entry every released table declares a primary key and every declared key is measured before a release ships (<code>integrity.json</code>: 23 primary and 57 foreign keys, all ok). The naming conventions are generated from the registries and the provider guide is drafted (Tasks 12–13, Q1 inventory).</p>
 <p><strong>Publish.</strong> One record and one EML document per dataset are generated at every release, and from them the dataset pages, DCAT, STAC, the Darwin Core archives, the EDI packages and ERDDAP’s metadata; every release has a DOI. Open: the OBIS and EDI uploads wait on provider decisions; CTD casts on ERDDAP (Q1).</p>
 <p><strong>Visualize.</strong> The Explorer (2026-08-29, six lenses since 2026-09-07) runs in the browser over the release and supersedes the Shiny viewers; the landing page is a dataset catalog with a page per dataset; the schema browser shows each key measured. Open: variable-based discovery (Task 14, Q3–Q4).</p>
@@ -716,8 +716,14 @@ repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 </section>
 <section id="deliverables-crosswalk" class="level3" data-number="17.2.4">
 <h3 data-number="17.2.4" class="anchored" data-anchor-id="deliverables-crosswalk"><span class="header-section-number">17.2.4</span> Deliverables Crosswalk</h3>
-<p>Against the SOW (** = must-complete by end of contract):</p>
+<p>Against the SOW (** = must-complete by end of contract); <a href="#tbl-sow-ingest" class="quarto-xref">Table&nbsp;<span>17.1</span></a>, <a href="#tbl-sow-visualize" class="quarto-xref">Table&nbsp;<span>17.2</span></a> and <a href="#tbl-sow-share" class="quarto-xref">Table&nbsp;<span>17.3</span></a> are that crosswalk, deliverable by deliverable:</p>
 <p><strong>Ingest</strong> — all must-complete datasets done:</p>
+<div id="tbl-sow-ingest" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sow-ingest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;17.1: Ingest deliverables of the 2025-10 – 2026-06 contract, against the SOW.
+</figcaption>
+<div aria-describedby="tbl-sow-ingest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -768,7 +774,16 @@ repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p><strong>Visualize:</strong></p>
+<div id="tbl-sow-visualize" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sow-visualize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;17.2: Visualize deliverables of the 2025-10 – 2026-06 contract.
+</figcaption>
+<div aria-describedby="tbl-sow-visualize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -795,7 +810,16 @@ repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p><strong>Share:</strong></p>
+<div id="tbl-sow-share" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sow-share-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;17.3: Share deliverables of the 2025-10 – 2026-06 contract.
+</figcaption>
+<div aria-describedby="tbl-sow-share-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -830,6 +854,9 @@ repos); (2) correspondence with Erin Satterthwaite (esatterthwaite@ucsd.edu);
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <hr>
 </section>
 <section id="program-coordination" class="level3" data-number="17.2.5">

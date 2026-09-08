@@ -639,7 +639,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <p>How a dataset gets into CalCOFI.io, where its words live, and what a data provider or a member of the data team edits — and what they never have to. This chapter is for people who own or curate a dataset; the engineering detail behind each step is in <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> and its <code>CLAUDE.md</code>.</p>
 <section id="one-key-one-record-one-page" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="one-key-one-record-one-page"><span class="header-section-number">9.1</span> One key, one record, one page</h2>
-<p>Every dataset has one key, <code>{provider}_{dataset}</code> (<code>calcofi_bottle</code>, <code>swfsc_ichthyo</code>, <code>cce-lter_zooscan</code>), and that key names everything about it: its folder of metadata in git, its row in its provider’s Google Sheet, its record in the release, and its page at <a href="https://calcofi.io/datasets/"><code>calcofi.io/datasets/{key}/</code></a>. A dataset is in one of three states, and the key, the folder, the Sheet row and the page URL are the same in all three, so a link never breaks when a dataset moves forward:</p>
+<p>Every dataset has one key, <code>{provider}_{dataset}</code> (<code>calcofi_bottle</code>, <code>swfsc_ichthyo</code>, <code>cce-lter_zooscan</code>), and that key names everything about it: its folder of metadata in git, its row in its provider’s Google Sheet, its record in the release, and its page at <a href="https://calcofi.io/datasets/"><code>calcofi.io/datasets/{key}/</code></a>. A dataset is in one of three states (<a href="#tbl-dataset-states" class="quarto-xref">Table&nbsp;<span>9.1</span></a>), and the key, the folder, the Sheet row and the page URL are the same in all three, so a link never breaks when a dataset moves forward:</p>
+<div id="tbl-dataset-states" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dataset-states-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.1: The three states a dataset can be in, what each means, and where it shows.
+</figcaption>
+<div aria-describedby="tbl-dataset-states-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -671,6 +677,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="where-the-words-live" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="where-the-words-live"><span class="header-section-number">9.2</span> Where the words live</h2>
@@ -679,32 +688,32 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <li><strong>Authored</strong> — abstract, methods, who made it, how to cite it, its licence and DOI, the acknowledgement a use should carry. These live in one small file per dataset in git, <code>metadata/{provider}/{dataset}/dataset_meta.yml</code>, and every public surface is generated from it: the dataset page, the EML document the portals read, the citation the apps copy.</li>
 <li><strong>Measured</strong> — years and area covered, row counts, when the source was last fetched, whether a DOI resolves. These are computed when a release is cut and are never typed; a hand-written extent goes stale the moment the data grows underneath it.</li>
 </ul>
-<p>The authored fields are tiered, so a provider sees the few that matter first. The table reads the field registry live from the repository:</p>
+<p>The authored fields are tiered, so a provider sees the few that matter first. <a href="#tbl-meta-fields" class="quarto-xref">Table&nbsp;<span>9.2</span></a> reads the field registry live from the repository:</p>
 <div class="cell">
 <div id="tbl-meta-fields" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-meta-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_fields.csv</code> in CalCOFI/workflows). Read-only rows are what the release measures and shows beside the editable ones for context.
+Table&nbsp;9.2: Authored metadata fields, by tier (<code>metadata/dataset_meta_fields.csv</code> in CalCOFI/workflows). Read-only rows are what the release measures and shows beside the editable ones for context.
 </figcaption>
 <div aria-describedby="tbl-meta-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="kwbteufvkj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kwbteufvkj table {
+<div id="wnyvszlqda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wnyvszlqda table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kwbteufvkj thead, #kwbteufvkj tbody, #kwbteufvkj tfoot, #kwbteufvkj tr, #kwbteufvkj td, #kwbteufvkj th {
+#wnyvszlqda thead, #wnyvszlqda tbody, #wnyvszlqda tfoot, #wnyvszlqda tr, #wnyvszlqda td, #wnyvszlqda th {
   border-style: none;
 }
 
-#kwbteufvkj p {
+#wnyvszlqda p {
   margin: 0;
   padding: 0;
 }
 
-#kwbteufvkj .gt_table {
+#wnyvszlqda .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -730,12 +739,12 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-left-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_caption {
+#wnyvszlqda .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kwbteufvkj .gt_title {
+#wnyvszlqda .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -747,7 +756,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-width: 0;
 }
 
-#kwbteufvkj .gt_subtitle {
+#wnyvszlqda .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -759,7 +768,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-width: 0;
 }
 
-#kwbteufvkj .gt_heading {
+#wnyvszlqda .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -771,13 +780,13 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_bottom_border {
+#wnyvszlqda .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_col_headings {
+#wnyvszlqda .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -792,7 +801,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_col_heading {
+#wnyvszlqda .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -812,7 +821,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#kwbteufvkj .gt_column_spanner_outer {
+#wnyvszlqda .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -824,15 +833,15 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 4px;
 }
 
-#kwbteufvkj .gt_column_spanner_outer:first-child {
+#wnyvszlqda .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kwbteufvkj .gt_column_spanner_outer:last-child {
+#wnyvszlqda .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kwbteufvkj .gt_column_spanner {
+#wnyvszlqda .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -844,11 +853,11 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   width: 100%;
 }
 
-#kwbteufvkj .gt_spanner_row {
+#wnyvszlqda .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kwbteufvkj .gt_group_heading {
+#wnyvszlqda .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -874,7 +883,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   text-align: left;
 }
 
-#kwbteufvkj .gt_empty_group_heading {
+#wnyvszlqda .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -889,15 +898,15 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: middle;
 }
 
-#kwbteufvkj .gt_from_md > :first-child {
+#wnyvszlqda .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kwbteufvkj .gt_from_md > :last-child {
+#wnyvszlqda .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kwbteufvkj .gt_row {
+#wnyvszlqda .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -916,7 +925,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#kwbteufvkj .gt_stub {
+#wnyvszlqda .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -929,7 +938,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#kwbteufvkj .gt_stub_row_group {
+#wnyvszlqda .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -943,15 +952,15 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: top;
 }
 
-#kwbteufvkj .gt_row_group_first td {
+#wnyvszlqda .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kwbteufvkj .gt_row_group_first th {
+#wnyvszlqda .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kwbteufvkj .gt_summary_row {
+#wnyvszlqda .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -961,16 +970,16 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#kwbteufvkj .gt_first_summary_row {
+#wnyvszlqda .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_first_summary_row.thick {
+#wnyvszlqda .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kwbteufvkj .gt_last_summary_row {
+#wnyvszlqda .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -980,7 +989,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_grand_summary_row {
+#wnyvszlqda .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -990,7 +999,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#kwbteufvkj .gt_first_grand_summary_row {
+#wnyvszlqda .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1000,7 +1009,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_last_grand_summary_row_top {
+#wnyvszlqda .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1010,11 +1019,11 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_striped {
+#wnyvszlqda .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kwbteufvkj .gt_table_body {
+#wnyvszlqda .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1023,7 +1032,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_footnotes {
+#wnyvszlqda .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1037,7 +1046,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_footnote {
+#wnyvszlqda .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1046,7 +1055,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#kwbteufvkj .gt_sourcenotes {
+#wnyvszlqda .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1060,7 +1069,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#kwbteufvkj .gt_sourcenote {
+#wnyvszlqda .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1068,72 +1077,72 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#kwbteufvkj .gt_left {
+#wnyvszlqda .gt_left {
   text-align: left;
 }
 
-#kwbteufvkj .gt_center {
+#wnyvszlqda .gt_center {
   text-align: center;
 }
 
-#kwbteufvkj .gt_right {
+#wnyvszlqda .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kwbteufvkj .gt_font_normal {
+#wnyvszlqda .gt_font_normal {
   font-weight: normal;
 }
 
-#kwbteufvkj .gt_font_bold {
+#wnyvszlqda .gt_font_bold {
   font-weight: bold;
 }
 
-#kwbteufvkj .gt_font_italic {
+#wnyvszlqda .gt_font_italic {
   font-style: italic;
 }
 
-#kwbteufvkj .gt_super {
+#wnyvszlqda .gt_super {
   font-size: 65%;
 }
 
-#kwbteufvkj .gt_footnote_marks {
+#wnyvszlqda .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kwbteufvkj .gt_asterisk {
+#wnyvszlqda .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kwbteufvkj .gt_indent_1 {
+#wnyvszlqda .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kwbteufvkj .gt_indent_2 {
+#wnyvszlqda .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kwbteufvkj .gt_indent_3 {
+#wnyvszlqda .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kwbteufvkj .gt_indent_4 {
+#wnyvszlqda .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kwbteufvkj .gt_indent_5 {
+#wnyvszlqda .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kwbteufvkj .katex-display {
+#wnyvszlqda .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kwbteufvkj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wnyvszlqda div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1328,7 +1337,13 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </section>
 <section id="the-sheets-and-what-you-may-edit" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="the-sheets-and-what-you-may-edit"><span class="header-section-number">9.3</span> The Sheets, and what you may edit</h2>
-<p>Each provider organization (<code>calcofi</code>, <code>swfsc</code>, <code>sio</code>, <code>cce-lter</code>, <code>cdfw</code>, <code>farallon</code>, <code>sccoos</code>) has <strong>one Google Sheet</strong>, generated from git and synced back to it. It is titled <em>CalCOFI integrated database — questions for &lt;provider&gt;</em> and sits in a Shared Drive folder called <a href="https://drive.google.com/drive/folders/1Tryjfd76TNU4nVPPSQiyQCy03uo0hlx6"><em>questions</em></a> — the questions came first, and the name stayed when the metadata and holdings tabs joined the same spreadsheet (2026-09-05). The folder is owned by the CalCOFI service account, so nothing depends on one person’s login, and the data team sends each provider the link to their own Sheet. A Sheet has three kinds of tab:</p>
+<p>Each provider organization (<code>calcofi</code>, <code>swfsc</code>, <code>sio</code>, <code>cce-lter</code>, <code>cdfw</code>, <code>farallon</code>, <code>sccoos</code>) has <strong>one Google Sheet</strong>, generated from git and synced back to it. It is titled <em>CalCOFI integrated database — questions for &lt;provider&gt;</em> and sits in a Shared Drive folder called <a href="https://drive.google.com/drive/folders/1Tryjfd76TNU4nVPPSQiyQCy03uo0hlx6"><em>questions</em></a> — the questions came first, and the name stayed when the metadata and holdings tabs joined the same spreadsheet (2026-09-05). The folder is owned by the CalCOFI service account, so nothing depends on one person’s login, and the data team sends each provider the link to their own Sheet. A Sheet has three kinds of tab (<a href="#tbl-sheet-tabs" class="quarto-xref">Table&nbsp;<span>9.3</span></a>):</p>
+<div id="tbl-sheet-tabs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sheet-tabs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.3: The three kinds of tab in a provider’s Sheet, and which columns the provider may edit.
+</figcaption>
+<div aria-describedby="tbl-sheet-tabs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1365,6 +1380,9 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>Two rows deserve a note. <strong><code>visibility</code></strong> is a checkbox: <code>internal</code> keeps a dataset in the record and on the triage board but off every public page, the sitemap and <code>data.json</code> until the conversation with its provider is done. <strong><code>license</code></strong> must be one of the ids in the licence registry (<code>CC-BY-4.0</code>, <code>CC0-1.0</code>, <code>US-PD</code>, <code>custom</code> with a URL, …); anything else is refused when the Sheet is pulled, not discovered at release.</p>
 </section>
 <section id="questions-and-what-proposed-means" class="level2" data-number="9.4">
@@ -1379,7 +1397,7 @@ Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </section>
 <section id="what-happens-after-you-edit" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="what-happens-after-you-edit"><span class="header-section-number">9.5</span> What happens after you edit</h2>
-<p>Nothing happens on the Sheet itself. The data team runs a sync (<code>push</code> to regenerate the tabs from git, <code>pull</code> to bring edits back; both are dry runs until told otherwise), which rewrites only the changed values in the sidecar and leaves its history and comments intact. The next release — cut every few weeks, each with its own DOI — then regenerates every surface from the record:</p>
+<p>Nothing happens on the Sheet itself. The data team runs a sync (<code>push</code> to regenerate the tabs from git, <code>pull</code> to bring edits back; both are dry runs until told otherwise), which rewrites only the changed values in the sidecar and leaves its history and comments intact. The next release — cut every few weeks, each with its own DOI — then regenerates every surface from the record (<a href="#fig-catalog-flow-metadata" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>):</p>
 <div id="fig-catalog-flow-metadata" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-catalog-flow-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

@@ -637,7 +637,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <pre><code>/explore-dataset  →  /generate-metadata  →  /ingest-new  →  run the notebook  →  /validate-ingest  →  release_database.qmd</code></pre>
 <section id="the-shared-artifacts" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="the-shared-artifacts"><span class="header-section-number">13.1</span> The shared artifacts</h2>
-<p>Everything a step produces lands in a registry or a sidecar that the next step reads; nothing is typed twice.</p>
+<p>Everything a step produces lands in a registry or a sidecar that the next step reads (<a href="#tbl-ingest-artifacts" class="quarto-xref">Table&nbsp;<span>13.1</span></a>); nothing is typed twice.</p>
+<div id="tbl-ingest-artifacts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ingest-artifacts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;13.1: Where each step of the loop leaves what the next one reads.
+</figcaption>
+<div aria-describedby="tbl-ingest-artifacts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -680,6 +686,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="the-five-steps" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="the-five-steps"><span class="header-section-number">13.2</span> The five steps</h2>

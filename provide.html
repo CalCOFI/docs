@@ -649,10 +649,16 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <section id="the-shape-of-a-good-dataset" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="the-shape-of-a-good-dataset"><span class="header-section-number">8.1</span> The shape of a good dataset</h2>
 <p>A dataset CalCOFI can integrate answers three questions for every row: <strong>what</strong> was measured or counted, <strong>when</strong> and <strong>where</strong>. Everything else is context that makes the answer more useful. One row is one measurement or one count of one thing at one place and time; a spreadsheet with one column per variable is fine (the ingest turns it long), as long as each row is one event.</p>
-<p>Names are not the hard part — the data team maps your columns onto the standard names at ingest and keeps a crosswalk of what you called them (<a href="./naming.html#legacy-names-mapped">Naming conventions</a>). What cannot be recovered afterwards is a missing time zone, an undocumented unit, a count with no effort, or a species with no name that resolves. Those are the mandatory fields.</p>
+<p>Names are not the hard part — the data team maps your columns onto the standard names at ingest and keeps a crosswalk of what you called them (<a href="./naming.html#legacy-names-mapped">Naming conventions</a>). What cannot be recovered afterwards is a missing time zone, an undocumented unit, a count with no effort, or a species with no name that resolves. Those are the mandatory fields of <a href="#tbl-mandatory" class="quarto-xref">Table&nbsp;<span>8.1</span></a>.</p>
 </section>
 <section id="mandatory-what-when-where" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="mandatory-what-when-where"><span class="header-section-number">8.2</span> Mandatory: what, when, where</h2>
+<div id="tbl-mandatory" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mandatory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.1: What every dataset must carry, in the form the ingest can read it.
+</figcaption>
+<div aria-describedby="tbl-mandatory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -704,6 +710,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="optional-what-makes-it-calcofi" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="optional-what-makes-it-calcofi"><span class="header-section-number">8.3</span> Optional: what makes it CalCOFI</h2>
@@ -730,6 +739,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <section id="an-example" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="an-example"><span class="header-section-number">8.5</span> An example</h2>
 <p>A net-tow dataset that carries everything above, as one row per taxon per tow:</p>
+<div id="tbl-example-row" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.2: One row of a net-tow dataset that carries every mandatory field, and the optional ones that make it CalCOFI.
+</figcaption>
+<div aria-describedby="tbl-example-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 6%">
@@ -790,7 +805,10 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
-<p>The data team’s ingest would map <code>cruise</code> to <code>cruise_key</code> (<code>2019-02-33P4</code> after resolving the ship), <code>line</code> and <code>station</code> to <code>site_key</code> (<code>093.3 026.4</code>), the tow to a <code>sample</code> row with <code>tow_type</code> <code>CB</code>, each count to an <code>obs_bio</code> row with <code>taxon_key</code> <code>worms:217452</code> and <code>life_stage</code> <code>larva</code>, <code>volume_sampled_m3</code> and <code>prop_sorted</code> to <code>sample_measurement</code>, and keep your <code>tow_number</code> beside them. Nothing in your file changes.</p>
+</div>
+</figure>
+</div>
+<p>From <a href="#tbl-example-row" class="quarto-xref">Table&nbsp;<span>8.2</span></a> the data team’s ingest would map <code>cruise</code> to <code>cruise_key</code> (<code>2019-02-33P4</code> after resolving the ship), <code>line</code> and <code>station</code> to <code>site_key</code> (<code>093.3 026.4</code>), the tow to a <code>sample</code> row with <code>tow_type</code> <code>CB</code>, each count to an <code>obs_bio</code> row with <code>taxon_key</code> <code>worms:217452</code> and <code>life_stage</code> <code>larva</code>, <code>volume_sampled_m3</code> and <code>prop_sorted</code> to <code>sample_measurement</code>, and keep your <code>tow_number</code> beside them. Nothing in your file changes.</p>
 </section>
 <section id="what-happens-next" class="level2" data-number="8.6">
 <h2 data-number="8.6" class="anchored" data-anchor-id="what-happens-next"><span class="header-section-number">8.6</span> What happens next</h2>
@@ -804,7 +822,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </section>
 <section id="reconciled-with-the-database" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="reconciled-with-the-database"><span class="header-section-number">8.7</span> Reconciled with the database</h2>
-<p>The guide’s first drafts and the database’s registries disagreed on a handful of names. The registry is the record, so the guide follows it; each is noted here so nobody reintroduces the older form.</p>
+<p>The guide’s first drafts and the database’s registries disagreed on a handful of names. The registry is the record, so the guide follows it; each is noted in <a href="#tbl-reconciled" class="quarto-xref">Table&nbsp;<span>8.3</span></a> so nobody reintroduces the older form.</p>
+<div id="tbl-reconciled" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-reconciled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.3: Where the guide’s drafts and the database’s registries disagreed, and what the registry has.
+</figcaption>
+<div aria-describedby="tbl-reconciled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -856,6 +880,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 
 
 </section>

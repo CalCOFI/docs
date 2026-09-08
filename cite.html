@@ -693,8 +693,14 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </section>
 <section id="citing-an-individual-dataset" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="citing-an-individual-dataset"><span class="header-section-number">3.2</span> Citing an individual dataset</h2>
-<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. The table is the <code>dataset</code> table of the promoted release, v2026.09.06.</p>
+<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. <a href="#tbl-dataset-citations" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is the <code>dataset</code> table of the promoted release, v2026.09.06.</p>
 <div class="cell">
+<div id="tbl-dataset-citations" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: Every dataset of v2026.09.06 with the citation, licence, DOI and contact a use should carry.
+</figcaption>
+<div aria-describedby="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div id="tbl-cite" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;" class="anchored">
 <style>#tbl-cite table {
@@ -1150,7 +1156,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 50%">
@@ -1322,6 +1328,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </table>
 
 </div>
+</div>
+</div>
+</figure>
 </div>
 </div>
 </section>

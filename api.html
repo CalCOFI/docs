@@ -623,7 +623,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<p>The Plumber API at <code>api.calcofi.io</code> served the first generation of CalCOFI.io: a PostgreSQL database of the ingested tables and pre-built match tables between net tows and CTD casts, with endpoints for time series, cruises, rasters and the biology-to-environment matches. It was superseded in 2026 by the frozen parquet releases, which any DuckDB — including one running in a browser tab — reads directly with no server, no credentials and no rate limit. This appendix is the map from each endpoint to what replaced it; <a href="./data-access.html">Access the data</a> is the guide.</p>
+<p>The Plumber API at <code>api.calcofi.io</code> served the first generation of CalCOFI.io: a PostgreSQL database of the ingested tables and pre-built match tables between net tows and CTD casts, with endpoints for time series, cruises, rasters and the biology-to-environment matches. It was superseded in 2026 by the frozen parquet releases, which any DuckDB — including one running in a browser tab — reads directly with no server, no credentials and no rate limit. <a href="#tbl-api-endpoints" class="quarto-xref">Table&nbsp;<span>A.1</span></a> is the map from each endpoint to what replaced it; <a href="./data-access.html">Access the data</a> is the guide.</p>
+<div id="tbl-api-endpoints" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-api-endpoints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;A.1: Every endpoint the retired <code>api.calcofi.io</code> served, what it did, and what reads the release in its place.
+</figcaption>
+<div aria-describedby="tbl-api-endpoints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -685,6 +691,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>The three matching endpoints, and many more queries, are also a point-and-click form at <a href="https://calcofi.io/db-query/">calcofi.io/db-query</a>, running DuckDB in the browser over the same release. The API’s source stays at <a href="https://github.com/CalCOFI/api">CalCOFI/api</a>.</p>
 
 

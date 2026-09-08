@@ -680,7 +680,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 <section id="sec-server-access" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="sec-server-access"><span class="header-section-number">11.1</span> SSH, SFTP &amp; PostgreSQL</h2>
-<p>The CalCOFI server (<code>ssh.calcofi.io</code>, a Google Cloud VM in Iowa) hosts the apps, RStudio Server, ERDDAP — and, since August 2026, a <strong>multi-user PostgreSQL database</strong> that the CTD team uses for QA/QC: everyone reads and writes the same tables, originals stay immutable, flags and proposed fixes live beside them. This page is the one place that explains how to get in and how to connect, for <strong>Mac</strong> and <strong>Windows</strong>.</p>
+<p>The CalCOFI server (<code>ssh.calcofi.io</code>, a Google Cloud VM in Iowa) hosts the apps, RStudio Server, ERDDAP — and, since August 2026, a <strong>multi-user PostgreSQL database</strong> for CTD QA/QC: everyone reads and writes the same tables, originals stay immutable, flags and proposed fixes live beside them. The database is <strong>available, not yet adopted</strong> — it is built, loaded and accounts work, but it is not yet the CTD team’s routine, so the overview figure in <a href="./architecture.html">Architecture</a> leaves it out and <a href="./ctd-qaqc.html">CTD QA/QC</a> says what adopting it would change. This page is the one place that explains how to get in and how to connect, for <strong>Mac</strong> and <strong>Windows</strong> — everything below works today.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -693,7 +693,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <div class="callout-body-container callout-body">
 <ul>
 <li>The <strong>public releases</strong> are parquet on a public bucket. No account, no tunnel: <a href="./data-access.html">Access the data</a>, <code>calcofi4r::cc_get_db()</code>, DuckDB, the browser.</li>
-<li>The <strong>working PostgreSQL database</strong> (<code>calcofi</code>) is private and reachable only over SSH. That is what the rest of this page is about.</li>
+<li>The <strong>working PostgreSQL database</strong> (<code>calcofi</code>) is private and reachable only over SSH. That is what the rest of this page is about. It is offered to the CTD team rather than required of them; nothing in the pipeline reads it live either way.</li>
 </ul>
 </div>
 </div>
@@ -701,6 +701,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <section id="sec-server-stack" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="sec-server-stack"><span class="header-section-number">11.2</span> The stack</h2>
 <p>Everything the server runs is one <strong>Docker Compose stack</strong>, configured in the <a href="https://github.com/CalCOFI/server">CalCOFI/server</a> repository — the config of record for every <code>*.calcofi.io</code> service (file an <a href="https://github.com/CalCOFI/server/issues">issue</a> there for server problems):</p>
+<div id="tbl-server-stack" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-server-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.1: The Docker Compose services on the CalCOFI server, from <code>CalCOFI/server</code>.
+</figcaption>
+<div aria-describedby="tbl-server-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -757,11 +763,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
-<p>Caddy also fronts two static services with no container of their own: <a href="https://file.calcofi.io">file.calcofi.io</a> (public files on the server’s disk) and <a href="https://storage.calcofi.io">storage.calcofi.io</a> (a browsable front door onto the public Google Cloud Storage buckets).</p>
+</div>
+</figure>
+</div>
+<p><a href="#tbl-server-stack" class="quarto-xref">Table&nbsp;<span>11.1</span></a> is the whole machine. Caddy also fronts two static services with no container of their own: <a href="https://file.calcofi.io">file.calcofi.io</a> (public files on the server’s disk) and <a href="https://storage.calcofi.io">storage.calcofi.io</a> (a browsable front door onto the public Google Cloud Storage buckets).</p>
 </section>
 <section id="sec-account" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="sec-account"><span class="header-section-number">11.3</span> Getting an account</h2>
-<p>Accounts are personal (no shared logins), key-only (no passwords over SSH), and named after your email local-part — <code>rswalethorp</code>, <code>bmgire</code>, <code>kdvogel</code>, <code>bthuang</code>, <code>esatterthwaite</code>, <code>bebest</code>. Each account gets:</p>
+<p>Accounts are personal (no shared logins), key-only (no passwords over SSH), and named after your email local-part — <code>rswalethorp</code>, <code>bmgire</code>, <code>kdvogel</code>, <code>bthuang</code>, <code>esatterthwaite</code>, <code>bebest</code>. Each account gets what <a href="#tbl-account" class="quarto-xref">Table&nbsp;<span>11.2</span></a> lists:</p>
+<div id="tbl-account" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-account-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.2: What one account gets you.
+</figcaption>
+<div aria-describedby="tbl-account-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -792,6 +807,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p><strong>To request one: send Ben (bebest@ucsd.edu) your SSH <em>public</em> key.</strong> Generate it once per computer:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Mac (Terminal)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Windows (PowerShell)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Windows (PuTTY)</a></li></ul>
@@ -912,6 +930,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </div>
 <section id="graphical-clients" class="level3" data-number="11.6.1">
 <h3 data-number="11.6.1" class="anchored" data-anchor-id="graphical-clients"><span class="header-section-number">11.6.1</span> Graphical clients</h3>
+<div id="tbl-pg-clients" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pg-clients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.3: Graphical clients onto the working database, and who each suits.
+</figcaption>
+<div aria-describedby="tbl-pg-clients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -943,6 +967,10 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
+<p>Any of <a href="#tbl-pg-clients" class="quarto-xref">Table&nbsp;<span>11.3</span></a> will do; pgAdmin on the web needs nothing installed at all.</p>
 </section>
 </section>
 <section id="sec-r" class="level2" data-number="11.7">
@@ -1023,6 +1051,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <section id="sec-ctd-db" class="level2" data-number="11.10">
 <h2 data-number="11.10" class="anchored" data-anchor-id="sec-ctd-db"><span class="header-section-number">11.10</span> The CTD QA/QC database</h2>
 <p>Database <code>calcofi</code>, three kinds of schema:</p>
+<div id="tbl-ctd-schemas-server" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ctd-schemas-server-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.4: The schemas of database <code>calcofi</code>, what each holds and who may write to it.
+</figcaption>
+<div aria-describedby="tbl-ctd-schemas-server-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -1059,7 +1093,10 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
-<p>The rules of the road: <strong>originals never change</strong> — a problem is a row in <code>ctd.flag</code> (which scan, which variable, what code, optional proposed value, why), a fix is an <em>accepted</em> flag, and every derived product is computed from originals + accepted flags so it can be regenerated. A first flag, end to end:</p>
+</div>
+</figure>
+</div>
+<p><a href="#tbl-ctd-schemas-server" class="quarto-xref">Table&nbsp;<span>11.4</span></a> is the same layout <a href="./ctd-qaqc.html">CTD QA/QC</a> describes, in more detail. The rules of the road: <strong>originals never change</strong> — a problem is a row in <code>ctd.flag</code> (which scan, which variable, what code, optional proposed value, why), a fix is an <em>accepted</em> flag, and every derived product is computed from originals + accepted flags so it can be regenerated. A first flag, end to end:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- propose: temperature spike on one scan (IODE 4 = bad); 5 = changed, with proposed_value</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> ctd.flag (scan_id, variable, qual_code, reason)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> scan_id, <span class="st">'temp1'</span>, <span class="dv">4</span>, <span class="st">'spike vs neighbours'</span> <span class="kw">FROM</span> ctd.v_scan_best</span>

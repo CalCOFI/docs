@@ -637,11 +637,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-store-in-one-figure" id="toc-the-store-in-one-figure" class="nav-link active" data-scroll-target="#the-store-in-one-figure"><span class="header-section-number">12.1</span> The store, in one figure</a></li>
-  <li><a href="#a-flag-end-to-end" id="toc-a-flag-end-to-end" class="nav-link" data-scroll-target="#a-flag-end-to-end"><span class="header-section-number">12.2</span> A flag, end to end</a></li>
-  <li><a href="#where-to-start" id="toc-where-to-start" class="nav-link" data-scroll-target="#where-to-start"><span class="header-section-number">12.3</span> Where to start</a></li>
-  <li><a href="#what-reaches-the-release-and-what-does-not" id="toc-what-reaches-the-release-and-what-does-not" class="nav-link" data-scroll-target="#what-reaches-the-release-and-what-does-not"><span class="header-section-number">12.4</span> What reaches the release, and what does not</a></li>
-  <li><a href="#reading-the-release-from-the-store" id="toc-reading-the-release-from-the-store" class="nav-link" data-scroll-target="#reading-the-release-from-the-store"><span class="header-section-number">12.5</span> Reading the release from the store</a></li>
+  <li><a href="#where-the-store-sits-in-the-system" id="toc-where-the-store-sits-in-the-system" class="nav-link active" data-scroll-target="#where-the-store-sits-in-the-system"><span class="header-section-number">12.1</span> Where the store sits in the system</a></li>
+  <li><a href="#the-store-in-one-figure" id="toc-the-store-in-one-figure" class="nav-link" data-scroll-target="#the-store-in-one-figure"><span class="header-section-number">12.2</span> The store, in one figure</a></li>
+  <li><a href="#a-flag-end-to-end" id="toc-a-flag-end-to-end" class="nav-link" data-scroll-target="#a-flag-end-to-end"><span class="header-section-number">12.3</span> A flag, end to end</a></li>
+  <li><a href="#where-to-start" id="toc-where-to-start" class="nav-link" data-scroll-target="#where-to-start"><span class="header-section-number">12.4</span> Where to start</a></li>
+  <li><a href="#what-reaches-the-release-and-what-does-not" id="toc-what-reaches-the-release-and-what-does-not" class="nav-link" data-scroll-target="#what-reaches-the-release-and-what-does-not"><span class="header-section-number">12.5</span> What reaches the release, and what does not</a></li>
+  <li><a href="#reading-the-release-from-the-store" id="toc-reading-the-release-from-the-store" class="nav-link" data-scroll-target="#reading-the-release-from-the-store"><span class="header-section-number">12.6</span> Reading the release from the store</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/ctd-qaqc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -668,20 +669,52 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<p>For the CTD team. The casts you quality-control live in two places on purpose: a <strong>working store</strong> you can edit — a multi-user PostgreSQL database on the CalCOFI server where every cast file is loaded verbatim and never changed, and your flags and proposed fixes sit in a ledger beside it — and the <strong>frozen release</strong> everyone else reads, which the ledger feeds. This page is the path from one to the other: what the store holds, how a flag travels, where to start, and what reaches the release. Accounts, keys, the tunnel and the clients are in <a href="./server-access.html">Server access</a>.</p>
-<section id="the-store-in-one-figure" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="the-store-in-one-figure"><span class="header-section-number">12.1</span> The store, in one figure</h2>
+<p>For the CTD team. The casts you quality-control can live in two places on purpose: a <strong>working store</strong> you can edit — a multi-user PostgreSQL database on the CalCOFI server where every cast file is loaded verbatim and never changed, and your flags and proposed fixes sit in a ledger beside it — and the <strong>frozen release</strong> everyone else reads, which the ledger feeds. This page is the path from one to the other: what the store holds, how a flag travels, where to start, and what reaches the release. Accounts, keys, the tunnel and the clients are in <a href="./server-access.html">Server access</a>.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Available, not yet adopted.</strong> The store is built, loaded and working — but it is not yet the team’s QA/QC practice, so today CalCOFI’s CTD flags reach the release the way every other dataset’s do: inside the provider’s own files. That is why the system figure in <a href="./architecture.html">Architecture</a> does not show it, and why this chapter has its own (<a href="#fig-system-ctd" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>). Nothing below is a plan; it all runs today.</p>
+</div>
+</div>
+</div>
+<section id="where-the-store-sits-in-the-system" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="where-the-store-sits-in-the-system"><span class="header-section-number">12.1</span> Where the store sits in the system</h2>
+<div id="fig-system-ctd" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-system-ctd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="diagrams/system_ctd.svg" class="cc-diagram nolightbox img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-system-ctd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1: The whole system with the CTD working store in it: the team proposes and reviews flags in <code>ctd.flag</code>, the server writes the accepted rows to <code>flag_accepted.parquet</code> every night, and the next CTD ingest applies them as <code>measurement_qual</code>. The pipeline never reads the live database — only that file — and <code>pg_duckdb</code> lets the store read the release back. Compare the overview figure in <a href="./architecture.html">Architecture</a>, which is the same system without this box.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-system-ctd" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> is the ingest → integrate → publish path of the overview figure with one box added on the left. <strong>What is built and running</strong>, since 2026-08-19: PostgreSQL 18 with PostGIS 3.6 and <code>pg_duckdb</code> on the CalCOFI server; 409 cast files and <strong>10,812,360 scans</strong> loaded verbatim in all 82 source columns; the <code>ctd.flag</code> ledger with its audit trail and the <code>v_scan_qc</code> / <code>v_scan_clean</code> views over it; 20,521 best-stage casts, 1993–2026; personal accounts, a tunnel and clients in R and Python (<a href="./server-access.html">Server access</a>); and the nightly job that writes every accepted flag to <code>gs://calcofi-db/qc/ctd/flag_accepted.parquet</code>.</p>
+<p><strong>The pipeline never reads the live database.</strong> The bridge is that one parquet file, so an ingest runs on a laptop, on the server or in CI without a tunnel, a credential or a database being up — and the flags it applies are a dated, immutable snapshot rather than whatever the ledger happened to say mid-run.</p>
+<p><strong>What adopting it would change</strong>: a flag accepted in the ledger reaches the next release on its own, with nobody touching the release, re-exporting a cast file or asking the data team to re-ingest anything — and the reasoning behind each flag stays in the database, attributable and reversible. <strong>What happens instead today</strong>: flags arrive with the provider’s files, so a correction waits for the next archive delivery, and the judgement behind it lives wherever the person who made it kept it. Both paths end in the same column, <code>measurement_qual</code>, uninterpreted.</p>
+</section>
+<section id="the-store-in-one-figure" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="the-store-in-one-figure"><span class="header-section-number">12.2</span> The store, in one figure</h2>
 <div id="fig-ctd-flow" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ctd-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="diagrams/ctd_flow.svg" class="cc-diagram nolightbox img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ctd-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12.1: The CTD archive is loaded verbatim and never edited; a flag is a row beside it; the accepted flags are snapshotted nightly and applied by the next CTD ingest, so the release carries the team’s judgement without anyone touching the release.
+Figure&nbsp;12.2: The CTD archive is loaded verbatim and never edited; a flag is a row beside it; the accepted flags are snapshotted nightly and applied by the next CTD ingest, so the release carries the team’s judgement without anyone touching the release.
 </figcaption>
 </figure>
 </div>
-<p>Database <code>calcofi</code>, three kinds of schema:</p>
+<p><a href="#fig-ctd-flow" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> is the store itself, close up, and <a href="#tbl-ctd-schemas" class="quarto-xref">Table&nbsp;<span>12.1</span></a> is what it holds. Database <code>calcofi</code>, three kinds of schema:</p>
+<div id="tbl-ctd-schemas" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ctd-schemas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12.1: The schemas of database <code>calcofi</code> and who writes to each; <a href="./server-access.html">Server access</a> has the longer form.
+</figcaption>
+<div aria-describedby="tbl-ctd-schemas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -718,15 +751,18 @@ Figure&nbsp;12.1: The CTD archive is loaded verbatim and never edited; a flag is
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>The rules of the road: <strong>originals never change.</strong> A problem is a row in <code>ctd.flag</code> — which scan, which variable, what code, an optional proposed value, why; a fix is an <em>accepted</em> flag; every derived product is computed from originals plus accepted flags, so it can always be regenerated.</p>
 </section>
-<section id="a-flag-end-to-end" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="a-flag-end-to-end"><span class="header-section-number">12.2</span> A flag, end to end</h2>
+<section id="a-flag-end-to-end" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="a-flag-end-to-end"><span class="header-section-number">12.3</span> A flag, end to end</h2>
 <ol type="1">
 <li><strong>Propose.</strong> From any client — psql, pgAdmin, R, Python — insert a row naming the scan, the variable, the IODE code (<code>4</code> = bad; <code>5</code> = changed, with <code>proposed_value</code>) and the reason. The Python package wraps it: <code>cc_propose_flags()</code> takes a data frame of scan ids and codes, and <code>cc_withdraw_flags()</code> takes one back.</li>
 <li><strong>Review.</strong> A curator sets <code>status</code> to <code>accepted</code> or <code>rejected</code> with a note; <code>reviewed_by</code> and <code>reviewed_at</code> fill themselves, and <code>ctd.flag_audit</code> keeps the history.</li>
 <li><strong>See it.</strong> <code>ctd.v_scan_qc</code> shows the code beside the value; <code>ctd.v_scan_clean</code> applies it. Nothing else in the store moves.</li>
-<li><strong>It reaches the release.</strong> Every night the server writes the accepted rows to <code>gs://calcofi-db/qc/ctd/flag_accepted.parquet</code>. The CTD ingest notebook reads that file — never the live database, so the pipeline can run anywhere — and applies each accepted flag as the scan’s <code>measurement_qual</code>; the release notebook then compares the snapshot’s count with what the ingest applied and warns when flags accepted since the last ingest are still pending. The next release carries them; the <code>qual_ok</code> column and the packages’ quality predicate (<a href="./data-access.html">Access the data</a>) honour them everywhere.</li>
+<li><strong>It reaches the release.</strong> This is the step that waits on adoption, and it needs nothing built. Every night the server writes the accepted rows to <code>gs://calcofi-db/qc/ctd/flag_accepted.parquet</code>. The CTD ingest notebook reads that file — never the live database, so the pipeline can run anywhere — and applies each accepted flag as the scan’s <code>measurement_qual</code>; the release notebook then compares the snapshot’s count with what the ingest applied and warns when flags accepted since the last ingest are still pending. The next release carries them; the <code>qual_ok</code> column and the packages’ quality predicate (<a href="./data-access.html">Access the data</a>) honour them everywhere.</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- propose: a temperature spike on one scan</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> ctd.flag (scan_id, variable, qual_code, reason)</span>
@@ -740,8 +776,8 @@ Figure&nbsp;12.1: The CTD archive is loaded verbatim and never edited; a flag is
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">depth</span>, temp1, temp1_qc <span class="kw">FROM</span> ctd.v_scan_qc</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> study <span class="op">=</span> <span class="st">'2304SH'</span> <span class="kw">AND</span> cast_id <span class="op">=</span> <span class="st">'2304_001d'</span> <span class="kw">AND</span> temp1_qc <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="where-to-start" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="where-to-start"><span class="header-section-number">12.3</span> Where to start</h2>
+<section id="where-to-start" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="where-to-start"><span class="header-section-number">12.4</span> Where to start</h2>
 <p>Two starting points, one in each language, both against the same store:</p>
 <ul>
 <li><strong>Python: the QA/QC walkthrough</strong> — <a href="https://calcofi.io/calcofi4py/articles/ctd-qaqc/">calcofi.io/calcofi4py/articles/ctd-qaqc</a>, a notebook that connects through your tunnel (<code>cc_pg_connect(tunnel=True)</code>), lists a cruise’s casts (<code>cc_ctd_casts()</code>), pulls their scans (<code>cc_ctd_scans()</code>, <code>cc_bin_1m()</code> to bin them), runs the screening checks (<code>cc_qc_range()</code>, <code>cc_qc_spike()</code>, <code>cc_qc_sensor_pair()</code>), plots a profile or a section (<code>cc_profile_plot()</code>, <code>cc_profile_explorer()</code>, <code>cc_section_plot()</code>, <code>cc_station_map()</code>) and proposes flags from what it finds. Copy it, change the cruise, keep going.</li>
@@ -749,8 +785,8 @@ Figure&nbsp;12.1: The CTD archive is loaded verbatim and never edited; a flag is
 </ul>
 <p>The schema and the flag vocabulary are new (August 2026). Propose a change to them in <code>work</code>; it is folded into <code>ctd</code> by the data team.</p>
 </section>
-<section id="what-reaches-the-release-and-what-does-not" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="what-reaches-the-release-and-what-does-not"><span class="header-section-number">12.4</span> What reaches the release, and what does not</h2>
+<section id="what-reaches-the-release-and-what-does-not" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="what-reaches-the-release-and-what-does-not"><span class="header-section-number">12.5</span> What reaches the release, and what does not</h2>
 <ul>
 <li><strong>Two preliminary tiers ship as one archive.</strong> A cruise’s <code>_CTDPrelim.zip</code> can hold both the fully processed preliminary casts and a sensor-only tier; the sensor-only tier reaches the release with <strong>no salinity and no oxygen</strong>, because they were never computed. The ingest classifies each file’s tier and records it; the final QC’d archive supersedes both.</li>
 <li><strong>The release carries two CTD products.</strong> <code>obs_env</code> holds the <em>thinned</em> headline series per cast — a 10 m grid plus the profile’s inflection points plus every bottle depth, one direction — which is what the Explorer’s sections and the anomaly climatology read. <code>obs_ctd_full</code> holds every scan (~271 M rows), supplemental: catalogued, downloadable, off by default.</li>
@@ -758,8 +794,8 @@ Figure&nbsp;12.1: The CTD archive is loaded verbatim and never edited; a flag is
 <li><strong>Bottle data is its own dataset</strong> (<code>calcofi_bottle</code>), keyed to the same cruises and stations; the plan to migrate the bottle database off Access into this same store is Task 1 of the <a href="./dmp.html">data management plan</a>, and the profile database you are building on is Task 2.</li>
 </ul>
 </section>
-<section id="reading-the-release-from-the-store" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="reading-the-release-from-the-store"><span class="header-section-number">12.5</span> Reading the release from the store</h2>
+<section id="reading-the-release-from-the-store" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="reading-the-release-from-the-store"><span class="header-section-number">12.6</span> Reading the release from the store</h2>
 <p>The <code>release</code> schema and <code>pg_duckdb</code> let psql read the public release directly, so a check can join your casts to what shipped:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> release.cruise <span class="kw">WHERE</span> <span class="dt">year</span> <span class="op">=</span> <span class="dv">2023</span>;</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- any release table: resolve its object through the catalog (Access the data), then</span></span>

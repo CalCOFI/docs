@@ -49,6 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-6794274f46ceb0ad8b85daaa5eb348a9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-82712176d6372d89cf0722a174a65022.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-6794274f46ceb0ad8b85daaa5eb348a9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -602,17 +605,40 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-explorer" id="toc-the-explorer" class="nav-link active" data-scroll-target="#the-explorer"><span class="header-section-number">1.1</span> The Explorer</a></li>
-  <li><a href="#one-dataset" id="toc-one-dataset" class="nav-link" data-scroll-target="#one-dataset"><span class="header-section-number">1.2</span> One dataset</a></li>
-  <li><a href="#one-table-one-query" id="toc-one-table-one-query" class="nav-link" data-scroll-target="#one-table-one-query"><span class="header-section-number">1.3</span> One table, one query</a></li>
-  <li><a href="#the-other-applications" id="toc-the-other-applications" class="nav-link" data-scroll-target="#the-other-applications"><span class="header-section-number">1.4</span> The other applications</a></li>
-  <li><a href="#student-contributions" id="toc-student-contributions" class="nav-link" data-scroll-target="#student-contributions"><span class="header-section-number">1.5</span> Student contributions</a></li>
-  <li><a href="#reports-built-on-the-data" id="toc-reports-built-on-the-data" class="nav-link" data-scroll-target="#reports-built-on-the-data"><span class="header-section-number">1.6</span> Reports built on the data</a></li>
+  <li><a href="#the-explorer" id="toc-the-explorer" class="nav-link active" data-scroll-target="#the-explorer"><span class="header-section-number">1.1</span> The Explorer</a>
+  <ul class="collapse">
+  <li><a href="#sec-explore-tour" id="toc-sec-explore-tour" class="nav-link" data-scroll-target="#sec-explore-tour"><span class="header-section-number">1.1.1</span> Start the tour</a></li>
+  </ul></li>
+  <li><a href="#sec-explore-anatomy" id="toc-sec-explore-anatomy" class="nav-link" data-scroll-target="#sec-explore-anatomy"><span class="header-section-number">1.2</span> The anatomy</a>
+  <ul class="collapse">
+  <li><a href="#sec-explore-sentence" id="toc-sec-explore-sentence" class="nav-link" data-scroll-target="#sec-explore-sentence"><span class="header-section-number">1.2.1</span> The sentence is the controls</a></li>
+  <li><a href="#sec-explore-controls" id="toc-sec-explore-controls" class="nav-link" data-scroll-target="#sec-explore-controls"><span class="header-section-number">1.2.2</span> Select, Refine, Share</a></li>
+  <li><a href="#sec-explore-time" id="toc-sec-explore-time" class="nav-link" data-scroll-target="#sec-explore-time"><span class="header-section-number">1.2.3</span> Time, along the bottom</a></li>
+  <li><a href="#sec-explore-depth" id="toc-sec-explore-depth" class="nav-link" data-scroll-target="#sec-explore-depth"><span class="header-section-number">1.2.4</span> Depth, at the right</a></li>
+  </ul></li>
+  <li><a href="#sec-explore-lenses" id="toc-sec-explore-lenses" class="nav-link" data-scroll-target="#sec-explore-lenses"><span class="header-section-number">1.3</span> The six lenses</a>
+  <ul class="collapse">
+  <li><a href="#sec-explore-stations" id="toc-sec-explore-stations" class="nav-link" data-scroll-target="#sec-explore-stations"><span class="header-section-number">1.3.1</span> Stations</a></li>
+  <li><a href="#sec-explore-hex" id="toc-sec-explore-hex" class="nav-link" data-scroll-target="#sec-explore-hex"><span class="header-section-number">1.3.2</span> Hexagons</a></li>
+  <li><a href="#sec-explore-contours" id="toc-sec-explore-contours" class="nav-link" data-scroll-target="#sec-explore-contours"><span class="header-section-number">1.3.3</span> Contours</a></li>
+  <li><a href="#sec-explore-cruises" id="toc-sec-explore-cruises" class="nav-link" data-scroll-target="#sec-explore-cruises"><span class="header-section-number">1.3.4</span> Cruises</a></li>
+  <li><a href="#sec-explore-regions" id="toc-sec-explore-regions" class="nav-link" data-scroll-target="#sec-explore-regions"><span class="header-section-number">1.3.5</span> Regions</a></li>
+  <li><a href="#sec-explore-sections" id="toc-sec-explore-sections" class="nav-link" data-scroll-target="#sec-explore-sections"><span class="header-section-number">1.3.6</span> Sections</a></li>
+  </ul></li>
+  <li><a href="#sec-explore-layers" id="toc-sec-explore-layers" class="nav-link" data-scroll-target="#sec-explore-layers"><span class="header-section-number">1.4</span> Map layers</a></li>
+  <li><a href="#sec-explore-panes" id="toc-sec-explore-panes" class="nav-link" data-scroll-target="#sec-explore-panes"><span class="header-section-number">1.5</span> Every pane, the same controls</a></li>
+  <li><a href="#sec-explore-share" id="toc-sec-explore-share" class="nav-link" data-scroll-target="#sec-explore-share"><span class="header-section-number">1.6</span> Share: every view is a URL</a></li>
+  <li><a href="#sec-explore-help" id="toc-sec-explore-help" class="nav-link" data-scroll-target="#sec-explore-help"><span class="header-section-number">1.7</span> Help, the tour and feedback</a></li>
+  <li><a href="#one-dataset" id="toc-one-dataset" class="nav-link" data-scroll-target="#one-dataset"><span class="header-section-number">1.8</span> One dataset</a></li>
+  <li><a href="#one-table-one-query" id="toc-one-table-one-query" class="nav-link" data-scroll-target="#one-table-one-query"><span class="header-section-number">1.9</span> One table, one query</a></li>
+  <li><a href="#the-other-applications" id="toc-the-other-applications" class="nav-link" data-scroll-target="#the-other-applications"><span class="header-section-number">1.10</span> The other applications</a></li>
+  <li><a href="#student-contributions" id="toc-student-contributions" class="nav-link" data-scroll-target="#student-contributions"><span class="header-section-number">1.11</span> Student contributions</a></li>
+  <li><a href="#reports-built-on-the-data" id="toc-reports-built-on-the-data" class="nav-link" data-scroll-target="#reports-built-on-the-data"><span class="header-section-number">1.12</span> Reports built on the data</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/explore.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./explore.html">Use the data</a></li><li class="breadcrumb-item"><a href="./explore.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Explore</span></a></li></ol></nav>
@@ -653,47 +679,310 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <li><strong>Every download is reproducible.</strong> A map exports as PNG with its title; a table as CSV with a <code>dataset_key</code> column; and the SQL that produced it can be copied for R, Python or a DuckDB shell.</li>
 <li><strong>Attribution is built in.</strong> <em>Cite this data</em> copies the release citation plus one per dataset in the view (see <a href="./cite.html">Cite this data</a>); a <em>Sources</em> line names every dataset a view pools; the feedback button sends the view, annotated if you like, to the team.</li>
 </ul>
-<p><code>?theme=dark</code> or <code>?theme=light</code> sets the theme, <code>?tour=off</code> skips the welcome tour, and the <a href="https://github.com/CalCOFI/explore#readme">README</a> documents every parameter.</p>
+<section id="sec-explore-tour" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="sec-explore-tour"><span class="header-section-number">1.1.1</span> Start the tour</h3>
+<p>The app carries a guided tour — <em>Help ▾ → Take the tour</em>, or press <code>?</code> — that walks the same stops in the same order as the rest of this chapter, in the app itself. This page is the written version of that walk: one section per stop, with a picture of what you should be seeing and the part the tour has no room for. The app’s <em>Help ▾ → Explorer guide</em> opens this page.</p>
+<p>The pictures below are screenshots of the live app reading the promoted release. Nothing in them is mocked up, so a control that has moved since is a bug in this chapter — the pencil in the margin edits it.</p>
 </section>
-<section id="one-dataset" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="one-dataset"><span class="header-section-number">1.2</span> One dataset</h2>
-<p>Every dataset in the database — and every one CalCOFI holds but has not yet ingested — has a page at <a href="https://calcofi.io/datasets/"><strong>calcofi.io/datasets</strong></a>: what it is, who made it, its years and area, how to cite it, and every place it can be reached (the Explorer, the packages, ERDDAP, its archive of record). The page is generated from the same record the portals read, so it is never a copy of anything. <a href="./metadata.html">Metadata &amp; the ingest loop</a> says where its words come from.</p>
 </section>
-<section id="one-table-one-query" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="one-table-one-query"><span class="header-section-number">1.3</span> One table, one query</h2>
-<ul>
-<li><a href="https://calcofi.io/db-schema/"><strong>calcofi.io/db-schema</strong></a> browses the schema of any release: tables, columns with units and descriptions, the entity-relationship diagram, the datasets and the measurement-type registry. <a href="./db.html">The database</a> and <a href="./keys.html">Keys and integrity</a> are the narrative it lacks.</li>
-<li><a href="https://calcofi.io/db-query/"><strong>calcofi.io/db-query</strong></a> runs SQL against the release in your browser — a library of queries to start from, and a shell. <a href="./data-access.html">Access the data</a> shows the same queries from R and Python.</li>
-</ul>
-</section>
-<section id="the-other-applications" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="the-other-applications"><span class="header-section-number">1.4</span> The other applications</h2>
-<p>The Explorer superseded the server-side applications that each showed one of its lenses; they keep serving, and their cards on <a href="https://calcofi.io">calcofi.io</a> say what replaced them. The table reads the same cards.</p>
-<div class="cell">
-<div id="tbl-apps" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the landing page’s product cards.
+<section id="sec-explore-anatomy" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-explore-anatomy"><span class="header-section-number">1.2</span> The anatomy</h2>
+<p>Every lens is drawn on one map with the same furniture around it (<a href="#fig-explore-anatomy" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>). Reading it in the order the tour takes:</p>
+<div id="fig-explore-anatomy" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-anatomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/stations_light.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1.1: The Explorer as it opens: the Stations lens, the title sentence at the top with its colour scale, the Controls panel floating at the left with its three tabs, Time along the bottom, Depth folded to a pill at the right edge, and the map’s own buttons at the top right."><img src="figs/explore/stations_light.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-anatomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: The Explorer as it opens: the Stations lens, the title sentence at the top with its colour scale, the Controls panel floating at the left with its three tabs, Time along the bottom, Depth folded to a pill at the right edge, and the map’s own buttons at the top right.
 </figcaption>
-<div aria-describedby="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figure>
+</div>
+<ol type="1">
+<li><strong>The header</strong> names the release you are reading and lets you pick another; then <em>Help ▾</em>, the feedback bubble and the theme toggle, in the order every CalCOFI product uses. The word beside the wordmark is the lens you are in.</li>
+<li><strong>The sentence</strong> at the top says what the map shows in plain words, with the colour scale, the observation count and — for a standardized biology view — how many observations the standardization excludes. Its ▾ turns the sentence into controls.</li>
+<li><strong>The Controls panel</strong> floats at the top left with three numbered tabs: ① <strong>Select</strong> what you are looking at, ② <strong>Refine</strong> it, ③ <strong>Share</strong> it. Its footer counts the observations in view and the sources behind them.</li>
+<li><strong>The map</strong> is the page (x, y): everything else floats over it. Hover a dot for its summary; click a station for its coverage card — every dataset measured there, by year and by month.</li>
+<li><strong>Time</strong> (t) runs along the bottom: observations per year over the whole record. Drag on it to filter the map to a span of years.</li>
+<li><strong>Depth</strong> (z) is the pill on the right edge. It opens into the water column for an ocean variable; drag a band to slice the map to those depths.</li>
+<li><strong>The map’s own buttons</strong> sit in one row at the top right: zoom, the layers card, and the download that exports the map with its title or the table the lens draws.</li>
+</ol>
+<section id="sec-explore-sentence" class="level3 page-columns page-full" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="sec-explore-sentence"><span class="header-section-number">1.2.1</span> The sentence is the controls</h3>
+<p>The title sentence is not a caption. Open its ▾ and every part becomes a chip whose menu is the same picker the Controls panel holds (<a href="#fig-explore-sentence" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>) — realm, organism or variable, life stage, statistic, standardization, <em>View as</em>, years, season, depth band, datasets. Change a chip and the map follows; the Controls panel shows the same choice, because the two read one state.</p>
+<div id="fig-explore-sentence" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-sentence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/sentence_dropdown.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;1.2: The title sentence opened as chips, with the View as chip showing all six lenses and the one line of help each carries. The colour scale and the observation count stay under the sentence."><img src="figs/explore/sentence_dropdown.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-sentence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: The title sentence opened as chips, with the <em>View as</em> chip showing all six lenses and the one line of help each carries. The colour scale and the observation count stay under the sentence.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-controls" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="sec-explore-controls"><span class="header-section-number">1.2.2</span> Select, Refine, Share</h3>
+<p>The Controls panel is three steps in order (<a href="#fig-explore-controls" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>).</p>
+<p><strong>① Select</strong> is what you are looking at: <strong>Biology</strong> or <strong>Environment</strong>, then the organism (a taxon — species, genus or family) or the ocean variable, and the life stage that goes with it. The picker opens folded by category, each category with its icon, how many items it holds and a log-scale bar of how much data — type to search within it, or use the flat A–Z list. <em>View as</em> holds the six lenses: the active one full size with a line of help under it, the other five as icon slivers. <em>More options</em> is the disclosure that decides what is pooled: the summary statistic, how counts are standardized (per 10 m² of sea surface, per 1000 m³ strained, or the raw count), whether tows that were sampled and caught nothing count as zeros, one pill per dataset × stage, and the <em>Sources</em> line naming every dataset the average pools. A statistic is averaged across datasets that share the life stage and the standardization, and never across them — eggs are never merged with larvae, counts never with densities.</p>
+<p><strong>② Refine</strong> narrows it: the years (typed, or dragged on the Time panel), the seasons as quarters, the depth band (typed, or brushed on the Depth panel) and the datasets in view.</p>
+<p><strong>③ Share</strong> is everything that leaves the app: <em>Download data (zip)</em> — the summary and the observations, the exact SQL against the release’s object URLs, a README, the citations and <code>reproduce.R</code> / <code>reproduce.py</code> that re-run the query; <em>Copy code</em> for SQL, R or Python; <em>Cite this data</em>; <em>Copy link</em>; <em>Copy image</em> / <em>Download PNG</em> of the whole view with the selection, release and URL stamped in the footer; <em>Register a product</em>, <em>Send feedback</em>, and <em>SQL and timing</em> for what the browser actually ran.</p>
+<div id="fig-explore-controls" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-explore-controls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-explore-controls" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-explore-select" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-explore-select-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figs/explore/controls_select.png" class="lightbox" data-gallery="fig-explore-controls" title="Figure&nbsp;1.3&nbsp;(a): ① Select"><img src="figs/explore/controls_select.png" class="img-fluid figure-img" data-ref-parent="fig-explore-controls"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-explore-select-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) ① Select
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-explore-controls" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-explore-refine" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-explore-refine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figs/explore/controls_refine.png" class="lightbox" data-gallery="fig-explore-controls" title="Figure&nbsp;1.3&nbsp;(b): ② Refine"><img src="figs/explore/controls_refine.png" class="img-fluid figure-img" data-ref-parent="fig-explore-controls"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-explore-refine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) ② Refine
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-explore-controls" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-explore-share" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-explore-share-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figs/explore/controls_share.png" class="lightbox" data-gallery="fig-explore-controls" title="Figure&nbsp;1.3&nbsp;(c): ③ Share"><img src="figs/explore/controls_share.png" class="img-fluid figure-img" data-ref-parent="fig-explore-controls"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-explore-share-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) ③ Share
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-controls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: The three tabs of the Controls panel: choose what you are looking at, narrow it, then take it with you.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-time" class="level3 page-columns page-full" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="sec-explore-time"><span class="header-section-number">1.2.3</span> Time, along the bottom</h3>
+<p>The Time panel (<a href="#fig-explore-time" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>) is the whole record, not the filtered slice: it keeps every year for context and shows the span you filtered inside it. Its modes are <em>observations</em> (how many per year), <em>mean ± se</em> (the selection as a time series) and <em>cruises</em> (a year × month calendar of what sailed). Drag across it to filter the map to a span of years.</p>
+<div id="fig-explore-time" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/time_strip.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;1.4: The Time panel: observations per year over the whole record, with its three modes at the right and its own download."><img src="figs/explore/time_strip.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: The Time panel: observations per year over the whole record, with its three modes at the right and its own download.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-depth" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="sec-explore-depth"><span class="header-section-number">1.2.4</span> Depth, at the right</h3>
+<p>The Depth panel (<a href="#fig-explore-depth" class="quarto-xref">Figure&nbsp;<span>1.5</span></a>) is the water column for the current selection: the profile with its spread, in 10 m bins. Drag a band on it to slice the map to those depths. It starts folded to a pill and it never opens itself — it lights up when a pick that was sampled at depth arrives, and when a pick has no depth axis (a depth-integrated net tow) the pill says so instead of moving.</p>
+<div id="fig-explore-depth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-explore-depth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figs/explore/depth_control.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;1.5: The Depth panel, opened for an ocean variable: the profile over the current selection with its spread, depth down the y-axis. Drag on it to brush a band."><img src="figs/explore/depth_control.png" class="img-fluid figure-img" style="width:22.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-depth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.5: The Depth panel, opened for an ocean variable: the profile over the current selection with its spread, depth down the y-axis. Drag on it to brush a band.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-explore-lenses" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-explore-lenses"><span class="header-section-number">1.3</span> The six lenses</h2>
+<p>Six shapes of the same data, under the same selection and the same filters. Switching between Stations and Hexagons travels the dots to their hexagon centres — the one animation that shows what pooling does; every other change is a short cross-fade, and no lens carries dots it does not explain.</p>
+<section id="sec-explore-stations" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="sec-explore-stations"><span class="header-section-number">1.3.1</span> Stations</h3>
+<p>One dot per station, coloured by the summary of what you chose (<a href="#fig-explore-anatomy" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>). The legend’s 5–95 % window sets the colours, so a few extreme stations cannot flatten the rest. Click a dot for the station’s coverage card: every dataset measured there, by year and by month. This is the lens for <em>what has been collected where</em>, and the one the app opens on.</p>
+</section>
+<section id="sec-explore-hex" class="level3 page-columns page-full" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-explore-hex"><span class="header-section-number">1.3.2</span> Hexagons</h3>
+<p>The same summary pooled into H3 cells, with a size slider that runs from about 60 km to about 1 km (<a href="#fig-explore-hexagons" class="quarto-xref">Figure&nbsp;<span>1.6</span></a>). Pooling smooths the sampling — the grid’s repeat occupations stop reading as isolated dots — and the size you pick lands in the URL as <code>res=</code>. The <code>hex_id</code> behind it is the H3 index carried on every observation in the release (<a href="./db.html">The database</a>).</p>
+<div id="fig-explore-hexagons" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-hexagons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/hexagons.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;1.6: The Hexagons lens: the same selection as the opening view, pooled into hexagons of about 8.5 km, with the size slider under View as."><img src="figs/explore/hexagons.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-hexagons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.6: The Hexagons lens: the same selection as the opening view, pooled into hexagons of about 8.5 km, with the size slider under <em>View as</em>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-contours" class="level3 page-columns page-full" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="sec-explore-contours"><span class="header-section-number">1.3.3</span> Contours</h3>
+<p>The Contours lens interpolates the point summary into a surface, in a Web Worker in your browser (<a href="#fig-explore-contours" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>). Four choices are yours, and all four are in the URL:</p>
+<ul>
+<li><strong>the method</strong> — <strong>IDW</strong> (inverse-distance weighting, what the superseded Contour Explorer drew), <strong>kriging</strong> (an exponential variogram fitted to the points) or <strong>spline</strong> (a thin-plate spline, the GAM <code>calcofi4r::pts_to_contours_gam()</code> fits, over the station grid);</li>
+<li><strong>what it is fitted to</strong> — <strong>every site</strong> (each cast, tow or site at its own position, repeat occupations pooled) or the <strong>station grid</strong> (one point per grid cell);</li>
+<li><strong>the surface</strong> — the statistic itself, <strong>its error</strong> (the kriging standard deviation or the spline’s standard error; IDW is a weighted average and has none), the observation density, the first or last year sampled, the 5th or 95th percentile, or their spread;</li>
+<li><strong>what is drawn over it</strong> — the input points the surface was fitted to, and the level labels along the isolines.</li>
+</ul>
+<p>Under the options, the fit reports itself: the leave-one-out RMSE, the variogram (nugget, sill, range) or the effective degrees of freedom, and how long it took. The surface is blank beyond 60 km from any point and clipped at the coastline, so the map never extrapolates and never draws ocean over land. <code>calcofi4r::cc_interpolate()</code> and <code>calcofi4py.interpolate()</code> are the same algorithm, pinned to the browser’s own output by a shared fixture, so a surface made in R or Python matches the map cell for cell (<a href="./data-access.html">Access the data</a>).</p>
+<div id="fig-explore-contours" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-contours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/contours_temperature_grid_labels.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;1.7: The Contours lens: temperature kriged over the station grid, with the input stations drawn, the level labels on the isolines, and the fit reported under the method — leave-one-out RMSE, the variogram and the time it took."><img src="figs/explore/contours_temperature_grid_labels.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-contours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.7: The Contours lens: temperature kriged over the station grid, with the input stations drawn, the level labels on the isolines, and the fit reported under the method — leave-one-out RMSE, the variogram and the time it took.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-cruises" class="level3 page-columns page-full" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="sec-explore-cruises"><span class="header-section-number">1.3.4</span> Cruises</h3>
+<p>One voyage at a time (<a href="#fig-explore-cruises" class="quarto-xref">Figure&nbsp;<span>1.8</span></a>): its track, its station visits coloured by what you picked, and the sampling events behind them. The <em>Cruise series</em> panel puts that cruise in the whole record — every cruise’s mean as a point, the one you are looking at highlighted — which is how you see whether a cruise was warm or cold for its season without leaving the lens.</p>
+<div id="fig-explore-cruises" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-cruises-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/cruises.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;1.8: The Cruises lens: one cruise along its track with its casts coloured, and the Cruise series panel placing it among every cruise in the record."><img src="figs/explore/cruises.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-cruises-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.8: The Cruises lens: one cruise along its track with its casts coloured, and the Cruise series panel placing it among every cruise in the record.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-regions" class="level3 page-columns page-full" data-number="1.3.5">
+<h3 data-number="1.3.5" class="anchored" data-anchor-id="sec-explore-regions"><span class="header-section-number">1.3.5</span> Regions</h3>
+<p>The same summary averaged inside boundaries (<a href="#fig-explore-regions" class="quarto-xref">Figure&nbsp;<span>1.9</span></a>): pick a layer — sanctuaries, protected areas, wind areas, counties, the CalCOFI regions — and each polygon is ranked as a pill with its value and the number of observations behind it. Membership is exact, from the release’s own <code>sample_spatial</code> table rather than a bounding box, and a polygon with no data says so rather than reading as a zero.</p>
+<div id="fig-explore-regions" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-regions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/regions.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;1.9: The Regions lens: the selection averaged within National Marine Sanctuaries, the polygons drawn on the map and ranked as pills with their values and counts."><img src="figs/explore/regions.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-regions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.9: The Regions lens: the selection averaged within National Marine Sanctuaries, the polygons drawn on the map and ranked as pills with their values and counts.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-sections" class="level3 page-columns page-full" data-number="1.3.6">
+<h3 data-number="1.3.6" class="anchored" data-anchor-id="sec-explore-sections"><span class="header-section-number">1.3.6</span> Sections</h3>
+<p>A section cuts one CalCOFI line, and <strong>its y-axis is the realm</strong> — this is the one lens whose shape changes with what you picked.</p>
+<p>For an <strong>ocean variable</strong> it is a <strong>depth section</strong>: the stations along the line across the x-axis, depth down the y-axis, for <strong>one cruise</strong> (<a href="#fig-explore-section-env" class="quarto-xref">Figure&nbsp;<span>1.10</span></a>). The checkbox <em>difference from the 1993–2013 normal</em> subtracts the release’s own <code>climatology</code> table — the mean for that station, the cast’s own calendar month and its 10 m depth bin — so an anomaly here and an anomaly in <a href="https://calcofi.io/ctd-transects/">ctd-transects</a> cannot disagree (<a href="./db.html">The database</a>).</p>
+<p>For an <strong>organism</strong> the tows are depth-integrated, so there is no depth axis: the lens draws a <strong>station-by-year</strong> section — the same stations across the x-axis, years down the y-axis, across <strong>all cruises</strong> (<a href="#fig-explore-section-bio" class="quarto-xref">Figure&nbsp;<span>1.11</span></a>). White is a station-year that was never sampled, not a zero.</p>
+<p>Both are laid out like the map — <strong>offshore on the left, the coast on the right</strong> — and both carry two rulers on the x-axis: station number above, distance offshore below. They are one ruler, because a CalCOFI line is equidistant at 7.386 km per station unit, so the axis is linear in both at once.</p>
+<div id="fig-explore-section-env" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-section-env-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/sections_env.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;1.10: The Sections lens for an ocean variable: a depth section of temperature along line 90 on one cruise, offshore on the left, station number above the axis and distance offshore below it."><img src="figs/explore/sections_env.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-section-env-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.10: The Sections lens for an ocean variable: a depth section of temperature along line 90 on one cruise, offshore on the left, station number above the axis and distance offshore below it.
+</figcaption>
+</figure>
+</div>
+<div id="fig-explore-section-bio" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-section-bio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/sections_bio.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;1.11: The Sections lens for an organism: a station-by-year section along line 90 across all cruises, years down the y-axis because the tows are depth-integrated."><img src="figs/explore/sections_bio.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-section-bio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.11: The Sections lens for an organism: a station-by-year section along line 90 across all cruises, years down the y-axis because the tows are depth-integrated.
+</figcaption>
+</figure>
+</div>
+<p>For an ocean variable, the <strong>3-D</strong> button hangs the same section as a curtain over the GEBCO sea floor (<a href="#fig-explore-section-3d" class="quarto-xref">Figure&nbsp;<span>1.12</span></a>), with the vertical exaggeration in the URL; <strong>2D</strong> at the top right brings the flat one back.</p>
+<div id="fig-explore-section-3d" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-section-3d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/sections_3d.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;1.12: The same depth section as a 3-D curtain over the GEBCO sea floor. Desktop and ocean variables only; the 2D button restores the flat section."><img src="figs/explore/sections_3d.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-section-3d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.12: The same depth section as a 3-D curtain over the GEBCO sea floor. Desktop and ocean variables only; the 2D button restores the flat section.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-explore-layers" class="level2 page-columns page-full" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-explore-layers"><span class="header-section-number">1.4</span> Map layers</h2>
+<p>The layers button on the map opens one card for everything drawn under and over your data (<a href="#fig-explore-layers" class="quarto-xref">Figure&nbsp;<span>1.13</span></a>):</p>
+<ul>
+<li><strong>Data</strong> — the selection as the lens draws it: on or off, its opacity, and its <strong>colour ramp</strong> (cmocean’s ramps, viridis and GEBCO’s, reversible). With no ramp chosen, the variable takes its cmocean convention — thermal for temperature, haline for salinity, ice for oxygen.</li>
+<li><strong>Sea floor</strong> — GEBCO 2025 as three parts you can toggle separately (shaded relief, depth colour, contours) with its own opacity. It is the same bathymetry the 3-D curtain stands on.</li>
+<li><strong>On the map</strong> — the boundary layers <em>and</em> the Data row in draw order, top first, re-ordered by dragging a row or with ▲ ▼. Putting a boundary above Data draws it over your data; putting Data above it draws the data over the boundary.</li>
+<li><strong>Add a layer</strong> — the boundary registry by group: maritime zones, protected areas, administrative, ecological, energy and industry.</li>
+</ul>
+<p>Every choice — which layers, their order, their colour, fill opacity and line width, the sea floor’s parts and opacity, the data ramp — is view state and lives in the URL, so a shared link, a bookmark and a feedback report all reopen the same map.</p>
+<div id="fig-explore-layers" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/layers_panel.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;1.13: The Layers card over the Hexagons lens: the Data row with its opacity and colour ramp, the GEBCO sea floor in three parts, the draw order under On the map with the sanctuary boundary above the data, and the layer registry folded by group."><img src="figs/explore/layers_panel.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.13: The Layers card over the Hexagons lens: the Data row with its opacity and colour ramp, the GEBCO sea floor in three parts, the draw order under <em>On the map</em> with the sanctuary boundary above the data, and the layer registry folded by group.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-panes" class="level2 page-columns page-full" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="sec-explore-panes"><span class="header-section-number">1.5</span> Every pane, the same controls</h2>
+<p>Every panel — Controls, Time, Depth, Layers and each lens result — is a floating pane with one title bar and the same four controls (<a href="#fig-explore-pane" class="quarto-xref">Figure&nbsp;<span>1.14</span></a>): <strong>move</strong> it by dragging the bar (a double-click sends it home), <strong>collapse</strong> it to a labelled pill on the nearest edge, <strong>expand</strong> it to fill the map (<code>Esc</code> restores) and <strong>resize</strong> it from an edge or the corner grip. Positions are remembered per browser and per viewport; which panes are folded or expanded lives in the URL.</p>
+<p>The ⬇ on the bar exports that pane on its own:</p>
+<ul>
+<li><strong>PNG</strong>, at 2×, with the selection, the release and the view URL stamped in a footer;</li>
+<li><strong>SVG</strong>, vector, for a paper;</li>
+<li><strong>CSV</strong>, the pane’s own table — the same rows the download bundle carries, each with a <code>dataset_key</code> column, so a pooled row still names the datasets it pools.</li>
+</ul>
+<p>Nothing leaves the app anonymous: every figure footer and every CSV names the datasets in view, which is what makes the citations in <a href="./cite.html">Cite this data</a> possible to honour.</p>
+<div id="fig-explore-pane" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-pane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/pane_controls.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;1.14: A lens pane’s own bar with its export menu open — PNG at 2×, SVG, CSV — beside the drag grip, collapse and expand. The pane here is an environment depth section along line 90 on one cruise, offshore on the left, station number above and distance offshore below."><img src="figs/explore/pane_controls.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-pane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.14: A lens pane’s own bar with its export menu open — PNG at 2×, SVG, CSV — beside the drag grip, collapse and expand. The pane here is an environment depth section along line 90 on one cruise, offshore on the left, station number above and distance offshore below.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-explore-share" class="level2 page-columns page-full" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="sec-explore-share"><span class="header-section-number">1.6</span> Share: every view is a URL</h2>
+<p>There is no view the address bar does not carry. <em>Share → Copy link</em> hands over the whole state — including the map extent — and pasting one back reproduces it exactly, on any machine, without an account. <a href="#tbl-explore-url" class="quarto-xref">Table&nbsp;<span>1.1</span></a> lists the parameters; <code>src/state.ts</code> in <a href="https://github.com/CalCOFI/explore">CalCOFI/explore</a> is the authority that reads and writes them.</p>
+<div class="cell">
+<div id="tbl-explore-url" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-explore-url-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anything left out takes its default, so a link only carries what you changed.
+</figcaption>
+<div aria-describedby="tbl-explore-url-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="redpwyuoyk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#redpwyuoyk table {
+<div id="juvshsjksq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#juvshsjksq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#redpwyuoyk thead, #redpwyuoyk tbody, #redpwyuoyk tfoot, #redpwyuoyk tr, #redpwyuoyk td, #redpwyuoyk th {
+#juvshsjksq thead, #juvshsjksq tbody, #juvshsjksq tfoot, #juvshsjksq tr, #juvshsjksq td, #juvshsjksq th {
   border-style: none;
 }
 
-#redpwyuoyk p {
+#juvshsjksq p {
   margin: 0;
   padding: 0;
 }
 
-#redpwyuoyk .gt_table {
+#juvshsjksq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -719,12 +1008,12 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-left-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_caption {
+#juvshsjksq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#redpwyuoyk .gt_title {
+#juvshsjksq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -736,7 +1025,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-width: 0;
 }
 
-#redpwyuoyk .gt_subtitle {
+#juvshsjksq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -748,7 +1037,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-top-width: 0;
 }
 
-#redpwyuoyk .gt_heading {
+#juvshsjksq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -760,13 +1049,13 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_bottom_border {
+#juvshsjksq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_col_headings {
+#juvshsjksq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -781,7 +1070,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_col_heading {
+#juvshsjksq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -801,7 +1090,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#redpwyuoyk .gt_column_spanner_outer {
+#juvshsjksq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -813,15 +1102,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 4px;
 }
 
-#redpwyuoyk .gt_column_spanner_outer:first-child {
+#juvshsjksq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#redpwyuoyk .gt_column_spanner_outer:last-child {
+#juvshsjksq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#redpwyuoyk .gt_column_spanner {
+#juvshsjksq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -833,11 +1122,11 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   width: 100%;
 }
 
-#redpwyuoyk .gt_spanner_row {
+#juvshsjksq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#redpwyuoyk .gt_group_heading {
+#juvshsjksq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -863,7 +1152,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   text-align: left;
 }
 
-#redpwyuoyk .gt_empty_group_heading {
+#juvshsjksq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -878,15 +1167,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: middle;
 }
 
-#redpwyuoyk .gt_from_md > :first-child {
+#juvshsjksq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#redpwyuoyk .gt_from_md > :last-child {
+#juvshsjksq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#redpwyuoyk .gt_row {
+#juvshsjksq .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -905,7 +1194,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#redpwyuoyk .gt_stub {
+#juvshsjksq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -918,7 +1207,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#redpwyuoyk .gt_stub_row_group {
+#juvshsjksq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,15 +1221,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: top;
 }
 
-#redpwyuoyk .gt_row_group_first td {
+#juvshsjksq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#redpwyuoyk .gt_row_group_first th {
+#juvshsjksq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#redpwyuoyk .gt_summary_row {
+#juvshsjksq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -950,16 +1239,16 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#redpwyuoyk .gt_first_summary_row {
+#juvshsjksq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_first_summary_row.thick {
+#juvshsjksq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#redpwyuoyk .gt_last_summary_row {
+#juvshsjksq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -969,7 +1258,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_grand_summary_row {
+#juvshsjksq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -979,7 +1268,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#redpwyuoyk .gt_first_grand_summary_row {
+#juvshsjksq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -989,7 +1278,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-top-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_last_grand_summary_row_top {
+#juvshsjksq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,11 +1288,11 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_striped {
+#juvshsjksq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#redpwyuoyk .gt_table_body {
+#juvshsjksq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1012,7 +1301,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_footnotes {
+#juvshsjksq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1026,7 +1315,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_footnote {
+#juvshsjksq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1035,7 +1324,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#redpwyuoyk .gt_sourcenotes {
+#juvshsjksq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1049,7 +1338,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#redpwyuoyk .gt_sourcenote {
+#juvshsjksq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1057,72 +1346,685 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#redpwyuoyk .gt_left {
+#juvshsjksq .gt_left {
   text-align: left;
 }
 
-#redpwyuoyk .gt_center {
+#juvshsjksq .gt_center {
   text-align: center;
 }
 
-#redpwyuoyk .gt_right {
+#juvshsjksq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#redpwyuoyk .gt_font_normal {
+#juvshsjksq .gt_font_normal {
   font-weight: normal;
 }
 
-#redpwyuoyk .gt_font_bold {
+#juvshsjksq .gt_font_bold {
   font-weight: bold;
 }
 
-#redpwyuoyk .gt_font_italic {
+#juvshsjksq .gt_font_italic {
   font-style: italic;
 }
 
-#redpwyuoyk .gt_super {
+#juvshsjksq .gt_super {
   font-size: 65%;
 }
 
-#redpwyuoyk .gt_footnote_marks {
+#juvshsjksq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#redpwyuoyk .gt_asterisk {
+#juvshsjksq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#redpwyuoyk .gt_indent_1 {
+#juvshsjksq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#redpwyuoyk .gt_indent_2 {
+#juvshsjksq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#redpwyuoyk .gt_indent_3 {
+#juvshsjksq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#redpwyuoyk .gt_indent_4 {
+#juvshsjksq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#redpwyuoyk .gt_indent_5 {
+#juvshsjksq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#redpwyuoyk .katex-display {
+#juvshsjksq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#redpwyuoyk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#juvshsjksq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Sets" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Sets</th>
+<th id="Parameters" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Parameters</th>
+<th id="Example" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Example</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the lens</td>
+<td class="gt_row gt_left" headers="Parameters">lens</td>
+<td class="gt_row gt_left" headers="Example">lens=section</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">an organism</td>
+<td class="gt_row gt_left" headers="Parameters">taxon, stage, den, zeros</td>
+<td class="gt_row gt_left" headers="Example">taxon=worms:217452&amp;stage=larva&amp;den=per_10m2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">an ocean variable</td>
+<td class="gt_row gt_left" headers="Parameters">var</td>
+<td class="gt_row gt_left" headers="Example">var=temperature</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">the filters</td>
+<td class="gt_row gt_left" headers="Parameters">years, q, depth, datasets</td>
+<td class="gt_row gt_left" headers="Example">years=1990-2020&amp;q=2,3&amp;depth=250-350</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the summary</td>
+<td class="gt_row gt_left" headers="Parameters">stat</td>
+<td class="gt_row gt_left" headers="Example">stat=med</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">hexagon size</td>
+<td class="gt_row gt_left" headers="Parameters">res</td>
+<td class="gt_row gt_left" headers="Example">res=5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the contour surface</td>
+<td class="gt_row gt_left" headers="Parameters">interp, grain, surface, inputs, labels</td>
+<td class="gt_row gt_left" headers="Example">interp=ok&amp;grain=station&amp;surface=se</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">the section</td>
+<td class="gt_row gt_left" headers="Parameters">line, anom, cruise, view, exag</td>
+<td class="gt_row gt_left" headers="Example">line=90&amp;anom=1&amp;view=3d</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the region</td>
+<td class="gt_row gt_left" headers="Parameters">layer, region</td>
+<td class="gt_row gt_left" headers="Example">layer=National+Marine+Sanctuaries</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">the map extent</td>
+<td class="gt_row gt_left" headers="Parameters">map</td>
+<td class="gt_row gt_left" headers="Example">map=-120.4,34.1,6.2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the map layers</td>
+<td class="gt_row gt_left" headers="Parameters">layers, data, datao, ramp</td>
+<td class="gt_row gt_left" headers="Example">layers=noaa_onms_sanctuaries,data&amp;ramp=thermal</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">the sea floor</td>
+<td class="gt_row gt_left" headers="Parameters">bathy, bathyo</td>
+<td class="gt_row gt_left" headers="Example">bathy=relief,contours&amp;bathyo=0.5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the Time panel</td>
+<td class="gt_row gt_left" headers="Parameters">strip, yview</td>
+<td class="gt_row gt_left" headers="Example">strip=mean</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">the panes</td>
+<td class="gt_row gt_left" headers="Parameters">show, hide, max</td>
+<td class="gt_row gt_left" headers="Example">show=depth&amp;max=section</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">a station's card</td>
+<td class="gt_row gt_left" headers="Parameters">station</td>
+<td class="gt_row gt_left" headers="Example">station=&lt;grid_key&gt;</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">which release</td>
+<td class="gt_row gt_left" headers="Parameters">release</td>
+<td class="gt_row gt_left" headers="Example">release=vYYYY.MM.DD</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the theme</td>
+<td class="gt_row gt_left" headers="Parameters">theme</td>
+<td class="gt_row gt_left" headers="Example">theme=dark</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sets">the welcome and tour</td>
+<td class="gt_row gt_left" headers="Parameters">tour</td>
+<td class="gt_row gt_left" headers="Example">tour=off</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sets">the attribution modal</td>
+<td class="gt_row gt_left" headers="Parameters">modal</td>
+<td class="gt_row gt_left" headers="Example">modal=sources</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Two of them are worth knowing by name. <code>?theme=dark</code> and <code>?theme=light</code> set the theme for one view (<a href="#fig-explore-dark" class="quarto-xref">Figure&nbsp;<span>1.15</span></a>) — the app otherwise follows the theme you chose anywhere on calcofi.io — and <code>?tour=off</code> suppresses the welcome card and the tour, which is what makes a screenshot of the app deterministic (see <a href="./products.html">Products, brand and uptime</a>).</p>
+<div id="fig-explore-dark" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/stations_dark.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;1.15: The default view in the dark theme, from ?theme=dark. Every product on calcofi.io honours the same parameter and the same stored choice."><img src="figs/explore/stations_dark.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.15: The default view in the dark theme, from <code>?theme=dark</code>. Every product on calcofi.io honours the same parameter and the same stored choice.
+</figcaption>
+</figure>
+</div>
+<p>The pattern also runs the other way: every dataset page on <a href="https://calcofi.io/datasets/">calcofi.io/datasets</a> links into the Explorer as <code>?datasets=&lt;dataset_key&gt;</code>, and each of its variables as <code>?datasets=&lt;dataset_key&gt;&amp;var=&lt;variable&gt;</code>, so “show me this dataset, in this variable” is one click from the record rather than a search.</p>
+</section>
+<section id="sec-explore-help" class="level2 page-columns page-full" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="sec-explore-help"><span class="header-section-number">1.7</span> Help, the tour and feedback</h2>
+<p><em>Help ▾</em> in the header (<a href="#fig-explore-help" class="quarto-xref">Figure&nbsp;<span>1.16</span></a>) holds the tour (<code>?</code> replays it), the <em>Explorer guide</em> — this chapter — <em>Start here</em> (the welcome card, with its two doors and four worked questions), <em>About</em> (what the app is, the release, the datasets with their providers and spans, the credits), <em>Data Sources and Attribution</em> (one row per dataset, with citation, licence, DOI and contacts; also reachable as <code>?modal=sources</code>), <em>Register a product</em> and the keyboard map.</p>
+<div id="fig-explore-help" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-explore-help-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="figs/explore/help_menu.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;1.16: The Help menu open, with the feedback bubble and the theme toggle beside it in the header."><img src="figs/explore/help_menu.png" class="img-fluid figure-img column-body-outset"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-explore-help-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.16: The Help menu open, with the feedback bubble and the theme toggle beside it in the header.
+</figcaption>
+</figure>
+</div>
+<p>The speech bubble beside the theme toggle is <strong>feedback</strong>. It captures the view you are looking at, lets you mark it up — arrow, circle, rectangle, pen, text — and sends the picture with your note, the view’s URL, the release, the viewport and the theme: to the team by mail, to a sheet, and as a public issue in the app’s repository without your email address. That is the point of the URL being the whole view: “that spike looks wrong” arrives as something anyone can open and see. <em>Register a product</em> is the same dialog in its second form, for telling us what you built with these data.</p>
+</section>
+<section id="one-dataset" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="one-dataset"><span class="header-section-number">1.8</span> One dataset</h2>
+<p>Every dataset in the database — and every one CalCOFI holds but has not yet ingested — has a page at <a href="https://calcofi.io/datasets/"><strong>calcofi.io/datasets</strong></a>: what it is, who made it, its years and area, how to cite it, and every place it can be reached (the Explorer, the packages, ERDDAP, its archive of record). The page is generated from the same record the portals read, so it is never a copy of anything. <a href="./metadata.html">Metadata &amp; the ingest loop</a> says where its words come from.</p>
+</section>
+<section id="one-table-one-query" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="one-table-one-query"><span class="header-section-number">1.9</span> One table, one query</h2>
+<ul>
+<li><a href="https://calcofi.io/db-schema/"><strong>calcofi.io/db-schema</strong></a> browses the schema of any release: tables, columns with units and descriptions, the entity-relationship diagram, the datasets and the measurement-type registry. <a href="./db.html">The database</a> and <a href="./keys.html">Keys and integrity</a> are the narrative it lacks.</li>
+<li><a href="https://calcofi.io/db-query/"><strong>calcofi.io/db-query</strong></a> runs SQL against the release in your browser — a library of queries to start from, and a shell. <a href="./data-access.html">Access the data</a> shows the same queries from R and Python.</li>
+</ul>
+</section>
+<section id="the-other-applications" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="the-other-applications"><span class="header-section-number">1.10</span> The other applications</h2>
+<p>The Explorer superseded the server-side applications that each showed one of its lenses; they keep serving, and their cards on <a href="https://calcofi.io">calcofi.io</a> say what replaced them. The table reads the same cards.</p>
+<div class="cell">
+<div id="tbl-apps" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the landing page’s product cards.
+</figcaption>
+<div aria-describedby="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="vdotoottyu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vdotoottyu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vdotoottyu thead, #vdotoottyu tbody, #vdotoottyu tfoot, #vdotoottyu tr, #vdotoottyu td, #vdotoottyu th {
+  border-style: none;
+}
+
+#vdotoottyu p {
+  margin: 0;
+  padding: 0;
+}
+
+#vdotoottyu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.92em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vdotoottyu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vdotoottyu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vdotoottyu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vdotoottyu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vdotoottyu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vdotoottyu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vdotoottyu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vdotoottyu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vdotoottyu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vdotoottyu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vdotoottyu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vdotoottyu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vdotoottyu .gt_row {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vdotoottyu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vdotoottyu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vdotoottyu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vdotoottyu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vdotoottyu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vdotoottyu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vdotoottyu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vdotoottyu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vdotoottyu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vdotoottyu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vdotoottyu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vdotoottyu .gt_left {
+  text-align: left;
+}
+
+#vdotoottyu .gt_center {
+  text-align: center;
+}
+
+#vdotoottyu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vdotoottyu .gt_font_normal {
+  font-weight: normal;
+}
+
+#vdotoottyu .gt_font_bold {
+  font-weight: bold;
+}
+
+#vdotoottyu .gt_font_italic {
+  font-style: italic;
+}
+
+#vdotoottyu .gt_super {
+  font-size: 65%;
+}
+
+#vdotoottyu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vdotoottyu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vdotoottyu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vdotoottyu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vdotoottyu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vdotoottyu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vdotoottyu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vdotoottyu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vdotoottyu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1181,34 +2083,34 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
 </div>
 </div>
 </section>
-<section id="student-contributions" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="student-contributions"><span class="header-section-number">1.5</span> Student contributions</h2>
+<section id="student-contributions" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="student-contributions"><span class="header-section-number">1.11</span> Student contributions</h2>
 <p>Student teams at UCSB, UCLA and UCSD have built portals, dashboards and stories on the database; their repositories are archived and their sites keep serving.</p>
 <div class="cell">
 <div id="tbl-students" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-students-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
+Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
 </figcaption>
 <div aria-describedby="tbl-students-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="nlslqgixju" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nlslqgixju table {
+<div id="ktegolappm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ktegolappm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nlslqgixju thead, #nlslqgixju tbody, #nlslqgixju tfoot, #nlslqgixju tr, #nlslqgixju td, #nlslqgixju th {
+#ktegolappm thead, #ktegolappm tbody, #ktegolappm tfoot, #ktegolappm tr, #ktegolappm td, #ktegolappm th {
   border-style: none;
 }
 
-#nlslqgixju p {
+#ktegolappm p {
   margin: 0;
   padding: 0;
 }
 
-#nlslqgixju .gt_table {
+#ktegolappm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1234,12 +2136,12 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-left-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_caption {
+#ktegolappm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nlslqgixju .gt_title {
+#ktegolappm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1251,7 +2153,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-width: 0;
 }
 
-#nlslqgixju .gt_subtitle {
+#ktegolappm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1263,7 +2165,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-top-width: 0;
 }
 
-#nlslqgixju .gt_heading {
+#ktegolappm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1275,13 +2177,13 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_bottom_border {
+#ktegolappm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_col_headings {
+#ktegolappm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1296,7 +2198,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_col_heading {
+#ktegolappm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1316,7 +2218,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#nlslqgixju .gt_column_spanner_outer {
+#ktegolappm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1328,15 +2230,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 4px;
 }
 
-#nlslqgixju .gt_column_spanner_outer:first-child {
+#ktegolappm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nlslqgixju .gt_column_spanner_outer:last-child {
+#ktegolappm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nlslqgixju .gt_column_spanner {
+#ktegolappm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1348,11 +2250,11 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   width: 100%;
 }
 
-#nlslqgixju .gt_spanner_row {
+#ktegolappm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nlslqgixju .gt_group_heading {
+#ktegolappm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1378,7 +2280,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   text-align: left;
 }
 
-#nlslqgixju .gt_empty_group_heading {
+#ktegolappm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1393,15 +2295,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   vertical-align: middle;
 }
 
-#nlslqgixju .gt_from_md > :first-child {
+#ktegolappm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nlslqgixju .gt_from_md > :last-child {
+#ktegolappm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nlslqgixju .gt_row {
+#ktegolappm .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1420,7 +2322,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#nlslqgixju .gt_stub {
+#ktegolappm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1433,7 +2335,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#nlslqgixju .gt_stub_row_group {
+#ktegolappm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1447,15 +2349,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   vertical-align: top;
 }
 
-#nlslqgixju .gt_row_group_first td {
+#ktegolappm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nlslqgixju .gt_row_group_first th {
+#ktegolappm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nlslqgixju .gt_summary_row {
+#ktegolappm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1465,16 +2367,16 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#nlslqgixju .gt_first_summary_row {
+#ktegolappm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_first_summary_row.thick {
+#ktegolappm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nlslqgixju .gt_last_summary_row {
+#ktegolappm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1484,7 +2386,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_grand_summary_row {
+#ktegolappm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1494,7 +2396,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#nlslqgixju .gt_first_grand_summary_row {
+#ktegolappm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1504,7 +2406,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-top-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_last_grand_summary_row_top {
+#ktegolappm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1514,11 +2416,11 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_striped {
+#ktegolappm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nlslqgixju .gt_table_body {
+#ktegolappm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1527,7 +2429,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_footnotes {
+#ktegolappm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1541,7 +2443,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_footnote {
+#ktegolappm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1550,7 +2452,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#nlslqgixju .gt_sourcenotes {
+#ktegolappm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1564,7 +2466,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#nlslqgixju .gt_sourcenote {
+#ktegolappm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1572,72 +2474,72 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#nlslqgixju .gt_left {
+#ktegolappm .gt_left {
   text-align: left;
 }
 
-#nlslqgixju .gt_center {
+#ktegolappm .gt_center {
   text-align: center;
 }
 
-#nlslqgixju .gt_right {
+#ktegolappm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nlslqgixju .gt_font_normal {
+#ktegolappm .gt_font_normal {
   font-weight: normal;
 }
 
-#nlslqgixju .gt_font_bold {
+#ktegolappm .gt_font_bold {
   font-weight: bold;
 }
 
-#nlslqgixju .gt_font_italic {
+#ktegolappm .gt_font_italic {
   font-style: italic;
 }
 
-#nlslqgixju .gt_super {
+#ktegolappm .gt_super {
   font-size: 65%;
 }
 
-#nlslqgixju .gt_footnote_marks {
+#ktegolappm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nlslqgixju .gt_asterisk {
+#ktegolappm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nlslqgixju .gt_indent_1 {
+#ktegolappm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nlslqgixju .gt_indent_2 {
+#ktegolappm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nlslqgixju .gt_indent_3 {
+#ktegolappm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nlslqgixju .gt_indent_4 {
+#ktegolappm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nlslqgixju .gt_indent_5 {
+#ktegolappm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nlslqgixju .katex-display {
+#ktegolappm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nlslqgixju div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ktegolappm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1706,8 +2608,8 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
 </div>
 </div>
 </section>
-<section id="reports-built-on-the-data" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="reports-built-on-the-data"><span class="header-section-number">1.6</span> Reports built on the data</h2>
+<section id="reports-built-on-the-data" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="reports-built-on-the-data"><span class="header-section-number">1.12</span> Reports built on the data</h2>
 <p>The <a href="https://noaa-onms.github.io/cinms">Channel Islands National Marine Sanctuary condition report</a> reads CalCOFI through <code>calcofi4r</code> — its <a href="https://noaa-onms.github.io/cinms/modals/forage-assemblage.html">forage assemblage page</a> is a worked example of a report that regenerates from the release. The <a href="./status.html">status chapter</a> records what each contract period delivered.</p>
 
 
@@ -2140,8 +3042,40 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/explore.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/explore.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+</body></html>

@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -697,6 +717,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <section id="the-core-data-model" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="the-core-data-model"><span class="header-section-number">4.2</span> The core data model</h2>
 <p>Sixteen source datasets — ichthyoplankton, zooplankton, bottle hydrography, CTD casts, DIC, underway meteorology, seabird and mammal transects, and more — used to reach the database as ~40 per-dataset tables. They now project into a small <strong>core family</strong> that every consumer reads. A dataset’s projection lives in its own ingest notebook (the generic shapes live in <code>calcofi4db</code>), so adding a dataset never edits a shared <code>switch()</code>.</p>
+<div id="tbl-core" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-core-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.1: The core family: what one row of each table stands for, and whether it is in the default set.
+</figcaption>
+<div aria-describedby="tbl-core-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -758,7 +784,10 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
-<p>An observation’s provenance is denormalized onto it on purpose: <code>obs</code> carries <code>dataset_key</code>, <code>cruise_key</code>, <code>grid_key</code>, the position, the datetime and <code>hex_id</code> (H3 at resolution 10, so coarser aggregations use <code>h3_cell_to_parent(hex_id, res)</code> rather than a column per resolution), so a rollup groups without a join. <code>geom</code> lives on <code>sample</code> and on the reference tables, never on <code>obs</code>.</p>
+</div>
+</figure>
+</div>
+<p><a href="#tbl-core" class="quarto-xref">Table&nbsp;<span>4.1</span></a> is the whole model in nine rows; <a href="#tbl-inventory" class="quarto-xref">Table&nbsp;<span>4.2</span></a> below is every table the release actually ships. An observation’s provenance is denormalized onto it on purpose: <code>obs</code> carries <code>dataset_key</code>, <code>cruise_key</code>, <code>grid_key</code>, the position, the datetime and <code>hex_id</code> (H3 at resolution 10, so coarser aggregations use <code>h3_cell_to_parent(hex_id, res)</code> rather than a column per resolution), so a rollup groups without a join. <code>geom</code> lives on <code>sample</code> and on the reference tables, never on <code>obs</code>.</p>
 <section id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view"><span class="header-section-number">4.2.1</span> What the release publishes: <code>obs_bio</code> + <code>obs_env</code>, and <code>obs</code> as a view</h3>
 <p>The assembly grain is <code>obs</code>; what the <strong>release</strong> publishes is the pair cut from it, because the questions consumers ask are shaped differently for the two realms:</p>
@@ -785,27 +814,27 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <div id="tbl-inventory" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-inventory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and description.
+Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and description.
 </figcaption>
 <div aria-describedby="tbl-inventory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="anvtfwnpsj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#anvtfwnpsj table {
+<div id="rwsuuknkzn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rwsuuknkzn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#anvtfwnpsj thead, #anvtfwnpsj tbody, #anvtfwnpsj tfoot, #anvtfwnpsj tr, #anvtfwnpsj td, #anvtfwnpsj th {
+#rwsuuknkzn thead, #rwsuuknkzn tbody, #rwsuuknkzn tfoot, #rwsuuknkzn tr, #rwsuuknkzn td, #rwsuuknkzn th {
   border-style: none;
 }
 
-#anvtfwnpsj p {
+#rwsuuknkzn p {
   margin: 0;
   padding: 0;
 }
 
-#anvtfwnpsj .gt_table {
+#rwsuuknkzn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -831,12 +860,12 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-left-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_caption {
+#rwsuuknkzn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#anvtfwnpsj .gt_title {
+#rwsuuknkzn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -848,7 +877,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-width: 0;
 }
 
-#anvtfwnpsj .gt_subtitle {
+#rwsuuknkzn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -860,7 +889,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-top-width: 0;
 }
 
-#anvtfwnpsj .gt_heading {
+#rwsuuknkzn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -872,13 +901,13 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_bottom_border {
+#rwsuuknkzn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_col_headings {
+#rwsuuknkzn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -893,7 +922,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_col_heading {
+#rwsuuknkzn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -913,7 +942,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   overflow-x: hidden;
 }
 
-#anvtfwnpsj .gt_column_spanner_outer {
+#rwsuuknkzn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -925,15 +954,15 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 4px;
 }
 
-#anvtfwnpsj .gt_column_spanner_outer:first-child {
+#rwsuuknkzn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#anvtfwnpsj .gt_column_spanner_outer:last-child {
+#rwsuuknkzn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#anvtfwnpsj .gt_column_spanner {
+#rwsuuknkzn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -945,11 +974,11 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   width: 100%;
 }
 
-#anvtfwnpsj .gt_spanner_row {
+#rwsuuknkzn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#anvtfwnpsj .gt_group_heading {
+#rwsuuknkzn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -975,7 +1004,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   text-align: left;
 }
 
-#anvtfwnpsj .gt_empty_group_heading {
+#rwsuuknkzn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -990,15 +1019,15 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   vertical-align: middle;
 }
 
-#anvtfwnpsj .gt_from_md > :first-child {
+#rwsuuknkzn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#anvtfwnpsj .gt_from_md > :last-child {
+#rwsuuknkzn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#anvtfwnpsj .gt_row {
+#rwsuuknkzn .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -1017,7 +1046,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   overflow-x: hidden;
 }
 
-#anvtfwnpsj .gt_stub {
+#rwsuuknkzn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1030,7 +1059,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#anvtfwnpsj .gt_stub_row_group {
+#rwsuuknkzn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1044,15 +1073,15 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   vertical-align: top;
 }
 
-#anvtfwnpsj .gt_row_group_first td {
+#rwsuuknkzn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#anvtfwnpsj .gt_row_group_first th {
+#rwsuuknkzn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#anvtfwnpsj .gt_summary_row {
+#rwsuuknkzn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1062,16 +1091,16 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#anvtfwnpsj .gt_first_summary_row {
+#rwsuuknkzn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_first_summary_row.thick {
+#rwsuuknkzn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#anvtfwnpsj .gt_last_summary_row {
+#rwsuuknkzn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1081,7 +1110,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_grand_summary_row {
+#rwsuuknkzn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1091,7 +1120,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#anvtfwnpsj .gt_first_grand_summary_row {
+#rwsuuknkzn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1101,7 +1130,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-top-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_last_grand_summary_row_top {
+#rwsuuknkzn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1111,11 +1140,11 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_striped {
+#rwsuuknkzn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#anvtfwnpsj .gt_table_body {
+#rwsuuknkzn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1124,7 +1153,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_footnotes {
+#rwsuuknkzn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1138,7 +1167,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_footnote {
+#rwsuuknkzn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1147,7 +1176,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#anvtfwnpsj .gt_sourcenotes {
+#rwsuuknkzn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1161,7 +1190,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#anvtfwnpsj .gt_sourcenote {
+#rwsuuknkzn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1169,72 +1198,72 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#anvtfwnpsj .gt_left {
+#rwsuuknkzn .gt_left {
   text-align: left;
 }
 
-#anvtfwnpsj .gt_center {
+#rwsuuknkzn .gt_center {
   text-align: center;
 }
 
-#anvtfwnpsj .gt_right {
+#rwsuuknkzn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#anvtfwnpsj .gt_font_normal {
+#rwsuuknkzn .gt_font_normal {
   font-weight: normal;
 }
 
-#anvtfwnpsj .gt_font_bold {
+#rwsuuknkzn .gt_font_bold {
   font-weight: bold;
 }
 
-#anvtfwnpsj .gt_font_italic {
+#rwsuuknkzn .gt_font_italic {
   font-style: italic;
 }
 
-#anvtfwnpsj .gt_super {
+#rwsuuknkzn .gt_super {
   font-size: 65%;
 }
 
-#anvtfwnpsj .gt_footnote_marks {
+#rwsuuknkzn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#anvtfwnpsj .gt_asterisk {
+#rwsuuknkzn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#anvtfwnpsj .gt_indent_1 {
+#rwsuuknkzn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#anvtfwnpsj .gt_indent_2 {
+#rwsuuknkzn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#anvtfwnpsj .gt_indent_3 {
+#rwsuuknkzn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#anvtfwnpsj .gt_indent_4 {
+#rwsuuknkzn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#anvtfwnpsj .gt_indent_5 {
+#rwsuuknkzn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#anvtfwnpsj .katex-display {
+#rwsuuknkzn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#anvtfwnpsj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rwsuuknkzn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1471,7 +1500,7 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
 <section id="overview" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.3.1</span> Overview</h3>
 <p>The integrated database is built by the <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> pipeline: one <code>ingest_{provider}_{dataset}.qmd</code> notebook per dataset (orchestrated by <code>targets</code>, engine functions in <a href="https://github.com/CalCOFI/calcofi4db"><code>calcofi4db</code></a>) writes Parquet shards plus JSON sidecars; <code>release_database.qmd</code> assembles them in an in-memory DuckDB, validates, and freezes a versioned, immutable <strong>release</strong> on public Google Cloud Storage (next section). Consumers — the apps, <code>calcofi4r::cc_get_db()</code>, the <a href="https://calcofi.io/db-schema/">schema</a> and <a href="https://calcofi.io/db-query/">query</a> sites — read the release as Parquet over HTTPS with no credentials.</p>
-<p>Alongside the releases, a <strong>PostgreSQL</strong> database (<code>calcofi</code>, PostgreSQL 18 + PostGIS 3.6 on the CalCOFI server) is the <em>working</em>, multi-user store for the CTD team’s QA/QC: originals loaded verbatim and immutable, a flag/proposal ledger beside them, derived products on top. It is private and reached over SSH — see <a href="./server-access.html">Server Access</a>. DuckDB’s <code>postgres</code> extension joins the two worlds in one query (<code>calcofi4r::cc_pg_attach()</code>). (An earlier design ran the whole database in PostgreSQL with <code>dev</code>/<code>prod</code> schemas and a single <code>create_db.qmd</code>; that is superseded and only the legacy <code>gis</code> database remains, behind tile.calcofi.io.)</p>
+<p>Alongside the releases stands a <strong>PostgreSQL</strong> database (<code>calcofi</code>, PostgreSQL 18 + PostGIS 3.6 on the CalCOFI server) built as a <em>working</em>, multi-user store for the CTD team’s QA/QC: originals loaded verbatim and immutable, a flag/proposal ledger beside them, derived products on top. It is <strong>available but not yet adopted</strong> — the team’s flags still arrive with the provider’s files — and no part of the pipeline reads it live in either case; the bridge is a nightly parquet snapshot (<a href="./ctd-qaqc.html">CTD QA/QC</a>). It is private and reached over SSH — see <a href="./server-access.html">Server Access</a>. DuckDB’s <code>postgres</code> extension joins the two worlds in one query (<code>calcofi4r::cc_pg_attach()</code>). (An earlier design ran the whole database in PostgreSQL with <code>dev</code>/<code>prod</code> schemas and a single <code>create_db.qmd</code>; that is superseded and only the legacy <code>gis</code> database remains, behind tile.calcofi.io.)</p>
 </section>
 <section id="release-versioning" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="release-versioning"><span class="header-section-number">4.3.2</span> Release versioning</h3>
@@ -1490,6 +1519,12 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
 <li><code>citation_authority.json</code> — a <strong>generated cache</strong> of what the source’s own authority (EDI, NCEI, ERDDAP, DataCite) says about the citation and licence. A proposal, never the record.</li>
 </ul>
 <p>Shared, under <code>metadata/</code>:</p>
+<div id="tbl-registries" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-registries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.3: The shared registries under <code>metadata/</code> in <code>CalCOFI/workflows</code>, and what each is the record of.
+</figcaption>
+<div aria-describedby="tbl-registries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1584,7 +1619,10 @@ Table&nbsp;4.1: Every table of v2026.09.06, with its tier, rows, columns and des
 </tr>
 </tbody>
 </table>
-<p>These flow through two stages:</p>
+</div>
+</figure>
+</div>
+<p>The per-dataset files above and the shared registries of <a href="#tbl-registries" class="quarto-xref">Table&nbsp;<span>4.3</span></a> flow through two stages:</p>
 <ol type="1">
 <li><p><strong>Per ingest</strong>: <code>calcofi4db::build_metadata_json()</code> writes <code>data/parquet/{provider}_{dataset}/metadata.json</code> (schema version 1.0) beside the parquet outputs, and reports its own documentation gaps.</p></li>
 <li><p><strong>Per release</strong>: <code>calcofi4db::merge_metadata_json()</code> merges every per-ingest sidecar plus the release-only registries into <code>gs://calcofi-db/ducklake/releases/{version}/metadata.json</code> (schema version 1.2):</p>
@@ -1649,8 +1687,14 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953</code></pre>
 </section>
 <section id="darwin-core-obis-env-data-mapping" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="darwin-core-obis-env-data-mapping"><span class="header-section-number">4.4</span> Darwin Core / OBIS ENV-DATA mapping</h2>
-<p>The core model was designed against the <a href="https://doi.org/10.3389/fmars.2018.00251">OBIS ENV-DATA</a> pattern described by <a href="https://doi.org/10.3897/BDJ.5.e10989">De Pooter et al.&nbsp;(2017)</a>, so the shapes map one to one: <code>sample</code>’s adjacency list <strong>is</strong> an Event core, <code>obs</code>’s bio rows <strong>are</strong> an Occurrence extension, and the two measurement grains <strong>are</strong> extended Measurement-or-Fact tables. What was missing was never the shape — it was the <em>vocabulary</em>: an export had to guess which controlled term a CalCOFI measurement name meant, and the ichthyoplankton OBIS notebook did not guess, it wrote <code>measurementTypeID = NA</code>.</p>
+<p>The core model was designed against the <a href="https://doi.org/10.3389/fmars.2018.00251">OBIS ENV-DATA</a> pattern described by <span class="citation" data-cites="depooter2017">De Pooter et al. (<a href="refs.html#ref-depooter2017" role="doc-biblioref">2017</a>)</span>, so the shapes map one to one: <code>sample</code>’s adjacency list <strong>is</strong> an Event core, <code>obs</code>’s bio rows <strong>are</strong> an Occurrence extension, and the two measurement grains <strong>are</strong> extended Measurement-or-Fact tables. What was missing was never the shape — it was the <em>vocabulary</em>: an export had to guess which controlled term a CalCOFI measurement name meant, and the ichthyoplankton OBIS notebook did not guess, it wrote <code>measurementTypeID = NA</code>.</p>
 <p>The ids now live in the registries the release already publishes, so a portal export is a lookup rather than a judgement.</p>
+<div id="tbl-dwc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dwc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.4: How each core table publishes as Darwin Core under the OBIS ENV-DATA pattern.
+</figcaption>
+<div aria-describedby="tbl-dwc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -1692,12 +1736,21 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953</code></pre>
 </tr>
 </tbody>
 </table>
-<p><code>metadata/field_dictionary.csv</code> carries a <code>dwc_term</code> column holding the full term URI for the <strong>12 of 57</strong> canonical fields that one Darwin Core term means exactly. A field Darwin Core <em>splits</em> — <code>depth_m</code> becomes <code>minimumDepthInMeters</code> <strong>and</strong> <code>maximumDepthInMeters</code> — or has no term for is deliberately left empty rather than mapped approximately.</p>
+</div>
+</figure>
+</div>
+<p>Every row of <a href="#tbl-dwc" class="quarto-xref">Table&nbsp;<span>4.4</span></a> is a lookup in a registry the release already publishes, not a judgement made at export time. <code>metadata/field_dictionary.csv</code> carries a <code>dwc_term</code> column holding the full term URI for the <strong>12 of 57</strong> canonical fields that one Darwin Core term means exactly. A field Darwin Core <em>splits</em> — <code>depth_m</code> becomes <code>minimumDepthInMeters</code> <strong>and</strong> <code>maximumDepthInMeters</code> — or has no term for is deliberately left empty rather than mapped approximately.</p>
 <section id="an-id-is-filled-only-on-an-exact-match" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="an-id-is-filled-only-on-an-exact-match"><span class="header-section-number">4.4.1</span> An id is filled only on an exact match</h3>
 <p><strong>Empty means “no concept in the vocabulary says exactly this”, never “nobody looked.”</strong> An id is written only when every facet the concept states — quantity, matrix, phase, method — is something the registry or the dataset’s documented protocol actually supplies. A <em>generic</em> concept is an exact match at coarser specificity: NERC P01 <code>TEMPPR01</code>, <em>Temperature of the water body</em>, is exactly what a QC’d bottle temperature is. A concept that adds a facet nobody recorded is not: <code>IRRDUV01</code> pins PAR to a cosine-collector radiometer, which no CalCOFI metadata states, so PAR has no id.</p>
 <p>Filling an id you are not sure of is worse than leaving it empty. An empty <code>measurementTypeID</code> is a portal record that says “this measurement is not mapped”; a wrong one is a record that confidently says the wrong thing, at an aggregator that will never ask.</p>
 <p>Coverage as of <code>v2026.09</code>:</p>
+<div id="tbl-vocab-coverage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vocab-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.5: Controlled-vocabulary coverage per registry — filled only on an exact match.
+</figcaption>
+<div aria-describedby="tbl-vocab-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -1739,7 +1792,10 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Of the 85 measurement types with no P01, <strong>29 are taxon-bearing</strong> abundance, biomass or size types — P01 encodes the taxon <em>in the concept</em>, and CalCOFI carries it in <code>taxon_key</code>, so a per-type id there would be wrong rather than missing. Another 8 are event-level effort and sub-occurrence attributes BODC does not model as parameters. The genuine gaps are documented in <code>RELEASES.md</code>, and most of them are questions for a data provider rather than for the vocabulary: an unrecorded transmissometer wavelength, radiation channels that do not say whether they are upwelling or downwelling, flow-cytometry gating that was never written down.</p>
+</div>
+</figure>
+</div>
+<p>The gaps in <a href="#tbl-vocab-coverage" class="quarto-xref">Table&nbsp;<span>4.5</span></a> are deliberate, and mostly not gaps. Of the 85 measurement types with no P01, <strong>29 are taxon-bearing</strong> abundance, biomass or size types — P01 encodes the taxon <em>in the concept</em>, and CalCOFI carries it in <code>taxon_key</code>, so a per-type id there would be wrong rather than missing. Another 8 are event-level effort and sub-occurrence attributes BODC does not model as parameters. The genuine gaps are documented in <code>RELEASES.md</code>, and most of them are questions for a data provider rather than for the vocabulary: an unrecorded transmissometer wavelength, radiation channels that do not say whether they are upwelling or downwelling, flow-cytometry gating that was never written down.</p>
 </section>
 <section id="three-caveats-for-anyone-building-an-export" class="level3" data-number="4.4.2">
 <h3 data-number="4.4.2" class="anchored" data-anchor-id="three-caveats-for-anyone-building-an-export"><span class="header-section-number">4.4.2</span> Three caveats for anyone building an export</h3>
@@ -1764,6 +1820,11 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953</code></pre>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-depooter2017" class="csl-entry" role="listitem">
+De Pooter, Daphnis, Ward Appeltans, Nicolas Bailly, Sky Bristol, Klaas Deneudt, Menashè Eliezer, Ei Fujioka, et al. 2017. <span>“Toward a New Data Standard for Combined Marine Biological and Environmental Datasets — Expanding <span>OBIS</span> Beyond Species Occurrences.”</span> <em>Biodiversity Data Journal</em> 5: e10989. <a href="https://doi.org/10.3897/BDJ.5.e10989">https://doi.org/10.3897/BDJ.5.e10989</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

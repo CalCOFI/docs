@@ -674,7 +674,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <p>A database is only as trustworthy as its joins. This chapter states how the integrated database’s tables are keyed, what each key promises, and — because a promise is worth little unstated — what the release actually measures before it ships. Every table below is generated from the promoted release’s own sidecars, so the page and the database cannot disagree.</p>
 <section id="the-rules" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="the-rules"><span class="header-section-number">5.1</span> The rules</h2>
-<p><strong>The suffix says what kind of value a column holds</strong>, and this is checked in review, because a character-valued identifier named <code>*_id</code> is a promise the data cannot keep:</p>
+<p><strong>The suffix says what kind of value a column holds</strong> (<a href="#tbl-suffixes" class="quarto-xref">Table&nbsp;<span>5.1</span></a>), and this is checked in review, because a character-valued identifier named <code>*_id</code> is a promise the data cannot keep:</p>
+<div id="tbl-suffixes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-suffixes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: What each column-name suffix promises about the value the column holds.
+</figcaption>
+<div aria-describedby="tbl-suffixes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -706,6 +712,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <p>(<code>hex_id</code> is the one integer that is neither a counter nor a surrogate: an H3 cell index at resolution 10, so coarser hexagons are <code>h3_cell_to_parent(hex_id, res)</code> rather than a column per resolution.)</p>
 <p><strong>Natural keys carry the integration.</strong> Four of them are worth stating exactly, because every dataset joins to the others through them:</p>
 <ul>
@@ -739,32 +748,32 @@ Figure&nbsp;5.1: The core family and the references it joins to, with the keys t
 </section>
 <section id="the-contract-per-table" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="the-contract-per-table"><span class="header-section-number">5.2</span> The contract, per table</h2>
-<p>Every released table declares a primary key, and every foreign key between released tables is declared in the release’s <code>relationships.json</code> (<code>calcofi4db::core_relationships()</code> for the core family and the tables the release builds; <code>metadata/relationships_cross.csv</code> for the edges that cross datasets). The table reads that file for v2026.09.06.</p>
+<p>Every released table declares a primary key, and every foreign key between released tables — every arrow in <a href="#fig-core-erd" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> — is declared in the release’s <code>relationships.json</code> (<code>calcofi4db::core_relationships()</code> for the core family and the tables the release builds; <code>metadata/relationships_cross.csv</code> for the edges that cross datasets). <a href="#tbl-contract" class="quarto-xref">Table&nbsp;<span>5.2</span></a> reads that file for v2026.09.06.</p>
 <div class="cell">
 <div id="tbl-contract" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.
+Table&nbsp;5.2: Keys declared for every table of v2026.09.06. A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.
 </figcaption>
 <div aria-describedby="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="usivofzlhh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#usivofzlhh table {
+<div id="ndnxjcsgco" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ndnxjcsgco table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#usivofzlhh thead, #usivofzlhh tbody, #usivofzlhh tfoot, #usivofzlhh tr, #usivofzlhh td, #usivofzlhh th {
+#ndnxjcsgco thead, #ndnxjcsgco tbody, #ndnxjcsgco tfoot, #ndnxjcsgco tr, #ndnxjcsgco td, #ndnxjcsgco th {
   border-style: none;
 }
 
-#usivofzlhh p {
+#ndnxjcsgco p {
   margin: 0;
   padding: 0;
 }
 
-#usivofzlhh .gt_table {
+#ndnxjcsgco .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -790,12 +799,12 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-left-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_caption {
+#ndnxjcsgco .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#usivofzlhh .gt_title {
+#ndnxjcsgco .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -807,7 +816,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-bottom-width: 0;
 }
 
-#usivofzlhh .gt_subtitle {
+#ndnxjcsgco .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -819,7 +828,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-top-width: 0;
 }
 
-#usivofzlhh .gt_heading {
+#ndnxjcsgco .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -831,13 +840,13 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_bottom_border {
+#ndnxjcsgco .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_col_headings {
+#ndnxjcsgco .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -852,7 +861,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_col_heading {
+#ndnxjcsgco .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -872,7 +881,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   overflow-x: hidden;
 }
 
-#usivofzlhh .gt_column_spanner_outer {
+#ndnxjcsgco .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -884,15 +893,15 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   padding-right: 4px;
 }
 
-#usivofzlhh .gt_column_spanner_outer:first-child {
+#ndnxjcsgco .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#usivofzlhh .gt_column_spanner_outer:last-child {
+#ndnxjcsgco .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#usivofzlhh .gt_column_spanner {
+#ndnxjcsgco .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -904,11 +913,11 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   width: 100%;
 }
 
-#usivofzlhh .gt_spanner_row {
+#ndnxjcsgco .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#usivofzlhh .gt_group_heading {
+#ndnxjcsgco .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -934,7 +943,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   text-align: left;
 }
 
-#usivofzlhh .gt_empty_group_heading {
+#ndnxjcsgco .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -949,15 +958,15 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   vertical-align: middle;
 }
 
-#usivofzlhh .gt_from_md > :first-child {
+#ndnxjcsgco .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#usivofzlhh .gt_from_md > :last-child {
+#ndnxjcsgco .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#usivofzlhh .gt_row {
+#ndnxjcsgco .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -976,7 +985,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   overflow-x: hidden;
 }
 
-#usivofzlhh .gt_stub {
+#ndnxjcsgco .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -989,7 +998,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   padding-right: 5px;
 }
 
-#usivofzlhh .gt_stub_row_group {
+#ndnxjcsgco .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1003,15 +1012,15 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   vertical-align: top;
 }
 
-#usivofzlhh .gt_row_group_first td {
+#ndnxjcsgco .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#usivofzlhh .gt_row_group_first th {
+#ndnxjcsgco .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#usivofzlhh .gt_summary_row {
+#ndnxjcsgco .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1021,16 +1030,16 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   padding-right: 5px;
 }
 
-#usivofzlhh .gt_first_summary_row {
+#ndnxjcsgco .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_first_summary_row.thick {
+#ndnxjcsgco .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#usivofzlhh .gt_last_summary_row {
+#ndnxjcsgco .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1040,7 +1049,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_grand_summary_row {
+#ndnxjcsgco .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1050,7 +1059,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   padding-right: 5px;
 }
 
-#usivofzlhh .gt_first_grand_summary_row {
+#ndnxjcsgco .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1060,7 +1069,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-top-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_last_grand_summary_row_top {
+#ndnxjcsgco .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1070,11 +1079,11 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_striped {
+#ndnxjcsgco .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#usivofzlhh .gt_table_body {
+#ndnxjcsgco .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1083,7 +1092,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_footnotes {
+#ndnxjcsgco .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1097,7 +1106,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_footnote {
+#ndnxjcsgco .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1106,7 +1115,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   padding-right: 5px;
 }
 
-#usivofzlhh .gt_sourcenotes {
+#ndnxjcsgco .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1120,7 +1129,7 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#usivofzlhh .gt_sourcenote {
+#ndnxjcsgco .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1128,72 +1137,72 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
   padding-right: 5px;
 }
 
-#usivofzlhh .gt_left {
+#ndnxjcsgco .gt_left {
   text-align: left;
 }
 
-#usivofzlhh .gt_center {
+#ndnxjcsgco .gt_center {
   text-align: center;
 }
 
-#usivofzlhh .gt_right {
+#ndnxjcsgco .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#usivofzlhh .gt_font_normal {
+#ndnxjcsgco .gt_font_normal {
   font-weight: normal;
 }
 
-#usivofzlhh .gt_font_bold {
+#ndnxjcsgco .gt_font_bold {
   font-weight: bold;
 }
 
-#usivofzlhh .gt_font_italic {
+#ndnxjcsgco .gt_font_italic {
   font-style: italic;
 }
 
-#usivofzlhh .gt_super {
+#ndnxjcsgco .gt_super {
   font-size: 65%;
 }
 
-#usivofzlhh .gt_footnote_marks {
+#ndnxjcsgco .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#usivofzlhh .gt_asterisk {
+#ndnxjcsgco .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#usivofzlhh .gt_indent_1 {
+#ndnxjcsgco .gt_indent_1 {
   text-indent: 5px;
 }
 
-#usivofzlhh .gt_indent_2 {
+#ndnxjcsgco .gt_indent_2 {
   text-indent: 10px;
 }
 
-#usivofzlhh .gt_indent_3 {
+#ndnxjcsgco .gt_indent_3 {
   text-indent: 15px;
 }
 
-#usivofzlhh .gt_indent_4 {
+#ndnxjcsgco .gt_indent_4 {
   text-indent: 20px;
 }
 
-#usivofzlhh .gt_indent_5 {
+#ndnxjcsgco .gt_indent_5 {
   text-indent: 25px;
 }
 
-#usivofzlhh .katex-display {
+#ndnxjcsgco .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#usivofzlhh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ndnxjcsgco div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1427,27 +1436,27 @@ Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreig
 <div id="tbl-pk" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates, and rows with a NULL anywhere in the key.
+Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates, and rows with a NULL anywhere in the key.
 </figcaption>
 <div aria-describedby="tbl-pk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="kvszhzfbsq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kvszhzfbsq table {
+<div id="cstlinsuku" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cstlinsuku table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kvszhzfbsq thead, #kvszhzfbsq tbody, #kvszhzfbsq tfoot, #kvszhzfbsq tr, #kvszhzfbsq td, #kvszhzfbsq th {
+#cstlinsuku thead, #cstlinsuku tbody, #cstlinsuku tfoot, #cstlinsuku tr, #cstlinsuku td, #cstlinsuku th {
   border-style: none;
 }
 
-#kvszhzfbsq p {
+#cstlinsuku p {
   margin: 0;
   padding: 0;
 }
 
-#kvszhzfbsq .gt_table {
+#cstlinsuku .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1473,12 +1482,12 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-left-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_caption {
+#cstlinsuku .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kvszhzfbsq .gt_title {
+#cstlinsuku .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1490,7 +1499,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-width: 0;
 }
 
-#kvszhzfbsq .gt_subtitle {
+#cstlinsuku .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1502,7 +1511,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-top-width: 0;
 }
 
-#kvszhzfbsq .gt_heading {
+#cstlinsuku .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1514,13 +1523,13 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_bottom_border {
+#cstlinsuku .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_col_headings {
+#cstlinsuku .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1535,7 +1544,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_col_heading {
+#cstlinsuku .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1555,7 +1564,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   overflow-x: hidden;
 }
 
-#kvszhzfbsq .gt_column_spanner_outer {
+#cstlinsuku .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1567,15 +1576,15 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 4px;
 }
 
-#kvszhzfbsq .gt_column_spanner_outer:first-child {
+#cstlinsuku .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kvszhzfbsq .gt_column_spanner_outer:last-child {
+#cstlinsuku .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kvszhzfbsq .gt_column_spanner {
+#cstlinsuku .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1587,11 +1596,11 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   width: 100%;
 }
 
-#kvszhzfbsq .gt_spanner_row {
+#cstlinsuku .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kvszhzfbsq .gt_group_heading {
+#cstlinsuku .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1617,7 +1626,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   text-align: left;
 }
 
-#kvszhzfbsq .gt_empty_group_heading {
+#cstlinsuku .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1632,15 +1641,15 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   vertical-align: middle;
 }
 
-#kvszhzfbsq .gt_from_md > :first-child {
+#cstlinsuku .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kvszhzfbsq .gt_from_md > :last-child {
+#cstlinsuku .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kvszhzfbsq .gt_row {
+#cstlinsuku .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1659,7 +1668,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   overflow-x: hidden;
 }
 
-#kvszhzfbsq .gt_stub {
+#cstlinsuku .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1672,7 +1681,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#kvszhzfbsq .gt_stub_row_group {
+#cstlinsuku .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1686,15 +1695,15 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   vertical-align: top;
 }
 
-#kvszhzfbsq .gt_row_group_first td {
+#cstlinsuku .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kvszhzfbsq .gt_row_group_first th {
+#cstlinsuku .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kvszhzfbsq .gt_summary_row {
+#cstlinsuku .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1704,16 +1713,16 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#kvszhzfbsq .gt_first_summary_row {
+#cstlinsuku .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_first_summary_row.thick {
+#cstlinsuku .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kvszhzfbsq .gt_last_summary_row {
+#cstlinsuku .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1723,7 +1732,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_grand_summary_row {
+#cstlinsuku .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1733,7 +1742,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#kvszhzfbsq .gt_first_grand_summary_row {
+#cstlinsuku .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1743,7 +1752,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-top-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_last_grand_summary_row_top {
+#cstlinsuku .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1753,11 +1762,11 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_striped {
+#cstlinsuku .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kvszhzfbsq .gt_table_body {
+#cstlinsuku .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1766,7 +1775,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_footnotes {
+#cstlinsuku .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1780,7 +1789,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_footnote {
+#cstlinsuku .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1789,7 +1798,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#kvszhzfbsq .gt_sourcenotes {
+#cstlinsuku .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1803,7 +1812,7 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#kvszhzfbsq .gt_sourcenote {
+#cstlinsuku .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1811,72 +1820,72 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#kvszhzfbsq .gt_left {
+#cstlinsuku .gt_left {
   text-align: left;
 }
 
-#kvszhzfbsq .gt_center {
+#cstlinsuku .gt_center {
   text-align: center;
 }
 
-#kvszhzfbsq .gt_right {
+#cstlinsuku .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kvszhzfbsq .gt_font_normal {
+#cstlinsuku .gt_font_normal {
   font-weight: normal;
 }
 
-#kvszhzfbsq .gt_font_bold {
+#cstlinsuku .gt_font_bold {
   font-weight: bold;
 }
 
-#kvszhzfbsq .gt_font_italic {
+#cstlinsuku .gt_font_italic {
   font-style: italic;
 }
 
-#kvszhzfbsq .gt_super {
+#cstlinsuku .gt_super {
   font-size: 65%;
 }
 
-#kvszhzfbsq .gt_footnote_marks {
+#cstlinsuku .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kvszhzfbsq .gt_asterisk {
+#cstlinsuku .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kvszhzfbsq .gt_indent_1 {
+#cstlinsuku .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kvszhzfbsq .gt_indent_2 {
+#cstlinsuku .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kvszhzfbsq .gt_indent_3 {
+#cstlinsuku .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kvszhzfbsq .gt_indent_4 {
+#cstlinsuku .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kvszhzfbsq .gt_indent_5 {
+#cstlinsuku .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kvszhzfbsq .katex-display {
+#cstlinsuku .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kvszhzfbsq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cstlinsuku div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2114,27 +2123,27 @@ Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates
 <div id="tbl-fk" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitted), and orphans (a non-NULL value with no match; any orphan fails the release).
+Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitted), and orphans (a non-NULL value with no match; any orphan fails the release).
 </figcaption>
 <div aria-describedby="tbl-fk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="sjhaeplmgu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sjhaeplmgu table {
+<div id="kvyhhhafdu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kvyhhhafdu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sjhaeplmgu thead, #sjhaeplmgu tbody, #sjhaeplmgu tfoot, #sjhaeplmgu tr, #sjhaeplmgu td, #sjhaeplmgu th {
+#kvyhhhafdu thead, #kvyhhhafdu tbody, #kvyhhhafdu tfoot, #kvyhhhafdu tr, #kvyhhhafdu td, #kvyhhhafdu th {
   border-style: none;
 }
 
-#sjhaeplmgu p {
+#kvyhhhafdu p {
   margin: 0;
   padding: 0;
 }
 
-#sjhaeplmgu .gt_table {
+#kvyhhhafdu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2160,12 +2169,12 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-left-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_caption {
+#kvyhhhafdu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sjhaeplmgu .gt_title {
+#kvyhhhafdu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2177,7 +2186,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-width: 0;
 }
 
-#sjhaeplmgu .gt_subtitle {
+#kvyhhhafdu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2189,7 +2198,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-top-width: 0;
 }
 
-#sjhaeplmgu .gt_heading {
+#kvyhhhafdu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2201,13 +2210,13 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_bottom_border {
+#kvyhhhafdu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_col_headings {
+#kvyhhhafdu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2222,7 +2231,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_col_heading {
+#kvyhhhafdu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2242,7 +2251,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   overflow-x: hidden;
 }
 
-#sjhaeplmgu .gt_column_spanner_outer {
+#kvyhhhafdu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2254,15 +2263,15 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 4px;
 }
 
-#sjhaeplmgu .gt_column_spanner_outer:first-child {
+#kvyhhhafdu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sjhaeplmgu .gt_column_spanner_outer:last-child {
+#kvyhhhafdu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sjhaeplmgu .gt_column_spanner {
+#kvyhhhafdu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2274,11 +2283,11 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   width: 100%;
 }
 
-#sjhaeplmgu .gt_spanner_row {
+#kvyhhhafdu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sjhaeplmgu .gt_group_heading {
+#kvyhhhafdu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2304,7 +2313,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   text-align: left;
 }
 
-#sjhaeplmgu .gt_empty_group_heading {
+#kvyhhhafdu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2319,15 +2328,15 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   vertical-align: middle;
 }
 
-#sjhaeplmgu .gt_from_md > :first-child {
+#kvyhhhafdu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sjhaeplmgu .gt_from_md > :last-child {
+#kvyhhhafdu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sjhaeplmgu .gt_row {
+#kvyhhhafdu .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2346,7 +2355,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   overflow-x: hidden;
 }
 
-#sjhaeplmgu .gt_stub {
+#kvyhhhafdu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2359,7 +2368,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#sjhaeplmgu .gt_stub_row_group {
+#kvyhhhafdu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2373,15 +2382,15 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   vertical-align: top;
 }
 
-#sjhaeplmgu .gt_row_group_first td {
+#kvyhhhafdu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sjhaeplmgu .gt_row_group_first th {
+#kvyhhhafdu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sjhaeplmgu .gt_summary_row {
+#kvyhhhafdu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2391,16 +2400,16 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#sjhaeplmgu .gt_first_summary_row {
+#kvyhhhafdu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_first_summary_row.thick {
+#kvyhhhafdu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sjhaeplmgu .gt_last_summary_row {
+#kvyhhhafdu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2410,7 +2419,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_grand_summary_row {
+#kvyhhhafdu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2420,7 +2429,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#sjhaeplmgu .gt_first_grand_summary_row {
+#kvyhhhafdu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2430,7 +2439,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-top-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_last_grand_summary_row_top {
+#kvyhhhafdu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2440,11 +2449,11 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_striped {
+#kvyhhhafdu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sjhaeplmgu .gt_table_body {
+#kvyhhhafdu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2453,7 +2462,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_footnotes {
+#kvyhhhafdu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2467,7 +2476,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_footnote {
+#kvyhhhafdu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2476,7 +2485,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#sjhaeplmgu .gt_sourcenotes {
+#kvyhhhafdu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2490,7 +2499,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#sjhaeplmgu .gt_sourcenote {
+#kvyhhhafdu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2498,72 +2507,72 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#sjhaeplmgu .gt_left {
+#kvyhhhafdu .gt_left {
   text-align: left;
 }
 
-#sjhaeplmgu .gt_center {
+#kvyhhhafdu .gt_center {
   text-align: center;
 }
 
-#sjhaeplmgu .gt_right {
+#kvyhhhafdu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sjhaeplmgu .gt_font_normal {
+#kvyhhhafdu .gt_font_normal {
   font-weight: normal;
 }
 
-#sjhaeplmgu .gt_font_bold {
+#kvyhhhafdu .gt_font_bold {
   font-weight: bold;
 }
 
-#sjhaeplmgu .gt_font_italic {
+#kvyhhhafdu .gt_font_italic {
   font-style: italic;
 }
 
-#sjhaeplmgu .gt_super {
+#kvyhhhafdu .gt_super {
   font-size: 65%;
 }
 
-#sjhaeplmgu .gt_footnote_marks {
+#kvyhhhafdu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sjhaeplmgu .gt_asterisk {
+#kvyhhhafdu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sjhaeplmgu .gt_indent_1 {
+#kvyhhhafdu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sjhaeplmgu .gt_indent_2 {
+#kvyhhhafdu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sjhaeplmgu .gt_indent_3 {
+#kvyhhhafdu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sjhaeplmgu .gt_indent_4 {
+#kvyhhhafdu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sjhaeplmgu .gt_indent_5 {
+#kvyhhhafdu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sjhaeplmgu .katex-display {
+#kvyhhhafdu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sjhaeplmgu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kvyhhhafdu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2987,7 +2996,7 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
 </figure>
 </div>
 </div>
-<p>Two things the tables do not show, on purpose:</p>
+<p>Two things <a href="#tbl-pk" class="quarto-xref">Table&nbsp;<span>5.3</span></a> and <a href="#tbl-fk" class="quarto-xref">Table&nbsp;<span>5.4</span></a> do not show, on purpose:</p>
 <ul>
 <li><strong>A NULL is not an orphan.</strong> Where a column is NULL the row has nothing to point at — an environmental observation has no taxon, a region-pooled sample has no grid cell, a root sample has no parent. The counts are shown so a reader can see how nullable an edge is; they are not failures.</li>
 <li><strong>One edge is knowingly undeclared.</strong> <code>obs_mets_full.sample_key</code> would point at <code>sample</code>, but the full-resolution meteorology mints one key per underway record and only the headline series’ events reach <code>sample</code>: 73,607 of its 2,168,850 distinct keys resolve. Declaring the edge would fail every release on some nineteen million orphans; leaving it silent would hide a real gap. It is recorded in the release notes and as <a href="https://github.com/CalCOFI/workflows/issues/78">CalCOFI/workflows#78</a> until the supplemental’s events either join <code>sample</code> or carry a documented per-record key.</li>
@@ -2996,6 +3005,12 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
 <section id="what-the-release-checks-before-it-ships" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="what-the-release-checks-before-it-ships"><span class="header-section-number">5.4</span> What the release checks before it ships</h2>
 <p>Keys are one family of gate. The full list — what each checks, and whether it fails the release or only ratchets — is on the <a href="./releases.html#sec-release-gates">Releases</a> page; the ones that concern keys are:</p>
+<div id="tbl-gates-keys" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-gates-keys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.5: The gates that stop a release outright, of which the first three are key gates.
+</figcaption>
+<div aria-describedby="tbl-gates-keys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -3042,6 +3057,10 @@ Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitt
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
+<p>The first three rows of <a href="#tbl-gates-keys" class="quarto-xref">Table&nbsp;<span>5.5</span></a> are the key gates proper; the last three catch a key problem on its way to a consumer.</p>
 </section>
 <section id="walking-the-keys" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="walking-the-keys"><span class="header-section-number">5.5</span> Walking the keys</h2>

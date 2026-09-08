@@ -688,13 +688,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <img src="diagrams/system.svg" class="cc-diagram nolightbox img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-system-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The system, read left to right along the phases of the data management plan. Provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; from the release come the record each portal reads and the products people use. The CTD team’s working store stands beside it, feeding accepted flags into the next ingest.
+Figure&nbsp;1: The system, read left to right along the phases of the data management plan. Provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; from the release come the record each portal reads and the products people use.
 </figcaption>
 </figure>
 </div>
 <section id="five-phases-one-system" class="level2">
 <h2 class="anchored" data-anchor-id="five-phases-one-system">Five phases, one system</h2>
-<p>The SIO-CalCOFI data management plan organizes the work into five phases. They are also the book’s spine: each phase has a product that realizes it and a chapter that explains it.</p>
+<p>The SIO-CalCOFI data management plan organizes the work into five phases. They are also the book’s spine: each phase has a product that realizes it and a chapter that explains it, and <a href="#fig-system" class="quarto-xref">Figure&nbsp;<span>1</span></a> reads left to right along them.</p>
 <ul>
 <li><strong>Ingest.</strong> Each source dataset — a bottle database, a CTD archive, a net-tow spreadsheet — is turned into the shared schema by one reproducible notebook, with the provider’s own identifiers kept as columns and every open question filed with the provider. → <a href="./ingest-loop.html">Ingesting a dataset</a>, <a href="./metadata.html">Metadata &amp; the ingest loop</a>.</li>
 <li><strong>Integrate.</strong> The shards join on a handful of shared keys — the cruise, the station, the sampling event, the taxon, the measured quantity — under one naming convention, and a release is cut only after its keys and its bounds have been checked. → <a href="./db.html">The database</a>, <a href="./keys.html">Keys and integrity</a>, <a href="./naming.html">Naming conventions</a>, <a href="./releases.html">Releases</a>.</li>
@@ -705,6 +705,12 @@ Figure&nbsp;1: The system, read left to right along the phases of the data manag
 </section>
 <section id="which-door-is-yours" class="level2">
 <h2 class="anchored" data-anchor-id="which-door-is-yours">Which door is yours</h2>
+<div id="tbl-doors" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-doors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Where to start, by who you are and what you came for.
+</figcaption>
+<div aria-describedby="tbl-doors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -746,6 +752,10 @@ Figure&nbsp;1: The system, read left to right along the phases of the data manag
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
+<p>Pick your row in <a href="#tbl-doors" class="quarto-xref">Table&nbsp;<span>1</span></a>; every chapter links onward to the next one you are likely to want.</p>
 </section>
 <section id="how-this-book-is-kept-true" class="level2">
 <h2 class="anchored" data-anchor-id="how-this-book-is-kept-true">How this book is kept true</h2>

@@ -673,6 +673,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 <p>The integrated database is published as <strong>parquet files on a public bucket</strong>, and every way in — R, Python, a SQL shell, a browser tab — reads those same bytes through the same catalog. There is no server to be slow, no credentials to request and nothing to download whole: DuckDB reads only the columns and row groups a query touches, over HTTPS. This chapter is the one guide to both paths CalCOFI.io offers, the public release and the team’s working store:</p>
+<div id="tbl-two-paths" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-two-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: The two ways into CalCOFI data. Everything else on this page is the left-hand column.
+</figcaption>
+<div aria-describedby="tbl-two-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -685,7 +691,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <tr class="odd">
 <td>what</td>
 <td>every dataset, integrated, frozen per version, cited by DOI</td>
-<td>the CTD team’s multi-user PostgreSQL: originals verbatim, a flag ledger beside them</td>
+<td>the CTD team’s multi-user PostgreSQL: originals verbatim, a flag ledger beside them — built and running, <strong>not yet the team’s practice</strong> (<a href="./ctd-qaqc.html">CTD QA/QC</a>)</td>
 </tr>
 <tr class="even">
 <td>who</td>
@@ -700,10 +706,14 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <tr class="even">
 <td>when it changes</td>
 <td>at each release, never in place</td>
-<td>continuously; accepted flags reach the next release</td>
+<td>continuously, once adopted; accepted flags would reach the next release through a nightly snapshot, never a live read</td>
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
+<p><a href="#tbl-two-paths" class="quarto-xref">Table&nbsp;<span>2.1</span></a> is the whole choice: unless you are on the CTD team, the public release is the only path you need.</p>
 <section id="where-the-data-lives" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="where-the-data-lives"><span class="header-section-number">2.1</span> Where the data lives</h2>
 <p>A release is a versioned folder of <strong>sidecars</strong> — the record of what it is — and its tables are parquet <strong>objects</strong> the release’s <code>catalog.json</code> points at:</p>
@@ -739,27 +749,27 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <div id="tbl-tables" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partitioned table reads as an explicit list of objects (with <code>hive_partitioning = true</code> to recover the partition column); a twin is one whole-table object a browser reads instead of the list.
+Table&nbsp;2.2: The tables of v2026.09.06 as the catalog lays them out. A partitioned table reads as an explicit list of objects (with <code>hive_partitioning = true</code> to recover the partition column); a twin is one whole-table object a browser reads instead of the list.
 </figcaption>
 <div aria-describedby="tbl-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="qlphgurbkr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qlphgurbkr table {
+<div id="pncldnbvya" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pncldnbvya table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qlphgurbkr thead, #qlphgurbkr tbody, #qlphgurbkr tfoot, #qlphgurbkr tr, #qlphgurbkr td, #qlphgurbkr th {
+#pncldnbvya thead, #pncldnbvya tbody, #pncldnbvya tfoot, #pncldnbvya tr, #pncldnbvya td, #pncldnbvya th {
   border-style: none;
 }
 
-#qlphgurbkr p {
+#pncldnbvya p {
   margin: 0;
   padding: 0;
 }
 
-#qlphgurbkr .gt_table {
+#pncldnbvya .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -785,12 +795,12 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-left-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_caption {
+#pncldnbvya .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qlphgurbkr .gt_title {
+#pncldnbvya .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -802,7 +812,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-bottom-width: 0;
 }
 
-#qlphgurbkr .gt_subtitle {
+#pncldnbvya .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -814,7 +824,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-top-width: 0;
 }
 
-#qlphgurbkr .gt_heading {
+#pncldnbvya .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -826,13 +836,13 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-right-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_bottom_border {
+#pncldnbvya .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_col_headings {
+#pncldnbvya .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -847,7 +857,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-right-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_col_heading {
+#pncldnbvya .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -867,7 +877,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   overflow-x: hidden;
 }
 
-#qlphgurbkr .gt_column_spanner_outer {
+#pncldnbvya .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -879,15 +889,15 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   padding-right: 4px;
 }
 
-#qlphgurbkr .gt_column_spanner_outer:first-child {
+#pncldnbvya .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qlphgurbkr .gt_column_spanner_outer:last-child {
+#pncldnbvya .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qlphgurbkr .gt_column_spanner {
+#pncldnbvya .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -899,11 +909,11 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   width: 100%;
 }
 
-#qlphgurbkr .gt_spanner_row {
+#pncldnbvya .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qlphgurbkr .gt_group_heading {
+#pncldnbvya .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -929,7 +939,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   text-align: left;
 }
 
-#qlphgurbkr .gt_empty_group_heading {
+#pncldnbvya .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -944,15 +954,15 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   vertical-align: middle;
 }
 
-#qlphgurbkr .gt_from_md > :first-child {
+#pncldnbvya .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qlphgurbkr .gt_from_md > :last-child {
+#pncldnbvya .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qlphgurbkr .gt_row {
+#pncldnbvya .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -971,7 +981,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   overflow-x: hidden;
 }
 
-#qlphgurbkr .gt_stub {
+#pncldnbvya .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -984,7 +994,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   padding-right: 5px;
 }
 
-#qlphgurbkr .gt_stub_row_group {
+#pncldnbvya .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -998,15 +1008,15 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   vertical-align: top;
 }
 
-#qlphgurbkr .gt_row_group_first td {
+#pncldnbvya .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qlphgurbkr .gt_row_group_first th {
+#pncldnbvya .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qlphgurbkr .gt_summary_row {
+#pncldnbvya .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1016,16 +1026,16 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   padding-right: 5px;
 }
 
-#qlphgurbkr .gt_first_summary_row {
+#pncldnbvya .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_first_summary_row.thick {
+#pncldnbvya .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qlphgurbkr .gt_last_summary_row {
+#pncldnbvya .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1035,7 +1045,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-bottom-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_grand_summary_row {
+#pncldnbvya .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1045,7 +1055,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   padding-right: 5px;
 }
 
-#qlphgurbkr .gt_first_grand_summary_row {
+#pncldnbvya .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1055,7 +1065,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-top-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_last_grand_summary_row_top {
+#pncldnbvya .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1065,11 +1075,11 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-bottom-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_striped {
+#pncldnbvya .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qlphgurbkr .gt_table_body {
+#pncldnbvya .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1078,7 +1088,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-bottom-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_footnotes {
+#pncldnbvya .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1092,7 +1102,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-right-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_footnote {
+#pncldnbvya .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1101,7 +1111,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   padding-right: 5px;
 }
 
-#qlphgurbkr .gt_sourcenotes {
+#pncldnbvya .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1115,7 +1125,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   border-right-color: #D3D3D3;
 }
 
-#qlphgurbkr .gt_sourcenote {
+#pncldnbvya .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1123,72 +1133,72 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
   padding-right: 5px;
 }
 
-#qlphgurbkr .gt_left {
+#pncldnbvya .gt_left {
   text-align: left;
 }
 
-#qlphgurbkr .gt_center {
+#pncldnbvya .gt_center {
   text-align: center;
 }
 
-#qlphgurbkr .gt_right {
+#pncldnbvya .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qlphgurbkr .gt_font_normal {
+#pncldnbvya .gt_font_normal {
   font-weight: normal;
 }
 
-#qlphgurbkr .gt_font_bold {
+#pncldnbvya .gt_font_bold {
   font-weight: bold;
 }
 
-#qlphgurbkr .gt_font_italic {
+#pncldnbvya .gt_font_italic {
   font-style: italic;
 }
 
-#qlphgurbkr .gt_super {
+#pncldnbvya .gt_super {
   font-size: 65%;
 }
 
-#qlphgurbkr .gt_footnote_marks {
+#pncldnbvya .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qlphgurbkr .gt_asterisk {
+#pncldnbvya .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qlphgurbkr .gt_indent_1 {
+#pncldnbvya .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qlphgurbkr .gt_indent_2 {
+#pncldnbvya .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qlphgurbkr .gt_indent_3 {
+#pncldnbvya .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qlphgurbkr .gt_indent_4 {
+#pncldnbvya .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qlphgurbkr .gt_indent_5 {
+#pncldnbvya .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qlphgurbkr .katex-display {
+#pncldnbvya .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qlphgurbkr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pncldnbvya div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1398,7 +1408,7 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
 </figure>
 </div>
 </div>
-<p>A <strong>supplemental</strong> table (<code>obs_ctd_full</code>, the full-resolution CTD scans; <code>obs_mets_full</code>; the <code>sample_root</code> join twin) is hosted and catalogued but left out of <code>cc_get_db()</code>’s default set — <code>obs_ctd_full</code> alone is ~270 M rows. Ask for it (<code>supplemental = TRUE</code>) and filter early.</p>
+<p><a href="#tbl-tables" class="quarto-xref">Table&nbsp;<span>2.2</span></a> is the whole inventory, tier by tier. A <strong>supplemental</strong> table (<code>obs_ctd_full</code>, the full-resolution CTD scans; <code>obs_mets_full</code>; the <code>sample_root</code> join twin) is hosted and catalogued but left out of <code>cc_get_db()</code>’s default set — <code>obs_ctd_full</code> alone is ~270 M rows. Ask for it (<code>supplemental = TRUE</code>) and filter early.</p>
 </section>
 <section id="from-r" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="from-r"><span class="header-section-number">2.3</span> From R</h2>
@@ -1418,43 +1428,63 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_list_versions</span>()                       <span class="co"># versions.json</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_release_notes</span>()                       <span class="co"># this release's notes</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_describe_table</span>(<span class="st">"sample"</span>)              <span class="co"># columns, units, descriptions from metadata.json</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If that install stops at <code>s2</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>calcofi4r</code> needs <code>sf</code>, <code>sf</code> needs <a href="https://r-spatial.github.io/s2/"><code>s2</code></a>, and <code>s2</code> is C++. CRAN has no macOS arm64 binaries for R 4.6 yet, so on Apple Silicon it compiles, and the compile needs <code>cmake</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install cmake</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>brew install abseil</code> will not do instead, though s2’s own failure message recommends it: its <code>configure</code> defaults <code>S2_FORCE_BUNDLED_ABSEIL=true</code>, always builds its vendored Abseil with cmake, and never asks <code>pkg-config</code> about a system copy.</p>
+<p>To avoid the compile, take prebuilt binaries from Posit Package Manager — in <code>~/.Rprofile</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">P3M =</span> <span class="st">"https://packagemanager.posit.co/cran/latest"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 <p>To hand a table’s URLs to DuckDB (or anything else) yourself, resolve them through the catalog:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cat_ <span class="ot">&lt;-</span> <span class="fu">cc_catalog</span>(<span class="st">"latest"</span>)                     <span class="co"># or a pinned "vYYYY.MM.DD"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>src  <span class="ot">&lt;-</span> <span class="fu">cc_release_sources</span>(cat_, <span class="st">"obs_env"</span>)      <span class="co"># list(urls, hive, canonical, hashes, local_paths, single_file)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>src<span class="sc">$</span>urls                                         <span class="co"># one https URL per partition</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_read_parquet_sql</span>(src)                         <span class="co"># read_parquet([...], hive_partitioning = true) — paste into any SQL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cat_ <span class="ot">&lt;-</span> <span class="fu">cc_catalog</span>(<span class="st">"latest"</span>)                     <span class="co"># or a pinned "vYYYY.MM.DD"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>src  <span class="ot">&lt;-</span> <span class="fu">cc_release_sources</span>(cat_, <span class="st">"obs_env"</span>)      <span class="co"># list(urls, hive, canonical, hashes, local_paths, single_file)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>src<span class="sc">$</span>urls                                         <span class="co"># one https URL per partition</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_read_parquet_sql</span>(src)                         <span class="co"># read_parquet([...], hive_partitioning = true) — paste into any SQL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="from-python" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="from-python"><span class="header-section-number">2.4</span> From Python</h2>
 <p><a href="https://calcofi.io/calcofi4py/"><code>calcofi4py</code></a> mirrors the R package, verb for verb:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calcofi4py <span class="im">as</span> cc</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> cc.cc_get_db()                              <span class="co"># the promoted release; cc_get_db("v2026.08.25") to pin</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df  <span class="op">=</span> con.sql(<span class="st">"SELECT * FROM taxon WHERE common_name ILIKE '</span><span class="sc">%s</span><span class="st">ardine%'"</span>).df()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>cc.cc_query(<span class="st">"SELECT count(*) FROM obs_bio"</span>).fetchone()</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>catalog <span class="op">=</span> cc.cc_catalog(<span class="st">"latest"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>src     <span class="op">=</span> cc.release_sources(catalog, <span class="st">"obs_env"</span>)  <span class="co"># {"urls", "hive", "canonical", "hashes", "local_paths", "single_file"}</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>cc.read_parquet_sql(src)                          <span class="co"># the read_parquet(...) fragment for any DuckDB</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calcofi4py <span class="im">as</span> cc</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> cc.cc_get_db()                              <span class="co"># the promoted release; cc_get_db("v2026.08.25") to pin</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df  <span class="op">=</span> con.sql(<span class="st">"SELECT * FROM taxon WHERE common_name ILIKE '</span><span class="sc">%s</span><span class="st">ardine%'"</span>).df()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>cc.cc_query(<span class="st">"SELECT count(*) FROM obs_bio"</span>).fetchone()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>catalog <span class="op">=</span> cc.cc_catalog(<span class="st">"latest"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>src     <span class="op">=</span> cc.release_sources(catalog, <span class="st">"obs_env"</span>)  <span class="co"># {"urls", "hive", "canonical", "hashes", "local_paths", "single_file"}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>cc.read_parquet_sql(src)                          <span class="co"># the read_parquet(...) fragment for any DuckDB</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="from-sql-anywhere" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="from-sql-anywhere"><span class="header-section-number">2.5</span> From SQL, anywhere</h2>
 <p>Any DuckDB — the command-line shell, a notebook, another language’s binding — reads the release after <code>INSTALL httpfs; LOAD httpfs;</code> (and <code>spatial</code> for <code>ST_*</code> functions). Take the table’s objects from the catalog and hand them to <code>read_parquet()</code>; a partitioned table is an explicit list with <code>hive_partitioning = true</code>, and that runs in every DuckDB, the browser included:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>INSTALL httpfs; LOAD httpfs;</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- one object: a single-file table (the path is catalog.json ▸ tables[name = 'taxon'] ▸ objects[0].path)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> taxon_key, scientific_name, common_name, worms_id, <span class="fu">rank</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/tables/taxon/{content_hash}/taxon.parquet'</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> scientific_name <span class="op">=</span> <span class="st">'Sardinops sagax'</span>;</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- many objects: a partitioned table, one URL per partition, in catalog order</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> measurement_type, <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">AS</span> n</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet([</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/tables/obs_env/measurement_type=temperature/{hash}/data_0.parquet'</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/tables/obs_env/measurement_type=salinity/{hash}/data_0.parquet'</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  ], hive_partitioning <span class="op">=</span> <span class="kw">true</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>INSTALL httpfs; LOAD httpfs;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- one object: a single-file table (the path is catalog.json ▸ tables[name = 'taxon'] ▸ objects[0].path)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> taxon_key, scientific_name, common_name, worms_id, <span class="fu">rank</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/tables/taxon/{content_hash}/taxon.parquet'</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> scientific_name <span class="op">=</span> <span class="st">'Sardinops sagax'</span>;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- many objects: a partitioned table, one URL per partition, in catalog order</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> measurement_type, <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">AS</span> n</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet([</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/tables/obs_env/measurement_type=temperature/{hash}/data_0.parquet'</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/tables/obs_env/measurement_type=salinity/{hash}/data_0.parquet'</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ], hive_partitioning <span class="op">=</span> <span class="kw">true</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Because the partition column is in the path, a filter on it lets DuckDB <strong>prune</strong> whole objects: a one-variable query over <code>obs_env</code> opens one file. Releases before v2026.09 have no <code>objects[]</code>; their partitioned tables are directories that plain HTTPS cannot glob, so they are read through an anonymous s3-style glob (<code>SET s3_endpoint = 'storage.googleapis.com'; SET s3_url_style = 'path';</code> then <code>read_parquet('s3://calcofi-db/…/obs/**/*.parquet', hive_partitioning = true)</code>) — the resolvers return that form for those versions automatically.</p>
 </section>
 <section id="from-your-browser" class="level2" data-number="2.6">
@@ -1466,46 +1496,52 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
 <li><a href="https://shell.duckdb.org"><strong>shell.duckdb.org</strong></a> — DuckDB’s own shell, for a one-off query.</li>
 </ul>
 <p>To embed DuckDB in your own page, the boilerplate is short: load the bundle, instantiate, resolve a table through the catalog:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="dt">&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> <span class="op">*</span> <span class="im">as</span> duckdb <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm"</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bundle <span class="op">=</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">selectBundle</span>(duckdb<span class="op">.</span><span class="fu">getJsDelivrBundles</span>())<span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> db     <span class="op">=</span> <span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">AsyncDuckDB</span>(<span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">ConsoleLogger</span>()<span class="op">,</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">createWorker</span>(bundle<span class="op">.</span><span class="at">mainWorker</span>))<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> db<span class="op">.</span><span class="fu">instantiate</span>(bundle<span class="op">.</span><span class="at">mainModule</span><span class="op">,</span> bundle<span class="op">.</span><span class="at">pthreadWorker</span>)<span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> conn <span class="op">=</span> <span class="cf">await</span> db<span class="op">.</span><span class="fu">connect</span>()<span class="op">;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="st">"INSTALL httpfs; LOAD httpfs;"</span>)<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> <span class="bu">root</span>    <span class="op">=</span> <span class="st">"https://storage.googleapis.com/calcofi-db"</span><span class="op">;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> version <span class="op">=</span> (<span class="cf">await</span> (<span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/ducklake/releases/latest.txt`</span>))<span class="op">.</span><span class="fu">text</span>())<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> catalog <span class="op">=</span> <span class="cf">await</span> (<span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/ducklake/releases/</span><span class="sc">${</span>version<span class="sc">}</span><span class="vs">/catalog.json`</span>))<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// a table's objects → a read_parquet() fragment. A partitioned table is a list (hive_partitioning);</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// if it also publishes a whole-table twin (the object WITHOUT partition_by), a browser reads the</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// twin instead of the list — never both, which would count every row twice.</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> readParquet <span class="op">=</span> (name) <span class="kw">=&gt;</span> {</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> t    <span class="op">=</span> catalog<span class="op">.</span><span class="at">tables</span><span class="op">.</span><span class="fu">find</span>(t <span class="kw">=&gt;</span> t<span class="op">.</span><span class="at">name</span> <span class="op">===</span> name)<span class="op">;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> twin <span class="op">=</span> t<span class="op">.</span><span class="at">partitioned</span> <span class="op">?</span> t<span class="op">.</span><span class="at">objects</span><span class="op">.</span><span class="fu">find</span>(o <span class="kw">=&gt;</span> <span class="op">!</span>o<span class="op">.</span><span class="at">partition_by</span>) <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (twin) <span class="cf">return</span> <span class="vs">`read_parquet('</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>twin<span class="op">.</span><span class="at">path</span><span class="sc">}</span><span class="vs">')`</span><span class="op">;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> urls <span class="op">=</span> t<span class="op">.</span><span class="at">objects</span><span class="op">.</span><span class="fu">map</span>(o <span class="kw">=&gt;</span> <span class="vs">`'</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>o<span class="op">.</span><span class="at">path</span><span class="sc">}</span><span class="vs">'`</span>)<span class="op">.</span><span class="fu">join</span>(<span class="st">", "</span>)<span class="op">;</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`read_parquet([</span><span class="sc">${</span>urls<span class="sc">}</span><span class="vs">]</span><span class="sc">${</span>t<span class="op">.</span><span class="at">partitioned</span> <span class="op">?</span> <span class="st">", hive_partitioning = true"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="vs">`</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="vs">    SELECT scientific_name, common_name, worms_id FROM </span><span class="sc">${</span><span class="fu">readParquet</span>(<span class="st">"taxon"</span>)<span class="sc">}</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="vs">    WHERE common_name ILIKE '%sardine%'`</span>)<span class="op">;</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result<span class="op">.</span><span class="fu">toArray</span>())<span class="op">;</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="dt">&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> <span class="op">*</span> <span class="im">as</span> duckdb <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm"</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bundle <span class="op">=</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">selectBundle</span>(duckdb<span class="op">.</span><span class="fu">getJsDelivrBundles</span>())<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> db     <span class="op">=</span> <span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">AsyncDuckDB</span>(<span class="kw">new</span> duckdb<span class="op">.</span><span class="fu">ConsoleLogger</span>()<span class="op">,</span> <span class="cf">await</span> duckdb<span class="op">.</span><span class="fu">createWorker</span>(bundle<span class="op">.</span><span class="at">mainWorker</span>))<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> db<span class="op">.</span><span class="fu">instantiate</span>(bundle<span class="op">.</span><span class="at">mainModule</span><span class="op">,</span> bundle<span class="op">.</span><span class="at">pthreadWorker</span>)<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> conn <span class="op">=</span> <span class="cf">await</span> db<span class="op">.</span><span class="fu">connect</span>()<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="st">"INSTALL httpfs; LOAD httpfs;"</span>)<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> <span class="bu">root</span>    <span class="op">=</span> <span class="st">"https://storage.googleapis.com/calcofi-db"</span><span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> version <span class="op">=</span> (<span class="cf">await</span> (<span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/ducklake/releases/latest.txt`</span>))<span class="op">.</span><span class="fu">text</span>())<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> catalog <span class="op">=</span> <span class="cf">await</span> (<span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/ducklake/releases/</span><span class="sc">${</span>version<span class="sc">}</span><span class="vs">/catalog.json`</span>))<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// a table's objects → a read_parquet() fragment. A partitioned table is a list (hive_partitioning);</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// if it also publishes a whole-table twin (the object WITHOUT partition_by), a browser reads the</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// twin instead of the list — never both, which would count every row twice.</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> readParquet <span class="op">=</span> (name) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> t    <span class="op">=</span> catalog<span class="op">.</span><span class="at">tables</span><span class="op">.</span><span class="fu">find</span>(t <span class="kw">=&gt;</span> t<span class="op">.</span><span class="at">name</span> <span class="op">===</span> name)<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> twin <span class="op">=</span> t<span class="op">.</span><span class="at">partitioned</span> <span class="op">?</span> t<span class="op">.</span><span class="at">objects</span><span class="op">.</span><span class="fu">find</span>(o <span class="kw">=&gt;</span> <span class="op">!</span>o<span class="op">.</span><span class="at">partition_by</span>) <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (twin) <span class="cf">return</span> <span class="vs">`read_parquet('</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>twin<span class="op">.</span><span class="at">path</span><span class="sc">}</span><span class="vs">')`</span><span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> urls <span class="op">=</span> t<span class="op">.</span><span class="at">objects</span><span class="op">.</span><span class="fu">map</span>(o <span class="kw">=&gt;</span> <span class="vs">`'</span><span class="sc">${</span><span class="bu">root</span><span class="sc">}</span><span class="vs">/</span><span class="sc">${</span>o<span class="op">.</span><span class="at">path</span><span class="sc">}</span><span class="vs">'`</span>)<span class="op">.</span><span class="fu">join</span>(<span class="st">", "</span>)<span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`read_parquet([</span><span class="sc">${</span>urls<span class="sc">}</span><span class="vs">]</span><span class="sc">${</span>t<span class="op">.</span><span class="at">partitioned</span> <span class="op">?</span> <span class="st">", hive_partitioning = true"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> conn<span class="op">.</span><span class="fu">query</span>(<span class="vs">`</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="vs">    SELECT scientific_name, common_name, worms_id FROM </span><span class="sc">${</span><span class="fu">readParquet</span>(<span class="st">"taxon"</span>)<span class="sc">}</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="vs">    WHERE common_name ILIKE '%sardine%'`</span>)<span class="op">;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result<span class="op">.</span><span class="fu">toArray</span>())<span class="op">;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="apply-the-quality-flags" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="apply-the-quality-flags"><span class="header-section-number">2.7</span> Apply the quality flags</h2>
 <p><code>measurement_qual</code> carries each dataset’s <strong>own</strong> flag vocabulary, uninterpreted — bottle (6 = OK but from CTD, 8 = suspect, 9 = missing), CTD cast files (1/2 = use the primary/secondary sensor, 8 = questionable, 9 = bad/missing), DIC WOCE (2 = good, 3 = questionable, 4 = bad, 9 = missing); the registry is <a href="https://github.com/CalCOFI/workflows/blob/main/metadata/measurement_qual.csv"><code>metadata/measurement_qual.csv</code></a>. A flagged value is still a row. <code>obs_bio</code> and <code>obs_env</code> carry the verdict as a column, <strong><code>qual_ok</code></strong>, and the packages expose the predicate it was computed with, so a filter reads the same in every language:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> qual_ok                          <span class="co">-- obs_bio, obs_env: the materialized verdict</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>calcofi4r<span class="sc">::</span><span class="fu">cc_qual_ok_sql</span>(<span class="st">"o"</span>)         <span class="co"># the predicate, for obs / obs_ctd_full / sample_measurement</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>calcofi4py.qual_ok_sql(<span class="st">"o"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> qual_ok                          <span class="co">-- obs_bio, obs_env: the materialized verdict</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>calcofi4r<span class="sc">::</span><span class="fu">cc_qual_ok_sql</span>(<span class="st">"o"</span>)         <span class="co"># the predicate, for obs / obs_ctd_full / sample_measurement</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>calcofi4py.qual_ok_sql(<span class="st">"o"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The predicate is NULL-safe — an unflagged row is kept — and every CalCOFI app applies it. A 2.18 ml/L oxygen spike at 1,144 m that had been flagged suspect since 1955 reached a plot in 2026 because no consumer did; that is why the column exists.</p>
 </section>
 <section id="matching-biology-to-environment" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="matching-biology-to-environment"><span class="header-section-number">2.8</span> Matching biology to environment</h2>
-<p>Relating a net tow’s catch to the water it was towed through is the question the database exists to answer, and <code>calcofi4r</code> answers it in one call: three wrappers match <strong>biological</strong> observations to <strong>environmental</strong> ones in time and space, on the fly, against the release.</p>
+<p>Relating a net tow’s catch to the water it was towed through is the question the database exists to answer, and <code>calcofi4r</code> answers it in one call: the three wrappers of <a href="#tbl-match" class="quarto-xref">Table&nbsp;<span>2.3</span></a> match <strong>biological</strong> observations to <strong>environmental</strong> ones in time and space, on the fly, against the release.</p>
+<div id="tbl-match" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-match-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.3: The three matching wrappers and the biological side each takes.
+</figcaption>
+<div aria-describedby="tbl-match-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1532,13 +1568,16 @@ Table&nbsp;2.1: The tables of v2026.09.06 as the catalog lays them out. A partit
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sardinops sagax"</span>, <span class="at">env_var =</span> <span class="st">"temperature"</span>, <span class="at">life_stage =</span> <span class="st">"larva"</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_min =</span> <span class="st">"2018-01-01"</span>, <span class="at">date_max =</span> <span class="st">"2018-03-31"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">relax_matching =</span> <span class="cn">TRUE</span>)                 <span class="co"># 5 km / 72 h instead of the default 2 km / 6 h</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">attr</span>(d, <span class="st">"sql"</span>))                      <span class="co"># the exact, portable SQL that produced it</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">attr</span>(d, <span class="st">"query_meta"</span>))               <span class="co"># release version, parameters, source URLs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cc_match_ichthyo_by_name</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sardinops sagax"</span>, <span class="at">env_var =</span> <span class="st">"temperature"</span>, <span class="at">life_stage =</span> <span class="st">"larva"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">date_min =</span> <span class="st">"2018-01-01"</span>, <span class="at">date_max =</span> <span class="st">"2018-03-31"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">relax_matching =</span> <span class="cn">TRUE</span>)                 <span class="co"># 5 km / 72 h instead of the default 2 km / 6 h</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">attr</span>(d, <span class="st">"sql"</span>))                      <span class="co"># the exact, portable SQL that produced it</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">attr</span>(d, <span class="st">"query_meta"</span>))               <span class="co"># release version, parameters, source URLs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Each returns one row per biological observation with the matched environmental value, and attaches the <strong>exact SQL</strong> that produced it: paste <code>attr(d, "sql")</code> into the DuckDB shell, Python or the query site and the same rows come back. <code>return_sql = TRUE</code> gives the SQL without running it. The wrappers are thin shells over <code>cc_match_bio_env(bio, env, …)</code>, which takes a biological and an environmental <code>SELECT</code> and performs the match — call it when the wrappers’ filters are not yours. Its knobs: <code>max_dist_km</code> and <code>max_time_hr</code> (2 km / 6 h; <code>relax_matching = TRUE</code> widens to 5 km / 72 h), <code>join_method</code> (<code>"nearest_time"</code>, <code>"nearest_dist"</code> or <code>"average"</code> over the window), <code>life_stage</code>, <code>date_min</code>/<code>date_max</code>, <code>depth_m_min</code>/<code>depth_m_max</code>, <code>version</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1558,7 +1597,7 @@ Note
 <h2 data-number="2.9" class="anchored" data-anchor-id="reproducible"><span class="header-section-number">2.9</span> Reproducible</h2>
 <p>Every query is plain SQL against immutable, versioned, public parquet, so a CalCOFI result is reproducible by anyone who has the version and the SQL. Pin a <strong>consolidated</strong> version (<a href="./releases.html">Releases</a>) — its bytes are kept indefinitely — and keep the SQL: what the matching helpers attach as <code>attr(d, "sql")</code>, what the Explorer copies beside every download, what the query site shows in its SQL panel and what a hand-written query is are one and the same thing, in R, Python, the shell and the browser.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1567,9 +1606,15 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The Plumber API at <code>api.calcofi.io</code> served pre-built match tables from a PostgreSQL database that no longer exists. Every endpoint has a replacement that reads the release directly:</p>
+<div id="tbl-retired" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-retired-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.4: What each retired <code>api.calcofi.io</code> endpoint became.
+</figcaption>
+<div aria-describedby="tbl-retired-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1612,7 +1657,10 @@ Note
 </tr>
 </tbody>
 </table>
-<p><a href="./api.html">Appendix A</a> keeps the old endpoint reference.</p>
+</div>
+</figure>
+</div>
+<p><a href="./api.html">Appendix A</a> keeps the old endpoint reference in full; <a href="#tbl-retired" class="quarto-xref">Table&nbsp;<span>2.4</span></a> is the short form.</p>
 </div>
 </div>
 </div>
