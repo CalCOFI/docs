@@ -46,6 +46,35 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- feedback (2026-09-08): the fleet's feedback dialog — calcofi.io/assets/feedback.{css,js}, the Explorer's
+     annotated-screenshot dialog ported to plain JS — with this book's own trigger: a speech-bubble sidebar
+     tool inserted just before quarto's theme toggle on DOMContentLoaded (feedback.js binds on DOM ready and
+     reads endpoint / repo / app from the button). The endpoint is the "CalCOFI app feedback" Apps Script the
+     Explorer and calcofi.io use (calcofi4r::cc_feedback_script()); app "docs" — the script maps an app to
+     the repo its public issue is filed in, and needs `docs = "CalCOFI/docs"` in its repos= for that step. -->
+<link rel="stylesheet" href="https://calcofi.io/assets/feedback.css">
+<script defer src="https://calcofi.io/assets/feedback.js"></script>
+<style>
+  /* the sidebar tool: quarto's tools are 1 rem bootstrap glyphs on the sidebar's text colour; the bubble is an
+     inline SVG at the same size, so it sits level with the share and toggle icons */
+  .cc-feedback.quarto-navigation-tool { display: inline-flex; align-items: center; vertical-align: middle; }
+  .cc-feedback.quarto-navigation-tool svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+  /* the dialog's buttons and inputs inherit bootstrap's font-size / line-height; hold them to the brand's */
+  dialog.fb { font-size: 16px; }
+  dialog.fb code { color: var(--fg); background: var(--panel); }   /* not bootstrap's pink */
+</style>
+<script>document.addEventListener("DOMContentLoaded", function () {
+  var toggle = document.querySelector(".quarto-color-scheme-toggle");
+  if (!toggle || document.querySelector(".cc-feedback")) return;
+  var a = document.createElement("a");
+  a.href = ""; a.className = "cc-feedback quarto-navigation-tool px-1"; a.title = "Send feedback — with a screenshot of this page"; a.setAttribute("aria-label", "Send feedback");
+  a.setAttribute("data-endpoint", "https://script.google.com/macros/s/AKfycby8SIv9aBTXGBqKpPxLGox6YV2ZvqXwxvpwFq7Z9uFWLS8ik38_bADnMKlOJ_JolcfI/exec");
+  a.setAttribute("data-repo", "CalCOFI/docs"); a.setAttribute("data-app", "docs");
+  a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M4,4V17.17L5.17,16H20V4H4M6,7H18V9H6V7M6,11H15V13H6V11Z"/></svg>';
+  toggle.parentNode.insertBefore(a, toggle);
+  if (window.ccFeedback) ccFeedback.mount();   // the fleet script may already have run its own ready hook
+});</script>
+
 <!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
      class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
 <link rel="stylesheet" href="libs/diagram.css">
