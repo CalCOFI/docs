@@ -1,10 +1,192 @@
 # Releases {#sec-releases}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+The integrated database is published as **frozen releases**: an immutable, versioned copy of every
+table, with a catalog that says exactly which bytes it holds and a DOI that names it. Nothing a
+consumer reads is ever edited in place. This chapter says what a release is, what ships with it,
+which versions are kept, and what is checked before one is cut.
 
-What a release is (a date, a catalog, its parquet objects, a DOI), what ships beside it, how objects are content-addressed and what `since` means, which versions are kept and how to pin one, the release notes as the database's changelog, and what a release checks before it ships.
-:::
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(dplyr, gt, here, jsonlite, purrr, readr, stringr, tibble, yaml, quiet = TRUE)
+`%||%` <- function(a, b) if (is.null(a)) b else a
+snap     <- jsonlite::fromJSON(here("data/_snapshot.json"))
+catalog  <- jsonlite::fromJSON(here("data/release/catalog.json"), simplifyVector = FALSE)
+versions <- jsonlite::fromJSON(here("data/release/versions.json"), simplifyVector = TRUE)$versions
+policy   <- yaml::read_yaml(here("data/registry/release_policy.yml"))
+tests    <- tryCatch(jsonlite::fromJSON(here("data/release/test_results.json")), error = function(e) NULL)
+rel_md   <- readLines(here("data/release/RELEASES.md"), warn = FALSE)
+fmt_n    <- function(x) format(x, big.mark = ",", scientific = FALSE)
+fmt_gb   <- function(b) sprintf("%.2f GB", b / 1e9)
+tabs <- purrr::map_dfr(catalog$tables, \(t) tibble::tibble(
+  table = t$name,
+  rows = as.numeric(t$rows %||% NA),
+  objects = length(t$objects %||% list()),
+  partition_by = purrr::map_chr(list(t$objects %||% list()), \(o) {
+    p <- unique(unlist(purrr::map(o, \(x) x$partition_by))); if (length(p)) paste(p, collapse = ",") else ""
+  }),
+  bytes = sum(purrr::map_dbl(t$objects %||% list(), \(o) as.numeric(o$bytes %||% 0))),
+  since = {
+    s <- unlist(purrr::map(t$objects %||% list(), \(o) o$since)); if (length(s)) max(s) else NA_character_
+  },
+  supplemental = isTRUE(t$supplemental), deprecated = isTRUE(t$deprecated)))
+```
+
+## A release in one line
+
+The promoted release is **`r catalog$version`**, cut `r catalog$release_date`: `r length(catalog$tables)`
+tables, `r fmt_n(catalog$total_rows)` rows, `r fmt_gb(catalog$total_size)` of parquet, DOI
+[`r catalog$doi`](https://doi.org/`r catalog$doi`). A version is a date (`vYYYY.MM.DD`), and a
+release is cut whenever the data or the schema change enough to matter — every few weeks, in
+practice. `latest.txt` on the bucket names the promoted one, and it is promoted only after the
+consumer-contract suite has passed against the frozen files.
+
+## What ships
+
+Everything lives under one public prefix, `gs://calcofi-db/ducklake/releases/{version}/`, read
+over HTTPS with no credentials:
+
+- **`catalog.json`** — the structural manifest and the data-access contract: the version, its
+  DOIs and citation, and for every table its rows, its `content_hash` and its `objects[]` — one
+  parquet object for a single-file table, one per partition for a partitioned one — each with a
+  bucket-relative `path`, `bytes`, `sha256` and `since`. Resolve a table through it
+  (`calcofi4r::cc_release_sources()`, `calcofi4py.release_sources()`); never build a path by hand.
+- **the parquet objects**, content-addressed under `gs://calcofi-db/ducklake/tables/{table}/…`:
+  immutable and shared between versions, so `since` on an object is the first release that shipped
+  those exact bytes — the per-table changelog. A release's own `parquet/` copy exists only for the
+  promoted version, its predecessor and the consolidated milestones (below).
+- **the sidecars**: `metadata.json` (every table and column, with units and descriptions),
+  `relationships.json` (every key, [Keys and integrity](keys.qmd)), `integrity.json` (the keys
+  measured), `datasets.json` (one record per dataset — the record every portal reads), `eml/`
+  (one EML document per dataset), `coverage.json` and `coverage_stations.json` (what the Explorer
+  paints first), `grid.geojson`, `spatial.geojson`, `spatial_layers.json`, a static `stac/`
+  catalog, `erd.mmd`, `test_results.json`, and `RELEASE_NOTES.md`.
+
+```{r}
+#| label: tbl-objects
+#| tbl-cap: !expr paste0("The tables of ", catalog$version, " as the catalog describes them — objects, partitioning, size, and the release whose bytes each table last changed in.")
+tabs |>
+  dplyr::mutate(tier = dplyr::case_when(deprecated ~ "deprecated", supplemental ~ "supplemental", TRUE ~ "core")) |>
+  dplyr::arrange(tier, table) |>
+  dplyr::select(table, tier, rows, objects, `partitioned by` = partition_by, bytes, `last changed` = since) |>
+  gt() |>
+  fmt_integer(columns = c(rows, objects)) |>
+  fmt_bytes(columns = bytes, standard = "decimal", decimals = 1) |>
+  sub_missing(missing_text = "") |>
+  tab_style(style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = c(table, `partitioned by`))) |>
+  tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+```
+
+## Versions, and which are kept
+
+Every version keeps its sidecars forever, so any release can still be browsed. Its parquet copy is
+kept for the promoted version, the one before it, and the **consolidated** milestones — versions a
+paper, a docs example or an app pins; the rest is thinned, and a thinned version's `retired`
+marker names the consolidated one to read instead (`metadata/release_policy.yml` in
+`CalCOFI/workflows` decides; `scripts/thin_releases.R` applies it). The content-addressed store
+means a kept object is stored once however many versions share it.
+
+```{r}
+#| label: tbl-versions
+#| tbl-cap: Every release, newest first, from `versions.json`.
+# `retired` is a nested data frame column when any version carries it (jsonlite simplifies it)
+ret_to <- if (!is.null(versions$retired)) versions$retired$to else rep(NA_character_, nrow(versions))
+vv <- tibble::tibble(
+  version = versions$version, date = versions$release_date, tables = versions$tables,
+  rows = versions$total_rows, `size (MB)` = versions$size_mb,
+  DOI = if (!is.null(versions$doi)) versions$doi else NA_character_,
+  kept = dplyr::case_when(
+    dplyr::coalesce(versions$consolidated, FALSE) ~ "consolidated",
+    !is.na(ret_to) ~ paste0("retired → ", ret_to),
+    TRUE ~ "current")) |>
+  dplyr::arrange(dplyr::desc(version))
+consolidated_str <- paste0("`", unlist(policy$consolidated), "`", collapse = ", ")
+vv |>
+  gt() |>
+  fmt_integer(columns = c(tables, rows)) |>
+  fmt_number(columns = `size (MB)`, decimals = 0) |>
+  sub_missing(missing_text = "") |>
+  tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+```
+
+Consolidated today: `r consolidated_str`.
+
+To pin a version rather than follow the promoted one:
+
+```r
+calcofi4r::cc_get_db(version = "v2026.08.25")          # R
+```
+
+```python
+calcofi4py.cc_get_db(version="v2026.08.25")             # Python
+```
+
+```r
+# any DuckDB, from any language: resolve a table's objects through the catalog and paste the
+# read_parquet() fragment it hands back — never a typed releases/{v}/parquet path
+calcofi4r::cc_read_parquet_sql(calcofi4r::cc_release_sources(calcofi4r::cc_catalog("v2026.08.25"), "sample"))
+```
+
+## Two DOIs
+
+Each release is tagged on GitHub, and Zenodo mints a **version DOI** for it; one **concept DOI**
+always resolves to the newest. Cite the version DOI in a paper — it names exactly the bytes you
+used — and the concept DOI where a living pointer is wanted. Both are in `catalog.json`, in the
+release notes' *How to cite*, and on [Cite this data](cite.qmd):
+
+- this release: <https://doi.org/`r catalog$doi`>
+- every release: <https://doi.org/`r catalog$concept_doi`>
+
+## The changelog
+
+`RELEASES.md` is the database's NEWS file: one section per release, newest first, saying what
+changed and why, with a **Consumers:** line wherever a change could break a reader, and an
+`# Unreleased` section collecting changes until the next cut. Each version's `RELEASE_NOTES.md`
+is its section plus a generated appendix (tables and rows, datasets, the consumer-contract result,
+package versions). A release with no section for itself is refused before the freeze — the notes
+are written by the change that made them necessary, never reconstructed afterwards.
+
+```{r}
+#| label: releases-headings
+#| echo: false
+#| results: asis
+heads <- rel_md[grepl("^# ", rel_md)]
+heads <- heads[!grepl("release notes$", heads, ignore.case = TRUE)]
+cat("The most recent sections of [`RELEASES.md`](https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md):\n\n")
+for (h in head(heads, 6)) cat("- ", sub("^# ", "", h), "\n", sep = "")
+```
+
+## What a release checks before it ships {#sec-release-gates}
+
+`release_database.qmd` assembles every ingest's parquet shards in memory, builds the release-only
+tables, and runs a series of gates before the freeze. Each is a function in `calcofi4db` with a
+test of its own, and the notebook's rendered page shows every result. The ones that stop a release
+outright:
+
+{{< include _gates.qmd >}}
+
+And the ones that report and ratchet — a number that may only ever go down between releases, so a
+regression fails but a known backlog does not:
+
+| gate | what it measures |
+|---|---|
+| `check_depth_bounds()` / `check_depth_vs_seafloor()` | no depth is NaN, negative or beyond 6,500 m (fails); each root sample's deepest depth against the GEBCO seafloor near its position (ratchet — the place is imprecise, not the measurement) |
+| `check_measurement_bounds()` | every measurement type has declared physical bounds and no value lies outside them (out of range fails; undeclared types ratchet) |
+| `check_taxon_ids()` | every taxon key is an accepted WoRMS or ITIS id, or on an explicit allowlist of dataset-local classes (fails) |
+| `check_dataset_citation()` | every dataset's citation has a year and a locator, its licence is a registered id, its DOI resolves (fails unless a provider question is open on the field) |
+| `check_dataset_catalog()` / `check_eml_catalog()` | the record and each EML document validate against their schemas (fails) |
+| `observed_coverage()` | each dataset's temporal and spatial extent, measured from the data — never typed (report) |
+
+```{r}
+#| label: contract-result
+#| echo: false
+#| results: asis
+if (!is.null(tests)) cat(sprintf(
+  "For %s the consumer-contract suite ran %d queries: **%d passed**, %d failed, %d skipped (`test_results.json`).\n",
+  tests$release_version, tests$n_pass + tests$n_fail + tests$n_skip, tests$n_pass, tests$n_fail, tests$n_skip))
+```
+
+A release that passes is uploaded, tested once more from the bucket by `test_release.qmd`, and
+only then promoted; the read-only consumers (the Explorer, ERDDAP, the apps) are refreshed
+afterwards. A **staging** run exercises the whole path under a separate prefix without touching
+the promoted release or the shared object store.

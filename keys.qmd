@@ -1,10 +1,256 @@
 # Keys and integrity {#sec-keys}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+A database is only as trustworthy as its joins. This chapter states how the integrated database's
+tables are keyed, what each key promises, and — because a promise is worth little unstated — what
+the release actually measures before it ships. Every table below is generated from the promoted
+release's own sidecars, so the page and the database cannot disagree.
 
-The rules — which suffix means which kind of key, the four keys that carry the integration, why the release's keys are natural strings and the provider's UUIDs are kept as columns beside them — then the contract per table (primary key, foreign keys in and out, what may be NULL), and the measured result: for every release, whether every primary key is unique and every foreign key resolves, from the `integrity.json` sidecar the release writes.
-:::
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(dplyr, gt, here, jsonlite, purrr, readr, tibble, tidyr, quiet = TRUE)
+`%||%` <- function(a, b) if (is.null(a)) b else a
+snap    <- jsonlite::fromJSON(here("data/_snapshot.json"))
+catalog <- jsonlite::fromJSON(here("data/release/catalog.json"), simplifyVector = FALSE)
+rels    <- jsonlite::fromJSON(here("data/release/relationships.json"), simplifyVector = FALSE)
+integ_path <- here("data/release/integrity.json")
+integ   <- if (file.exists(integ_path)) jsonlite::fromJSON(integ_path, simplifyVector = TRUE) else NULL
+tests   <- tryCatch(jsonlite::fromJSON(here("data/release/test_results.json")), error = function(e) NULL)
+
+tabs <- purrr::map_dfr(catalog$tables, \(t) tibble::tibble(
+  table = t$name, rows = as.numeric(t$rows %||% NA),
+  supplemental = isTRUE(t$supplemental), deprecated = isTRUE(t$deprecated)))
+pk <- tibble::tibble(
+  table = names(rels$primary_keys),
+  pk    = purrr::map_chr(rels$primary_keys, \(x) paste(unlist(x), collapse = ", ")))
+fk <- purrr::map_dfr(rels$foreign_keys, \(f) tibble::tibble(
+  table = f$table, column = f$column, ref_table = f$ref_table, ref_column = f$ref_column))
+```
+
+## The rules
+
+**The suffix says what kind of value a column holds**, and this is checked in review, because a
+character-valued identifier named `*_id` is a promise the data cannot keep:
+
+| suffix | value | examples |
+|---|---|---|
+| `*_key` | a **string** natural key — meaningful, stable, human-readable | `cruise_key`, `site_key`, `grid_key`, `sample_key`, `taxon_key`, `dataset_key`, `ship_key` |
+| `*_id` | an **integer** key — a source counter or a surrogate the release mints | `cast_id`, `bottle_id`, `obs_id`, `root_id` |
+| `*_uuid` | the **provider's own** identifier for that record, as they mint it ([RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)) | `cruise_uuid`, `source_uuid`, `station_uuid` |
+| `*_seq` | an auto-incrementing sequence integer | — |
+
+(`hex_id` is the one integer that is neither a counter nor a surrogate: an H3 cell index at
+resolution 10, so coarser hexagons are `h3_cell_to_parent(hex_id, res)` rather than a column per
+resolution.)
+
+**Natural keys carry the integration.** Four of them are worth stating exactly, because every
+dataset joins to the others through them:
+
+- **`cruise_key` = `YYYY-MM-NODC`** (`1998-02-33JD`): the month SWFSC *designates* for the cruise
+  and the ship's NODC code — never the month a cast or tow happened to fall in. A cruise routinely
+  straddles a calendar boundary (5508BD ran 7 Aug – 25 Sep 1955) and the neighbouring month is
+  usually a real cruise of the same ship, so keying by event month silently moved casts onto the
+  wrong cruise with no foreign key ever failing. Events are keyed by containment in the reference
+  cruise's observed date span first, then by the source's own designation, then by event month as a
+  last resort, and which rule fired is recorded (`cruise_key_method`). The `cruise` reference itself
+  is completed at release: one row per key an event names that SWFSC's export has no station row
+  for (`cruise_key_method = 'derived'`), which is why `cruise` holds more rows than SWFSC's list.
+- **`sample_key` = `{dataset_key}:{sample_type}:{id}`** (`calcofi_bottle:cast:7644`): globally
+  unique across datasets *and* across event levels, so a site, a tow, a net, a cast and a bottle
+  share one table without collision. The hierarchy is an adjacency list — `parent_sample_key` points
+  at the containing event, `root_sample_key` at the top of the chain — so counting distinct events at
+  any level is one `GROUP BY`.
+- **`site_key`** is the CalCOFI station as `"line station"` (`"090.0 062.0"`); **`grid_key`** is the
+  shared grid cell; **`dataset_key` = `{provider}_{dataset}`** is the provenance stamp on every
+  observation.
+- **`taxon_key`** is a lowercase authority prefix plus that authority's *accepted* id —
+  `worms:<AphiaID>`, or `itis:<TSN>` for birds, whose WoRMS taxonomy lags (see
+  [The database](db.qmd#taxonomy)).
+
+**The release mints one sequential integer**, `root_id` on `sample_root`: a dense integer for each
+root sampling event (a `sample` row with no parent), numbered deterministically so a rebuild
+reproduces it, and carried on `obs_bio` and `obs_env` so a browser can join observations to their
+event without the string key.
+
+### Why not UUID primary keys?
+
+NOAA's own CalCOFI database keys cruises, stations and nets by UUID, and its curator has argued —
+from experience — that a compound natural key is a liability: when a ship is swapped or a date
+corrected, the key and the fields it was built from can disagree, and nothing stops a partial
+correction. The argument is right for a database that is *edited*. This one is not: a release is
+read-only, its keys are minted from the corrected fields at the freeze
+(`create_cruise_key()` refuses a blank or malformed NODC code outright), and the gate below fails
+the release if a key disagrees with its parts. What a natural key buys in return is legibility —
+`2019-07-39C2` says which cruise it is; a UUID says nothing until joined — and stability across the
+fifteen datasets whose sources mint no UUID at all.
+
+**The provider's identifiers are released as typed columns beside the keys**, never dropped: they
+are the join back to the provider's own database.
+
+- `cruise.cruise_uuid` is NOAA/SWFSC's `CruiseId`, populated for every SWFSC cruise — a public join
+  key to NOAA's CalCOFI database.
+- `sample.source_uuid` is the provider's identifier for *that event*, exactly as shipped (SWFSC's
+  `site_uuid` on a site row, `tow_uuid` on a tow, `net_uuid` on a net), and NULL for the datasets
+  whose sources mint none.
+- `sample.station_uuid` is the SWFSC station occupation any event belongs to, resolved at release,
+  with `station_uuid_method` saying how (its own site, its parent's, a match on cruise + station +
+  occupation order, or the one ichthyoplankton occupation within 24 hours).
+
+Wrangling-time provenance (`_source_file`, `_source_row`, …) is a different thing and is stripped
+at the freeze.
+
+![The core family and the references it joins to, with the keys that carry the integration. Every other released table hangs off one of these; the full diagram for any release is in the [schema browser](https://calcofi.io/db-schema/#erd).](diagrams/core_erd.svg){#fig-core-erd .cc-diagram .nolightbox}
+
+## The contract, per table
+
+Every released table declares a primary key, and every foreign key between released tables is
+declared in the release's `relationships.json` (`calcofi4db::core_relationships()` for the core
+family and the tables the release builds; `metadata/relationships_cross.csv` for the edges that
+cross datasets). The table reads that file for `r snap$version`.
+
+```{r}
+#| label: tbl-contract
+#| tbl-cap: !expr paste0("Keys declared for every table of ", snap$version, ". A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.")
+out <- fk |>
+  dplyr::group_by(table) |>
+  dplyr::summarise(fks = paste0(column, " → ", ref_table, collapse = "; "), .groups = "drop")
+inn <- fk |>
+  dplyr::filter(table != ref_table) |>
+  dplyr::distinct(ref_table, table) |>
+  dplyr::count(ref_table, name = "referenced_by")
+contract <- tabs |>
+  dplyr::left_join(pk, by = "table") |>
+  dplyr::left_join(out, by = "table") |>
+  dplyr::left_join(inn, by = c("table" = "ref_table")) |>
+  dplyr::mutate(
+    tier = dplyr::case_when(deprecated ~ "deprecated", supplemental ~ "supplemental", TRUE ~ "core"),
+    referenced_by = tidyr::replace_na(referenced_by, 0L)) |>
+  dplyr::arrange(tier, table) |>
+  dplyr::select(table, tier, rows, `primary key` = pk, `foreign keys` = fks, `referenced by` = referenced_by)
+contract |>
+  gt() |>
+  fmt_integer(columns = rows) |>
+  sub_missing(missing_text = "") |>
+  tab_style(style = cell_text(font = "monospace", size = "0.85em"),
+            locations = cells_body(columns = c(table, `primary key`, `foreign keys`))) |>
+  tab_options(table.width = pct(100), data_row.padding = px(4), table.font.size = "0.88em")
+```
+
+## Measured, this release
+
+Declaring a key is cheap. Since 2026-09-08 the release *measures* every declaration on the
+assembled tables before it freezes — `calcofi4db::check_release_relationships()` — and writes the
+result beside `catalog.json` as `integrity.json`. A duplicate or NULL primary key, or any non-NULL
+foreign key with no match, **stops the release**. The schema browser reads the same file, so a ✓
+on a key there means measured, not declared.
+
+```{r}
+#| label: integrity-summary
+#| echo: false
+#| results: asis
+if (is.null(integ)) {
+  cat("> The promoted release predates `integrity.json`; the tables below appear once a release carries it.\n")
+} else {
+  cat(sprintf(
+    "For **%s**: %d primary keys and %d foreign keys measured, %d skipped, **%s**.\n",
+    integ$version %||% snap$version, integ$n_primary_keys, integ$n_foreign_keys, integ$n_skipped,
+    if (isTRUE(integ$ok)) "every key ok" else "at least one key failing"))
+}
+```
+
+```{r}
+#| label: tbl-pk
+#| tbl-cap: Primary keys, measured — rows, distinct key values, duplicates, and rows with a NULL anywhere in the key.
+#| eval: !expr length(integ) > 0
+as_tibble(integ$primary_keys) |>
+  dplyr::arrange(status, table) |>
+  dplyr::select(table, key = columns, rows = n_rows, distinct = n_distinct, duplicates = n_dup, `NULL` = n_null, status) |>
+  gt() |>
+  fmt_integer(columns = c(rows, distinct, duplicates, `NULL`)) |>
+  tab_style(style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = c(table, key))) |>
+  tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+```
+
+```{r}
+#| label: tbl-fk
+#| tbl-cap: Foreign keys, measured — rows, rows whose key is NULL (permitted), and orphans (a non-NULL value with no match; any orphan fails the release).
+#| eval: !expr length(integ) > 0
+as_tibble(integ$foreign_keys) |>
+  dplyr::mutate(edge = paste0(table, ".", column, " → ", ref_table, ".", ref_column)) |>
+  dplyr::arrange(status, table, column) |>
+  dplyr::select(edge, rows = n_rows, `NULL` = n_null, orphans = n_orphan, status) |>
+  gt() |>
+  fmt_integer(columns = c(rows, `NULL`, orphans)) |>
+  tab_style(style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = edge)) |>
+  tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+```
+
+Two things the tables do not show, on purpose:
+
+- **A NULL is not an orphan.** Where a column is NULL the row has nothing to point at — an
+  environmental observation has no taxon, a region-pooled sample has no grid cell, a root sample
+  has no parent. The counts are shown so a reader can see how nullable an edge is; they are not
+  failures.
+- **One edge is knowingly undeclared.** `obs_mets_full.sample_key` would point at `sample`, but the
+  full-resolution meteorology mints one key per underway record and only the headline series' events
+  reach `sample`: 73,607 of its 2,168,850 distinct keys resolve. Declaring the edge would fail every
+  release on some nineteen million orphans; leaving it silent would hide a real gap. It is recorded
+  in the release notes and as
+  [CalCOFI/workflows#78](https://github.com/CalCOFI/workflows/issues/78) until the supplemental's
+  events either join `sample` or carry a documented per-record key.
+
+## What the release checks before it ships
+
+Keys are one family of gate. The full list — what each checks, and whether it fails the release or
+only ratchets — is on the [Releases](releases.qmd#sec-release-gates) page; the ones that concern
+keys are:
+
+{{< include _gates.qmd >}}
+
+## Walking the keys
+
+The joins worth memorising, as SQL against any release (see [Access the data](data-access.qmd)
+for the connection):
+
+```sql
+-- an observation to its sampling event, and up the hierarchy
+obs_bio.sample_key          -> sample.sample_key
+sample.parent_sample_key    -> sample.sample_key      -- the containing event
+sample.root_sample_key      -> sample.sample_key      -- the top of the chain
+
+-- the dense integer twin the browser objects use instead of the string key
+obs_bio.root_id             -> sample_root.root_id
+sample_spatial.root_id      -> sample_root.root_id    -- which polygons a root sample falls in
+
+-- provenance and place, denormalized onto the observation so a rollup needs no join
+obs_env.dataset_key         -> dataset.dataset_key
+obs_env.cruise_key          -> cruise.cruise_key
+obs_env.grid_key            -> grid.grid_key
+
+-- what was measured, and of what
+obs_env.measurement_type    -> measurement_type.measurement_type
+obs_bio.taxon_key           -> taxon.taxon_key
+(dataset_key, ds_taxa_code) -> dataset_taxon          -- the per-dataset vocabulary
+
+-- back to the provider
+cruise.cruise_uuid                                    -- NOAA's CruiseId
+sample.source_uuid                                    -- the provider's own event id
+sample.station_uuid         -> sample.source_uuid     -- the SWFSC station occupation
+```
+
+A worked example: every net tow in a cruise with the number of larvae observations under it,
+walking `sample`'s adjacency list once.
+
+```sql
+WITH tows AS (
+  SELECT sample_key, root_sample_key, datetime
+  FROM sample
+  WHERE dataset_key = 'swfsc_ichthyo' AND sample_type = 'tow' AND cruise_key = '2019-07-39C2'
+)
+SELECT t.sample_key, t.datetime, count(o.obs_id) AS n_larvae_obs
+FROM tows t
+LEFT JOIN sample n ON n.parent_sample_key = t.sample_key          -- the nets under each tow
+LEFT JOIN obs_bio o ON o.sample_key = n.sample_key AND o.life_stage = 'larva'
+GROUP BY 1, 2
+ORDER BY 2;
+```

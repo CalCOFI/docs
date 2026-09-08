@@ -4,6 +4,11 @@ project:
   resources:
   - "/.nojekyll"
   - "match/"   # standalone DuckDB-WASM Match app (see chapters: data-access, api)
+  # the diagram viewer (libs/diagram.js): every .cc-diagram figure becomes an inline SVG
+  # with pan, zoom and fullscreen; the pdf keeps the static image
+  - "libs/diagram.js"
+  - "libs/diagram.css"
+  - "libs/svg-pan-zoom.min.js"
   # the one place the network is touched at render time: snapshots the promoted
   # release's sidecars, the workflows registries and the product cards under data/
   pre-render:
@@ -100,7 +105,6 @@ book:
         - architecture.qmd
         - status.qmd
   appendices:
-    - helpers.qmd
     - api.qmd
     - glossary.qmd
     - refs.qmd

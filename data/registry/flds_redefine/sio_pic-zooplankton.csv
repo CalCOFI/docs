@@ -1,0 +1,21 @@
+tbl_old,tbl_new,fld_old,fld_new,type_old,type_new,order_old,order_new,fld_description,units,notes,mutation
+SIOPIC_DB_PNTtable,zooplankton_tow,EXPEDITION_pnt,expedition,character,VARCHAR,1,2,Expedition name.,,cruise_key derived from this + ship + date,
+SIOPIC_DB_PNTtable,zooplankton_tow,EXPED_CODE_pnt,expedition_code,character,VARCHAR,2,3,Expedition code.,,25.6% null,
+SIOPIC_DB_PNTtable,zooplankton_tow,Expedition_Type_pnt,expedition_type,character,VARCHAR,3,4,Expedition type.,,,
+SIOPIC_DB_PNTtable,zooplankton_tow,SHIP_pnt,ship_name,character,VARCHAR,4,5,Name of ship used to collect the net-tow sample; resolved to ship_key.,,,
+SIOPIC_DB_PNTtable,zooplankton_tow,SWFOrder_Occ,order_occ,numeric,SMALLINT,5,6,SWFSC order occupied (populated for CalCOFI cruises).,,99% null (CalCOFI cruises only),
+SIOPIC_DB_PNTtable,zooplankton_tow,STATION_LINE_pnt,line,character,DOUBLE,6,7,CalCOFI alongshore line (or Haul/Cycle for non-CalCOFI programs).,,cast to numeric where CalCOFI,TRY_CAST(STATION_LINE_pnt AS DOUBLE)
+SIOPIC_DB_PNTtable,zooplankton_tow,STATION_NUMBER_pnt,station,character,DOUBLE,7,8,CalCOFI offshore station (or Station/Net number for non-CalCOFI).,,cast to numeric where CalCOFI,TRY_CAST(STATION_NUMBER_pnt AS DOUBLE)
+SIOPIC_DB_PNTtable,zooplankton_tow,LAT_DECIMAL_pnt,latitude,numeric,DOUBLE,8,9,"Latitude in decimal degrees, WGS84 (EPSG:4326).",decimal_degrees,,
+SIOPIC_DB_PNTtable,zooplankton_tow,LONG_DECIMAL_pnt,longitude,numeric,DOUBLE,9,10,"Longitude in decimal degrees, WGS84 (EPSG:4326).",decimal_degrees,some |lon|>180 dropped by CalCOFI bbox filter (Q04),
+SIOPIC_DB_PNTtable,zooplankton_tow,SAMPLE_DATE_pnt,date,character,DATE,10,11,Date the net-tow sample was collected.,,source MM/DD/YYYY,
+SIOPIC_DB_PNTtable,zooplankton_tow,START_TIME_pnt,datetime_start_utc,character,TIMESTAMP,11,12,Tow start date-time; canonical event timestamp.,,"source HHMM local time (tz unconfirmed, Q03)",
+SIOPIC_DB_PNTtable,zooplankton_tow,END_TIME_pnt,datetime_end_utc,character,TIMESTAMP,12,13,Tow end date-time.,,source HHMM local time (Q03),
+SIOPIC_DB_PNTtable,zooplankton_tow,DEPTH_MIN_pnt,depth_min_m,numeric,DOUBLE,13,14,Minimum depth the net reached.,m,67% null,
+SIOPIC_DB_PNTtable,zooplankton_tow,DEPTH_MAX_pnt,depth_max_m,numeric,DOUBLE,14,15,Maximum depth the net reached.,m,,
+SIOPIC_DB_PNTtable,zooplankton_tow,MAX_MWO_pnt,max_wire_out_m,numeric,DOUBLE,15,16,Maximum meters of wire out for the net tow.,m,74% null,
+SIOPIC_DB_PNTtable,zooplankton_tow,NET_TYPE_pnt,net_type,character,VARCHAR,16,17,"Type of net used (e.g. CalBOBL, Cal1Mobl, Pairovet, Calvet, Manta, Neuston).",,114 distinct; lookup pending (Q06),
+SIOPIC_DB_PNTtable,zooplankton_tow,MESH_SIZE_pnt,mesh_size_mm,numeric,DOUBLE,17,18,Mesh size of the net.,mm,,
+SIOPIC_DB_PNTtable,zooplankton_tow,TOW_TYPE_pnt,tow_type,character,VARCHAR,18,19,"How the net was towed (e.g. Oblique, Horizontal, Vertical).",,,
+SIOPIC_DB_PNTtable,zooplankton_tow,FIXATIVE_pnt,fixative,character,VARCHAR,19,20,Fixative used on the sample.,,,
+SIOPIC_DB_PNTtable,zooplankton_tow,PRESERVATIVE_pnt,preservative,character,VARCHAR,20,21,Preservative used on the sample.,,,

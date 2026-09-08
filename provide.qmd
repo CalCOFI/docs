@@ -1,10 +1,120 @@
 # Providing data to CalCOFI {#sec-provide}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
-
-The guide for a data provider, current or future: who it is for and what it is for; the fields that are mandatory (what, when, where), optional and best practice — a stable identifier per row, a UUID if you already run a database, a license, a citation, a contact; an example table with its columns; and what happens next once a dataset arrives.
+::: {.callout-note appearance="simple" icon=false}
+**Who this is for.** Anyone who collects, curates or holds data from the CalCOFI region and would
+like it to be usable beside the rest — a program lab, a collaborating institution, a student
+project, an instrument group — whether the dataset already exists or is being designed.
+**What it is for.** To say, in one place, what a dataset needs to carry for the CalCOFI data team
+to integrate it: the few fields that are mandatory, the ones that make it more useful, and the
+practices that make it durable. It is *guidance for a provider*, not the database's own rulebook —
+that is [Naming conventions](naming.qmd) — and it asks for less than the database keeps.
 :::
+
+Drafted by Betty Huang with Erin Satterthwaite for the data management plan's naming-conventions
+task (Task 12), reconciled against the database's registries on 2026-09-08, and kept here as the
+record; the working copy stays a Google Doc until the guide is agreed.
+
+## The shape of a good dataset
+
+A dataset CalCOFI can integrate answers three questions for every row: **what** was measured or
+counted, **when** and **where**. Everything else is context that makes the answer more useful.
+One row is one measurement or one count of one thing at one place and time; a spreadsheet with
+one column per variable is fine (the ingest turns it long), as long as each row is one event.
+
+Names are not the hard part — the data team maps your columns onto the standard names at ingest
+and keeps a crosswalk of what you called them ([Naming conventions](naming.qmd#legacy-names-mapped)).
+What cannot be recovered afterwards is a missing time zone, an undocumented unit, a count with no
+effort, or a species with no name that resolves. Those are the mandatory fields.
+
+## Mandatory: what, when, where
+
+| field | what we need | example |
+|---|---|---|
+| **the quantity** | what was measured or counted, in words, with its **unit** — one column per quantity, or one `variable` / `value` / `unit` triple | `temperature` in `degC`; `larvae` as a count per tow |
+| **the time** | date and time of the event in **UTC** (ISO 8601, `2019-02-06T23:48:00Z`), or a local clock time *and* the offset that was in effect | `2019-02-06T23:48:00Z` |
+| **the place** | latitude and longitude in **decimal degrees**, WGS 84, signed (south and west negative) | `33.48066, -117.769` |
+| **the depth**, where it applies | metres below the surface, positive down; a range (`depth_min`, `depth_max`) for a tow or a bin | `115.5`; `0 – 210` |
+| **the organism**, for a biological count | a scientific name, and where you have it an identifier from WoRMS (`AphiaID`), ITIS or GBIF; a life stage if the count is stage-specific | `Sardinops sagax`, WoRMS `217452`, `larva` |
+| **the effort**, for a count | what the count is per: the volume filtered, the area or time surveyed, the fraction of the sample sorted | `467.3 m³`; `0.48` sorted |
+| **who made it** | the organization that holds and can license the data, a contact, and how you want it cited | `Scripps Institution of Oceanography` |
+
+## Optional: what makes it CalCOFI
+
+These let the data team join your rows to everything else, rather than only place them on a map.
+
+- **The cruise** — the cruise designation as your records carry it (`1902SR`, `CalCOFI 2019-02`,
+  a NOAA cruise id). The database keys every event to a cruise by its date span, so a designation
+  is a check, not a requirement.
+- **The station** — CalCOFI line and station where the event was on the grid (`93.3`, `26.4`), or
+  your own station name where it was not.
+- **The gear and the tow** — the net or instrument (a CalCOFI tow-type code such as `CB` for the
+  standard bongo, or a description), the tow number within the cruise, the net side.
+- **Quality flags** — your own vocabulary, as long as it is written down; the database keeps every
+  flag exactly as you assign it and never re-interprets it.
+- **Precision and method** — the significant digits of a measurement, the analytical method, the
+  processing stage (preliminary, final).
+
+## Best practice: what makes it durable
+
+- **A stable identifier for every row you might refer to again** — a cast number, a sample id, a
+  net id — that stays the same across the versions of your data. If you run a database, a UUID for
+  each cruise, station, tow or net is the best form of this, and the integrated database keeps it
+  as a column beside its own keys; it is never required. A dataset with no identifiers at all is
+  still ingestible: the database mints its own, from your rows.
+- **A licence** — the terms under which the data may be reused (`CC-BY-4.0` is the CalCOFI
+  default; `CC0`, a public-domain statement or your institution's terms are all fine as long as
+  they are stated). An unstated licence is the single most common reason a dataset cannot be
+  published onward.
+- **A citation and a DOI** — how you want to be credited; if your data already has a DOI (at EDI,
+  NCEI, Zenodo, a library repository), that is the citation the integrated database carries.
+- **A data dictionary** — one line per column: what it is, its unit, how a missing value is written
+  (`NA`, blank, `-99`; never a plausible number).
+- **Time zones and coordinate systems stated once**, at the top, even when they are the standard
+  ones.
+- **Versions, not edits** — when the data change, a new file with a date, not a corrected copy
+  under the same name.
+
+## An example
+
+A net-tow dataset that carries everything above, as one row per taxon per tow:
+
+| cruise | line | station | tow_number | tow_type | datetime_utc | latitude | longitude | depth_max_m | volume_sampled_m3 | prop_sorted | scientific_name | worms_id | life_stage | count | qual |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1902SR | 93.3 | 26.4 | 12 | CB | 2019-02-06T23:48:00Z | 33.48066 | -117.769 | 210 | 467.3 | 0.48 | Sardinops sagax | 217452 | larva | 42 | |
+
+The data team's ingest would map `cruise` to `cruise_key` (`2019-02-33P4` after resolving the
+ship), `line` and `station` to `site_key` (`093.3 026.4`), the tow to a `sample` row with `tow_type`
+`CB`, each count to an `obs_bio` row with `taxon_key` `worms:217452` and `life_stage` `larva`,
+`volume_sampled_m3` and `prop_sorted` to `sample_measurement`, and keep your `tow_number` beside
+them. Nothing in your file changes.
+
+## What happens next
+
+1. **Explore** — the data team profiles the file and seeds a list of questions from what it
+   cannot answer (a unit, a code, an ambiguous date).
+2. **You get one Sheet** — one tab of questions per dataset, most already carrying a *proposed*
+   answer for you to confirm, and a `metadata` tab for the abstract, methods, creators, licence and
+   citation ([Metadata & the ingest loop](metadata.qmd)).
+3. **Ingest and validate** — one reproducible notebook turns the file into the shared schema; every
+   finding is fixed or becomes a question.
+4. **Release** — the dataset joins the next frozen release with a DOI, gets its page at
+   `calcofi.io/datasets/{key}/`, its citation on every figure drawn from it, and — where you want it
+   — its way onward to ERDDAP, OBIS, EDI or the archives ([Portals](portals.qmd)).
+
+Write to **data@calcofi.io** to start.
+
+## Reconciled with the database
+
+The guide's first drafts and the database's registries disagreed on a handful of names. The
+registry is the record, so the guide follows it; each is noted here so nobody reintroduces the
+older form.
+
+| the draft said | the registry has | why |
+|---|---|---|
+| `ship_code` for the NODC code, `ship_key` for a two-letter CalCOFI code | **`ship_key` *is* the NODC code** (`31JD`); there is no `ship_code` | the four-character NODC code is the primary key of `ship` and the suffix of every `cruise_key` |
+| `depth` | **`depth_m`**, `depth_min_m`, `depth_max_m` | units are suffixes on every measured column |
+| `datetime_utc`, `datetime_local`, `utc_offset` | **`datetime_start_utc`** / `datetime_end_utc` in the dictionary; `datetime` on the released `sample` | an event has a span; local time is recoverable from UTC and the position, never the reverse |
+| larval stages as codes (`YOLK`, `PREF`, `FLEX`, `TRNS`, `POST`) | **`life_stage`** as words from the registry (`egg`, `larva`, …), with Darwin Core and NERC ids where exact | one vocabulary for every dataset; the ichthyoplankton stage codes map onto it at ingest |
+| `cruise_id` in the long form `1949-03-01-C-31CR` | an **alias** of `cruise_key` in the dictionary, not a field | legacy names are kept in the crosswalk, not in the schema |
+| `M2` as the MOCNESS 10 m frame | the registry names `M2` **MOCNESS (3 m²)** — to be checked against the source with SWFSC | the gear registry is the record; if the source says otherwise the registry changes, not the guide |
+| no `OBLIQUE` gear | **`OBLIQUE`** — an oblique tow whose gear was not recorded | the registry lists every code that appears in the data |

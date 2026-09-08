@@ -17,7 +17,7 @@ its strengths and limitations. The diagram below is the flow as it runs today: w
 observe (left) becomes one record per dataset at release, that record generates every surface a
 portal can read, and each portal or meta-portal is pointed at one of those static files.
 
-![Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW.](diagrams/catalog_flow.svg){#fig-portals-flow}
+![Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW.](diagrams/catalog_flow.svg){#fig-portals-flow .cc-diagram .nolightbox}
 
 In practice, CalCOFI is a partnership with various contributing members, so the authoritative
 dataset might flow differently, such as from EDI to the database to the other portals. The other
@@ -208,7 +208,7 @@ hand. The Darwin Core Archive OBIS publishing uses and an EDI data package both 
 same document, so a provider correction to a dataset's abstract or creators reaches every
 publisher at once.
 
-![Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.](diagrams/portals_metadata.svg){#fig-portals-metadata width=70%}
+![Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.](diagrams/portals_metadata.svg){#fig-portals-metadata .cc-diagram .nolightbox width=70%}
 
 The EML specification provides detailed structure for describing datasets, including:
 

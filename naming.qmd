@@ -1,10 +1,250 @@
 # Naming conventions {#sec-naming}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+These are the database's conventions: what a table, a column, a key, a measured quantity, a life
+stage, a gear code, a provider or a dataset is called, and why. They are **generated from the
+registries** in [CalCOFI/workflows](https://github.com/CalCOFI/workflows) `metadata/` — the same
+files the ingest notebooks conform to and the release is checked against — so this chapter is the
+convention as enforced, not as remembered. The companion for anyone *supplying* data is
+[Providing data to CalCOFI](provide.qmd), which says which of these a provider needs to care about.
 
-The database's conventions, generated from the registries in `CalCOFI/workflows` `metadata/`: tables and columns, identifiers, the field dictionary with its Darwin Core terms, the measurement types by category with units, bounds and NERC ids, life stages, gear, providers and licenses, dataset keys and names — and the mapping tables from each source's legacy names to the standard ones.
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(dplyr, gt, here, jsonlite, purrr, readr, stringr, tibble, tidyr, quiet = TRUE)
+reg <- function(f) readr::read_csv(here("data/registry", f), show_col_types = FALSE, na = "")
+snap  <- jsonlite::fromJSON(here("data/_snapshot.json"))
+fld   <- reg("field_dictionary.csv")
+mt    <- reg("measurement_type.csv")
+cat_  <- reg("category.csv")
+ls_   <- reg("life_stage.csv")
+gear  <- reg("gear.csv")
+prov  <- reg("provider.csv")
+lic   <- reg("license.csv")
+ds    <- readr::read_csv(here("data/release/dataset.csv"), show_col_types = FALSE)
+mono  <- function(g, cols) tab_style(g, style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = {{ cols }}))
+compact <- function(g) tab_options(g, table.width = pct(100), data_row.padding = px(3), table.font.size = "0.86em")
+```
+
+## The rules
+
+- **Tables are singular and lower case**: `cruise`, `sample`, `taxon` (not `cruises`).
+- **Columns are `snake_case`**, lower case with underscores, so nothing ever needs quoting in
+  SQL; a unit is a suffix where one applies (`depth_m`, `volume_sampled_m3`, `temperature_degc`).
+- **The suffix of an identifier says what it holds**: `*_key` a string natural key, `*_id` an
+  integer, `*_uuid` the provider's own identifier, `*_seq` a sequence. The four keys that carry the
+  integration — `cruise_key`, `sample_key`, `site_key` / `grid_key`, `taxon_key` — and what each
+  promises are in [Keys and integrity](keys.qmd).
+- **Every measured value is a row, not a column**: `measurement_type`, `value` (`measurement_value`
+  on the deprecated `obs`), `measurement_qual`, with the vocabulary of types registered once
+  (below), so a new quantity is a registry row, never a schema change.
+- **Text is UTF-8**; a geometry column is `geom`, tagged `EPSG:4326`; times are UTC (the
+  dictionary names an event's start and end, `datetime_start_utc` / `datetime_end_utc`; the released
+  `sample` carries the start as `datetime`); positions are decimal degrees, signed; depth is metres,
+  positive down.
+
+## Fields
+
+The field dictionary is **prescriptive**: a new dataset's columns are mapped onto these names at
+ingest, and the aliases record what each source called them. `dwc_term` is the Darwin Core term a
+field publishes as, filled only where one term means exactly this (`r sum(nzchar(fld$dwc_term))`
+of `r nrow(fld)` today).
+
+```{r}
+#| label: tbl-fields
+#| tbl-cap: The field dictionary (`metadata/field_dictionary.csv`).
+fld |>
+  dplyr::mutate(dwc = ifelse(nzchar(dwc_term), basename(dwc_term), "")) |>
+  dplyr::arrange(category, fld_new) |>
+  dplyr::select(field = fld_new, type = type_new, units, category, description = fld_description, aliases, dwc) |>
+  gt(groupname_col = "category") |>
+  sub_missing(missing_text = "") |>
+  mono(c(field, type, units, aliases, dwc)) |>
+  compact()
+```
+
+## Measured quantities
+
+`measurement_type.csv` is the vocabulary of everything measured, filed under the twelve
+categories every dataset and type belongs to. A type carries its units, the physical bounds a
+value must lie within (`valid_min` / `valid_max` — enforced per dataset at ingest, and a release
+fails on a value outside them), the depth range over which it is defined, how a *derived* type
+was produced, and — where one concept says exactly this — the NERC P01 concept and P06 unit a
+Darwin Core export emits. `is_canonical` marks the headline types the apps offer first.
+
+```{r}
+#| label: tbl-categories
+#| tbl-cap: The twelve categories (`metadata/category.csv`).
+cat_ |>
+  dplyr::arrange(order) |>
+  dplyr::mutate(types = purrr::map_int(category, \(k) sum(mt$category == k, na.rm = TRUE)),
+                datasets = purrr::map_int(category, \(k) sum(ds$category == k, na.rm = TRUE))) |>
+  dplyr::select(category, realm, description, `measurement types` = types, datasets) |>
+  gt() |> mono(category) |> compact()
+```
+
+```{r}
+#| label: tbl-measurement-types
+#| tbl-cap: !expr paste0("Every measurement type (", nrow(mt), "), by category. Bounds are physical limits, not observed ranges; a blank NERC column means no concept states exactly this, never that it was not looked at.")
+mt |>
+  dplyr::mutate(
+    canonical = ifelse(coalesce(as.logical(is_canonical), FALSE), "yes", ""),
+    bounds = dplyr::case_when(
+      !is.na(valid_min) & !is.na(valid_max) ~ paste0(valid_min, " – ", valid_max),
+      !is.na(valid_min) ~ paste0("≥ ", valid_min),
+      !is.na(valid_max) ~ paste0("≤ ", valid_max),
+      TRUE ~ ""),
+    p01 = ifelse(nzchar(coalesce(nerc_p01, "")), basename(nerc_p01), "")) |>
+  dplyr::arrange(category, dplyr::desc(canonical), measurement_type) |>
+  dplyr::select(category, `measurement type` = measurement_type, canonical, units, bounds, description, `P01` = p01) |>
+  gt(groupname_col = "category") |>
+  sub_missing(missing_text = "") |>
+  mono(c(`measurement type`, units, bounds, P01)) |>
+  compact()
+```
+
+## Life stages and gear
+
+Two more registries carry the values that appear on observations and events, each with the
+Darwin Core label and the NERC concept where one is exact. Two life-stage values are recorded as
+*not* life stages (euphausiid `damaged`, ichthyoplankton `invert`) and are never published as one.
+
+```{r}
+#| label: tbl-life-stages
+#| tbl-cap: Life stages (`metadata/life_stage.csv`).
+ls_ |>
+  dplyr::mutate(s11 = ifelse(nzchar(coalesce(nerc_s11, "")), basename(nerc_s11), "")) |>
+  dplyr::select(`life stage` = life_stage, `Darwin Core` = dwc_lifeStage, `NERC S11` = s11, parent = life_stage_parent, datasets, note) |>
+  gt() |> sub_missing(missing_text = "") |> mono(c(`life stage`, `NERC S11`, datasets)) |> compact()
+```
+
+```{r}
+#| label: tbl-gear
+#| tbl-cap: Gear (`metadata/gear.csv`) — every `sample.tow_type` code.
+gear |>
+  dplyr::mutate(l22 = ifelse(nzchar(coalesce(nerc_l22, "")), basename(nerc_l22), "")) |>
+  dplyr::select(code = tow_type, gear = gear_name, `sampling protocol` = dwc_samplingProtocol, `NERC L22` = l22, datasets) |>
+  gt() |> sub_missing(missing_text = "") |> mono(c(code, `NERC L22`, datasets)) |> compact()
+```
+
+## Providers, licences and dataset names
+
+**A provider is the organization that curates — holds and can license — the data**, never the
+portal that serves it and never a collection or lab inside it. CalCOFI program data is `calcofi`
+even when served from NCEI or EDI; the Pelagic Invertebrate Collection is a *dataset* of provider
+`sio`. Every provider an ingest names must be registered, or the build stops.
+
+```{r}
+#| label: tbl-providers
+#| tbl-cap: Providers (`metadata/provider.csv`).
+prov |>
+  dplyr::filter(coalesce(status, "active") != "deprecated") |>
+  dplyr::mutate(datasets = purrr::map_int(provider, \(k) sum(ds$provider == k))) |>
+  dplyr::select(provider, name = provider_name, url, status, datasets) |>
+  (\(tbl) if (knitr::is_html_output()) tbl |> gt() |> fmt_url(columns = url, label = "↗")
+          else tbl |> dplyr::select(-url) |> gt())() |>
+  sub_missing(missing_text = "") |> mono(provider) |> compact()
+```
+
+**A dataset's key is `{provider}_{dataset}`**, both slugs lower case with hyphens inside a slug
+(`cce-lter_zooscan`, `cdfw_dungeness-crab`). The key names everything about the dataset: its
+ingest notebook, its folder of metadata, its row in the provider's Sheet, its record in the
+release and its page at `calcofi.io/datasets/{key}/`. The human names — `dataset_name` and the
+short form the apps show — are declared once, in the ingest notebook's `calcofi:` block, and every
+surface reads them from there. This is the nomenclature the data management plan's Task 13 asks to
+be agreed; the table is the current state of it.
+
+```{r}
+#| label: tbl-datasets
+#| tbl-cap: !expr paste0("The datasets of ", snap$version, " — key, names, provider and category.")
+ds |>
+  dplyr::arrange(provider, dataset) |>
+  dplyr::select(dataset_key, `name` = dataset_name, `short name` = dataset_name_short, provider, category, license) |>
+  gt() |> sub_missing(missing_text = "") |> mono(c(dataset_key, provider, category, license)) |> compact()
+```
+
+```{r}
+#| label: tbl-licenses
+#| tbl-cap: Licence ids a dataset may declare (`metadata/license.csv`); `custom` needs a `license_url`.
+lic |>
+  dplyr::select(license, name, url, status, notes) |>
+  (\(tbl) if (knitr::is_html_output()) tbl |> gt() |> fmt_url(columns = url, label = "↗")
+          else tbl |> dplyr::select(-url) |> gt())() |>
+  sub_missing(missing_text = "") |> mono(license) |> compact()
+```
+
+## Legacy names, mapped
+
+Every dataset arrived with its own names, and every one of them is recorded: the dictionary's
+`aliases` column lists what each standard field was called in the sources, and each ingest keeps a
+crosswalk, `metadata/{provider}/{dataset}/flds_redefine.csv`, from every source column to its
+standard name and type. Nothing is renamed in a source file; the mapping is applied at ingest and
+kept so the provider's own names remain answerable.
+
+```{r}
+#| label: setup-crosswalk
+#| include: false
+xw_files <- list.files(here("data/registry/flds_redefine"), pattern = "\\.csv$", full.names = TRUE)
+xw <- purrr::map_dfr(xw_files, \(f) {
+  x <- readr::read_csv(f, show_col_types = FALSE, na = "", col_types = readr::cols(.default = "c"))
+  need <- c("tbl_new", "fld_old", "fld_new", "type_old", "type_new", "units")
+  for (k in setdiff(need, names(x))) x[[k]] <- NA_character_
+  x |>
+    dplyr::mutate(dataset_key = sub("\\.csv$", "", basename(f))) |>
+    dplyr::select(dataset_key, table = tbl_new, `source name` = fld_old, `standard name` = fld_new,
+                  `source type` = type_old, type = type_new, units)
+})
+xw_summary <- xw |>
+  dplyr::group_by(dataset_key) |>
+  dplyr::summarise(fields = dplyr::n(),
+                   renamed = sum(!is.na(`source name`) & !is.na(`standard name`) & `source name` != `standard name`),
+                   .groups = "drop")
+```
+
+```{r}
+#| label: tbl-crosswalk-summary
+#| tbl-cap: Each dataset's crosswalk — how many source fields it maps, and how many change name on the way in. The full crosswalk per dataset follows (HTML), and each is a CSV in CalCOFI/workflows.
+xw_summary |>
+  dplyr::mutate(crosswalk = paste0("https://github.com/CalCOFI/workflows/blob/main/metadata/",
+                                   sub("_", "/", dataset_key, fixed = TRUE), "/flds_redefine.csv")) |>
+  dplyr::arrange(dataset_key) |>
+  (\(tbl) if (knitr::is_html_output())
+    tbl |> gt() |> fmt_url(columns = crosswalk, label = "flds_redefine.csv")
+  else
+    tbl |> dplyr::select(-crosswalk) |> gt())() |>
+  mono(dataset_key) |> compact()
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: crosswalks
+#| echo: false
+#| results: asis
+# one tab per dataset; only the fields whose name changes are listed, since an unchanged
+# name needs no map. HTML only — a 600-row appendix would double the pdf.
+cat("::: {.panel-tabset}\n\n")
+for (k in sort(unique(xw$dataset_key))) {
+  d <- xw |>
+    dplyr::filter(dataset_key == k, !is.na(`source name`), `source name` != coalesce(`standard name`, "")) |>
+    dplyr::arrange(table, `standard name`) |>
+    dplyr::select(-dataset_key)
+  cat("## ", k, "\n\n", sep = "")
+  if (nrow(d) == 0) { cat("*Every source field keeps its name.*\n\n"); next }
+  print(d |> gt(groupname_col = "table") |> sub_missing(missing_text = "") |>
+          mono(c(`source name`, `standard name`, `source type`, type, units)) |> compact() |> as_raw_html())
+  cat("\n\n")
+}
+cat(":::\n")
+```
+
 :::
+
+## Proposing a change
+
+A convention changes the way the data does: through a pull request to `metadata/` in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows) — a row in the dictionary (authored in
+`libs/build_field_dictionary.R`, which regenerates the CSV), a measurement type registered with
+`calcofi4db::register_measurement_types()`, a life stage or gear row — or, where the question is
+the provider's to answer, a row in that dataset's `questions.csv` and its Sheet
+([Metadata & the ingest loop](metadata.qmd)). The next release carries whatever changed, and this
+page follows.

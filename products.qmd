@@ -1,10 +1,107 @@
 # Products, brand and uptime {#sec-products}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+Every CalCOFI.io product is a card on [calcofi.io](https://calcofi.io), and the card is the
+record: its name, its section, where it lives, where its source is, its uptime history and its
+usage. This page lists them from that record and states the three small contracts that keep a
+product findable and recognisably CalCOFI's. For the data team and anyone building a new one.
 
-Every CalCOFI.io product with its section, its source, its uptime and its usage, generated from the landing page's cards; the three-slug contract that keeps a card, its monitor and its analytics one thing; the brand contract in one paragraph; and how to add a product.
-:::
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(dplyr, gt, here, purrr, tibble, yaml, quiet = TRUE)
+`%||%` <- function(a, b) if (is.null(a)) b else a
+prod  <- yaml::read_yaml(here("data/products.yml"))
+secs  <- purrr::map_dfr(prod$sections %||% list(), \(s) tibble::tibble(section = s$key %||% s$id %||% NA_character_, title = s$title %||% NA_character_))
+cards <- purrr::map_dfr(prod$products %||% list(), \(p) tibble::tibble(
+  key = p$key, title = p$title %||% p$key, section = p$section %||% NA_character_,
+  live_url = p$live_url %||% NA_character_, source_url = p$source_url %||% NA_character_,
+  uptime = p$uptime %||% NA_character_, usage = p$usage %||% NA_character_,
+  status = p$status %||% "live", superseded_by = p$superseded_by %||% NA_character_,
+  added = p$added %||% NA_character_,
+  tech = if (is.null(p$tech)) "" else paste(unlist(p$tech), collapse = ", ")))
+title_of <- function(k) { t <- cards$title[match(k, cards$key)]; ifelse(is.na(t), k, t) }
+cards <- cards |>
+  dplyr::mutate(
+    section_title = secs$title[match(section, secs$section)] %||% section,
+    status_text = dplyr::case_when(
+      status == "superseded" & !is.na(superseded_by) ~ paste0("superseded by ", title_of(superseded_by)),
+      TRUE ~ status),
+    uptime_url = ifelse(is.na(uptime), NA, paste0("https://status.calcofi.io/history/", uptime)),
+    usage_url  = ifelse(is.na(usage),  NA, paste0("https://calcofi.io/analytics/", usage, "/")))
+```
+
+## Every product
+
+```{r}
+#| label: tbl-products
+#| tbl-cap: The products on calcofi.io, by section, from the landing page's cards (`_data/products.yml` in CalCOFI/CalCOFI.github.io). Usage per product is at [calcofi.io/analytics](https://calcofi.io/analytics/).
+d <- cards |>
+  dplyr::arrange(factor(section, levels = unique(secs$section)), status_text, title) |>
+  dplyr::select(section = section_title, key, title, live_url, source_url, uptime_url, status = status_text, tech)
+if (knitr::is_html_output()) {
+  d |>
+    gt(groupname_col = "section") |>
+    fmt_url(columns = live_url,   label = from_column("title")) |>
+    fmt_url(columns = source_url, label = "source") |>
+    fmt_url(columns = uptime_url, label = "uptime") |>
+    cols_hide(title) |>
+    cols_label(live_url = "product", source_url = "", uptime_url = "") |>
+    sub_missing(missing_text = "") |>
+    tab_style(style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = c(key, tech))) |>
+    tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+} else {
+  d |>
+    dplyr::select(section, key, title, status, tech) |>
+    gt(groupname_col = "section") |>
+    sub_missing(missing_text = "") |>
+    tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+}
+```
+
+## The three-slug contract
+
+A product is one thing in three places, and it is the same string in all of them:
+
+- its `key` in the landing page's `products.yml` (the card);
+- its `slug` in `CalCOFI/uptime`'s monitor list (the status page at
+  `status.calcofi.io/history/<slug>`);
+- its `slug` in `CalCOFI/analytics`' registry (the usage report at `calcofi.io/analytics/<slug>/`).
+
+When the names diverged, none of the three was findable from the others. Cards are named for the
+thing itself — the repository or application name used everywhere else — except student
+contributions, which keep their human titles. The card's `status` is its *lifecycle* (`interim`,
+`superseded`, `archived`), not its uptime; a superseded card names what replaced it, and the
+[Explore](explore.qmd) chapter reads exactly that.
+
+## The brand contract
+
+Every product wears one theme, one header and one favicon, and the rule is checked weekly rather
+than assumed. The contract is [calcofi.io/brand/v2](https://calcofi.io/brand/v2/) — the SIO look,
+light by default, UCSD's palette, Source Sans 3 and Teko, the horizontal lockup — and in one
+breath:
+
+- `?theme=dark|light` on any URL sets the theme, remembered across products only when a person
+  chose it; a fresh visit is light.
+- The header is one bar: the lockup at the far left links to calcofi.io, the product's title beside
+  it links to its own root, the theme toggle sits at the right. Where a framework owns the bar
+  (Quarto, pkgdown, MkDocs, Shiny), the lockup goes in its brand slot and its toggle is bridged.
+- An application declares its scale (`<meta name="cc-scale" content="app">`); a page declares
+  nothing and gets the reading rhythm. This book is a page.
+- `?tour=off` suppresses any guided tour, so `live_url?theme=<t>&tour=off` is a deterministic
+  screenshot; every card carries a light and a dark shot taken that way.
+
+`calcofi4r::cc_brand_head()` and `cc_brand_header()` give a Shiny app the head block and the bar;
+the Quarto sites include the same head file; `check_brand.py` in the landing repository probes
+every product for the theme, the favicon, the home link, the toggle, the version and the default.
+
+## Adding a product
+
+1. Build it on the release: read through the catalog ([Access the data](data-access.qmd)), never a
+   typed path; apply the quality predicate; cite through `cc_cite()`.
+2. Wear the brand (above); honour `?theme=` and `?tour=off`; take the two screenshots.
+3. Add the card to `products.yml` with its section, its `datasets` (the keys it covers, or `all`)
+   and, if it opens a dataset directly, the `dataset_url` template the dataset pages link through.
+4. Add the same slug to the uptime monitors and the analytics registry, and tag the page for
+   analytics.
+5. Push; the landing page, the status page and the usage report rebuild themselves, and this table
+   follows.

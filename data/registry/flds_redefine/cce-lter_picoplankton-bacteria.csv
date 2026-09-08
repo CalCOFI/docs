@@ -1,0 +1,24 @@
+tbl_old,tbl_new,fld_old,fld_new,type_old,type_new,fld_description,units,notes
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,studyName,study_name,VARCHAR,VARCHAR,Cruise identifier string (matches CalCOFI source naming); source of cruise_key resolution,,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Cruise,cruise_code,VARCHAR,VARCHAR,CalCOFI cruise short identifier (4-digit year + 2-digit month); raw field only -- NOT used for key resolution,,use study_name for joins
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Datetime GMT,datetime_utc,VARCHAR,TIMESTAMP,Date and time (UTC) from CTD instrument when bottle is closed,,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Latitude (º),latitude,VARCHAR,DOUBLE,Sample latitude,decimal_degrees,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Longitude (º),longitude,VARCHAR,DOUBLE,Sample longitude,decimal_degrees,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Line,line,VARCHAR,DOUBLE,CalCOFI sampling grid line,,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Station,station,VARCHAR,DOUBLE,CalCOFI sampling grid station,,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Cast Number,cast_number,VARCHAR,INTEGER,Reference number for CTD deployment,,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Bottle Number,bottle_number,VARCHAR,INTEGER,Reference number of sample bottle from rosette,,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Associated Bottle Number,assoc_bottle_number,VARCHAR,INTEGER,Associated bottle number for matching to CTD bottle records for other data,,see Q03 -- purpose not fully confirmed
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Depth (m),depth_m,VARCHAR,DOUBLE,Sample depth from CTD,m,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,Notes,notes,VARCHAR,VARCHAR,Data record explanatory notes (100% blank in current export),,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,,bottle_id,,INTEGER,Sequential bottle identifier; primary key of picoplankton_bacteria_bottle,,derived (row_number)
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,,site_key,,VARCHAR,CalCOFI station key in 'line station' form,,derived from line + station
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_bottle,,cruise_key,,VARCHAR,Natural cruise key YYYY-MM-NODC; resolved via derive_cruise_key_on_casts() from study_name's embedded ship code,,see Resolve Ship and Cruise Keys
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,Heterotrophic Bacteria (number/ml),,VARCHAR,,Heterotrophic bacteria abundance,number/ml,pivoted to measurement_type='het_bacteria'
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,Prochlorococcus (number/ml),,VARCHAR,,Prochlorococcus abundance -- ~80% populated; likely non-detection, unconfirmed (see Q01),number/ml,pivoted to measurement_type='prochlorococcus'
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,Synechococcus (number/ml),,VARCHAR,,Synechococcus abundance,number/ml,pivoted to measurement_type='synechococcus'
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,Picoeukaryotes (number/ml),,VARCHAR,,Picoeukaryote abundance,number/ml,pivoted to measurement_type='picoeukaryotes'
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,,measurement_id,,INTEGER,Sequential measurement identifier; primary key of picoplankton_bacteria_measurement,,derived (row_number)
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,,bottle_id,,INTEGER,FK to picoplankton_bacteria_bottle.bottle_id,,
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,,measurement_type,,VARCHAR,FK to measurement_type.measurement_type; one of het_bacteria/prochlorococcus/synechococcus/picoeukaryotes,,unit-less code -- units carried by measurement_type.csv
+PicoplanktonandBacteriaAbundance,picoplankton_bacteria_measurement,,measurement_value,,DOUBLE,Numeric value of the measurement; units carried by measurement_type not here,,

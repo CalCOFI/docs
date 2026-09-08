@@ -1,0 +1,86 @@
+erDiagram
+  %% the core family and the references it joins to, with the keys that carry the
+  %% integration; every other released table hangs off one of these (keys.qmd)
+  cruise ||--o{ sample : "cruise_key"
+  grid   ||--o{ sample : "grid_key"
+  sample ||--o{ sample : "parent_sample_key"
+  sample ||--|| sample_root : "root_sample_key (roots only)"
+  sample ||--o{ obs_bio : "sample_key"
+  sample ||--o{ obs_env : "sample_key"
+  sample ||--o{ sample_measurement : "sample_key"
+  sample ||--o{ obs_attribute : "sample_key"
+  sample_root ||--o{ obs_bio : "root_id"
+  sample_root ||--o{ obs_env : "root_id"
+  taxon ||--o{ obs_bio : "taxon_key"
+  taxon ||--o{ dataset_taxon : "taxon_key"
+  dataset ||--o{ dataset_taxon : "dataset_key"
+  dataset ||--o{ sample : "dataset_key"
+  measurement_type ||--o{ obs_bio : "measurement_type"
+  measurement_type ||--o{ obs_env : "measurement_type"
+  ship ||--o{ cruise : "ship_key"
+  cruise {
+    string cruise_key PK "YYYY-MM-NODC"
+    string ship_key FK
+    uuid cruise_uuid "NOAA CruiseId"
+    date date_min
+    date date_max
+  }
+  sample {
+    string sample_key PK "dataset_key:sample_type:id"
+    string parent_sample_key FK
+    string root_sample_key FK
+    string dataset_key FK
+    string cruise_key FK
+    string grid_key FK
+    string site_key
+    uuid source_uuid "the provider's own"
+    uuid station_uuid "SWFSC occupation"
+  }
+  sample_root {
+    int root_id PK
+    string root_sample_key FK
+  }
+  obs_bio {
+    int obs_id PK
+    string sample_key FK
+    int root_id FK
+    string taxon_key FK
+    string measurement_type FK
+    double value
+  }
+  obs_env {
+    int obs_id PK
+    string sample_key FK
+    int root_id FK
+    string measurement_type FK
+    double value
+  }
+  taxon {
+    string taxon_key PK "worms:<id> or itis:<id>"
+    string parent_taxon_key FK
+  }
+  dataset {
+    string dataset_key PK "provider_dataset"
+  }
+  measurement_type {
+    string measurement_type PK
+  }
+  grid {
+    string grid_key PK
+  }
+  ship {
+    string ship_key PK "NODC code"
+  }
+  dataset_taxon {
+    string ds_taxon_key PK
+    string dataset_key FK
+    string taxon_key FK
+  }
+  sample_measurement {
+    int sample_measurement_id PK
+    string sample_key FK
+  }
+  obs_attribute {
+    int obs_attribute_id PK
+    string sample_key FK
+  }

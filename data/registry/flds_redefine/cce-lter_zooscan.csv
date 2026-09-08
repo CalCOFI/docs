@@ -1,0 +1,14 @@
+tbl_old,tbl_new,fld_old,fld_new,type_new,fld_description,units
+zooscan_prpoos,zooscan_sample,cruise,cruise_orig,VARCHAR,"Original ZooScan cruise code (YYYYMM + 2-letter ship code, e.g. '200507NH' = Jul 2005, R/V New Horizon); cruise_key + ship_key are parsed from it.",
+zooscan_prpoos,zooscan_sample,line,line,DOUBLE,"Alongshore CalCOFI line (80, 87, or 90).",
+zooscan_prpoos,zooscan_sample,station,station,DOUBLE,"Offshore CalCOFI station.",
+zooscan_prpoos,zooscan_sample,latitude,latitude,DOUBLE,"Latitude in decimal degrees, WGS84 (EPSG:4326).",decimal_degrees
+zooscan_prpoos,zooscan_sample,longitude,longitude,DOUBLE,"Longitude in decimal degrees, WGS84 (EPSG:4326).",decimal_degrees
+zooscan_prpoos,zooscan_sample,max_depth_m,max_depth_m,DOUBLE,"Maximum tow depth in meters.",m
+zooscan_prpoos,zooscan_sample,min_depth_m,min_depth_m,DOUBLE,"Minimum tow depth in meters.",m
+zooscan_prpoos,zooscan_sample,cruise_mid_date,cruise_mid_date,DATE,"Mid-date of the cruise.",
+zooscan_prpoos,zooscan_sample,station_date,station_date,DATE,"Date the station was sampled.",
+zooscan_prpoos,zooscan_sample,local_time_pst,local_time_pst,VARCHAR,"Local (PST) clock time of the tow (HH:MM).",
+zooscan_prpoos,zooscan_sample,day_night,day_night,VARCHAR,"Day or Night tow (by nautical twilight).",
+zooscan_prpoos,zooscan_taxon,taxon,taxon_slug,VARCHAR,"Lower-cased ZooScan bioclass name; FK target from zooscan_measurement.",
+zooscan_prpoos,zooscan_measurement,abundance_per_m2,measurement_value,DOUBLE,"Pivoted to long form: zooscan_abundance (No./m2), zooscan_biomass_carbon (mgC/m2), zooscan_feret_diameter (mm), zooscan_carbon_individual (ugC/individual).",

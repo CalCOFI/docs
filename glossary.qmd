@@ -1,10 +1,90 @@
 # Glossary {#sec-glossary}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+The words this book uses with a specific meaning, each ending with the chapter that says more.
 
-The terms a reader trips on — cruise, cast, bottle, tow, net, site, line and station, grid cell, hexagon, realm, grain, measurement type, life stage, sample and observation, release, holding, sidecar, catalog, provider, dataset key — each ending with the chapter that says more.
-:::
+**bottle** — a Niskin bottle closed at a depth during a cast; in the database a `sample` of type
+`bottle` under its `cast`, with the water-chemistry measurements taken from it in `obs_env`.
+→ [The database](db.qmd)
+
+**cast** — one lowering of the CTD or the bottle rosette at a station; a root `sample` of type
+`cast` with bottles under it. → [CTD QA/QC](ctd-qaqc.qmd)
+
+**catalog** — `catalog.json`, the release's manifest: every table, its rows and the parquet
+objects that hold it; the contract every reader resolves through. → [Releases](releases.qmd)
+
+**core** — the small family of tables every consumer reads — `sample`, `obs_bio`, `obs_env`,
+`obs_attribute`, `sample_measurement` and the references — that every dataset projects into.
+→ [The database](db.qmd)
+
+**cruise** — one voyage of one ship; keyed `YYYY-MM-NODC` by the month SWFSC designates for it and
+the ship's NODC code, never by the month an event fell in. → [Keys and integrity](keys.qmd)
+
+**dataset key** — `{provider}_{dataset}`, the name of everything about a dataset: its notebook,
+its metadata folder, its record, its page, the provenance stamp on every observation.
+→ [Naming conventions](naming.qmd)
+
+**grain** — what one row stands for: a physical sampling event in `sample`, one measured value
+in `obs_env`, one taxon's headline in `obs_bio`, one bin in `obs_attribute`.
+→ [The database](db.qmd)
+
+**grid cell** — a cell of the CalCOFI station grid a sample falls in (`grid_key`); several real
+stations share one nearshore cell. → [Keys and integrity](keys.qmd)
+
+**hexagon** — an H3 cell; every observation carries its resolution-10 cell (`hex_id`) and coarser
+hexagons are computed from it. → [Explore](explore.qmd)
+
+**holding** — a dataset CalCOFI has or knows of but has not ingested; it has a page and a record
+but no rows. → [Metadata & the ingest loop](metadata.qmd)
+
+**ingest** — the reproducible notebook that turns one source dataset into the shared schema.
+→ [Ingesting a dataset](ingest-loop.qmd)
+
+**life stage** — the developmental stage of a counted organism, from a registered vocabulary
+with Darwin Core and NERC ids. → [Naming conventions](naming.qmd)
+
+**line and station** — CalCOFI's survey grid: a line runs offshore from the coast, a station is
+a position along it; together the `site_key` (`093.3 026.4`). → [Keys and integrity](keys.qmd)
+
+**measurement type** — a registered measured quantity with its units and physical bounds; every
+`obs_env` row names one. → [Naming conventions](naming.qmd)
+
+**net, tow** — one deployment of a net (a tow) and each net on it; `sample` rows of type `tow` and
+`net` under a `site`, with the counts from the net in `obs_bio`. → [The database](db.qmd)
+
+**observation** — one measured or counted value at one place and time, in `obs_env` or `obs_bio`;
+`obs` is the two under one name. → [Access the data](data-access.qmd)
+
+**provider** — the organization that curates, holds and can license a dataset; never the portal
+that serves it. → [Naming conventions](naming.qmd)
+
+**quality flag** — a dataset's own verdict on a value (`measurement_qual`), kept uninterpreted;
+`qual_ok` is the release's reading of it. → [Access the data](data-access.qmd)
+
+**realm** — `bio` or `env`: whether an observation counts an organism or measures the water.
+→ [The database](db.qmd)
+
+**record** — `datasets.json`, one entry per dataset generated at release, from which every portal
+surface is derived. → [Portals](portals.qmd)
+
+**release** — an immutable, versioned, cited copy of every table, cut every few weeks; `latest`
+is the promoted one. → [Releases](releases.qmd)
+
+**root sample** — a `sample` with no parent — a site, a cast, an underway record — and the
+`root_id` the browser objects join on. → [Keys and integrity](keys.qmd)
+
+**sample** — a physical sampling event of any kind, at its native grain, with its position, time
+and depth span, and its parent. → [The database](db.qmd)
+
+**sidecar** — a JSON or markdown file beside the parquet — the catalog, the metadata, the keys,
+the record, the notes — that describes the release and never needs the bytes to be read.
+→ [Releases](releases.qmd)
+
+**supplemental** — a table hosted and catalogued but left out of the default set: the
+full-resolution CTD and meteorology series, the root-sample join twin.
+→ [Access the data](data-access.qmd)
+
+**taxon key** — `worms:<AphiaID>`, or `itis:<TSN>` for birds: the accepted identifier of an
+organism in the authority that carries it. → [The database](db.qmd)
+
+**working store** — the CTD team's PostgreSQL database: originals verbatim, flags beside them,
+feeding the next release but never read by consumers. → [CTD QA/QC](ctd-qaqc.qmd)

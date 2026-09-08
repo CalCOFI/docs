@@ -26,7 +26,7 @@ DOI [`r catalog$doi`](https://doi.org/`r catalog$doi`). Every number on this pag
 the release when the book renders; nothing here is typed.
 :::
 
-![The system, read left to right along the phases of the data management plan. Provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; from the release come the record each portal reads and the products people use. The CTD team's working store stands beside it, feeding accepted flags into the next ingest.](diagrams/system.svg){#fig-system}
+![The system, read left to right along the phases of the data management plan. Provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; from the release come the record each portal reads and the products people use. The CTD team's working store stands beside it, feeding accepted flags into the next ingest.](diagrams/system.svg){#fig-system .cc-diagram .nolightbox}
 
 ## Five phases, one system
 

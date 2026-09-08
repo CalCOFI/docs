@@ -25,7 +25,10 @@ hrefs <- unique(hrefs)
 # only to a browser session, and this repo's own rolling `documents` assets, which the
 # second CI job creates after this check runs
 skip <- grepl("^https?://(cdn\\.jsdelivr\\.net|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|docs\\.google\\.com|drive\\.google\\.com|twitter\\.com/intent|www\\.facebook\\.com/sharer|www\\.linkedin\\.com/share)", hrefs) |
-  grepl("^https://github\\.com/CalCOFI/docs/releases/download/", hrefs)
+  grepl("^https://github\\.com/CalCOFI/docs/releases/download/", hrefs) |
+  # the status site prerenders only its root: /history/<slug> answers 404 to curl by design and
+  # renders in a browser (Sapper export + GitHub Pages' 404.html client-routing)
+  grepl("^https://status\\.calcofi\\.io/history/", hrefs)
 hrefs <- hrefs[!skip]
 cat(sprintf("check_links: %d distinct external links\n", length(hrefs)))
 

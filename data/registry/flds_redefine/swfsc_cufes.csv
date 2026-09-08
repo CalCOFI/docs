@@ -1,0 +1,27 @@
+tbl_old,tbl_new,fld_old,fld_new,type_new,fld_description,units
+erdCalCOFIcufes,cufes_sample,cruise,cruise_orig,VARCHAR,Source cruise label; cruise_key derived from it.,
+erdCalCOFIcufes,cufes_sample,ship,ship_name,VARCHAR,Vessel name; resolved to ship_key.,
+erdCalCOFIcufes,cufes_sample,ship_code,ship_code,VARCHAR,Source ship code.,
+erdCalCOFIcufes,cufes_sample,sample_number,sample_number,INTEGER,CUFES sample sequence number within the cruise.,
+erdCalCOFIcufes,cufes_sample,time,datetime_start_utc,TIMESTAMP,Sample start date-time (UTC); canonical event timestamp.,
+erdCalCOFIcufes,cufes_sample,latitude,latitude,DOUBLE,"Sample start latitude, WGS84.",decimal_degrees
+erdCalCOFIcufes,cufes_sample,longitude,longitude,DOUBLE,"Sample start longitude, WGS84.",decimal_degrees
+erdCalCOFIcufes,cufes_sample,start_temperature,start_temperature,DOUBLE,Sea surface temperature at sample start.,degC
+erdCalCOFIcufes,cufes_sample,start_salinity,start_salinity,DOUBLE,Sea surface salinity at sample start.,PSS-78
+erdCalCOFIcufes,cufes_sample,start_wind_speed,start_wind_speed,DOUBLE,Wind speed at sample start.,m/s
+erdCalCOFIcufes,cufes_sample,start_wind_direction,start_wind_direction,DOUBLE,Wind direction at sample start.,degrees
+erdCalCOFIcufes,cufes_sample,start_pump_speed,start_pump_speed,DOUBLE,CUFES pump speed at sample start.,
+erdCalCOFIcufes,cufes_sample,stop_time,datetime_end_utc,TIMESTAMP,Sample end date-time (UTC).,
+erdCalCOFIcufes,cufes_sample,stop_latitude,latitude_stop,DOUBLE,Sample end latitude.,decimal_degrees
+erdCalCOFIcufes,cufes_sample,stop_longitude,longitude_stop,DOUBLE,Sample end longitude.,decimal_degrees
+erdCalCOFIcufes,cufes_sample,stop_temperature,stop_temperature,DOUBLE,Sea surface temperature at sample end.,degC
+erdCalCOFIcufes,cufes_sample,stop_salinity,stop_salinity,DOUBLE,Sea surface salinity at sample end.,PSS-78
+erdCalCOFIcufes,cufes_sample,stop_wind_speed,stop_wind_speed,DOUBLE,Wind speed at sample end.,m/s
+erdCalCOFIcufes,cufes_sample,stop_wind_direction,stop_wind_direction,DOUBLE,Wind direction at sample end.,degrees
+erdCalCOFIcufes,cufes_sample,stop_pump_speed,stop_pump_speed,DOUBLE,CUFES pump speed at sample end.,
+erdCalCOFIcufes,cufes_measurement,sardine_eggs,sardine_eggs,INTEGER,Sardine (Sardinops sagax) egg count.,count
+erdCalCOFIcufes,cufes_measurement,anchovy_eggs,anchovy_eggs,INTEGER,Northern anchovy (Engraulis mordax) egg count.,count
+erdCalCOFIcufes,cufes_measurement,jack_mackerel_eggs,jack_mackerel_eggs,INTEGER,Jack mackerel (Trachurus symmetricus) egg count.,count
+erdCalCOFIcufes,cufes_measurement,hake_eggs,hake_eggs,INTEGER,Pacific hake (Merluccius productus) egg count.,count
+erdCalCOFIcufes,cufes_measurement,squid_eggs,squid_eggs,INTEGER,Squid egg count.,count
+erdCalCOFIcufes,cufes_measurement,other_fish_eggs,other_fish_eggs,INTEGER,Other fish egg count.,count

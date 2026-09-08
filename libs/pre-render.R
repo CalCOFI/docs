@@ -95,6 +95,13 @@ registries <- c("field_dictionary.csv", "measurement_type.csv", "measurement_qua
                 "release_policy.yml", "relationships_cross.csv")
 for (r in registries) fetch(file.path(wf_raw, "metadata", r), file.path(dir_reg, r))
 
+# each dataset's field crosswalk (legacy source names -> the standard names), for the
+# naming chapter's mapping tables; a dataset without one is skipped
+dir_xw <- file.path(dir_reg, "flds_redefine"); dir.create(dir_xw, showWarnings = FALSE)
+for (i in seq_len(nrow(ds)))
+  fetch(file.path(wf_raw, "metadata", ds$provider[i], ds$dataset[i], "flds_redefine.csv"),
+        file.path(dir_xw, paste0(ds$dataset_key[i], ".csv")), required = FALSE)
+
 # the products on calcofi.io ----------------------------------------------------------
 fetch(file.path(site_raw, "_data/products.yml"), file.path(dir_data, "products.yml"))
 

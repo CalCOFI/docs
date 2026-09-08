@@ -1,0 +1,40 @@
+tbl_old,tbl_new,fld_old,fld_new,type_new,fld_description,units
+transects,bird_mammal_transect,GIS key,gis_key,VARCHAR,Transect-segment identifier; primary key. Joins observations.,
+transects,bird_mammal_transect,Cruise,cruise_label,VARCHAR,Source cruise label (e.g. CAC1987_05); cruise_key derived from it.,
+transects,bird_mammal_transect,Transect number,transect_number,INTEGER,Transect number within the cruise.,
+transects,bird_mammal_transect,Bin number,bin_number,INTEGER,Bin (segment) number within the transect.,
+transects,bird_mammal_transect,Date,date,DATE,Survey date.,
+transects,bird_mammal_transect,Time (sec),time_sec,DOUBLE,Time of day in seconds (local); combined with date into datetime_start_utc.,s
+transects,bird_mammal_transect,Latitude Mid (º),latitude,DOUBLE,"Latitude of the transect-segment midpoint, WGS84.",decimal_degrees
+transects,bird_mammal_transect,Longitude Mid (º),longitude,DOUBLE,"Longitude of the transect-segment midpoint, WGS84.",decimal_degrees
+transects,bird_mammal_transect,Latitude Start (º),latitude_start,DOUBLE,Latitude at segment start.,decimal_degrees
+transects,bird_mammal_transect,Longitude Start (º),longitude_start,DOUBLE,Longitude at segment start.,decimal_degrees
+transects,bird_mammal_transect,Latitude Stop (º),latitude_stop,DOUBLE,Latitude at segment stop.,decimal_degrees
+transects,bird_mammal_transect,Longitude Stop (º),longitude_stop,DOUBLE,Longitude at segment stop.,decimal_degrees
+transects,bird_mammal_transect,Length (m),length_m,DOUBLE,Transect-segment length.,m
+transects,bird_mammal_transect,Width (m),width_m,DOUBLE,Transect strip width.,m
+transects,bird_mammal_transect,Area (m²),area_m2,DOUBLE,Surveyed area of the segment.,m2
+transects,bird_mammal_transect,Depth (m),bottom_depth_m,DOUBLE,Seafloor depth at the segment (negative = below sea level in source).,m
+transects,bird_mammal_transect,Julian date,julian_date,DOUBLE,Julian date.,
+transects,bird_mammal_transect,Julian day,julian_day,INTEGER,Julian day of year.,
+transects,bird_mammal_transect,SVY,svy,VARCHAR,"Survey/cruise-program code (CalCOFI, NMFS, CPR).",
+transects,bird_mammal_transect,Season,season,VARCHAR,Season of the survey.,
+observations,bird_mammal_observation,GIS key,gis_key,VARCHAR,Transect-segment identifier; FK to bird_mammal_transect.,
+observations,bird_mammal_observation,Species,species_code,VARCHAR,Species code; FK to bird_mammal_species.,
+observations,bird_mammal_observation,Behavior,behavior_code,VARCHAR,Behavior code; FK to bird_mammal_behavior.,
+observations,bird_mammal_observation,Count,count,INTEGER,Number of individuals observed.,count
+allspecieslist,bird_mammal_species,Species,species_code,VARCHAR,Species code (4-letter); primary key.,
+allspecieslist,bird_mammal_species,Common Name,common_name,VARCHAR,Common (vernacular) name.,
+allspecieslist,bird_mammal_species,Latin Name,scientific_name,VARCHAR,Scientific (Latin) name.,
+allspecieslist,bird_mammal_species,ITIS,itis_id,INTEGER,ITIS Taxonomic Serial Number.,
+allspecieslist,bird_mammal_species,Bird,is_bird,BOOLEAN,TRUE if the taxon is a bird.,
+allspecieslist,bird_mammal_species,Mammal,is_mammal,BOOLEAN,TRUE if the taxon is a mammal.,
+allspecieslist,bird_mammal_species,Fish,is_fish,BOOLEAN,TRUE if the taxon is a fish.,
+allspecieslist,bird_mammal_species,LargeBird,is_large_bird,BOOLEAN,TRUE if classified as a large bird.,
+allspecieslist,bird_mammal_species,Unidentified,is_unidentified,BOOLEAN,TRUE if the record is unidentified to species.,
+allspecieslist,bird_mammal_species,Include,include_flag,BOOLEAN,Provider inclusion flag.,
+allspecieslist,bird_mammal_species,NMFS,nmfs_code,VARCHAR,NMFS species code (if any).,
+allspecieslist,bird_mammal_species,Comment,comment,VARCHAR,Free-text comment.,
+behaviorcodes,bird_mammal_behavior,ID,behavior_code,VARCHAR,Behavior code; primary key.,
+behaviorcodes,bird_mammal_behavior,Behavior,behavior,VARCHAR,Behavior name.,
+behaviorcodes,bird_mammal_behavior,Description,description,VARCHAR,Behavior description.,

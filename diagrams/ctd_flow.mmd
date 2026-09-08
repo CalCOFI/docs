@@ -1,0 +1,14 @@
+flowchart LR
+  files["db-CSV cast files<br/>calcofi.org · JRW archive"]:::src --> load["load_pg_ctd.qmd<br/>idempotent on (archive, path)"]:::step
+  load --> scan[("ctd.file · ctd.scan<br/>10.8 M scans, 82 columns, verbatim<br/>immutable by trigger")]:::pg
+  scan --> views["ctd.cast (materialized)<br/>ctd.v_scan_qc · ctd.v_scan_clean"]:::pg
+  team["you: propose a flag<br/>curators: accept or reject"]:::people --> flag[("ctd.flag ledger<br/>IODE codes · ctd.flag_audit")]:::pg
+  flag --> views
+  flag -. nightly snapshot .-> snap["gs://calcofi-db/qc/ctd/<br/>flag_accepted.parquet"]:::art
+  snap --> ingest["ingest_calcofi_ctd-cast.qmd<br/>applies as measurement_qual"]:::step
+  ingest --> rel[("the next release<br/>obs_env · obs_ctd_full")]:::art
+  classDef src fill:#f5f0e6,stroke:#8a8272,color:#182b49
+  classDef step fill:#fff7d6,stroke:#c9a227,color:#182b49
+  classDef pg fill:#eef1f5,stroke:#6b7a90,color:#182b49
+  classDef art fill:#fbe9c9,stroke:#d97706,color:#182b49
+  classDef people fill:#e6f2fb,stroke:#00629b,color:#182b49

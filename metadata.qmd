@@ -107,7 +107,7 @@ from git, `pull` to bring edits back; both are dry runs until told otherwise), w
 the changed values in the sidecar and leaves its history and comments intact. The next release —
 cut every few weeks, each with its own DOI — then regenerates every surface from the record:
 
-![Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish.](diagrams/catalog_flow.svg){#fig-catalog-flow-metadata}
+![Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish.](diagrams/catalog_flow.svg){#fig-catalog-flow-metadata .cc-diagram .nolightbox}
 
 Between releases, a weekly job asks each portal what it says *now* about every dataset and
 holding — a new EDI revision, an OBIS re-index, an ERDDAP id that disappeared — and files a

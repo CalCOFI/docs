@@ -2,6 +2,57 @@
 title: "Status"
 ---
 
+Dated entries, newest first. From 2026-09 each entry is organized by the five phases of the
+[data management plan](dmp.qmd) — Ingest, Publish, Integrate, Visualize, Synthesize — one per
+quarter of the 2026–27 statement of work (Q1 due 2026-11-30); the entries before it follow the
+three components of the 2025–26 contract. Each is written by reviewing the git histories across
+the CalCOFI repositories since the entry before (`libs/status_git-logs.R`).
+
+## 2026-09-08
+
+<!-- The baseline at the start of the 2026-09-01 → 2027-08-31 SoW (Year 1 of the DMP), written
+     with the revamp of this book; the first quarterly entry follows on 2026-11-30. -->
+
+```{r}
+#| label: facts-2026-09-08
+#| include: false
+librarian::shelf(jsonlite, readr, here, quiet = TRUE)
+catalog <- jsonlite::fromJSON(here("data/release/catalog.json"), simplifyVector = FALSE)
+ds      <- readr::read_csv(here("data/release/dataset.csv"), show_col_types = FALSE)
+integ   <- tryCatch(jsonlite::fromJSON(here("data/release/integrity.json")), error = function(e) NULL)
+fmt_n   <- function(x) format(x, big.mark = ",")
+```
+
+The state of the system at the start of the new contract, by phase. The promoted release is
+`r catalog$version` (`r nrow(ds)` datasets, `r length(catalog$tables)` tables,
+`r fmt_n(catalog$total_rows)` rows, DOI `r catalog$doi`).
+
+**Ingest.** Sixteen datasets run through one pipeline of reproducible notebooks; the CTD team's
+PostgreSQL working store (2026-08-19) holds the cast archive verbatim with a flag ledger whose
+accepted flags reach the next ingest through a nightly snapshot. Open: the bottle database
+migration (Task 1) waits on the profile database and training.
+
+**Integrate.** Every event keys to its cruise by date span (v2026.08.25); provider UUIDs are
+released as columns beside the natural keys (v2026.09.04); as of this entry every released table
+declares a primary key and every declared key is measured before a release ships
+(`integrity.json`: `r if (is.null(integ)) "pending" else paste(integ$n_primary_keys, "primary and", integ$n_foreign_keys, "foreign keys, all ok")`).
+The naming conventions are generated from the registries and the provider guide is drafted
+(Tasks 12–13, Q1 inventory).
+
+**Publish.** One record and one EML document per dataset are generated at every release, and from
+them the dataset pages, DCAT, STAC, the Darwin Core archives, the EDI packages and ERDDAP's
+metadata; every release has a DOI. Open: the OBIS and EDI uploads wait on provider decisions; CTD
+casts on ERDDAP (Q1).
+
+**Visualize.** The Explorer (2026-08-29, six lenses since 2026-09-07) runs in the browser over the
+release and supersedes the Shiny viewers; the landing page is a dataset catalog with a page per
+dataset; the schema browser shows each key measured. Open: variable-based discovery (Task 14,
+Q3–Q4).
+
+**Synthesize.** This book was restructured into five parts by audience with the plan's phases as
+its spine, its facts generated from the release, its diagrams zoomable, and its PDF the living
+document the plan's Task 16 asks for.
+
 ## 2026-07-01
 
 <!--

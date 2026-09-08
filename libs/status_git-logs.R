@@ -1,75 +1,32 @@
 #!/usr/bin/env Rscript
+# Collect the git log of every CalCOFI repository since a date, one file per repo, as the raw
+# material for a dated entry in status.qmd. The repository list comes from the landing page's
+# product cards (data/products.yml, snapshotted by libs/pre-render.R), so a product added to
+# calcofi.io is reviewed here without editing this script.
+#
+#   Rscript libs/status_git-logs.R 2026-09-01        # since the last entry
+librarian::shelf(glue, yaml, quiet = TRUE)
 
-librarian::shelf(
-  glue,
-  quiet = T)
-
-# Define the base directory and output directory
+date_beg   <- if (length(commandArgs(trailingOnly = TRUE))) commandArgs(trailingOnly = TRUE)[1] else "2026-09-01"
 base_dir   <- "~/Github/CalCOFI"
-date_beg   <- "2025-07-01"
-output_dir <- "~/Github/CalCOFI/_git-logs_{date_beg}-to-{Sys.Date()}" |> glue()
+output_dir <- glue("~/Github/CalCOFI/_git-logs_{date_beg}-to-{Sys.Date()}")
 
-# List of repository folders
-# from visiting https://github.com/orgs/CalCOFI/repositories sorted by Last pushed
-repos <- c(
-  "db-viz-hex", "workflows", "server", "CalCOFI.github.io",
-  "docs", "calcofi4db", "calcofi4r")
+prod  <- yaml::read_yaml("data/products.yml")
+urls  <- vapply(prod$products, function(p) p$source_url %||% "", character(1))
+repos <- unique(sub("/.*$", "", sub("^https://github.com/CalCOFI/", "", urls[grepl("^https://github.com/CalCOFI/", urls)])))
+repos <- union(repos, c("workflows", "calcofi4db", "server", "uptime", "analytics"))   # the ones with no card
 
-# Ensure output directory exists
-if (!dir.exists(output_dir))
-  dir.create(output_dir, recursive = T)
+if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
 
-# Loop through each repository
 for (repo in repos) {
-
-  cat(sprintf("\n=== Processing repository: %s ===\n", repo))
-
-  # Full path to repository
   repo_path <- file.path(base_dir, repo)
-
-  # Check if repository exists
-  if (!dir.exists(repo_path)) {
-    warning(sprintf("Repository not found: %s\n", repo_path))
-    next
-  }
-
-  # Check for uncommitted changes
-  status_output <- tryCatch({
-    system2(
-      command = "git",
-      args = c("-C", repo_path, "status", "--porcelain"),
-      stdout = TRUE,
-      stderr = TRUE
-    )
-  }, error = function(e) {
-    return(NULL)
-  })
-
-  # Warn if there are uncommitted changes
-  if (!is.null(status_output) && length(status_output) > 0) {
-    warning(sprintf("⚠️  Repository '%s' has uncommitted changes:\n", repo),
-            immediate. = TRUE)
-    cat(paste("  ", status_output, collapse = "\n"), "\n")
-  }
-
-  # Run git log command
-  git_output <- tryCatch({
-    system2(
-      command = "git",
-      args = c("-C", repo_path, "log", glue("--since={date_beg}"), "--oneline"),
-      stdout = TRUE,
-      stderr = TRUE
-    )
-  }, error = function(e) {
-    return(paste("Error:", e$message))
-  })
-
-  # Write output to file
-  output_file <- file.path(output_dir, paste0(repo, ".txt"))
-  writeLines(git_output, output_file)
-
-  cat(sprintf("✓ Saved to: %s (%d commits)\n",
-              output_file, length(git_output)))
+  if (!dir.exists(repo_path)) { warning(sprintf("not cloned: %s", repo_path)); next }
+  cat(sprintf("\n=== %s ===\n", repo))
+  dirty <- system2("git", c("-C", repo_path, "status", "--porcelain"), stdout = TRUE)
+  if (length(dirty)) cat(sprintf("  (%d uncommitted change(s))\n", length(dirty)))
+  log <- system2("git", c("-C", repo_path, "log", glue("--since={date_beg}"), "--date=short",
+                          "--format='%ad %h %s'", "--no-merges"), stdout = TRUE)
+  writeLines(log, file.path(output_dir, glue("{repo}.log")))
+  cat(sprintf("  %d commits since %s\n", length(log), date_beg))
 }
-
-cat("\n=== Done! All git logs saved. ===\n")
+cat(glue("\nlogs in {output_dir}\n"))

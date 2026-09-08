@@ -3,6 +3,7 @@
   "private": true,
   "description": "Pins the mermaid-cli that pre-renders diagrams/*.mmd to SVG (libs/render_diagrams.sh); the book embeds the SVGs, so no browser runs at render time.",
   "devDependencies": {
-    "@mermaid-js/mermaid-cli": "11.12.0"
+    "@mermaid-js/mermaid-cli": "11.12.0",
+    "svg-pan-zoom": "^3.6.1"
   }
 }

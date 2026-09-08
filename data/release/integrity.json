@@ -1,0 +1,789 @@
+{
+  "schema_version": "1.0",
+  "version": "v2026.09.06",
+  "ok": true,
+  "n_primary_keys": 23,
+  "n_foreign_keys": 57,
+  "n_skipped": 0,
+  "primary_keys": [
+    {
+      "table": "sample",
+      "columns": "sample_key",
+      "n_rows": 1469155,
+      "n_distinct": 1469155,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs",
+      "columns": "obs_id",
+      "n_rows": 26265248,
+      "n_distinct": 26265248,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_measurement",
+      "columns": "sample_measurement_id",
+      "n_rows": 589603,
+      "n_distinct": 589603,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "measurement_type",
+      "columns": "measurement_type",
+      "n_rows": 200,
+      "n_distinct": 200,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_attribute",
+      "columns": "obs_attribute_id",
+      "n_rows": 458184,
+      "n_distinct": 458184,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "taxon",
+      "columns": "taxon_key",
+      "n_rows": 2614,
+      "n_distinct": 2614,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "dataset_taxon",
+      "columns": "ds_taxon_key",
+      "n_rows": 1917,
+      "n_distinct": 1917,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "region",
+      "columns": "region_key",
+      "n_rows": 4,
+      "n_distinct": 4,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "grid",
+      "columns": "grid_key",
+      "n_rows": 218,
+      "n_distinct": 218,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "cruise",
+      "columns": "cruise_key",
+      "n_rows": 842,
+      "n_distinct": 842,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "ship",
+      "columns": "ship_key",
+      "n_rows": 49,
+      "n_distinct": 49,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "columns": "obs_id",
+      "n_rows": 1258665,
+      "n_distinct": 1258665,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_env",
+      "columns": "obs_id",
+      "n_rows": 25006583,
+      "n_distinct": 25006583,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_ctd_full",
+      "columns": "obs_id",
+      "n_rows": 271394164,
+      "n_distinct": 271394164,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_mets_full",
+      "columns": "obs_id",
+      "n_rows": 19927416,
+      "n_distinct": 19927416,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_root",
+      "columns": "root_id",
+      "n_rows": 421454,
+      "n_distinct": 421454,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_spatial",
+      "columns": "root_sample_key,spatial_key",
+      "n_rows": 929664,
+      "n_distinct": 929664,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "spatial",
+      "columns": "spatial_key",
+      "n_rows": 13206,
+      "n_distinct": 13206,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "spatial_attribute",
+      "columns": "spatial_key,fld",
+      "n_rows": 148461,
+      "n_distinct": 148461,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "climatology",
+      "columns": "dataset_key,grid_key,month,depth_bin,measurement_type",
+      "n_rows": 768880,
+      "n_distinct": 768880,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "dataset",
+      "columns": "dataset_key",
+      "n_rows": 16,
+      "n_distinct": 16,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "lookup",
+      "columns": "lookup_id",
+      "n_rows": 26,
+      "n_distinct": 26,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    },
+    {
+      "table": "taxon_group",
+      "columns": "taxon_group_key,taxon_key",
+      "n_rows": 441,
+      "n_distinct": 441,
+      "n_dup": 0,
+      "n_null": 0,
+      "status": "ok"
+    }
+  ],
+  "foreign_keys": [
+    {
+      "table": "sample",
+      "column": "parent_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 1469155,
+      "n_null": 421454,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample",
+      "column": "root_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 1469155,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 26265248,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 26265248,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 589603,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 589603,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key",
+      "n_rows": 26265248,
+      "n_null": 25007346,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 458184,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key",
+      "n_rows": 458184,
+      "n_null": 781,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 458184,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "dataset_taxon",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key",
+      "n_rows": 1917,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "taxon",
+      "column": "parent_taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key",
+      "n_rows": 2614,
+      "n_null": 19,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "taxon_group",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key",
+      "n_rows": 441,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 1469155,
+      "n_null": 27922,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key",
+      "n_rows": 1469155,
+      "n_null": 23739,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 26265248,
+      "n_null": 316895,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key",
+      "n_rows": 26265248,
+      "n_null": 179587,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 26265248,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 1469155,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_measurement",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 589603,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 271394164,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 271394164,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 271394164,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "dataset_taxon",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 1917,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_spatial",
+      "column": "root_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 929664,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_spatial",
+      "column": "spatial_key",
+      "ref_table": "spatial",
+      "ref_column": "spatial_key",
+      "n_rows": 929664,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_root",
+      "column": "root_sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 421454,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "column": "root_id",
+      "ref_table": "sample_root",
+      "ref_column": "root_id",
+      "n_rows": 1258665,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_env",
+      "column": "root_id",
+      "ref_table": "sample_root",
+      "ref_column": "root_id",
+      "n_rows": 25006583,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 1258665,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_env",
+      "column": "sample_key",
+      "ref_table": "sample",
+      "ref_column": "sample_key",
+      "n_rows": 25006583,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 1258665,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_env",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 25006583,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 1258665,
+      "n_null": 209033,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_env",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 25006583,
+      "n_null": 107862,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key",
+      "n_rows": 1258665,
+      "n_null": 143957,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_env",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key",
+      "n_rows": 25006583,
+      "n_null": 35630,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 1258665,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_env",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 25006583,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_bio",
+      "column": "taxon_key",
+      "ref_table": "taxon",
+      "ref_column": "taxon_key",
+      "n_rows": 1258665,
+      "n_null": 763,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "climatology",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 768880,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "climatology",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 768880,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "climatology",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 768880,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample",
+      "column": "station_uuid",
+      "ref_table": "sample",
+      "ref_column": "source_uuid",
+      "n_rows": 1469155,
+      "n_null": 436533,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "spatial_attribute",
+      "column": "spatial_key",
+      "ref_table": "spatial",
+      "ref_column": "spatial_key",
+      "n_rows": 148461,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_mets_full",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 19927416,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_mets_full",
+      "column": "measurement_type",
+      "ref_table": "measurement_type",
+      "ref_column": "measurement_type",
+      "n_rows": 19927416,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_mets_full",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key",
+      "n_rows": 19927416,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_mets_full",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 19927416,
+      "n_null": 16128,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key",
+      "n_rows": 271394164,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_ctd_full",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 271394164,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_root",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 421454,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_root",
+      "column": "cruise_key",
+      "ref_table": "cruise",
+      "ref_column": "cruise_key",
+      "n_rows": 421454,
+      "n_null": 23149,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_root",
+      "column": "grid_key",
+      "ref_table": "grid",
+      "ref_column": "grid_key",
+      "n_rows": 421454,
+      "n_null": 13231,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "sample_spatial",
+      "column": "root_id",
+      "ref_table": "sample_root",
+      "ref_column": "root_id",
+      "n_rows": 929664,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "cruise",
+      "column": "ship_key",
+      "ref_table": "ship",
+      "ref_column": "ship_key",
+      "n_rows": 842,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    },
+    {
+      "table": "obs_attribute",
+      "column": "dataset_key",
+      "ref_table": "dataset",
+      "ref_column": "dataset_key",
+      "n_rows": 458184,
+      "n_null": 0,
+      "n_orphan": 0,
+      "status": "ok"
+    }
+  ]
+}

@@ -1,10 +1,117 @@
 # Architecture {#sec-architecture}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+CalCOFI.io is a **federated** system: the data stay with the organizations that collect them,
+one pipeline integrates a copy into a versioned database, and everything people use — the
+explorer, the packages, the dataset pages, the portals — reads that database rather than each
+other. This chapter walks the system end to end, names where every URL is served from, and sets
+the 2022 design beside the 2026 one. It is the documentation of the federated architecture and
+its access paths that the [data management plan](dmp.qmd) asks for under Task 14.
 
-The federated system end to end: sources on Drive and GCS, the pipeline, the release store, the record and the portals, the applications and packages, the working PostgreSQL store, the server stack, and where every URL is served from — with the 2022 design beside the 2026 one.
-:::
+![The system along the phases of the plan: provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; the record and every product derive from the release; the CTD team's working store stands beside it.](diagrams/system.svg){#fig-architecture .cc-diagram .nolightbox}
+
+## Sources
+
+Providers' files — spreadsheets, database exports, cast archives — live on a **Google Shared
+Drive** the program owns, in one folder per provider and dataset, and are mirrored by `rclone` to
+a bucket (`gs://calcofi-files/`) so a pipeline run never depends on a person's Drive client. Drive
+keeps the archive as delivered; nothing is unzipped or edited there. Every ingest records which
+file, and which row of it, each value came from, and the record stamps when a source was last
+fetched ([Metadata & the ingest loop](metadata.qmd)).
+
+## The pipeline
+
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows) holds one Quarto notebook per dataset —
+`ingest_{provider}_{dataset}.qmd`, sixteen datasets today, plus the boundary layers and the ship
+reference — orchestrated by `targets` from the `calcofi:` block in each notebook's front matter,
+with the engine in the [calcofi4db](https://calcofi.io/calcofi4db/) R package. Each notebook writes
+its tables as parquet shards to a staging directory outside the repository (mirrored to
+`gs://calcofi-db/parquet/`) and its JSON sidecars — the manifest, the metadata, the keys — into
+the repository, where they are the reviewable record. `release_database.qmd` assembles every
+shard in memory, completes the references, runs the gates and freezes a release
+([Releases](releases.qmd)); `test_release.qmd` tests the uploaded release and promotes it. The
+whole run is reproducible on a laptop or the server. → [Ingesting a dataset](ingest-loop.qmd)
+
+## The release store
+
+`gs://calcofi-db/ducklake/` is public and read over HTTPS. `releases/{version}/` holds each
+release's sidecars; `tables/{table}/{content_hash}/…` holds the parquet objects, content-addressed
+and shared between versions; `releases/latest.txt` names the promoted version. Every reader
+resolves a table through its `catalog.json`; `storage.calcofi.io` is a browsable front door onto
+the same buckets that also redirects a legacy per-release path to its object. Each release is
+tagged and archived on Zenodo with its own DOI. → [Access the data](data-access.qmd),
+[Releases](releases.qmd)
+
+## The record and the portals
+
+At release, one record per dataset (`datasets.json`) and one EML document per dataset are
+generated from the ingest's front matter, the descriptive sidecar the provider edits, the
+registries and the measured coverage. From those two files come the dataset pages at
+[calcofi.io/datasets](https://calcofi.io/datasets/) with their JSON-LD and sitemap, the DCAT and
+STAC catalogs, the Darwin Core archives for OBIS, the EDI packages and ERDDAP's own metadata —
+so a description written once reaches every portal, and a weekly observation asks each portal
+what it says now. → [Portals](portals.qmd), [Cite this data](cite.qmd)
+
+## The products
+
+Everything people use reads the release, and the same bytes:
+
+- the [**Explorer**](https://calcofi.io/explore/), a static site whose queries run in DuckDB inside
+  the browser — six lenses, every view a URL;
+- the [**dataset pages**](https://calcofi.io/datasets/), the [schema browser](https://calcofi.io/db-schema/)
+  and the [query site](https://calcofi.io/db-query/), static sites over the release's sidecars and
+  objects;
+- [**calcofi4r**](https://calcofi.io/calcofi4r/) and [**calcofi4py**](https://calcofi.io/calcofi4py/),
+  which register every release table as a view and carry the matching, citation, quality and
+  branding helpers;
+- [**erddap.calcofi.io**](https://erddap.calcofi.io/erddap/), a CalCOFI-branded ERDDAP serving the
+  release's tables for the community that reads ERDDAP;
+- the **Shiny applications** on the CalCOFI server (`app.calcofi.io/…`), the first generation of
+  viewers, now superseded by the Explorer and kept serving.
+
+→ [Explore](explore.qmd), [Products, brand and uptime](products.qmd)
+
+## The working store
+
+Beside the read-only releases, the CTD team's **PostgreSQL** database on the CalCOFI server
+(PostgreSQL 18, PostGIS, `pg_duckdb`) holds the cast archive verbatim and the team's flag ledger,
+reached over SSH. It is never read by a consumer: the accepted flags are snapshotted nightly to
+the bucket and the next CTD ingest applies them, so the team's judgement reaches the release
+through the pipeline like everything else. → [CTD QA/QC](ctd-qaqc.qmd), [Server
+access](server-access.qmd)
+
+## Where every URL is served from
+
+| address | what | served by |
+|---|---|---|
+| `calcofi.io` | the landing page and the dataset catalog | GitHub Pages (Jekyll, `CalCOFI/CalCOFI.github.io`) |
+| `calcofi.io/explore` | the Explorer | GitHub Pages (Vite + DuckDB-WASM, `CalCOFI/explore`) |
+| `calcofi.io/docs` | this book | GitHub Pages (Quarto, `CalCOFI/docs`) |
+| `calcofi.io/db-schema`, `/db-query` | the schema browser, the query site | GitHub Pages (Jekyll) |
+| `calcofi.io/workflows` | every notebook, rendered | GitHub Pages (Quarto, `CalCOFI/workflows`) |
+| `calcofi.io/calcofi4r`, `/calcofi4py`, `/calcofi4db` | the packages' reference sites | GitHub Pages (pkgdown, MkDocs, pkgdown) |
+| `calcofi.io/analytics` | usage per product | GitHub Pages (Hugo, `CalCOFI/analytics`) |
+| `status.calcofi.io` | uptime per product | Upptime (`CalCOFI/uptime`) |
+| `storage.googleapis.com/calcofi-db` | the release store, the parquet | Google Cloud Storage |
+| `storage.calcofi.io` | a browsable front door onto the buckets, with the legacy-path redirects | Caddy on the CalCOFI server |
+| `erddap.calcofi.io` | ERDDAP | the CalCOFI server (Docker) |
+| `app.calcofi.io/…` | the Shiny applications | the CalCOFI server (Shiny Server) |
+| `h3t.calcofi.io` | the cached hexagon-tile API behind the Hexagon Explorer | the CalCOFI server (FastAPI behind Varnish) |
+| `rstudio.`, `pgadmin.`, `ssh.calcofi.io` | RStudio Server, pgAdmin, SSH and the PostgreSQL tunnel | the CalCOFI server |
+| `tile.calcofi.io`, `file.calcofi.io` | vector tiles from PostGIS; public files on disk | the CalCOFI server |
+
+The server is one Docker Compose stack, configured in [CalCOFI/server](https://github.com/CalCOFI/server)
+— the configuration of record for every `*.calcofi.io` service. Everything on GitHub Pages
+rebuilds itself on push and costs nothing to host.
+
+## Then and now
+
+![The 2022 design: sources ingested by scripts into a PostGIS database, an API feeding Shiny apps and reports, and a *publish* step to the portals that was intent rather than code.](figs/sw_arch.svg){#fig-arch-2022 .cc-diagram .nolightbox}
+
+The 2022 figure had the right boxes and the wrong plumbing. Its database was PostgreSQL behind
+an API, so every reader was a request to one server; its *publish* box was a plan. The 2026 system
+keeps the boxes and changes what connects them: the database is parquet on a public bucket that
+any DuckDB reads directly — the browser included, so the flagship application has no server at
+all; the API is retired; the *publish* box is generated from one record per dataset at every
+release; and the PostgreSQL that remains is a working store for one team, feeding the pipeline
+rather than serving it. What did not change is the intent: one integrated, versioned, citable
+database that every product reads, so that a correction made once reaches everyone.

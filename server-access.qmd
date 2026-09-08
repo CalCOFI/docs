@@ -12,8 +12,8 @@ explains how to get in and how to connect, for **Mac** and **Windows**.
 
 ::: {.callout-note}
 ## Two databases, two access paths
-- The **public releases** (`v2026.08.14` …) are Parquet on a public bucket. No account, no
-  tunnel: [Data Access](data-access.qmd), `calcofi4r::cc_get_db()`, DuckDB, the browser.
+- The **public releases** are parquet on a public bucket. No account, no tunnel:
+  [Access the data](data-access.qmd), `calcofi4r::cc_get_db()`, DuckDB, the browser.
 - The **working PostgreSQL database** (`calcofi`) is private and reachable only over SSH.
   That is what the rest of this page is about.
 :::
@@ -333,9 +333,8 @@ Raw SQL, in any DuckDB:
 INSTALL postgres; LOAD postgres;
 ATTACH 'dbname=calcofi host=localhost port=5432 user=rswalethorp' AS pg (TYPE postgres, READ_ONLY);
 SELECT * FROM pg.ctd.cast LIMIT 5;
--- v2026.08.14 is a consolidated release, so this per-release path is kept; for any
--- other version take the URL from the release catalog (see below)
-SELECT * FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.14/parquet/sample.parquet') LIMIT 5;
+-- a release table: take its object URL from the release catalog, never a typed path (see below)
+SELECT * FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/tables/sample/{content_hash}/sample.parquet') LIMIT 5;
 ```
 
 **And the other direction — DuckDB *inside* PostgreSQL.** The server runs the
@@ -344,16 +343,14 @@ read the public release Parquet without leaving SQL:
 
 ```sql
 SELECT * FROM release.cruise WHERE year = 2023;        -- views over the current release (cruise, ship, dataset)
-SELECT r['sample_key']::text, r['datetime_utc']::timestamp
-FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.14/parquet/sample.parquet') r
+SELECT r['sample_key']::text, r['datetime']::timestamp
+FROM read_parquet('https://storage.googleapis.com/calcofi-db/ducklake/tables/sample/{content_hash}/sample.parquet') r
 WHERE r['dataset_key']::text = 'calcofi_ctd-cast' LIMIT 10;
 ```
 
-The `v2026.08.14` URL works because that version is **consolidated** — its
-`parquet/` copy is kept indefinitely — whereas a retired version's is removed by
-archive thinning (see [Versions](data-access.qmd#sec-versions)). For any other
-version, resolve the table through its `catalog.json` instead of typing a path;
-the packages hand back the `read_parquet(...)` fragment to paste in:
+Resolve the table through the release's `catalog.json` rather than typing a path — the objects
+are content-addressed and shared between versions ([Releases](releases.qmd)); the packages hand
+back the `read_parquet(...)` fragment to paste in:
 
 ```r
 calcofi4r::cc_read_parquet_sql(cc_release_sources(cc_catalog("latest"), "sample"))

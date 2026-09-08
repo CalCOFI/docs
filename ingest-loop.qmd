@@ -1,10 +1,95 @@
 # Ingesting a dataset {#sec-ingest-loop}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+For the data team, and for anyone who will bring a dataset into the integrated database. The
+work is a loop of five steps with a person at every hand-off; each step is a Claude Code *skill*
+in [CalCOFI/workflows](https://github.com/CalCOFI/workflows) (`.claude/skills/`, with the runbook
+beside them) that scaffolds the artifacts and writes its stage into the shared trackers, so the
+loop documents itself. The provider-facing side of the same loop — what a provider sees and edits
+— is [Metadata & the ingest loop](metadata.qmd).
 
-The loop the data team runs to bring a dataset in — explore, metadata, ingest, validate, release — the artifacts each step writes, what validation checks, how a dataset can be staged without being released, and how a question reaches its provider.
-:::
+```
+/explore-dataset  →  /generate-metadata  →  /ingest-new  →  run the notebook  →  /validate-ingest  →  release_database.qmd
+```
+
+## The shared artifacts
+
+Everything a step produces lands in a registry or a sidecar that the next step reads; nothing is
+typed twice.
+
+| artifact | role |
+|---|---|
+| `metadata/field_dictionary.csv` | the standard column names, types and units a new dataset conforms to; authored in `libs/build_field_dictionary.R` ([Naming conventions](naming.qmd)) |
+| `metadata/measurement_type.csv` | the vocabulary of measured quantities with their physical bounds; read with `calcofi4db::read_measurement_type()`, appended with `register_measurement_types()` — never a bare `write_csv()`, which ships the string `"NA"` |
+| `metadata/{provider}/{dataset}/tbls_redefine.csv`, `flds_redefine.csv` | the crosswalk from the source's tables and columns to the standard names, with descriptions and units |
+| `metadata/{provider}/{dataset}/dataset_meta.yml` | the descriptive metadata — abstract, methods, creators, citation, licence, contact — that the provider edits through their Sheet |
+| `metadata/{provider}/{dataset}/questions.csv` | every question for the provider, with a durable `id`, a short `label`, a `status` (`open` · `proposed` · `answered` · `wontfix`) and a `priority`; read with `read_questions()` |
+| `metadata/dataset_status.csv` | one row per dataset; each step writes its stage column |
+| `metadata/relationships_cross.csv` | the foreign keys that cross datasets; every edge is measured at release ([Keys and integrity](keys.qmd)) |
+| `data/parquet/{provider}_{dataset}/` | the ingest's JSON sidecars — `manifest.json`, `metadata.json`, `relationships.json` — tracked in git; the parquet itself stages outside the repo and mirrors to the bucket |
+
+## The five steps
+
+1. **Explore** — `/explore-dataset {path|url}` profiles the source: structure, coverage, the
+   columns that look like keys or standard fields (matched against the dictionary), the provider,
+   whether to ingest or only to publish. It **seeds `questions.csv`** from what the profile cannot
+   answer.
+2. **Metadata** — `/generate-metadata {provider} {dataset}` scaffolds the two crosswalk files,
+   pre-filling the standard names from the dictionary (the dictionary wins: `lat_dec` →
+   `latitude`), flags the columns it cannot place as new standard fields or new measurement types,
+   and registers the dataset's key, category and descriptive sidecar.
+3. **Ingest** — `/ingest-new {provider} {dataset}` scaffolds `ingest_{provider}_{dataset}.qmd` from
+   the template, with the questions section at the end. The notebook reads the source, applies the
+   crosswalk, keys every event to its cruise by date span
+   (`resolve_cruise_key()`, never by event month), keeps the provider's own identifiers as columns,
+   and **projects its tables into the core family** — `sample`, `obs`, `obs_attribute`,
+   `sample_measurement`, and the taxa references — with the generic `append_*()` helpers. The
+   projection SQL lives in the notebook, not in the package, so a new dataset never edits shared
+   code. Every notebook ends the same way: `write_parquet_outputs()`, `build_metadata_json()`,
+   `sync_to_gcs()`.
+4. **Validate** — after the notebook runs, `/validate-ingest {provider} {dataset}` checks keys,
+   nulls, ranges, duplicates, the summary tables, the schema against the dictionary, the declared
+   measurement bounds, and that no `blocker` question is open. Every finding is either fixed or
+   becomes a `proposed` question with the finding as its context; an undeclared bound is a finding,
+   not a pass.
+5. **Release** — `release_database.qmd` discovers the new dataset's sidecars on its own, merges its
+   relationships, assembles the core in memory, runs the gates ([Releases](releases.qmd)), and
+   freezes. `test_release.qmd` then runs the consumer contract against the uploaded release and
+   promotes `latest.txt` only when it passes.
+
+## Staging without releasing
+
+A dataset with open blocker questions sets `in_release: false` in its notebook's `calcofi:` block.
+It still runs in the pipeline and writes its full outputs, but every release-side step skips it —
+the table registry, the core union, the `dataset` table, the diagram, the merged sidecars — until
+the flag flips. Two things do not follow automatically: a new measurement type it introduces is
+staged in its own `measurement_type_new.csv` rather than the shared registry, and any upload to the
+public bucket is gated behind a local flag if publication itself is unsettled.
+
+## Rules that fell out of doing it sixteen times
+
+- **Key events to cruises by date span, never by calendar month.** A cruise straddles a month
+  boundary routinely and the neighbouring month is usually a real cruise of the same ship; the
+  month rule moved thousands of casts onto the wrong cruise with no key ever failing.
+- **The provider's identifiers are columns.** A UUID, a cast counter, a station id: keep it, typed,
+  beside the natural key. Never drop a source key as "derivable" — the bottle ingest did, and that
+  was the bug.
+- **Declare what you publish, and only the core.** No per-dataset source table reaches the release;
+  where a source column matters, give it a home in the core rather than shipping the source table
+  to carry it.
+- **Bounds are physical, not observed.** Declare what is possible, never the range you saw;
+  enforcement is a separate, explicit deletion.
+- **Coverage is measured, never asserted.** Do not type a dataset's years or extent into its
+  metadata; the release measures both.
+- **Every question is pre-answered where the repo can answer it.** A `proposed` row carries the
+  answer we built; the provider confirms a solution rather than being handed a problem.
+- **A shared registry is written with `na = ""`.** The default writes the string `"NA"`, which is
+  invisible from R and reaches the release as a value.
+
+## How a question reaches its provider
+
+Each provider organization has one Google Sheet, generated from git and pulled back into it: a
+tab per dataset for its questions, a `metadata` tab for the descriptive sidecar, and — on the
+CalCOFI Sheet — the `holdings` triage board for datasets not yet ingested. The data team runs
+`push` to regenerate the tabs and `pull` to bring answers back; both are dry runs until told
+otherwise, and `pull` writes only the four answer columns. When a batch is ready, one email is
+drafted from the same rows. [Metadata & the ingest loop](metadata.qmd) says what the provider sees.

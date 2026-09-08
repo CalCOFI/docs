@@ -1,0 +1,36 @@
+tbl_old,tbl_new,fld_old,fld_new,type_new,fld_description,units
+Compiled Cruises,dungeness_sample,Cruise,cruise_orig,VARCHAR,"Source cruise label, YYMM + two-letter CalCOFI ship abbreviation (e.g. 1404SH = April 2014, Bell M. Shimada).",
+Compiled Cruises,dungeness_sample,Line,line,DOUBLE,CalCOFI alongshore line.,
+Compiled Cruises,dungeness_sample,Station,station,DOUBLE,CalCOFI offshore station.,
+Compiled Cruises,dungeness_sample,Order_Occ,order_occ,SMALLINT,Order of station occupation within the cruise.,
+Compiled Cruises,dungeness_sample,Date,date,DATE,Sample collection date. Source workbook uses Excel's 1904 date epoch.,
+Compiled Cruises,dungeness_sample,Time,time_sec,INTEGER,Collection time as seconds since midnight; source is a mix of Excel day fractions and 'HH:MM' text.,s
+Compiled Cruises,dungeness_sample,Aliq.,aliquot,DOUBLE,"Fraction of the preserved sample actually examined under the scope (1 = whole sample). Counts are NOT divided by this: the sorter deliberately did not adjust for aliquot, since the study measures occurrence rather than density (Notes sheet, 2015-10-22). Treat it as context for interpreting an absence.",fraction
+Compiled Cruises,dungeness_sample,Vol (ml),volume_ml,DOUBLE,Settled volume of the preserved plankton sample.,ml
+Compiled Cruises,dungeness_sample,Sample Comments,comments,VARCHAR,Sorter's free-text notes on the sample as a whole.,
+Compiled Cruises,dungeness_measurement,Dungeness Crab Megalopae,measurement_value,DOUBLE,Count of Metacarcinus magister megalopae found in the examined aliquot.,count
+Compiled Cruises,dungeness_measurement,Other Megalopae,measurement_value,DOUBLE,"Count of non-Dungeness decapod megalopae found in the examined aliquot. Flagged lower-confidence by the sorter: ""Data beyond Dungeness crab megalopae should be used more as a guideline - extends beyond the focus of the study and there is potential for error in some of the identifications"" (Notes sheet, 2015-10-22).",count
+Compiled Cruises,dungeness_measurement,Cancer Zoea,measurement_value,DOUBLE,"Count of Cancer/Metacarcinus zoeae found in the examined aliquot. Flagged lower-confidence by the sorter: ""Data beyond Dungeness crab megalopae should be used more as a guideline - extends beyond the focus of the study and there is potential for error in some of the identifications"" (Notes sheet, 2015-10-22).",count
+Compiled Cruises,dungeness_measurement,Other Zoea,measurement_value,DOUBLE,"Count of non-Cancer decapod zoeae found in the examined aliquot. Flagged lower-confidence by the sorter: ""Data beyond Dungeness crab megalopae should be used more as a guideline - extends beyond the focus of the study and there is potential for error in some of the identifications"" (Notes sheet, 2015-10-22).",count
+Compiled Cruises,dungeness_measurement,Description,taxa_description,VARCHAR,"Sorter's free-text identification detail for this count, e.g. 'Zoea III (2) 2.4mm, 2.6mm; Zoea IV (1) 2.8mm'. Not yet parsed into structured taxon/stage/length bins (see questions.csv).",
+Compiled Cruises,dungeness_carapace,Carapace length,carapace_length_mm,DOUBLE,Carapace length of one Metacarcinus magister megalopa (rostrum to end of carapace).,mm
+Cancer Magister sorting update,dungeness_sorting_log,Expedition,expedition_orig,VARCHAR,"Source expedition label, inconsistently formatted (e.g. '8803', 'CALCOFI 0404', 'CCES-Sardine Survey 0807', 'BODEGA BAY').",
+Cancer Magister sorting update,dungeness_sorting_log,Staline,line,DOUBLE,CalCOFI alongshore line.,
+Cancer Magister sorting update,dungeness_sorting_log,StaNo,station,DOUBLE,CalCOFI offshore station.,
+Cancer Magister sorting update,dungeness_sorting_log,Lat,latitude,DOUBLE,"Latitude, WGS84.",decimal_degrees
+Cancer Magister sorting update,dungeness_sorting_log,Lon,longitude,DOUBLE,"Longitude, WGS84.",decimal_degrees
+Cancer Magister sorting update,dungeness_sorting_log,SampleDate,date,DATE,"Sample collection date, reassembled from the source's day/year text and its separate Month column.",
+Cancer Magister sorting update,dungeness_sorting_log,StartTime,time_start_sec,INTEGER,Tow start time as seconds since midnight.,s
+Cancer Magister sorting update,dungeness_sorting_log,EndTime,time_end_sec,INTEGER,Tow end time as seconds since midnight.,s
+Cancer Magister sorting update,dungeness_sorting_log,MaxDepth,max_depth_m,DOUBLE,Maximum tow depth.,m
+Cancer Magister sorting update,dungeness_sorting_log,Net,net,VARCHAR,"Net type (CALBOBL, BONGO, CAL1MOBL, CAL2MOBL, '1 m', '3/4 m').",
+Cancer Magister sorting update,dungeness_sorting_log,Mesh,mesh_mm,DOUBLE,Net mesh size.,mm
+Cancer Magister sorting update,dungeness_sorting_log,Tow,tow_type,VARCHAR,Tow geometry (OBLIQUE throughout).,
+Cancer Magister sorting update,dungeness_sorting_log,Preservative,preservative,VARCHAR,Sample preservative (formaldehyde throughout).,
+ScrippsArchivedMegalopae,dungeness_specimen,CR,cruise_orig,VARCHAR,Source cruise label (YYMM).,
+ScrippsArchivedMegalopae,dungeness_specimen,Station,station,DOUBLE,CalCOFI offshore station (split from the source's 'line station' cell).,
+ScrippsArchivedMegalopae,dungeness_specimen,Sample Date,date,DATE,Date the plankton sample was collected.,
+ScrippsArchivedMegalopae,dungeness_specimen,Time,time_sec,INTEGER,Collection time as seconds since midnight (source is HHMM text).,s
+ScrippsArchivedMegalopae,dungeness_specimen,Dungeness Crab megalopae?,is_magister,BOOLEAN,Whether the specimen was confirmed as Metacarcinus magister on independent review.,
+ScrippsArchivedMegalopae,dungeness_specimen,Size mm (rostrum to end of carapace),carapace_length_mm,DOUBLE,Carapace length of the specimen.,mm
+ScrippsArchivedMegalopae,dungeness_specimen,Notes,notes,VARCHAR,Reviewer's notes on specimen condition and alternative identification.,

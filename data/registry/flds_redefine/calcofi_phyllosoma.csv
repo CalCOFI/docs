@@ -1,0 +1,26 @@
+tbl_old,tbl_new,fld_old,fld_new,type_new,fld_description,units
+phyllosoma,phyllosoma_tow,sorting_lab,sorting_lab,VARCHAR,Lab that sorted the sample.,
+phyllosoma,phyllosoma_tow,year_month_of_tow,cruise_orig,VARCHAR,Source cruise label (YYMM); cruise_key derived from it.,
+phyllosoma,phyllosoma_tow,tow_collection_day,date,DATE,Tow collection date.,
+phyllosoma,phyllosoma_tow,ship,ship_name,VARCHAR,Vessel name; resolved to ship_key.,
+phyllosoma,phyllosoma_tow,station_line,line,DOUBLE,CalCOFI alongshore line.,
+phyllosoma,phyllosoma_tow,station_number,station,DOUBLE,CalCOFI offshore station.,
+phyllosoma,phyllosoma_tow,latitude_o,latitude,DOUBLE,"Latitude, WGS84.",decimal_degrees
+phyllosoma,phyllosoma_tow,longitude_o,longitude,DOUBLE,"Longitude, WGS84.",decimal_degrees
+phyllosoma,phyllosoma_tow,max_tow_depth_m,max_tow_depth_m,DOUBLE,Maximum tow depth.,m
+phyllosoma,phyllosoma_tow,volume_water_filtered_ml_1000m3,volume_filtered,DOUBLE,Volume of water filtered (standardization factor).,ml/1000m3
+phyllosoma,phyllosoma_tow,aliquot_percent,aliquot_pct,DOUBLE,Aliquot percentage sorted.,percent
+phyllosoma,phyllosoma_tow,aliquot_adjustment_value,aliquot_adjustment,VARCHAR,Aliquot adjustment note/value.,
+phyllosoma,phyllosoma_tow,study_flag,study_flag,VARCHAR,Provider study flag.,
+phyllosoma,phyllosoma_measurement,total_phyllosoma,total_phyllosoma,INTEGER,Total phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_1,phyllosoma_stage_1,INTEGER,Stage 1 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_2,phyllosoma_stage_2,INTEGER,Stage 2 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_3,phyllosoma_stage_3,INTEGER,Stage 3 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_4,phyllosoma_stage_4,INTEGER,Stage 4 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_5,phyllosoma_stage_5,INTEGER,Stage 5 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_6,phyllosoma_stage_6,INTEGER,Stage 6 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_7,phyllosoma_stage_7,INTEGER,Stage 7 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_8,phyllosoma_stage_8,INTEGER,Stage 8 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_9,phyllosoma_stage_9,INTEGER,Stage 9 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_10,phyllosoma_stage_10,INTEGER,Stage 10 phyllosoma count.,count
+phyllosoma,phyllosoma_measurement,stage_11,phyllosoma_stage_11,INTEGER,Stage 11 phyllosoma count.,count

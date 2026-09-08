@@ -1,10 +1,67 @@
 # The data management plan {#sec-dmp}
 
-::: {.callout-note}
-## Being written
-This chapter is part of the September 2026 revamp of the book (the plan is in
-[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
-order the plan gives. What it will hold:
+The SIO-CalCOFI **Data Management Plan** is a two-year action plan (2026–2028) that organizes the
+program's data work into five phases — **Ingest, Publish, Integrate, Visualize, Synthesize** —
+and names, for each action, a lead, a deliverable and the people doing it. This book is arranged
+along the same five phases, so every deliverable that is a document, a page or a product has a
+home here. The table below mirrors the team's status sheet, refreshed with each quarterly status
+entry; the sheet itself is the working record.
 
-The five phases of the SIO-CalCOFI data management plan and the tasks under each, with owner, status, target date and where the deliverable lives — read from a file kept in step with the plan's status sheet.
-:::
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(dplyr, gt, here, purrr, tibble, yaml, quiet = TRUE)
+`%||%` <- function(a, b) if (is.null(a)) b else a
+dmp <- yaml::read_yaml(here("data/dmp_tasks.yml"))
+chapter_title <- function(f) {
+  x <- readLines(here(f), warn = FALSE)
+  h <- x[grepl("^# ", x)][1]
+  sub("\\s*\\{.*\\}\\s*$", "", sub("^# ", "", h))
+}
+tasks <- purrr::map_dfr(dmp$tasks, \(t) tibble::tibble(
+  id = t$id, phase = t$phase, tier = t$tier %||% "", scope = t$scope %||% "",
+  action = t$action, lead = t$lead %||% "", status = t$status %||% "",
+  where = paste(purrr::map_chr(t$where %||% list(), \(f)
+    sprintf("[%s](%s)", chapter_title(f), sub("\\.qmd$", ".html", f))), collapse = ", ")))
+```
+
+Updated `r dmp$updated` from the [action sheet](`r dmp$source`). Period: `r dmp$period`.
+
+## The tasks, by phase
+
+```{r}
+#| label: tbl-dmp
+#| tbl-cap: The plan's tasks (1–17 from the proposal; 18 onward added by the team), with the lead, the status the sheet reports, and where in this book the deliverable lives.
+tasks |>
+  dplyr::mutate(phase = factor(phase, levels = unlist(dmp$phases)),
+                task = paste0("Task ", id, ifelse(nzchar(scope), paste0(" · ", scope), ""))) |>
+  dplyr::arrange(phase, id) |>
+  dplyr::select(phase, task, action, lead, status, where) |>
+  gt(groupname_col = "phase") |>
+  (\(g) if (knitr::is_html_output()) fmt_markdown(g, columns = where) else cols_hide(g, where))() |>
+  cols_label(where = "in this book") |>
+  sub_missing(missing_text = "") |>
+  tab_style(style = cell_text(size = "0.9em"), locations = cells_body()) |>
+  tab_options(table.width = pct(100), data_row.padding = px(4), table.font.size = "0.88em")
+```
+
+## Year 1: what the contractor delivers, by quarter
+
+Ocean Metrics is the plan's senior data-science contractor, and its Year 1 statement of work
+(2026-09-01 to 2027-08-31) puts each of its deliverables in a quarter. The ones that are
+documentation land in this book:
+
+| quarter | due | deliverables |
+|---|---|---|
+| Q1 | 2026-11-30 | the cloud database with internal and external access and its access guidance (Task 11: [Access the data](data-access.qmd), [Server access](server-access.qmd)); CTD casts on ERDDAP; the bottle-migration schema documentation and the CTD profile database's data dictionary (Tasks 1–2); the inventory of legacy names and a first draft of the naming conventions (Tasks 12–13: [Naming conventions](naming.qmd), [Providing data](provide.qmd)); releases; the quarterly status entry |
+| Q2 | 2027-02-28 | bottle migration QA/QC against the release; CTD profile integration validated by the release gates; the naming guide and mapping tables circulated for review; NetID/UUID advisory (Task 9); the invertebrate–ichthyoplankton crosswalk (Tasks 7–8); webinar 1, the product showcase |
+| Q3 | 2027-05-31 | the naming guide and dataset nomenclature agreed and applied (Tasks 12–13); schema-normalization recommendations (Task 10); the eDNA-to-OBIS pipeline (Task 5); the data inventory with variable-based discovery, beta (Task 14) |
+| Q4 | 2027-08-31 | the inventory released, with the federated-architecture and data-access documentation (Task 14: [Architecture](architecture.qmd)); webinar 2, the technical deep-dives; contributions to the mid-term report and the seed of the living plan (Tasks 15–16) |
+
+## How to read a status
+
+A task's status is the sentence the sheet carries, condensed; the sheet's owner writes it, not the
+book. *Where* it lives is the chapter or product that holds the deliverable today, which is why
+some rows point at a chapter that is still being written: the plan is ahead of the record, as it
+should be. The [status chapter](status.qmd) is the dated log of what actually landed, by phase,
+each quarter.

@@ -1,0 +1,18 @@
+tbl_old,tbl_new,fld_old,fld_new,type_new,fld_description,units
+zoodb_holoplankton,zoodb_sample,source,source,VARCHAR,"Sample grain: 'unpooled' (single net tow with full position) or 'pooled' (per-cruise regional composite of n_tows_pooled night tows).",
+zoodb_holoplankton,zoodb_sample,cruise,cruise_orig,VARCHAR,"Original ZooDB cruise label (e.g. 'CALCOFI 5103', 'CALCOFI Monterey 5105', 'CALCOFI 1203SH'); cruise_key is derived from it.",
+zoodb_holoplankton,zoodb_sample,ship,ship_name,VARCHAR,"Vessel name as provided (unpooled only; 'N/A' for pooled); resolved to ship_key against the NODC ship registry.",
+zoodb_holoplankton,zoodb_sample,date,date,DATE,"Sample date.",
+zoodb_holoplankton,zoodb_sample,tow_begin,datetime_start_utc,TIMESTAMP,"Tow start date-time (unpooled only); cross-dataset match key to casts. Timezone unconfirmed (assumed local ship time, see questions).",
+zoodb_holoplankton,zoodb_sample,tow_end,datetime_end_utc,TIMESTAMP,"Tow end date-time (unpooled only).",
+zoodb_holoplankton,zoodb_sample,line,line,DOUBLE,"Alongshore CalCOFI line (unpooled only).",
+zoodb_holoplankton,zoodb_sample,station,station,DOUBLE,"Offshore CalCOFI station (unpooled only).",
+zoodb_holoplankton,zoodb_sample,region,region,VARCHAR,"ZooDB region: SC (Southern California, lines 76.7-93), CC (Central California, lines 60-70), or Other (outside standard regions).",
+zoodb_holoplankton,zoodb_sample,latitude,latitude,DOUBLE,"Latitude in decimal degrees, WGS84 (EPSG:4326); unpooled only.",decimal_degrees
+zoodb_holoplankton,zoodb_sample,longitude,longitude,DOUBLE,"Longitude in decimal degrees, WGS84 (EPSG:4326); unpooled only.",decimal_degrees
+zoodb_holoplankton,zoodb_sample,max_depth_m,max_depth_m,DOUBLE,"Maximum tow depth in meters (unpooled only); CalCOFI standard 0-210 m since 1969, 0-140 m 1951-1968.",m
+zoodb_holoplankton,zoodb_sample,min_depth_m,min_depth_m,DOUBLE,"Minimum tow depth in meters (unpooled only).",m
+zoodb_holoplankton,zoodb_sample,net_type,net_type,VARCHAR,"Net gear: CAL1MOBL (1-m ring net, to 1977), CALBOBL (0.71-m bongo, since Dec 1977), or '1 m' (unpooled only).",
+zoodb_holoplankton,zoodb_sample,n_tows_pooled,n_tows_pooled,INTEGER,"Number of tows aggregated: 1 for unpooled, n for pooled composites.",
+zoodb_holoplankton,zoodb_taxon,taxon,taxon_slug,VARCHAR,"Lower-cased underscore join key derived from the ZooDB higher-taxon label; FK target from zoodb_measurement.",
+zoodb_holoplankton,zoodb_measurement,abundance_per_1000m3,measurement_value,DOUBLE,"Pivoted to long form: zooplankton_abundance (count/1000m3), zooplankton_abundance_areal (count/m2), and zooplankton_biomass_carbon (mg C/m2).",

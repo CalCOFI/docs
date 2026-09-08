@@ -1,0 +1,180 @@
+# The SIO-CalCOFI Data Management Plan's action plan, mirrored from the team's Google Sheet
+# ("FINAL PROPOSAL_CalCOFI DMP actions", tabs FINAL PROPOSAL and Status) so the book can show it:
+# the Sheet is private, and the book's build must never depend on Google auth. Authored by hand,
+# refreshed with each quarterly status entry (docs/status.qmd); `status` is the Status tab's
+# sentence, condensed; `where` names the chapters or products a task's deliverable lives in.
+updated: 2026-09-08
+source: https://docs.google.com/spreadsheets/d/1r5xs4SzLlY1pDzdAYb5viW8Lg5v-410WfTGPBVsX3aM
+period: 2026-09-01 to 2028-08-31 (two years; Year 1 is the 2026-09 to 2027-08 Ocean Metrics SoW)
+phases:
+  - Ingest
+  - Publish
+  - Integrate
+  - Visualize
+  - Synthesize
+tasks:
+  - id: 1
+    phase: Ingest
+    tier: "1 · operational stability"
+    scope: cast, profile and bottle data
+    action: Migrate the bottle database into a non-proprietary relational database
+    lead: Rasmus Swalethorp
+    status: awaiting finalization of the CTD profile database and training
+    where: [server-access.qmd, ctd-qaqc.qmd]
+  - id: 2
+    phase: Ingest
+    tier: "1 · operational stability"
+    scope: cast, profile and bottle data
+    action: Construct a CTD profile database and integrate it with the bottle database
+    lead: Rasmus Swalethorp
+    status: PostgreSQL profile database built (2026-08-19), internal access set up, training started, the QA/QC protocol under discussion; weekly meetings with the SIO tech team; the QA/QC process being automated in Python
+    where: [ctd-qaqc.qmd, server-access.qmd]
+  - id: 3
+    phase: Publish
+    tier: "2 · level-1 data readiness"
+    scope: eDNA metabarcoding (12S MiFish, 12S MarVer1, d-loop, CO1)
+    action: Ensure all future sampling follows FAIRe-formatted data collection
+    lead: Nastassia Patin
+    status: the Fall 2026 cruise is the test case for real-time FAIRe sample metadata; starting, with the new eDNA technician
+  - id: 4
+    phase: Publish
+    tier: "2 · level-1 data readiness"
+    scope: eDNA metabarcoding
+    action: Format all past eDNA datasets and their environmental metadata to FAIRe
+    lead: Nastassia Patin
+    status: a conversion pipeline for the existing metabarcoding datasets is built and validated
+  - id: 5
+    phase: Publish
+    tier: "2 · level-1 data readiness"
+    scope: eDNA metabarcoding
+    action: Upload eDNA datasets and metadata to OBIS
+    lead: Nastassia Patin
+    status: one dataset ready for submission pending admin authorization; more expected in the coming months
+    where: [portals.qmd]
+  - id: 6
+    phase: Publish
+    scope: eDNA metabarcoding
+    action: Assess the status of complementary CalCOFI-associated eDNA datasets (e.g. NCOG)
+    lead: Nastassia Patin
+    status: not yet started
+  - id: 7
+    phase: Integrate
+    tier: "3a · interoperability across datasets"
+    scope: zooplankton samples
+    action: Explore where the SIO invertebrate tow and net samples match the ichthyoplankton samples
+    lead: Linsey Sala
+    status: starts Fall 2026; waiting on input from the collection
+    where: [keys.qmd]
+  - id: 8
+    phase: Integrate
+    tier: "3a · interoperability across datasets"
+    scope: zooplankton samples
+    action: Outline the matches and mismatches and an approach to optimizing the match
+    lead: Linsey Sala
+    status: waiting on input from the collection
+  - id: 9
+    phase: Integrate
+    tier: "3a · interoperability across datasets"
+    scope: zooplankton samples
+    action: Integrate the NOAA-SWFSC NetID (UUID) with incoming records and the invertebrate collection database
+    lead: Linsey Sala
+    status: waiting on input from the collection; the database already keeps provider UUIDs as columns
+    where: [keys.qmd]
+  - id: 10
+    phase: Integrate
+    scope: zooplankton samples
+    action: Use the matching exercise and the naming conventions to decide where the database is normalized and restructured
+    lead: Linsey Sala
+    status: waiting on input from the collection
+  - id: 11
+    phase: Integrate
+    tier: "3a · interoperability across datasets"
+    scope: cross-cutting
+    action: A fast, cloud-based integrated database accessible internally and externally
+    lead: Ben Best & Betty Huang
+    status: operational — versioned frozen releases on Google Cloud Storage, read from R, Python, ERDDAP and the browser; the internal PostgreSQL working store documented; the one access-guidance document is this book's Access and Server access chapters (Q1)
+    where: [data-access.qmd, server-access.qmd, releases.qmd]
+  - id: 12
+    phase: Integrate
+    tier: "3a · interoperability across datasets"
+    scope: cross-cutting
+    action: Standardized CalCOFI naming conventions for cruises, tows, times, coordinates, stations and lines, variables and units, mapped onto the existing datasets
+    lead: Ben Best & Betty Huang
+    status: Betty's guide drafted (audience and purpose, mandatory / optional / best practice, an example table), reconciled against the registries 2026-09-08 and published as the provider guide; the database's conventions and the legacy-name crosswalk generated from the registries; the inventory of legacy names Q1, the guide circulated Q2, applied across datasets Q3
+    where: [naming.qmd, provide.qmd]
+  - id: 13
+    phase: Integrate
+    tier: "3a · interoperability across datasets"
+    scope: cross-cutting
+    action: Agree a standardized nomenclature for naming CalCOFI datasets
+    lead: Ben Best & Betty Huang
+    status: dataset naming lives in each ingest's front matter (provider + dataset slug, names, category) and the provider registry, aligned with the CalOOS inventory; the governance record is the naming chapter's dataset section (Q3)
+    where: [naming.qmd]
+  - id: 14
+    phase: Visualize
+    tier: "3a · interoperability across datasets"
+    scope: cross-cutting
+    action: A single authoritative CalCOFI data inventory and entry point, with variable-based discovery
+    lead: Ben Best & Betty Huang
+    status: nearly done — the calcofi.io landing page, the dataset catalog with one page per dataset (in the database or not), the Explorer with six lenses, the schema and query explorers; next, variable-based (EOV) discovery folded into the portal (beta Q3, release Q4) and the federated-architecture documentation (Q4)
+    where: [explore.qmd, architecture.qmd]
+  - id: 15
+    phase: Synthesize
+    scope: mid-term progress report (end of Year 1)
+    action: A structured progress report — completed actions, challenges, next steps
+    lead: Mark Gold
+    status: not yet due; the running record is the status chapter
+    where: [status.qmd]
+  - id: 16
+    phase: Synthesize
+    scope: final report (end of Year 2)
+    action: A stand-alone, living document of the data management approach, what was done, what remains
+    lead: Mark Gold
+    status: seeded by this book; the PDF of the book is the living document
+    where: [index.qmd, architecture.qmd]
+  - id: 17
+    phase: Synthesize
+    scope: guidance on the plan's actions
+    action: Input, direction and review of how the actions are designed and implemented
+    lead: Mark Gold & Karen Stocks
+    status: ongoing
+  - id: 18
+    phase: Publish
+    scope: additional task
+    action: The CalOOS inventory and portal
+    lead: Erin Satterthwaite & Betty Huang
+    status: working with the portal team
+    where: [portals.qmd]
+  - id: 19
+    phase: Publish
+    scope: additional task
+    action: Spin up a CalCOFI ERDDAP
+    lead: Ed Weber
+    status: erddap.calcofi.io serves the release; NOAA's own server is Ed's
+    where: [portals.qmd]
+  - id: 20
+    phase: Publish
+    scope: additional task
+    action: Publish the CDFW dataset and the marine mammal datasets
+    lead: Erin Satterthwaite
+    status: the Dungeness crab megalopae dataset is in the release; its deposit with the UCSD Library and the CDFW portal link are in progress
+  - id: 21
+    phase: Visualize
+    scope: additional task
+    action: A CTD viewer
+    lead: Betty Huang, Ben Best, Rasmus Swalethorp
+    status: the CTD Explorer app and the Python profile explorer serve the team; the Explorer's sections lens serves the public
+    where: [ctd-qaqc.qmd, explore.qmd]
+  - id: 22
+    phase: Ingest
+    scope: additional task
+    action: Track which instruments and datasets have samples collected but no data yet
+    lead: Betty Huang & Mark Gold
+    status: the holdings board on the CalCOFI Sheet and the holdings on calcofi.io/datasets are the start
+    where: [metadata.qmd]
+  - id: 23
+    phase: Publish
+    scope: additional task
+    action: An internal eDNA data inventory with the FAIR status of every dataset
+    lead: Nastassia Patin
+    status: starting

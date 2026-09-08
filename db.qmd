@@ -1,157 +1,23 @@
 # Database
 
-## Naming conventions
+## Conventions, in one line each
 
-> There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton (Netscape architect)
+Names follow [Naming conventions](naming.qmd): singular lower-case tables, `snake_case` columns
+with a unit suffix where one applies, a `geom` column tagged `EPSG:4326`, one row per measured
+value. Keys follow [Keys and integrity](keys.qmd): a `*_key` is a string natural key, a `*_id` an
+integer, a `*_uuid` the provider's own identifier kept as a column; `cruise_key`, `sample_key`,
+`site_key`/`grid_key` and `taxon_key` carry the integration, and every declared key is measured
+before a release ships.
 
-Background reading: [Learn SQL: Naming Conventions](https://www.sqlshack.com/learn-sql-naming-conventions/) ·
-[Best Practices for Database Naming Conventions](https://drygast.net/blog/post/database_naming_conventions).
-
-### Name tables
-
-- Table names are **singular** and use all lower case.
-  - Example: `cruise`, `site`, `species`, `lookup` (not `cruises`, `sites`, `lookups`)
-
-### Name columns
-
-- To name columns, use [**snake-case**](https://cran.r-project.org/web/packages/snakecase/vignettes/introducing-the-snakecase-package.html) (i.e., lower-case with underscores) so as to prevent the need to quote SQL statements. (TIP: Use [`janitor::clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html) to convert a table.)
-
-- Suffix with **units** where applicable (e.g., `*_m` for meters, `*_km` for kilometers, `*_degc` for degrees Celsius). See [units vignette](https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html).
-
-- Set the geometry column to **`geom`** (used by the [PostGIS](https://postgis.net) spatial extension). If a table has multiple geometry columns, use `geom` for the default and `geom_{type}` for the rest (`geom_point`, `geom_line`, `geom_polygon`).
-
-### Key conventions
-
-The **suffix says what kind of value it is**, and this is checked in review, because a
-character-valued identifier named `*_id` is a promise the data cannot keep:
-
-| suffix | value | examples |
-|---|---|---|
-| `*_key` | a **string** natural key — meaningful, stable, human-readable | `cruise_key`, `site_key`, `grid_key`, `sample_key`, `taxon_key`, `dataset_key`, `ship_key` |
-| `*_id` | an **integer** key — a source counter or surrogate | `cast_id`, `bottle_id`, `species_id`, `obs_id`, `hex_id` |
-| `*_uuid` | the **provider's own** identifier for that record, as they mint it ([RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)) | `cruise_uuid`, `source_uuid`, `station_uuid` |
-| `*_seq` | an auto-incrementing sequence integer | — |
-
-**Natural keys are preferred over surrogates wherever they are stable**, and the four that
-carry the integration are worth stating exactly:
-
-- **`cruise_key` = `YYYY-MM-NODC`** (e.g. `1998-02-33JD`) — and the `YYYY-MM` is the month
-  SWFSC *designates* for the whole cruise, never the month a cast or tow happened to fall in.
-  A CalCOFI cruise routinely straddles a calendar boundary (5508BD ran 7 Aug – 25 Sep 1955),
-  and the neighbouring month is usually a **real** cruise of the same ship, so keying by event
-  month silently moves casts onto the wrong cruise with no foreign key ever failing. Events are
-  keyed by containment in the reference cruise's observed date span first, then by the source's
-  own designation, then by event month as a last resort — and which rule fired is recorded.
-- **`sample_key` = `{dataset_key}:{sample_type}:{id}`** (e.g.
-  `calcofi_bottle:cast:7644`) — globally unique across datasets *and* across event levels, so a
-  site, a tow, a net, a cast and a bottle can share one table without collision.
-- **`site_key`** is the CalCOFI station in `"line station"` form (`"090.0 062.0"`);
-  **`grid_key`** is the shared grid cell; **`dataset_key`** = `{provider}_{dataset}` is the
-  provenance stamp on every observation.
-- **`taxon_key`** is a lowercase authority prefix plus that authority's accepted id —
-  `worms:<AphiaID>`, or `itis:<TSN>` for birds, whose WoRMS taxonomy lags. See
-  [Taxonomy](#taxonomy) below.
-
-**Provider UUIDs are released as typed columns where the provider mints them.** They are not
-primary keys — the string keys above are — but they are the join back to the provider's own
-database, and dropping them would make that join impossible:
-
-- **`cruise.cruise_uuid`** is NOAA/SWFSC's `CruiseId`, populated for every released cruise. It
-  is a **public** join key, not an internal artefact.
-- **`sample.source_uuid`** is the provider's identifier for *that event* — SWFSC's `site_uuid`
-  on a site row, `tow_uuid` on a tow, `net_uuid` on a net — and is NULL for the datasets whose
-  sources mint no UUID (15 of 16 do not).
-- **`sample.station_uuid`** is the SWFSC station occupation an event belongs to, resolved in the
-  release, with `station_uuid_method` saying how (the event's own site, its parent's, a match on
-  `(cruise_key, site_key, order_occ)`, or the single ichthyoplankton occupation within 24 hours).
-
-`_source_*` provenance columns — the wrangling-time record of which source file and row a value
-came from — are a different thing entirely and **are stripped at the freeze**; they never reach
-a release.
-
-All three columns ship since v2026.09.04; `metadata.json` for the release you are reading, or the
-[schema explorer](https://calcofi.io/db-schema/), lists them.
-
-**The one sequential integer key the release mints is `root_id`**, on `sample_root`: a dense
-integer for each root sampling event (a `sample` row with no parent), numbered deterministically
-so a rebuild reproduces it. `obs_bio` and `obs_env` carry it so a browser can join observations to
-their event without the string key.
-
-## Use Unicode for text
-
-The [default character encoding for Postgresql](https://www.postgresql.org/docs/current/multibyte.html#MULTIBYTE-SETTING) is unicode (`UTF8`), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.
-
-Logging into the server, we can see this with the following command:
-
-```bash
-docker exec -it postgis psql -l
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(dplyr, gt, here, jsonlite, purrr, tibble, quiet = TRUE)
+`%||%` <- function(a, b) if (is.null(a)) b else a
+snap    <- jsonlite::fromJSON(here("data/_snapshot.json"))
+catalog <- jsonlite::fromJSON(here("data/release/catalog.json"), simplifyVector = FALSE)
+meta    <- jsonlite::fromJSON(here("data/release/metadata.json"), simplifyVector = FALSE)
 ```
-
-```
-                                  List of databases
-        Name        | Owner | Encoding |  Collate   |   Ctype    | Access privileges 
---------------------+-------+----------+------------+------------+-------------------
- gis                | admin | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/admin        +
-                    |       |          |            |            | admin=CTc/admin  +
-                    |       |          |            |            | ro_user=c/admin
- lter_core_metabase | admin | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/admin        +
-                    |       |          |            |            | admin=CTc/admin  +
-                    |       |          |            |            | rw_user=c/admin
- postgres           | admin | UTF8     | en_US.utf8 | en_US.utf8 | 
- template0          | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +
-                    |       |          |            |            | admin=CTc/admin
- template1          | admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/admin         +
-                    |       |          |            |            | admin=CTc/admin
- template_postgis   | admin | UTF8     | en_US.utf8 | en_US.utf8 | 
-(6 rows)
-```
-
-Use Unicode (`utf-8` in Python or `UTF8` in Postgresql) encoding for all database text values to support international characters and documentation (i.e., tabs, etc for markdown conversion).
-
-- In **Python**, use [**`pandas`**](https://pandas.pydata.org/docs/index.html) to read ([`read_csv()`](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)) and write ([`to_csv()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html)) with UTF-8 encoding (i.e., `encoding='utf-8'`).:
-  
-  ```python
-  import pandas as pd
-  from sqlalchemy import create_engine
-  engine = create_engine('postgresql://user:password@localhost:5432/dbname')
-  
-  # read from a csv file
-  df = pd.read_csv('file.csv', encoding='utf-8')
-  
-  # write to PostgreSQL
-  df.to_sql('table_name', engine, if_exists='replace', index=False, method='multi', chunksize=1000, encoding='utf-8')
-  
-  # read from PostgreSQL
-  df = pd.read_sql('SELECT * FROM table_name', engine, encoding='utf-8')
-  
-  # write to a csv file with UTF-8 encoding
-  df.to_csv('file.csv', index=False, encoding='utf-8')
-  ```
-
-- In **R**, use [**`readr`**](https://readr.tidyverse.org/index.html) to read ([`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) and write ([`write_excel_csv()`](https://readr.tidyverse.org/reference/write_delim.html)) to force UTF-8 encoding.
-  
-  ```r
-  library(readr)
-  library(DBI)
-  library(RPostgres)
-  
-  # connect to PostgreSQL
-  con <- dbConnect(RPostgres::Postgres(), dbname = "dbname", host = "localhost", port = 5432, user = "user", password = "password")
-  
-  # read from a csv file
-  df <- read_csv('file.csv', locale = locale(encoding = 'UTF-8'))  # explicit
-  df <- read_csv('file.csv')                                       # implicit
-  
-  # write to PostgreSQL
-  dbWriteTable(con, 'table_name', df, overwrite = TRUE)
-  
-  # read from PostgreSQL
-  df <- dbReadTable(con, 'table_name')
-  
-  # write to a csv file with UTF-8 encoding
-  write_excel_csv(df, 'file.csv', locale = locale(encoding = 'UTF-8'))  # explicit
-  write_excel_csv(df, 'file.csv')                                       # implicit
-  ```
 
 ## The core data model
 
@@ -164,10 +30,13 @@ reads. A dataset's projection lives in its own ingest notebook (the generic shap
 | table | grain | tier |
 |---|---|---|
 | **`sample`** | one row per **physical sampling event** — site, tow, net, cast, bottle, underway record, transect, subsample, region pool — with the hierarchy as an adjacency list (`parent_sample_key`, plus `root_sample_key` for the top of the chain) | core |
-| **`obs`** | the **occurrence headline**: one scalar per row, `realm` = `bio` or `env`; a bio row carries `taxon_key` and `life_stage`, an env row a CTD/bottle measurement | core (a **view**, see below) |
+| **`obs_bio`** | the **biological occurrence headline**: one scalar per row for a taxon (`taxon_key`, `life_stage`, `measurement_type`, `value`) with its event's gear, effort and the two standardized densities inline | core |
+| **`obs_env`** | the **environmental headline**: one measured scalar per row (`measurement_type`, `value`, `measurement_qual`, `qual_ok`), one parquet object per measurement type | core |
+| **`obs`** | the two above under one name — `realm` = `bio` or `env`, `value` as `measurement_value` — as a **view** the catalog carries; its own objects are deprecated | view |
 | **`obs_attribute`** | **sub-occurrence** detail — length- and stage-frequency bins (`bin_value`, `bin_label`, `count`) and categorical behaviour | core |
 | **`sample_measurement`** | **event-level effort and conditions** — a net's `volume_sampled` and `std_haul_factor`, a cast's surface observations | core |
-| **`obs_ctd_full`** | full-resolution CTD scans (~271 M rows); `obs` carries the thinned series | supplemental |
+| **`sample_root`** | one row per root sampling event with the dense integer `root_id` the browser objects join on, its position, time, depth span, gear and seafloor depth | supplemental |
+| **`obs_ctd_full`** | full-resolution CTD scans (~271 M rows); `obs_env` carries the thinned series | supplemental |
 | **`obs_mets_full`** | full-resolution underway meteorology (~20 M rows) | supplemental |
 
 An observation's provenance is denormalized onto it on purpose: `obs` carries `dataset_key`,
@@ -220,6 +89,35 @@ plain mean per dataset × `grid_key` × **calendar month** × 10 m depth bin × 
 **1993–2013**, kept only where ≥ 3 distinct cruises contribute, with the window stamped on every
 row. A cast's anomaly is its value minus the cell of *its own* calendar month; pooling months
 produces a seasonal-cycle map, not an anomaly.
+
+### Every table in the release
+
+The full inventory — what a database client's object browser would list — read from the promoted
+release's `catalog.json` and `metadata.json`. A **supplemental** table is hosted and catalogued but
+left out of `cc_get_db()`'s default set; a **deprecated** one still ships its objects for one
+release while its replacement is named.
+
+```{r}
+#| label: tbl-inventory
+#| tbl-cap: !expr paste0("Every table of ", snap$version, ", with its tier, rows, columns and description.")
+n_cols  <- table(sub("\\..*$", "", names(meta$columns)))
+inv <- purrr::map_dfr(catalog$tables, \(t) tibble::tibble(
+  table = t$name,
+  tier  = dplyr::case_when(isTRUE(t$deprecated) ~ "deprecated", isTRUE(t$supplemental) ~ "supplemental", TRUE ~ "core"),
+  rows  = as.numeric(t$rows %||% NA),
+  columns = as.integer(n_cols[t$name] %||% NA),
+  name  = meta$tables[[t$name]]$name_long %||% "",
+  description = meta$tables[[t$name]]$description_md %||% ""))
+inv |>
+  dplyr::arrange(tier, table) |>
+  gt() |>
+  fmt_integer(columns = c(rows, columns)) |>
+  # markdown cells break gt's Word export on a bare `&` (git log 2026-09-07): HTML only
+  (\(g) if (knitr::is_html_output()) fmt_markdown(g, columns = description) else g)() |>
+  sub_missing(missing_text = "") |>
+  tab_style(style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = table)) |>
+  tab_options(table.width = pct(100), data_row.padding = px(4), table.font.size = "0.86em")
+```
 
 ### Taxonomy {#taxonomy}
 
@@ -295,54 +193,10 @@ only the legacy `gis` database remains, behind tile.calcofi.io.)
 
 ### Release versioning
 
-Each rendered `release_database.qmd` writes a frozen, immutable release to
-`gs://calcofi-db/ducklake/releases/{version}/` where `version` is
-`vYYYY.MM.DD`. The release directory holds the **sidecars** — the complete
-record of what the release is — and the `catalog.json` among them is the
-data-access contract: consumers resolve every table through it
-([Data Access](data-access.qmd#where-the-data-lives)) rather than building a
-path.
-
-- `catalog.json` — structural manifest: `version`, `release_date`,
-  `total_rows` / `total_size`, and per table `name`, `rows`, `partitioned`,
-  `supplemental`. From the v2026.09 releases it is **content-addressed**
-  (`layout: "canonical"`, plus the `writer` settings — compression, row-group
-  size — that make the bytes reproducible): each table carries `content_hash`
-  (a whole-table signature), `compat_path` (its legacy per-release path) and
-  `objects[]` — one object for a single-file table, one per partition for a
-  partitioned one — each with a bucket-relative `path`
-  (`ducklake/tables/{table}/{content_hash}/{table}.parquet`, or
-  `ducklake/tables/{table}/{col}={value}/{hash}/data_0.parquet`), `bytes`,
-  `sha256`, `content_hash`, `since` (the first version that shipped this exact
-  object), its own `compat_path` and, for a partition, `partition_by` /
-  `partition_value`. A partitioned table may also publish a whole-table
-  **twin** — the one object without `partition_by` (`obs` does) — for
-  https-only readers; it is read *instead of* the partitions, never alongside
-  them. Objects are immutable and shared between versions, so `since` is the
-  per-table "what changed"; `calcofi4r::cc_release_sources()` and
-  `calcofi4py.release_sources()` are the resolvers (the twin comes back as
-  `single_file`, excluded from `urls`).
-- `relationships.json` — primary keys and foreign keys
-- `metadata.json` — table and column descriptions, units, dataset block, measurement-type registry
-- `RELEASE_NOTES.md` — this version's section of `RELEASES.md` plus a generated
-  appendix (tables and rows from `catalog.json`, datasets, the consumer-contract
-  result, package versions)
-- `parquet/` — the legacy per-release copy of the tables (single `.parquet` or
-  hive-partitioned directories). Kept only for the promoted version, its
-  predecessor and the **consolidated** versions; elsewhere it is removed by
-  archive thinning (`metadata/release_policy.yml` in
-  [`CalCOFI/workflows`](https://github.com/CalCOFI/workflows), applied by
-  `scripts/thin_releases.R`), while the sidecars stay.
-
-Bucket-level, under `releases/`: `latest.txt` names the promoted version
-(promoted only after `test_release.qmd`'s consumer-contract suite passes);
-`versions.json` lists every release — `version`, `release_date`, `tables`,
-`total_rows`, `size_mb` — with `consolidated: true` on the milestone versions
-(`v2026.04.08`, `v2026.05.14`, `v2026.06.26`, `v2026.07.17`, `v2026.08.14`,
-`v2026.08.25`) and `retired: {retired_utc, to, reason}` on a thinned one, `to`
-being the consolidated version to use instead; and `RELEASES.md` is the
-running changelog across versions, newest first, with `# Unreleased`
-collecting changes until the next cut.
+A release is an immutable, versioned copy of every table under
+`gs://calcofi-db/ducklake/releases/{version}/`, described by its `catalog.json`, content-addressed,
+with a DOI per version and one concept DOI for all of them. What ships, which versions are kept,
+how to pin one and what is checked before a release is cut are in [Releases](releases.qmd).
 
 ### Metadata registries — the single sources of truth
 
@@ -353,12 +207,13 @@ travel with the code that produced them and change through pull requests.
 Per dataset, under `metadata/{provider}/{dataset}/`:
 
 - `tbls_redefine.csv` — `tbl_new`, `tbl_description`
-- `flds_redefine.csv` — `tbl_new`, `fld_new`, `fld_description`, `units`
+- `flds_redefine.csv` — the crosswalk from every source column to its standard name and type ([Naming conventions](naming.qmd#legacy-names-mapped))
 - `metadata_derived.csv` — optional markdown/units overlay for derived tables and columns
 - `questions.csv` — the **provider-question registry**: what we have asked the data's owners,
   what they answered, and what we have *proposed* an answer to and want confirmed. Each question
   has a durable global `id` and a short per-dataset `label` (`Q15`), a `status`
   (`open` / `proposed` / `answered` / `wontfix`) and a `priority`.
+- `dataset_meta.yml` — the **descriptive** half of the dataset's metadata: abstract, methods, creators, citation, licence, DOI, contact, keywords ([Metadata & the ingest loop](metadata.qmd))
 - `citation_authority.json` — a **generated cache** of what the source's own authority (EDI,
   NCEI, ERDDAP, DataCite) says about the citation and licence. A proposal, never the record.
 
@@ -374,7 +229,15 @@ Shared, under `metadata/`:
 | `license.csv` | The licence ids a dataset may declare. |
 | `life_stage.csv` | Every distinct `obs.life_stage` value with its Darwin Core label and NERC S11 id. |
 | `gear.csv` | Every `sample.tow_type` code with its `samplingProtocol` sentence and NERC L22 device id. |
-| `relationships_cross.csv` | Cross-dataset foreign keys (intra-dataset ones live in each ingest's `relationships.json`). |
+| `dataset_meta_fields.csv` | The tiers of authored dataset metadata (required, recommended, optional) and the guidance a provider sees for each; the field list every `dataset_meta.yml` follows. |
+| `dataset_status.csv` | The pipeline-stage tracker, one row per dataset, and each dataset's archive-of-record policy sentence. |
+| `distribution.csv` | Every curated endpoint per dataset the release cannot measure itself — mirrors, archive records, the OBIS dataset, legacy ERDDAP ids with their successors — never deleted, only statused. |
+| `distribution_observed.json` | **Generated weekly**: what each portal says *now* about every distribution; a change files a proposed provider question, never an edit. |
+| `portal.csv` | The portals themselves — what each holds, how it can be queried, what it harvests from calcofi.io ([Portals](portals.qmd)). |
+| `holdings.csv` | **Generated at release**: the datasets CalCOFI holds but has not ingested, from their sidecars. |
+| `taxon_group.csv` | The rules that assign taxa to the groups the apps offer (functional groups, "other"); a group label never becomes a taxon's common name. |
+| `questions_sheets.yml` | Which Google Sheet each provider's questions and metadata tabs live in ([Metadata & the ingest loop](metadata.qmd)). |
+| `relationships_cross.csv` | Cross-dataset foreign keys (intra-dataset ones live in each ingest's `relationships.json`); every edge is measured at release ([Keys and integrity](keys.qmd)). |
 | `release_tables.csv`, `release_columns.csv` | Descriptions for tables built inside `release_database.qmd` itself. |
 | `measurement_taxon.csv`, `taxon_override.csv` | How a taxon-bearing measurement name decomposes, and manual id resolution where a source taxon has no clean id. |
 | `taxon_lineage.csv`, `taxon_xref.csv` | **Generated caches** of the WoRMS/ITIS classification chains and the WoRMS↔ITIS cross-reference. Safe to delete; they refetch. |
@@ -387,26 +250,30 @@ These flow through two stages:
    outputs, and reports its own documentation gaps.
 2. **Per release**: `calcofi4db::merge_metadata_json()` merges every per-ingest sidecar plus the
    release-only registries into
-   `gs://calcofi-db/ducklake/releases/{version}/metadata.json` (schema version 1.1):
+   `gs://calcofi-db/ducklake/releases/{version}/metadata.json` (schema version 1.2):
 
    ```json
    {
-     "schema_version": "1.1",
-     "release_version": "v2026.05.14",
-     "release_date":    "2026-05-14",
+     "schema_version": "1.2",
+     "release_version": "v2026.09.06",
+     "release_date":    "2026-09-06",
      "datasets":          { "calcofi_bottle": { ... } },
-     "tables":            { "bottle":         { "name_long": "Bottle",
-                                                "description_md": "...",
-                                                "provider": "calcofi",
-                                                "dataset":  "bottle" } },
-     "columns":           { "bottle.depth_m": { "name_long": "Depth M",
-                                                "units":          "meters",
-                                                "description_md": "Bottle depth" } },
-     "measurement_types": { "temperature":    { "description": "...",
-                                                "units":       "degC",
-                                                "is_canonical": true } }
+     "tables":            { "sample":  { "name_long": "Sample",
+                                         "description_md": "One row per physical sampling event …",
+                                         "provider": "swfsc", "dataset": "ichthyo" } },
+     "columns":           { "sample.depth_min_m": { "name_long": "Depth Min",
+                                                    "units": "m",
+                                                    "data_type": "DOUBLE",
+                                                    "description_md": "Shallowest depth of the event" } },
+     "measurement_types": { "temperature": { "description": "...", "units": "degC",
+                                             "is_canonical": true } },
+     "contributions":     { "sample": { "swfsc_ichthyo": 0.62, "calcofi_bottle": 0.31 } },
+     "erd_legend":        [ { "provider_dataset": "calcofi_bottle", "color": "#f5cad9" } ]
    }
    ```
+
+`contributions` is each dataset's share of a shared table's rows (the bar on a schema-browser
+card); `erd_legend` the colour each dataset takes in the diagram.
 
 Markdown is supported anywhere in `description_md`; consumers should render it through a
 markdown parser when displaying.
@@ -415,8 +282,8 @@ markdown parser when displaying.
 
 A dataset's temporal and spatial extent is **measured from the assembled data at release
 time** — `coverage_temporal_observed`, `coverage_spatial_observed` and `coverage_bbox` in
-`metadata.json`, and the corresponding columns on the released `dataset` table. Nothing
-hand-writes an extent.
+`metadata.json`, and `coverage_temporal` / `coverage_spatial` on the released `dataset` table
+(the measured values, under the plain names). Nothing hand-writes an extent.
 
 This is not pedantry. A hand-written extent is authored once while the data grows underneath
 it: at `v2026.08.06` seven of fifteen datasets were wrong — one claimed data through 2021-05
@@ -473,13 +340,13 @@ sidecar:
 library(calcofi4r)
 
 # schema + descriptions + units for a single table
-tbl <- cc_describe_table("bottle")
+tbl <- cc_describe_table("sample")
 attr(tbl, "description_md")    # table-level description
 
 # interactive datatable of every table and column in the release
 cc_db_catalog()
-cc_db_catalog(tables = c("bottle", "ichthyo"))
-cc_db_catalog(version = "v2026.05.14")
+cc_db_catalog(tables = c("sample", "obs_bio"))
+cc_db_catalog(version = "v2026.08.25")
 ```
 
 When writing a new ingest, populate `tbls_redefine.csv` and
@@ -596,30 +463,11 @@ per-dataset ichthyoplankton notebook on 2026-09-05 (see [Portals](portals.qmd#ob
 
 ## Relationships between tables
 
-Primary and foreign keys ship with every release as `relationships.json` beside
-`catalog.json`, and the [**Schema explorer**](https://calcofi.io/db-schema/) draws them as an
-entity-relationship diagram per release (deep-link with `#erd?v=v2026.08.25`). Intra-dataset
-relationships are declared in each ingest's own `relationships.json`; cross-dataset ones live
-in `metadata/relationships_cross.csv` and are merged in at release time.
-
-The joins worth memorising:
-
-```sql
--- an observation to its sampling event, and up the hierarchy
-obs.sample_key        -> sample.sample_key
-sample.parent_sample_key -> sample.sample_key      -- adjacency list
-sample.root_sample_key   -> sample.sample_key      -- top of the chain
-
--- provenance and place, denormalized onto obs so a rollup needs no join
-obs.dataset_key       -> dataset.dataset_key
-obs.cruise_key        -> cruise.cruise_key
-obs.grid_key          -> grid.grid_key
-
--- what was measured, and of what
-obs.measurement_type  -> measurement_type.measurement_type
-obs.taxon_key         -> taxon.taxon_key
-(dataset_key, ds_taxa_code) -> dataset_taxon       -- the per-dataset vocabulary
-```
+Primary and foreign keys ship with every release as `relationships.json` beside `catalog.json`,
+and since 2026-09-08 every one of them is measured before the release is cut and the result ships
+as `integrity.json`. The keys, the joins worth memorising and the measured result are in
+[Keys and integrity](keys.qmd); the [schema browser](https://calcofi.io/db-schema/) draws the
+diagram per release.
 
 ## Spatial Tips
 

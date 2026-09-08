@@ -70,3 +70,16 @@ climatology,grid_key,grid,grid_key,the station a baseline cell belongs to (one c
 climatology,measurement_type,measurement_type,measurement_type,the measured quantity a baseline cell is a mean of
 climatology,dataset_key,dataset,dataset_key,the dataset a baseline cell is built from (one row per dataset)
 sample,station_uuid,sample,source_uuid,SWFSC station occupation (ichthyo site) this event belongs to; NULL when unmatched (calcofi4db >= 3.32.0 match_station_occupation())
+spatial_attribute,spatial_key,spatial,spatial_key,"the feature an attribute row describes (measured 0 orphans on v2026.09.06, 2026-09-08)"
+obs_mets_full,dataset_key,dataset,dataset_key,supplemental METS provenance stamp
+obs_mets_full,measurement_type,measurement_type,measurement_type,METS measured quantity vocabulary
+obs_mets_full,cruise_key,cruise,cruise_key,"underway record's cruise (measured 0 orphans, 2026-09-08)"
+obs_mets_full,grid_key,grid,grid_key,underway record's grid cell (nullable)
+obs_ctd_full,cruise_key,cruise,cruise_key,"full-resolution CTD scan's cruise (measured 0 orphans, 2026-09-08)"
+obs_ctd_full,grid_key,grid,grid_key,full-resolution CTD scan's grid cell
+sample_root,dataset_key,dataset,dataset_key,root sampling event provenance stamp
+sample_root,cruise_key,cruise,cruise_key,root sampling event's cruise (nullable)
+sample_root,grid_key,grid,grid_key,root sampling event's grid cell (nullable)
+sample_spatial,root_id,sample_root,root_id,the dense integer twin of root_sample_key the browser objects join on
+cruise,ship_key,ship,ship_key,every cruise's ship resolved to the NODC ship reference
+obs_attribute,dataset_key,dataset,dataset_key,sub-occurrence attribute provenance stamp

@@ -1,78 +1,25 @@
-# API
+# The retired API {#sec-api}
 
-::: {.callout-important}
-## Superseded by direct querying + `calcofi4r` helpers
+The Plumber API at `api.calcofi.io` served the first generation of CalCOFI.io: a PostgreSQL
+database of the ingested tables and pre-built match tables between net tows and CTD casts, with
+endpoints for time series, cruises, rasters and the biology-to-environment matches. It was
+superseded in 2026 by the frozen parquet releases, which any DuckDB — including one running in a
+browser tab — reads directly with no server, no credentials and no rate limit. This appendix is
+the map from each endpoint to what replaced it; [Access the data](data-access.qmd) is the guide.
 
-The Postgres-backed Plumber API at [api.calcofi.io](https://api.calcofi.io) is
-**being phased out**. CalCOFI data is now published as versioned, public
-**Parquet** files that you query directly with DuckDB — no API server, no
-credentials, no rate limits.
-
-- To query the data directly (SQL, R, Python), see **[Data Access](data-access.qmd)**.
-- For biological ↔ environmental matching (the old `zooplankton_biomass`,
-  `itis_ichthyodata` and `ichthyodata` endpoints), see
-  **[Matching Helpers](helpers.qmd)** — the `calcofi4r` functions
-  `cc_match_zooplankton_biomass()`, `cc_match_ichthyo_by_taxon()` and
-  `cc_match_ichthyo_by_name()`.
-
-The endpoint notes below are retained as a historical reference and a map from
-each API endpoint to its replacement.
-:::
-
-::: {.callout-tip}
-## Try the new client-side query playground
-
-The three retired bio↔env endpoints — and many more queries besides — are
-now an interactive form at **[calcofi.io/db-query/](https://calcofi.io/db-query/)**
-that runs entirely in your browser. Pick a query from the left-side
-accordion, fill the form, click **Run**, see the rows — no server, no
-credentials, no install. DuckDB-WASM in a worker thread, public Parquet on
-Google Cloud Storage, the same portable SQL the
-[`calcofi4r::cc_match_*()`](helpers.qmd) helpers emit.
-:::
-
-The raw interface to the legacy Application Programming Interface (API) is
-available at:
-
-- [api.calcofi.io](https://api.calcofi.io)
-
-## Endpoint → replacement
-
-| Legacy endpoint | R helper (`calcofi4r`) | Browser |
+| endpoint | what it did | now |
 |---|---|---|
-| `/variables` | `cc_list_measurement_types()` | [Query → measurement types](https://calcofi.io/db-query/#browse--measurement-types) |
-| `/timeseries` | direct SQL aggregation — see [Data Access](data-access.qmd) | [Query → SQL shell](https://calcofi.io/db-query/#sql-shell--shell) |
-| `/cruises` | `cc_read_cruise()` | [Query → cruises](https://calcofi.io/db-query/#browse--cruises) |
-| `/raster` | direct SQL + `pts_to_rast_idw()` | — |
-| `/cruise_lines`, `/cruise_line_profile` | direct SQL against `ctd_cast` / `ctd_thin` | [Query → SQL shell](https://calcofi.io/db-query/#sql-shell--shell) |
-| `zooplankton_biomass` | [`cc_match_zooplankton_biomass()`](helpers.qmd) | **[Query → zoo biomass](https://calcofi.io/db-query/#bio-env-matching--zoo-biomass)** |
-| `itis_ichthyodata` | [`cc_match_ichthyo_by_taxon()`](helpers.qmd) | **[Query → by taxon](https://calcofi.io/db-query/#bio-env-matching--by-taxon)** |
-| `ichthyodata` | [`cc_match_ichthyo_by_name()`](helpers.qmd) | **[Query → by name](https://calcofi.io/db-query/#bio-env-matching--by-name)** |
+| `/variables` | list the variables available to `/timeseries` | `calcofi4r::cc_list_measurement_types()`; the measurement-type registry in [Naming conventions](naming.qmd) |
+| `/species_groups` | (never finished) species groups for larval counts | `taxon_group` in the release |
+| `/timeseries` | a time series of one variable, optionally by area | SQL over `obs_env` and `sample`; the Explorer's stations and regions lenses |
+| `/cruises` | the cruise list with summary statistics | `cc_read_cruise()`; the Explorer's cruises lens |
+| `/raster` | an interpolated raster of one variable | `cc_interpolate()`; the Explorer's contours lens |
+| `/cruise_lines`, `/cruise_line_profile` | station lines and depth profiles along a line | SQL over `obs_env`; the Explorer's sections lens |
+| `zooplankton_biomass` | net-tow biomass matched to CTD-bottle measurements | `cc_match_zooplankton_biomass()` |
+| `itis_ichthyodata` | larval counts for an ITIS taxon and its descendants, matched | `cc_match_ichthyo_by_taxon()` — WoRMS, recursive |
+| `ichthyodata` | larval counts by scientific name, matched | `cc_match_ichthyo_by_name()` |
+| `relax_matching`, `cruiseymd_min/max`, `stage` | the match parameters | `relax_matching` (5 km / 72 h), `date_min/max`, `life_stage` |
 
-## Legacy endpoint reference
-
-### `/variables`: get list of variables for timeseries
-
-Get list of variables for use in `/timeseries`.
-
-### `/species_groups`: get species groups for larvae
-
-Not yet working. Get list of species groups for use with variables `larvae_counts.count` in `/timeseries`.
-
-### `/timeseries`: get time series data
-
-### `/cruises`: get list of cruises
-
-Get list of cruises with summary stats as CSV table for time (`date_beg`).
-
-### `/raster`: get raster map of variable
-
-Get raster of variable.
-
-### `/cruise_lines`: get station lines from cruises
-
-Get station lines from cruises (with more than one cast).
-
-### `/cruise_line_profile`
-
-Get profile at depths for given variable of casts along line of stations.
+The three matching endpoints, and many more queries, are also a point-and-click form at
+[calcofi.io/db-query](https://calcofi.io/db-query/), running DuckDB in the browser over the same
+release. The API's source stays at [CalCOFI/api](https://github.com/CalCOFI/api).
