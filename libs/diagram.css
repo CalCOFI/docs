@@ -10,8 +10,10 @@
 }
 .cc-diagram-wrap:active { cursor: grabbing; }
 .cc-diagram-wrap svg { display: block; }
+/* top-LEFT: quarto's anchor link (.anchorjs-link, the chain icon on hover) owns the
+   figure's top-right corner, and the two collided there */
 .cc-diagram-wrap .cc-diagram-full {
-  position: absolute; top: 0.4rem; right: 0.4rem;
+  position: absolute; top: 0.4rem; left: 0.4rem;
   width: 2rem; height: 2rem; line-height: 1.8rem; font-size: 1.1rem;
   border: 1px solid var(--bs-border-color, #dddddd); border-radius: 6px;
   background: var(--bs-body-bg, #ffffff); color: var(--bs-body-color, #182b49);
