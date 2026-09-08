@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>5&nbsp; Metadata &amp; the ingest loop – CalCOFI.io</title>
+<title>7&nbsp; Cite This Data – CalCOFI.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,8 +66,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data-access.html" rel="next">
-<link href="./db.html" rel="prev">
+<link href="./server-access.html" rel="next">
+<link href="./data-access.html" rel="prev">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -49,9 +84,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-53ac320e6d6703b3d0eb8d314bb16b71.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -310,7 +342,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./metadata.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cite.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cite This Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -394,7 +426,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./metadata.html" class="sidebar-item-text sidebar-link active">
+  <a href="./metadata.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
   </div>
 </li>
@@ -406,7 +438,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cite.html" class="sidebar-item-text sidebar-link">
+  <a href="./cite.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cite This Data</span></span></a>
   </div>
 </li>
@@ -456,16 +488,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#one-key-one-record-one-page" id="toc-one-key-one-record-one-page" class="nav-link active" data-scroll-target="#one-key-one-record-one-page"><span class="header-section-number">5.1</span> One key, one record, one page</a></li>
-  <li><a href="#where-the-words-live" id="toc-where-the-words-live" class="nav-link" data-scroll-target="#where-the-words-live"><span class="header-section-number">5.2</span> Where the words live</a></li>
-  <li><a href="#the-sheets-and-what-you-may-edit" id="toc-the-sheets-and-what-you-may-edit" class="nav-link" data-scroll-target="#the-sheets-and-what-you-may-edit"><span class="header-section-number">5.3</span> The Sheets, and what you may edit</a></li>
-  <li><a href="#questions-and-what-proposed-means" id="toc-questions-and-what-proposed-means" class="nav-link" data-scroll-target="#questions-and-what-proposed-means"><span class="header-section-number">5.4</span> Questions, and what <em>proposed</em> means</a></li>
-  <li><a href="#what-happens-after-you-edit" id="toc-what-happens-after-you-edit" class="nav-link" data-scroll-target="#what-happens-after-you-edit"><span class="header-section-number">5.5</span> What happens after you edit</a></li>
-  <li><a href="#a-new-dataset-end-to-end" id="toc-a-new-dataset-end-to-end" class="nav-link" data-scroll-target="#a-new-dataset-end-to-end"><span class="header-section-number">5.6</span> A new dataset, end to end</a></li>
-  <li><a href="#who-to-contact" id="toc-who-to-contact" class="nav-link" data-scroll-target="#who-to-contact"><span class="header-section-number">5.7</span> Who to contact</a></li>
-  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also"><span class="header-section-number">5.8</span> See also</a></li>
+  <li><a href="#citing-the-database-release" id="toc-citing-the-database-release" class="nav-link active" data-scroll-target="#citing-the-database-release"><span class="header-section-number">7.1</span> Citing the database release</a></li>
+  <li><a href="#citing-an-individual-dataset" id="toc-citing-an-individual-dataset" class="nav-link" data-scroll-target="#citing-an-individual-dataset"><span class="header-section-number">7.2</span> Citing an individual dataset</a></li>
+  <li><a href="#citing-what-you-downloaded" id="toc-citing-what-you-downloaded" class="nav-link" data-scroll-target="#citing-what-you-downloaded"><span class="header-section-number">7.3</span> Citing what you downloaded</a></li>
+  <li><a href="#reaching-a-data-provider" id="toc-reaching-a-data-provider" class="nav-link" data-scroll-target="#reaching-a-data-provider"><span class="header-section-number">7.4</span> Reaching a data provider</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also"><span class="header-section-number">7.5</span> See also</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/metadata.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/cite.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -473,7 +502,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-metadata" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cite This Data</span></h1>
 </div>
 
 
@@ -490,86 +519,62 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<p>How a dataset gets into CalCOFI.io, where its words live, and what a data provider or a member of the data team edits — and what they never have to. This chapter is for people who own or curate a dataset; the engineering detail behind each step is in <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> and its <code>CLAUDE.md</code>.</p>
-<section id="one-key-one-record-one-page" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="one-key-one-record-one-page"><span class="header-section-number">5.1</span> One key, one record, one page</h2>
-<p>Every dataset has one key, <code>{provider}_{dataset}</code> (<code>calcofi_bottle</code>, <code>swfsc_ichthyo</code>, <code>cce-lter_zooscan</code>), and that key names everything about it: its folder of metadata in git, its row in its provider’s Google Sheet, its record in the release, and its page at <a href="https://calcofi.io/datasets/"><code>calcofi.io/datasets/{key}/</code></a>. A dataset is in one of three states, and the key, the folder, the Sheet row and the page URL are the same in all three, so a link never breaks when a dataset moves forward:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>state</th>
-<th>what it means</th>
-<th>where it shows</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>holding</strong> (<code>external</code>, <code>archived</code> or <code>planned</code>)</td>
-<td>CalCOFI has or knows of the data, but it is not in the integrated database yet</td>
-<td>the catalog grid under <em>not yet in the database</em>, with its links out</td>
-</tr>
-<tr class="even">
-<td><strong>in the pipeline</strong> (<code>in_release: false</code>)</td>
-<td>an ingest notebook runs and produces outputs, but provider questions are still open</td>
-<td>the workflow page only; nothing public until the switch flips</td>
-</tr>
-<tr class="odd">
-<td><strong>released</strong></td>
-<td>the dataset is in a frozen release with a DOI</td>
-<td>its full page, every endpoint, every app</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="where-the-words-live" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="where-the-words-live"><span class="header-section-number">5.2</span> Where the words live</h2>
-<p>Two kinds of fact describe a dataset, and they are kept apart on purpose:</p>
+<p>This is the <strong>Data Sources &amp; Attribution</strong> page — the one answer to “how do I cite CalCOFI data?”. Every CalCOFI product points here rather than restating it: the release itself has a citation, and every dataset inside it carries its own — checked against the source’s own authority, never invented (the attribution contract lives in <a href="https://github.com/CalCOFI/workflows/blob/main/CLAUDE.md">CalCOFI/workflows</a>).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Two things to cite, always
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your work touches the CalCOFI Integrated Database, cite <strong>both</strong>: the release (the database as a whole — the assembly, the schema, the QA/QC) <em>and</em> every individual dataset your analysis actually used (the people who collected and curated the data). Citing only the release erases the contributing datasets; citing only a dataset erases the integration work that made it queryable alongside fifteen others.</p>
+</div>
+</div>
+<section id="citing-the-database-release" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="citing-the-database-release"><span class="header-section-number">7.1</span> Citing the database release</h2>
+<p>CalCOFI (2026). CalCOFI Integrated Database, release v2026.09.06 [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953</p>
+<p>Every release also has a DOI of its own, minted on Zenodo when the release is tagged, and one <strong>concept DOI</strong> that always resolves to the newest release. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code> (<code>doi</code>, <code>concept_doi</code>) and in the release notes’ <em>How to cite</em>:</p>
 <ul>
-<li><strong>Authored</strong> — abstract, methods, who made it, how to cite it, its licence and DOI, the acknowledgement a use should carry. These live in one small file per dataset in git, <code>metadata/{provider}/{dataset}/dataset_meta.yml</code>, and every public surface is generated from it: the dataset page, the EML document the portals read, the citation the apps copy.</li>
-<li><strong>Measured</strong> — years and area covered, row counts, when the source was last fetched, whether a DOI resolves. These are computed when a release is cut and are never typed; a hand-written extent goes stale the moment the data grows underneath it.</li>
+<li>this release, <code>v2026.09.06</code>: <a href="https://doi.org/10.5281/zenodo.22514953" class="uri">https://doi.org/10.5281/zenodo.22514953</a></li>
+<li>the concept DOI, every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
 </ul>
-<p>The authored fields are tiered, so a provider sees the few that matter first. The table reads the field registry live from the repository:</p>
+</section>
+<section id="citing-an-individual-dataset" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="citing-an-individual-dataset"><span class="header-section-number">7.2</span> Citing an individual dataset</h2>
+<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. The table is the <code>dataset</code> table of the promoted release, v2026.09.06.</p>
 <div class="cell">
-<div id="tbl-meta-fields" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-meta-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_fields.csv</code> in CalCOFI/workflows). Read-only rows are what the release measures and shows beside the editable ones for context.
-</figcaption>
-<div aria-describedby="tbl-meta-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="giwcyhdbus" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#giwcyhdbus table {
+<div id="kptemdqdar" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kptemdqdar table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#giwcyhdbus thead, #giwcyhdbus tbody, #giwcyhdbus tfoot, #giwcyhdbus tr, #giwcyhdbus td, #giwcyhdbus th {
+#kptemdqdar thead, #kptemdqdar tbody, #kptemdqdar tfoot, #kptemdqdar tr, #kptemdqdar td, #kptemdqdar th {
   border-style: none;
 }
 
-#giwcyhdbus p {
+#kptemdqdar p {
   margin: 0;
   padding: 0;
 }
 
-#giwcyhdbus .gt_table {
+#kptemdqdar .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 90%;
+  font-size: 0.85em;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
+  width: 100%;
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
@@ -584,12 +589,12 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-left-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_caption {
+#kptemdqdar .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#giwcyhdbus .gt_title {
+#kptemdqdar .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -601,7 +606,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-width: 0;
 }
 
-#giwcyhdbus .gt_subtitle {
+#kptemdqdar .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -613,7 +618,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-width: 0;
 }
 
-#giwcyhdbus .gt_heading {
+#kptemdqdar .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -625,13 +630,13 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_bottom_border {
+#kptemdqdar .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_col_headings {
+#kptemdqdar .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -646,7 +651,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_col_heading {
+#kptemdqdar .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -666,7 +671,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#giwcyhdbus .gt_column_spanner_outer {
+#kptemdqdar .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -678,15 +683,15 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 4px;
 }
 
-#giwcyhdbus .gt_column_spanner_outer:first-child {
+#kptemdqdar .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#giwcyhdbus .gt_column_spanner_outer:last-child {
+#kptemdqdar .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#giwcyhdbus .gt_column_spanner {
+#kptemdqdar .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -698,11 +703,11 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   width: 100%;
 }
 
-#giwcyhdbus .gt_spanner_row {
+#kptemdqdar .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#giwcyhdbus .gt_group_heading {
+#kptemdqdar .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -728,7 +733,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   text-align: left;
 }
 
-#giwcyhdbus .gt_empty_group_heading {
+#kptemdqdar .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -743,15 +748,15 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: middle;
 }
 
-#giwcyhdbus .gt_from_md > :first-child {
+#kptemdqdar .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#giwcyhdbus .gt_from_md > :last-child {
+#kptemdqdar .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#giwcyhdbus .gt_row {
+#kptemdqdar .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -770,7 +775,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#giwcyhdbus .gt_stub {
+#kptemdqdar .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -783,7 +788,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_stub_row_group {
+#kptemdqdar .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -797,15 +802,15 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: top;
 }
 
-#giwcyhdbus .gt_row_group_first td {
+#kptemdqdar .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#giwcyhdbus .gt_row_group_first th {
+#kptemdqdar .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#giwcyhdbus .gt_summary_row {
+#kptemdqdar .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -815,16 +820,16 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_first_summary_row {
+#kptemdqdar .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_first_summary_row.thick {
+#kptemdqdar .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#giwcyhdbus .gt_last_summary_row {
+#kptemdqdar .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -834,7 +839,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_grand_summary_row {
+#kptemdqdar .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -844,7 +849,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_first_grand_summary_row {
+#kptemdqdar .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -854,7 +859,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_last_grand_summary_row_top {
+#kptemdqdar .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -864,11 +869,11 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_striped {
+#kptemdqdar .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#giwcyhdbus .gt_table_body {
+#kptemdqdar .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -877,7 +882,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_footnotes {
+#kptemdqdar .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -891,7 +896,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_footnote {
+#kptemdqdar .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -900,7 +905,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_sourcenotes {
+#kptemdqdar .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -914,7 +919,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_sourcenote {
+#kptemdqdar .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -922,253 +927,422 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_left {
+#kptemdqdar .gt_left {
   text-align: left;
 }
 
-#giwcyhdbus .gt_center {
+#kptemdqdar .gt_center {
   text-align: center;
 }
 
-#giwcyhdbus .gt_right {
+#kptemdqdar .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#giwcyhdbus .gt_font_normal {
+#kptemdqdar .gt_font_normal {
   font-weight: normal;
 }
 
-#giwcyhdbus .gt_font_bold {
+#kptemdqdar .gt_font_bold {
   font-weight: bold;
 }
 
-#giwcyhdbus .gt_font_italic {
+#kptemdqdar .gt_font_italic {
   font-style: italic;
 }
 
-#giwcyhdbus .gt_super {
+#kptemdqdar .gt_super {
   font-size: 65%;
 }
 
-#giwcyhdbus .gt_footnote_marks {
+#kptemdqdar .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#giwcyhdbus .gt_asterisk {
+#kptemdqdar .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#giwcyhdbus .gt_indent_1 {
+#kptemdqdar .gt_indent_1 {
   text-indent: 5px;
 }
 
-#giwcyhdbus .gt_indent_2 {
+#kptemdqdar .gt_indent_2 {
   text-indent: 10px;
 }
 
-#giwcyhdbus .gt_indent_3 {
+#kptemdqdar .gt_indent_3 {
   text-indent: 15px;
 }
 
-#giwcyhdbus .gt_indent_4 {
+#kptemdqdar .gt_indent_4 {
   text-indent: 20px;
 }
 
-#giwcyhdbus .gt_indent_5 {
+#kptemdqdar .gt_indent_5 {
   text-indent: 25px;
 }
 
-#giwcyhdbus .katex-display {
+#kptemdqdar .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#giwcyhdbus div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kptemdqdar div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
 <thead>
 <tr class="gt_col_headings header">
-<th id="field" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">field</th>
-<th id="editable" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="guidance" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">what it is for</th>
+<th id="provider" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">provider</th>
+<th id="dataset" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">dataset</th>
+<th id="dataset_name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">name</th>
+<th id="citation_main" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">citation</th>
+<th id="license" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">license</th>
+<th id="license_url" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">license URL</th>
+<th id="doi" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">DOI</th>
+<th id="pi_names" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">PI(s)</th>
+<th id="acknowledgement" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">acknowledgement</th>
+<th id="contact" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">contact</th>
+<th id="source_accessed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">source accessed</th>
+<th id="link_calcofi_org" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">calcofi.org</th>
+<th id="link_data_source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">data source</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
-<tr class="gt_group_heading_row odd">
-<th colspan="3" id="required" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">required</th>
-</tr>
-<tr class="gt_row_group_first even">
-<td class="gt_row gt_left" headers="required  field">description</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">One-paragraph summary used on calcofi.io cards and tables; becomes the EML abstract when <code>abstract</code> is empty.</td>
-</tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="required  field">abstract</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">Full EML abstract: what the dataset is, why it exists, what is in it. Falls back to <code>description</code> when empty.</td>
+<td class="gt_row gt_left" headers="provider">calcofi</td>
+<td class="gt_row gt_left" headers="dataset">bottle</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI Bottle Database</td>
+<td class="gt_row gt_left" headers="citation_main">CalCOFI. (2023). CalCOFI Bottle Database 194903-202105. CalCOFI.org.</td>
+<td class="gt_row gt_left" headers="license"><br>
+</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names"><br>
+</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/oceanographic-data/bottle-database/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://calcofi.org/downloads/database/CalCOFI_Database_194903-202105_csv_16October2023.zip" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="required  field">methods_md</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">How the data were collected or measured (instruments, protocols). Markdown; becomes an EML methodStep.</td>
+<td class="gt_row gt_left" headers="provider">calcofi</td>
+<td class="gt_row gt_left" headers="dataset">ctd-cast</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI CTD Cast Files</td>
+<td class="gt_row gt_left" headers="citation_main">CalCOFI. (2023). CalCOFI CTD Cast Files. CalCOFI.org.</td>
+<td class="gt_row gt_left" headers="license"><br>
+</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names"><br>
+</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-08-25</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/oceanographic-data/ctd-cast-files/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://calcofi.org/data/oceanographic-data/ctd-cast-files/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="required  field">study_extent</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">The spatial/temporal/thematic scope actually sampled – what defines one observation.</td>
+<td class="gt_row gt_left" headers="provider">calcofi</td>
+<td class="gt_row gt_left" headers="dataset">dic</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI DIC</td>
+<td class="gt_row gt_left" headers="citation_main">Keeling, C.D.; Lueker, T.J.; Emanuele, G.; Dickson, A.G.; Martz, T.R.; Wolfe, W.H.; Mau, A. (2025). Discrete profile dissolved inorganic carbon, total alkalinity, water temperature and salinity measurements for CalCOFI (NCEI Accession 0301029). NOAA NCEI. https://doi.org/10.25921/3w9f-jd72</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi">10.25921/3w9f-jd72</td>
+<td class="gt_row gt_left" headers="pi_names">Todd Martz; Aaron Mau</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/oceanographic-data/dic/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0301029" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="required  field">sampling_description</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">The sampling design in prose: gear, frequency, station pattern.</td>
+<td class="gt_row gt_left" headers="provider">calcofi</td>
+<td class="gt_row gt_left" headers="dataset">mets</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI METS (Underway TSG/Meteorology)</td>
+<td class="gt_row gt_left" headers="citation_main">CalCOFI. Underway (METS) TSG/Meteorology Data. CalCOFI.org.</td>
+<td class="gt_row gt_left" headers="license"><br>
+</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names"><br>
+</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-08-25</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/oceanographic-data/underway/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://calcofi.org/data/oceanographic-data/underway/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="required  field">creators</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">One per line: Name · Organization · orcid · email. The people/orgs who created the dataset.</td>
+<td class="gt_row gt_left" headers="provider">calcofi</td>
+<td class="gt_row gt_left" headers="dataset">phyllosoma</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI Lobster Phyllosoma</td>
+<td class="gt_row gt_left" headers="citation_main">CalCOFI - Scripps Institution of Oceanography and T. Koslow. 2017. Data pertaining to lobster phyllosoma, Panulirus interruptus, collection methods, locations, identification and staging (1951-2008, months of July and August) ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa</td>
+<td class="gt_row gt_left" headers="license">custom</td>
+<td class="gt_row gt_left" headers="license_url">https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-cce.188.4</td>
+<td class="gt_row gt_left" headers="doi">10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa</td>
+<td class="gt_row gt_left" headers="pi_names">J. Anthony Koslow</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><br>
+</td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-cce.188.4" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="required  field">contact</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">An email or URL a user can reach about this dataset. Falls back to the CalCOFI role address when empty.</td>
+<td class="gt_row gt_left" headers="provider">calcofi</td>
+<td class="gt_row gt_left" headers="dataset">phytoplankton</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI Phytoplankton (Venrick)</td>
+<td class="gt_row gt_left" headers="citation_main">CalCOFI - Scripps Institution of Oceanography, California Current Ecosystem LTER, and E. Venrick. 2023. Temporal and spatial changes of the abundance and species composition of phytoplankton in the California Current from samples collected aboard CalCOFI cruises from summer 1996 through 2022. ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/60edabfbfd85c623fce05822befaa071</td>
+<td class="gt_row gt_left" headers="license">CC0-1.0</td>
+<td class="gt_row gt_left" headers="license_url">https://creativecommons.org/publicdomain/zero/1.0/</td>
+<td class="gt_row gt_left" headers="doi">10.6073/pasta/60edabfbfd85c623fce05822befaa071</td>
+<td class="gt_row gt_left" headers="pi_names">Elizabeth L. Venrick</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/marine-ecosystem-data/phytoplankton-bacterioplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-cce.254.4" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="required  field">keywords</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">Free-text keywords, one per line or semicolon-separated.</td>
+<td class="gt_row gt_left" headers="provider">cce-lter</td>
+<td class="gt_row gt_left" headers="dataset">euphausiids</td>
+<td class="gt_row gt_left" headers="dataset_name">CCE-LTER Euphausiid Abundance</td>
+<td class="gt_row gt_left" headers="citation_main">Ohman, M.D. 2022. California Current Ecosystem Euphausiid data, Brinton and Townsend Euphausiid Database (BTEDB) ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4a92a0044bcd1523a4f994ece874a57d</td>
+<td class="gt_row gt_left" headers="license">custom</td>
+<td class="gt_row gt_left" headers="license_url">https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-cce.313.1</td>
+<td class="gt_row gt_left" headers="doi">10.6073/pasta/4a92a0044bcd1523a4f994ece874a57d</td>
+<td class="gt_row gt_left" headers="pi_names">Rasmus Swalethorp; Linsey Sala</td>
+<td class="gt_row gt_left" headers="acknowledgement">Data originate from the Brinton and Townsend Euphausiid Database of the Pelagic Invertebrate Collection, Scripps Institution of Oceanography. Supported in recent years by NSF grants to M.D. Ohman and the CCE-LTER site.</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><br>
+</td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-cce&amp;identifier=313" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="required  field">license</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">An id from metadata/license.csv (CC-BY-4.0, CC0-1.0, US-PD, custom, unknown). <code>custom</code> requires license_url.</td>
+<td class="gt_row gt_left" headers="provider">cce-lter</td>
+<td class="gt_row gt_left" headers="dataset">picoplankton-bacteria</td>
+<td class="gt_row gt_left" headers="dataset_name">Picoplankton and Bacteria Abundance (CalCOFI Cruise)</td>
+<td class="gt_row gt_left" headers="citation_main">Landry, M. (2004-2023). Picoplankton and Bacteria Abundance (CalCOFI Cruise). CCE LTER.</td>
+<td class="gt_row gt_left" headers="license"><br>
+</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names">Michael Landry</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-08-25</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><br>
+</td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://oceaninformatics.ucsd.edu/datazoo/catalogs/ccelter/datasets/159" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="required  field">visibility</td>
-<td class="gt_row gt_left" headers="required  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="required  guidance">public or internal (checkbox). internal keeps the dataset out of public pages, the sitemap and data.json until the provider conversation is done.</td>
-</tr>
-<tr class="gt_group_heading_row even">
-<th colspan="3" id="recommended" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">recommended</th>
-</tr>
-<tr class="gt_row_group_first odd">
-<td class="gt_row gt_left" headers="recommended  field">quality_control_md</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">QC steps applied before release (flags, corrections, validation).</td>
+<td class="gt_row gt_left" headers="provider">cce-lter</td>
+<td class="gt_row gt_left" headers="dataset">zoodb</td>
+<td class="gt_row gt_left" headers="dataset_name">ZooDB Holoplankton Community</td>
+<td class="gt_row gt_left" headers="citation_main"><br>
+</td>
+<td class="gt_row gt_left" headers="license">custom</td>
+<td class="gt_row gt_left" headers="license_url">https://oceaninformatics.ucsd.edu/zoodb/</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names">Mark D. Ohman; Bertha Lavaniegos; Linsey Sala</td>
+<td class="gt_row gt_left" headers="acknowledgement">Plankton sample analysis supported by NSF grants to M.D. Ohman and the CCE-LTER site, and by the SIO Pelagic Invertebrate Collection.</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/marine-ecosystem-data/zooplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://oceaninformatics.ucsd.edu/zoodb/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="recommended  field">maintenance</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">Update frequency / ongoing vs.&nbsp;completed / how new data enters the series.</td>
+<td class="gt_row gt_left" headers="provider">cce-lter</td>
+<td class="gt_row gt_left" headers="dataset">zooscan</td>
+<td class="gt_row gt_left" headers="dataset_name">ZooScan PRPOOS Zooplankton</td>
+<td class="gt_row gt_left" headers="citation_main"><br>
+</td>
+<td class="gt_row gt_left" headers="license">custom</td>
+<td class="gt_row gt_left" headers="license_url">https://oceaninformatics.ucsd.edu/zooscandb/</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names">Mark D. Ohman; Marina Frants</td>
+<td class="gt_row gt_left" headers="acknowledgement">Plankton sample analysis supported by NSF grants to M.D. Ohman and the CCE-LTER site.</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/marine-ecosystem-data/zooplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://oceaninformatics.ucsd.edu/zooscandb/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="recommended  field">associated_parties</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">Other contributors and their role (dataManager, principalInvestigator, …), same <code>Name · Org · orcid · email</code> form as creators.</td>
+<td class="gt_row gt_left" headers="provider">cdfw</td>
+<td class="gt_row gt_left" headers="dataset">dungeness-crab</td>
+<td class="gt_row gt_left" headers="dataset_name">CDFW Dungeness Crab Megalopae</td>
+<td class="gt_row gt_left" headers="citation_main">Rogers-Bennett, L.; Jones, E.; Klemmedson, A. (2026). CDFW Dungeness Crab Megalopae from archived CalCOFI plankton samples (1949-2014). California Department of Fish and Wildlife, published through CalCOFI / Scripps Institution of Oceanography.</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names">Laura Rogers-Bennett</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><br>
+</td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://library.ucsd.edu/dc/search?q=CalCOFI+Dungeness+crab+megalopae" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="recommended  field">keywords_gcmd</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">GCMD Science Keywords controlled-vocabulary terms – what IOOS/NCEI/data.gov facet on.</td>
+<td class="gt_row gt_left" headers="provider">farallon</td>
+<td class="gt_row gt_left" headers="dataset">bird-mammal</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI Bird &amp; Mammal Census</td>
+<td class="gt_row gt_left" headers="citation_main"><br>
+</td>
+<td class="gt_row gt_left" headers="license">custom</td>
+<td class="gt_row gt_left" headers="license_url">https://oceanview.pfeg.noaa.gov/CalCOFI/app/resources/docs/Data_Sharing_Agreement_FarallonInstitute.pdf</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names">Bill Sydeman</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><br>
+</td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://oceanview.pfeg.noaa.gov/erddap/tabledap/CAC_FI_SBAS_obs.html" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="recommended  field">funding</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">Funding sources / grant numbers.</td>
+<td class="gt_row gt_left" headers="provider">sio</td>
+<td class="gt_row gt_left" headers="dataset">mesopelagic-fish</td>
+<td class="gt_row gt_left" headers="dataset_name">UCSD SIO Mesopelagic Fish</td>
+<td class="gt_row gt_left" headers="citation_main">Koslow, J. Anthony (2016). CalCOFI Trawl Data. In California Cooperative Oceanic Fisheries Investigations (CalCOFI): Acoustic and Trawl Data. UC San Diego Library Digital Collections. https://doi.org/10.6075/J0BZ64DH</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi">10.6075/J0BZ64DH</td>
+<td class="gt_row gt_left" headers="pi_names">J. Anthony Koslow</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><br>
+</td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://library.ucsd.edu/dc/object/bb9217084g" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="recommended  field">acknowledgement</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">Acknowledgement text a use of this data is required or expected to carry.</td>
+<td class="gt_row gt_left" headers="provider">sio</td>
+<td class="gt_row gt_left" headers="dataset">pic-zooplankton</td>
+<td class="gt_row gt_left" headers="dataset_name">SIO PIC Zooplankton Net Tows</td>
+<td class="gt_row gt_left" headers="citation_main"><br>
+</td>
+<td class="gt_row gt_left" headers="license"><br>
+</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names">Rasmus Swalethorp; Ed Weber; Linsey Sala</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/marine-ecosystem-data/zooplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><br>
+</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="recommended  field">citation_main</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">The canonical how-to-cite string for this dataset.</td>
+<td class="gt_row gt_left" headers="provider">swfsc</td>
+<td class="gt_row gt_left" headers="dataset">cufes</td>
+<td class="gt_row gt_left" headers="dataset_name">CalCOFI Underway CUFES Fish Eggs</td>
+<td class="gt_row gt_left" headers="citation_main"><br>
+</td>
+<td class="gt_row gt_left" headers="license">custom</td>
+<td class="gt_row gt_left" headers="license_url">https://coastwatch.pfeg.noaa.gov/erddap/tabledap/erdCalCOFIcufes.das</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names">Noelle Bowlin</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><br>
+</td>
+<td class="gt_row gt_left" headers="link_data_source"><span style="white-space: pre;"><a href="https://coastwatch.pfeg.noaa.gov/erddap/tabledap/erdCalCOFIcufes.html" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="recommended  field">license_url</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">Required when license = custom: URL to the provider’s own terms.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="recommended  field">doi</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">Bare DOI (10.xxxx/…), no https:// prefix, expected to resolve.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="recommended  field">pi_names</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">Principal investigator name(s), semicolon-separated; superseded by <code>creators</code> once populated.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="recommended  field">link_calcofi_org</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">The calcofi.org landing page for this dataset, if any.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="recommended  field">link_data_source</td>
-<td class="gt_row gt_left" headers="recommended  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="recommended  guidance">The portal/download URL the data is actually fetched from.</td>
-</tr>
-<tr class="gt_group_heading_row odd">
-<th colspan="3" id="optional" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">optional</th>
-</tr>
-<tr class="gt_row_group_first even">
-<td class="gt_row gt_left" headers="optional  field">citation_others</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="optional  guidance">Other citations relevant to this dataset (companion papers, prior versions), one per line.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="optional  field">link_others</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="optional  guidance">Other relevant URLs (companion DOIs, related pages), one per line.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="optional  field">coverage_temporal</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="optional  guidance">Asserted ONLY when the data provably cannot answer it (see CLAUDE.md ‘Coverage is measured, never asserted’); otherwise leave empty – the release measures it.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="optional  field">coverage_spatial</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">edit</td>
-<td class="gt_row gt_left" headers="optional  guidance">Asserted ONLY when the data provably cannot answer it; otherwise leave empty – the release measures it.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="optional  field">coverage_temporal_observed</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">read-only</td>
-<td class="gt_row gt_left" headers="optional  guidance">Measured at release from the assembled core (observed_coverage()). Read-only context.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="optional  field">coverage_spatial_observed</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">read-only</td>
-<td class="gt_row gt_left" headers="optional  guidance">Measured at release from the assembled core (observed_coverage()). Read-only context.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="optional  field">source_accessed</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">read-only</td>
-<td class="gt_row gt_left" headers="optional  guidance">When the source was last fetched (resolve_source_accessed()). Read-only context.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="optional  field">n_obs</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">read-only</td>
-<td class="gt_row gt_left" headers="optional  guidance">Row count in <code>obs</code> for this dataset at the last release. Read-only context.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="optional  field">year_min</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">read-only</td>
-<td class="gt_row gt_left" headers="optional  guidance">Earliest observed year in the release. Read-only context.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="optional  field">year_max</td>
-<td class="gt_row gt_left" headers="optional  editable" style="color: #66686A">read-only</td>
-<td class="gt_row gt_left" headers="optional  guidance">Latest observed year in the release. Read-only context.</td>
+<td class="gt_row gt_left" headers="provider">swfsc</td>
+<td class="gt_row gt_left" headers="dataset">ichthyo</td>
+<td class="gt_row gt_left" headers="dataset_name">SWFSC Ichthyoplankton</td>
+<td class="gt_row gt_left" headers="citation_main">NOAA Fisheries SWFSC. CalCOFI Ichthyoplankton Database.</td>
+<td class="gt_row gt_left" headers="license"><br>
+</td>
+<td class="gt_row gt_left" headers="license_url"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="pi_names"><br>
+</td>
+<td class="gt_row gt_left" headers="acknowledgement"><br>
+</td>
+<td class="gt_row gt_center" headers="contact"><br>
+</td>
+<td class="gt_row gt_right" headers="source_accessed">2026-09-04</td>
+<td class="gt_row gt_left" headers="link_calcofi_org"><span style="white-space: pre;"><a href="https://calcofi.org/data/marine-ecosystem-data/fish-eggs-larvae/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">↗</a></span></td>
+<td class="gt_row gt_left" headers="link_data_source"><br>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1176,102 +1350,56 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </div>
 </div>
 </div>
-</figure>
+</section>
+<section id="citing-what-you-downloaded" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="citing-what-you-downloaded"><span class="header-section-number">7.3</span> Citing what you downloaded</h2>
+<p>Every figure, CSV or Parquet subset you export from a CalCOFI product should carry citations for <strong>only the datasets it actually used</strong>, plus the release. <code>cc_cite()</code> accepts a <code>dataset_key</code> vector or a query result data frame — it resolves exactly the datasets present, in first-occurrence order, and errors naming any <code>dataset_key</code> it does not recognize rather than silently dropping one.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)                <span class="co"># remotes::install_github("calcofi/calcofi4r")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">cc_get_db</span>()                <span class="co"># the promoted release, over https</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_cite</span>(<span class="at">con =</span> con)                <span class="co"># every dataset in the release, release citation first</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_cite</span>(<span class="st">"calcofi_dic"</span>, <span class="at">con =</span> con) <span class="co"># just the datasets a query touched</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># from a query result directly (must carry a dataset_key column)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">tbl</span>(con, <span class="st">"obs"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(dataset_key <span class="sc">==</span> <span class="st">"calcofi_dic"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">collect</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cc_cite</span>(<span class="at">con =</span> con)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># a .bib file for a paper's reference manager</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_cite</span>(<span class="at">format =</span> <span class="st">"bibtex"</span>, <span class="at">con =</span> con) <span class="sc">|&gt;</span> <span class="fu">cat</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calcofi4py <span class="im">as</span> cc</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> cc.cc_get_db()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>cc.cc_cite()                     <span class="co"># every dataset, release citation first</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>cc.cc_cite(<span class="st">"calcofi_dic"</span>)        <span class="co"># just one dataset</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>cc.cc_cite(<span class="bu">format</span><span class="op">=</span><span class="st">"bibtex"</span>)      <span class="co"># a .bib file</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>The <a href="https://calcofi.io/explore/">Explorer</a> does the same from its <em>Cite this data</em> button — the release citation plus one per dataset in the view, as text or BibTeX — and every CSV it exports carries a <code>dataset_key</code> column for exactly this reason.</p>
 </section>
-<section id="the-sheets-and-what-you-may-edit" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="the-sheets-and-what-you-may-edit"><span class="header-section-number">5.3</span> The Sheets, and what you may edit</h2>
-<p>Each provider organization (<code>calcofi</code>, <code>swfsc</code>, <code>sio</code>, <code>cce-lter</code>, <code>cdfw</code>, <code>farallon</code>, <code>sccoos</code>) has <strong>one Google Sheet</strong>, generated from git and synced back to it. It is titled <em>CalCOFI integrated database — questions for &lt;provider&gt;</em> and sits in a Shared Drive folder called <a href="https://drive.google.com/drive/folders/1Tryjfd76TNU4nVPPSQiyQCy03uo0hlx6"><em>questions</em></a> — the questions came first, and the name stayed when the metadata and holdings tabs joined the same spreadsheet (2026-09-05). The folder is owned by the CalCOFI service account, so nothing depends on one person’s login, and the data team sends each provider the link to their own Sheet. A Sheet has three kinds of tab:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>tab</th>
-<th>one row per</th>
-<th>you edit</th>
-<th>everything else</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>a dataset’s tab</strong> (its key)</td>
-<td>question we have asked about that dataset</td>
-<td><code>answer</code>, <code>status</code>, <code>answered_date</code>, <code>who</code></td>
-<td>protected</td>
-</tr>
-<tr class="even">
-<td><strong><code>metadata</code></strong></td>
-<td>(dataset, field) — long form, because abstracts are paragraphs</td>
-<td><code>value</code> (<code>edited_by</code> and <code>edited_date</code> fill themselves)</td>
-<td>protected; measured fields shown read-only for context</td>
-</tr>
-<tr class="odd">
-<td><strong><code>holdings</code></strong> (the CalCOFI Sheet only)</td>
-<td>dataset not yet ingested, across all providers — the team’s triage board</td>
-<td><code>status</code>, <code>priority</code>, <code>owner</code>, <code>next_step</code></td>
-<td>protected</td>
-</tr>
-</tbody>
-</table>
-<p>Two rows deserve a note. <strong><code>visibility</code></strong> is a checkbox: <code>internal</code> keeps a dataset in the record and on the triage board but off every public page, the sitemap and <code>data.json</code> until the conversation with its provider is done. <strong><code>license</code></strong> must be one of the ids in the licence registry (<code>CC-BY-4.0</code>, <code>CC0-1.0</code>, <code>US-PD</code>, <code>custom</code> with a URL, …); anything else is refused when the Sheet is pulled, not discovered at release.</p>
+<section id="reaching-a-data-provider" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="reaching-a-data-provider"><span class="header-section-number">7.4</span> Reaching a data provider</h2>
+<p>Each dataset’s <code>contact</code> (a provider-chosen URL or <code>mailto:</code> link) is in the table above. To share a derived product, ask a question about the underlying data, or propose a correction, use that contact — or open an issue against <a href="https://github.com/CalCOFI/workflows/issues">CalCOFI/workflows</a> if you are unsure who owns a dataset. Every dataset’s provenance and open questions are also tracked in that repo’s <code>metadata/{provider}/{dataset}/questions.csv</code>.</p>
 </section>
-<section id="questions-and-what-proposed-means" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="questions-and-what-proposed-means"><span class="header-section-number">5.4</span> Questions, and what <em>proposed</em> means</h2>
-<p>Every question we have for a dataset’s owner is a row in <code>metadata/{provider}/{dataset}/questions.csv</code> (see <a href="./db.html">the registries</a>) and in that dataset’s Sheet tab. A row has a short label (<code>Q07</code>), the question, the context we already know, a priority, and a <code>status</code>:</p>
+<section id="see-also" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="see-also"><span class="header-section-number">7.5</span> See also</h2>
 <ul>
-<li><strong><code>open</code></strong> — we need an answer we do not have.</li>
-<li><strong><code>proposed</code></strong> — we have already built or reasoned an answer and want it confirmed; the <code>proposed_answer</code> column holds it. Most rows are <code>proposed</code>, so a provider approves a solution rather than being handed a problem.</li>
-<li><strong><code>answered</code></strong> and <strong><code>wontfix</code></strong> — closed, with the answer kept beside the question.</li>
-</ul>
-<p>Questions reach a provider through the Sheet and, when a batch is ready, through one email drafted from the same rows. Answers come back the same way: the data team pulls the Sheet, the four answer columns are validated and written into <code>questions.csv</code> in one commit, and the next release carries whatever changed.</p>
-</section>
-<section id="what-happens-after-you-edit" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="what-happens-after-you-edit"><span class="header-section-number">5.5</span> What happens after you edit</h2>
-<p>Nothing happens on the Sheet itself. The data team runs a sync (<code>push</code> to regenerate the tabs from git, <code>pull</code> to bring edits back; both are dry runs until told otherwise), which rewrites only the changed values in the sidecar and leaves its history and comments intact. The next release — cut every few weeks, each with its own DOI — then regenerates every surface from the record:</p>
-<div id="fig-catalog-flow-metadata" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-catalog-flow-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="diagrams/catalog_flow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;5.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish."><img src="diagrams/catalog_flow.svg" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-catalog-flow-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish.
-</figcaption>
-</figure>
-</div>
-<p>Between releases, a weekly job asks each portal what it says <em>now</em> about every dataset and holding — a new EDI revision, an OBIS re-index, an ERDDAP id that disappeared — and files a <code>proposed</code> question for the provider when something changed. It observes; it never edits the record.</p>
-</section>
-<section id="a-new-dataset-end-to-end" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="a-new-dataset-end-to-end"><span class="header-section-number">5.6</span> A new dataset, end to end</h2>
-<p>Bringing a dataset in is a loop of five steps with a person at every hand-off:</p>
-<ol type="1">
-<li><strong>Explore</strong> — profile the source (columns, coverage, keys, provider), and seed the first questions from what the profile cannot answer.</li>
-<li><strong>Metadata</strong> — map the source’s fields onto the shared field dictionary and measurement vocabulary; register the dataset’s key, category and descriptive sidecar.</li>
-<li><strong>Ingest</strong> — a notebook (<code>ingest_{provider}_{dataset}.qmd</code>) turns the source into the core tables, with the provider’s own identifiers kept as columns and the questions section at the end.</li>
-<li><strong>Validate</strong> — keys, ranges, taxa and coverage are checked; every finding is either fixed or becomes a <code>proposed</code> question.</li>
-<li><strong>Release</strong> — the dataset joins the next frozen release, gets its page, its EML and STAC records, and its rows in the apps.</li>
-</ol>
-<p>A dataset can stop after step 3 with <code>in_release: false</code> while its questions are open. That is normal, and it is what the holdings triage board is for: a holding’s <code>next_step</code> names which of these steps it is waiting on and who owns it.</p>
-</section>
-<section id="who-to-contact" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="who-to-contact"><span class="header-section-number">5.7</span> Who to contact</h2>
-<ul>
-<li><strong><code>data@calcofi.io</code></strong> reaches the CalCOFI data team, and is the contact printed in every record and metadata document unless a dataset names its own.</li>
-<li><strong>The feedback button</strong> in the <a href="https://calcofi.io/explore/">Explorer</a> captures the view you are looking at (annotate it if you like) and sends it to the team, a tracking sheet and a public issue; <em>Register a product</em> on the same dialog tells a provider what was made from their data.</li>
-<li><strong>GitHub issues</strong> on <a href="https://github.com/CalCOFI/workflows/issues">CalCOFI/workflows</a> for anything about a dataset’s ingest or metadata.</li>
-</ul>
-</section>
-<section id="see-also" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="see-also"><span class="header-section-number">5.8</span> See also</h2>
-<ul>
-<li><a href="./db.html">The database schema</a> — the metadata registries and the <code>dataset</code> table.</li>
-<li><a href="./portals.html">Portals</a> — where each dataset is archived and registered, and the policy per dataset.</li>
-<li><a href="./cite.html">Cite this data</a> — the citations the record produces.</li>
+<li><a href="./db.html">The database</a> — table/column reference, including the <code>dataset</code> table’s full column list.</li>
+<li><a href="./data-access.html">Data Access</a> — how to query the release from R, Python or your browser.</li>
+<li><a href="./portals.html">Portals</a> — where the same data is discoverable outside calcofi.io (EDI, NCEI, OBIS, ERDDAP).</li>
 </ul>
 
 
@@ -1693,51 +1821,19 @@ Figure&nbsp;5.1: Everything a portal sees is generated from one record per datas
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./db.html" class="pagination-link" aria-label="Database">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Database</span></span>
+      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./server-access.html" class="pagination-link" aria-label="Server Access">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Server Access</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/metadata.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/cite.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

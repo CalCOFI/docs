@@ -2,24 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>7&nbsp; Data Access – CalCOFI.io</title>
+<title>6&nbsp; Data Access – CalCOFI.io</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,23 +66,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./server-access.html" rel="next">
+<link href="./cite.html" rel="next">
 <link href="./metadata.html" rel="prev">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fa7240b43d390df12a9eb5b7239d81ea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b27d90b72072fefe1ae495084ac7ea72.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-fa7240b43d390df12a9eb5b7239d81ea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-53ac320e6d6703b3d0eb8d314bb16b71.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -347,7 +342,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-access.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Access</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-access.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -362,39 +357,18 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://calcofi.io" class="sidebar-logo-link">
-      <img src="https://calcofi.io/brand/v2/logo_calcofi_light.svg" alt="CalCOFI" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="https://calcofi.io/brand/v2/logo_calcofi.svg" alt="CalCOFI" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <img src="https://calcofi.io/brand/v2/logo_calcofi_h_light.svg" alt="CalCOFI" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="https://calcofi.io/brand/v2/logo_calcofi_h.svg" alt="CalCOFI" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">docs</a> 
         <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.pdf" title="PDF" class="quarto-navigation-tool px-1" aria-label="PDF"><i class="bi bi-file-earmark-pdf"></i></a>
+    <a href="https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.docx" title="DOCX" class="quarto-navigation-tool px-1" aria-label="DOCX"><i class="bi bi-file-earmark-word"></i></a>
     <a href="https://github.com/CalCOFI/docs/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io.pdf">
-              <i class="bi bi-file-pdf pe-1"></i>
-            Download PDF
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io.docx">
-              <i class="bi bi-file-word pe-1"></i>
-            Download Docx
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io.epub">
-              <i class="bi bi-journal pe-1"></i>
-            Download ePub
-            </a>
-          </li>
-      </ul>
-    </div>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
@@ -446,26 +420,26 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./maps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./db.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Database</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./metadata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cite This Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -514,17 +488,17 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#where-the-data-lives" id="toc-where-the-data-lives" class="nav-link active" data-scroll-target="#where-the-data-lives"><span class="header-section-number">7.1</span> Where the data lives</a></li>
-  <li><a href="#sec-versions" id="toc-sec-versions" class="nav-link" data-scroll-target="#sec-versions"><span class="header-section-number">7.2</span> Versions</a></li>
-  <li><a href="#setup-the-httpfs-extension" id="toc-setup-the-httpfs-extension" class="nav-link" data-scroll-target="#setup-the-httpfs-extension"><span class="header-section-number">7.3</span> Setup: the <code>httpfs</code> extension</a></li>
-  <li><a href="#single-file-tables" id="toc-single-file-tables" class="nav-link" data-scroll-target="#single-file-tables"><span class="header-section-number">7.4</span> Single-file tables</a></li>
-  <li><a href="#hive-partitioned-tables" id="toc-hive-partitioned-tables" class="nav-link" data-scroll-target="#hive-partitioned-tables"><span class="header-section-number">7.5</span> Hive-partitioned tables</a></li>
-  <li><a href="#from-r" id="toc-from-r" class="nav-link" data-scroll-target="#from-r"><span class="header-section-number">7.6</span> From R</a></li>
-  <li><a href="#from-python" id="toc-from-python" class="nav-link" data-scroll-target="#from-python"><span class="header-section-number">7.7</span> From Python</a></li>
-  <li><a href="#from-your-browser" id="toc-from-your-browser" class="nav-link" data-scroll-target="#from-your-browser"><span class="header-section-number">7.8</span> From your browser</a></li>
-  <li><a href="#run-it-from-anywhere" id="toc-run-it-from-anywhere" class="nav-link" data-scroll-target="#run-it-from-anywhere"><span class="header-section-number">7.9</span> Run it from anywhere</a></li>
-  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">7.10</span> Reproducibility</a></li>
-  <li><a href="#sec-worked-example" id="toc-sec-worked-example" class="nav-link" data-scroll-target="#sec-worked-example"><span class="header-section-number">7.11</span> Worked example: sardine larvae + temperature</a></li>
+  <li><a href="#where-the-data-lives" id="toc-where-the-data-lives" class="nav-link active" data-scroll-target="#where-the-data-lives"><span class="header-section-number">6.1</span> Where the data lives</a></li>
+  <li><a href="#sec-versions" id="toc-sec-versions" class="nav-link" data-scroll-target="#sec-versions"><span class="header-section-number">6.2</span> Versions</a></li>
+  <li><a href="#setup-the-httpfs-extension" id="toc-setup-the-httpfs-extension" class="nav-link" data-scroll-target="#setup-the-httpfs-extension"><span class="header-section-number">6.3</span> Setup: the <code>httpfs</code> extension</a></li>
+  <li><a href="#single-file-tables" id="toc-single-file-tables" class="nav-link" data-scroll-target="#single-file-tables"><span class="header-section-number">6.4</span> Single-file tables</a></li>
+  <li><a href="#hive-partitioned-tables" id="toc-hive-partitioned-tables" class="nav-link" data-scroll-target="#hive-partitioned-tables"><span class="header-section-number">6.5</span> Hive-partitioned tables</a></li>
+  <li><a href="#from-r" id="toc-from-r" class="nav-link" data-scroll-target="#from-r"><span class="header-section-number">6.6</span> From R</a></li>
+  <li><a href="#from-python" id="toc-from-python" class="nav-link" data-scroll-target="#from-python"><span class="header-section-number">6.7</span> From Python</a></li>
+  <li><a href="#from-your-browser" id="toc-from-your-browser" class="nav-link" data-scroll-target="#from-your-browser"><span class="header-section-number">6.8</span> From your browser</a></li>
+  <li><a href="#run-it-from-anywhere" id="toc-run-it-from-anywhere" class="nav-link" data-scroll-target="#run-it-from-anywhere"><span class="header-section-number">6.9</span> Run it from anywhere</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">6.10</span> Reproducibility</a></li>
+  <li><a href="#sec-worked-example" id="toc-sec-worked-example" class="nav-link" data-scroll-target="#sec-worked-example"><span class="header-section-number">6.11</span> Worked example: sardine larvae + temperature</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/data-access.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -534,7 +508,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Access</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></h1>
 </div>
 
 
@@ -554,8 +528,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <p>CalCOFI <a href="./db.html">database</a> releases are published as <strong>Parquet</strong> files on a public Google Cloud Storage (GCS) bucket. You can query them directly with <a href="https://duckdb.org">DuckDB</a> — from R, Python, the DuckDB CLI, or any DuckDB client — with <strong>no credentials, no API server, and no full download</strong>. DuckDB reads only the columns and row groups a query actually touches, straight over HTTPS.</p>
 <p>This page covers querying the release Parquet directly. For convenience-wrapped biological ↔︎ environmental matching, see <a href="./helpers.html">Matching Helpers</a>. Looking for a particular dataset rather than a query? Every dataset has its own page at <a href="https://calcofi.io/datasets/">calcofi.io/datasets/{dataset_key}/</a> — coverage, every place it can be reached (this page’s Parquet included), its citation and its provider — see <a href="./portals.html">Portals</a>.</p>
 <p>The releases are read-only snapshots. The CTD team’s <em>working</em> database — multi-user PostgreSQL on the CalCOFI server, private, reached over SSH — is described in <a href="./server-access.html">Server Access</a>, including how to join it with the releases from DuckDB.</p>
-<section id="where-the-data-lives" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="where-the-data-lives"><span class="header-section-number">7.1</span> Where the data lives</h2>
+<section id="where-the-data-lives" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="where-the-data-lives"><span class="header-section-number">6.1</span> Where the data lives</h2>
 <p>A release is a versioned folder of <strong>sidecars</strong> — the record of what the release is — and its tables are Parquet <strong>objects</strong> that the release’s <code>catalog.json</code> points at:</p>
 <pre><code>gs://calcofi-db/ducklake/
 ├── releases/
@@ -582,22 +556,22 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <li>To <strong>see what’s in each table</strong> before writing a query, open the <a href="https://calcofi.io/db-schema/"><strong>CalCOFI Schema explorer</strong></a> — ERD, sortable tables/columns with units and descriptions, dataset provenance, and the canonical measurement-type registry, all reading the same <code>metadata.json</code> sidecar.</li>
 </ul>
 </section>
-<section id="sec-versions" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="sec-versions"><span class="header-section-number">7.2</span> Versions</h2>
+<section id="sec-versions" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-versions"><span class="header-section-number">6.2</span> Versions</h2>
 <ul>
 <li><strong><code>latest</code> vs pinned.</strong> <code>latest.txt</code> names the <em>promoted</em> version — a release is promoted only after its consumer-contract query suite passes, so <code>latest</code> is safe to follow interactively and is what <code>cc_get_db()</code> defaults to. Anything that must be reproducible — a paper, an app build, a download bundle — pins a <code>vYYYY.MM.DD</code>. Releases are immutable: the same version always returns the same rows.</li>
 <li><strong>Consolidated vs retired.</strong> Every version keeps its sidecars and notes, but only some keep their bytes. The <strong>consolidated</strong> versions (<code>"consolidated": true</code> in <code>versions.json</code>) mark a schema or data milestone and keep their <code>parquet/</code> copy indefinitely — <code>v2026.04.08</code> (last of the per-dataset schema), <code>v2026.05.14</code> (first <code>ctd_thin</code>), <code>v2026.06.26</code> (zoodb and zooscan enter), <code>v2026.07.17</code> (unified <code>taxon</code>), <code>v2026.08.14</code> (last before content-addressing) and <code>v2026.08.25</code> (<code>cruise_key</code> by date span, depth ceiling, quality flags mapped) — plus, always, the promoted version and its predecessor. Every other version is <strong>retired</strong> by archive thinning once it is neither: its <code>versions.json</code> entry gains <code>retired: {retired_utc, to, reason}</code>, where <code>to</code> is the consolidated version to use instead, and <code>cc_get_db("v2026.08.10")</code> errors naming it rather than failing table by table on 404s. When you pin, pin a consolidated version.</li>
 <li><strong>What changed.</strong> <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md"><code>RELEASES.md</code></a> is the running changelog across versions — one section per release, newest first, saying what was wrong, what is true now, and what it costs a consumer (<code>**Consumers:**</code> lines). Each version’s <code>RELEASE_NOTES.md</code> is its section plus a generated appendix (tables and rows, datasets, the consumer-contract result, package versions): <code>calcofi4r::cc_release_notes(version)</code> prints it, and <code>cc_list_versions()</code> / <code>calcofi4py.cc_list_versions()</code> list <code>versions.json</code>. Per table, <code>objects[].since</code> in the catalog says which version last changed its bytes.</li>
 </ul>
 </section>
-<section id="setup-the-httpfs-extension" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="setup-the-httpfs-extension"><span class="header-section-number">7.3</span> Setup: the <code>httpfs</code> extension</h2>
+<section id="setup-the-httpfs-extension" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="setup-the-httpfs-extension"><span class="header-section-number">6.3</span> Setup: the <code>httpfs</code> extension</h2>
 <p>DuckDB reads remote Parquet through its <code>httpfs</code> extension. Spatial queries (e.g.&nbsp;distances between casts and tows) also need <code>spatial</code>. Both are one-time installs, then loaded per session:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INSTALL httpfs; LOAD httpfs;</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>INSTALL spatial; LOAD spatial;   <span class="co">-- only if you use ST_* functions</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="single-file-tables" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="single-file-tables"><span class="header-section-number">7.4</span> Single-file tables</h2>
+<section id="single-file-tables" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="single-file-tables"><span class="header-section-number">6.4</span> Single-file tables</h2>
 <p>A single-file table is one HTTPS URL handed to <code>read_parquet()</code>. Take it from the catalog (the packages do this for you, below); typed by hand it must be a version whose <code>parquet/</code> copy is kept — <code>v2026.08.25</code> is consolidated, so this URL answers indefinitely:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> taxon_key, scientific_name, common_name, worms_id, <span class="fu">rank</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_parquet(<span class="st">'https://storage.googleapis.com/calcofi-db/ducklake/releases/v2026.08.25/parquet/taxon.parquet'</span>)</span>
@@ -611,8 +585,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> sm.measurement_type <span class="op">=</span> <span class="st">'std_haul_factor'</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="hive-partitioned-tables" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="hive-partitioned-tables"><span class="header-section-number">7.5</span> Hive-partitioned tables</h2>
+<section id="hive-partitioned-tables" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="hive-partitioned-tables"><span class="header-section-number">6.5</span> Hive-partitioned tables</h2>
 <p><code>obs</code> (and the supplemental <code>obs_ctd_full</code> / <code>obs_mets_full</code>) is partitioned into one folder per <code>dataset_key</code>. From the v2026.09 releases the catalog lists each partition as its own object, so a partitioned table is read as an <strong>explicit list of HTTPS URLs</strong> — <code>objects[].path</code> prefixed with the bucket root — with <code>hive_partitioning = true</code> to recover <code>dataset_key</code> from the <code>dataset_key=…</code> path segment. That runs in every DuckDB, the browser included:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- the list is catalog.json ▸ tables[name = 'obs'] ▸ objects[].path, one per partition</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> dataset_key, <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">AS</span> n</span>
@@ -647,8 +621,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> dataset_key;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The resolvers return this form for those versions automatically.</p>
 </section>
-<section id="from-r" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="from-r"><span class="header-section-number">7.6</span> From R</h2>
+<section id="from-r" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="from-r"><span class="header-section-number">6.6</span> From R</h2>
 <p>Let the <a href="https://calcofi.io/calcofi4r"><code>calcofi4r</code></a> package register every release table as a view — it resolves each table through the catalog and handles <code>httpfs</code>, the partitioned tables, the supplemental opt-in and local caching (content-addressed, so a table unchanged between releases is cached once):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github("calcofi/calcofi4r")</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span>
@@ -678,8 +652,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE common_name ILIKE '%%sardine%%'"</span>,</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cc_read_parquet_sql</span>(<span class="fu">cc_release_sources</span>(cat_, <span class="st">"taxon"</span>))))   <span class="co"># read_parquet('…') or read_parquet([...], hive_partitioning = true)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="from-python" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="from-python"><span class="header-section-number">7.7</span> From Python</h2>
+<section id="from-python" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="from-python"><span class="header-section-number">6.7</span> From Python</h2>
 <p><a href="https://github.com/CalCOFI/calcofi4py"><code>calcofi4py</code></a> registers every release table as a DuckDB view for you (partitioned + supplemental handling included), mirroring <code>calcofi4r</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install "calcofi4py @ git+https://github.com/CalCOFI/calcofi4py"</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> calcofi4py <span class="im">as</span> cc</span>
@@ -721,8 +695,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Without the package the same resolution is a few lines of <code>json</code>: fetch <code>releases/{version}/catalog.json</code> and prefix each table’s <code>objects[].path</code> with <code>https://storage.googleapis.com/calcofi-db/</code>, as the browser example below does.</p>
 </section>
-<section id="from-your-browser" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="from-your-browser"><span class="header-section-number">7.8</span> From your browser</h2>
+<section id="from-your-browser" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="from-your-browser"><span class="header-section-number">6.8</span> From your browser</h2>
 <p>DuckDB compiles to WebAssembly, so the <em>same engine</em> runs <strong>client-side in your browser</strong> — no server, no install, no R or Python. CalCOFI ships a ready-made form at <strong>→ <a href="https://calcofi.io/db-query/">Open CalCOFI Query</a></strong> that wraps the three retired bio↔︎env Plumber endpoints (and a free-form SQL shell): pick a function, fill the form, click <strong>Run</strong>, and a Chromium / Firefox / Safari worker thread fetches Parquet range-by-range over HTTPS and joins them in-browser.</p>
 <p>To embed DuckDB-WASM in your own page, the boilerplate is about 15 lines — load the bundle from a CDN, instantiate, <code>INSTALL httpfs</code> and you’re ready:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="dt">&gt;</span></span>
@@ -764,8 +738,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For arbitrary one-off SQL with no setup at all, paste a query into <a href="https://shell.duckdb.org"><strong>shell.duckdb.org</strong></a> — DuckDB’s official DuckDB-WASM shell. Same WebAssembly engine, same public Parquet, identical rows.</p>
 </section>
-<section id="run-it-from-anywhere" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="run-it-from-anywhere"><span class="header-section-number">7.9</span> Run it from anywhere</h2>
+<section id="run-it-from-anywhere" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="run-it-from-anywhere"><span class="header-section-number">6.9</span> Run it from anywhere</h2>
 <p>The same portable SQL — what <a href="./helpers.html"><code>calcofi4r::cc_match_*()</code></a> emits as <code>attr(d, "sql")</code>, what the <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> download bundle ships in its <code>query/</code> folder, what is shown in <a href="#sec-worked-example">the worked example</a> below — runs in any DuckDB client:</p>
 <table class="caption-top table">
 <thead>
@@ -794,8 +768,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tbody>
 </table>
 </section>
-<section id="reproducibility" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">7.10</span> Reproducibility</h2>
+<section id="reproducibility" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">6.10</span> Reproducibility</h2>
 <p>Because every query is plain SQL against immutable, versioned, public Parquet, a CalCOFI result is <strong>reproducible by anyone</strong> — pin the <code>{version}</code> and re-run the SQL. Pin a <a href="#sec-versions">consolidated</a> version: its bytes are kept indefinitely, and a later release that shares an object with it shares the same bytes.</p>
 <p>The <a href="https://app.calcofi.io/db-viz-hex">Integrated App</a> builds on this: its data <strong>download bundle</strong> ships a <code>query/</code> folder alongside the data:</p>
 <pre><code>data/original/{bio,env}.csv          ← query/{bio,env}.sql
@@ -805,8 +779,8 @@ query/manifest.json                  release version, filters, GCS source URLs,
 query/REPRODUCE.md                   DuckDB-CLI / Python / R re-run snippets</code></pre>
 <p>Each <code>*.sql</code> file is fully interpolated, GCS-URL-based, and copy-paste runnable (prefixed with the <code>INSTALL</code>/<code>LOAD</code> it needs). Re-run <code>query/integrated_*.sql</code> in DuckDB and you get back exactly the rows in the matching <code>.csv</code> — the <code>manifest.json</code> md5 checksums let you confirm it. The same SQL is what <a href="./helpers.html"><code>calcofi4r::cc_match_bio_env()</code></a> executes and attaches as <code>attr(x, "sql")</code>, what the browser-based <strong><a href="https://calcofi.io/db-query/">CalCOFI Query</a></strong> generates as its <code>SQL</code> panel, and what a hand-written query produces — <strong>a single source of truth across R, Python, the CLI and JavaScript</strong>.</p>
 </section>
-<section id="sec-worked-example" class="level2" data-number="7.11">
-<h2 data-number="7.11" class="anchored" data-anchor-id="sec-worked-example"><span class="header-section-number">7.11</span> Worked example: sardine larvae + temperature</h2>
+<section id="sec-worked-example" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="sec-worked-example"><span class="header-section-number">6.11</span> Worked example: sardine larvae + temperature</h2>
 <p>The recurring example through these pages is <em>Pacific sardine (<code>Sardinops sagax</code>) larvae matched to CTD-bottle temperature, Q1 2018, with relaxed (5 km / 72 hr) matching</em>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1337,12 +1311,12 @@ Note
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./metadata.html" class="pagination-link" aria-label="Metadata &amp; the ingest loop">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./server-access.html" class="pagination-link" aria-label="Server Access">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Server Access</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cite.html" class="pagination-link" aria-label="Cite This Data">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cite This Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

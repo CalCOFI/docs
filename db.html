@@ -2,24 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>5&nbsp; Database – CalCOFI.io</title>
+<title>4&nbsp; Database – CalCOFI.io</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,22 +67,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./metadata.html" rel="next">
-<link href="./maps.html" rel="prev">
+<link href="./apps.html" rel="prev">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fa7240b43d390df12a9eb5b7239d81ea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b27d90b72072fefe1ae495084ac7ea72.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-fa7240b43d390df12a9eb5b7239d81ea.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-53ac320e6d6703b3d0eb8d314bb16b71.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -172,9 +167,6 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     document.addEventListener("cc:theme", function (e) { pushToQuarto(e.detail.theme); });   // (c) a brand toggle, if a page ever adds one
   });
 })();</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -350,7 +342,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./db.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./db.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Database</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -365,39 +357,18 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://calcofi.io" class="sidebar-logo-link">
-      <img src="https://calcofi.io/brand/v2/logo_calcofi_light.svg" alt="CalCOFI" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="https://calcofi.io/brand/v2/logo_calcofi.svg" alt="CalCOFI" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <img src="https://calcofi.io/brand/v2/logo_calcofi_h_light.svg" alt="CalCOFI" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="https://calcofi.io/brand/v2/logo_calcofi_h.svg" alt="CalCOFI" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">docs</a> 
         <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.pdf" title="PDF" class="quarto-navigation-tool px-1" aria-label="PDF"><i class="bi bi-file-earmark-pdf"></i></a>
+    <a href="https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.docx" title="DOCX" class="quarto-navigation-tool px-1" aria-label="DOCX"><i class="bi bi-file-earmark-word"></i></a>
     <a href="https://github.com/CalCOFI/docs/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io.pdf">
-              <i class="bi bi-file-pdf pe-1"></i>
-            Download PDF
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io.docx">
-              <i class="bi bi-file-word pe-1"></i>
-            Download Docx
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./CalCOFI.io.epub">
-              <i class="bi bi-journal pe-1"></i>
-            Download ePub
-            </a>
-          </li>
-      </ul>
-    </div>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
@@ -449,26 +420,26 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./maps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./db.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Database</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./metadata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cite This Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -517,38 +488,38 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#naming-conventions" id="toc-naming-conventions" class="nav-link active" data-scroll-target="#naming-conventions"><span class="header-section-number">5.1</span> Naming conventions</a>
+  <li><a href="#naming-conventions" id="toc-naming-conventions" class="nav-link active" data-scroll-target="#naming-conventions"><span class="header-section-number">4.1</span> Naming conventions</a>
   <ul class="collapse">
-  <li><a href="#name-tables" id="toc-name-tables" class="nav-link" data-scroll-target="#name-tables"><span class="header-section-number">5.1.1</span> Name tables</a></li>
-  <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">5.1.2</span> Name columns</a></li>
-  <li><a href="#key-conventions" id="toc-key-conventions" class="nav-link" data-scroll-target="#key-conventions"><span class="header-section-number">5.1.3</span> Key conventions</a></li>
+  <li><a href="#name-tables" id="toc-name-tables" class="nav-link" data-scroll-target="#name-tables"><span class="header-section-number">4.1.1</span> Name tables</a></li>
+  <li><a href="#name-columns" id="toc-name-columns" class="nav-link" data-scroll-target="#name-columns"><span class="header-section-number">4.1.2</span> Name columns</a></li>
+  <li><a href="#key-conventions" id="toc-key-conventions" class="nav-link" data-scroll-target="#key-conventions"><span class="header-section-number">4.1.3</span> Key conventions</a></li>
   </ul></li>
-  <li><a href="#use-unicode-for-text" id="toc-use-unicode-for-text" class="nav-link" data-scroll-target="#use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</a></li>
-  <li><a href="#the-core-data-model" id="toc-the-core-data-model" class="nav-link" data-scroll-target="#the-core-data-model"><span class="header-section-number">5.3</span> The core data model</a>
+  <li><a href="#use-unicode-for-text" id="toc-use-unicode-for-text" class="nav-link" data-scroll-target="#use-unicode-for-text"><span class="header-section-number">4.2</span> Use Unicode for text</a></li>
+  <li><a href="#the-core-data-model" id="toc-the-core-data-model" class="nav-link" data-scroll-target="#the-core-data-model"><span class="header-section-number">4.3</span> The core data model</a>
   <ul class="collapse">
-  <li><a href="#what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" id="toc-what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" class="nav-link" data-scroll-target="#what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view"><span class="header-section-number">5.3.1</span> What the release publishes: <code>obs_bio</code> + <code>obs_env</code>, and <code>obs</code> as a view</a></li>
-  <li><a href="#shared-reference-tables" id="toc-shared-reference-tables" class="nav-link" data-scroll-target="#shared-reference-tables"><span class="header-section-number">5.3.2</span> Shared reference tables</a></li>
-  <li><a href="#taxonomy" id="toc-taxonomy" class="nav-link" data-scroll-target="#taxonomy"><span class="header-section-number">5.3.3</span> Taxonomy</a></li>
-  <li><a href="#quality-flags-reach-consumers-only-if-consumers-apply-them" id="toc-quality-flags-reach-consumers-only-if-consumers-apply-them" class="nav-link" data-scroll-target="#quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">5.3.4</span> Quality flags reach consumers only if consumers apply them</a></li>
-  <li><a href="#depth-is-a-coordinate-and-it-is-bounded-as-one" id="toc-depth-is-a-coordinate-and-it-is-bounded-as-one" class="nav-link" data-scroll-target="#depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">5.3.5</span> Depth is a coordinate, and it is bounded as one</a></li>
+  <li><a href="#what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" id="toc-what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" class="nav-link" data-scroll-target="#what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view"><span class="header-section-number">4.3.1</span> What the release publishes: <code>obs_bio</code> + <code>obs_env</code>, and <code>obs</code> as a view</a></li>
+  <li><a href="#shared-reference-tables" id="toc-shared-reference-tables" class="nav-link" data-scroll-target="#shared-reference-tables"><span class="header-section-number">4.3.2</span> Shared reference tables</a></li>
+  <li><a href="#taxonomy" id="toc-taxonomy" class="nav-link" data-scroll-target="#taxonomy"><span class="header-section-number">4.3.3</span> Taxonomy</a></li>
+  <li><a href="#quality-flags-reach-consumers-only-if-consumers-apply-them" id="toc-quality-flags-reach-consumers-only-if-consumers-apply-them" class="nav-link" data-scroll-target="#quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">4.3.4</span> Quality flags reach consumers only if consumers apply them</a></li>
+  <li><a href="#depth-is-a-coordinate-and-it-is-bounded-as-one" id="toc-depth-is-a-coordinate-and-it-is-bounded-as-one" class="nav-link" data-scroll-target="#depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">4.3.5</span> Depth is a coordinate, and it is bounded as one</a></li>
   </ul></li>
-  <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">5.4</span> Integrated database ingestion strategy</a>
+  <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">4.4</span> Integrated database ingestion strategy</a>
   <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">5.4.1</span> Overview</a></li>
-  <li><a href="#release-versioning" id="toc-release-versioning" class="nav-link" data-scroll-target="#release-versioning"><span class="header-section-number">5.4.2</span> Release versioning</a></li>
-  <li><a href="#metadata-registries-the-single-sources-of-truth" id="toc-metadata-registries-the-single-sources-of-truth" class="nav-link" data-scroll-target="#metadata-registries-the-single-sources-of-truth"><span class="header-section-number">5.4.3</span> Metadata registries — the single sources of truth</a></li>
-  <li><a href="#coverage-is-measured-never-asserted" id="toc-coverage-is-measured-never-asserted" class="nav-link" data-scroll-target="#coverage-is-measured-never-asserted"><span class="header-section-number">5.4.4</span> Coverage is measured, never asserted</a></li>
-  <li><a href="#citation-and-licence-are-a-contract-and-they-are-checked" id="toc-citation-and-licence-are-a-contract-and-they-are-checked" class="nav-link" data-scroll-target="#citation-and-licence-are-a-contract-and-they-are-checked"><span class="header-section-number">5.4.5</span> Citation and licence are a contract, and they are checked</a></li>
-  <li><a href="#consuming-descriptions" id="toc-consuming-descriptions" class="nav-link" data-scroll-target="#consuming-descriptions"><span class="header-section-number">5.4.6</span> Consuming descriptions</a></li>
-  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">5.4.7</span> Publishing to portals</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">4.4.1</span> Overview</a></li>
+  <li><a href="#release-versioning" id="toc-release-versioning" class="nav-link" data-scroll-target="#release-versioning"><span class="header-section-number">4.4.2</span> Release versioning</a></li>
+  <li><a href="#metadata-registries-the-single-sources-of-truth" id="toc-metadata-registries-the-single-sources-of-truth" class="nav-link" data-scroll-target="#metadata-registries-the-single-sources-of-truth"><span class="header-section-number">4.4.3</span> Metadata registries — the single sources of truth</a></li>
+  <li><a href="#coverage-is-measured-never-asserted" id="toc-coverage-is-measured-never-asserted" class="nav-link" data-scroll-target="#coverage-is-measured-never-asserted"><span class="header-section-number">4.4.4</span> Coverage is measured, never asserted</a></li>
+  <li><a href="#citation-and-licence-are-a-contract-and-they-are-checked" id="toc-citation-and-licence-are-a-contract-and-they-are-checked" class="nav-link" data-scroll-target="#citation-and-licence-are-a-contract-and-they-are-checked"><span class="header-section-number">4.4.5</span> Citation and licence are a contract, and they are checked</a></li>
+  <li><a href="#consuming-descriptions" id="toc-consuming-descriptions" class="nav-link" data-scroll-target="#consuming-descriptions"><span class="header-section-number">4.4.6</span> Consuming descriptions</a></li>
+  <li><a href="#publishing-to-portals" id="toc-publishing-to-portals" class="nav-link" data-scroll-target="#publishing-to-portals"><span class="header-section-number">4.4.7</span> Publishing to portals</a></li>
   </ul></li>
-  <li><a href="#darwin-core-obis-env-data-mapping" id="toc-darwin-core-obis-env-data-mapping" class="nav-link" data-scroll-target="#darwin-core-obis-env-data-mapping"><span class="header-section-number">5.5</span> Darwin Core / OBIS ENV-DATA mapping</a>
+  <li><a href="#darwin-core-obis-env-data-mapping" id="toc-darwin-core-obis-env-data-mapping" class="nav-link" data-scroll-target="#darwin-core-obis-env-data-mapping"><span class="header-section-number">4.5</span> Darwin Core / OBIS ENV-DATA mapping</a>
   <ul class="collapse">
-  <li><a href="#an-id-is-filled-only-on-an-exact-match" id="toc-an-id-is-filled-only-on-an-exact-match" class="nav-link" data-scroll-target="#an-id-is-filled-only-on-an-exact-match"><span class="header-section-number">5.5.1</span> An id is filled only on an exact match</a></li>
-  <li><a href="#three-caveats-for-anyone-building-an-export" id="toc-three-caveats-for-anyone-building-an-export" class="nav-link" data-scroll-target="#three-caveats-for-anyone-building-an-export"><span class="header-section-number">5.5.2</span> Three caveats for anyone building an export</a></li>
+  <li><a href="#an-id-is-filled-only-on-an-exact-match" id="toc-an-id-is-filled-only-on-an-exact-match" class="nav-link" data-scroll-target="#an-id-is-filled-only-on-an-exact-match"><span class="header-section-number">4.5.1</span> An id is filled only on an exact match</a></li>
+  <li><a href="#three-caveats-for-anyone-building-an-export" id="toc-three-caveats-for-anyone-building-an-export" class="nav-link" data-scroll-target="#three-caveats-for-anyone-building-an-export"><span class="header-section-number">4.5.2</span> Three caveats for anyone building an export</a></li>
   </ul></li>
-  <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">5.6</span> Relationships between tables</a></li>
-  <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">5.7</span> Spatial Tips</a></li>
+  <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">4.6</span> Relationships between tables</a></li>
+  <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">4.7</span> Spatial Tips</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/db.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -558,7 +529,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Database</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Database</span></h1>
 </div>
 
 
@@ -575,14 +546,14 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<section id="naming-conventions" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="naming-conventions"><span class="header-section-number">5.1</span> Naming conventions</h2>
+<section id="naming-conventions" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="naming-conventions"><span class="header-section-number">4.1</span> Naming conventions</h2>
 <blockquote class="blockquote">
 <p>There are only two hard things in Computer Science: cache invalidation and naming things. – Phil Karlton (Netscape architect)</p>
 </blockquote>
 <p>Background reading: <a href="https://www.sqlshack.com/learn-sql-naming-conventions/">Learn SQL: Naming Conventions</a> · <a href="https://drygast.net/blog/post/database_naming_conventions">Best Practices for Database Naming Conventions</a>.</p>
-<section id="name-tables" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="name-tables"><span class="header-section-number">5.1.1</span> Name tables</h3>
+<section id="name-tables" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="name-tables"><span class="header-section-number">4.1.1</span> Name tables</h3>
 <ul>
 <li>Table names are <strong>singular</strong> and use all lower case.
 <ul>
@@ -590,16 +561,16 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </ul></li>
 </ul>
 </section>
-<section id="name-columns" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="name-columns"><span class="header-section-number">5.1.2</span> Name columns</h3>
+<section id="name-columns" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="name-columns"><span class="header-section-number">4.1.2</span> Name columns</h3>
 <ul>
 <li><p>To name columns, use <a href="https://cran.r-project.org/web/packages/snakecase/vignettes/introducing-the-snakecase-package.html"><strong>snake-case</strong></a> (i.e., lower-case with underscores) so as to prevent the need to quote SQL statements. (TIP: Use <a href="https://sfirke.github.io/janitor/reference/clean_names.html"><code>janitor::clean_names()</code></a> to convert a table.)</p></li>
 <li><p>Suffix with <strong>units</strong> where applicable (e.g., <code>*_m</code> for meters, <code>*_km</code> for kilometers, <code>*_degc</code> for degrees Celsius). See <a href="https://cran.r-project.org/web/packages/units/vignettes/measurement_units_in_R.html">units vignette</a>.</p></li>
 <li><p>Set the geometry column to <strong><code>geom</code></strong> (used by the <a href="https://postgis.net">PostGIS</a> spatial extension). If a table has multiple geometry columns, use <code>geom</code> for the default and <code>geom_{type}</code> for the rest (<code>geom_point</code>, <code>geom_line</code>, <code>geom_polygon</code>).</p></li>
 </ul>
 </section>
-<section id="key-conventions" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="key-conventions"><span class="header-section-number">5.1.3</span> Key conventions</h3>
+<section id="key-conventions" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="key-conventions"><span class="header-section-number">4.1.3</span> Key conventions</h3>
 <p>The <strong>suffix says what kind of value it is</strong>, and this is checked in review, because a character-valued identifier named <code>*_id</code> is a promise the data cannot keep:</p>
 <table class="caption-top table">
 <thead>
@@ -646,24 +617,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <li><strong><code>sample.station_uuid</code></strong> is the SWFSC station occupation an event belongs to, resolved in the release, with <code>station_uuid_method</code> saying how (the event’s own site, its parent’s, a match on <code>(cruise_key, site_key, order_occ)</code>, or the single ichthyoplankton occupation within 24 hours).</li>
 </ul>
 <p><code>_source_*</code> provenance columns — the wrangling-time record of which source file and row a value came from — are a different thing entirely and <strong>are stripped at the freeze</strong>; they never reach a release.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>sample.source_uuid</code>, <code>sample.station_uuid</code> and <code>station_uuid_method</code> are decided and land with the provider-UUID workstream; <code>cruise.cruise_uuid</code> ships today. Check <code>catalog.json</code>/<code>metadata.json</code> for the release you are reading, or the <a href="https://calcofi.io/db-schema/">schema explorer</a>.</p>
-</div>
-</div>
-<p><strong>Sequential integer keys carry a documented sort order</strong> so a rebuild reproduces them: <code>site_id</code> by <code>(cruise_key, order_occ)</code>, <code>tow_id</code> by <code>(site_id, time_start)</code>, <code>net_id</code> by <code>(tow_id, side)</code>.</p>
+<p>All three columns ship since v2026.09.04; <code>metadata.json</code> for the release you are reading, or the <a href="https://calcofi.io/db-schema/">schema explorer</a>, lists them.</p>
+<p><strong>The one sequential integer key the release mints is <code>root_id</code></strong>, on <code>sample_root</code>: a dense integer for each root sampling event (a <code>sample</code> row with no parent), numbered deterministically so a rebuild reproduces it. <code>obs_bio</code> and <code>obs_env</code> carry it so a browser can join observations to their event without the string key.</p>
 </section>
 </section>
-<section id="use-unicode-for-text" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="use-unicode-for-text"><span class="header-section-number">5.2</span> Use Unicode for text</h2>
+<section id="use-unicode-for-text" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="use-unicode-for-text"><span class="header-section-number">4.2</span> Use Unicode for text</h2>
 <p>The <a href="https://www.postgresql.org/docs/current/multibyte.html#MULTIBYTE-SETTING">default character encoding for Postgresql</a> is unicode (<code>UTF8</code>), which allows for international characters, accents and special characters. Improper encoding can royally mess up basic text.</p>
 <p>Logging into the server, we can see this with the following command:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> postgis psql <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -724,8 +683,8 @@ Note
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_excel_csv</span>(df, <span class="st">'file.csv'</span>)                                       <span class="co"># implicit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 </section>
-<section id="the-core-data-model" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="the-core-data-model"><span class="header-section-number">5.3</span> The core data model</h2>
+<section id="the-core-data-model" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="the-core-data-model"><span class="header-section-number">4.3</span> The core data model</h2>
 <p>Sixteen source datasets — ichthyoplankton, zooplankton, bottle hydrography, CTD casts, DIC, underway meteorology, seabird and mammal transects, and more — used to reach the database as ~40 per-dataset tables. They now project into a small <strong>core family</strong> that every consumer reads. A dataset’s projection lives in its own ingest notebook (the generic shapes live in <code>calcofi4db</code>), so adding a dataset never edits a shared <code>switch()</code>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -774,8 +733,8 @@ Note
 </tbody>
 </table>
 <p>An observation’s provenance is denormalized onto it on purpose: <code>obs</code> carries <code>dataset_key</code>, <code>cruise_key</code>, <code>grid_key</code>, the position, the datetime and <code>hex_id</code> (H3 at resolution 10, so coarser aggregations use <code>h3_cell_to_parent(hex_id, res)</code> rather than a column per resolution), so a rollup groups without a join. <code>geom</code> lives on <code>sample</code> and on the reference tables, never on <code>obs</code>.</p>
-<section id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view"><span class="header-section-number">5.3.1</span> What the release publishes: <code>obs_bio</code> + <code>obs_env</code>, and <code>obs</code> as a view</h3>
+<section id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view"><span class="header-section-number">4.3.1</span> What the release publishes: <code>obs_bio</code> + <code>obs_env</code>, and <code>obs</code> as a view</h3>
 <p>The assembly grain is <code>obs</code>; what the <strong>release</strong> publishes is the pair cut from it, because the questions consumers ask are shaped differently for the two realms:</p>
 <ul>
 <li><strong><code>obs_bio</code></strong> — one object, the bio realm, with the gear and effort of the row’s <em>own</em> sampling event inline (<code>tow_type</code>, <code>std_haul_factor</code>, <code>prop_sorted</code>, <code>volume_sampled_m3</code>) and the two standardized densities derived once (<code>density_per_10m2</code>, <code>density_per_1000m3</code>) plus <code>effort_class</code>. One taxon question = one file.</li>
@@ -788,13 +747,13 @@ Note
 </ul>
 <p>Do not rename <code>value</code>, <code>root_id</code> or <code>hex7</code> on the pair; new columns are appended and the view maps names, so consumers never have to.</p>
 </section>
-<section id="shared-reference-tables" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="shared-reference-tables"><span class="header-section-number">5.3.2</span> Shared reference tables</h3>
+<section id="shared-reference-tables" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="shared-reference-tables"><span class="header-section-number">4.3.2</span> Shared reference tables</h3>
 <p><code>cruise</code> (one row per cruise, with <code>cruise_uuid</code>, the ship, and the observed <code>date_min</code>/<code>date_max</code> span that keys every other dataset’s events), <code>ship</code>, <code>grid</code> (the CalCOFI station grid, materialized deterministically from <code>calcofi4r::cc_grid</code>), <code>spatial</code> + <code>spatial_attribute</code> (boundary layers), <code>sample_spatial</code> (the sample→layer memberships), <code>region</code>, <code>lookup</code>, <code>dataset</code> (one row per released dataset, with its measured coverage and its citation), <code>measurement_type</code> (the measurement vocabulary, below) and <code>climatology</code>.</p>
 <p><strong><code>climatology</code> is the one baseline every anomaly subtracts.</strong> Until 2026-08-31 three products each computed their own and the same section read +1.4 °C in one and ~0 in another. It is a plain mean per dataset × <code>grid_key</code> × <strong>calendar month</strong> × 10 m depth bin × measurement type over <strong>1993–2013</strong>, kept only where ≥ 3 distinct cruises contribute, with the window stamped on every row. A cast’s anomaly is its value minus the cell of <em>its own</em> calendar month; pooling months produces a seasonal-cycle map, not an anomaly.</p>
 </section>
-<section id="taxonomy" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="taxonomy"><span class="header-section-number">5.3.3</span> Taxonomy</h3>
+<section id="taxonomy" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="taxonomy"><span class="header-section-number">4.3.3</span> Taxonomy</h3>
 <p>Three shared tables replace the ~7 per-dataset taxon tables:</p>
 <ul>
 <li><strong><code>taxon</code></strong> — one row per taxon: <code>taxon_key</code> (<code>worms:&lt;AphiaID&gt;</code>, or <code>itis:&lt;TSN&gt;</code> when the taxon’s class is <strong>Aves</strong>, because WoRMS bird taxonomy lags), the cross-reference ids (<code>worms_id</code>, <code>itis_id</code>, <code>gbif_id</code>), <code>parent_taxon_key</code>, <code>rank</code> and <code>rank_order</code>, the flattened lineage (<code>kingdom</code>, <code>phylum</code>, <code>class</code>, <code>order_taxon</code>, <code>family</code>), <code>scientific_name</code>, <code>common_name</code>, and <code>taxonomic_status</code> <strong>with</strong> <code>status_checked</code> — read the two together; a status with no check date is not a fact.</li>
@@ -804,124 +763,25 @@ Note
 <p>Two distinctions that cost real data before they were written down. <strong>The key authority and the cross-reference columns are different questions</strong>: a bird keys <code>itis:</code> <em>and</em> carries a <code>worms_id</code>, because a consumer joining on <code>worms_id</code> would otherwise match zero seabirds. And <strong>a key must be an accepted id</strong> while a cross-reference is whatever the authority links — a deprecated TSN is re-keyed onto its accepted successor and the event is recorded in <code>taxon.notes</code>.</p>
 <p>When asserting lineage coverage, <strong>split by rank position</strong>: <code>family</code> is legitimately NULL above family rank, and <code>kingdom</code> is NULL for <code>worms:1</code> <em>Biota</em>. A blanket non-NULL assertion is wrong, and someone will “fix” it by inventing data.</p>
 </section>
-<section id="quality-flags-reach-consumers-only-if-consumers-apply-them" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">5.3.4</span> Quality flags reach consumers only if consumers apply them</h3>
+<section id="quality-flags-reach-consumers-only-if-consumers-apply-them" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">4.3.4</span> Quality flags reach consumers only if consumers apply them</h3>
 <p><code>obs.measurement_qual</code> is <strong>each dataset’s own vocabulary, uninterpreted</strong> — bottle 6 = ok-from-CTD, 8 = suspect, 9 = missing; CTD 1/2 = use primary/secondary sensor, 8 = questionable, 9 = bad; DIC follows WOCE (2 good, 3 questionable, 4 bad, 9 missing). The registry is <code>metadata/measurement_qual.csv</code> in the workflows repo and it ships in <code>metadata.json</code>.</p>
 <p>In August 2026 a 2.18 ml/L oxygen spike at 1,144 m turned out to be a bottle flagged suspect in the source <strong>since 1955</strong> — it reached a plotted app because no consumer filtered on the column. There is now one predicate per language — <code>calcofi4r::cc_qual_ok_sql()</code>, <code>calcofi4py.qual_ok_sql()</code>, the query site’s <code>qualOkSQL()</code> — NULL-safe, so an unflagged row is kept. <strong>Apply it.</strong> A value with a flag you do not read is not a value you can trust.</p>
 </section>
-<section id="depth-is-a-coordinate-and-it-is-bounded-as-one" class="level3" data-number="5.3.5">
-<h3 data-number="5.3.5" class="anchored" data-anchor-id="depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">5.3.5</span> Depth is a coordinate, and it is bounded as one</h3>
+<section id="depth-is-a-coordinate-and-it-is-bounded-as-one" class="level3" data-number="4.3.5">
+<h3 data-number="4.3.5" class="anchored" data-anchor-id="depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">4.3.5</span> Depth is a coordinate, and it is bounded as one</h3>
 <p>Every released depth is finite, non-negative and no deeper than <strong>6,500 m</strong>, on <code>obs</code>, on <code>sample</code> and on the supplemental tables; a violation fails the release rather than shipping. Separately, <code>sample.seafloor_depth_m</code> carries the GEBCO 2025 sea-floor depth at the sample’s position (positive down, 0 on land, NULL outside the raster) so a consumer can judge a deep sample without fetching a raster. Where a sample’s deepest attributed depth exceeds the deepest GEBCO cell near it, that is <strong>reported and ratcheted, never deleted</strong>: nearly all such cases are minute-rounded 1949–1975 positions on slopes and canyons — the measurement is fine, the place is imprecise.</p>
 </section>
 </section>
-<section id="integrated-database-ingestion-strategy" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="integrated-database-ingestion-strategy"><span class="header-section-number">5.4</span> Integrated database ingestion strategy</h2>
-<section id="overview" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">5.4.1</span> Overview</h3>
+<section id="integrated-database-ingestion-strategy" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="integrated-database-ingestion-strategy"><span class="header-section-number">4.4</span> Integrated database ingestion strategy</h2>
+<section id="overview" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.4.1</span> Overview</h3>
 <p>The integrated database is built by the <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> pipeline: one <code>ingest_{provider}_{dataset}.qmd</code> notebook per dataset (orchestrated by <code>targets</code>, engine functions in <a href="https://github.com/CalCOFI/calcofi4db"><code>calcofi4db</code></a>) writes Parquet shards plus JSON sidecars; <code>release_database.qmd</code> assembles them in an in-memory DuckDB, validates, and freezes a versioned, immutable <strong>release</strong> on public Google Cloud Storage (next section). Consumers — the apps, <code>calcofi4r::cc_get_db()</code>, the <a href="https://calcofi.io/db-schema/">schema</a> and <a href="https://calcofi.io/db-query/">query</a> sites — read the release as Parquet over HTTPS with no credentials.</p>
 <p>Alongside the releases, a <strong>PostgreSQL</strong> database (<code>calcofi</code>, PostgreSQL 18 + PostGIS 3.6 on the CalCOFI server) is the <em>working</em>, multi-user store for the CTD team’s QA/QC: originals loaded verbatim and immutable, a flag/proposal ledger beside them, derived products on top. It is private and reached over SSH — see <a href="./server-access.html">Server Access</a>. DuckDB’s <code>postgres</code> extension joins the two worlds in one query (<code>calcofi4r::cc_pg_attach()</code>). (An earlier design ran the whole database in PostgreSQL with <code>dev</code>/<code>prod</code> schemas and a single <code>create_db.qmd</code>; that is superseded and only the legacy <code>gis</code> database remains, behind tile.calcofi.io.)</p>
-<div class="cell" data-file="diagrams/db_doc.mmd" data-layout-align="default">
-<div class="cell-output-display">
-<div id="fig-db_doc" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-db_doc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-db_doc">flowchart TB
-    %% Node definitions
-    gd[("`&lt;b&gt;Source Data&lt;/b&gt;
-          Google Drive:
-          calcofi/data/{provider}/{dataset}/*.csv`")]
-    iw["&lt;b&gt;Ingest&lt;/b&gt;
-        calcofi4db: create_db.qmd; sections by {provider},{dataset}"]
-    dd["&lt;b&gt;Data Definitions&lt;/b&gt;
-        calcofi4db: ingest/{provider}/{dataset}/:
-        &lt;ul&gt;
-          &lt;li&gt;tbls_redefine.csv&lt;/li&gt;
-          &lt;li&gt;flds_redefine.csv&lt;/li&gt;
-        &lt;/ul&gt;"]
-    db[("&lt;b&gt;Database&lt;/b&gt;")]
-    api["&lt;b&gt;API Endpoint&lt;/b&gt;
-         /db_tables
-         /db_columns"]
-    catalog["&lt;b&gt;R Function&lt;/b&gt;
-             calcofi4r::cc_db_catalog()"]
-    eml["&lt;b&gt;Publish Workflow&lt;/b&gt;
-      workflows: publish_{dataset}_{portal}.qmd
-      with {portal}s:
-      &lt;ul&gt;
-        &lt;li&gt;erddap&lt;/li&gt;
-        &lt;li&gt;edi&lt;/li&gt;
-        &lt;li&gt;obis&lt;/li&gt;
-        &lt;li&gt;ncei&lt;/li&gt;
-      &lt;/ul&gt;"]
-
-    %% Edge definitions
-    gd --&gt; iw
-    iw --&gt;|"1 auto-generated"| dd
-    dd --&gt;|"2 manual edit"| iw
-    iw --&gt;|"3 data"| db
-    iw --&gt; comments
-    comments --&gt;|"4 metadata"| db
-    db --&gt; api
-    api --&gt; catalog
-    db --&gt; eml
-
-    %% Comments subgraph with internal nodes
-    subgraph comments["&lt;b&gt;Database Comments&lt;/b&gt;
-              (stored as text in JSON format to differentiate elements)"]
-        direction TB
-        h["hideme"]:::hidden
-        h~~~tbl
-        h~~~fld
-        tbl["per &lt;em&gt;Table&lt;/em&gt;:
-            &lt;ul&gt;
-              &lt;li&gt;description&lt;/li&gt;
-              &lt;li&gt;source (&lt;em&gt;linked&lt;/em&gt;)&lt;/li&gt;
-              &lt;li&gt;source_created (&lt;em&gt;datetime&lt;/em&gt;)&lt;/li&gt;
-              &lt;li&gt;workflow (&lt;em&gt;linked&lt;/em&gt;)&lt;/li&gt;
-              &lt;li&gt;workflow_ingested (&lt;em&gt;datetime&lt;/em&gt;)&lt;/li&gt;
-            &lt;/ul&gt;"]
-        fld["per &lt;em&gt;Field&lt;/em&gt;:
-            &lt;ul&gt;
-              &lt;li&gt;description&lt;/li&gt;
-              &lt;li&gt;units (SI)`&lt;/li&gt;
-            &lt;/ul&gt;"]
-    end
-
-    %% Clickable links
-    click gd "https://drive.google.com/drive/folders/1xxdWa4mWkmfkJUQsHxERTp9eBBXBMbV7" "calcofi folder - Google Drive"
-    click api "https://api.calcofi.io/db_tables" "API endpoint&lt;/b&gt;"
-    click catalog "https://calcofi.io/calcofi4r/reference/cc_db_catalog.html" "R package function"
-
-    %% Styling
-    classDef source fill:#f9f9f9,stroke:#000,stroke-width:2px,color:#000
-    classDef process fill:#a3e0f2,stroke:#000,stroke-width:2px,color:#000
-    classDef eml fill:#F0FDF4,stroke:#22C55E,stroke-width:2px,color:#000,text-align:left
-    classDef data fill:#ffbe75,stroke:#000,stroke-width:2px,color:#000
-    classDef api fill:#9ad294,stroke:#000,stroke-width:2px,color:#000
-    classDef meta fill:#c9a6db,stroke:#000,stroke-width:2px,color:#000,text-align:left
-    classDef hidden display: none;
-
-    class gd source
-    class dd,comments,tbl,fld meta
-    class iw process
-    class db data
-    class api,catalog api
-    class tbl,fld li
-    class eml eml
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-db_doc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.1: Integrated database ingestion scheme.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
 </section>
-<section id="release-versioning" class="level3" data-number="5.4.2">
-<h3 data-number="5.4.2" class="anchored" data-anchor-id="release-versioning"><span class="header-section-number">5.4.2</span> Release versioning</h3>
+<section id="release-versioning" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="release-versioning"><span class="header-section-number">4.4.2</span> Release versioning</h3>
 <p>Each rendered <code>release_database.qmd</code> writes a frozen, immutable release to <code>gs://calcofi-db/ducklake/releases/{version}/</code> where <code>version</code> is <code>vYYYY.MM.DD</code>. The release directory holds the <strong>sidecars</strong> — the complete record of what the release is — and the <code>catalog.json</code> among them is the data-access contract: consumers resolve every table through it (<a href="./data-access.html#where-the-data-lives">Data Access</a>) rather than building a path.</p>
 <ul>
 <li><code>catalog.json</code> — structural manifest: <code>version</code>, <code>release_date</code>, <code>total_rows</code> / <code>total_size</code>, and per table <code>name</code>, <code>rows</code>, <code>partitioned</code>, <code>supplemental</code>. From the v2026.09 releases it is <strong>content-addressed</strong> (<code>layout: "canonical"</code>, plus the <code>writer</code> settings — compression, row-group size — that make the bytes reproducible): each table carries <code>content_hash</code> (a whole-table signature), <code>compat_path</code> (its legacy per-release path) and <code>objects[]</code> — one object for a single-file table, one per partition for a partitioned one — each with a bucket-relative <code>path</code> (<code>ducklake/tables/{table}/{content_hash}/{table}.parquet</code>, or <code>ducklake/tables/{table}/{col}={value}/{hash}/data_0.parquet</code>), <code>bytes</code>, <code>sha256</code>, <code>content_hash</code>, <code>since</code> (the first version that shipped this exact object), its own <code>compat_path</code> and, for a partition, <code>partition_by</code> / <code>partition_value</code>. A partitioned table may also publish a whole-table <strong>twin</strong> — the one object without <code>partition_by</code> (<code>obs</code> does) — for https-only readers; it is read <em>instead of</em> the partitions, never alongside them. Objects are immutable and shared between versions, so <code>since</code> is the per-table “what changed”; <code>calcofi4r::cc_release_sources()</code> and <code>calcofi4py.release_sources()</code> are the resolvers (the twin comes back as <code>single_file</code>, excluded from <code>urls</code>).</li>
@@ -932,8 +792,8 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 </ul>
 <p>Bucket-level, under <code>releases/</code>: <code>latest.txt</code> names the promoted version (promoted only after <code>test_release.qmd</code>’s consumer-contract suite passes); <code>versions.json</code> lists every release — <code>version</code>, <code>release_date</code>, <code>tables</code>, <code>total_rows</code>, <code>size_mb</code> — with <code>consolidated: true</code> on the milestone versions (<code>v2026.04.08</code>, <code>v2026.05.14</code>, <code>v2026.06.26</code>, <code>v2026.07.17</code>, <code>v2026.08.14</code>, <code>v2026.08.25</code>) and <code>retired: {retired_utc, to, reason}</code> on a thinned one, <code>to</code> being the consolidated version to use instead; and <code>RELEASES.md</code> is the running changelog across versions, newest first, with <code># Unreleased</code> collecting changes until the next cut.</p>
 </section>
-<section id="metadata-registries-the-single-sources-of-truth" class="level3" data-number="5.4.3">
-<h3 data-number="5.4.3" class="anchored" data-anchor-id="metadata-registries-the-single-sources-of-truth"><span class="header-section-number">5.4.3</span> Metadata registries — the single sources of truth</h3>
+<section id="metadata-registries-the-single-sources-of-truth" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="metadata-registries-the-single-sources-of-truth"><span class="header-section-number">4.4.3</span> Metadata registries — the single sources of truth</h3>
 <p>Descriptions, vocabularies and provenance live as reviewable CSVs in <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> — <strong>not</strong> in the database — so they travel with the code that produced them and change through pull requests.</p>
 <p>Per dataset, under <code>metadata/{provider}/{dataset}/</code>:</p>
 <ul>
@@ -1002,7 +862,7 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 </tr>
 <tr class="odd">
 <td><code>dataset.csv</code></td>
-<td><strong>Deprecated.</strong> Dataset-level metadata is the <code>calcofi:</code> YAML block in each ingest notebook, which is what the release reads (see <a href="cite.qmd">Cite This Data</a> for how to cite them). The CSV drifted from the notebooks and orphaned observations.</td>
+<td><strong>Deprecated.</strong> A dataset’s structural keys are the <code>calcofi:</code> YAML block in its ingest notebook; its descriptive metadata (abstract, citation, license, DOI, contact, …) is the <code>metadata/{provider}/{dataset}/dataset_meta.yml</code> sidecar, and the release reads the two merged (see <a href="./metadata.html">Metadata &amp; the ingest loop</a> and <a href="./cite.html">Cite This Data</a>). The CSV drifted from the notebooks and orphaned observations.</td>
 </tr>
 </tbody>
 </table>
@@ -1029,23 +889,24 @@ Figure&nbsp;5.1: Integrated database ingestion scheme.
 </ol>
 <p>Markdown is supported anywhere in <code>description_md</code>; consumers should render it through a markdown parser when displaying.</p>
 </section>
-<section id="coverage-is-measured-never-asserted" class="level3" data-number="5.4.4">
-<h3 data-number="5.4.4" class="anchored" data-anchor-id="coverage-is-measured-never-asserted"><span class="header-section-number">5.4.4</span> Coverage is measured, never asserted</h3>
+<section id="coverage-is-measured-never-asserted" class="level3" data-number="4.4.4">
+<h3 data-number="4.4.4" class="anchored" data-anchor-id="coverage-is-measured-never-asserted"><span class="header-section-number">4.4.4</span> Coverage is measured, never asserted</h3>
 <p>A dataset’s temporal and spatial extent is <strong>measured from the assembled data at release time</strong> — <code>coverage_temporal_observed</code>, <code>coverage_spatial_observed</code> and <code>coverage_bbox</code> in <code>metadata.json</code>, and the corresponding columns on the released <code>dataset</code> table. Nothing hand-writes an extent.</p>
 <p>This is not pedantry. A hand-written extent is authored once while the data grows underneath it: at <code>v2026.08.06</code> seven of fifteen datasets were wrong — one claimed data through 2021-05 that ends 2015-04, three said “present” while stalling in 2019, 2022 and 2023. Measurement is also honest about what it finds, which is how two coordinate bugs surfaced that the prose had hidden (a dropped minus sign putting a dataset at 124.9° <strong>E</strong>, and a dataset reaching latitude <code>0.0</code>). One dataset asserts its temporal half and says why in a comment: it is region-pooled and has no datetimes at all.</p>
 </section>
-<section id="citation-and-licence-are-a-contract-and-they-are-checked" class="level3" data-number="5.4.5">
-<h3 data-number="5.4.5" class="anchored" data-anchor-id="citation-and-licence-are-a-contract-and-they-are-checked"><span class="header-section-number">5.4.5</span> Citation and licence are a contract, and they are checked</h3>
-<p>Every dataset carries <code>citation_main</code>, <code>license</code>, <code>doi</code>, <code>acknowledgement</code> and <code>contact</code> in its ingest notebook’s YAML, and these are <strong>checked, not trusted</strong> — by the workflows index build and again by the release. A citation needs a year and a locator; <code>license</code> must be an active id in <code>license.csv</code> (<code>custom</code> requires a <code>license_url</code>; <code>unknown</code> or empty fails unless a provider question is open on that field); a <code>doi</code> is stored bare and must resolve. The check also asks the source’s own authority — EDI’s cite service, NCEI’s “Cite as”, an ERDDAP <code>.das</code>, DataCite — caches the answer, and <strong>reports drift without ever writing into the notebook</strong>: the author’s string is the record.</p>
+<section id="citation-and-licence-are-a-contract-and-they-are-checked" class="level3" data-number="4.4.5">
+<h3 data-number="4.4.5" class="anchored" data-anchor-id="citation-and-licence-are-a-contract-and-they-are-checked"><span class="header-section-number">4.4.5</span> Citation and licence are a contract, and they are checked</h3>
+<p>Every dataset carries <code>citation_main</code>, <code>license</code>, <code>doi</code>, <code>acknowledgement</code> and <code>contact</code> in its <code>dataset_meta.yml</code> sidecar, and these are <strong>checked, not trusted</strong> — by the workflows index build and again by the release. A citation needs a year and a locator; <code>license</code> must be an active id in <code>license.csv</code> (<code>custom</code> requires a <code>license_url</code>; <code>unknown</code> or empty fails unless a provider question is open on that field); a <code>doi</code> is stored bare and must resolve. The check also asks the source’s own authority — EDI’s cite service, NCEI’s “Cite as”, an ERDDAP <code>.das</code>, DataCite — caches the answer, and <strong>reports drift without ever writing into the notebook</strong>: the author’s string is the record.</p>
 <p><code>source_accessed</code> is measured, not authored. And the release cites itself: <code>catalog.json</code> carries a <code>citation</code>, a <code>concept_doi</code> and, once minted, the version <code>doi</code>; the release notes open with “How to cite”; <code>CITATION.cff</code> and <code>.zenodo.json</code> are generated from the same source.</p>
-<pre><code>CalCOFI (2026). CalCOFI Integrated Database, release v2026.08.25 [Data set].
+<pre><code>CalCOFI (2026). CalCOFI Integrated Database, release v2026.09.06 [Data set].
 Scripps Institution of Oceanography, NOAA Fisheries, and California Department
-of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN</code></pre>
+of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953</code></pre>
+<p>(That is the release promoted as this page was written; the current one is in <code>catalog.json</code> and on <a href="./cite.html">Cite This Data</a>.)</p>
 <p><strong>When you use these data, cite the release <em>and</em> the source datasets you used.</strong> The release <code>dataset</code> table carries each source’s own <code>citation_main</code>, <code>license</code>, <code>doi</code> and <code>acknowledgement</code> for exactly this purpose — one row per dataset, so a query that touched <code>dataset_key</code> already knows whom to credit.</p>
 </section>
-<section id="consuming-descriptions" class="level3" data-number="5.4.6">
-<h3 data-number="5.4.6" class="anchored" data-anchor-id="consuming-descriptions"><span class="header-section-number">5.4.6</span> Consuming descriptions</h3>
-<p>The fastest way to browse the schema is the <a href="https://calcofi.io/db-schema/"><strong>CalCOFI Schema explorer</strong></a> — per-release ERD, sortable table/column lists with units, dataset provenance, and the measurement-type registry, all sourced from the release <code>metadata.json</code> sidecar on GCS. Deep-link to a specific release with <code>#erd?v=v2026.05.19</code> (or <code>#tables</code>, <code>#columns</code>, <code>#measurements</code>).</p>
+<section id="consuming-descriptions" class="level3" data-number="4.4.6">
+<h3 data-number="4.4.6" class="anchored" data-anchor-id="consuming-descriptions"><span class="header-section-number">4.4.6</span> Consuming descriptions</h3>
+<p>The fastest way to browse the schema is the <a href="https://calcofi.io/db-schema/"><strong>CalCOFI Schema explorer</strong></a> — per-release ERD, sortable table/column lists with units, dataset provenance, and the measurement-type registry, all sourced from the release <code>metadata.json</code> sidecar on GCS. Deep-link to a specific release with <code>#erd?v=v2026.08.25</code> (or <code>#tables</code>, <code>#columns</code>, <code>#measurements</code>).</p>
 <p>From R, fetch the descriptions either column-by-column or as a full interactive catalog. Both calls hit the same release <code>metadata.json</code> sidecar:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(calcofi4r)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1059,15 +920,15 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN</code></pre>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cc_db_catalog</span>(<span class="at">version =</span> <span class="st">"v2026.05.14"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>When writing a new ingest, populate <code>tbls_redefine.csv</code> and <code>flds_redefine.csv</code> (especially <code>fld_description</code> and <code>units</code>) before running the ingest notebook — <code>build_metadata_json()</code> reads them directly. The Claude Code <code>/generate-metadata</code> and <code>/validate-ingest</code> skills enforce this.</p>
 </section>
-<section id="publishing-to-portals" class="level3" data-number="5.4.7">
-<h3 data-number="5.4.7" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">5.4.7</span> Publishing to portals</h3>
-<p>Workflows in <code>workflows/publish_*.qmd</code> push selected tables to external portals — ERDDAP, EDI, OBIS, NCEI. They read the release <code>catalog.json</code> and <code>metadata.json</code> to assemble Ecological Metadata Language (EML), ERDDAP <code>datasets.xml</code> entries and netCDF attributes, so a description written once in a metadata registry reaches every portal without re-keying, and so no publish notebook builds a parquet path by hand.</p>
-<p>The netCDF and ERDDAP publishers are <strong>generic</strong> — parameterised by dataset, driven by the release — while the OBIS publisher is still per-dataset; see <a href="#darwin-core-obis-env-data-mapping">Darwin Core / OBIS ENV-DATA mapping</a> for what a generic one reads.</p>
+<section id="publishing-to-portals" class="level3" data-number="4.4.7">
+<h3 data-number="4.4.7" class="anchored" data-anchor-id="publishing-to-portals"><span class="header-section-number">4.4.7</span> Publishing to portals</h3>
+<p>Workflows in <code>workflows/publish_to-*.qmd</code> push selected tables to external portals — ERDDAP, EDI, OBIS — and write netCDF for the archives. They read the release <code>catalog.json</code> and <code>metadata.json</code> to assemble Ecological Metadata Language (EML), ERDDAP <code>datasets.xml</code> entries and netCDF attributes, so a description written once in a metadata registry reaches every portal without re-keying, and so no publish notebook builds a parquet path by hand.</p>
+<p>The netCDF, ERDDAP, EDI and OBIS publishers are all <strong>generic</strong> — parameterised by dataset, driven by the release; the OBIS one (<code>publish_to-obis.qmd</code>, 2026-09-05) retired the per-dataset ichthyoplankton notebook. See <a href="#darwin-core-obis-env-data-mapping">Darwin Core / OBIS ENV-DATA mapping</a> for what it reads, and <a href="./portals.html#obis">Portals</a> for the publishing steps.</p>
 <p><strong>ERDDAP</strong> (<code>publish_to-erddap.qmd</code>) discovers one config block per <code>dataset_key</code> from what the core actually holds, rather than a hand-maintained table list, and executes every view against the real release before writing its XML. Since the pre-release plan D-S1/D-S3 (2026-09) the <code>{dataset_key}</code> observation grain reads <code>obs_bio</code> (bio datasets) or <code>obs_env</code> (env datasets) through the release catalog (<code>calcofi4r::cc_release_sources()</code>) — never a hand-built <code>releases/{v}/parquet</code> path — carrying the sample’s own gear and effort (<code>tow_type</code>, <code>std_haul_factor</code>, <code>prop_sorted</code>, <code>volume_sampled_m3</code>) and the two canonical densities (<code>density_per_10m2</code>, <code>density_per_1000m3</code>, <code>effort_class</code>) inline, plus <code>flag_values</code>/<code>flag_meanings</code> on <code>measurement_qual</code> from <code>metadata/measurement_qual.csv</code>. A release cut before D-S1 (no <code>obs_bio</code>/<code>obs_env</code> in its catalog) falls back to the deprecated <code>obs</code> objects, with no effort/density columns.</p>
 </section>
 </section>
-<section id="darwin-core-obis-env-data-mapping" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="darwin-core-obis-env-data-mapping"><span class="header-section-number">5.5</span> Darwin Core / OBIS ENV-DATA mapping</h2>
+<section id="darwin-core-obis-env-data-mapping" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="darwin-core-obis-env-data-mapping"><span class="header-section-number">4.5</span> Darwin Core / OBIS ENV-DATA mapping</h2>
 <p>The core model was designed against the <a href="https://doi.org/10.3389/fmars.2018.00251">OBIS ENV-DATA</a> pattern described by <a href="https://doi.org/10.3897/BDJ.5.e10989">De Pooter et al.&nbsp;(2017)</a>, so the shapes map one to one: <code>sample</code>’s adjacency list <strong>is</strong> an Event core, <code>obs</code>’s bio rows <strong>are</strong> an Occurrence extension, and the two measurement grains <strong>are</strong> extended Measurement-or-Fact tables. What was missing was never the shape — it was the <em>vocabulary</em>: an export had to guess which controlled term a CalCOFI measurement name meant, and the ichthyoplankton OBIS notebook did not guess, it wrote <code>measurementTypeID = NA</code>.</p>
 <p>The ids now live in the registries the release already publishes, so a portal export is a lookup rather than a judgement.</p>
 <table class="caption-top table">
@@ -1112,8 +973,8 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN</code></pre>
 </tbody>
 </table>
 <p><code>metadata/field_dictionary.csv</code> carries a <code>dwc_term</code> column holding the full term URI for the <strong>12 of 57</strong> canonical fields that one Darwin Core term means exactly. A field Darwin Core <em>splits</em> — <code>depth_m</code> becomes <code>minimumDepthInMeters</code> <strong>and</strong> <code>maximumDepthInMeters</code> — or has no term for is deliberately left empty rather than mapped approximately.</p>
-<section id="an-id-is-filled-only-on-an-exact-match" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1" class="anchored" data-anchor-id="an-id-is-filled-only-on-an-exact-match"><span class="header-section-number">5.5.1</span> An id is filled only on an exact match</h3>
+<section id="an-id-is-filled-only-on-an-exact-match" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="an-id-is-filled-only-on-an-exact-match"><span class="header-section-number">4.5.1</span> An id is filled only on an exact match</h3>
 <p><strong>Empty means “no concept in the vocabulary says exactly this”, never “nobody looked.”</strong> An id is written only when every facet the concept states — quantity, matrix, phase, method — is something the registry or the dataset’s documented protocol actually supplies. A <em>generic</em> concept is an exact match at coarser specificity: NERC P01 <code>TEMPPR01</code>, <em>Temperature of the water body</em>, is exactly what a QC’d bottle temperature is. A concept that adds a facet nobody recorded is not: <code>IRRDUV01</code> pins PAR to a cosine-collector radiometer, which no CalCOFI metadata states, so PAR has no id.</p>
 <p>Filling an id you are not sure of is worse than leaving it empty. An empty <code>measurementTypeID</code> is a portal record that says “this measurement is not mapped”; a wrong one is a record that confidently says the wrong thing, at an aggregator that will never ask.</p>
 <p>Coverage as of <code>v2026.09</code>:</p>
@@ -1160,18 +1021,18 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN</code></pre>
 </table>
 <p>Of the 85 measurement types with no P01, <strong>29 are taxon-bearing</strong> abundance, biomass or size types — P01 encodes the taxon <em>in the concept</em>, and CalCOFI carries it in <code>taxon_key</code>, so a per-type id there would be wrong rather than missing. Another 8 are event-level effort and sub-occurrence attributes BODC does not model as parameters. The genuine gaps are documented in <code>RELEASES.md</code>, and most of them are questions for a data provider rather than for the vocabulary: an unrecorded transmissometer wavelength, radiation channels that do not say whether they are upwelling or downwelling, flow-cytometry gating that was never written down.</p>
 </section>
-<section id="three-caveats-for-anyone-building-an-export" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="three-caveats-for-anyone-building-an-export"><span class="header-section-number">5.5.2</span> Three caveats for anyone building an export</h3>
+<section id="three-caveats-for-anyone-building-an-export" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="three-caveats-for-anyone-building-an-export"><span class="header-section-number">4.5.2</span> Three caveats for anyone building an export</h3>
 <ul>
 <li><strong><code>obs</code> is positive-only for ichthyoplankton.</strong> A tow that was sorted and found nothing has <strong>no row</strong>, so <code>occurrenceStatus = "absent"</code> cannot be derived from zero values. Absences come from the sampling events (<code>sample</code>, root rows) minus the taxa observed on them — and a surveyed year with no positives is indistinguishable from an unsurveyed year if you count rows instead of events.</li>
 <li><strong><code>organismQuantityType</code> is the whole meaning of the number.</strong> Areal (individuals per 10 m², from an oblique or vertical tow standardized by the haul factor) and volumetric (individuals per 1000 m³, from a surface Manta tow or any tow with a filtered volume) are <strong>not interconvertible</strong> without an integrated depth and a vertical-distribution assumption. Publish the denominator with the number, never a bare count.</li>
 <li><strong>Two <code>life_stage</code> values are not life stages.</strong> Euphausiid <code>damaged</code> marks specimens too damaged to stage (<code>occurrenceRemarks</code>), and ichthyoplankton <code>invert</code> is a provenance flag for the merged invertebrate counts. <code>metadata/life_stage.csv</code> says so per value; do not pass either through as <code>lifeStage</code>.</li>
 </ul>
-<p>A generic <code>publish_to-obis.qmd</code> over the core — replacing the per-dataset ichthyoplankton notebook — is planned rather than built; the registries above are what it was waiting for.</p>
+<p>The generic <code>publish_to-obis.qmd</code> over the core reads exactly these registries; it replaced the per-dataset ichthyoplankton notebook on 2026-09-05 (see <a href="./portals.html#obis">Portals</a>).</p>
 </section>
 </section>
-<section id="relationships-between-tables" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="relationships-between-tables"><span class="header-section-number">5.6</span> Relationships between tables</h2>
+<section id="relationships-between-tables" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="relationships-between-tables"><span class="header-section-number">4.6</span> Relationships between tables</h2>
 <p>Primary and foreign keys ship with every release as <code>relationships.json</code> beside <code>catalog.json</code>, and the <a href="https://calcofi.io/db-schema/"><strong>Schema explorer</strong></a> draws them as an entity-relationship diagram per release (deep-link with <code>#erd?v=v2026.08.25</code>). Intra-dataset relationships are declared in each ingest’s own <code>relationships.json</code>; cross-dataset ones live in <code>metadata/relationships_cross.csv</code> and are merged in at release time.</p>
 <p>The joins worth memorising:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- an observation to its sampling event, and up the hierarchy</span></span>
@@ -1189,8 +1050,8 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN</code></pre>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>obs.taxon_key         <span class="op">-&gt;</span> taxon.taxon_key</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>(dataset_key, ds_taxa_code) <span class="op">-&gt;</span> dataset_taxon       <span class="co">-- the per-dataset vocabulary</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="spatial-tips" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="spatial-tips"><span class="header-section-number">5.7</span> Spatial Tips</h2>
+<section id="spatial-tips" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="spatial-tips"><span class="header-section-number">4.7</span> Spatial Tips</h2>
 <ul>
 <li><p>Use <a href="https://postgis.net/docs/ST_Subdivide.html"><code>ST_Subdivide()</code></a> when running spatial joins on large polygons.</p></li>
 <li><p><strong>All released geometry is tagged <code>EPSG:4326</code></strong>, normalized immediately before the freeze. This matters because <code>ST_Point(lon, lat)</code> tags <code>OGC:CRS84</code> while <code>ST_Read()</code> over GeoJSON tags <code>EPSG:4326</code> — the same WGS 84 longitude/latitude — and <strong>DuckDB refuses <code>ST_Intersects</code> across differing tags</strong>. If you build geometry on one side of a join, tag both sides; do not coerce one to match the other, or the next release will break you.</p></li>
@@ -1616,13 +1477,13 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./maps.html" class="pagination-link" aria-label="Maps">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maps</span></span>
+      <a href="./apps.html" class="pagination-link" aria-label="Applications">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./metadata.html" class="pagination-link" aria-label="Metadata &amp; the ingest loop">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
