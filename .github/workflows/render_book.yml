@@ -82,22 +82,21 @@ jobs:
         with:
           cache-version: 3
 
+      # each render empties _book, so every document is copied aside before the next one runs
       - name: Render (docx)
-        run: quarto render --to docx
+        run: quarto render --to docx && mkdir -p documents && cp _book/*.docx documents/
         continue-on-error: true
         env:
           CALCOFI_DOCS_REFRESH: "1"
 
       - name: Render (pdf)
-        run: quarto render --to pdf
+        run: quarto render --to pdf && mkdir -p documents && cp _book/*.pdf documents/
         continue-on-error: true
 
       - uses: actions/upload-artifact@v4
         with:
           name: documents
-          path: |
-            _book/*.pdf
-            _book/*.docx
+          path: documents/*
           if-no-files-found: warn
 
       - name: Publish as the assets of the rolling `documents` release
@@ -108,9 +107,7 @@ jobs:
           body: >-
             The PDF and DOCX of https://calcofi.io/docs/, rebuilt on every push to main.
             The assets are replaced each time; the tag does not move.
-          files: |
-            _book/*.pdf
-            _book/*.docx
+          files: documents/*
           fail_on_unmatched_files: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
