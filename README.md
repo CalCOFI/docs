@@ -24,7 +24,7 @@ A Github Action will build the book automatically when you push changes to the r
 
 * Fork or clone the GitHub repository from this Repository URL: 
   ```
-  https://github.com/ioos/bio_data_guide.git
+  https://github.com/CalCOFI/docs.git
   ```
 
 * Install all the required packages listed in the `DESCRIPTION` from the R **Console**:

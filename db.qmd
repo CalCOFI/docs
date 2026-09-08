@@ -69,16 +69,13 @@ database, and dropping them would make that join impossible:
 came from — are a different thing entirely and **are stripped at the freeze**; they never reach
 a release.
 
-::: {.callout-note}
-`sample.source_uuid`, `sample.station_uuid` and `station_uuid_method` are decided and land with
-the provider-UUID workstream; `cruise.cruise_uuid` ships today. Check
-`catalog.json`/`metadata.json` for the release you are reading, or the
-[schema explorer](https://calcofi.io/db-schema/).
-:::
+All three columns ship since v2026.09.04; `metadata.json` for the release you are reading, or the
+[schema explorer](https://calcofi.io/db-schema/), lists them.
 
-**Sequential integer keys carry a documented sort order** so a rebuild reproduces them:
-`site_id` by `(cruise_key, order_occ)`, `tow_id` by `(site_id, time_start)`, `net_id` by
-`(tow_id, side)`.
+**The one sequential integer key the release mints is `root_id`**, on `sample_root`: a dense
+integer for each root sampling event (a `sample` row with no parent), numbered deterministically
+so a rebuild reproduces it. `obs_bio` and `obs_env` carry it so a browser can join observations to
+their event without the string key.
 
 ## Use Unicode for text
 
@@ -387,7 +384,7 @@ Shared, under `metadata/`:
 | `release_tables.csv`, `release_columns.csv` | Descriptions for tables built inside `release_database.qmd` itself. |
 | `measurement_taxon.csv`, `taxon_override.csv` | How a taxon-bearing measurement name decomposes, and manual id resolution where a source taxon has no clean id. |
 | `taxon_lineage.csv`, `taxon_xref.csv` | **Generated caches** of the WoRMS/ITIS classification chains and the WoRMS↔ITIS cross-reference. Safe to delete; they refetch. |
-| `dataset.csv` | **Deprecated.** Dataset-level metadata is the `calcofi:` YAML block in each ingest notebook, which is what the release reads (see [Cite This Data](cite.qmd) for how to cite them). The CSV drifted from the notebooks and orphaned observations. |
+| `dataset.csv` | **Deprecated.** A dataset's structural keys are the `calcofi:` YAML block in its ingest notebook; its descriptive metadata (abstract, citation, license, DOI, contact, …) is the `metadata/{provider}/{dataset}/dataset_meta.yml` sidecar, and the release reads the two merged (see [Metadata & the ingest loop](metadata.qmd) and [Cite This Data](cite.qmd)). The CSV drifted from the notebooks and orphaned observations. |
 
 These flow through two stages:
 
@@ -438,7 +435,7 @@ has no datetimes at all.
 ### Citation and licence are a contract, and they are checked
 
 Every dataset carries `citation_main`, `license`, `doi`, `acknowledgement` and `contact` in its
-ingest notebook's YAML, and these are **checked, not trusted** — by the workflows index build
+`dataset_meta.yml` sidecar, and these are **checked, not trusted** — by the workflows index build
 and again by the release. A citation needs a year and a locator; `license` must be an active id
 in `license.csv` (`custom` requires a `license_url`; `unknown` or empty fails unless a provider
 question is open on that field); a `doi` is stored bare and must resolve. The check also asks the
@@ -451,10 +448,13 @@ a `citation`, a `concept_doi` and, once minted, the version `doi`; the release n
 "How to cite"; `CITATION.cff` and `.zenodo.json` are generated from the same source.
 
 ```
-CalCOFI (2026). CalCOFI Integrated Database, release v2026.08.25 [Data set].
+CalCOFI (2026). CalCOFI Integrated Database, release v2026.09.06 [Data set].
 Scripps Institution of Oceanography, NOAA Fisheries, and California Department
-of Fish and Wildlife. https://doi.org/10.5281/zenodo.NNNNNNN
+of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953
 ```
+
+(That is the release promoted as this page was written; the current one is in `catalog.json`
+and on [Cite This Data](cite.qmd).)
 
 **When you use these data, cite the release *and* the source datasets you used.** The release
 `dataset` table carries each source's own `citation_main`, `license`, `doi` and
@@ -468,7 +468,7 @@ The fastest way to browse the schema is the
 per-release ERD, sortable table/column lists with units, dataset
 provenance, and the measurement-type registry, all sourced from the
 release `metadata.json` sidecar on GCS. Deep-link to a specific
-release with `#erd?v=v2026.05.19` (or `#tables`, `#columns`,
+release with `#erd?v=v2026.08.25` (or `#tables`, `#columns`,
 `#measurements`).
 
 From R, fetch the descriptions either column-by-column or as a full
@@ -496,16 +496,16 @@ skills enforce this.
 
 ### Publishing to portals
 
-Workflows in `workflows/publish_*.qmd` push selected tables to external portals — ERDDAP, EDI,
-OBIS, NCEI. They read the release `catalog.json` and `metadata.json` to assemble Ecological
+Workflows in `workflows/publish_to-*.qmd` push selected tables to external portals — ERDDAP, EDI,
+OBIS — and write netCDF for the archives. They read the release `catalog.json` and `metadata.json` to assemble Ecological
 Metadata Language (EML), ERDDAP `datasets.xml` entries and netCDF attributes, so a description
 written once in a metadata registry reaches every portal without re-keying, and so no publish
 notebook builds a parquet path by hand.
 
-The netCDF and ERDDAP publishers are **generic** — parameterised by dataset, driven by the
-release — while the OBIS publisher is still per-dataset; see
-[Darwin Core / OBIS ENV-DATA mapping](#darwin-core-obis-env-data-mapping) for what a generic
-one reads.
+The netCDF, ERDDAP, EDI and OBIS publishers are all **generic** — parameterised by dataset, driven by
+the release; the OBIS one (`publish_to-obis.qmd`, 2026-09-05) retired the per-dataset ichthyoplankton
+notebook. See [Darwin Core / OBIS ENV-DATA mapping](#darwin-core-obis-env-data-mapping) for what it
+reads, and [Portals](portals.qmd#obis) for the publishing steps.
 
 **ERDDAP** (`publish_to-erddap.qmd`) discovers one config block per
 `dataset_key` from what the core actually holds, rather than a
@@ -597,8 +597,8 @@ whether they are upwelling or downwelling, flow-cytometry gating that was never 
   the merged invertebrate counts. `metadata/life_stage.csv` says so per value; do not pass either
   through as `lifeStage`.
 
-A generic `publish_to-obis.qmd` over the core — replacing the per-dataset ichthyoplankton
-notebook — is planned rather than built; the registries above are what it was waiting for.
+The generic `publish_to-obis.qmd` over the core reads exactly these registries; it replaced the
+per-dataset ichthyoplankton notebook on 2026-09-05 (see [Portals](portals.qmd#obis)).
 
 ## Relationships between tables
 

@@ -109,7 +109,7 @@ the changed values in the sidecar and leaves its history and comments intact. Th
 cut every few weeks, each with its own DOI — then regenerates every surface from the record:
 
 ```{mermaid}
-%%| label: fig-catalog-flow
+%%| label: fig-catalog-flow-metadata
 %%| fig-cap: "Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish."
 %%| file: diagrams/catalog_flow.mmd
 %%| fig-width: 9

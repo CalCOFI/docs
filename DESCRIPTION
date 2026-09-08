@@ -1,21 +1,32 @@
 Package: docs
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("Benjamin", "Best", , "ben@ecoquants.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Title: CalCOFI.io Documentation
+Version: 0.2.0
+Authors@R: c(
+    person("Benjamin", "Best", , "ben@oceanmetrics.io", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2686-0784")),
+    person("Erin", "Satterthwaite", , "esatterthwaite@ucsd.edu", role = "aut"))
+Description: The Quarto book at https://calcofi.io/docs/. This DESCRIPTION exists so
+    r-lib/actions/setup-r-dependencies installs what the chapters' R chunks load;
+    it is not a package.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-Imports: 
-    dplyr, 
-    gt, 
-    here, 
+Imports:
+    calcofi4r,
+    DBI,
+    dplyr,
+    glue,
+    gt,
+    here,
+    jsonlite,
     knitr,
     librarian,
+    purrr,
     quarto,
     readr,
     rmarkdown,
-    scales
+    scales,
+    tibble,
+    tidyr,
+    yaml
+Remotes:
+    calcofi/calcofi4r

@@ -11,3 +11,7 @@ $navbar-bg:    #f5f5f5;
 $sidebar-bg:   #f5f5f5;
 $code-bg:      #f5f5f5;
 $text-muted:   #66686a;
+
+/*-- scss:rules --*/
+// the v2 lockup in quarto's sidebar logo slot: the brand's page height, never a fixed 32 px mark
+.sidebar-logo { height: 36px; width: auto; max-width: 100%; }
