@@ -149,6 +149,28 @@ cc_release_notes()                       # this release's notes
 cc_describe_table("sample")              # columns, units, descriptions from metadata.json
 ```
 
+::: {.callout-tip collapse="true"}
+## If that install stops at `s2`
+
+`calcofi4r` needs `sf`, `sf` needs [`s2`](https://r-spatial.github.io/s2/), and `s2` is C++.
+CRAN has no macOS arm64 binaries for R 4.6 yet, so on Apple Silicon it compiles, and the compile
+needs `cmake`:
+
+```sh
+brew install cmake
+```
+
+`brew install abseil` will not do instead, though s2's own failure message recommends it: its
+`configure` defaults `S2_FORCE_BUNDLED_ABSEIL=true`, always builds its vendored Abseil with
+cmake, and never asks `pkg-config` about a system copy.
+
+To avoid the compile, take prebuilt binaries from Posit Package Manager — in `~/.Rprofile`:
+
+```r
+options(repos = c(P3M = "https://packagemanager.posit.co/cran/latest"))
+```
+:::
+
 To hand a table's URLs to DuckDB (or anything else) yourself, resolve them through the catalog:
 
 ```r
