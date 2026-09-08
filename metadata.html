@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>5&nbsp; Metadata &amp; the ingest loop – CalCOFI.io</title>
+<title>9&nbsp; Metadata &amp; the ingest loop – CalCOFI.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data-access.html" rel="next">
-<link href="./db.html" rel="prev">
+<link href="./portals.html" rel="next">
+<link href="./provide.html" rel="prev">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -310,7 +310,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./metadata.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./provide.html">Contribute data</a></li><li class="breadcrumb-item"><a href="./metadata.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -371,81 +371,201 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Process</span></span></a>
+ <span class="menu-text">Start here</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Use the data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reports.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Reports</span></span></a>
+  <a href="./explore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Explore</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Applications</span></span></a>
+  <a href="./data-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cite This Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Understand the database</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./db.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Database</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./keys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Keys and integrity</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./naming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Naming conventions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./releases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Releases</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Contribute data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./provide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Providing data to CalCOFI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./metadata.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./cite.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cite This Data</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./server-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Server Access</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">API</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./portals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Portals</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Work with the team</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./server-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Server Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ctd-qaqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">CTD QA/QC, start to release</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ingest-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ingesting a dataset</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./products.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Products, brand and uptime</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">The plan and the record</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dmp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The data management plan</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Architecture</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -456,14 +576,14 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#one-key-one-record-one-page" id="toc-one-key-one-record-one-page" class="nav-link active" data-scroll-target="#one-key-one-record-one-page"><span class="header-section-number">5.1</span> One key, one record, one page</a></li>
-  <li><a href="#where-the-words-live" id="toc-where-the-words-live" class="nav-link" data-scroll-target="#where-the-words-live"><span class="header-section-number">5.2</span> Where the words live</a></li>
-  <li><a href="#the-sheets-and-what-you-may-edit" id="toc-the-sheets-and-what-you-may-edit" class="nav-link" data-scroll-target="#the-sheets-and-what-you-may-edit"><span class="header-section-number">5.3</span> The Sheets, and what you may edit</a></li>
-  <li><a href="#questions-and-what-proposed-means" id="toc-questions-and-what-proposed-means" class="nav-link" data-scroll-target="#questions-and-what-proposed-means"><span class="header-section-number">5.4</span> Questions, and what <em>proposed</em> means</a></li>
-  <li><a href="#what-happens-after-you-edit" id="toc-what-happens-after-you-edit" class="nav-link" data-scroll-target="#what-happens-after-you-edit"><span class="header-section-number">5.5</span> What happens after you edit</a></li>
-  <li><a href="#a-new-dataset-end-to-end" id="toc-a-new-dataset-end-to-end" class="nav-link" data-scroll-target="#a-new-dataset-end-to-end"><span class="header-section-number">5.6</span> A new dataset, end to end</a></li>
-  <li><a href="#who-to-contact" id="toc-who-to-contact" class="nav-link" data-scroll-target="#who-to-contact"><span class="header-section-number">5.7</span> Who to contact</a></li>
-  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also"><span class="header-section-number">5.8</span> See also</a></li>
+  <li><a href="#one-key-one-record-one-page" id="toc-one-key-one-record-one-page" class="nav-link active" data-scroll-target="#one-key-one-record-one-page"><span class="header-section-number">9.1</span> One key, one record, one page</a></li>
+  <li><a href="#where-the-words-live" id="toc-where-the-words-live" class="nav-link" data-scroll-target="#where-the-words-live"><span class="header-section-number">9.2</span> Where the words live</a></li>
+  <li><a href="#the-sheets-and-what-you-may-edit" id="toc-the-sheets-and-what-you-may-edit" class="nav-link" data-scroll-target="#the-sheets-and-what-you-may-edit"><span class="header-section-number">9.3</span> The Sheets, and what you may edit</a></li>
+  <li><a href="#questions-and-what-proposed-means" id="toc-questions-and-what-proposed-means" class="nav-link" data-scroll-target="#questions-and-what-proposed-means"><span class="header-section-number">9.4</span> Questions, and what <em>proposed</em> means</a></li>
+  <li><a href="#what-happens-after-you-edit" id="toc-what-happens-after-you-edit" class="nav-link" data-scroll-target="#what-happens-after-you-edit"><span class="header-section-number">9.5</span> What happens after you edit</a></li>
+  <li><a href="#a-new-dataset-end-to-end" id="toc-a-new-dataset-end-to-end" class="nav-link" data-scroll-target="#a-new-dataset-end-to-end"><span class="header-section-number">9.6</span> A new dataset, end to end</a></li>
+  <li><a href="#who-to-contact" id="toc-who-to-contact" class="nav-link" data-scroll-target="#who-to-contact"><span class="header-section-number">9.7</span> Who to contact</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also"><span class="header-section-number">9.8</span> See also</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/metadata.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -471,9 +591,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./provide.html">Contribute data</a></li><li class="breadcrumb-item"><a href="./metadata.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-metadata" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></h1>
+<h1 class="title"><span id="sec-metadata" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Metadata &amp; the ingest loop</span></span></h1>
 </div>
 
 
@@ -491,8 +611,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 <p>How a dataset gets into CalCOFI.io, where its words live, and what a data provider or a member of the data team edits — and what they never have to. This chapter is for people who own or curate a dataset; the engineering detail behind each step is in <a href="https://github.com/CalCOFI/workflows"><code>CalCOFI/workflows</code></a> and its <code>CLAUDE.md</code>.</p>
-<section id="one-key-one-record-one-page" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="one-key-one-record-one-page"><span class="header-section-number">5.1</span> One key, one record, one page</h2>
+<section id="one-key-one-record-one-page" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="one-key-one-record-one-page"><span class="header-section-number">9.1</span> One key, one record, one page</h2>
 <p>Every dataset has one key, <code>{provider}_{dataset}</code> (<code>calcofi_bottle</code>, <code>swfsc_ichthyo</code>, <code>cce-lter_zooscan</code>), and that key names everything about it: its folder of metadata in git, its row in its provider’s Google Sheet, its record in the release, and its page at <a href="https://calcofi.io/datasets/"><code>calcofi.io/datasets/{key}/</code></a>. A dataset is in one of three states, and the key, the folder, the Sheet row and the page URL are the same in all three, so a link never breaks when a dataset moves forward:</p>
 <table class="caption-top table">
 <colgroup>
@@ -526,8 +646,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </tbody>
 </table>
 </section>
-<section id="where-the-words-live" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="where-the-words-live"><span class="header-section-number">5.2</span> Where the words live</h2>
+<section id="where-the-words-live" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="where-the-words-live"><span class="header-section-number">9.2</span> Where the words live</h2>
 <p>Two kinds of fact describe a dataset, and they are kept apart on purpose:</p>
 <ul>
 <li><strong>Authored</strong> — abstract, methods, who made it, how to cite it, its licence and DOI, the acknowledgement a use should carry. These live in one small file per dataset in git, <code>metadata/{provider}/{dataset}/dataset_meta.yml</code>, and every public surface is generated from it: the dataset page, the EML document the portals read, the citation the apps copy.</li>
@@ -538,27 +658,27 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <div id="tbl-meta-fields" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-meta-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_fields.csv</code> in CalCOFI/workflows). Read-only rows are what the release measures and shows beside the editable ones for context.
+Table&nbsp;9.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_fields.csv</code> in CalCOFI/workflows). Read-only rows are what the release measures and shows beside the editable ones for context.
 </figcaption>
 <div aria-describedby="tbl-meta-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="giwcyhdbus" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#giwcyhdbus table {
+<div id="aasgqikipv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#aasgqikipv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#giwcyhdbus thead, #giwcyhdbus tbody, #giwcyhdbus tfoot, #giwcyhdbus tr, #giwcyhdbus td, #giwcyhdbus th {
+#aasgqikipv thead, #aasgqikipv tbody, #aasgqikipv tfoot, #aasgqikipv tr, #aasgqikipv td, #aasgqikipv th {
   border-style: none;
 }
 
-#giwcyhdbus p {
+#aasgqikipv p {
   margin: 0;
   padding: 0;
 }
 
-#giwcyhdbus .gt_table {
+#aasgqikipv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -584,12 +704,12 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-left-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_caption {
+#aasgqikipv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#giwcyhdbus .gt_title {
+#aasgqikipv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -601,7 +721,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-width: 0;
 }
 
-#giwcyhdbus .gt_subtitle {
+#aasgqikipv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -613,7 +733,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-width: 0;
 }
 
-#giwcyhdbus .gt_heading {
+#aasgqikipv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -625,13 +745,13 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_bottom_border {
+#aasgqikipv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_col_headings {
+#aasgqikipv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -646,7 +766,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_col_heading {
+#aasgqikipv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -666,7 +786,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#giwcyhdbus .gt_column_spanner_outer {
+#aasgqikipv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -678,15 +798,15 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 4px;
 }
 
-#giwcyhdbus .gt_column_spanner_outer:first-child {
+#aasgqikipv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#giwcyhdbus .gt_column_spanner_outer:last-child {
+#aasgqikipv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#giwcyhdbus .gt_column_spanner {
+#aasgqikipv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -698,11 +818,11 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   width: 100%;
 }
 
-#giwcyhdbus .gt_spanner_row {
+#aasgqikipv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#giwcyhdbus .gt_group_heading {
+#aasgqikipv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -728,7 +848,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   text-align: left;
 }
 
-#giwcyhdbus .gt_empty_group_heading {
+#aasgqikipv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -743,15 +863,15 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: middle;
 }
 
-#giwcyhdbus .gt_from_md > :first-child {
+#aasgqikipv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#giwcyhdbus .gt_from_md > :last-child {
+#aasgqikipv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#giwcyhdbus .gt_row {
+#aasgqikipv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -770,7 +890,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   overflow-x: hidden;
 }
 
-#giwcyhdbus .gt_stub {
+#aasgqikipv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -783,7 +903,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_stub_row_group {
+#aasgqikipv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -797,15 +917,15 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   vertical-align: top;
 }
 
-#giwcyhdbus .gt_row_group_first td {
+#aasgqikipv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#giwcyhdbus .gt_row_group_first th {
+#aasgqikipv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#giwcyhdbus .gt_summary_row {
+#aasgqikipv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -815,16 +935,16 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_first_summary_row {
+#aasgqikipv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_first_summary_row.thick {
+#aasgqikipv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#giwcyhdbus .gt_last_summary_row {
+#aasgqikipv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -834,7 +954,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_grand_summary_row {
+#aasgqikipv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -844,7 +964,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_first_grand_summary_row {
+#aasgqikipv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -854,7 +974,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-top-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_last_grand_summary_row_top {
+#aasgqikipv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -864,11 +984,11 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_striped {
+#aasgqikipv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#giwcyhdbus .gt_table_body {
+#aasgqikipv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -877,7 +997,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-bottom-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_footnotes {
+#aasgqikipv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -891,7 +1011,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_footnote {
+#aasgqikipv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -900,7 +1020,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_sourcenotes {
+#aasgqikipv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -914,7 +1034,7 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   border-right-color: #D3D3D3;
 }
 
-#giwcyhdbus .gt_sourcenote {
+#aasgqikipv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -922,72 +1042,72 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
   padding-right: 5px;
 }
 
-#giwcyhdbus .gt_left {
+#aasgqikipv .gt_left {
   text-align: left;
 }
 
-#giwcyhdbus .gt_center {
+#aasgqikipv .gt_center {
   text-align: center;
 }
 
-#giwcyhdbus .gt_right {
+#aasgqikipv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#giwcyhdbus .gt_font_normal {
+#aasgqikipv .gt_font_normal {
   font-weight: normal;
 }
 
-#giwcyhdbus .gt_font_bold {
+#aasgqikipv .gt_font_bold {
   font-weight: bold;
 }
 
-#giwcyhdbus .gt_font_italic {
+#aasgqikipv .gt_font_italic {
   font-style: italic;
 }
 
-#giwcyhdbus .gt_super {
+#aasgqikipv .gt_super {
   font-size: 65%;
 }
 
-#giwcyhdbus .gt_footnote_marks {
+#aasgqikipv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#giwcyhdbus .gt_asterisk {
+#aasgqikipv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#giwcyhdbus .gt_indent_1 {
+#aasgqikipv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#giwcyhdbus .gt_indent_2 {
+#aasgqikipv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#giwcyhdbus .gt_indent_3 {
+#aasgqikipv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#giwcyhdbus .gt_indent_4 {
+#aasgqikipv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#giwcyhdbus .gt_indent_5 {
+#aasgqikipv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#giwcyhdbus .katex-display {
+#aasgqikipv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#giwcyhdbus div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#aasgqikipv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1180,8 +1300,8 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </div>
 </div>
 </section>
-<section id="the-sheets-and-what-you-may-edit" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="the-sheets-and-what-you-may-edit"><span class="header-section-number">5.3</span> The Sheets, and what you may edit</h2>
+<section id="the-sheets-and-what-you-may-edit" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="the-sheets-and-what-you-may-edit"><span class="header-section-number">9.3</span> The Sheets, and what you may edit</h2>
 <p>Each provider organization (<code>calcofi</code>, <code>swfsc</code>, <code>sio</code>, <code>cce-lter</code>, <code>cdfw</code>, <code>farallon</code>, <code>sccoos</code>) has <strong>one Google Sheet</strong>, generated from git and synced back to it. It is titled <em>CalCOFI integrated database — questions for &lt;provider&gt;</em> and sits in a Shared Drive folder called <a href="https://drive.google.com/drive/folders/1Tryjfd76TNU4nVPPSQiyQCy03uo0hlx6"><em>questions</em></a> — the questions came first, and the name stayed when the metadata and holdings tabs joined the same spreadsheet (2026-09-05). The folder is owned by the CalCOFI service account, so nothing depends on one person’s login, and the data team sends each provider the link to their own Sheet. A Sheet has three kinds of tab:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1221,8 +1341,8 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </table>
 <p>Two rows deserve a note. <strong><code>visibility</code></strong> is a checkbox: <code>internal</code> keeps a dataset in the record and on the triage board but off every public page, the sitemap and <code>data.json</code> until the conversation with its provider is done. <strong><code>license</code></strong> must be one of the ids in the licence registry (<code>CC-BY-4.0</code>, <code>CC0-1.0</code>, <code>US-PD</code>, <code>custom</code> with a URL, …); anything else is refused when the Sheet is pulled, not discovered at release.</p>
 </section>
-<section id="questions-and-what-proposed-means" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="questions-and-what-proposed-means"><span class="header-section-number">5.4</span> Questions, and what <em>proposed</em> means</h2>
+<section id="questions-and-what-proposed-means" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="questions-and-what-proposed-means"><span class="header-section-number">9.4</span> Questions, and what <em>proposed</em> means</h2>
 <p>Every question we have for a dataset’s owner is a row in <code>metadata/{provider}/{dataset}/questions.csv</code> (see <a href="./db.html">the registries</a>) and in that dataset’s Sheet tab. A row has a short label (<code>Q07</code>), the question, the context we already know, a priority, and a <code>status</code>:</p>
 <ul>
 <li><strong><code>open</code></strong> — we need an answer we do not have.</li>
@@ -1231,23 +1351,23 @@ Table&nbsp;5.1: Authored metadata fields, by tier (<code>metadata/dataset_meta_f
 </ul>
 <p>Questions reach a provider through the Sheet and, when a batch is ready, through one email drafted from the same rows. Answers come back the same way: the data team pulls the Sheet, the four answer columns are validated and written into <code>questions.csv</code> in one commit, and the next release carries whatever changed.</p>
 </section>
-<section id="what-happens-after-you-edit" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="what-happens-after-you-edit"><span class="header-section-number">5.5</span> What happens after you edit</h2>
+<section id="what-happens-after-you-edit" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="what-happens-after-you-edit"><span class="header-section-number">9.5</span> What happens after you edit</h2>
 <p>Nothing happens on the Sheet itself. The data team runs a sync (<code>push</code> to regenerate the tabs from git, <code>pull</code> to bring edits back; both are dry runs until told otherwise), which rewrites only the changed values in the sidecar and leaves its history and comments intact. The next release — cut every few weeks, each with its own DOI — then regenerates every surface from the record:</p>
 <div id="fig-catalog-flow-metadata" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-catalog-flow-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="diagrams/catalog_flow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;5.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish."><img src="diagrams/catalog_flow.svg" class="img-fluid figure-img"></a>
+<a href="diagrams/catalog_flow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;9.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish."><img src="diagrams/catalog_flow.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-catalog-flow-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish.
+Figure&nbsp;9.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish.
 </figcaption>
 </figure>
 </div>
 <p>Between releases, a weekly job asks each portal what it says <em>now</em> about every dataset and holding — a new EDI revision, an OBIS re-index, an ERDDAP id that disappeared — and files a <code>proposed</code> question for the provider when something changed. It observes; it never edits the record.</p>
 </section>
-<section id="a-new-dataset-end-to-end" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="a-new-dataset-end-to-end"><span class="header-section-number">5.6</span> A new dataset, end to end</h2>
+<section id="a-new-dataset-end-to-end" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="a-new-dataset-end-to-end"><span class="header-section-number">9.6</span> A new dataset, end to end</h2>
 <p>Bringing a dataset in is a loop of five steps with a person at every hand-off:</p>
 <ol type="1">
 <li><strong>Explore</strong> — profile the source (columns, coverage, keys, provider), and seed the first questions from what the profile cannot answer.</li>
@@ -1258,16 +1378,16 @@ Figure&nbsp;5.1: Everything a portal sees is generated from one record per datas
 </ol>
 <p>A dataset can stop after step 3 with <code>in_release: false</code> while its questions are open. That is normal, and it is what the holdings triage board is for: a holding’s <code>next_step</code> names which of these steps it is waiting on and who owns it.</p>
 </section>
-<section id="who-to-contact" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="who-to-contact"><span class="header-section-number">5.7</span> Who to contact</h2>
+<section id="who-to-contact" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="who-to-contact"><span class="header-section-number">9.7</span> Who to contact</h2>
 <ul>
 <li><strong><code>data@calcofi.io</code></strong> reaches the CalCOFI data team, and is the contact printed in every record and metadata document unless a dataset names its own.</li>
 <li><strong>The feedback button</strong> in the <a href="https://calcofi.io/explore/">Explorer</a> captures the view you are looking at (annotate it if you like) and sends it to the team, a tracking sheet and a public issue; <em>Register a product</em> on the same dialog tells a provider what was made from their data.</li>
 <li><strong>GitHub issues</strong> on <a href="https://github.com/CalCOFI/workflows/issues">CalCOFI/workflows</a> for anything about a dataset’s ingest or metadata.</li>
 </ul>
 </section>
-<section id="see-also" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="see-also"><span class="header-section-number">5.8</span> See also</h2>
+<section id="see-also" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="see-also"><span class="header-section-number">9.8</span> See also</h2>
 <ul>
 <li><a href="./db.html">The database schema</a> — the metadata registries and the <code>dataset</code> table.</li>
 <li><a href="./portals.html">Portals</a> — where each dataset is archived and registered, and the policy per dataset.</li>
@@ -1693,13 +1813,13 @@ Figure&nbsp;5.1: Everything a portal sees is generated from one record per datas
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./db.html" class="pagination-link" aria-label="Database">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Database</span></span>
+      <a href="./provide.html" class="pagination-link" aria-label="Providing data to CalCOFI">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Providing data to CalCOFI</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Access</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./portals.html" class="pagination-link" aria-label="Portals">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Portals</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
