@@ -168,6 +168,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
+
 
 </head>
 
@@ -424,7 +430,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -574,26 +580,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -667,23 +667,23 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. The table is the <code>dataset</code> table of the promoted release, v2026.09.06.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ihvowwhgbe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ihvowwhgbe table {
+<div id="xdinbjvgda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xdinbjvgda table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ihvowwhgbe thead, #ihvowwhgbe tbody, #ihvowwhgbe tfoot, #ihvowwhgbe tr, #ihvowwhgbe td, #ihvowwhgbe th {
+#xdinbjvgda thead, #xdinbjvgda tbody, #xdinbjvgda tfoot, #xdinbjvgda tr, #xdinbjvgda td, #xdinbjvgda th {
   border-style: none;
 }
 
-#ihvowwhgbe p {
+#xdinbjvgda p {
   margin: 0;
   padding: 0;
 }
 
-#ihvowwhgbe .gt_table {
+#xdinbjvgda .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -709,12 +709,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-left-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_caption {
+#xdinbjvgda .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ihvowwhgbe .gt_title {
+#xdinbjvgda .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -726,7 +726,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-bottom-width: 0;
 }
 
-#ihvowwhgbe .gt_subtitle {
+#xdinbjvgda .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -738,7 +738,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-top-width: 0;
 }
 
-#ihvowwhgbe .gt_heading {
+#xdinbjvgda .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -750,13 +750,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-right-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_bottom_border {
+#xdinbjvgda .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_col_headings {
+#xdinbjvgda .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -771,7 +771,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-right-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_col_heading {
+#xdinbjvgda .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -791,7 +791,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   overflow-x: hidden;
 }
 
-#ihvowwhgbe .gt_column_spanner_outer {
+#xdinbjvgda .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -803,15 +803,15 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   padding-right: 4px;
 }
 
-#ihvowwhgbe .gt_column_spanner_outer:first-child {
+#xdinbjvgda .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ihvowwhgbe .gt_column_spanner_outer:last-child {
+#xdinbjvgda .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ihvowwhgbe .gt_column_spanner {
+#xdinbjvgda .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -823,11 +823,11 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   width: 100%;
 }
 
-#ihvowwhgbe .gt_spanner_row {
+#xdinbjvgda .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ihvowwhgbe .gt_group_heading {
+#xdinbjvgda .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -853,7 +853,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   text-align: left;
 }
 
-#ihvowwhgbe .gt_empty_group_heading {
+#xdinbjvgda .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -868,15 +868,15 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   vertical-align: middle;
 }
 
-#ihvowwhgbe .gt_from_md > :first-child {
+#xdinbjvgda .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ihvowwhgbe .gt_from_md > :last-child {
+#xdinbjvgda .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ihvowwhgbe .gt_row {
+#xdinbjvgda .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -895,7 +895,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   overflow-x: hidden;
 }
 
-#ihvowwhgbe .gt_stub {
+#xdinbjvgda .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -908,7 +908,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   padding-right: 5px;
 }
 
-#ihvowwhgbe .gt_stub_row_group {
+#xdinbjvgda .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -922,15 +922,15 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   vertical-align: top;
 }
 
-#ihvowwhgbe .gt_row_group_first td {
+#xdinbjvgda .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ihvowwhgbe .gt_row_group_first th {
+#xdinbjvgda .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ihvowwhgbe .gt_summary_row {
+#xdinbjvgda .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -940,16 +940,16 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   padding-right: 5px;
 }
 
-#ihvowwhgbe .gt_first_summary_row {
+#xdinbjvgda .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_first_summary_row.thick {
+#xdinbjvgda .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ihvowwhgbe .gt_last_summary_row {
+#xdinbjvgda .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -959,7 +959,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-bottom-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_grand_summary_row {
+#xdinbjvgda .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -969,7 +969,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   padding-right: 5px;
 }
 
-#ihvowwhgbe .gt_first_grand_summary_row {
+#xdinbjvgda .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -979,7 +979,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-top-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_last_grand_summary_row_top {
+#xdinbjvgda .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -989,11 +989,11 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-bottom-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_striped {
+#xdinbjvgda .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ihvowwhgbe .gt_table_body {
+#xdinbjvgda .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1002,7 +1002,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-bottom-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_footnotes {
+#xdinbjvgda .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1016,7 +1016,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-right-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_footnote {
+#xdinbjvgda .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1025,7 +1025,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   padding-right: 5px;
 }
 
-#ihvowwhgbe .gt_sourcenotes {
+#xdinbjvgda .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1039,7 +1039,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   border-right-color: #D3D3D3;
 }
 
-#ihvowwhgbe .gt_sourcenote {
+#xdinbjvgda .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1047,72 +1047,72 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   padding-right: 5px;
 }
 
-#ihvowwhgbe .gt_left {
+#xdinbjvgda .gt_left {
   text-align: left;
 }
 
-#ihvowwhgbe .gt_center {
+#xdinbjvgda .gt_center {
   text-align: center;
 }
 
-#ihvowwhgbe .gt_right {
+#xdinbjvgda .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ihvowwhgbe .gt_font_normal {
+#xdinbjvgda .gt_font_normal {
   font-weight: normal;
 }
 
-#ihvowwhgbe .gt_font_bold {
+#xdinbjvgda .gt_font_bold {
   font-weight: bold;
 }
 
-#ihvowwhgbe .gt_font_italic {
+#xdinbjvgda .gt_font_italic {
   font-style: italic;
 }
 
-#ihvowwhgbe .gt_super {
+#xdinbjvgda .gt_super {
   font-size: 65%;
 }
 
-#ihvowwhgbe .gt_footnote_marks {
+#xdinbjvgda .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ihvowwhgbe .gt_asterisk {
+#xdinbjvgda .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ihvowwhgbe .gt_indent_1 {
+#xdinbjvgda .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ihvowwhgbe .gt_indent_2 {
+#xdinbjvgda .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ihvowwhgbe .gt_indent_3 {
+#xdinbjvgda .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ihvowwhgbe .gt_indent_4 {
+#xdinbjvgda .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ihvowwhgbe .gt_indent_5 {
+#xdinbjvgda .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ihvowwhgbe .katex-display {
+#xdinbjvgda .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ihvowwhgbe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xdinbjvgda div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1941,8 +1941,8 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span>
+      <a href="./data-access.html" class="pagination-link" aria-label="Access the data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

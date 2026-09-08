@@ -133,6 +133,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
+
 
 </head>
 
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,8 +568,17 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#every-product" id="toc-every-product" class="nav-link active" data-scroll-target="#every-product"><span class="header-section-number">14.1</span> Every product</a></li>
+  <li><a href="#the-three-slug-contract" id="toc-the-three-slug-contract" class="nav-link" data-scroll-target="#the-three-slug-contract"><span class="header-section-number">14.2</span> The three-slug contract</a></li>
+  <li><a href="#the-brand-contract" id="toc-the-brand-contract" class="nav-link" data-scroll-target="#the-brand-contract"><span class="header-section-number">14.3</span> The brand contract</a></li>
+  <li><a href="#adding-a-product" id="toc-adding-a-product" class="nav-link" data-scroll-target="#adding-a-product"><span class="header-section-number">14.4</span> Adding a product</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/products.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -594,22 +603,753 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>Every CalCOFI.io product is a card on <a href="https://calcofi.io">calcofi.io</a>, and the card is the record: its name, its section, where it lives, where its source is, its uptime history and its usage. This page lists them from that record and states the three small contracts that keep a product findable and recognisably CalCOFI’s. For the data team and anyone building a new one.</p>
+<section id="every-product" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="every-product"><span class="header-section-number">14.1</span> Every product</h2>
+<div class="cell">
+<div id="tbl-products" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-products-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;14.1: The products on calcofi.io, by section, from the landing page’s cards (<code>_data/products.yml</code> in CalCOFI/CalCOFI.github.io). Usage per product is at <a href="https://calcofi.io/analytics/">calcofi.io/analytics</a>.
+</figcaption>
+<div aria-describedby="tbl-products-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="vvxrqgliqn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vvxrqgliqn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vvxrqgliqn thead, #vvxrqgliqn tbody, #vvxrqgliqn tfoot, #vvxrqgliqn tr, #vvxrqgliqn td, #vvxrqgliqn th {
+  border-style: none;
+}
+
+#vvxrqgliqn p {
+  margin: 0;
+  padding: 0;
+}
+
+#vvxrqgliqn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.88em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vvxrqgliqn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vvxrqgliqn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vvxrqgliqn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vvxrqgliqn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vvxrqgliqn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vvxrqgliqn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vvxrqgliqn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vvxrqgliqn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vvxrqgliqn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vvxrqgliqn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vvxrqgliqn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vvxrqgliqn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vvxrqgliqn .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vvxrqgliqn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvxrqgliqn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vvxrqgliqn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vvxrqgliqn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vvxrqgliqn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvxrqgliqn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vvxrqgliqn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvxrqgliqn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vvxrqgliqn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvxrqgliqn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vvxrqgliqn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vvxrqgliqn .gt_left {
+  text-align: left;
+}
+
+#vvxrqgliqn .gt_center {
+  text-align: center;
+}
+
+#vvxrqgliqn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vvxrqgliqn .gt_font_normal {
+  font-weight: normal;
+}
+
+#vvxrqgliqn .gt_font_bold {
+  font-weight: bold;
+}
+
+#vvxrqgliqn .gt_font_italic {
+  font-style: italic;
+}
+
+#vvxrqgliqn .gt_super {
+  font-size: 65%;
+}
+
+#vvxrqgliqn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vvxrqgliqn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vvxrqgliqn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vvxrqgliqn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vvxrqgliqn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vvxrqgliqn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vvxrqgliqn .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vvxrqgliqn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vvxrqgliqn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="key" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">key</th>
+<th id="live_url" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">product</th>
+<th id="source_url" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="uptime_url" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="status" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">status</th>
+<th id="tech" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">tech</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row odd">
+<th colspan="6" id="Explore" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Explore</th>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">ctd-viz</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/ctd/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CTD Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/apps/tree/main/ctd-viz" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/ctd-viz" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">live</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em">R, Shiny, DuckDB, MapLibre</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">ctd-transects</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/ctd-transects/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CTD Transects</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/ctd-transects" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/ctd-transects" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">live</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em">DuckDB, Plotly, JavaScript</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">explore</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/explore/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CalCOFI Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/explore" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/explore" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">live</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em">DuckDB-WASM, TypeScript, MapLibre, deck.gl, Plotly</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">pollutants</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/pollutants/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Pollutants Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/pollutants-app" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/pollutants" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">live</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">db-viz-station</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/station/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Station Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/db-viz-station" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/db-viz-station" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">live</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em">DuckDB, JavaScript, MapLibre</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">oceano</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/explore/?lens=contour&amp;var=temperature" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Contour Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/apps/tree/main/oceano" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/oceano" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">superseded by CalCOFI Explorer</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">db-viz-cruise</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/cruise/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Cruise Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/apps/tree/main/db-viz-cruise" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/db-viz-cruise" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">superseded by CalCOFI Explorer</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em">R, Shiny, DuckDB</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Explore  key" style="font-family: monospace; font-size: 0.85em">db-viz-hex</td>
+<td class="gt_row gt_left" headers="Explore  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/hex/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Hexagon Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Explore  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/db-viz-hex" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Explore  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/db-viz-hex" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Explore  status">superseded by CalCOFI Explorer</td>
+<td class="gt_row gt_left" headers="Explore  tech" style="font-family: monospace; font-size: 0.85em">R, Shiny, DuckDB, H3, MapLibre</td>
+</tr>
+<tr class="gt_group_heading_row even">
+<th colspan="6" id="Access" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Access</th>
+</tr>
+<tr class="gt_row_group_first odd">
+<td class="gt_row gt_left" headers="Access  key" style="font-family: monospace; font-size: 0.85em">calcofi4py</td>
+<td class="gt_row gt_left" headers="Access  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/calcofi4py/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi4py</a></span></td>
+<td class="gt_row gt_left" headers="Access  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/calcofi4py" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Access  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/calcofi4py" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Access  status">live</td>
+<td class="gt_row gt_left" headers="Access  tech" style="font-family: monospace; font-size: 0.85em">Python</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Access  key" style="font-family: monospace; font-size: 0.85em">calcofi4r</td>
+<td class="gt_row gt_left" headers="Access  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/calcofi4r/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi4r</a></span></td>
+<td class="gt_row gt_left" headers="Access  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/calcofi4r" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Access  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/calcofi4r" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Access  status">live</td>
+<td class="gt_row gt_left" headers="Access  tech" style="font-family: monospace; font-size: 0.85em">R</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Access  key" style="font-family: monospace; font-size: 0.85em">db-query</td>
+<td class="gt_row gt_left" headers="Access  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/db-query/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">db-query</a></span></td>
+<td class="gt_row gt_left" headers="Access  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/db-query" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Access  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/db-query" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Access  status">live</td>
+<td class="gt_row gt_left" headers="Access  tech" style="font-family: monospace; font-size: 0.85em">SQL, DuckDB-WASM</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Access  key" style="font-family: monospace; font-size: 0.85em">erddap</td>
+<td class="gt_row gt_left" headers="Access  live_url"><span style="white-space: pre;"><a href="https://erddap.calcofi.io/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">erddap</a></span></td>
+<td class="gt_row gt_left" headers="Access  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/erddap" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Access  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/erddap" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Access  status">live</td>
+<td class="gt_row gt_left" headers="Access  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Access  key" style="font-family: monospace; font-size: 0.85em">storage</td>
+<td class="gt_row gt_left" headers="Access  live_url"><span style="white-space: pre;"><a href="https://storage.calcofi.io/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">storage</a></span></td>
+<td class="gt_row gt_left" headers="Access  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/server" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Access  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/storage" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Access  status">live</td>
+<td class="gt_row gt_left" headers="Access  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="gt_group_heading_row even">
+<th colspan="6" id="Build" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Build</th>
+</tr>
+<tr class="gt_row_group_first odd">
+<td class="gt_row gt_left" headers="Build  key" style="font-family: monospace; font-size: 0.85em">calcofi4db</td>
+<td class="gt_row gt_left" headers="Build  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/calcofi4db/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi4db</a></span></td>
+<td class="gt_row gt_left" headers="Build  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/calcofi4db" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Build  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/calcofi4db" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Build  status">live</td>
+<td class="gt_row gt_left" headers="Build  tech" style="font-family: monospace; font-size: 0.85em">R</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Build  key" style="font-family: monospace; font-size: 0.85em">db-schema</td>
+<td class="gt_row gt_left" headers="Build  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/db-schema/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">db-schema</a></span></td>
+<td class="gt_row gt_left" headers="Build  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/db-schema" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Build  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/db-schema" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Build  status">live</td>
+<td class="gt_row gt_left" headers="Build  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Build  key" style="font-family: monospace; font-size: 0.85em">docs</td>
+<td class="gt_row gt_left" headers="Build  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/docs/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">docs</a></span></td>
+<td class="gt_row gt_left" headers="Build  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/docs" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Build  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/docs" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Build  status">live</td>
+<td class="gt_row gt_left" headers="Build  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Build  key" style="font-family: monospace; font-size: 0.85em">workflows</td>
+<td class="gt_row gt_left" headers="Build  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/workflows/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">workflows</a></span></td>
+<td class="gt_row gt_left" headers="Build  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/workflows" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Build  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/workflows" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Build  status">live</td>
+<td class="gt_row gt_left" headers="Build  tech" style="font-family: monospace; font-size: 0.85em">R, Quarto, DuckDB, Parquet</td>
+</tr>
+<tr class="gt_group_heading_row odd">
+<th colspan="6" id="Students" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Students</th>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">capstone</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/capstone/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Capstone App</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://github.com/PK0207/CalCOFI22" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/capstone" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Students  status">archived</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">hypoxia-story</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/hypoxia-story/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Hypoxia Story</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/hypoxia-story" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/hypoxia-story" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Students  status">archived</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">ucsb-larvae-dashboard</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/2026-ucsb-larvae-dashboard/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Larvae Dashboard</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/2026-ucsb-larvae-dashboard" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/ucsb-larvae-dashboard" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Students  status">archived</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">marmam</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/marmam/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Marine Mammal App</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/marmam-app" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/marmam" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Students  status">archived</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">saferseafood</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://app.calcofi.io/SaferSeafood/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">SaferSeafood App</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/SaferSeafood" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/saferseafood" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Students  status">archived</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">ucsb-station-portal</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/2026-ucsb-station-data-portal/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Station Data Portal</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/2026-ucsb-station-data-portal" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/ucsb-station-portal" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Students  status">archived</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">calcofi-75th-timeline</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=12x10Qrf0UAyUT2BQ_TA3wTDgQJHYqov0fEQV42VtByU&amp;font=Default&amp;lang=en" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">75th Anniversary Timeline</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://docs.google.com/spreadsheets/d/12x10Qrf0UAyUT2BQ_TA3wTDgQJHYqov0fEQV42VtByU/edit?usp=sharing" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><br>
+</td>
+<td class="gt_row gt_left" headers="Students  status">live</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">ucla-monitoring-map</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://calcofi.io/2026-ucla-cal-ocean-coastal-monitoring-map/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">CA Ocean &amp; Coastal Monitoring Map</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><span style="white-space: pre;"><a href="https://github.com/CalCOFI/2026-ucla-cal-ocean-coastal-monitoring-map" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">source</a></span></td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><span style="white-space: pre;"><a href="https://status.calcofi.io/history/ucla-monitoring-map" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">uptime</a></span></td>
+<td class="gt_row gt_left" headers="Students  status">live</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Students  key" style="font-family: monospace; font-size: 0.85em">offshore-wind-monitoring</td>
+<td class="gt_row gt_left" headers="Students  live_url"><span style="white-space: pre;"><a href="https://elizathomas.shinyapps.io/california_ofw_monitoring/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Offshore Wind Monitoring</a></span></td>
+<td class="gt_row gt_left" headers="Students  source_url"><br>
+</td>
+<td class="gt_row gt_left" headers="Students  uptime_url"><br>
+</td>
+<td class="gt_row gt_left" headers="Students  status">live</td>
+<td class="gt_row gt_left" headers="Students  tech" style="font-family: monospace; font-size: 0.85em"></td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>Every CalCOFI.io product with its section, its source, its uptime and its usage, generated from the landing page’s cards; the three-slug contract that keeps a card, its monitor and its analytics one thing; the brand contract in one paragraph; and how to add a product.</p>
+</figure>
 </div>
 </div>
+</section>
+<section id="the-three-slug-contract" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="the-three-slug-contract"><span class="header-section-number">14.2</span> The three-slug contract</h2>
+<p>A product is one thing in three places, and it is the same string in all of them:</p>
+<ul>
+<li>its <code>key</code> in the landing page’s <code>products.yml</code> (the card);</li>
+<li>its <code>slug</code> in <code>CalCOFI/uptime</code>’s monitor list (the status page at <code>status.calcofi.io/history/&lt;slug&gt;</code>);</li>
+<li>its <code>slug</code> in <code>CalCOFI/analytics</code>’ registry (the usage report at <code>calcofi.io/analytics/&lt;slug&gt;/</code>).</li>
+</ul>
+<p>When the names diverged, none of the three was findable from the others. Cards are named for the thing itself — the repository or application name used everywhere else — except student contributions, which keep their human titles. The card’s <code>status</code> is its <em>lifecycle</em> (<code>interim</code>, <code>superseded</code>, <code>archived</code>), not its uptime; a superseded card names what replaced it, and the <a href="./explore.html">Explore</a> chapter reads exactly that.</p>
+</section>
+<section id="the-brand-contract" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="the-brand-contract"><span class="header-section-number">14.3</span> The brand contract</h2>
+<p>Every product wears one theme, one header and one favicon, and the rule is checked weekly rather than assumed. The contract is <a href="https://calcofi.io/brand/v2/">calcofi.io/brand/v2</a> — the SIO look, light by default, UCSD’s palette, Source Sans 3 and Teko, the horizontal lockup — and in one breath:</p>
+<ul>
+<li><code>?theme=dark|light</code> on any URL sets the theme, remembered across products only when a person chose it; a fresh visit is light.</li>
+<li>The header is one bar: the lockup at the far left links to calcofi.io, the product’s title beside it links to its own root, the theme toggle sits at the right. Where a framework owns the bar (Quarto, pkgdown, MkDocs, Shiny), the lockup goes in its brand slot and its toggle is bridged.</li>
+<li>An application declares its scale (<code>&lt;meta name="cc-scale" content="app"&gt;</code>); a page declares nothing and gets the reading rhythm. This book is a page.</li>
+<li><code>?tour=off</code> suppresses any guided tour, so <code>live_url?theme=&lt;t&gt;&amp;tour=off</code> is a deterministic screenshot; every card carries a light and a dark shot taken that way.</li>
+</ul>
+<p><code>calcofi4r::cc_brand_head()</code> and <code>cc_brand_header()</code> give a Shiny app the head block and the bar; the Quarto sites include the same head file; <code>check_brand.py</code> in the landing repository probes every product for the theme, the favicon, the home link, the toggle, the version and the default.</p>
+</section>
+<section id="adding-a-product" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="adding-a-product"><span class="header-section-number">14.4</span> Adding a product</h2>
+<ol type="1">
+<li>Build it on the release: read through the catalog (<a href="./data-access.html">Access the data</a>), never a typed path; apply the quality predicate; cite through <code>cc_cite()</code>.</li>
+<li>Wear the brand (above); honour <code>?theme=</code> and <code>?tour=off</code>; take the two screenshots.</li>
+<li>Add the card to <code>products.yml</code> with its section, its <code>datasets</code> (the keys it covers, or <code>all</code>) and, if it opens a dataset directly, the <code>dataset_url</code> template the dataset pages link through.</li>
+<li>Add the same slug to the uptime monitors and the analytics registry, and tag the page for analytics.</li>
+<li>Push; the landing page, the status page and the usage report rebuild themselves, and this table follows.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,4 +1782,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/products.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/products.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

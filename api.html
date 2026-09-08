@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>Appendix B — API – CalCOFI.io</title>
+<title>Appendix A — The retired API – CalCOFI.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./glossary.html" rel="next">
-<link href="./helpers.html" rel="prev">
+<link href="./status.html" rel="prev">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -132,6 +132,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     document.addEventListener("cc:theme", function (e) { pushToQuarto(e.detail.theme); });   // (c) a brand toggle, if a page ever adds one
   });
 })();</script>
+
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
 
 
 </head>
@@ -307,7 +313,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./helpers.html">Appendices</a></li><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html">Appendices</a></li><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,32 +568,16 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#endpoint-replacement" id="toc-endpoint-replacement" class="nav-link active" data-scroll-target="#endpoint-replacement"><span class="header-section-number">B.1</span> Endpoint → replacement</a></li>
-  <li><a href="#legacy-endpoint-reference" id="toc-legacy-endpoint-reference" class="nav-link" data-scroll-target="#legacy-endpoint-reference"><span class="header-section-number">B.2</span> Legacy endpoint reference</a>
-  <ul class="collapse">
-  <li><a href="#variables-get-list-of-variables-for-timeseries" id="toc-variables-get-list-of-variables-for-timeseries" class="nav-link" data-scroll-target="#variables-get-list-of-variables-for-timeseries"><span class="header-section-number">B.2.1</span> <code>/variables</code>: get list of variables for timeseries</a></li>
-  <li><a href="#species_groups-get-species-groups-for-larvae" id="toc-species_groups-get-species-groups-for-larvae" class="nav-link" data-scroll-target="#species_groups-get-species-groups-for-larvae"><span class="header-section-number">B.2.2</span> <code>/species_groups</code>: get species groups for larvae</a></li>
-  <li><a href="#timeseries-get-time-series-data" id="toc-timeseries-get-time-series-data" class="nav-link" data-scroll-target="#timeseries-get-time-series-data"><span class="header-section-number">B.2.3</span> <code>/timeseries</code>: get time series data</a></li>
-  <li><a href="#cruises-get-list-of-cruises" id="toc-cruises-get-list-of-cruises" class="nav-link" data-scroll-target="#cruises-get-list-of-cruises"><span class="header-section-number">B.2.4</span> <code>/cruises</code>: get list of cruises</a></li>
-  <li><a href="#raster-get-raster-map-of-variable" id="toc-raster-get-raster-map-of-variable" class="nav-link" data-scroll-target="#raster-get-raster-map-of-variable"><span class="header-section-number">B.2.5</span> <code>/raster</code>: get raster map of variable</a></li>
-  <li><a href="#cruise_lines-get-station-lines-from-cruises" id="toc-cruise_lines-get-station-lines-from-cruises" class="nav-link" data-scroll-target="#cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">B.2.6</span> <code>/cruise_lines</code>: get station lines from cruises</a></li>
-  <li><a href="#cruise_line_profile" id="toc-cruise_line_profile" class="nav-link" data-scroll-target="#cruise_line_profile"><span class="header-section-number">B.2.7</span> <code>/cruise_line_profile</code></a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/api.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./helpers.html">Appendices</a></li><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html">Appendices</a></li><li class="breadcrumb-item"><a href="./api.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix B — API</h1>
+<h1 class="title"><span id="sec-api" class="quarto-section-identifier">Appendix A — The retired API</span></h1>
 </div>
 
 
@@ -610,127 +594,71 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Superseded by direct querying + <code>calcofi4r</code> helpers
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The Postgres-backed Plumber API at <a href="https://api.calcofi.io">api.calcofi.io</a> is <strong>being phased out</strong>. CalCOFI data is now published as versioned, public <strong>Parquet</strong> files that you query directly with DuckDB — no API server, no credentials, no rate limits.</p>
-<ul>
-<li>To query the data directly (SQL, R, Python), see <strong><a href="./data-access.html">Data Access</a></strong>.</li>
-<li>For biological ↔︎ environmental matching (the old <code>zooplankton_biomass</code>, <code>itis_ichthyodata</code> and <code>ichthyodata</code> endpoints), see <strong><a href="./helpers.html">Matching Helpers</a></strong> — the <code>calcofi4r</code> functions <code>cc_match_zooplankton_biomass()</code>, <code>cc_match_ichthyo_by_taxon()</code> and <code>cc_match_ichthyo_by_name()</code>.</li>
-</ul>
-<p>The endpoint notes below are retained as a historical reference and a map from each API endpoint to its replacement.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Try the new client-side query playground
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The three retired bio↔︎env endpoints — and many more queries besides — are now an interactive form at <strong><a href="https://calcofi.io/db-query/">calcofi.io/db-query/</a></strong> that runs entirely in your browser. Pick a query from the left-side accordion, fill the form, click <strong>Run</strong>, see the rows — no server, no credentials, no install. DuckDB-WASM in a worker thread, public Parquet on Google Cloud Storage, the same portable SQL the <a href="./helpers.html"><code>calcofi4r::cc_match_*()</code></a> helpers emit.</p>
-</div>
-</div>
-<p>The raw interface to the legacy Application Programming Interface (API) is available at:</p>
-<ul>
-<li><a href="https://api.calcofi.io">api.calcofi.io</a></li>
-</ul>
-<section id="endpoint-replacement" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="endpoint-replacement"><span class="header-section-number">B.1</span> Endpoint → replacement</h2>
+<p>The Plumber API at <code>api.calcofi.io</code> served the first generation of CalCOFI.io: a PostgreSQL database of the ingested tables and pre-built match tables between net tows and CTD casts, with endpoints for time series, cruises, rasters and the biology-to-environment matches. It was superseded in 2026 by the frozen parquet releases, which any DuckDB — including one running in a browser tab — reads directly with no server, no credentials and no rate limit. This appendix is the map from each endpoint to what replaced it; <a href="./data-access.html">Access the data</a> is the guide.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Legacy endpoint</th>
-<th>R helper (<code>calcofi4r</code>)</th>
-<th>Browser</th>
+<th>endpoint</th>
+<th>what it did</th>
+<th>now</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>/variables</code></td>
-<td><code>cc_list_measurement_types()</code></td>
-<td><a href="https://calcofi.io/db-query/#browse--measurement-types">Query → measurement types</a></td>
+<td>list the variables available to <code>/timeseries</code></td>
+<td><code>calcofi4r::cc_list_measurement_types()</code>; the measurement-type registry in <a href="./naming.html">Naming conventions</a></td>
 </tr>
 <tr class="even">
+<td><code>/species_groups</code></td>
+<td>(never finished) species groups for larval counts</td>
+<td><code>taxon_group</code> in the release</td>
+</tr>
+<tr class="odd">
 <td><code>/timeseries</code></td>
-<td>direct SQL aggregation — see <a href="./data-access.html">Data Access</a></td>
-<td><a href="https://calcofi.io/db-query/#sql-shell--shell">Query → SQL shell</a></td>
+<td>a time series of one variable, optionally by area</td>
+<td>SQL over <code>obs_env</code> and <code>sample</code>; the Explorer’s stations and regions lenses</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>/cruises</code></td>
-<td><code>cc_read_cruise()</code></td>
-<td><a href="https://calcofi.io/db-query/#browse--cruises">Query → cruises</a></td>
+<td>the cruise list with summary statistics</td>
+<td><code>cc_read_cruise()</code>; the Explorer’s cruises lens</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>/raster</code></td>
-<td>direct SQL + <code>pts_to_rast_idw()</code></td>
-<td>—</td>
+<td>an interpolated raster of one variable</td>
+<td><code>cc_interpolate()</code>; the Explorer’s contours lens</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>/cruise_lines</code>, <code>/cruise_line_profile</code></td>
-<td>direct SQL against <code>ctd_cast</code> / <code>ctd_thin</code></td>
-<td><a href="https://calcofi.io/db-query/#sql-shell--shell">Query → SQL shell</a></td>
-</tr>
-<tr class="even">
-<td><code>zooplankton_biomass</code></td>
-<td><a href="./helpers.html"><code>cc_match_zooplankton_biomass()</code></a></td>
-<td><strong><a href="https://calcofi.io/db-query/#bio-env-matching--zoo-biomass">Query → zoo biomass</a></strong></td>
+<td>station lines and depth profiles along a line</td>
+<td>SQL over <code>obs_env</code>; the Explorer’s sections lens</td>
 </tr>
 <tr class="odd">
-<td><code>itis_ichthyodata</code></td>
-<td><a href="./helpers.html"><code>cc_match_ichthyo_by_taxon()</code></a></td>
-<td><strong><a href="https://calcofi.io/db-query/#bio-env-matching--by-taxon">Query → by taxon</a></strong></td>
+<td><code>zooplankton_biomass</code></td>
+<td>net-tow biomass matched to CTD-bottle measurements</td>
+<td><code>cc_match_zooplankton_biomass()</code></td>
 </tr>
 <tr class="even">
+<td><code>itis_ichthyodata</code></td>
+<td>larval counts for an ITIS taxon and its descendants, matched</td>
+<td><code>cc_match_ichthyo_by_taxon()</code> — WoRMS, recursive</td>
+</tr>
+<tr class="odd">
 <td><code>ichthyodata</code></td>
-<td><a href="./helpers.html"><code>cc_match_ichthyo_by_name()</code></a></td>
-<td><strong><a href="https://calcofi.io/db-query/#bio-env-matching--by-name">Query → by name</a></strong></td>
+<td>larval counts by scientific name, matched</td>
+<td><code>cc_match_ichthyo_by_name()</code></td>
+</tr>
+<tr class="even">
+<td><code>relax_matching</code>, <code>cruiseymd_min/max</code>, <code>stage</code></td>
+<td>the match parameters</td>
+<td><code>relax_matching</code> (5 km / 72 h), <code>date_min/max</code>, <code>life_stage</code></td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="legacy-endpoint-reference" class="level2" data-number="B.2">
-<h2 data-number="B.2" class="anchored" data-anchor-id="legacy-endpoint-reference"><span class="header-section-number">B.2</span> Legacy endpoint reference</h2>
-<section id="variables-get-list-of-variables-for-timeseries" class="level3" data-number="B.2.1">
-<h3 data-number="B.2.1" class="anchored" data-anchor-id="variables-get-list-of-variables-for-timeseries"><span class="header-section-number">B.2.1</span> <code>/variables</code>: get list of variables for timeseries</h3>
-<p>Get list of variables for use in <code>/timeseries</code>.</p>
-</section>
-<section id="species_groups-get-species-groups-for-larvae" class="level3" data-number="B.2.2">
-<h3 data-number="B.2.2" class="anchored" data-anchor-id="species_groups-get-species-groups-for-larvae"><span class="header-section-number">B.2.2</span> <code>/species_groups</code>: get species groups for larvae</h3>
-<p>Not yet working. Get list of species groups for use with variables <code>larvae_counts.count</code> in <code>/timeseries</code>.</p>
-</section>
-<section id="timeseries-get-time-series-data" class="level3" data-number="B.2.3">
-<h3 data-number="B.2.3" class="anchored" data-anchor-id="timeseries-get-time-series-data"><span class="header-section-number">B.2.3</span> <code>/timeseries</code>: get time series data</h3>
-</section>
-<section id="cruises-get-list-of-cruises" class="level3" data-number="B.2.4">
-<h3 data-number="B.2.4" class="anchored" data-anchor-id="cruises-get-list-of-cruises"><span class="header-section-number">B.2.4</span> <code>/cruises</code>: get list of cruises</h3>
-<p>Get list of cruises with summary stats as CSV table for time (<code>date_beg</code>).</p>
-</section>
-<section id="raster-get-raster-map-of-variable" class="level3" data-number="B.2.5">
-<h3 data-number="B.2.5" class="anchored" data-anchor-id="raster-get-raster-map-of-variable"><span class="header-section-number">B.2.5</span> <code>/raster</code>: get raster map of variable</h3>
-<p>Get raster of variable.</p>
-</section>
-<section id="cruise_lines-get-station-lines-from-cruises" class="level3" data-number="B.2.6">
-<h3 data-number="B.2.6" class="anchored" data-anchor-id="cruise_lines-get-station-lines-from-cruises"><span class="header-section-number">B.2.6</span> <code>/cruise_lines</code>: get station lines from cruises</h3>
-<p>Get station lines from cruises (with more than one cast).</p>
-</section>
-<section id="cruise_line_profile" class="level3" data-number="B.2.7">
-<h3 data-number="B.2.7" class="anchored" data-anchor-id="cruise_line_profile"><span class="header-section-number">B.2.7</span> <code>/cruise_line_profile</code></h3>
-<p>Get profile at depths for given variable of casts along line of stations.</p>
+<p>The three matching endpoints, and many more queries, are also a point-and-click form at <a href="https://calcofi.io/db-query/">calcofi.io/db-query</a>, running DuckDB in the browser over the same release. The API’s source stays at <a href="https://github.com/CalCOFI/api">CalCOFI/api</a>.</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1148,13 +1076,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./helpers.html" class="pagination-link" aria-label="Matching Helpers">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span>
+      <a href="./status.html" class="pagination-link" aria-label="Status">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Status</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./glossary.html" class="pagination-link" aria-label="Glossary">
-        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1163,4 +1091,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/api.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/api.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

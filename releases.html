@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -132,6 +167,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     document.addEventListener("cc:theme", function (e) { pushToQuarto(e.detail.theme); });   // (c) a brand toggle, if a page ever adds one
   });
 })();</script>
+
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
 
 
 </head>
@@ -389,7 +430,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +580,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,8 +603,19 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-release-in-one-line" id="toc-a-release-in-one-line" class="nav-link active" data-scroll-target="#a-release-in-one-line"><span class="header-section-number">7.1</span> A release in one line</a></li>
+  <li><a href="#what-ships" id="toc-what-ships" class="nav-link" data-scroll-target="#what-ships"><span class="header-section-number">7.2</span> What ships</a></li>
+  <li><a href="#versions-and-which-are-kept" id="toc-versions-and-which-are-kept" class="nav-link" data-scroll-target="#versions-and-which-are-kept"><span class="header-section-number">7.3</span> Versions, and which are kept</a></li>
+  <li><a href="#two-dois" id="toc-two-dois" class="nav-link" data-scroll-target="#two-dois"><span class="header-section-number">7.4</span> Two DOIs</a></li>
+  <li><a href="#the-changelog" id="toc-the-changelog" class="nav-link" data-scroll-target="#the-changelog"><span class="header-section-number">7.5</span> The changelog</a></li>
+  <li><a href="#sec-release-gates" id="toc-sec-release-gates" class="nav-link" data-scroll-target="#sec-release-gates"><span class="header-section-number">7.6</span> What a release checks before it ships</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/releases.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -594,22 +640,1619 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>The integrated database is published as <strong>frozen releases</strong>: an immutable, versioned copy of every table, with a catalog that says exactly which bytes it holds and a DOI that names it. Nothing a consumer reads is ever edited in place. This chapter says what a release is, what ships with it, which versions are kept, and what is checked before one is cut.</p>
+<section id="a-release-in-one-line" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="a-release-in-one-line"><span class="header-section-number">7.1</span> A release in one line</h2>
+<p>The promoted release is <strong>v2026.09.06</strong>, cut 2026-09-06: 23 tables, 348,657,010 rows, 2.46 GB of parquet, DOI <a href="https://doi.org/10.5281/zenodo.22514953">10.5281/zenodo.22514953</a>. A version is a date (<code>vYYYY.MM.DD</code>), and a release is cut whenever the data or the schema change enough to matter — every few weeks, in practice. <code>latest.txt</code> on the bucket names the promoted one, and it is promoted only after the consumer-contract suite has passed against the frozen files.</p>
+</section>
+<section id="what-ships" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="what-ships"><span class="header-section-number">7.2</span> What ships</h2>
+<p>Everything lives under one public prefix, <code>gs://calcofi-db/ducklake/releases/{version}/</code>, read over HTTPS with no credentials:</p>
+<ul>
+<li><strong><code>catalog.json</code></strong> — the structural manifest and the data-access contract: the version, its DOIs and citation, and for every table its rows, its <code>content_hash</code> and its <code>objects[]</code> — one parquet object for a single-file table, one per partition for a partitioned one — each with a bucket-relative <code>path</code>, <code>bytes</code>, <code>sha256</code> and <code>since</code>. Resolve a table through it (<code>calcofi4r::cc_release_sources()</code>, <code>calcofi4py.release_sources()</code>); never build a path by hand.</li>
+<li><strong>the parquet objects</strong>, content-addressed under <code>gs://calcofi-db/ducklake/tables/{table}/…</code>: immutable and shared between versions, so <code>since</code> on an object is the first release that shipped those exact bytes — the per-table changelog. A release’s own <code>parquet/</code> copy exists only for the promoted version, its predecessor and the consolidated milestones (below).</li>
+<li><strong>the sidecars</strong>: <code>metadata.json</code> (every table and column, with units and descriptions), <code>relationships.json</code> (every key, <a href="./keys.html">Keys and integrity</a>), <code>integrity.json</code> (the keys measured), <code>datasets.json</code> (one record per dataset — the record every portal reads), <code>eml/</code> (one EML document per dataset), <code>coverage.json</code> and <code>coverage_stations.json</code> (what the Explorer paints first), <code>grid.geojson</code>, <code>spatial.geojson</code>, <code>spatial_layers.json</code>, a static <code>stac/</code> catalog, <code>erd.mmd</code>, <code>test_results.json</code>, and <code>RELEASE_NOTES.md</code>.</li>
+</ul>
+<div class="cell">
+<div id="tbl-objects" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.1: The tables of v2026.09.06 as the catalog describes them — objects, partitioning, size, and the release whose bytes each table last changed in.
+</figcaption>
+<div aria-describedby="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="oysxjpuuvo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oysxjpuuvo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#oysxjpuuvo thead, #oysxjpuuvo tbody, #oysxjpuuvo tfoot, #oysxjpuuvo tr, #oysxjpuuvo td, #oysxjpuuvo th {
+  border-style: none;
+}
+
+#oysxjpuuvo p {
+  margin: 0;
+  padding: 0;
+}
+
+#oysxjpuuvo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.88em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#oysxjpuuvo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#oysxjpuuvo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#oysxjpuuvo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#oysxjpuuvo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#oysxjpuuvo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#oysxjpuuvo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#oysxjpuuvo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#oysxjpuuvo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#oysxjpuuvo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#oysxjpuuvo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oysxjpuuvo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#oysxjpuuvo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#oysxjpuuvo .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#oysxjpuuvo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oysxjpuuvo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#oysxjpuuvo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#oysxjpuuvo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#oysxjpuuvo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oysxjpuuvo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#oysxjpuuvo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oysxjpuuvo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#oysxjpuuvo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oysxjpuuvo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oysxjpuuvo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oysxjpuuvo .gt_left {
+  text-align: left;
+}
+
+#oysxjpuuvo .gt_center {
+  text-align: center;
+}
+
+#oysxjpuuvo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#oysxjpuuvo .gt_font_normal {
+  font-weight: normal;
+}
+
+#oysxjpuuvo .gt_font_bold {
+  font-weight: bold;
+}
+
+#oysxjpuuvo .gt_font_italic {
+  font-style: italic;
+}
+
+#oysxjpuuvo .gt_super {
+  font-size: 65%;
+}
+
+#oysxjpuuvo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#oysxjpuuvo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#oysxjpuuvo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#oysxjpuuvo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#oysxjpuuvo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#oysxjpuuvo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#oysxjpuuvo .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#oysxjpuuvo .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#oysxjpuuvo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="table" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">table</th>
+<th id="tier" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">tier</th>
+<th id="rows" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">rows</th>
+<th id="objects" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">objects</th>
+<th id="partitioned-by" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">partitioned by</th>
+<th id="bytes" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">bytes</th>
+<th id="last-changed" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">last changed</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">climatology</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">768,880</td>
+<td class="gt_row gt_right" headers="objects">71</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_right" headers="bytes">9.9 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.06</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">842</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">19.6 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">16</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">14.7 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset_taxon</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">1,917</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">57.9 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">grid</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">218</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">103 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">lookup</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">26</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">1.6 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">200</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">12 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_attribute</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">1.8 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_bio</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">25.3 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="objects">84</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_right" headers="bytes">317.2 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">region</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">4</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">4 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">25.9 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_measurement</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">589,603</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">2 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">929,664</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">7.3 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">49</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">1.2 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">13,206</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">47.8 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">148,461</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">538 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">2,614</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">87.8 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.06</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">441</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">2.8 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
+<td class="gt_row gt_left" headers="tier">deprecated</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="objects">16</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">dataset_key</td>
+<td class="gt_row gt_right" headers="bytes">400.6 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_ctd_full</td>
+<td class="gt_row gt_left" headers="tier">supplemental</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_right" headers="objects">134</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
+<td class="gt_row gt_right" headers="bytes">1.4 GB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_mets_full</td>
+<td class="gt_row gt_left" headers="tier">supplemental</td>
+<td class="gt_row gt_right" headers="rows">19,927,416</td>
+<td class="gt_row gt_right" headers="objects">49</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
+<td class="gt_row gt_right" headers="bytes">250.5 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
+<td class="gt_row gt_left" headers="tier">supplemental</td>
+<td class="gt_row gt_right" headers="rows">421,454</td>
+<td class="gt_row gt_right" headers="objects">1</td>
+<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">10.5 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.09.04</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>What a release is (a date, a catalog, its parquet objects, a DOI), what ships beside it, how objects are content-addressed and what <code>since</code> means, which versions are kept and how to pin one, the release notes as the database’s changelog, and what a release checks before it ships.</p>
+</figure>
 </div>
 </div>
+</section>
+<section id="versions-and-which-are-kept" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="versions-and-which-are-kept"><span class="header-section-number">7.3</span> Versions, and which are kept</h2>
+<p>Every version keeps its sidecars forever, so any release can still be browsed. Its parquet copy is kept for the promoted version, the one before it, and the <strong>consolidated</strong> milestones — versions a paper, a docs example or an app pins; the rest is thinned, and a thinned version’s <code>retired</code> marker names the consolidated one to read instead (<code>metadata/release_policy.yml</code> in <code>CalCOFI/workflows</code> decides; <code>scripts/thin_releases.R</code> applies it). The content-addressed store means a kept object is stored once however many versions share it.</p>
+<div class="cell">
+<div id="tbl-versions" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-versions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
+</figcaption>
+<div aria-describedby="tbl-versions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="mykkexqnew" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mykkexqnew table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mykkexqnew thead, #mykkexqnew tbody, #mykkexqnew tfoot, #mykkexqnew tr, #mykkexqnew td, #mykkexqnew th {
+  border-style: none;
+}
+
+#mykkexqnew p {
+  margin: 0;
+  padding: 0;
+}
+
+#mykkexqnew .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.88em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mykkexqnew .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mykkexqnew .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mykkexqnew .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mykkexqnew .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mykkexqnew .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mykkexqnew .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mykkexqnew .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mykkexqnew .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mykkexqnew .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mykkexqnew .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mykkexqnew .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mykkexqnew .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mykkexqnew .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mykkexqnew .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mykkexqnew .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mykkexqnew .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mykkexqnew .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mykkexqnew .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mykkexqnew .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mykkexqnew .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mykkexqnew .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mykkexqnew .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mykkexqnew .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mykkexqnew .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mykkexqnew .gt_left {
+  text-align: left;
+}
+
+#mykkexqnew .gt_center {
+  text-align: center;
+}
+
+#mykkexqnew .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mykkexqnew .gt_font_normal {
+  font-weight: normal;
+}
+
+#mykkexqnew .gt_font_bold {
+  font-weight: bold;
+}
+
+#mykkexqnew .gt_font_italic {
+  font-style: italic;
+}
+
+#mykkexqnew .gt_super {
+  font-size: 65%;
+}
+
+#mykkexqnew .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mykkexqnew .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mykkexqnew .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mykkexqnew .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mykkexqnew .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mykkexqnew .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mykkexqnew .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mykkexqnew .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mykkexqnew div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="version" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">version</th>
+<th id="date" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">date</th>
+<th id="tables" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">tables</th>
+<th id="rows" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">rows</th>
+<th id="size-(MB)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">size (MB)</th>
+<th id="DOI" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">DOI</th>
+<th id="kept" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">kept</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.09.06</td>
+<td class="gt_row gt_right" headers="date">2026-09-06</td>
+<td class="gt_row gt_right" headers="tables">23</td>
+<td class="gt_row gt_right" headers="rows">348,657,010</td>
+<td class="gt_row gt_right" headers="size (MB)">2,350</td>
+<td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22514953</td>
+<td class="gt_row gt_left" headers="kept">current</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.09.04</td>
+<td class="gt_row gt_right" headers="date">2026-09-04</td>
+<td class="gt_row gt_right" headers="tables">23</td>
+<td class="gt_row gt_right" headers="rows">348,657,010</td>
+<td class="gt_row gt_right" headers="size (MB)">2,351</td>
+<td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22310858</td>
+<td class="gt_row gt_left" headers="kept">current</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.08.25</td>
+<td class="gt_row gt_right" headers="date">2026-08-25</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">320,260,205</td>
+<td class="gt_row gt_right" headers="size (MB)">1,998</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">consolidated</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.08.14</td>
+<td class="gt_row gt_right" headers="date">2026-08-14</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">307,537,056</td>
+<td class="gt_row gt_right" headers="size (MB)">1,930</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">consolidated</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.08.11</td>
+<td class="gt_row gt_right" headers="date">2026-08-11</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">323,912,311</td>
+<td class="gt_row gt_right" headers="size (MB)">2,016</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.08.10</td>
+<td class="gt_row gt_right" headers="date">2026-08-11</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">323,912,364</td>
+<td class="gt_row gt_right" headers="size (MB)">2,017</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.08.08</td>
+<td class="gt_row gt_right" headers="date">2026-08-08</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">309,122,838</td>
+<td class="gt_row gt_right" headers="size (MB)">1,947</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.08.07</td>
+<td class="gt_row gt_right" headers="date">2026-08-07</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">323,733,662</td>
+<td class="gt_row gt_right" headers="size (MB)">2,024</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.08.06</td>
+<td class="gt_row gt_right" headers="date">2026-08-06</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">255,137,845</td>
+<td class="gt_row gt_right" headers="size (MB)">1,636</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.08.05</td>
+<td class="gt_row gt_right" headers="date">2026-08-05</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">255,137,845</td>
+<td class="gt_row gt_right" headers="size (MB)">1,636</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.08.04</td>
+<td class="gt_row gt_right" headers="date">2026-08-04</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">255,155,031</td>
+<td class="gt_row gt_right" headers="size (MB)">1,635</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.08.03</td>
+<td class="gt_row gt_right" headers="date">2026-08-03</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">255,037,035</td>
+<td class="gt_row gt_right" headers="size (MB)">2,057</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.08.02</td>
+<td class="gt_row gt_right" headers="date">2026-08-02</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">255,037,035</td>
+<td class="gt_row gt_right" headers="size (MB)">2,087</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.07.30</td>
+<td class="gt_row gt_right" headers="date">2026-07-30</td>
+<td class="gt_row gt_right" headers="tables">17</td>
+<td class="gt_row gt_right" headers="rows">233,730,737</td>
+<td class="gt_row gt_right" headers="size (MB)">1,710</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.07.17</td>
+<td class="gt_row gt_right" headers="date">2026-07-17</td>
+<td class="gt_row gt_right" headers="tables">17</td>
+<td class="gt_row gt_right" headers="rows">236,577,241</td>
+<td class="gt_row gt_right" headers="size (MB)">1,943</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">consolidated</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.07.16</td>
+<td class="gt_row gt_right" headers="date">2026-07-16</td>
+<td class="gt_row gt_right" headers="tables">17</td>
+<td class="gt_row gt_right" headers="rows">236,577,241</td>
+<td class="gt_row gt_right" headers="size (MB)">1,945</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.07.17</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.07.15</td>
+<td class="gt_row gt_right" headers="date">2026-07-15</td>
+<td class="gt_row gt_right" headers="tables">22</td>
+<td class="gt_row gt_right" headers="rows">236,371,206</td>
+<td class="gt_row gt_right" headers="size (MB)">5,472</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.07.17</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.06.26</td>
+<td class="gt_row gt_right" headers="date">2026-06-26</td>
+<td class="gt_row gt_right" headers="tables">50</td>
+<td class="gt_row gt_right" headers="rows">133,966,996</td>
+<td class="gt_row gt_right" headers="size (MB)">3,554</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">consolidated</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.06.08</td>
+<td class="gt_row gt_right" headers="date">2026-06-08</td>
+<td class="gt_row gt_right" headers="tables">44</td>
+<td class="gt_row gt_right" headers="rows">133,807,311</td>
+<td class="gt_row gt_right" headers="size (MB)">3,553</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.06.07</td>
+<td class="gt_row gt_right" headers="date">2026-06-07</td>
+<td class="gt_row gt_right" headers="tables">28</td>
+<td class="gt_row gt_right" headers="rows">133,015,544</td>
+<td class="gt_row gt_right" headers="size (MB)">3,547</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.05.20</td>
+<td class="gt_row gt_right" headers="date">2026-05-20</td>
+<td class="gt_row gt_right" headers="tables">28</td>
+<td class="gt_row gt_right" headers="rows">133,022,102</td>
+<td class="gt_row gt_right" headers="size (MB)">5,503</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.05.19</td>
+<td class="gt_row gt_right" headers="date">2026-05-19</td>
+<td class="gt_row gt_right" headers="tables">28</td>
+<td class="gt_row gt_right" headers="rows">133,022,102</td>
+<td class="gt_row gt_right" headers="size (MB)">5,503</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.05.15</td>
+<td class="gt_row gt_right" headers="date">2026-05-15</td>
+<td class="gt_row gt_right" headers="tables">28</td>
+<td class="gt_row gt_right" headers="rows">133,013,839</td>
+<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.05.14</td>
+<td class="gt_row gt_right" headers="date">2026-05-14</td>
+<td class="gt_row gt_right" headers="tables">28</td>
+<td class="gt_row gt_right" headers="rows">133,013,839</td>
+<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">consolidated</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.04.08</td>
+<td class="gt_row gt_right" headers="date">2026-04-08</td>
+<td class="gt_row gt_right" headers="tables">28</td>
+<td class="gt_row gt_right" headers="rows">357,418,040</td>
+<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">consolidated</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.04.06</td>
+<td class="gt_row gt_right" headers="date">2026-04-06</td>
+<td class="gt_row gt_right" headers="tables">29</td>
+<td class="gt_row gt_right" headers="rows">361,200,542</td>
+<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.04.03</td>
+<td class="gt_row gt_right" headers="date">2026-04-03</td>
+<td class="gt_row gt_right" headers="tables">29</td>
+<td class="gt_row gt_right" headers="rows">361,183,451</td>
+<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.04.02</td>
+<td class="gt_row gt_right" headers="date">2026-04-02</td>
+<td class="gt_row gt_right" headers="tables">43</td>
+<td class="gt_row gt_right" headers="rows">361,152,303</td>
+<td class="gt_row gt_right" headers="size (MB)">11,498</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.03.25</td>
+<td class="gt_row gt_right" headers="date">2026-03-25</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">354,898,020</td>
+<td class="gt_row gt_right" headers="size (MB)">11,263</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.03.14</td>
+<td class="gt_row gt_right" headers="date">2026-03-14</td>
+<td class="gt_row gt_right" headers="tables">20</td>
+<td class="gt_row gt_right" headers="rows">357,001,188</td>
+<td class="gt_row gt_right" headers="size (MB)">11,330</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Consolidated today: <code>v2026.04.08</code>, <code>v2026.05.14</code>, <code>v2026.06.26</code>, <code>v2026.07.17</code>, <code>v2026.08.14</code>, <code>v2026.08.25</code>.</p>
+<p>To pin a version rather than follow the promoted one:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>calcofi4r<span class="sc">::</span><span class="fu">cc_get_db</span>(<span class="at">version =</span> <span class="st">"v2026.08.25"</span>)          <span class="co"># R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>calcofi4py.cc_get_db(version<span class="op">=</span><span class="st">"v2026.08.25"</span>)             <span class="co"># Python</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># any DuckDB, from any language: resolve a table's objects through the catalog and paste the</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read_parquet() fragment it hands back — never a typed releases/{v}/parquet path</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>calcofi4r<span class="sc">::</span><span class="fu">cc_read_parquet_sql</span>(calcofi4r<span class="sc">::</span><span class="fu">cc_release_sources</span>(calcofi4r<span class="sc">::</span><span class="fu">cc_catalog</span>(<span class="st">"v2026.08.25"</span>), <span class="st">"sample"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="two-dois" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="two-dois"><span class="header-section-number">7.4</span> Two DOIs</h2>
+<p>Each release is tagged on GitHub, and Zenodo mints a <strong>version DOI</strong> for it; one <strong>concept DOI</strong> always resolves to the newest. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code>, in the release notes’ <em>How to cite</em>, and on <a href="./cite.html">Cite this data</a>:</p>
+<ul>
+<li>this release: <a href="https://doi.org/10.5281/zenodo.22514953" class="uri">https://doi.org/10.5281/zenodo.22514953</a></li>
+<li>every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
+</ul>
+</section>
+<section id="the-changelog" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="the-changelog"><span class="header-section-number">7.5</span> The changelog</h2>
+<p><code>RELEASES.md</code> is the database’s NEWS file: one section per release, newest first, saying what changed and why, with a <strong>Consumers:</strong> line wherever a change could break a reader, and an <code># Unreleased</code> section collecting changes until the next cut. Each version’s <code>RELEASE_NOTES.md</code> is its section plus a generated appendix (tables and rows, datasets, the consumer-contract result, package versions). A release with no section for itself is refused before the freeze — the notes are written by the change that made them necessary, never reconstructed afterwards.</p>
+<p>The most recent sections of <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md"><code>RELEASES.md</code></a>:</p>
+<ul>
+<li>Unreleased</li>
+<li>v2026.09.06 (2026-09-06)</li>
+<li>v2026.09.04 (2026-09-04)</li>
+<li>v2026.08.25 (2026-08-25)</li>
+<li>v2026.08.14 (2026-08-14)</li>
+<li>v2026.08.11 (2026-08-11)</li>
+</ul>
+</section>
+<section id="sec-release-gates" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="sec-release-gates"><span class="header-section-number">7.6</span> What a release checks before it ships</h2>
+<p><code>release_database.qmd</code> assembles every ingest’s parquet shards in memory, builds the release-only tables, and runs a series of gates before the freeze. Each is a function in <code>calcofi4db</code> with a test of its own, and the notebook’s rendered page shows every result. The ones that stop a release outright:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>gate</th>
+<th>what it measures</th>
+<th>on failure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>check_release_relationships()</code></td>
+<td>every declared primary key unique and non-NULL; every non-NULL foreign key resolving; written to <code>integrity.json</code></td>
+<td><strong>stops the release</strong></td>
+</tr>
+<tr class="even">
+<td><code>check_core_pk_unique()</code></td>
+<td>the core family’s primary keys, before the release-built tables exist (the gate added after v2026.08.25 shipped 4,855 duplicate <code>sample_key</code>s)</td>
+<td>stops the release</td>
+</tr>
+<tr class="odd">
+<td><code>check_cruise_key_integrity()</code></td>
+<td><code>cruise_key</code> format, its month against the NODC code, the <code>sample</code>/<code>obs</code> → <code>cruise</code> edge, <code>cruise_uuid</code> hygiene, every event’s date within its cruise’s span (± 31 days, named exceptions only)</td>
+<td>stops the release; three ratchets (span overlaps, derived cruises, NULL keys per dataset) may only ever go down</td>
+</tr>
+<tr class="even">
+<td><code>validate_for_release()</code></td>
+<td>NULLs in any <code>*_id</code> / <code>*_key</code> / <code>*_uuid</code> column; latitude, longitude and counts in range; no empty table</td>
+<td>NULLs stop the release; ranges warn</td>
+</tr>
+<tr class="odd">
+<td><code>check_obs_pair_parity()</code></td>
+<td><code>obs_bio</code> + <code>obs_env</code> reproduce <code>obs</code> — row counts, distinct ids, a hash of every column, per realm and dataset</td>
+<td>stops the release</td>
+</tr>
+<tr class="even">
+<td><code>test_release.qmd</code> consumer contract</td>
+<td>every query shape the apps and packages depend on, run against the frozen release three ways (objects, view, pair), plus the presence of an all-ok <code>integrity.json</code></td>
+<td><code>latest.txt</code> is not promoted</td>
+</tr>
+</tbody>
+</table>
+<p>And the ones that report and ratchet — a number that may only ever go down between releases, so a regression fails but a known backlog does not:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>gate</th>
+<th>what it measures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>check_depth_bounds()</code> / <code>check_depth_vs_seafloor()</code></td>
+<td>no depth is NaN, negative or beyond 6,500 m (fails); each root sample’s deepest depth against the GEBCO seafloor near its position (ratchet — the place is imprecise, not the measurement)</td>
+</tr>
+<tr class="even">
+<td><code>check_measurement_bounds()</code></td>
+<td>every measurement type has declared physical bounds and no value lies outside them (out of range fails; undeclared types ratchet)</td>
+</tr>
+<tr class="odd">
+<td><code>check_taxon_ids()</code></td>
+<td>every taxon key is an accepted WoRMS or ITIS id, or on an explicit allowlist of dataset-local classes (fails)</td>
+</tr>
+<tr class="even">
+<td><code>check_dataset_citation()</code></td>
+<td>every dataset’s citation has a year and a locator, its licence is a registered id, its DOI resolves (fails unless a provider question is open on the field)</td>
+</tr>
+<tr class="odd">
+<td><code>check_dataset_catalog()</code> / <code>check_eml_catalog()</code></td>
+<td>the record and each EML document validate against their schemas (fails)</td>
+</tr>
+<tr class="even">
+<td><code>observed_coverage()</code></td>
+<td>each dataset’s temporal and spatial extent, measured from the data — never typed (report)</td>
+</tr>
+</tbody>
+</table>
+<p>For v2026.09.06 the consumer-contract suite ran 73 queries: <strong>69 passed</strong>, 0 failed, 4 skipped (<code>test_results.json</code>).</p>
+<p>A release that passes is uploaded, tested once more from the bucket by <code>test_release.qmd</code>, and only then promoted; the read-only consumers (the Explorer, ERDDAP, the apps) are refreshed afterwards. A <strong>staging</strong> run exercises the whole path under a separate prefix without touching the promoted release or the shared object store.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,4 +2685,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/releases.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/releases.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

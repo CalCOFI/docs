@@ -133,6 +133,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
+
 
 </head>
 
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,8 +568,18 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-shared-artifacts" id="toc-the-shared-artifacts" class="nav-link active" data-scroll-target="#the-shared-artifacts"><span class="header-section-number">13.1</span> The shared artifacts</a></li>
+  <li><a href="#the-five-steps" id="toc-the-five-steps" class="nav-link" data-scroll-target="#the-five-steps"><span class="header-section-number">13.2</span> The five steps</a></li>
+  <li><a href="#staging-without-releasing" id="toc-staging-without-releasing" class="nav-link" data-scroll-target="#staging-without-releasing"><span class="header-section-number">13.3</span> Staging without releasing</a></li>
+  <li><a href="#rules-that-fell-out-of-doing-it-sixteen-times" id="toc-rules-that-fell-out-of-doing-it-sixteen-times" class="nav-link" data-scroll-target="#rules-that-fell-out-of-doing-it-sixteen-times"><span class="header-section-number">13.4</span> Rules that fell out of doing it sixteen times</a></li>
+  <li><a href="#how-a-question-reaches-its-provider" id="toc-how-a-question-reaches-its-provider" class="nav-link" data-scroll-target="#how-a-question-reaches-its-provider"><span class="header-section-number">13.5</span> How a question reaches its provider</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/ingest-loop.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -594,22 +604,86 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>The loop the data team runs to bring a dataset in — explore, metadata, ingest, validate, release — the artifacts each step writes, what validation checks, how a dataset can be staged without being released, and how a question reaches its provider.</p>
-</div>
-</div>
+<p>For the data team, and for anyone who will bring a dataset into the integrated database. The work is a loop of five steps with a person at every hand-off; each step is a Claude Code <em>skill</em> in <a href="https://github.com/CalCOFI/workflows">CalCOFI/workflows</a> (<code>.claude/skills/</code>, with the runbook beside them) that scaffolds the artifacts and writes its stage into the shared trackers, so the loop documents itself. The provider-facing side of the same loop — what a provider sees and edits — is <a href="./metadata.html">Metadata &amp; the ingest loop</a>.</p>
+<pre><code>/explore-dataset  →  /generate-metadata  →  /ingest-new  →  run the notebook  →  /validate-ingest  →  release_database.qmd</code></pre>
+<section id="the-shared-artifacts" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="the-shared-artifacts"><span class="header-section-number">13.1</span> The shared artifacts</h2>
+<p>Everything a step produces lands in a registry or a sidecar that the next step reads; nothing is typed twice.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>artifact</th>
+<th>role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>metadata/field_dictionary.csv</code></td>
+<td>the standard column names, types and units a new dataset conforms to; authored in <code>libs/build_field_dictionary.R</code> (<a href="./naming.html">Naming conventions</a>)</td>
+</tr>
+<tr class="even">
+<td><code>metadata/measurement_type.csv</code></td>
+<td>the vocabulary of measured quantities with their physical bounds; read with <code>calcofi4db::read_measurement_type()</code>, appended with <code>register_measurement_types()</code> — never a bare <code>write_csv()</code>, which ships the string <code>"NA"</code></td>
+</tr>
+<tr class="odd">
+<td><code>metadata/{provider}/{dataset}/tbls_redefine.csv</code>, <code>flds_redefine.csv</code></td>
+<td>the crosswalk from the source’s tables and columns to the standard names, with descriptions and units</td>
+</tr>
+<tr class="even">
+<td><code>metadata/{provider}/{dataset}/dataset_meta.yml</code></td>
+<td>the descriptive metadata — abstract, methods, creators, citation, licence, contact — that the provider edits through their Sheet</td>
+</tr>
+<tr class="odd">
+<td><code>metadata/{provider}/{dataset}/questions.csv</code></td>
+<td>every question for the provider, with a durable <code>id</code>, a short <code>label</code>, a <code>status</code> (<code>open</code> · <code>proposed</code> · <code>answered</code> · <code>wontfix</code>) and a <code>priority</code>; read with <code>read_questions()</code></td>
+</tr>
+<tr class="even">
+<td><code>metadata/dataset_status.csv</code></td>
+<td>one row per dataset; each step writes its stage column</td>
+</tr>
+<tr class="odd">
+<td><code>metadata/relationships_cross.csv</code></td>
+<td>the foreign keys that cross datasets; every edge is measured at release (<a href="./keys.html">Keys and integrity</a>)</td>
+</tr>
+<tr class="even">
+<td><code>data/parquet/{provider}_{dataset}/</code></td>
+<td>the ingest’s JSON sidecars — <code>manifest.json</code>, <code>metadata.json</code>, <code>relationships.json</code> — tracked in git; the parquet itself stages outside the repo and mirrors to the bucket</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-five-steps" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="the-five-steps"><span class="header-section-number">13.2</span> The five steps</h2>
+<ol type="1">
+<li><strong>Explore</strong> — <code>/explore-dataset {path|url}</code> profiles the source: structure, coverage, the columns that look like keys or standard fields (matched against the dictionary), the provider, whether to ingest or only to publish. It <strong>seeds <code>questions.csv</code></strong> from what the profile cannot answer.</li>
+<li><strong>Metadata</strong> — <code>/generate-metadata {provider} {dataset}</code> scaffolds the two crosswalk files, pre-filling the standard names from the dictionary (the dictionary wins: <code>lat_dec</code> → <code>latitude</code>), flags the columns it cannot place as new standard fields or new measurement types, and registers the dataset’s key, category and descriptive sidecar.</li>
+<li><strong>Ingest</strong> — <code>/ingest-new {provider} {dataset}</code> scaffolds <code>ingest_{provider}_{dataset}.qmd</code> from the template, with the questions section at the end. The notebook reads the source, applies the crosswalk, keys every event to its cruise by date span (<code>resolve_cruise_key()</code>, never by event month), keeps the provider’s own identifiers as columns, and <strong>projects its tables into the core family</strong> — <code>sample</code>, <code>obs</code>, <code>obs_attribute</code>, <code>sample_measurement</code>, and the taxa references — with the generic <code>append_*()</code> helpers. The projection SQL lives in the notebook, not in the package, so a new dataset never edits shared code. Every notebook ends the same way: <code>write_parquet_outputs()</code>, <code>build_metadata_json()</code>, <code>sync_to_gcs()</code>.</li>
+<li><strong>Validate</strong> — after the notebook runs, <code>/validate-ingest {provider} {dataset}</code> checks keys, nulls, ranges, duplicates, the summary tables, the schema against the dictionary, the declared measurement bounds, and that no <code>blocker</code> question is open. Every finding is either fixed or becomes a <code>proposed</code> question with the finding as its context; an undeclared bound is a finding, not a pass.</li>
+<li><strong>Release</strong> — <code>release_database.qmd</code> discovers the new dataset’s sidecars on its own, merges its relationships, assembles the core in memory, runs the gates (<a href="./releases.html">Releases</a>), and freezes. <code>test_release.qmd</code> then runs the consumer contract against the uploaded release and promotes <code>latest.txt</code> only when it passes.</li>
+</ol>
+</section>
+<section id="staging-without-releasing" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="staging-without-releasing"><span class="header-section-number">13.3</span> Staging without releasing</h2>
+<p>A dataset with open blocker questions sets <code>in_release: false</code> in its notebook’s <code>calcofi:</code> block. It still runs in the pipeline and writes its full outputs, but every release-side step skips it — the table registry, the core union, the <code>dataset</code> table, the diagram, the merged sidecars — until the flag flips. Two things do not follow automatically: a new measurement type it introduces is staged in its own <code>measurement_type_new.csv</code> rather than the shared registry, and any upload to the public bucket is gated behind a local flag if publication itself is unsettled.</p>
+</section>
+<section id="rules-that-fell-out-of-doing-it-sixteen-times" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="rules-that-fell-out-of-doing-it-sixteen-times"><span class="header-section-number">13.4</span> Rules that fell out of doing it sixteen times</h2>
+<ul>
+<li><strong>Key events to cruises by date span, never by calendar month.</strong> A cruise straddles a month boundary routinely and the neighbouring month is usually a real cruise of the same ship; the month rule moved thousands of casts onto the wrong cruise with no key ever failing.</li>
+<li><strong>The provider’s identifiers are columns.</strong> A UUID, a cast counter, a station id: keep it, typed, beside the natural key. Never drop a source key as “derivable” — the bottle ingest did, and that was the bug.</li>
+<li><strong>Declare what you publish, and only the core.</strong> No per-dataset source table reaches the release; where a source column matters, give it a home in the core rather than shipping the source table to carry it.</li>
+<li><strong>Bounds are physical, not observed.</strong> Declare what is possible, never the range you saw; enforcement is a separate, explicit deletion.</li>
+<li><strong>Coverage is measured, never asserted.</strong> Do not type a dataset’s years or extent into its metadata; the release measures both.</li>
+<li><strong>Every question is pre-answered where the repo can answer it.</strong> A <code>proposed</code> row carries the answer we built; the provider confirms a solution rather than being handed a problem.</li>
+<li><strong>A shared registry is written with <code>na = ""</code>.</strong> The default writes the string <code>"NA"</code>, which is invisible from R and reaches the release as a value.</li>
+</ul>
+</section>
+<section id="how-a-question-reaches-its-provider" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="how-a-question-reaches-its-provider"><span class="header-section-number">13.5</span> How a question reaches its provider</h2>
+<p>Each provider organization has one Google Sheet, generated from git and pulled back into it: a tab per dataset for its questions, a <code>metadata</code> tab for the descriptive sidecar, and — on the CalCOFI Sheet — the <code>holdings</code> triage board for datasets not yet ingested. The data team runs <code>push</code> to regenerate the tabs and <code>pull</code> to bring answers back; both are dry runs until told otherwise, and <code>pull</code> writes only the four answer columns. When a batch is ready, one email is drafted from the same rows. <a href="./metadata.html">Metadata &amp; the ingest loop</a> says what the provider sees.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,4 +1116,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/ingest-loop.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/ingest-loop.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

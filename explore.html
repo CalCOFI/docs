@@ -133,6 +133,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
+
 
 </head>
 
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -648,23 +648,23 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
 </figcaption>
 <div aria-describedby="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="zhcrloivpz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zhcrloivpz table {
+<div id="sxmgigafqw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sxmgigafqw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zhcrloivpz thead, #zhcrloivpz tbody, #zhcrloivpz tfoot, #zhcrloivpz tr, #zhcrloivpz td, #zhcrloivpz th {
+#sxmgigafqw thead, #sxmgigafqw tbody, #sxmgigafqw tfoot, #sxmgigafqw tr, #sxmgigafqw td, #sxmgigafqw th {
   border-style: none;
 }
 
-#zhcrloivpz p {
+#sxmgigafqw p {
   margin: 0;
   padding: 0;
 }
 
-#zhcrloivpz .gt_table {
+#sxmgigafqw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -690,12 +690,12 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-left-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_caption {
+#sxmgigafqw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zhcrloivpz .gt_title {
+#sxmgigafqw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -707,7 +707,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-width: 0;
 }
 
-#zhcrloivpz .gt_subtitle {
+#sxmgigafqw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -719,7 +719,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-top-width: 0;
 }
 
-#zhcrloivpz .gt_heading {
+#sxmgigafqw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -731,13 +731,13 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_bottom_border {
+#sxmgigafqw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_col_headings {
+#sxmgigafqw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -752,7 +752,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_col_heading {
+#sxmgigafqw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -772,7 +772,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#zhcrloivpz .gt_column_spanner_outer {
+#sxmgigafqw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -784,15 +784,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 4px;
 }
 
-#zhcrloivpz .gt_column_spanner_outer:first-child {
+#sxmgigafqw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zhcrloivpz .gt_column_spanner_outer:last-child {
+#sxmgigafqw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zhcrloivpz .gt_column_spanner {
+#sxmgigafqw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -804,11 +804,11 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   width: 100%;
 }
 
-#zhcrloivpz .gt_spanner_row {
+#sxmgigafqw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zhcrloivpz .gt_group_heading {
+#sxmgigafqw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -834,7 +834,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   text-align: left;
 }
 
-#zhcrloivpz .gt_empty_group_heading {
+#sxmgigafqw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -849,15 +849,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: middle;
 }
 
-#zhcrloivpz .gt_from_md > :first-child {
+#sxmgigafqw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zhcrloivpz .gt_from_md > :last-child {
+#sxmgigafqw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zhcrloivpz .gt_row {
+#sxmgigafqw .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -876,7 +876,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#zhcrloivpz .gt_stub {
+#sxmgigafqw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -889,7 +889,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#zhcrloivpz .gt_stub_row_group {
+#sxmgigafqw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -903,15 +903,15 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: top;
 }
 
-#zhcrloivpz .gt_row_group_first td {
+#sxmgigafqw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zhcrloivpz .gt_row_group_first th {
+#sxmgigafqw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zhcrloivpz .gt_summary_row {
+#sxmgigafqw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -921,16 +921,16 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#zhcrloivpz .gt_first_summary_row {
+#sxmgigafqw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_first_summary_row.thick {
+#sxmgigafqw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zhcrloivpz .gt_last_summary_row {
+#sxmgigafqw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -940,7 +940,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_grand_summary_row {
+#sxmgigafqw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -950,7 +950,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#zhcrloivpz .gt_first_grand_summary_row {
+#sxmgigafqw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -960,7 +960,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-top-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_last_grand_summary_row_top {
+#sxmgigafqw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -970,11 +970,11 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_striped {
+#sxmgigafqw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zhcrloivpz .gt_table_body {
+#sxmgigafqw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -983,7 +983,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_footnotes {
+#sxmgigafqw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -997,7 +997,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_footnote {
+#sxmgigafqw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1006,7 +1006,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#zhcrloivpz .gt_sourcenotes {
+#sxmgigafqw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1020,7 +1020,7 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#zhcrloivpz .gt_sourcenote {
+#sxmgigafqw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1028,72 +1028,72 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#zhcrloivpz .gt_left {
+#sxmgigafqw .gt_left {
   text-align: left;
 }
 
-#zhcrloivpz .gt_center {
+#sxmgigafqw .gt_center {
   text-align: center;
 }
 
-#zhcrloivpz .gt_right {
+#sxmgigafqw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zhcrloivpz .gt_font_normal {
+#sxmgigafqw .gt_font_normal {
   font-weight: normal;
 }
 
-#zhcrloivpz .gt_font_bold {
+#sxmgigafqw .gt_font_bold {
   font-weight: bold;
 }
 
-#zhcrloivpz .gt_font_italic {
+#sxmgigafqw .gt_font_italic {
   font-style: italic;
 }
 
-#zhcrloivpz .gt_super {
+#sxmgigafqw .gt_super {
   font-size: 65%;
 }
 
-#zhcrloivpz .gt_footnote_marks {
+#sxmgigafqw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zhcrloivpz .gt_asterisk {
+#sxmgigafqw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zhcrloivpz .gt_indent_1 {
+#sxmgigafqw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zhcrloivpz .gt_indent_2 {
+#sxmgigafqw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zhcrloivpz .gt_indent_3 {
+#sxmgigafqw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zhcrloivpz .gt_indent_4 {
+#sxmgigafqw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zhcrloivpz .gt_indent_5 {
+#sxmgigafqw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zhcrloivpz .katex-display {
+#sxmgigafqw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zhcrloivpz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sxmgigafqw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1118,16 +1118,6 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
 <td class="gt_row gt_left" headers="description">Cross-shelf temperature, salinity, oxygen, density and fluorescence sections along every CalCOFI line, for every cruise since 1993 — drawn nearshore to offshore with no station picking, and mapped so you can see where each transect is. Opens on the anomaly against each station's day-of-year climatology (warmer or colder than usual, and by how much), with the measured value one click away. Flags each cruise's processing stage, and shows the uncorrected sensor series on cruises whose bottle merge has not run.</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Product"><span style="white-space: pre;"><a href="https://app.calcofi.io/cruise/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Cruise Explorer</a></span></td>
-<td class="gt_row gt_left" headers="Status">live</td>
-<td class="gt_row gt_left" headers="description">Cross-dataset observation explorer — compare coverage across cruises, datasets and depths, with shareable deep-link URLs.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Product"><span style="white-space: pre;"><a href="https://app.calcofi.io/hex/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Hexagon Explorer</a></span></td>
-<td class="gt_row gt_left" headers="Status">live</td>
-<td class="gt_row gt_left" headers="description">Explore decades of fish larvae and oceanographic bottle data together — filter by taxa, depth and season over dynamic hexagon maps, time series and depth profiles.</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="Product"><span style="white-space: pre;"><a href="https://app.calcofi.io/pollutants/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Pollutants Explorer</a></span></td>
 <td class="gt_row gt_left" headers="Status">live</td>
 <td class="gt_row gt_left" headers="description">Map pollutants in the Southern California Bight from the Regional Monitoring Program via SCCWRP.</td>
@@ -1141,6 +1131,16 @@ Table&nbsp;1.1: The applications on calcofi.io besides the Explorer, from the la
 <td class="gt_row gt_left" headers="Product"><span style="white-space: pre;"><a href="https://calcofi.io/explore/?lens=contour&amp;var=temperature" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Contour Explorer</a></span></td>
 <td class="gt_row gt_left" headers="Status">superseded by CalCOFI Explorer</td>
 <td class="gt_row gt_left" headers="description">Visualize and download CalCOFI oceanographic data in map, time-series and depth-profile views.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Product"><span style="white-space: pre;"><a href="https://app.calcofi.io/cruise/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Cruise Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Status">superseded by CalCOFI Explorer</td>
+<td class="gt_row gt_left" headers="description">Cross-dataset observation explorer — compare coverage across cruises, datasets and depths, with shareable deep-link URLs. Superseded by the Explorer's cruises lens (Ben, 2026-09-08); kept serving.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Product"><span style="white-space: pre;"><a href="https://app.calcofi.io/hex/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">Hexagon Explorer</a></span></td>
+<td class="gt_row gt_left" headers="Status">superseded by CalCOFI Explorer</td>
+<td class="gt_row gt_left" headers="description">Explore decades of fish larvae and oceanographic bottle data together — filter by taxa, depth and season over dynamic hexagon maps, time series and depth profiles. Superseded by the Explorer's hexagons lens (Ben, 2026-09-08); kept serving.</td>
 </tr>
 </tbody>
 </table>
@@ -1163,23 +1163,23 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
 </figcaption>
 <div aria-describedby="tbl-students-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="udtbqlcudf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#udtbqlcudf table {
+<div id="fiwisksmne" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fiwisksmne table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#udtbqlcudf thead, #udtbqlcudf tbody, #udtbqlcudf tfoot, #udtbqlcudf tr, #udtbqlcudf td, #udtbqlcudf th {
+#fiwisksmne thead, #fiwisksmne tbody, #fiwisksmne tfoot, #fiwisksmne tr, #fiwisksmne td, #fiwisksmne th {
   border-style: none;
 }
 
-#udtbqlcudf p {
+#fiwisksmne p {
   margin: 0;
   padding: 0;
 }
 
-#udtbqlcudf .gt_table {
+#fiwisksmne .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1205,12 +1205,12 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-left-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_caption {
+#fiwisksmne .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#udtbqlcudf .gt_title {
+#fiwisksmne .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1222,7 +1222,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-width: 0;
 }
 
-#udtbqlcudf .gt_subtitle {
+#fiwisksmne .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1234,7 +1234,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-top-width: 0;
 }
 
-#udtbqlcudf .gt_heading {
+#fiwisksmne .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1246,13 +1246,13 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_bottom_border {
+#fiwisksmne .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_col_headings {
+#fiwisksmne .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1267,7 +1267,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_col_heading {
+#fiwisksmne .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1287,7 +1287,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#udtbqlcudf .gt_column_spanner_outer {
+#fiwisksmne .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1299,15 +1299,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 4px;
 }
 
-#udtbqlcudf .gt_column_spanner_outer:first-child {
+#fiwisksmne .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#udtbqlcudf .gt_column_spanner_outer:last-child {
+#fiwisksmne .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#udtbqlcudf .gt_column_spanner {
+#fiwisksmne .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1319,11 +1319,11 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   width: 100%;
 }
 
-#udtbqlcudf .gt_spanner_row {
+#fiwisksmne .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#udtbqlcudf .gt_group_heading {
+#fiwisksmne .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1349,7 +1349,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   text-align: left;
 }
 
-#udtbqlcudf .gt_empty_group_heading {
+#fiwisksmne .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1364,15 +1364,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   vertical-align: middle;
 }
 
-#udtbqlcudf .gt_from_md > :first-child {
+#fiwisksmne .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#udtbqlcudf .gt_from_md > :last-child {
+#fiwisksmne .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#udtbqlcudf .gt_row {
+#fiwisksmne .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1391,7 +1391,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#udtbqlcudf .gt_stub {
+#fiwisksmne .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1404,7 +1404,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#udtbqlcudf .gt_stub_row_group {
+#fiwisksmne .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1418,15 +1418,15 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   vertical-align: top;
 }
 
-#udtbqlcudf .gt_row_group_first td {
+#fiwisksmne .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#udtbqlcudf .gt_row_group_first th {
+#fiwisksmne .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#udtbqlcudf .gt_summary_row {
+#fiwisksmne .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1436,16 +1436,16 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#udtbqlcudf .gt_first_summary_row {
+#fiwisksmne .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_first_summary_row.thick {
+#fiwisksmne .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#udtbqlcudf .gt_last_summary_row {
+#fiwisksmne .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1455,7 +1455,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_grand_summary_row {
+#fiwisksmne .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1465,7 +1465,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#udtbqlcudf .gt_first_grand_summary_row {
+#fiwisksmne .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1475,7 +1475,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-top-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_last_grand_summary_row_top {
+#fiwisksmne .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1485,11 +1485,11 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_striped {
+#fiwisksmne .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#udtbqlcudf .gt_table_body {
+#fiwisksmne .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1498,7 +1498,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_footnotes {
+#fiwisksmne .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1512,7 +1512,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_footnote {
+#fiwisksmne .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1521,7 +1521,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#udtbqlcudf .gt_sourcenotes {
+#fiwisksmne .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1535,7 +1535,7 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#udtbqlcudf .gt_sourcenote {
+#fiwisksmne .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1543,72 +1543,72 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#udtbqlcudf .gt_left {
+#fiwisksmne .gt_left {
   text-align: left;
 }
 
-#udtbqlcudf .gt_center {
+#fiwisksmne .gt_center {
   text-align: center;
 }
 
-#udtbqlcudf .gt_right {
+#fiwisksmne .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#udtbqlcudf .gt_font_normal {
+#fiwisksmne .gt_font_normal {
   font-weight: normal;
 }
 
-#udtbqlcudf .gt_font_bold {
+#fiwisksmne .gt_font_bold {
   font-weight: bold;
 }
 
-#udtbqlcudf .gt_font_italic {
+#fiwisksmne .gt_font_italic {
   font-style: italic;
 }
 
-#udtbqlcudf .gt_super {
+#fiwisksmne .gt_super {
   font-size: 65%;
 }
 
-#udtbqlcudf .gt_footnote_marks {
+#fiwisksmne .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#udtbqlcudf .gt_asterisk {
+#fiwisksmne .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#udtbqlcudf .gt_indent_1 {
+#fiwisksmne .gt_indent_1 {
   text-indent: 5px;
 }
 
-#udtbqlcudf .gt_indent_2 {
+#fiwisksmne .gt_indent_2 {
   text-indent: 10px;
 }
 
-#udtbqlcudf .gt_indent_3 {
+#fiwisksmne .gt_indent_3 {
   text-indent: 15px;
 }
 
-#udtbqlcudf .gt_indent_4 {
+#fiwisksmne .gt_indent_4 {
   text-indent: 20px;
 }
 
-#udtbqlcudf .gt_indent_5 {
+#fiwisksmne .gt_indent_5 {
   text-indent: 25px;
 }
 
-#udtbqlcudf .katex-display {
+#fiwisksmne .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#udtbqlcudf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fiwisksmne div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2105,8 +2105,8 @@ Table&nbsp;1.2: Student contributions, from the landing page’s product cards.
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data-access.html" class="pagination-link" aria-label="Data Access">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data-access.html" class="pagination-link" aria-label="Access the data">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

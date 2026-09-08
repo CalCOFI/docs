@@ -133,6 +133,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
+
 
 </head>
 
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,8 +568,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-shape-of-a-good-dataset" id="toc-the-shape-of-a-good-dataset" class="nav-link active" data-scroll-target="#the-shape-of-a-good-dataset"><span class="header-section-number">8.1</span> The shape of a good dataset</a></li>
+  <li><a href="#mandatory-what-when-where" id="toc-mandatory-what-when-where" class="nav-link" data-scroll-target="#mandatory-what-when-where"><span class="header-section-number">8.2</span> Mandatory: what, when, where</a></li>
+  <li><a href="#optional-what-makes-it-calcofi" id="toc-optional-what-makes-it-calcofi" class="nav-link" data-scroll-target="#optional-what-makes-it-calcofi"><span class="header-section-number">8.3</span> Optional: what makes it CalCOFI</a></li>
+  <li><a href="#best-practice-what-makes-it-durable" id="toc-best-practice-what-makes-it-durable" class="nav-link" data-scroll-target="#best-practice-what-makes-it-durable"><span class="header-section-number">8.4</span> Best practice: what makes it durable</a></li>
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"><span class="header-section-number">8.5</span> An example</a></li>
+  <li><a href="#what-happens-next" id="toc-what-happens-next" class="nav-link" data-scroll-target="#what-happens-next"><span class="header-section-number">8.6</span> What happens next</a></li>
+  <li><a href="#reconciled-with-the-database" id="toc-reconciled-with-the-database" class="nav-link" data-scroll-target="#reconciled-with-the-database"><span class="header-section-number">8.7</span> Reconciled with the database</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/provide.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -594,22 +606,230 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>The guide for a data provider, current or future: who it is for and what it is for; the fields that are mandatory (what, when, where), optional and best practice — a stable identifier per row, a UUID if you already run a database, a license, a citation, a contact; an example table with its columns; and what happens next once a dataset arrives.</p>
+<div class="callout-body-container">
+<p><strong>Who this is for.</strong> Anyone who collects, curates or holds data from the CalCOFI region and would like it to be usable beside the rest — a program lab, a collaborating institution, a student project, an instrument group — whether the dataset already exists or is being designed. <strong>What it is for.</strong> To say, in one place, what a dataset needs to carry for the CalCOFI data team to integrate it: the few fields that are mandatory, the ones that make it more useful, and the practices that make it durable. It is <em>guidance for a provider</em>, not the database’s own rulebook — that is <a href="./naming.html">Naming conventions</a> — and it asks for less than the database keeps.</p>
 </div>
 </div>
+</div>
+<p>Drafted by Betty Huang with Erin Satterthwaite for the data management plan’s naming-conventions task (Task 12), reconciled against the database’s registries on 2026-09-08, and kept here as the record; the working copy stays a Google Doc until the guide is agreed.</p>
+<section id="the-shape-of-a-good-dataset" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="the-shape-of-a-good-dataset"><span class="header-section-number">8.1</span> The shape of a good dataset</h2>
+<p>A dataset CalCOFI can integrate answers three questions for every row: <strong>what</strong> was measured or counted, <strong>when</strong> and <strong>where</strong>. Everything else is context that makes the answer more useful. One row is one measurement or one count of one thing at one place and time; a spreadsheet with one column per variable is fine (the ingest turns it long), as long as each row is one event.</p>
+<p>Names are not the hard part — the data team maps your columns onto the standard names at ingest and keeps a crosswalk of what you called them (<a href="./naming.html#legacy-names-mapped">Naming conventions</a>). What cannot be recovered afterwards is a missing time zone, an undocumented unit, a count with no effort, or a species with no name that resolves. Those are the mandatory fields.</p>
+</section>
+<section id="mandatory-what-when-where" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="mandatory-what-when-where"><span class="header-section-number">8.2</span> Mandatory: what, when, where</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>field</th>
+<th>what we need</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>the quantity</strong></td>
+<td>what was measured or counted, in words, with its <strong>unit</strong> — one column per quantity, or one <code>variable</code> / <code>value</code> / <code>unit</code> triple</td>
+<td><code>temperature</code> in <code>degC</code>; <code>larvae</code> as a count per tow</td>
+</tr>
+<tr class="even">
+<td><strong>the time</strong></td>
+<td>date and time of the event in <strong>UTC</strong> (ISO 8601, <code>2019-02-06T23:48:00Z</code>), or a local clock time <em>and</em> the offset that was in effect</td>
+<td><code>2019-02-06T23:48:00Z</code></td>
+</tr>
+<tr class="odd">
+<td><strong>the place</strong></td>
+<td>latitude and longitude in <strong>decimal degrees</strong>, WGS 84, signed (south and west negative)</td>
+<td><code>33.48066, -117.769</code></td>
+</tr>
+<tr class="even">
+<td><strong>the depth</strong>, where it applies</td>
+<td>metres below the surface, positive down; a range (<code>depth_min</code>, <code>depth_max</code>) for a tow or a bin</td>
+<td><code>115.5</code>; <code>0 – 210</code></td>
+</tr>
+<tr class="odd">
+<td><strong>the organism</strong>, for a biological count</td>
+<td>a scientific name, and where you have it an identifier from WoRMS (<code>AphiaID</code>), ITIS or GBIF; a life stage if the count is stage-specific</td>
+<td><code>Sardinops sagax</code>, WoRMS <code>217452</code>, <code>larva</code></td>
+</tr>
+<tr class="even">
+<td><strong>the effort</strong>, for a count</td>
+<td>what the count is per: the volume filtered, the area or time surveyed, the fraction of the sample sorted</td>
+<td><code>467.3 m³</code>; <code>0.48</code> sorted</td>
+</tr>
+<tr class="odd">
+<td><strong>who made it</strong></td>
+<td>the organization that holds and can license the data, a contact, and how you want it cited</td>
+<td><code>Scripps Institution of Oceanography</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="optional-what-makes-it-calcofi" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="optional-what-makes-it-calcofi"><span class="header-section-number">8.3</span> Optional: what makes it CalCOFI</h2>
+<p>These let the data team join your rows to everything else, rather than only place them on a map.</p>
+<ul>
+<li><strong>The cruise</strong> — the cruise designation as your records carry it (<code>1902SR</code>, <code>CalCOFI 2019-02</code>, a NOAA cruise id). The database keys every event to a cruise by its date span, so a designation is a check, not a requirement.</li>
+<li><strong>The station</strong> — CalCOFI line and station where the event was on the grid (<code>93.3</code>, <code>26.4</code>), or your own station name where it was not.</li>
+<li><strong>The gear and the tow</strong> — the net or instrument (a CalCOFI tow-type code such as <code>CB</code> for the standard bongo, or a description), the tow number within the cruise, the net side.</li>
+<li><strong>Quality flags</strong> — your own vocabulary, as long as it is written down; the database keeps every flag exactly as you assign it and never re-interprets it.</li>
+<li><strong>Precision and method</strong> — the significant digits of a measurement, the analytical method, the processing stage (preliminary, final).</li>
+</ul>
+</section>
+<section id="best-practice-what-makes-it-durable" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="best-practice-what-makes-it-durable"><span class="header-section-number">8.4</span> Best practice: what makes it durable</h2>
+<ul>
+<li><strong>A stable identifier for every row you might refer to again</strong> — a cast number, a sample id, a net id — that stays the same across the versions of your data. If you run a database, a UUID for each cruise, station, tow or net is the best form of this, and the integrated database keeps it as a column beside its own keys; it is never required. A dataset with no identifiers at all is still ingestible: the database mints its own, from your rows.</li>
+<li><strong>A licence</strong> — the terms under which the data may be reused (<code>CC-BY-4.0</code> is the CalCOFI default; <code>CC0</code>, a public-domain statement or your institution’s terms are all fine as long as they are stated). An unstated licence is the single most common reason a dataset cannot be published onward.</li>
+<li><strong>A citation and a DOI</strong> — how you want to be credited; if your data already has a DOI (at EDI, NCEI, Zenodo, a library repository), that is the citation the integrated database carries.</li>
+<li><strong>A data dictionary</strong> — one line per column: what it is, its unit, how a missing value is written (<code>NA</code>, blank, <code>-99</code>; never a plausible number).</li>
+<li><strong>Time zones and coordinate systems stated once</strong>, at the top, even when they are the standard ones.</li>
+<li><strong>Versions, not edits</strong> — when the data change, a new file with a date, not a corrected copy under the same name.</li>
+</ul>
+</section>
+<section id="an-example" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="an-example"><span class="header-section-number">8.5</span> An example</h2>
+<p>A net-tow dataset that carries everything above, as one row per taxon per tow:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>cruise</th>
+<th>line</th>
+<th>station</th>
+<th>tow_number</th>
+<th>tow_type</th>
+<th>datetime_utc</th>
+<th>latitude</th>
+<th>longitude</th>
+<th>depth_max_m</th>
+<th>volume_sampled_m3</th>
+<th>prop_sorted</th>
+<th>scientific_name</th>
+<th>worms_id</th>
+<th>life_stage</th>
+<th>count</th>
+<th>qual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1902SR</td>
+<td>93.3</td>
+<td>26.4</td>
+<td>12</td>
+<td>CB</td>
+<td>2019-02-06T23:48:00Z</td>
+<td>33.48066</td>
+<td>-117.769</td>
+<td>210</td>
+<td>467.3</td>
+<td>0.48</td>
+<td>Sardinops sagax</td>
+<td>217452</td>
+<td>larva</td>
+<td>42</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The data team’s ingest would map <code>cruise</code> to <code>cruise_key</code> (<code>2019-02-33P4</code> after resolving the ship), <code>line</code> and <code>station</code> to <code>site_key</code> (<code>093.3 026.4</code>), the tow to a <code>sample</code> row with <code>tow_type</code> <code>CB</code>, each count to an <code>obs_bio</code> row with <code>taxon_key</code> <code>worms:217452</code> and <code>life_stage</code> <code>larva</code>, <code>volume_sampled_m3</code> and <code>prop_sorted</code> to <code>sample_measurement</code>, and keep your <code>tow_number</code> beside them. Nothing in your file changes.</p>
+</section>
+<section id="what-happens-next" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="what-happens-next"><span class="header-section-number">8.6</span> What happens next</h2>
+<ol type="1">
+<li><strong>Explore</strong> — the data team profiles the file and seeds a list of questions from what it cannot answer (a unit, a code, an ambiguous date).</li>
+<li><strong>You get one Sheet</strong> — one tab of questions per dataset, most already carrying a <em>proposed</em> answer for you to confirm, and a <code>metadata</code> tab for the abstract, methods, creators, licence and citation (<a href="./metadata.html">Metadata &amp; the ingest loop</a>).</li>
+<li><strong>Ingest and validate</strong> — one reproducible notebook turns the file into the shared schema; every finding is fixed or becomes a question.</li>
+<li><strong>Release</strong> — the dataset joins the next frozen release with a DOI, gets its page at <code>calcofi.io/datasets/{key}/</code>, its citation on every figure drawn from it, and — where you want it — its way onward to ERDDAP, OBIS, EDI or the archives (<a href="./portals.html">Portals</a>).</li>
+</ol>
+<p>Write to <strong>data@calcofi.io</strong> to start.</p>
+</section>
+<section id="reconciled-with-the-database" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="reconciled-with-the-database"><span class="header-section-number">8.7</span> Reconciled with the database</h2>
+<p>The guide’s first drafts and the database’s registries disagreed on a handful of names. The registry is the record, so the guide follows it; each is noted here so nobody reintroduces the older form.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>the draft said</th>
+<th>the registry has</th>
+<th>why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ship_code</code> for the NODC code, <code>ship_key</code> for a two-letter CalCOFI code</td>
+<td><strong><code>ship_key</code> <em>is</em> the NODC code</strong> (<code>31JD</code>); there is no <code>ship_code</code></td>
+<td>the four-character NODC code is the primary key of <code>ship</code> and the suffix of every <code>cruise_key</code></td>
+</tr>
+<tr class="even">
+<td><code>depth</code></td>
+<td><strong><code>depth_m</code></strong>, <code>depth_min_m</code>, <code>depth_max_m</code></td>
+<td>units are suffixes on every measured column</td>
+</tr>
+<tr class="odd">
+<td><code>datetime_utc</code>, <code>datetime_local</code>, <code>utc_offset</code></td>
+<td><strong><code>datetime_start_utc</code></strong> / <code>datetime_end_utc</code> in the dictionary; <code>datetime</code> on the released <code>sample</code></td>
+<td>an event has a span; local time is recoverable from UTC and the position, never the reverse</td>
+</tr>
+<tr class="even">
+<td>larval stages as codes (<code>YOLK</code>, <code>PREF</code>, <code>FLEX</code>, <code>TRNS</code>, <code>POST</code>)</td>
+<td><strong><code>life_stage</code></strong> as words from the registry (<code>egg</code>, <code>larva</code>, …), with Darwin Core and NERC ids where exact</td>
+<td>one vocabulary for every dataset; the ichthyoplankton stage codes map onto it at ingest</td>
+</tr>
+<tr class="odd">
+<td><code>cruise_id</code> in the long form <code>1949-03-01-C-31CR</code></td>
+<td>an <strong>alias</strong> of <code>cruise_key</code> in the dictionary, not a field</td>
+<td>legacy names are kept in the crosswalk, not in the schema</td>
+</tr>
+<tr class="even">
+<td><code>M2</code> as the MOCNESS 10 m frame</td>
+<td>the registry names <code>M2</code> <strong>MOCNESS (3 m²)</strong> — to be checked against the source with SWFSC</td>
+<td>the gear registry is the record; if the source says otherwise the registry changes, not the guide</td>
+</tr>
+<tr class="odd">
+<td>no <code>OBLIQUE</code> gear</td>
+<td><strong><code>OBLIQUE</code></strong> — an oblique tow whose gear was not recorded</td>
+<td>the registry lists every code that appears in the data</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,4 +1262,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/provide.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/provide.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

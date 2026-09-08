@@ -8,7 +8,7 @@
 
 <meta name="description" content="Documentation for open-Source products at CalCOFI.io developed for California Cooperative Oceanic Fisheries Investigations (CalCOFI.org)">
 
-<title>Appendix C — Glossary – CalCOFI.io</title>
+<title>Appendix B — Glossary – CalCOFI.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,6 +132,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     document.addEventListener("cc:theme", function (e) { pushToQuarto(e.detail.theme); });   // (c) a brand toggle, if a page ever adds one
   });
 })();</script>
+
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
 
 
 </head>
@@ -307,7 +313,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./helpers.html">Appendices</a></li><li class="breadcrumb-item"><a href="./glossary.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html">Appendices</a></li><li class="breadcrumb-item"><a href="./glossary.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -575,9 +575,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./helpers.html">Appendices</a></li><li class="breadcrumb-item"><a href="./glossary.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html">Appendices</a></li><li class="breadcrumb-item"><a href="./glossary.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-glossary" class="quarto-section-identifier">Appendix C — Glossary</span></h1>
+<h1 class="title"><span id="sec-glossary" class="quarto-section-identifier">Appendix B — Glossary</span></h1>
 </div>
 
 
@@ -594,20 +594,34 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>The terms a reader trips on — cruise, cast, bottle, tow, net, site, line and station, grid cell, hexagon, realm, grain, measurement type, life stage, sample and observation, release, holding, sidecar, catalog, provider, dataset key — each ending with the chapter that says more.</p>
-</div>
-</div>
+<p>The words this book uses with a specific meaning, each ending with the chapter that says more.</p>
+<p><strong>bottle</strong> — a Niskin bottle closed at a depth during a cast; in the database a <code>sample</code> of type <code>bottle</code> under its <code>cast</code>, with the water-chemistry measurements taken from it in <code>obs_env</code>. → <a href="./db.html">The database</a></p>
+<p><strong>cast</strong> — one lowering of the CTD or the bottle rosette at a station; a root <code>sample</code> of type <code>cast</code> with bottles under it. → <a href="./ctd-qaqc.html">CTD QA/QC</a></p>
+<p><strong>catalog</strong> — <code>catalog.json</code>, the release’s manifest: every table, its rows and the parquet objects that hold it; the contract every reader resolves through. → <a href="./releases.html">Releases</a></p>
+<p><strong>core</strong> — the small family of tables every consumer reads — <code>sample</code>, <code>obs_bio</code>, <code>obs_env</code>, <code>obs_attribute</code>, <code>sample_measurement</code> and the references — that every dataset projects into. → <a href="./db.html">The database</a></p>
+<p><strong>cruise</strong> — one voyage of one ship; keyed <code>YYYY-MM-NODC</code> by the month SWFSC designates for it and the ship’s NODC code, never by the month an event fell in. → <a href="./keys.html">Keys and integrity</a></p>
+<p><strong>dataset key</strong> — <code>{provider}_{dataset}</code>, the name of everything about a dataset: its notebook, its metadata folder, its record, its page, the provenance stamp on every observation. → <a href="./naming.html">Naming conventions</a></p>
+<p><strong>grain</strong> — what one row stands for: a physical sampling event in <code>sample</code>, one measured value in <code>obs_env</code>, one taxon’s headline in <code>obs_bio</code>, one bin in <code>obs_attribute</code>. → <a href="./db.html">The database</a></p>
+<p><strong>grid cell</strong> — a cell of the CalCOFI station grid a sample falls in (<code>grid_key</code>); several real stations share one nearshore cell. → <a href="./keys.html">Keys and integrity</a></p>
+<p><strong>hexagon</strong> — an H3 cell; every observation carries its resolution-10 cell (<code>hex_id</code>) and coarser hexagons are computed from it. → <a href="./explore.html">Explore</a></p>
+<p><strong>holding</strong> — a dataset CalCOFI has or knows of but has not ingested; it has a page and a record but no rows. → <a href="./metadata.html">Metadata &amp; the ingest loop</a></p>
+<p><strong>ingest</strong> — the reproducible notebook that turns one source dataset into the shared schema. → <a href="./ingest-loop.html">Ingesting a dataset</a></p>
+<p><strong>life stage</strong> — the developmental stage of a counted organism, from a registered vocabulary with Darwin Core and NERC ids. → <a href="./naming.html">Naming conventions</a></p>
+<p><strong>line and station</strong> — CalCOFI’s survey grid: a line runs offshore from the coast, a station is a position along it; together the <code>site_key</code> (<code>093.3 026.4</code>). → <a href="./keys.html">Keys and integrity</a></p>
+<p><strong>measurement type</strong> — a registered measured quantity with its units and physical bounds; every <code>obs_env</code> row names one. → <a href="./naming.html">Naming conventions</a></p>
+<p><strong>net, tow</strong> — one deployment of a net (a tow) and each net on it; <code>sample</code> rows of type <code>tow</code> and <code>net</code> under a <code>site</code>, with the counts from the net in <code>obs_bio</code>. → <a href="./db.html">The database</a></p>
+<p><strong>observation</strong> — one measured or counted value at one place and time, in <code>obs_env</code> or <code>obs_bio</code>; <code>obs</code> is the two under one name. → <a href="./data-access.html">Access the data</a></p>
+<p><strong>provider</strong> — the organization that curates, holds and can license a dataset; never the portal that serves it. → <a href="./naming.html">Naming conventions</a></p>
+<p><strong>quality flag</strong> — a dataset’s own verdict on a value (<code>measurement_qual</code>), kept uninterpreted; <code>qual_ok</code> is the release’s reading of it. → <a href="./data-access.html">Access the data</a></p>
+<p><strong>realm</strong> — <code>bio</code> or <code>env</code>: whether an observation counts an organism or measures the water. → <a href="./db.html">The database</a></p>
+<p><strong>record</strong> — <code>datasets.json</code>, one entry per dataset generated at release, from which every portal surface is derived. → <a href="./portals.html">Portals</a></p>
+<p><strong>release</strong> — an immutable, versioned, cited copy of every table, cut every few weeks; <code>latest</code> is the promoted one. → <a href="./releases.html">Releases</a></p>
+<p><strong>root sample</strong> — a <code>sample</code> with no parent — a site, a cast, an underway record — and the <code>root_id</code> the browser objects join on. → <a href="./keys.html">Keys and integrity</a></p>
+<p><strong>sample</strong> — a physical sampling event of any kind, at its native grain, with its position, time and depth span, and its parent. → <a href="./db.html">The database</a></p>
+<p><strong>sidecar</strong> — a JSON or markdown file beside the parquet — the catalog, the metadata, the keys, the record, the notes — that describes the release and never needs the bytes to be read. → <a href="./releases.html">Releases</a></p>
+<p><strong>supplemental</strong> — a table hosted and catalogued but left out of the default set: the full-resolution CTD and meteorology series, the root-sample join twin. → <a href="./data-access.html">Access the data</a></p>
+<p><strong>taxon key</strong> — <code>worms:&lt;AphiaID&gt;</code>, or <code>itis:&lt;TSN&gt;</code> for birds: the accepted identifier of an organism in the authority that carries it. → <a href="./db.html">The database</a></p>
+<p><strong>working store</strong> — the CTD team’s PostgreSQL database: originals verbatim, flags beside them, feeding the next release but never read by consumers. → <a href="./ctd-qaqc.html">CTD QA/QC</a></p>
 
 
 
@@ -1027,13 +1041,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./api.html" class="pagination-link" aria-label="API">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span>
+      <a href="./api.html" class="pagination-link" aria-label="The retired API">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./refs.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -133,6 +133,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
+
 
 </head>
 
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,8 +568,21 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sources" id="toc-sources" class="nav-link active" data-scroll-target="#sources"><span class="header-section-number">16.1</span> Sources</a></li>
+  <li><a href="#the-pipeline" id="toc-the-pipeline" class="nav-link" data-scroll-target="#the-pipeline"><span class="header-section-number">16.2</span> The pipeline</a></li>
+  <li><a href="#the-release-store" id="toc-the-release-store" class="nav-link" data-scroll-target="#the-release-store"><span class="header-section-number">16.3</span> The release store</a></li>
+  <li><a href="#the-record-and-the-portals" id="toc-the-record-and-the-portals" class="nav-link" data-scroll-target="#the-record-and-the-portals"><span class="header-section-number">16.4</span> The record and the portals</a></li>
+  <li><a href="#the-products" id="toc-the-products" class="nav-link" data-scroll-target="#the-products"><span class="header-section-number">16.5</span> The products</a></li>
+  <li><a href="#the-working-store" id="toc-the-working-store" class="nav-link" data-scroll-target="#the-working-store"><span class="header-section-number">16.6</span> The working store</a></li>
+  <li><a href="#where-every-url-is-served-from" id="toc-where-every-url-is-served-from" class="nav-link" data-scroll-target="#where-every-url-is-served-from"><span class="header-section-number">16.7</span> Where every URL is served from</a></li>
+  <li><a href="#then-and-now" id="toc-then-and-now" class="nav-link" data-scroll-target="#then-and-now"><span class="header-section-number">16.8</span> Then and now</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/architecture.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -594,22 +607,160 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>CalCOFI.io is a <strong>federated</strong> system: the data stay with the organizations that collect them, one pipeline integrates a copy into a versioned database, and everything people use — the explorer, the packages, the dataset pages, the portals — reads that database rather than each other. This chapter walks the system end to end, names where every URL is served from, and sets the 2022 design beside the 2026 one. It is the documentation of the federated architecture and its access paths that the <a href="./dmp.html">data management plan</a> asks for under Task 14.</p>
+<div id="fig-architecture" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="diagrams/system.svg" class="cc-diagram nolightbox img-fluid figure-img">
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.1: The system along the phases of the plan: provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; the record and every product derive from the release; the CTD team’s working store stands beside it.
+</figcaption>
+</figure>
 </div>
+<section id="sources" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="sources"><span class="header-section-number">16.1</span> Sources</h2>
+<p>Providers’ files — spreadsheets, database exports, cast archives — live on a <strong>Google Shared Drive</strong> the program owns, in one folder per provider and dataset, and are mirrored by <code>rclone</code> to a bucket (<code>gs://calcofi-files/</code>) so a pipeline run never depends on a person’s Drive client. Drive keeps the archive as delivered; nothing is unzipped or edited there. Every ingest records which file, and which row of it, each value came from, and the record stamps when a source was last fetched (<a href="./metadata.html">Metadata &amp; the ingest loop</a>).</p>
+</section>
+<section id="the-pipeline" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="the-pipeline"><span class="header-section-number">16.2</span> The pipeline</h2>
+<p><a href="https://github.com/CalCOFI/workflows">CalCOFI/workflows</a> holds one Quarto notebook per dataset — <code>ingest_{provider}_{dataset}.qmd</code>, sixteen datasets today, plus the boundary layers and the ship reference — orchestrated by <code>targets</code> from the <code>calcofi:</code> block in each notebook’s front matter, with the engine in the <a href="https://calcofi.io/calcofi4db/">calcofi4db</a> R package. Each notebook writes its tables as parquet shards to a staging directory outside the repository (mirrored to <code>gs://calcofi-db/parquet/</code>) and its JSON sidecars — the manifest, the metadata, the keys — into the repository, where they are the reviewable record. <code>release_database.qmd</code> assembles every shard in memory, completes the references, runs the gates and freezes a release (<a href="./releases.html">Releases</a>); <code>test_release.qmd</code> tests the uploaded release and promotes it. The whole run is reproducible on a laptop or the server. → <a href="./ingest-loop.html">Ingesting a dataset</a></p>
+</section>
+<section id="the-release-store" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="the-release-store"><span class="header-section-number">16.3</span> The release store</h2>
+<p><code>gs://calcofi-db/ducklake/</code> is public and read over HTTPS. <code>releases/{version}/</code> holds each release’s sidecars; <code>tables/{table}/{content_hash}/…</code> holds the parquet objects, content-addressed and shared between versions; <code>releases/latest.txt</code> names the promoted version. Every reader resolves a table through its <code>catalog.json</code>; <code>storage.calcofi.io</code> is a browsable front door onto the same buckets that also redirects a legacy per-release path to its object. Each release is tagged and archived on Zenodo with its own DOI. → <a href="./data-access.html">Access the data</a>, <a href="./releases.html">Releases</a></p>
+</section>
+<section id="the-record-and-the-portals" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="the-record-and-the-portals"><span class="header-section-number">16.4</span> The record and the portals</h2>
+<p>At release, one record per dataset (<code>datasets.json</code>) and one EML document per dataset are generated from the ingest’s front matter, the descriptive sidecar the provider edits, the registries and the measured coverage. From those two files come the dataset pages at <a href="https://calcofi.io/datasets/">calcofi.io/datasets</a> with their JSON-LD and sitemap, the DCAT and STAC catalogs, the Darwin Core archives for OBIS, the EDI packages and ERDDAP’s own metadata — so a description written once reaches every portal, and a weekly observation asks each portal what it says now. → <a href="./portals.html">Portals</a>, <a href="./cite.html">Cite this data</a></p>
+</section>
+<section id="the-products" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="the-products"><span class="header-section-number">16.5</span> The products</h2>
+<p>Everything people use reads the release, and the same bytes:</p>
+<ul>
+<li>the <a href="https://calcofi.io/explore/"><strong>Explorer</strong></a>, a static site whose queries run in DuckDB inside the browser — six lenses, every view a URL;</li>
+<li>the <a href="https://calcofi.io/datasets/"><strong>dataset pages</strong></a>, the <a href="https://calcofi.io/db-schema/">schema browser</a> and the <a href="https://calcofi.io/db-query/">query site</a>, static sites over the release’s sidecars and objects;</li>
+<li><a href="https://calcofi.io/calcofi4r/"><strong>calcofi4r</strong></a> and <a href="https://calcofi.io/calcofi4py/"><strong>calcofi4py</strong></a>, which register every release table as a view and carry the matching, citation, quality and branding helpers;</li>
+<li><a href="https://erddap.calcofi.io/erddap/"><strong>erddap.calcofi.io</strong></a>, a CalCOFI-branded ERDDAP serving the release’s tables for the community that reads ERDDAP;</li>
+<li>the <strong>Shiny applications</strong> on the CalCOFI server (<code>app.calcofi.io/…</code>), the first generation of viewers, now superseded by the Explorer and kept serving.</li>
+</ul>
+<p>→ <a href="./explore.html">Explore</a>, <a href="./products.html">Products, brand and uptime</a></p>
+</section>
+<section id="the-working-store" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="the-working-store"><span class="header-section-number">16.6</span> The working store</h2>
+<p>Beside the read-only releases, the CTD team’s <strong>PostgreSQL</strong> database on the CalCOFI server (PostgreSQL 18, PostGIS, <code>pg_duckdb</code>) holds the cast archive verbatim and the team’s flag ledger, reached over SSH. It is never read by a consumer: the accepted flags are snapshotted nightly to the bucket and the next CTD ingest applies them, so the team’s judgement reaches the release through the pipeline like everything else. → <a href="./ctd-qaqc.html">CTD QA/QC</a>, <a href="./server-access.html">Server access</a></p>
+</section>
+<section id="where-every-url-is-served-from" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="where-every-url-is-served-from"><span class="header-section-number">16.7</span> Where every URL is served from</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>address</th>
+<th>what</th>
+<th>served by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>calcofi.io</code></td>
+<td>the landing page and the dataset catalog</td>
+<td>GitHub Pages (Jekyll, <code>CalCOFI/CalCOFI.github.io</code>)</td>
+</tr>
+<tr class="even">
+<td><code>calcofi.io/explore</code></td>
+<td>the Explorer</td>
+<td>GitHub Pages (Vite + DuckDB-WASM, <code>CalCOFI/explore</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>calcofi.io/docs</code></td>
+<td>this book</td>
+<td>GitHub Pages (Quarto, <code>CalCOFI/docs</code>)</td>
+</tr>
+<tr class="even">
+<td><code>calcofi.io/db-schema</code>, <code>/db-query</code></td>
+<td>the schema browser, the query site</td>
+<td>GitHub Pages (Jekyll)</td>
+</tr>
+<tr class="odd">
+<td><code>calcofi.io/workflows</code></td>
+<td>every notebook, rendered</td>
+<td>GitHub Pages (Quarto, <code>CalCOFI/workflows</code>)</td>
+</tr>
+<tr class="even">
+<td><code>calcofi.io/calcofi4r</code>, <code>/calcofi4py</code>, <code>/calcofi4db</code></td>
+<td>the packages’ reference sites</td>
+<td>GitHub Pages (pkgdown, MkDocs, pkgdown)</td>
+</tr>
+<tr class="odd">
+<td><code>calcofi.io/analytics</code></td>
+<td>usage per product</td>
+<td>GitHub Pages (Hugo, <code>CalCOFI/analytics</code>)</td>
+</tr>
+<tr class="even">
+<td><code>status.calcofi.io</code></td>
+<td>uptime per product</td>
+<td>Upptime (<code>CalCOFI/uptime</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>storage.googleapis.com/calcofi-db</code></td>
+<td>the release store, the parquet</td>
+<td>Google Cloud Storage</td>
+</tr>
+<tr class="even">
+<td><code>storage.calcofi.io</code></td>
+<td>a browsable front door onto the buckets, with the legacy-path redirects</td>
+<td>Caddy on the CalCOFI server</td>
+</tr>
+<tr class="odd">
+<td><code>erddap.calcofi.io</code></td>
+<td>ERDDAP</td>
+<td>the CalCOFI server (Docker)</td>
+</tr>
+<tr class="even">
+<td><code>app.calcofi.io/…</code></td>
+<td>the Shiny applications</td>
+<td>the CalCOFI server (Shiny Server)</td>
+</tr>
+<tr class="odd">
+<td><code>h3t.calcofi.io</code></td>
+<td>the cached hexagon-tile API behind the Hexagon Explorer</td>
+<td>the CalCOFI server (FastAPI behind Varnish)</td>
+</tr>
+<tr class="even">
+<td><code>rstudio.</code>, <code>pgadmin.</code>, <code>ssh.calcofi.io</code></td>
+<td>RStudio Server, pgAdmin, SSH and the PostgreSQL tunnel</td>
+<td>the CalCOFI server</td>
+</tr>
+<tr class="odd">
+<td><code>tile.calcofi.io</code>, <code>file.calcofi.io</code></td>
+<td>vector tiles from PostGIS; public files on disk</td>
+<td>the CalCOFI server</td>
+</tr>
+</tbody>
+</table>
+<p>The server is one Docker Compose stack, configured in <a href="https://github.com/CalCOFI/server">CalCOFI/server</a> — the configuration of record for every <code>*.calcofi.io</code> service. Everything on GitHub Pages rebuilds itself on push and costs nothing to host.</p>
+</section>
+<section id="then-and-now" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="then-and-now"><span class="header-section-number">16.8</span> Then and now</h2>
+<div id="fig-arch-2022" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-2022-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figs/sw_arch.svg" class="cc-diagram nolightbox img-fluid figure-img">
 </div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>The federated system end to end: sources on Drive and GCS, the pipeline, the release store, the record and the portals, the applications and packages, the working PostgreSQL store, the server stack, and where every URL is served from — with the 2022 design beside the 2026 one.</p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-2022-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.2: The 2022 design: sources ingested by scripts into a PostGIS database, an API feeding Shiny apps and reports, and a <em>publish</em> step to the portals that was intent rather than code.
+</figcaption>
+</figure>
 </div>
-</div>
+<p>The 2022 figure had the right boxes and the wrong plumbing. Its database was PostgreSQL behind an API, so every reader was a request to one server; its <em>publish</em> box was a plan. The 2026 system keeps the boxes and changes what connects them: the database is parquet on a public bucket that any DuckDB reads directly — the browser included, so the flagship application has no server at all; the API is retired; the <em>publish</em> box is generated from one record per dataset at every release; and the PostgreSQL that remains is a working store for one team, feeding the pipeline rather than serving it. What did not change is the intent: one integrated, versioned, citable database that every product reads, so that a correction made once reaches everyone.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,4 +1193,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/architecture.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/architecture.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

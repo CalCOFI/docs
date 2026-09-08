@@ -133,6 +133,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   });
 })();</script>
 
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
+
 
 </head>
 
@@ -389,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,8 +568,16 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-tasks-by-phase" id="toc-the-tasks-by-phase" class="nav-link active" data-scroll-target="#the-tasks-by-phase"><span class="header-section-number">15.1</span> The tasks, by phase</a></li>
+  <li><a href="#year-1-what-the-contractor-delivers-by-quarter" id="toc-year-1-what-the-contractor-delivers-by-quarter" class="nav-link" data-scroll-target="#year-1-what-the-contractor-delivers-by-quarter"><span class="header-section-number">15.2</span> Year 1: what the contractor delivers, by quarter</a></li>
+  <li><a href="#how-to-read-a-status" id="toc-how-to-read-a-status" class="nav-link" data-scroll-target="#how-to-read-a-status"><span class="header-section-number">15.3</span> How to read a status</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/dmp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -594,22 +602,706 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>The SIO-CalCOFI <strong>Data Management Plan</strong> is a two-year action plan (2026–2028) that organizes the program’s data work into five phases — <strong>Ingest, Publish, Integrate, Visualize, Synthesize</strong> — and names, for each action, a lead, a deliverable and the people doing it. This book is arranged along the same five phases, so every deliverable that is a document, a page or a product has a home here. The table below mirrors the team’s status sheet, refreshed with each quarterly status entry; the sheet itself is the working record.</p>
+<p>Updated 2026-09-08 from the <a href="https://docs.google.com/spreadsheets/d/1r5xs4SzLlY1pDzdAYb5viW8Lg5v-410WfTGPBVsX3aM">action sheet</a>. Period: 2026-09-01 to 2028-08-31 (two years; Year 1 is the 2026-09 to 2027-08 Ocean Metrics SoW).</p>
+<section id="the-tasks-by-phase" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="the-tasks-by-phase"><span class="header-section-number">15.1</span> The tasks, by phase</h2>
+<div class="cell">
+<div id="tbl-dmp" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;15.1: The plan’s tasks (1–17 from the proposal; 18 onward added by the team), with the lead, the status the sheet reports, and where in this book the deliverable lives.
+</figcaption>
+<div aria-describedby="tbl-dmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="tgesvihvpj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tgesvihvpj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tgesvihvpj thead, #tgesvihvpj tbody, #tgesvihvpj tfoot, #tgesvihvpj tr, #tgesvihvpj td, #tgesvihvpj th {
+  border-style: none;
+}
+
+#tgesvihvpj p {
+  margin: 0;
+  padding: 0;
+}
+
+#tgesvihvpj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.88em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tgesvihvpj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tgesvihvpj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tgesvihvpj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tgesvihvpj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tgesvihvpj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tgesvihvpj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tgesvihvpj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tgesvihvpj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tgesvihvpj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tgesvihvpj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tgesvihvpj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tgesvihvpj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tgesvihvpj .gt_row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tgesvihvpj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgesvihvpj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tgesvihvpj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tgesvihvpj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tgesvihvpj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgesvihvpj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tgesvihvpj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgesvihvpj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tgesvihvpj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgesvihvpj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tgesvihvpj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgesvihvpj .gt_left {
+  text-align: left;
+}
+
+#tgesvihvpj .gt_center {
+  text-align: center;
+}
+
+#tgesvihvpj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tgesvihvpj .gt_font_normal {
+  font-weight: normal;
+}
+
+#tgesvihvpj .gt_font_bold {
+  font-weight: bold;
+}
+
+#tgesvihvpj .gt_font_italic {
+  font-style: italic;
+}
+
+#tgesvihvpj .gt_super {
+  font-size: 65%;
+}
+
+#tgesvihvpj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tgesvihvpj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tgesvihvpj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tgesvihvpj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tgesvihvpj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tgesvihvpj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tgesvihvpj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tgesvihvpj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tgesvihvpj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="task" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">task</th>
+<th id="action" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">action</th>
+<th id="lead" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">lead</th>
+<th id="status" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">status</th>
+<th id="where" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">in this book</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row odd">
+<th colspan="5" id="Ingest" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Ingest</th>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Ingest  task" style="font-size: 0.9em">Task 1 · cast, profile and bottle data</td>
+<td class="gt_row gt_left" headers="Ingest  action" style="font-size: 0.9em">Migrate the bottle database into a non-proprietary relational database</td>
+<td class="gt_row gt_left" headers="Ingest  lead" style="font-size: 0.9em">Rasmus Swalethorp</td>
+<td class="gt_row gt_left" headers="Ingest  status" style="font-size: 0.9em">awaiting finalization of the CTD profile database and training</td>
+<td class="gt_row gt_left" headers="Ingest  where" style="font-size: 0.9em"><a href="server-access.html">host:port:database:user:password — the last field is your CalCOFI database password</a>, <a href="ctd-qaqc.html">CTD QA/QC, start to release</a></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Ingest  task" style="font-size: 0.9em">Task 2 · cast, profile and bottle data</td>
+<td class="gt_row gt_left" headers="Ingest  action" style="font-size: 0.9em">Construct a CTD profile database and integrate it with the bottle database</td>
+<td class="gt_row gt_left" headers="Ingest  lead" style="font-size: 0.9em">Rasmus Swalethorp</td>
+<td class="gt_row gt_left" headers="Ingest  status" style="font-size: 0.9em">PostgreSQL profile database built (2026-08-19), internal access set up, training started, the QA/QC protocol under discussion; weekly meetings with the SIO tech team; the QA/QC process being automated in Python</td>
+<td class="gt_row gt_left" headers="Ingest  where" style="font-size: 0.9em"><a href="ctd-qaqc.html">CTD QA/QC, start to release</a>, <a href="server-access.html">host:port:database:user:password — the last field is your CalCOFI database password</a></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Ingest  task" style="font-size: 0.9em">Task 22 · additional task</td>
+<td class="gt_row gt_left" headers="Ingest  action" style="font-size: 0.9em">Track which instruments and datasets have samples collected but no data yet</td>
+<td class="gt_row gt_left" headers="Ingest  lead" style="font-size: 0.9em">Betty Huang &amp; Mark Gold</td>
+<td class="gt_row gt_left" headers="Ingest  status" style="font-size: 0.9em">the holdings board on the CalCOFI Sheet and the holdings on calcofi.io/datasets are the start</td>
+<td class="gt_row gt_left" headers="Ingest  where" style="font-size: 0.9em"><a href="metadata.html">Metadata &amp; the ingest loop</a></td>
+</tr>
+<tr class="gt_group_heading_row odd">
+<th colspan="5" id="Publish" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Publish</th>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 3 · eDNA metabarcoding (12S MiFish, 12S MarVer1, d-loop, CO1)</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">Ensure all future sampling follows FAIRe-formatted data collection</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Nastassia Patin</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">the Fall 2026 cruise is the test case for real-time FAIRe sample metadata; starting, with the new eDNA technician</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 4 · eDNA metabarcoding</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">Format all past eDNA datasets and their environmental metadata to FAIRe</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Nastassia Patin</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">a conversion pipeline for the existing metabarcoding datasets is built and validated</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 5 · eDNA metabarcoding</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">Upload eDNA datasets and metadata to OBIS</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Nastassia Patin</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">one dataset ready for submission pending admin authorization; more expected in the coming months</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"><a href="portals.html">Portals</a></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 6 · eDNA metabarcoding</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">Assess the status of complementary CalCOFI-associated eDNA datasets (e.g. NCOG)</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Nastassia Patin</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">not yet started</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 18 · additional task</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">The CalOOS inventory and portal</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Erin Satterthwaite &amp; Betty Huang</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">working with the portal team</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"><a href="portals.html">Portals</a></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 19 · additional task</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">Spin up a CalCOFI ERDDAP</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Ed Weber</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">erddap.calcofi.io serves the release; NOAA's own server is Ed's</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"><a href="portals.html">Portals</a></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 20 · additional task</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">Publish the CDFW dataset and the marine mammal datasets</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Erin Satterthwaite</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">the Dungeness crab megalopae dataset is in the release; its deposit with the UCSD Library and the CDFW portal link are in progress</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Publish  task" style="font-size: 0.9em">Task 23 · additional task</td>
+<td class="gt_row gt_left" headers="Publish  action" style="font-size: 0.9em">An internal eDNA data inventory with the FAIR status of every dataset</td>
+<td class="gt_row gt_left" headers="Publish  lead" style="font-size: 0.9em">Nastassia Patin</td>
+<td class="gt_row gt_left" headers="Publish  status" style="font-size: 0.9em">starting</td>
+<td class="gt_row gt_left" headers="Publish  where" style="font-size: 0.9em"></td>
+</tr>
+<tr class="gt_group_heading_row even">
+<th colspan="5" id="Integrate" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Integrate</th>
+</tr>
+<tr class="gt_row_group_first odd">
+<td class="gt_row gt_left" headers="Integrate  task" style="font-size: 0.9em">Task 7 · zooplankton samples</td>
+<td class="gt_row gt_left" headers="Integrate  action" style="font-size: 0.9em">Explore where the SIO invertebrate tow and net samples match the ichthyoplankton samples</td>
+<td class="gt_row gt_left" headers="Integrate  lead" style="font-size: 0.9em">Linsey Sala</td>
+<td class="gt_row gt_left" headers="Integrate  status" style="font-size: 0.9em">starts Fall 2026; waiting on input from the collection</td>
+<td class="gt_row gt_left" headers="Integrate  where" style="font-size: 0.9em"><a href="keys.html">Keys and integrity</a></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Integrate  task" style="font-size: 0.9em">Task 8 · zooplankton samples</td>
+<td class="gt_row gt_left" headers="Integrate  action" style="font-size: 0.9em">Outline the matches and mismatches and an approach to optimizing the match</td>
+<td class="gt_row gt_left" headers="Integrate  lead" style="font-size: 0.9em">Linsey Sala</td>
+<td class="gt_row gt_left" headers="Integrate  status" style="font-size: 0.9em">waiting on input from the collection</td>
+<td class="gt_row gt_left" headers="Integrate  where" style="font-size: 0.9em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Integrate  task" style="font-size: 0.9em">Task 9 · zooplankton samples</td>
+<td class="gt_row gt_left" headers="Integrate  action" style="font-size: 0.9em">Integrate the NOAA-SWFSC NetID (UUID) with incoming records and the invertebrate collection database</td>
+<td class="gt_row gt_left" headers="Integrate  lead" style="font-size: 0.9em">Linsey Sala</td>
+<td class="gt_row gt_left" headers="Integrate  status" style="font-size: 0.9em">waiting on input from the collection; the database already keeps provider UUIDs as columns</td>
+<td class="gt_row gt_left" headers="Integrate  where" style="font-size: 0.9em"><a href="keys.html">Keys and integrity</a></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Integrate  task" style="font-size: 0.9em">Task 10 · zooplankton samples</td>
+<td class="gt_row gt_left" headers="Integrate  action" style="font-size: 0.9em">Use the matching exercise and the naming conventions to decide where the database is normalized and restructured</td>
+<td class="gt_row gt_left" headers="Integrate  lead" style="font-size: 0.9em">Linsey Sala</td>
+<td class="gt_row gt_left" headers="Integrate  status" style="font-size: 0.9em">waiting on input from the collection</td>
+<td class="gt_row gt_left" headers="Integrate  where" style="font-size: 0.9em"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Integrate  task" style="font-size: 0.9em">Task 11 · cross-cutting</td>
+<td class="gt_row gt_left" headers="Integrate  action" style="font-size: 0.9em">A fast, cloud-based integrated database accessible internally and externally</td>
+<td class="gt_row gt_left" headers="Integrate  lead" style="font-size: 0.9em">Ben Best &amp; Betty Huang</td>
+<td class="gt_row gt_left" headers="Integrate  status" style="font-size: 0.9em">operational — versioned frozen releases on Google Cloud Storage, read from R, Python, ERDDAP and the browser; the internal PostgreSQL working store documented; the one access-guidance document is this book's Access and Server access chapters (Q1)</td>
+<td class="gt_row gt_left" headers="Integrate  where" style="font-size: 0.9em"><a href="data-access.html">Access the data</a>, <a href="server-access.html">host:port:database:user:password — the last field is your CalCOFI database password</a>, <a href="releases.html">Releases</a></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Integrate  task" style="font-size: 0.9em">Task 12 · cross-cutting</td>
+<td class="gt_row gt_left" headers="Integrate  action" style="font-size: 0.9em">Standardized CalCOFI naming conventions for cruises, tows, times, coordinates, stations and lines, variables and units, mapped onto the existing datasets</td>
+<td class="gt_row gt_left" headers="Integrate  lead" style="font-size: 0.9em">Ben Best &amp; Betty Huang</td>
+<td class="gt_row gt_left" headers="Integrate  status" style="font-size: 0.9em">Betty's guide drafted (audience and purpose, mandatory / optional / best practice, an example table), reconciled against the registries 2026-09-08 and published as the provider guide; the database's conventions and the legacy-name crosswalk generated from the registries; the inventory of legacy names Q1, the guide circulated Q2, applied across datasets Q3</td>
+<td class="gt_row gt_left" headers="Integrate  where" style="font-size: 0.9em"><a href="naming.html">Naming conventions</a>, <a href="provide.html">Providing data to CalCOFI</a></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Integrate  task" style="font-size: 0.9em">Task 13 · cross-cutting</td>
+<td class="gt_row gt_left" headers="Integrate  action" style="font-size: 0.9em">Agree a standardized nomenclature for naming CalCOFI datasets</td>
+<td class="gt_row gt_left" headers="Integrate  lead" style="font-size: 0.9em">Ben Best &amp; Betty Huang</td>
+<td class="gt_row gt_left" headers="Integrate  status" style="font-size: 0.9em">dataset naming lives in each ingest's front matter (provider + dataset slug, names, category) and the provider registry, aligned with the CalOOS inventory; the governance record is the naming chapter's dataset section (Q3)</td>
+<td class="gt_row gt_left" headers="Integrate  where" style="font-size: 0.9em"><a href="naming.html">Naming conventions</a></td>
+</tr>
+<tr class="gt_group_heading_row even">
+<th colspan="5" id="Visualize" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Visualize</th>
+</tr>
+<tr class="gt_row_group_first odd">
+<td class="gt_row gt_left" headers="Visualize  task" style="font-size: 0.9em">Task 14 · cross-cutting</td>
+<td class="gt_row gt_left" headers="Visualize  action" style="font-size: 0.9em">A single authoritative CalCOFI data inventory and entry point, with variable-based discovery</td>
+<td class="gt_row gt_left" headers="Visualize  lead" style="font-size: 0.9em">Ben Best &amp; Betty Huang</td>
+<td class="gt_row gt_left" headers="Visualize  status" style="font-size: 0.9em">nearly done — the calcofi.io landing page, the dataset catalog with one page per dataset (in the database or not), the Explorer with six lenses, the schema and query explorers; next, variable-based (EOV) discovery folded into the portal (beta Q3, release Q4) and the federated-architecture documentation (Q4)</td>
+<td class="gt_row gt_left" headers="Visualize  where" style="font-size: 0.9em"><a href="explore.html">Explore</a>, <a href="architecture.html">Architecture</a></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Visualize  task" style="font-size: 0.9em">Task 21 · additional task</td>
+<td class="gt_row gt_left" headers="Visualize  action" style="font-size: 0.9em">A CTD viewer</td>
+<td class="gt_row gt_left" headers="Visualize  lead" style="font-size: 0.9em">Betty Huang, Ben Best, Rasmus Swalethorp</td>
+<td class="gt_row gt_left" headers="Visualize  status" style="font-size: 0.9em">the CTD Explorer app and the Python profile explorer serve the team; the Explorer's sections lens serves the public</td>
+<td class="gt_row gt_left" headers="Visualize  where" style="font-size: 0.9em"><a href="ctd-qaqc.html">CTD QA/QC, start to release</a>, <a href="explore.html">Explore</a></td>
+</tr>
+<tr class="gt_group_heading_row odd">
+<th colspan="5" id="Synthesize" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Synthesize</th>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Synthesize  task" style="font-size: 0.9em">Task 15 · mid-term progress report (end of Year 1)</td>
+<td class="gt_row gt_left" headers="Synthesize  action" style="font-size: 0.9em">A structured progress report — completed actions, challenges, next steps</td>
+<td class="gt_row gt_left" headers="Synthesize  lead" style="font-size: 0.9em">Mark Gold</td>
+<td class="gt_row gt_left" headers="Synthesize  status" style="font-size: 0.9em">not yet due; the running record is the status chapter</td>
+<td class="gt_row gt_left" headers="Synthesize  where" style="font-size: 0.9em"><a href="status.html">NA</a></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Synthesize  task" style="font-size: 0.9em">Task 16 · final report (end of Year 2)</td>
+<td class="gt_row gt_left" headers="Synthesize  action" style="font-size: 0.9em">A stand-alone, living document of the data management approach, what was done, what remains</td>
+<td class="gt_row gt_left" headers="Synthesize  lead" style="font-size: 0.9em">Mark Gold</td>
+<td class="gt_row gt_left" headers="Synthesize  status" style="font-size: 0.9em">seeded by this book; the PDF of the book is the living document</td>
+<td class="gt_row gt_left" headers="Synthesize  where" style="font-size: 0.9em"><a href="index.html">Start here</a>, <a href="architecture.html">Architecture</a></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Synthesize  task" style="font-size: 0.9em">Task 17 · guidance on the plan's actions</td>
+<td class="gt_row gt_left" headers="Synthesize  action" style="font-size: 0.9em">Input, direction and review of how the actions are designed and implemented</td>
+<td class="gt_row gt_left" headers="Synthesize  lead" style="font-size: 0.9em">Mark Gold &amp; Karen Stocks</td>
+<td class="gt_row gt_left" headers="Synthesize  status" style="font-size: 0.9em">ongoing</td>
+<td class="gt_row gt_left" headers="Synthesize  where" style="font-size: 0.9em"></td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>The five phases of the SIO-CalCOFI data management plan and the tasks under each, with owner, status, target date and where the deliverable lives — read from a file kept in step with the plan’s status sheet.</p>
+</figure>
 </div>
 </div>
+</section>
+<section id="year-1-what-the-contractor-delivers-by-quarter" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="year-1-what-the-contractor-delivers-by-quarter"><span class="header-section-number">15.2</span> Year 1: what the contractor delivers, by quarter</h2>
+<p>Ocean Metrics is the plan’s senior data-science contractor, and its Year 1 statement of work (2026-09-01 to 2027-08-31) puts each of its deliverables in a quarter. The ones that are documentation land in this book:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>quarter</th>
+<th>due</th>
+<th>deliverables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Q1</td>
+<td>2026-11-30</td>
+<td>the cloud database with internal and external access and its access guidance (Task 11: <a href="./data-access.html">Access the data</a>, <a href="./server-access.html">Server access</a>); CTD casts on ERDDAP; the bottle-migration schema documentation and the CTD profile database’s data dictionary (Tasks 1–2); the inventory of legacy names and a first draft of the naming conventions (Tasks 12–13: <a href="./naming.html">Naming conventions</a>, <a href="./provide.html">Providing data</a>); releases; the quarterly status entry</td>
+</tr>
+<tr class="even">
+<td>Q2</td>
+<td>2027-02-28</td>
+<td>bottle migration QA/QC against the release; CTD profile integration validated by the release gates; the naming guide and mapping tables circulated for review; NetID/UUID advisory (Task 9); the invertebrate–ichthyoplankton crosswalk (Tasks 7–8); webinar 1, the product showcase</td>
+</tr>
+<tr class="odd">
+<td>Q3</td>
+<td>2027-05-31</td>
+<td>the naming guide and dataset nomenclature agreed and applied (Tasks 12–13); schema-normalization recommendations (Task 10); the eDNA-to-OBIS pipeline (Task 5); the data inventory with variable-based discovery, beta (Task 14)</td>
+</tr>
+<tr class="even">
+<td>Q4</td>
+<td>2027-08-31</td>
+<td>the inventory released, with the federated-architecture and data-access documentation (Task 14: <a href="./architecture.html">Architecture</a>); webinar 2, the technical deep-dives; contributions to the mid-term report and the seed of the living plan (Tasks 15–16)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-to-read-a-status" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="how-to-read-a-status"><span class="header-section-number">15.3</span> How to read a status</h2>
+<p>A task’s status is the sentence the sheet carries, condensed; the sheet’s owner writes it, not the book. <em>Where</em> it lives is the chapter or product that holds the deliverable today, which is why some rows point at a chapter that is still being written: the plan is ahead of the record, as it should be. The <a href="./status.html">status chapter</a> is the dated log of what actually landed, by phase, each quarter.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,4 +1734,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/dmp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/dmp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

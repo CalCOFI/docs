@@ -49,9 +49,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-53ac320e6d6703b3d0eb8d314bb16b71.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-24e9d456e1d0a4eadbf7670f71d5d7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -135,6 +132,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     document.addEventListener("cc:theme", function (e) { pushToQuarto(e.detail.theme); });   // (c) a brand toggle, if a page ever adds one
   });
 })();</script>
+
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
 
 
 </head>
@@ -392,7 +395,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -542,26 +545,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -630,10 +627,10 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <section id="data-flow" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">10.2</span> Data Flow</h2>
 <p>While it would be ideal for CalCOFI data to be available through a single portal, each portal has its strengths and limitations. The diagram below is the flow as it runs today: what we author and observe (left) becomes one record per dataset at release, that record generates every surface a portal can read, and each portal or meta-portal is pointed at one of those static files.</p>
-<div id="fig-portals-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-portals-flow" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-portals-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="diagrams/catalog_flow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;10.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW."><img src="diagrams/catalog_flow.svg" class="img-fluid figure-img"></a>
+<img src="diagrams/catalog_flow.svg" class="cc-diagram nolightbox img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-portals-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.1: Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish. The one server-shaped option, pycsw, is gated on a partner asking for CSW.
@@ -653,23 +650,23 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </figcaption>
 <div aria-describedby="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="eyuhhjqjuh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#eyuhhjqjuh table {
+<div id="aqgvqksdzu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#aqgvqksdzu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#eyuhhjqjuh thead, #eyuhhjqjuh tbody, #eyuhhjqjuh tfoot, #eyuhhjqjuh tr, #eyuhhjqjuh td, #eyuhhjqjuh th {
+#aqgvqksdzu thead, #aqgvqksdzu tbody, #aqgvqksdzu tfoot, #aqgvqksdzu tr, #aqgvqksdzu td, #aqgvqksdzu th {
   border-style: none;
 }
 
-#eyuhhjqjuh p {
+#aqgvqksdzu p {
   margin: 0;
   padding: 0;
 }
 
-#eyuhhjqjuh .gt_table {
+#aqgvqksdzu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -695,12 +692,12 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-left-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_caption {
+#aqgvqksdzu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#eyuhhjqjuh .gt_title {
+#aqgvqksdzu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -712,7 +709,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-width: 0;
 }
 
-#eyuhhjqjuh .gt_subtitle {
+#aqgvqksdzu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -724,7 +721,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-width: 0;
 }
 
-#eyuhhjqjuh .gt_heading {
+#aqgvqksdzu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -736,13 +733,13 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_bottom_border {
+#aqgvqksdzu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_col_headings {
+#aqgvqksdzu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -757,7 +754,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_col_heading {
+#aqgvqksdzu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -777,7 +774,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#eyuhhjqjuh .gt_column_spanner_outer {
+#aqgvqksdzu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -789,15 +786,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 4px;
 }
 
-#eyuhhjqjuh .gt_column_spanner_outer:first-child {
+#aqgvqksdzu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eyuhhjqjuh .gt_column_spanner_outer:last-child {
+#aqgvqksdzu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eyuhhjqjuh .gt_column_spanner {
+#aqgvqksdzu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -809,11 +806,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   width: 100%;
 }
 
-#eyuhhjqjuh .gt_spanner_row {
+#aqgvqksdzu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#eyuhhjqjuh .gt_group_heading {
+#aqgvqksdzu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -839,7 +836,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   text-align: left;
 }
 
-#eyuhhjqjuh .gt_empty_group_heading {
+#aqgvqksdzu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -854,15 +851,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: middle;
 }
 
-#eyuhhjqjuh .gt_from_md > :first-child {
+#aqgvqksdzu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eyuhhjqjuh .gt_from_md > :last-child {
+#aqgvqksdzu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eyuhhjqjuh .gt_row {
+#aqgvqksdzu .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -881,7 +878,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#eyuhhjqjuh .gt_stub {
+#aqgvqksdzu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -894,7 +891,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#eyuhhjqjuh .gt_stub_row_group {
+#aqgvqksdzu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -908,15 +905,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: top;
 }
 
-#eyuhhjqjuh .gt_row_group_first td {
+#aqgvqksdzu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eyuhhjqjuh .gt_row_group_first th {
+#aqgvqksdzu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#eyuhhjqjuh .gt_summary_row {
+#aqgvqksdzu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -926,16 +923,16 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#eyuhhjqjuh .gt_first_summary_row {
+#aqgvqksdzu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_first_summary_row.thick {
+#aqgvqksdzu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eyuhhjqjuh .gt_last_summary_row {
+#aqgvqksdzu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -945,7 +942,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_grand_summary_row {
+#aqgvqksdzu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -955,7 +952,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#eyuhhjqjuh .gt_first_grand_summary_row {
+#aqgvqksdzu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -965,7 +962,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_last_grand_summary_row_top {
+#aqgvqksdzu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -975,11 +972,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_striped {
+#aqgvqksdzu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eyuhhjqjuh .gt_table_body {
+#aqgvqksdzu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -988,7 +985,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_footnotes {
+#aqgvqksdzu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1002,7 +999,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_footnote {
+#aqgvqksdzu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1011,7 +1008,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#eyuhhjqjuh .gt_sourcenotes {
+#aqgvqksdzu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1025,7 +1022,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#eyuhhjqjuh .gt_sourcenote {
+#aqgvqksdzu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1033,72 +1030,72 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#eyuhhjqjuh .gt_left {
+#aqgvqksdzu .gt_left {
   text-align: left;
 }
 
-#eyuhhjqjuh .gt_center {
+#aqgvqksdzu .gt_center {
   text-align: center;
 }
 
-#eyuhhjqjuh .gt_right {
+#aqgvqksdzu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eyuhhjqjuh .gt_font_normal {
+#aqgvqksdzu .gt_font_normal {
   font-weight: normal;
 }
 
-#eyuhhjqjuh .gt_font_bold {
+#aqgvqksdzu .gt_font_bold {
   font-weight: bold;
 }
 
-#eyuhhjqjuh .gt_font_italic {
+#aqgvqksdzu .gt_font_italic {
   font-style: italic;
 }
 
-#eyuhhjqjuh .gt_super {
+#aqgvqksdzu .gt_super {
   font-size: 65%;
 }
 
-#eyuhhjqjuh .gt_footnote_marks {
+#aqgvqksdzu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#eyuhhjqjuh .gt_asterisk {
+#aqgvqksdzu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eyuhhjqjuh .gt_indent_1 {
+#aqgvqksdzu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eyuhhjqjuh .gt_indent_2 {
+#aqgvqksdzu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eyuhhjqjuh .gt_indent_3 {
+#aqgvqksdzu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eyuhhjqjuh .gt_indent_4 {
+#aqgvqksdzu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eyuhhjqjuh .gt_indent_5 {
+#aqgvqksdzu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#eyuhhjqjuh .katex-display {
+#aqgvqksdzu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#eyuhhjqjuh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#aqgvqksdzu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1419,10 +1416,10 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 <section id="metadata" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="metadata"><span class="header-section-number">10.4</span> Metadata</h2>
 <p>The <a href="https://eml.ecoinformatics.org/">Ecological Metadata Language (EML)</a> is the one metadata document CalCOFI’s publishers share. Since 2026-09 the release writes one EML 2.2 document per dataset — <code>eml/{dataset_key}.xml</code>, built by <code>calcofi4db::build_eml()</code> directly from <code>datasets.json</code> and each dataset’s descriptive sidecar, checked by <code>check_eml()</code> before it ships — rather than each publish notebook typing its own sampling methods, study extent and rights by hand. The Darwin Core Archive OBIS publishing uses and an EDI data package both start from the same document, so a provider correction to a dataset’s abstract or creators reaches every publisher at once.</p>
-<div id="fig-portals-metadata" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-portals-metadata" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-portals-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="diagrams/portals_metadata.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals."><img src="diagrams/portals_metadata.svg" class="img-fluid figure-img" style="width:70.0%"></a>
+<img src="diagrams/portals_metadata.svg" class="cc-diagram nolightbox img-fluid figure-img" style="width:70.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-portals-metadata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is used to describe the dataset in a consistent manner that can be ingested by the portals.
@@ -1471,23 +1468,23 @@ Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is 
 Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted release’s <code>datasets.json</code>.
 </figcaption>
 <div aria-describedby="tbl-registrations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="pyfoqditvu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pyfoqditvu table {
+<div id="rrovgxghec" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rrovgxghec table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pyfoqditvu thead, #pyfoqditvu tbody, #pyfoqditvu tfoot, #pyfoqditvu tr, #pyfoqditvu td, #pyfoqditvu th {
+#rrovgxghec thead, #rrovgxghec tbody, #rrovgxghec tfoot, #rrovgxghec tr, #rrovgxghec td, #rrovgxghec th {
   border-style: none;
 }
 
-#pyfoqditvu p {
+#rrovgxghec p {
   margin: 0;
   padding: 0;
 }
 
-#pyfoqditvu .gt_table {
+#rrovgxghec .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1513,12 +1510,12 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-left-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_caption {
+#rrovgxghec .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pyfoqditvu .gt_title {
+#rrovgxghec .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1530,7 +1527,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-width: 0;
 }
 
-#pyfoqditvu .gt_subtitle {
+#rrovgxghec .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1542,7 +1539,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-top-width: 0;
 }
 
-#pyfoqditvu .gt_heading {
+#rrovgxghec .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1554,13 +1551,13 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_bottom_border {
+#rrovgxghec .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_col_headings {
+#rrovgxghec .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1575,7 +1572,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_col_heading {
+#rrovgxghec .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1595,7 +1592,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   overflow-x: hidden;
 }
 
-#pyfoqditvu .gt_column_spanner_outer {
+#rrovgxghec .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1607,15 +1604,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 4px;
 }
 
-#pyfoqditvu .gt_column_spanner_outer:first-child {
+#rrovgxghec .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pyfoqditvu .gt_column_spanner_outer:last-child {
+#rrovgxghec .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pyfoqditvu .gt_column_spanner {
+#rrovgxghec .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1627,11 +1624,11 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   width: 100%;
 }
 
-#pyfoqditvu .gt_spanner_row {
+#rrovgxghec .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pyfoqditvu .gt_group_heading {
+#rrovgxghec .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1657,7 +1654,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   text-align: left;
 }
 
-#pyfoqditvu .gt_empty_group_heading {
+#rrovgxghec .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1672,15 +1669,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   vertical-align: middle;
 }
 
-#pyfoqditvu .gt_from_md > :first-child {
+#rrovgxghec .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pyfoqditvu .gt_from_md > :last-child {
+#rrovgxghec .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pyfoqditvu .gt_row {
+#rrovgxghec .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1699,7 +1696,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   overflow-x: hidden;
 }
 
-#pyfoqditvu .gt_stub {
+#rrovgxghec .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1712,7 +1709,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#pyfoqditvu .gt_stub_row_group {
+#rrovgxghec .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1726,15 +1723,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   vertical-align: top;
 }
 
-#pyfoqditvu .gt_row_group_first td {
+#rrovgxghec .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pyfoqditvu .gt_row_group_first th {
+#rrovgxghec .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pyfoqditvu .gt_summary_row {
+#rrovgxghec .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1744,16 +1741,16 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#pyfoqditvu .gt_first_summary_row {
+#rrovgxghec .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_first_summary_row.thick {
+#rrovgxghec .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pyfoqditvu .gt_last_summary_row {
+#rrovgxghec .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1763,7 +1760,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_grand_summary_row {
+#rrovgxghec .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1773,7 +1770,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#pyfoqditvu .gt_first_grand_summary_row {
+#rrovgxghec .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1783,7 +1780,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-top-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_last_grand_summary_row_top {
+#rrovgxghec .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1793,11 +1790,11 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_striped {
+#rrovgxghec .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pyfoqditvu .gt_table_body {
+#rrovgxghec .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1806,7 +1803,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_footnotes {
+#rrovgxghec .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1820,7 +1817,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_footnote {
+#rrovgxghec .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1829,7 +1826,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#pyfoqditvu .gt_sourcenotes {
+#rrovgxghec .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1843,7 +1840,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#pyfoqditvu .gt_sourcenote {
+#rrovgxghec .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1851,72 +1848,72 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#pyfoqditvu .gt_left {
+#rrovgxghec .gt_left {
   text-align: left;
 }
 
-#pyfoqditvu .gt_center {
+#rrovgxghec .gt_center {
   text-align: center;
 }
 
-#pyfoqditvu .gt_right {
+#rrovgxghec .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pyfoqditvu .gt_font_normal {
+#rrovgxghec .gt_font_normal {
   font-weight: normal;
 }
 
-#pyfoqditvu .gt_font_bold {
+#rrovgxghec .gt_font_bold {
   font-weight: bold;
 }
 
-#pyfoqditvu .gt_font_italic {
+#rrovgxghec .gt_font_italic {
   font-style: italic;
 }
 
-#pyfoqditvu .gt_super {
+#rrovgxghec .gt_super {
   font-size: 65%;
 }
 
-#pyfoqditvu .gt_footnote_marks {
+#rrovgxghec .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pyfoqditvu .gt_asterisk {
+#rrovgxghec .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pyfoqditvu .gt_indent_1 {
+#rrovgxghec .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pyfoqditvu .gt_indent_2 {
+#rrovgxghec .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pyfoqditvu .gt_indent_3 {
+#rrovgxghec .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pyfoqditvu .gt_indent_4 {
+#rrovgxghec .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pyfoqditvu .gt_indent_5 {
+#rrovgxghec .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pyfoqditvu .katex-display {
+#rrovgxghec .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pyfoqditvu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rrovgxghec div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2107,23 +2104,23 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
 Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promoted release’s <code>datasets.json</code> (the registry it comes from until a release carries it).
 </figcaption>
 <div aria-describedby="tbl-policy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="smllolwmpz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#smllolwmpz table {
+<div id="iqwwiykmpe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iqwwiykmpe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#smllolwmpz thead, #smllolwmpz tbody, #smllolwmpz tfoot, #smllolwmpz tr, #smllolwmpz td, #smllolwmpz th {
+#iqwwiykmpe thead, #iqwwiykmpe tbody, #iqwwiykmpe tfoot, #iqwwiykmpe tr, #iqwwiykmpe td, #iqwwiykmpe th {
   border-style: none;
 }
 
-#smllolwmpz p {
+#iqwwiykmpe p {
   margin: 0;
   padding: 0;
 }
 
-#smllolwmpz .gt_table {
+#iqwwiykmpe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2149,12 +2146,12 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-left-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_caption {
+#iqwwiykmpe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#smllolwmpz .gt_title {
+#iqwwiykmpe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2166,7 +2163,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-width: 0;
 }
 
-#smllolwmpz .gt_subtitle {
+#iqwwiykmpe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2178,7 +2175,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-top-width: 0;
 }
 
-#smllolwmpz .gt_heading {
+#iqwwiykmpe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2190,13 +2187,13 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_bottom_border {
+#iqwwiykmpe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_col_headings {
+#iqwwiykmpe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2211,7 +2208,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_col_heading {
+#iqwwiykmpe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2231,7 +2228,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   overflow-x: hidden;
 }
 
-#smllolwmpz .gt_column_spanner_outer {
+#iqwwiykmpe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2243,15 +2240,15 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 4px;
 }
 
-#smllolwmpz .gt_column_spanner_outer:first-child {
+#iqwwiykmpe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#smllolwmpz .gt_column_spanner_outer:last-child {
+#iqwwiykmpe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#smllolwmpz .gt_column_spanner {
+#iqwwiykmpe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2263,11 +2260,11 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   width: 100%;
 }
 
-#smllolwmpz .gt_spanner_row {
+#iqwwiykmpe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#smllolwmpz .gt_group_heading {
+#iqwwiykmpe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2293,7 +2290,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   text-align: left;
 }
 
-#smllolwmpz .gt_empty_group_heading {
+#iqwwiykmpe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2308,15 +2305,15 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   vertical-align: middle;
 }
 
-#smllolwmpz .gt_from_md > :first-child {
+#iqwwiykmpe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#smllolwmpz .gt_from_md > :last-child {
+#iqwwiykmpe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#smllolwmpz .gt_row {
+#iqwwiykmpe .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -2335,7 +2332,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   overflow-x: hidden;
 }
 
-#smllolwmpz .gt_stub {
+#iqwwiykmpe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2348,7 +2345,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#smllolwmpz .gt_stub_row_group {
+#iqwwiykmpe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2362,15 +2359,15 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   vertical-align: top;
 }
 
-#smllolwmpz .gt_row_group_first td {
+#iqwwiykmpe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#smllolwmpz .gt_row_group_first th {
+#iqwwiykmpe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#smllolwmpz .gt_summary_row {
+#iqwwiykmpe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2380,16 +2377,16 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#smllolwmpz .gt_first_summary_row {
+#iqwwiykmpe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_first_summary_row.thick {
+#iqwwiykmpe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#smllolwmpz .gt_last_summary_row {
+#iqwwiykmpe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2399,7 +2396,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_grand_summary_row {
+#iqwwiykmpe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2409,7 +2406,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#smllolwmpz .gt_first_grand_summary_row {
+#iqwwiykmpe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2419,7 +2416,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-top-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_last_grand_summary_row_top {
+#iqwwiykmpe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2429,11 +2426,11 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_striped {
+#iqwwiykmpe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#smllolwmpz .gt_table_body {
+#iqwwiykmpe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2442,7 +2439,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_footnotes {
+#iqwwiykmpe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2456,7 +2453,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_footnote {
+#iqwwiykmpe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2465,7 +2462,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#smllolwmpz .gt_sourcenotes {
+#iqwwiykmpe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2479,7 +2476,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#smllolwmpz .gt_sourcenote {
+#iqwwiykmpe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2487,72 +2484,72 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#smllolwmpz .gt_left {
+#iqwwiykmpe .gt_left {
   text-align: left;
 }
 
-#smllolwmpz .gt_center {
+#iqwwiykmpe .gt_center {
   text-align: center;
 }
 
-#smllolwmpz .gt_right {
+#iqwwiykmpe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#smllolwmpz .gt_font_normal {
+#iqwwiykmpe .gt_font_normal {
   font-weight: normal;
 }
 
-#smllolwmpz .gt_font_bold {
+#iqwwiykmpe .gt_font_bold {
   font-weight: bold;
 }
 
-#smllolwmpz .gt_font_italic {
+#iqwwiykmpe .gt_font_italic {
   font-style: italic;
 }
 
-#smllolwmpz .gt_super {
+#iqwwiykmpe .gt_super {
   font-size: 65%;
 }
 
-#smllolwmpz .gt_footnote_marks {
+#iqwwiykmpe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#smllolwmpz .gt_asterisk {
+#iqwwiykmpe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#smllolwmpz .gt_indent_1 {
+#iqwwiykmpe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#smllolwmpz .gt_indent_2 {
+#iqwwiykmpe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#smllolwmpz .gt_indent_3 {
+#iqwwiykmpe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#smllolwmpz .gt_indent_4 {
+#iqwwiykmpe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#smllolwmpz .gt_indent_5 {
+#iqwwiykmpe .gt_indent_5 {
   text-indent: 25px;
 }
 
-#smllolwmpz .katex-display {
+#iqwwiykmpe .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#smllolwmpz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iqwwiykmpe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3083,40 +3080,8 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/portals.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/portals.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

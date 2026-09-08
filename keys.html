@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -132,6 +167,12 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
     document.addEventListener("cc:theme", function (e) { pushToQuarto(e.detail.theme); });   // (c) a brand toggle, if a page ever adds one
   });
 })();</script>
+
+<!-- the diagram viewer: inline SVG + pan/zoom + fullscreen for every figure with
+     class .cc-diagram (libs/diagram.js); pdf/docx keep the static image -->
+<link rel="stylesheet" href="libs/diagram.css">
+<script defer="" src="libs/svg-pan-zoom.min.js"></script>
+<script defer="" src="libs/diagram.js"></script>
 
 
 </head>
@@ -389,7 +430,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Access the data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -539,26 +580,20 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Matching Helpers</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The retired API</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -568,8 +603,21 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-rules" id="toc-the-rules" class="nav-link active" data-scroll-target="#the-rules"><span class="header-section-number">5.1</span> The rules</a>
+  <ul class="collapse">
+  <li><a href="#why-not-uuid-primary-keys" id="toc-why-not-uuid-primary-keys" class="nav-link" data-scroll-target="#why-not-uuid-primary-keys"><span class="header-section-number">5.1.1</span> Why not UUID primary keys?</a></li>
+  </ul></li>
+  <li><a href="#the-contract-per-table" id="toc-the-contract-per-table" class="nav-link" data-scroll-target="#the-contract-per-table"><span class="header-section-number">5.2</span> The contract, per table</a></li>
+  <li><a href="#measured-this-release" id="toc-measured-this-release" class="nav-link" data-scroll-target="#measured-this-release"><span class="header-section-number">5.3</span> Measured, this release</a></li>
+  <li><a href="#what-the-release-checks-before-it-ships" id="toc-what-the-release-checks-before-it-ships" class="nav-link" data-scroll-target="#what-the-release-checks-before-it-ships"><span class="header-section-number">5.4</span> What the release checks before it ships</a></li>
+  <li><a href="#walking-the-keys" id="toc-walking-the-keys" class="nav-link" data-scroll-target="#walking-the-keys"><span class="header-section-number">5.5</span> Walking the keys</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/keys.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -594,22 +642,2419 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>A database is only as trustworthy as its joins. This chapter states how the integrated database’s tables are keyed, what each key promises, and — because a promise is worth little unstated — what the release actually measures before it ships. Every table below is generated from the promoted release’s own sidecars, so the page and the database cannot disagree.</p>
+<section id="the-rules" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="the-rules"><span class="header-section-number">5.1</span> The rules</h2>
+<p><strong>The suffix says what kind of value a column holds</strong>, and this is checked in review, because a character-valued identifier named <code>*_id</code> is a promise the data cannot keep:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>suffix</th>
+<th>value</th>
+<th>examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>*_key</code></td>
+<td>a <strong>string</strong> natural key — meaningful, stable, human-readable</td>
+<td><code>cruise_key</code>, <code>site_key</code>, <code>grid_key</code>, <code>sample_key</code>, <code>taxon_key</code>, <code>dataset_key</code>, <code>ship_key</code></td>
+</tr>
+<tr class="even">
+<td><code>*_id</code></td>
+<td>an <strong>integer</strong> key — a source counter or a surrogate the release mints</td>
+<td><code>cast_id</code>, <code>bottle_id</code>, <code>obs_id</code>, <code>root_id</code></td>
+</tr>
+<tr class="odd">
+<td><code>*_uuid</code></td>
+<td>the <strong>provider’s own</strong> identifier for that record, as they mint it (<a href="https://datatracker.ietf.org/doc/html/rfc4122">RFC 4122</a>)</td>
+<td><code>cruise_uuid</code>, <code>source_uuid</code>, <code>station_uuid</code></td>
+</tr>
+<tr class="even">
+<td><code>*_seq</code></td>
+<td>an auto-incrementing sequence integer</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>(<code>hex_id</code> is the one integer that is neither a counter nor a surrogate: an H3 cell index at resolution 10, so coarser hexagons are <code>h3_cell_to_parent(hex_id, res)</code> rather than a column per resolution.)</p>
+<p><strong>Natural keys carry the integration.</strong> Four of them are worth stating exactly, because every dataset joins to the others through them:</p>
+<ul>
+<li><strong><code>cruise_key</code> = <code>YYYY-MM-NODC</code></strong> (<code>1998-02-33JD</code>): the month SWFSC <em>designates</em> for the cruise and the ship’s NODC code — never the month a cast or tow happened to fall in. A cruise routinely straddles a calendar boundary (5508BD ran 7 Aug – 25 Sep 1955) and the neighbouring month is usually a real cruise of the same ship, so keying by event month silently moved casts onto the wrong cruise with no foreign key ever failing. Events are keyed by containment in the reference cruise’s observed date span first, then by the source’s own designation, then by event month as a last resort, and which rule fired is recorded (<code>cruise_key_method</code>). The <code>cruise</code> reference itself is completed at release: one row per key an event names that SWFSC’s export has no station row for (<code>cruise_key_method = 'derived'</code>), which is why <code>cruise</code> holds more rows than SWFSC’s list.</li>
+<li><strong><code>sample_key</code> = <code>{dataset_key}:{sample_type}:{id}</code></strong> (<code>calcofi_bottle:cast:7644</code>): globally unique across datasets <em>and</em> across event levels, so a site, a tow, a net, a cast and a bottle share one table without collision. The hierarchy is an adjacency list — <code>parent_sample_key</code> points at the containing event, <code>root_sample_key</code> at the top of the chain — so counting distinct events at any level is one <code>GROUP BY</code>.</li>
+<li><strong><code>site_key</code></strong> is the CalCOFI station as <code>"line station"</code> (<code>"090.0 062.0"</code>); <strong><code>grid_key</code></strong> is the shared grid cell; <strong><code>dataset_key</code> = <code>{provider}_{dataset}</code></strong> is the provenance stamp on every observation.</li>
+<li><strong><code>taxon_key</code></strong> is a lowercase authority prefix plus that authority’s <em>accepted</em> id — <code>worms:&lt;AphiaID&gt;</code>, or <code>itis:&lt;TSN&gt;</code> for birds, whose WoRMS taxonomy lags (see <a href="./db.html#taxonomy">The database</a>).</li>
+</ul>
+<p><strong>The release mints one sequential integer</strong>, <code>root_id</code> on <code>sample_root</code>: a dense integer for each root sampling event (a <code>sample</code> row with no parent), numbered deterministically so a rebuild reproduces it, and carried on <code>obs_bio</code> and <code>obs_env</code> so a browser can join observations to their event without the string key.</p>
+<section id="why-not-uuid-primary-keys" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="why-not-uuid-primary-keys"><span class="header-section-number">5.1.1</span> Why not UUID primary keys?</h3>
+<p>NOAA’s own CalCOFI database keys cruises, stations and nets by UUID, and its curator has argued — from experience — that a compound natural key is a liability: when a ship is swapped or a date corrected, the key and the fields it was built from can disagree, and nothing stops a partial correction. The argument is right for a database that is <em>edited</em>. This one is not: a release is read-only, its keys are minted from the corrected fields at the freeze (<code>create_cruise_key()</code> refuses a blank or malformed NODC code outright), and the gate below fails the release if a key disagrees with its parts. What a natural key buys in return is legibility — <code>2019-07-39C2</code> says which cruise it is; a UUID says nothing until joined — and stability across the fifteen datasets whose sources mint no UUID at all.</p>
+<p><strong>The provider’s identifiers are released as typed columns beside the keys</strong>, never dropped: they are the join back to the provider’s own database.</p>
+<ul>
+<li><code>cruise.cruise_uuid</code> is NOAA/SWFSC’s <code>CruiseId</code>, populated for every SWFSC cruise — a public join key to NOAA’s CalCOFI database.</li>
+<li><code>sample.source_uuid</code> is the provider’s identifier for <em>that event</em>, exactly as shipped (SWFSC’s <code>site_uuid</code> on a site row, <code>tow_uuid</code> on a tow, <code>net_uuid</code> on a net), and NULL for the datasets whose sources mint none.</li>
+<li><code>sample.station_uuid</code> is the SWFSC station occupation any event belongs to, resolved at release, with <code>station_uuid_method</code> saying how (its own site, its parent’s, a match on cruise + station + occupation order, or the one ichthyoplankton occupation within 24 hours).</li>
+</ul>
+<p>Wrangling-time provenance (<code>_source_file</code>, <code>_source_row</code>, …) is a different thing and is stripped at the freeze.</p>
+<div id="fig-core-erd" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-core-erd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="diagrams/core_erd.svg" class="cc-diagram nolightbox img-fluid figure-img">
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Being written
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-core-erd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: The core family and the references it joins to, with the keys that carry the integration. Every other released table hangs off one of these; the full diagram for any release is in the <a href="https://calcofi.io/db-schema/#erd">schema browser</a>.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="the-contract-per-table" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="the-contract-per-table"><span class="header-section-number">5.2</span> The contract, per table</h2>
+<p>Every released table declares a primary key, and every foreign key between released tables is declared in the release’s <code>relationships.json</code> (<code>calcofi4db::core_relationships()</code> for the core family and the tables the release builds; <code>metadata/relationships_cross.csv</code> for the edges that cross datasets). The table reads that file for v2026.09.06.</p>
+<div class="cell">
+<div id="tbl-contract" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: Keys declared for every table of v2026.09.06. A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.
+</figcaption>
+<div aria-describedby="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="sqhokiwtiy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sqhokiwtiy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sqhokiwtiy thead, #sqhokiwtiy tbody, #sqhokiwtiy tfoot, #sqhokiwtiy tr, #sqhokiwtiy td, #sqhokiwtiy th {
+  border-style: none;
+}
+
+#sqhokiwtiy p {
+  margin: 0;
+  padding: 0;
+}
+
+#sqhokiwtiy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.88em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#sqhokiwtiy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sqhokiwtiy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sqhokiwtiy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sqhokiwtiy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sqhokiwtiy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sqhokiwtiy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sqhokiwtiy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sqhokiwtiy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#sqhokiwtiy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#sqhokiwtiy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sqhokiwtiy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sqhokiwtiy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sqhokiwtiy .gt_row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sqhokiwtiy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sqhokiwtiy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#sqhokiwtiy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#sqhokiwtiy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#sqhokiwtiy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sqhokiwtiy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#sqhokiwtiy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sqhokiwtiy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sqhokiwtiy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sqhokiwtiy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sqhokiwtiy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sqhokiwtiy .gt_left {
+  text-align: left;
+}
+
+#sqhokiwtiy .gt_center {
+  text-align: center;
+}
+
+#sqhokiwtiy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sqhokiwtiy .gt_font_normal {
+  font-weight: normal;
+}
+
+#sqhokiwtiy .gt_font_bold {
+  font-weight: bold;
+}
+
+#sqhokiwtiy .gt_font_italic {
+  font-style: italic;
+}
+
+#sqhokiwtiy .gt_super {
+  font-size: 65%;
+}
+
+#sqhokiwtiy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#sqhokiwtiy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#sqhokiwtiy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#sqhokiwtiy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#sqhokiwtiy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#sqhokiwtiy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#sqhokiwtiy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#sqhokiwtiy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#sqhokiwtiy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="table" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">table</th>
+<th id="tier" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">tier</th>
+<th id="rows" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">rows</th>
+<th id="primary-key" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">primary key</th>
+<th id="foreign-keys" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">foreign keys</th>
+<th id="referenced-by" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">referenced by</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">climatology</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">768,880</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">dataset_key, grid_key, month, depth_bin, measurement_type</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">grid_key → grid; measurement_type → measurement_type; dataset_key → dataset</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">842</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">ship_key → ship</td>
+<td class="gt_row gt_right" headers="referenced by">7</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">16</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">dataset_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em"><br>
+</td>
+<td class="gt_row gt_right" headers="referenced by">11</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset_taxon</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">1,917</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">ds_taxon_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">taxon_key → taxon; dataset_key → dataset</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">grid</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">218</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">grid_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em"><br>
+</td>
+<td class="gt_row gt_right" headers="referenced by">8</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">lookup</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">26</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">lookup_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em"><br>
+</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">200</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em"><br>
+</td>
+<td class="gt_row gt_right" headers="referenced by">8</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_attribute</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">obs_attribute_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; taxon_key → taxon; measurement_type → measurement_type; dataset_key → dataset</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_bio</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">root_id → sample_root; sample_key → sample; dataset_key → dataset; grid_key → grid; cruise_key → cruise; measurement_type → measurement_type; taxon_key → taxon</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">root_id → sample_root; sample_key → sample; dataset_key → dataset; grid_key → grid; cruise_key → cruise; measurement_type → measurement_type</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">region</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">4</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">region_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em"><br>
+</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">sample_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">parent_sample_key → sample; root_sample_key → sample; grid_key → grid; cruise_key → cruise; dataset_key → dataset; station_uuid → sample</td>
+<td class="gt_row gt_right" headers="referenced by">8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_measurement</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">589,603</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">sample_measurement_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; measurement_type → measurement_type; dataset_key → dataset</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">929,664</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">root_sample_key, spatial_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">root_sample_key → sample; spatial_key → spatial; root_id → sample_root</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">49</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">ship_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em"><br>
+</td>
+<td class="gt_row gt_right" headers="referenced by">1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">13,206</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">spatial_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em"><br>
+</td>
+<td class="gt_row gt_right" headers="referenced by">2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">148,461</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">spatial_key, fld</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">spatial_key → spatial</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">2,614</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">taxon_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">parent_taxon_key → taxon</td>
+<td class="gt_row gt_right" headers="referenced by">5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">441</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">taxon_group_key, taxon_key</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">taxon_key → taxon</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
+<td class="gt_row gt_left" headers="tier">deprecated</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; measurement_type → measurement_type; taxon_key → taxon; grid_key → grid; cruise_key → cruise; dataset_key → dataset</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_ctd_full</td>
+<td class="gt_row gt_left" headers="tier">supplemental</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; dataset_key → dataset; measurement_type → measurement_type; cruise_key → cruise; grid_key → grid</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_mets_full</td>
+<td class="gt_row gt_left" headers="tier">supplemental</td>
+<td class="gt_row gt_right" headers="rows">19,927,416</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">dataset_key → dataset; measurement_type → measurement_type; cruise_key → cruise; grid_key → grid</td>
+<td class="gt_row gt_right" headers="referenced by">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
+<td class="gt_row gt_left" headers="tier">supplemental</td>
+<td class="gt_row gt_right" headers="rows">421,454</td>
+<td class="gt_row gt_left" headers="primary key" style="font-family: monospace; font-size: 0.85em">root_id</td>
+<td class="gt_row gt_left" headers="foreign keys" style="font-family: monospace; font-size: 0.85em">root_sample_key → sample; dataset_key → dataset; cruise_key → cruise; grid_key → grid</td>
+<td class="gt_row gt_right" headers="referenced by">3</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>This chapter is part of the September 2026 revamp of the book (the plan is in <a href="https://github.com/CalCOFI/workflows/tree/main/.claude/plans">CalCOFI/workflows</a>) and lands in the order the plan gives. What it will hold:</p>
-<p>The rules — which suffix means which kind of key, the four keys that carry the integration, why the release’s keys are natural strings and the provider’s UUIDs are kept as columns beside them — then the contract per table (primary key, foreign keys in and out, what may be NULL), and the measured result: for every release, whether every primary key is unique and every foreign key resolves, from the <code>integrity.json</code> sidecar the release writes.</p>
+</div>
+</figure>
 </div>
 </div>
+</section>
+<section id="measured-this-release" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="measured-this-release"><span class="header-section-number">5.3</span> Measured, this release</h2>
+<p>Declaring a key is cheap. Since 2026-09-08 the release <em>measures</em> every declaration on the assembled tables before it freezes — <code>calcofi4db::check_release_relationships()</code> — and writes the result beside <code>catalog.json</code> as <code>integrity.json</code>. A duplicate or NULL primary key, or any non-NULL foreign key with no match, <strong>stops the release</strong>. The schema browser reads the same file, so a ✓ on a key there means measured, not declared.</p>
+<p>For <strong>v2026.09.06</strong>: 23 primary keys and 57 foreign keys measured, 0 skipped, <strong>every key ok</strong>.</p>
+<div class="cell">
+<div id="tbl-pk" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.2: Primary keys, measured — rows, distinct key values, duplicates, and rows with a NULL anywhere in the key.
+</figcaption>
+<div aria-describedby="tbl-pk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="yetsiajvzg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yetsiajvzg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#yetsiajvzg thead, #yetsiajvzg tbody, #yetsiajvzg tfoot, #yetsiajvzg tr, #yetsiajvzg td, #yetsiajvzg th {
+  border-style: none;
+}
+
+#yetsiajvzg p {
+  margin: 0;
+  padding: 0;
+}
+
+#yetsiajvzg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.88em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#yetsiajvzg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yetsiajvzg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yetsiajvzg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yetsiajvzg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yetsiajvzg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yetsiajvzg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yetsiajvzg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yetsiajvzg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yetsiajvzg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#yetsiajvzg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yetsiajvzg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yetsiajvzg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yetsiajvzg .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yetsiajvzg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yetsiajvzg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#yetsiajvzg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#yetsiajvzg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yetsiajvzg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yetsiajvzg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#yetsiajvzg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yetsiajvzg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yetsiajvzg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yetsiajvzg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yetsiajvzg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yetsiajvzg .gt_left {
+  text-align: left;
+}
+
+#yetsiajvzg .gt_center {
+  text-align: center;
+}
+
+#yetsiajvzg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yetsiajvzg .gt_font_normal {
+  font-weight: normal;
+}
+
+#yetsiajvzg .gt_font_bold {
+  font-weight: bold;
+}
+
+#yetsiajvzg .gt_font_italic {
+  font-style: italic;
+}
+
+#yetsiajvzg .gt_super {
+  font-size: 65%;
+}
+
+#yetsiajvzg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#yetsiajvzg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#yetsiajvzg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#yetsiajvzg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#yetsiajvzg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#yetsiajvzg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#yetsiajvzg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#yetsiajvzg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#yetsiajvzg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="table" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">table</th>
+<th id="key" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">key</th>
+<th id="rows" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">rows</th>
+<th id="distinct" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">distinct</th>
+<th id="duplicates" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">duplicates</th>
+<th id="NULL" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">NULL</th>
+<th id="status" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">status</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">climatology</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">dataset_key,grid_key,month,depth_bin,measurement_type</td>
+<td class="gt_row gt_right" headers="rows">768,880</td>
+<td class="gt_row gt_right" headers="distinct">768,880</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
+<td class="gt_row gt_right" headers="rows">842</td>
+<td class="gt_row gt_right" headers="distinct">842</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">dataset_key</td>
+<td class="gt_row gt_right" headers="rows">16</td>
+<td class="gt_row gt_right" headers="distinct">16</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset_taxon</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">ds_taxon_key</td>
+<td class="gt_row gt_right" headers="rows">1,917</td>
+<td class="gt_row gt_right" headers="distinct">1,917</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">grid</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">grid_key</td>
+<td class="gt_row gt_right" headers="rows">218</td>
+<td class="gt_row gt_right" headers="distinct">218</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">lookup</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">lookup_id</td>
+<td class="gt_row gt_right" headers="rows">26</td>
+<td class="gt_row gt_right" headers="distinct">26</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_right" headers="rows">200</td>
+<td class="gt_row gt_right" headers="distinct">200</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="distinct">26,265,248</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_attribute</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_attribute_id</td>
+<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_right" headers="distinct">458,184</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_bio</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="distinct">1,258,665</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_ctd_full</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_right" headers="distinct">271,394,164</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="distinct">25,006,583</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_mets_full</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_right" headers="rows">19,927,416</td>
+<td class="gt_row gt_right" headers="distinct">19,927,416</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">region</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">region_key</td>
+<td class="gt_row gt_right" headers="rows">4</td>
+<td class="gt_row gt_right" headers="distinct">4</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">sample_key</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="distinct">1,469,155</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_measurement</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">sample_measurement_id</td>
+<td class="gt_row gt_right" headers="rows">589,603</td>
+<td class="gt_row gt_right" headers="distinct">589,603</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">root_id</td>
+<td class="gt_row gt_right" headers="rows">421,454</td>
+<td class="gt_row gt_right" headers="distinct">421,454</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">root_sample_key,spatial_key</td>
+<td class="gt_row gt_right" headers="rows">929,664</td>
+<td class="gt_row gt_right" headers="distinct">929,664</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">ship_key</td>
+<td class="gt_row gt_right" headers="rows">49</td>
+<td class="gt_row gt_right" headers="distinct">49</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">spatial_key</td>
+<td class="gt_row gt_right" headers="rows">13,206</td>
+<td class="gt_row gt_right" headers="distinct">13,206</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">spatial_key,fld</td>
+<td class="gt_row gt_right" headers="rows">148,461</td>
+<td class="gt_row gt_right" headers="distinct">148,461</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">taxon_key</td>
+<td class="gt_row gt_right" headers="rows">2,614</td>
+<td class="gt_row gt_right" headers="distinct">2,614</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">taxon_group_key,taxon_key</td>
+<td class="gt_row gt_right" headers="rows">441</td>
+<td class="gt_row gt_right" headers="distinct">441</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-fk" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.3: Foreign keys, measured — rows, rows whose key is NULL (permitted), and orphans (a non-NULL value with no match; any orphan fails the release).
+</figcaption>
+<div aria-describedby="tbl-fk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="tplnxbmvhg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tplnxbmvhg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tplnxbmvhg thead, #tplnxbmvhg tbody, #tplnxbmvhg tfoot, #tplnxbmvhg tr, #tplnxbmvhg td, #tplnxbmvhg th {
+  border-style: none;
+}
+
+#tplnxbmvhg p {
+  margin: 0;
+  padding: 0;
+}
+
+#tplnxbmvhg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.88em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tplnxbmvhg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tplnxbmvhg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tplnxbmvhg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tplnxbmvhg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tplnxbmvhg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tplnxbmvhg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tplnxbmvhg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tplnxbmvhg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tplnxbmvhg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tplnxbmvhg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tplnxbmvhg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tplnxbmvhg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tplnxbmvhg .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tplnxbmvhg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tplnxbmvhg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tplnxbmvhg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tplnxbmvhg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tplnxbmvhg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tplnxbmvhg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tplnxbmvhg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tplnxbmvhg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tplnxbmvhg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tplnxbmvhg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tplnxbmvhg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tplnxbmvhg .gt_left {
+  text-align: left;
+}
+
+#tplnxbmvhg .gt_center {
+  text-align: center;
+}
+
+#tplnxbmvhg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tplnxbmvhg .gt_font_normal {
+  font-weight: normal;
+}
+
+#tplnxbmvhg .gt_font_bold {
+  font-weight: bold;
+}
+
+#tplnxbmvhg .gt_font_italic {
+  font-style: italic;
+}
+
+#tplnxbmvhg .gt_super {
+  font-size: 65%;
+}
+
+#tplnxbmvhg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tplnxbmvhg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tplnxbmvhg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tplnxbmvhg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tplnxbmvhg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tplnxbmvhg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tplnxbmvhg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tplnxbmvhg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tplnxbmvhg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="edge" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">edge</th>
+<th id="rows" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">rows</th>
+<th id="NULL" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">NULL</th>
+<th id="orphans" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">orphans</th>
+<th id="status" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">status</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">climatology.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">768,880</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">climatology.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">768,880</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">climatology.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">768,880</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">cruise.ship_key → ship.ship_key</td>
+<td class="gt_row gt_right" headers="rows">842</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">dataset_taxon.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">1,917</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">dataset_taxon.taxon_key → taxon.taxon_key</td>
+<td class="gt_row gt_right" headers="rows">1,917</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="NULL">179,587</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="NULL">316,895</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.taxon_key → taxon.taxon_key</td>
+<td class="gt_row gt_right" headers="rows">26,265,248</td>
+<td class="gt_row gt_right" headers="NULL">25,007,346</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.taxon_key → taxon.taxon_key</td>
+<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_right" headers="NULL">781</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="NULL">143,957</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="NULL">209,033</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.root_id → sample_root.root_id</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.taxon_key → taxon.taxon_key</td>
+<td class="gt_row gt_right" headers="rows">1,258,665</td>
+<td class="gt_row gt_right" headers="NULL">763</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">271,394,164</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="NULL">35,630</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="NULL">107,862</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.root_id → sample_root.root_id</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">25,006,583</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">19,927,416</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">19,927,416</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">19,927,416</td>
+<td class="gt_row gt_right" headers="NULL">16,128</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">19,927,416</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="NULL">23,739</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="NULL">27,922</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.parent_sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="NULL">421,454</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.root_sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.station_uuid → sample.source_uuid</td>
+<td class="gt_row gt_right" headers="rows">1,469,155</td>
+<td class="gt_row gt_right" headers="NULL">436,533</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_measurement.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">589,603</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_measurement.measurement_type → measurement_type.measurement_type</td>
+<td class="gt_row gt_right" headers="rows">589,603</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_measurement.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">589,603</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">421,454</td>
+<td class="gt_row gt_right" headers="NULL">23,149</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">421,454</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.grid_key → grid.grid_key</td>
+<td class="gt_row gt_right" headers="rows">421,454</td>
+<td class="gt_row gt_right" headers="NULL">13,231</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.root_sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">421,454</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.root_id → sample_root.root_id</td>
+<td class="gt_row gt_right" headers="rows">929,664</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.root_sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">929,664</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.spatial_key → spatial.spatial_key</td>
+<td class="gt_row gt_right" headers="rows">929,664</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">spatial_attribute.spatial_key → spatial.spatial_key</td>
+<td class="gt_row gt_right" headers="rows">148,461</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">taxon.parent_taxon_key → taxon.taxon_key</td>
+<td class="gt_row gt_right" headers="rows">2,614</td>
+<td class="gt_row gt_right" headers="NULL">19</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">taxon_group.taxon_key → taxon.taxon_key</td>
+<td class="gt_row gt_right" headers="rows">441</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Two things the tables do not show, on purpose:</p>
+<ul>
+<li><strong>A NULL is not an orphan.</strong> Where a column is NULL the row has nothing to point at — an environmental observation has no taxon, a region-pooled sample has no grid cell, a root sample has no parent. The counts are shown so a reader can see how nullable an edge is; they are not failures.</li>
+<li><strong>One edge is knowingly undeclared.</strong> <code>obs_mets_full.sample_key</code> would point at <code>sample</code>, but the full-resolution meteorology mints one key per underway record and only the headline series’ events reach <code>sample</code>: 73,607 of its 2,168,850 distinct keys resolve. Declaring the edge would fail every release on some nineteen million orphans; leaving it silent would hide a real gap. It is recorded in the release notes and as <a href="https://github.com/CalCOFI/workflows/issues/78">CalCOFI/workflows#78</a> until the supplemental’s events either join <code>sample</code> or carry a documented per-record key.</li>
+</ul>
+</section>
+<section id="what-the-release-checks-before-it-ships" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="what-the-release-checks-before-it-ships"><span class="header-section-number">5.4</span> What the release checks before it ships</h2>
+<p>Keys are one family of gate. The full list — what each checks, and whether it fails the release or only ratchets — is on the <a href="./releases.html#sec-release-gates">Releases</a> page; the ones that concern keys are:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>gate</th>
+<th>what it measures</th>
+<th>on failure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>check_release_relationships()</code></td>
+<td>every declared primary key unique and non-NULL; every non-NULL foreign key resolving; written to <code>integrity.json</code></td>
+<td><strong>stops the release</strong></td>
+</tr>
+<tr class="even">
+<td><code>check_core_pk_unique()</code></td>
+<td>the core family’s primary keys, before the release-built tables exist (the gate added after v2026.08.25 shipped 4,855 duplicate <code>sample_key</code>s)</td>
+<td>stops the release</td>
+</tr>
+<tr class="odd">
+<td><code>check_cruise_key_integrity()</code></td>
+<td><code>cruise_key</code> format, its month against the NODC code, the <code>sample</code>/<code>obs</code> → <code>cruise</code> edge, <code>cruise_uuid</code> hygiene, every event’s date within its cruise’s span (± 31 days, named exceptions only)</td>
+<td>stops the release; three ratchets (span overlaps, derived cruises, NULL keys per dataset) may only ever go down</td>
+</tr>
+<tr class="even">
+<td><code>validate_for_release()</code></td>
+<td>NULLs in any <code>*_id</code> / <code>*_key</code> / <code>*_uuid</code> column; latitude, longitude and counts in range; no empty table</td>
+<td>NULLs stop the release; ranges warn</td>
+</tr>
+<tr class="odd">
+<td><code>check_obs_pair_parity()</code></td>
+<td><code>obs_bio</code> + <code>obs_env</code> reproduce <code>obs</code> — row counts, distinct ids, a hash of every column, per realm and dataset</td>
+<td>stops the release</td>
+</tr>
+<tr class="even">
+<td><code>test_release.qmd</code> consumer contract</td>
+<td>every query shape the apps and packages depend on, run against the frozen release three ways (objects, view, pair), plus the presence of an all-ok <code>integrity.json</code></td>
+<td><code>latest.txt</code> is not promoted</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="walking-the-keys" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="walking-the-keys"><span class="header-section-number">5.5</span> Walking the keys</h2>
+<p>The joins worth memorising, as SQL against any release (see <a href="./data-access.html">Access the data</a> for the connection):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- an observation to its sampling event, and up the hierarchy</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>obs_bio.sample_key          <span class="op">-&gt;</span> <span class="kw">sample</span>.sample_key</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">sample</span>.parent_sample_key    <span class="op">-&gt;</span> <span class="kw">sample</span>.sample_key      <span class="co">-- the containing event</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">sample</span>.root_sample_key      <span class="op">-&gt;</span> <span class="kw">sample</span>.sample_key      <span class="co">-- the top of the chain</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- the dense integer twin the browser objects use instead of the string key</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>obs_bio.root_id             <span class="op">-&gt;</span> sample_root.root_id</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>sample_spatial.root_id      <span class="op">-&gt;</span> sample_root.root_id    <span class="co">-- which polygons a root sample falls in</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- provenance and place, denormalized onto the observation so a rollup needs no join</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>obs_env.dataset_key         <span class="op">-&gt;</span> dataset.dataset_key</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>obs_env.cruise_key          <span class="op">-&gt;</span> cruise.cruise_key</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>obs_env.grid_key            <span class="op">-&gt;</span> grid.grid_key</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">-- what was measured, and of what</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>obs_env.measurement_type    <span class="op">-&gt;</span> measurement_type.measurement_type</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>obs_bio.taxon_key           <span class="op">-&gt;</span> taxon.taxon_key</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>(dataset_key, ds_taxa_code) <span class="op">-&gt;</span> dataset_taxon          <span class="co">-- the per-dataset vocabulary</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">-- back to the provider</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>cruise.cruise_uuid                                    <span class="co">-- NOAA's CruiseId</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">sample</span>.source_uuid                                    <span class="co">-- the provider's own event id</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">sample</span>.station_uuid         <span class="op">-&gt;</span> <span class="kw">sample</span>.source_uuid     <span class="co">-- the SWFSC station occupation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A worked example: every net tow in a cruise with the number of larvae observations under it, walking <code>sample</code>’s adjacency list once.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> tows <span class="kw">AS</span> (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> sample_key, root_sample_key, datetime</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> <span class="kw">sample</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> dataset_key <span class="op">=</span> <span class="st">'swfsc_ichthyo'</span> <span class="kw">AND</span> sample_type <span class="op">=</span> <span class="st">'tow'</span> <span class="kw">AND</span> cruise_key <span class="op">=</span> <span class="st">'2019-07-39C2'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> t.sample_key, t.datetime, <span class="fu">count</span>(o.obs_id) <span class="kw">AS</span> n_larvae_obs</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> tows t</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> <span class="kw">sample</span> n <span class="kw">ON</span> n.parent_sample_key <span class="op">=</span> t.sample_key          <span class="co">-- the nets under each tow</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> obs_bio o <span class="kw">ON</span> o.sample_key <span class="op">=</span> n.sample_key <span class="kw">AND</span> o.life_stage <span class="op">=</span> <span class="st">'larva'</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>, <span class="dv">2</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1042,4 +3487,4 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/keys.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/keys.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
