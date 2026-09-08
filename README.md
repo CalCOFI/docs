@@ -51,3 +51,12 @@ find yourself typing a number, look for the file that carries it.
 
 The revamp of 2026-09 that gave the book its parts, its build and its keys chapter is planned in
 `CalCOFI/workflows` `.claude/plans/2026-09-08 Docs revamp — ….md`.
+
+## Feedback
+
+Every page carries the fleet's feedback dialog — calcofi.io's `assets/feedback.{css,js}` (the Explorer's
+annotated-screenshot dialog, plain JS) — as a speech-bubble sidebar tool beside Quarto's theme toggle,
+inserted by `brand-head.html`. A report (note, this page's URL, viewport, theme, the marked-up screenshot)
+goes to the "CalCOFI app feedback" Sheet and its recipients with `app: docs`; the Apps Script files the
+public issue in the repo it maps `docs` to, so `calcofi4r::cc_feedback_script(repos = c(…, docs = "CalCOFI/docs"))`
+must be deployed for that step. "Open as GitHub issue myself" files a prefilled issue here without it.
