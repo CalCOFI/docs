@@ -79,7 +79,10 @@ d <- ds |>
 # (the same guard as portals.qmd's tables): links are HTML-only
 if (knitr::is_html_output()) {
   d |>
-    gt::gt() |>
+    gt::gt(id = "tbl-cite") |>
+    # a DOI is one unbreakable token: let this column alone break anywhere, so the table
+    # stays inside the page (overflow-wrap: break-word, the book's default, does not shrink it)
+    gt::opt_css("#tbl-cite td:nth-child(2) { overflow-wrap: anywhere; }") |>
     gt::fmt_url(columns = page, label = gt::from_column("dataset_key")) |>
     gt::fmt_url(columns = doi, label = "doi") |>
     gt::cols_hide(dataset_key) |>
