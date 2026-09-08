@@ -1,23 +1,73 @@
-# Process
+# Start here {.unnumbered}
 
-```{=html}
-<!-- Edit here:
-[software architecture v2 | calcofi - Google Drawings](https://docs.google.com/drawings/d/10gMrYC7wIo0ahz94KjGh8rc-vP1Nim1MI-hZdUK9BL4/edit)
-[software architecture | calcofi - Google Drawings](https://docs.google.com/drawings/d/11lyFRPZV5Jtk7RoNFe4zRjxUvSp9ZH56p2PSdDWfEcs/edit)
--->
+CalCOFI.io is the open, versioned, integrated database of CalCOFI's observations — the physical,
+chemical and biological measurements of one of the world's longest ocean time series, from sixteen
+source datasets, in one schema — and the products around it: an explorer that runs in your
+browser, packages for R and Python, a page and a citable record for every dataset, and the
+portals the data reach. This book is its documentation, for everyone who uses the data, builds on
+it, or contributes to it.
+
+```{r}
+#| label: facts
+#| include: false
+librarian::shelf(jsonlite, readr, here, quiet = TRUE)
+snap    <- jsonlite::fromJSON(here("data/_snapshot.json"))
+catalog <- jsonlite::fromJSON(here("data/release/catalog.json"), simplifyVector = FALSE)
+ds      <- readr::read_csv(here("data/release/dataset.csv"), show_col_types = FALSE)
+n_tables <- length(catalog$tables)
+fmt_n    <- function(x) format(x, big.mark = ",", scientific = FALSE)
+fmt_gb   <- function(b) sprintf("%.2f GB", b / 1e9)
 ```
 
-![CalCOFI data workflow.](figs/sw_arch.svg){#fig-sw-arch}
+::: {.callout-note appearance="simple" icon=false}
+**The promoted release is `r catalog$version`** — `r nrow(ds)` datasets, `r n_tables` tables,
+`r fmt_n(catalog$total_rows)` rows, `r fmt_gb(catalog$total_size)` of parquet on a public bucket,
+DOI [`r catalog$doi`](https://doi.org/`r catalog$doi`). Every number on this page is read from
+the release when the book renders; nothing here is typed.
+:::
 
-The original raw **data**, most often in tabular format [e.g., comma-separated value (\*.csv)], gets **ingest**ed into the **database** by R [scripts](https://github.com/CalCOFI/scripts) that use functions and lookup data tables in the R package [**`calcofi4r`**](https://calcofi.github.io/calcofi4r/reference/index.html) where functions are organized into _Read_, _Analyze_ and _Visualize_ concepts. The application programming interface (**API**) provides a program-language-agnostic public interface for rendering subsets of data and custom visualizations given a set of documented input parameters for feeding interactive applications (**Apps**) using Shiny (or any other web application framework) and **reports** using Rmarkdown (or any other report templating framework). Finally, R scripts will **publish** metadata (as [Ecological Metadata Language](https://docs.ropensci.org/EML)) and data packages (e.g., in Darwin format) for discovery on a variety of data _**portals**_ oriented around slicing the tabular or gridded data ([ERDDAP](https://coastwatch.pfeg.noaa.gov/erddap/information.html)), biogeographic analysis ([OBIS](https://obis.org)), long-term archive ([DataOne](https://www.dataone.org), [NCEI](https://www.ncei.noaa.gov)) or metadata discovery ([InPort](https://www.fisheries.noaa.gov/inport/)). Every one of those datasets — and every one still awaiting ingestion — also has a page of its own at [calcofi.io/datasets/](https://calcofi.io/datasets/): the **dataset catalog**, generated from the same database, joining every portal it reaches (see [Portals](portals.qmd)). The **database** will be spatially enabled by PostGIS for summarizing any and all data by _**Areas of Interest**_ (AoIs), whether pre-defined (e.g., sanctuaries, MPAs, counties, etc.) or arbitrary new areas. (@fig-sw-arch)
+![The system, read left to right along the phases of the data management plan. Provider files are ingested by one notebook per dataset; the release assembles the shards, checks the keys and freezes a versioned copy with a DOI; from the release come the record each portal reads and the products people use. The CTD team's working store stands beside it, feeding accepted flags into the next ingest.](diagrams/system.svg){#fig-system}
 
-That figure is from 2022. The **publish** box on it is now real, and it is generated rather than
-scripted by hand: at every release one record per dataset (`datasets.json`) and one EML document
-per dataset are written, and from those two files come the dataset pages, the DCAT and STAC
-catalogs, the Darwin Core archives for OBIS, the EDI packages and ERDDAP's own metadata
-(@fig-catalog-flow). How a provider's words get into that record — and what they edit to change
-it — is the subject of [Metadata & the ingest loop](metadata.qmd).
+## Five phases, one system
 
-![Everything a portal sees is generated from one record per dataset. The dotted boxes are catalogs run by others; each is pointed at a static file we already publish.](diagrams/catalog_flow.svg){#fig-catalog-flow}
+The SIO-CalCOFI data management plan organizes the work into five phases. They are also the
+book's spine: each phase has a product that realizes it and a chapter that explains it.
 
+- **Ingest.** Each source dataset — a bottle database, a CTD archive, a net-tow spreadsheet — is
+  turned into the shared schema by one reproducible notebook, with the provider's own identifiers
+  kept as columns and every open question filed with the provider. → [Ingesting a
+  dataset](ingest-loop.qmd), [Metadata & the ingest loop](metadata.qmd).
+- **Integrate.** The shards join on a handful of shared keys — the cruise, the station, the
+  sampling event, the taxon, the measured quantity — under one naming convention, and a release
+  is cut only after its keys and its bounds have been checked. → [The database](db.qmd), [Keys
+  and integrity](keys.qmd), [Naming conventions](naming.qmd), [Releases](releases.qmd).
+- **Publish.** From the release, one record per dataset is generated, and from that record the
+  dataset pages, the metadata documents and the packages that reach ERDDAP, OBIS, EDI and the
+  archives — so a description written once reaches every portal. → [Portals](portals.qmd),
+  [Cite this data](cite.qmd).
+- **Visualize.** The Explorer looks at the whole database through six lenses with nothing but a
+  browser; the packages read the same bytes from R and Python; every dataset has a page. →
+  [Explore](explore.qmd), [Access the data](data-access.qmd).
+- **Synthesize.** The plan, its tasks and their status, and the architecture that ties the rest
+  together, kept as a living record. → [The data management plan](dmp.qmd),
+  [Architecture](architecture.qmd), [Status](status.qmd).
 
+## Which door is yours
+
+| If you are … | start with | then |
+|---|---|---|
+| curious about the ocean off California, or a scientist who wants to see the data | [Explore](explore.qmd) | [Access the data](data-access.qmd), [Cite this data](cite.qmd) |
+| a data scientist writing queries or building on the release | [Access the data](data-access.qmd) | [The database](db.qmd), [Keys and integrity](keys.qmd), [Releases](releases.qmd) |
+| a data provider, now or in future | [Providing data to CalCOFI](provide.qmd) | [Metadata & the ingest loop](metadata.qmd), [Portals](portals.qmd) |
+| on the CTD team | [CTD QA/QC, start to release](ctd-qaqc.qmd) | [Server access](server-access.qmd) |
+| on the data team, or building a CalCOFI.io product | [Ingesting a dataset](ingest-loop.qmd) | [Products, brand and uptime](products.qmd), [Architecture](architecture.qmd) |
+| reporting on the program | [The data management plan](dmp.qmd) | [Status](status.qmd) |
+
+## How this book is kept true
+
+Prose is authored; facts are generated. Every table of counts, columns, keys, datasets, portals
+or statuses is read from the record — the promoted release's own sidecars and the registries in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows) — when the book renders, so a page
+cannot describe a database that has since changed. Where a chapter states a rule, the rule is
+one the pipeline enforces, and the chapter says how. The source of every chapter is one file in
+[CalCOFI/docs](https://github.com/CalCOFI/docs); the pencil in the margin edits it.

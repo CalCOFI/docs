@@ -69,19 +69,40 @@ book:
       - icon: file-earmark-word
         text: DOCX
         href: https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.docx
+  # parts by audience; the DMP's five phases are the spine of index.qmd and status.qmd
   chapters:
     - index.qmd
-    - reports.qmd
-    - apps.qmd
-    - db.qmd
-    - metadata.qmd
-    - data-access.qmd
-    - cite.qmd
-    - server-access.qmd
+    - part: "Use the data"
+      chapters:
+        - explore.qmd
+        - data-access.qmd
+        - cite.qmd
+    - part: "Understand the database"
+      chapters:
+        - db.qmd
+        - keys.qmd
+        - naming.qmd
+        - releases.qmd
+    - part: "Contribute data"
+      chapters:
+        - provide.qmd
+        - metadata.qmd
+        - portals.qmd
+    - part: "Work with the team"
+      chapters:
+        - server-access.qmd
+        - ctd-qaqc.qmd
+        - ingest-loop.qmd
+        - products.qmd
+    - part: "The plan and the record"
+      chapters:
+        - dmp.qmd
+        - architecture.qmd
+        - status.qmd
+  appendices:
     - helpers.qmd
     - api.qmd
-    - portals.qmd
-    - status.qmd
+    - glossary.qmd
     - refs.qmd
 
 bibliography: ["refs/packages.bib"]

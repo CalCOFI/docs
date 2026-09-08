@@ -1,0 +1,10 @@
+# The data management plan {#sec-dmp}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+The five phases of the SIO-CalCOFI data management plan and the tasks under each, with owner, status, target date and where the deliverable lives — read from a file kept in step with the plan's status sheet.
+:::

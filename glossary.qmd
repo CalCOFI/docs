@@ -1,0 +1,10 @@
+# Glossary {#sec-glossary}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+The terms a reader trips on — cruise, cast, bottle, tow, net, site, line and station, grid cell, hexagon, realm, grain, measurement type, life stage, sample and observation, release, holding, sidecar, catalog, provider, dataset key — each ending with the chapter that says more.
+:::

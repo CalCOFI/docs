@@ -1,0 +1,10 @@
+# Products, brand and uptime {#sec-products}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+Every CalCOFI.io product with its section, its source, its uptime and its usage, generated from the landing page's cards; the three-slug contract that keeps a card, its monitor and its analytics one thing; the brand contract in one paragraph; and how to add a product.
+:::

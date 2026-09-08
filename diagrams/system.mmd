@@ -1,0 +1,56 @@
+graph LR
+  %% the CalCOFI.io data system, read left to right along the DMP's phases:
+  %% ingest -> integrate -> publish -> visualize, with the working store beside it.
+  %% synthesize is this book and the status page, so it is the frame, not a box.
+
+  subgraph ingest[Ingest]
+    drive["provider files<br/>Google Shared Drive ⇄ GCS"]:::source
+    nb["16 ingest notebooks<br/>ingest_*.qmd — calcofi4db, targets"]:::step
+    shards["parquet shards + JSON sidecars<br/>manifest · metadata · relationships"]:::artifact
+    q["questions.csv ⇄<br/>the provider's Sheet"]:::people
+  end
+
+  subgraph integrate[Integrate]
+    rel["release_database.qmd<br/>assemble · keys · gates"]:::step
+    frozen[("frozen release<br/>catalog.json · parquet objects<br/>DOI on Zenodo")]:::artifact
+    rec["the record<br/>datasets.json · eml/{key}.xml"]:::artifact
+  end
+
+  subgraph publish[Publish]
+    pages["calcofi.io/datasets/{key}<br/>DCAT · STAC · sitemap"]:::surface
+    erddap["erddap.calcofi.io"]:::surface
+    dwca["Darwin Core → OBIS<br/>EML → EDI · netCDF → NCEI"]:::surface
+  end
+
+  subgraph visualize[Visualize & access]
+    explore["CalCOFI Explorer<br/>six lenses, DuckDB in the browser"]:::surface
+    pkgs["calcofi4r · calcofi4py<br/>db-query · db-schema"]:::surface
+  end
+
+  subgraph work[The working store]
+    pg[("PostgreSQL<br/>ctd.scan verbatim · ctd.flag ledger")]:::people
+  end
+
+  drive --> nb --> shards --> rel
+  q -.-> nb
+  rel --> frozen --> rec
+  rec --> pages & erddap & dwca
+  frozen --> explore & pkgs & erddap
+  %% the working store feeds the CTD ingest (accepted flags, nightly) and reads the
+  %% release back through pg_duckdb; both edges start at pg so it ranks with Ingest
+  pg -. accepted flags, nightly .-> nb
+  pg -. reads the release, pg_duckdb .- frozen
+  %% invisible links rank the access block after the published surfaces
+  pages ~~~ explore
+  dwca ~~~ pkgs
+
+  classDef source   fill:#f5f0e6,stroke:#8a8272,color:#182b49
+  classDef step     fill:#fff7d6,stroke:#c9a227,color:#182b49
+  classDef artifact fill:#fbe9c9,stroke:#d97706,color:#182b49
+  classDef surface  fill:#e6f2fb,stroke:#00629b,color:#182b49
+  classDef people   fill:#eef1f5,stroke:#6b7a90,color:#182b49
+  style ingest     fill:#fafafa,stroke:#cfd6de
+  style integrate  fill:#fafafa,stroke:#cfd6de
+  style publish    fill:#fafafa,stroke:#cfd6de
+  style visualize  fill:#fafafa,stroke:#cfd6de
+  style work       fill:#fafafa,stroke:#cfd6de,stroke-dasharray:4 3

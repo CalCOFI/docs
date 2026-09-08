@@ -1,0 +1,10 @@
+# Providing data to CalCOFI {#sec-provide}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+The guide for a data provider, current or future: who it is for and what it is for; the fields that are mandatory (what, when, where), optional and best practice — a stable identifier per row, a UUID if you already run a database, a license, a citation, a contact; an example table with its columns; and what happens next once a dataset arrives.
+:::

@@ -1,0 +1,10 @@
+# CTD QA/QC, start to release {#sec-ctd-qaqc}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+For the CTD team: the working PostgreSQL store and its three schemas in one figure; the life of a flag from proposal to acceptance to the nightly snapshot the next ingest applies; the two starting points (the `calcofi4py` notebook and the workflows notebook); the preliminary tiers and what reaches the release; reading a release from psql.
+:::

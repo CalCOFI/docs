@@ -1,0 +1,10 @@
+# Keys and integrity {#sec-keys}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+The rules — which suffix means which kind of key, the four keys that carry the integration, why the release's keys are natural strings and the provider's UUIDs are kept as columns beside them — then the contract per table (primary key, foreign keys in and out, what may be NULL), and the measured result: for every release, whether every primary key is unique and every foreign key resolves, from the `integrity.json` sidecar the release writes.
+:::

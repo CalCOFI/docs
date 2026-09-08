@@ -1,0 +1,10 @@
+# Ingesting a dataset {#sec-ingest-loop}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+The loop the data team runs to bring a dataset in — explore, metadata, ingest, validate, release — the artifacts each step writes, what validation checks, how a dataset can be staged without being released, and how a question reaches its provider.
+:::

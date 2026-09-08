@@ -1,0 +1,10 @@
+# Architecture {#sec-architecture}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+The federated system end to end: sources on Drive and GCS, the pipeline, the release store, the record and the portals, the applications and packages, the working PostgreSQL store, the server stack, and where every URL is served from — with the 2022 design beside the 2026 one.
+:::

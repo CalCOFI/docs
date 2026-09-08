@@ -1,0 +1,145 @@
+---
+aliases:
+  - apps.html
+  - reports.html
+  - maps.html
+---
+
+# Explore {#sec-explore}
+
+Everything on this page runs on the same frozen release, so what you see in one product is what
+you get from another. Start with the Explorer; the rest of the page is where to go when you want
+one dataset, one table, or one query.
+
+## The Explorer
+
+[**calcofi.io/explore**](https://calcofi.io/explore/) is one web application for looking at the
+whole integrated database, for one **organism** (a taxon from the net tows and censuses) or one
+**ocean variable** (from the bottle, CTD, carbonate and weather series) at a time, through six
+*lenses*:
+
+- **Stations** — every CalCOFI station as a dot, coloured by the summary of what you chose over
+  the years, season and depths you set.
+- **Hexagons** — the same summary pooled into hexagons of a resolution you pick, so the whole
+  survey area reads at once.
+- **Contours** — an interpolated surface over the stations, computed in the browser, shown with
+  its own error.
+- **Cruises** — one cruise at a time: its track, its stations, what it measured.
+- **Regions** — summaries by boundary: sanctuaries, protected areas, wind areas, the CalCOFI
+  regions.
+- **Sections** — a vertical slice along a line, station by depth, as values or as anomalies
+  against the one climatology every product subtracts (see [The database](db.qmd)).
+
+Four things make it different from an app with a server behind it:
+
+- **Nothing runs anywhere but your browser.** The SQL executes in DuckDB inside the page, against
+  the release's parquet files on a public bucket — the same bytes `calcofi4r` and `calcofi4py`
+  read. There is no login, no rate limit and nothing to install.
+- **The URL is the whole view.** Lens, variable, stage, years, season, depth, theme: share the
+  address and the other person sees your view.
+- **Every download is reproducible.** A map exports as PNG with its title; a table as CSV with a
+  `dataset_key` column; and the SQL that produced it can be copied for R, Python or a DuckDB
+  shell.
+- **Attribution is built in.** *Cite this data* copies the release citation plus one per dataset
+  in the view (see [Cite this data](cite.qmd)); a *Sources* line names every dataset a view pools;
+  the feedback button sends the view, annotated if you like, to the team.
+
+`?theme=dark` or `?theme=light` sets the theme, `?tour=off` skips the welcome tour, and the
+[README](https://github.com/CalCOFI/explore#readme) documents every parameter.
+
+## One dataset
+
+Every dataset in the database — and every one CalCOFI holds but has not yet ingested — has a page
+at [**calcofi.io/datasets**](https://calcofi.io/datasets/): what it is, who made it, its years and
+area, how to cite it, and every place it can be reached (the Explorer, the packages, ERDDAP, its
+archive of record). The page is generated from the same record the portals read, so it is never a
+copy of anything. [Metadata & the ingest loop](metadata.qmd) says where its words come from.
+
+## One table, one query
+
+- [**calcofi.io/db-schema**](https://calcofi.io/db-schema/) browses the schema of any release:
+  tables, columns with units and descriptions, the entity-relationship diagram, the datasets and
+  the measurement-type registry. [The database](db.qmd) and [Keys and integrity](keys.qmd) are the
+  narrative it lacks.
+- [**calcofi.io/db-query**](https://calcofi.io/db-query/) runs SQL against the release in your
+  browser — a library of queries to start from, and a shell. [Access the data](data-access.qmd)
+  shows the same queries from R and Python.
+
+## The other applications
+
+```{r}
+#| label: setup
+#| include: false
+librarian::shelf(dplyr, gt, here, purrr, yaml, quiet = TRUE)
+`%||%` <- function(a, b) if (is.null(a)) b else a
+prod  <- yaml::read_yaml(here("data/products.yml"))
+cards <- prod$products %||% prod
+card_row <- function(p) tibble::tibble(
+  key         = p$key,
+  title       = p$title %||% p$key,
+  section     = p$section %||% NA_character_,
+  group       = p$group %||% NA_character_,
+  live_url    = p$live_url %||% NA_character_,
+  description = p$description %||% "",
+  status      = p$status %||% "live",
+  superseded_by = p$superseded_by %||% NA_character_,
+  credits     = if (is.null(p$credits)) NA_character_ else paste(unlist(p$credits), collapse = ", "),
+  added       = p$added %||% NA_character_)
+cards_df <- purrr::map_dfr(cards, card_row)
+title_of <- function(k) { t <- cards_df$title[match(k, cards_df$key)]; ifelse(is.na(t), k, t) }
+status_text <- function(s, by) dplyr::case_when(
+  s == "superseded" & !is.na(by) ~ paste0("superseded by ", title_of(by)),
+  s == "superseded" ~ "superseded",
+  s == "archived"   ~ "archived",
+  s == "interim"    ~ "interim",
+  TRUE              ~ "live")
+apps_tbl <- function(d) {
+  d |>
+    dplyr::mutate(Status = status_text(status, superseded_by),
+                  Product = live_url, name = title) |>
+    dplyr::select(Product, name, Status, description) |>
+    (\(tbl) if (knitr::is_html_output())
+      tbl |> gt() |> fmt_url(columns = "Product", label = from_column("name")) |> cols_hide("name")
+    else
+      tbl |> dplyr::select(-Product) |> dplyr::rename(Product = name) |> gt())() |>
+    cols_label(description = "") |>
+    cols_align("left") |>
+    tab_options(table.width = pct(100), data_row.padding = px(5), table.font.size = "0.92em")
+}
+```
+
+The Explorer superseded the server-side applications that each showed one of its lenses; they
+keep serving, and their cards on [calcofi.io](https://calcofi.io) say what replaced them. The table
+reads the same cards.
+
+```{r}
+#| label: tbl-apps
+#| tbl-cap: The applications on calcofi.io besides the Explorer, from the landing page's product cards.
+cards_df |>
+  dplyr::filter(section == "explore", key != "explore") |>
+  dplyr::arrange(status_text(status, superseded_by), title) |>
+  apps_tbl()
+```
+
+## Student contributions
+
+Student teams at UCSB, UCLA and UCSD have built portals, dashboards and stories on the database;
+their repositories are archived and their sites keep serving.
+
+```{r}
+#| label: tbl-students
+#| tbl-cap: Student contributions, from the landing page's product cards.
+cards_df |>
+  dplyr::filter(section == "students") |>
+  dplyr::arrange(dplyr::desc(added), title) |>
+  dplyr::mutate(description = ifelse(is.na(credits), description, paste0(description, " — ", credits))) |>
+  apps_tbl()
+```
+
+## Reports built on the data
+
+The [Channel Islands National Marine Sanctuary condition report](https://noaa-onms.github.io/cinms)
+reads CalCOFI through `calcofi4r` — its [forage assemblage
+page](https://noaa-onms.github.io/cinms/modals/forage-assemblage.html) is a worked example of a
+report that regenerates from the release. The [status chapter](status.qmd) records what each
+contract period delivered.

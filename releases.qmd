@@ -1,0 +1,10 @@
+# Releases {#sec-releases}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+What a release is (a date, a catalog, its parquet objects, a DOI), what ships beside it, how objects are content-addressed and what `since` means, which versions are kept and how to pin one, the release notes as the database's changelog, and what a release checks before it ships.
+:::

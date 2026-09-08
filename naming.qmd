@@ -1,0 +1,10 @@
+# Naming conventions {#sec-naming}
+
+::: {.callout-note}
+## Being written
+This chapter is part of the September 2026 revamp of the book (the plan is in
+[CalCOFI/workflows](https://github.com/CalCOFI/workflows/tree/main/.claude/plans)) and lands in the
+order the plan gives. What it will hold:
+
+The database's conventions, generated from the registries in `CalCOFI/workflows` `metadata/`: tables and columns, identifiers, the field dictionary with its Darwin Core terms, the measurement types by category with units, bounds and NERC ids, life stages, gear, providers and licenses, dataset keys and names — and the mapping tables from each source's legacy names to the standard ones.
+:::

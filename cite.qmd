@@ -72,6 +72,10 @@ cols <- intersect(
     "license_url", "doi", "pi_names", "acknowledgement", "contact",
     "source_accessed", "link_calcofi_org", "link_data_source"),
   names(ds))
+# the two link columns are HTML-only: fmt_url() writes the raw URL into LaTeX with an
+# unescaped underscore and the pdf fails on it (the same guard as portals.qmd's tables)
+if (!knitr::is_html_output())
+  cols <- setdiff(cols, c("link_calcofi_org", "link_data_source"))
 
 ds |>
   dplyr::select(dplyr::all_of(cols)) |>
