@@ -257,21 +257,21 @@ The layers button on the map opens one card for everything drawn under and over 
 - **Land** — the coast, drawn over the sea floor and the data from OpenStreetMap's land polygons
   (the same coastline the basemap's water comes from), so a 390 m bathymetry cell or a 10 km
   contoured cell never spills onto land, and the basemap's roads, county, state and country
-  lines and labels stay on top. Off (`land=off`), the map is the earlier stack.
+  lines and labels stay on top. It is always on; a link can say `land=off` only to compare.
 - **Basemap labels** — the basemap's own place names, road names, points of interest and water
   names, toned down so they never outrank the data (one grey, Regular weight, an opacity slider,
   `basemapo=`), plus the island names the basemap carries but never drew; off (`basemap=nolabels`)
   for a data-centric view, with the isobath labels and the undersea feature names untouched. The names layer has its own opacity in its *On the map* row.
 - **On the map** — the boundary layers *and* the Data row in draw order, top first, re-ordered by
   dragging a row or with ▲ ▼. Putting a boundary above Data draws it over your data; putting Data
-  above it draws the data over the boundary. With Land on, the Data row is the sea surface:
-  it and every row below it are clipped to the ocean, rows above it draw over the land too.
+  above it draws the data over the boundary. The Data row is the sea surface: it and every row
+  below it are clipped to the ocean by the coast, rows above it draw over the land too.
 - **Add a layer** — the boundary registry by group: maritime zones, protected areas,
   administrative, ecological, energy and industry, and the *Reference* group — the undersea
   feature names of the IHO-IOC GEBCO Gazetteer (banks, basins, canyons, seamounts,
   escarpments, labelled at a zoom set by their rank) and, for comparison, Esri's raster ocean
-  reference. The names are on from the start, above the data and absent from the legend;
-  remove the row to turn them off (`layers=off` in the link).
+  reference. The names are on from the start, above the data and absent from the legend, with
+  their opacity slider under the row; remove the row to turn them off (`layers=off` in the link).
 
 Every choice — which layers, their order, their colour, fill opacity and line width, the sea
 floor's parts and opacity, the land mask, the data ramp — is view state and lives in the URL, so a
