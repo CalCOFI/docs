@@ -150,13 +150,19 @@ is its section plus a generated appendix (tables and rows, datasets, the consume
 package versions). A release with no section for itself is refused before the freeze — the notes
 are written by the change that made them necessary, never reconstructed afterwards.
 
+The rendered changelog is [RELEASES.html](https://storage.calcofi.io/calcofi-db/ducklake/releases/RELEASES.html),
+with the raw markdown at [RELEASES.md](https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md)
+as a secondary link. Every version heading is anchored `#v{version}`. The first `##` heading of a
+version's section becomes that release's headline on calcofi.io/news and in the Atom feed — so it
+is written as the story of the release.
+
 ```{r}
 #| label: releases-headings
 #| echo: false
 #| results: asis
 heads <- rel_md[grepl("^# ", rel_md)]
 heads <- heads[!grepl("release notes$", heads, ignore.case = TRUE)]
-cat("The most recent sections of [`RELEASES.md`](https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md):\n\n")
+cat("The most recent sections of the [rendered changelog](https://storage.calcofi.io/calcofi-db/ducklake/releases/RELEASES.html) (raw markdown at [`RELEASES.md`](https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md)):\n\n")
 for (h in head(heads, 6)) cat("- ", sub("^# ", "", h), "\n", sep = "")
 ```
 
