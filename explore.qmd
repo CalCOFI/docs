@@ -266,7 +266,8 @@ The layers button on the map opens one card for everything drawn under and over 
   administrative, ecological, energy and industry, and the *Reference* group — the undersea
   feature names of the IHO-IOC GEBCO Gazetteer (banks, basins, canyons, seamounts,
   escarpments, labelled at a zoom set by their rank) and, for comparison, Esri's raster ocean
-  reference.
+  reference. The names are on from the start, above the data and absent from the legend;
+  remove the row to turn them off (`layers=off` in the link).
 
 Every choice — which layers, their order, their colour, fill opacity and line width, the sea
 floor's parts and opacity, the land mask, the data ramp — is view state and lives in the URL, so a
