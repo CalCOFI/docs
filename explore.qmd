@@ -258,6 +258,9 @@ The layers button on the map opens one card for everything drawn under and over 
   (the same coastline the basemap's water comes from), so a 390 m bathymetry cell or a 10 km
   contoured cell never spills onto land, and the basemap's roads, county, state and country
   lines and labels stay on top. Off (`land=off`), the map is the earlier stack.
+- **Basemap labels** — the basemap's own place names, road names, points of interest and water
+  names; off (`basemap=nolabels`) for a data-centric view, with the isobath labels and the
+  undersea feature names untouched.
 - **On the map** — the boundary layers *and* the Data row in draw order, top first, re-ordered by
   dragging a row or with ▲ ▼. Putting a boundary above Data draws it over your data; putting Data
   above it draws the data over the boundary. With Land on, the Data row is the sea surface:
