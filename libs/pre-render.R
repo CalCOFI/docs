@@ -102,8 +102,9 @@ for (i in seq_len(nrow(ds)))
   fetch(file.path(wf_raw, "metadata", ds$provider[i], ds$dataset[i], "flds_redefine.csv"),
         file.path(dir_xw, paste0(ds$dataset_key[i], ".csv")), required = FALSE)
 
-# the products on calcofi.io ----------------------------------------------------------
+# the products and the ship's log's hand-written rows on calcofi.io ------------------
 fetch(file.path(site_raw, "_data/products.yml"), file.path(dir_data, "products.yml"))
+fetch(file.path(site_raw, "_data/news.yml"),     file.path(dir_data, "news.yml"))
 
 # the stamp -------------------------------------------------------------------------
 snap <- list(

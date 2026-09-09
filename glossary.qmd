@@ -79,6 +79,11 @@ and depth span, and its parent. → [The database](db.qmd)
 the record, the notes — that describes the release and never needs the bytes to be read.
 → [Releases](releases.qmd)
 
+**species** — the word calcofi.io's front door and species catalog use for what the database keys
+as a *taxon*; the headline count is the taxa identified to species rank, and the fuller count —
+genus, family, class, the dataset-local classes — is one tooltip away. The catalog's key stays
+`taxon_key`. → [The database](db.qmd)
+
 **supplemental** — a table hosted and catalogued but left out of the default set: the
 full-resolution CTD and meteorology series, the root-sample join twin.
 → [Access the data](data-access.qmd)
