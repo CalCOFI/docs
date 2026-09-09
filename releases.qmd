@@ -39,7 +39,8 @@ tables, `r fmt_n(catalog$total_rows)` rows, `r fmt_gb(catalog$total_size)` of pa
 [`r catalog$doi`](https://doi.org/`r catalog$doi`). A version is a date (`vYYYY.MM.DD`), and a
 release is cut whenever the data or the schema change enough to matter — every few weeks, in
 practice. `latest.txt` on the bucket names the promoted one, and it is promoted only after the
-consumer-contract suite has passed against the frozen files.
+consumer-contract suite and the client packages' README examples (`calcofi4r`, `calcofi4py`)
+have passed against the frozen files.
 
 ## What ships
 

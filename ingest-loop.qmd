@@ -55,7 +55,8 @@ Everything a step produces lands in a registry or a sidecar that the next step r
    not a pass.
 5. **Release** — `release_database.qmd` discovers the new dataset's sidecars on its own, merges its
    relationships, assembles the core in memory, runs the gates ([Releases](releases.qmd)), and
-   freezes. `test_release.qmd` then runs the consumer contract against the uploaded release and
+   freezes. `test_release.qmd` then runs the consumer contract and the client packages' README
+   examples against the uploaded release and
    promotes `latest.txt` only when it passes.
 
 ## Staging without releasing

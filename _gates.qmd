@@ -6,3 +6,4 @@
 | `validate_for_release()` | NULLs in any `*_id` / `*_key` / `*_uuid` column; latitude, longitude and counts in range; no empty table | NULLs stop the release; ranges warn |
 | `check_obs_pair_parity()` | `obs_bio` + `obs_env` reproduce `obs` — row counts, distinct ids, a hash of every column, per realm and dataset | stops the release |
 | `test_release.qmd` consumer contract | every query shape the apps and packages depend on, run against the frozen release three ways (objects, view, pair), plus the presence of an all-ok `integrity.json` | `latest.txt` is not promoted |
+| `test_release.qmd` package examples | the client packages' own README examples — `calcofi4r`'s `README.Rmd` knit, `calcofi4py`'s `README.md` blocks executed — against the frozen release, pointed there by `CALCOFI_RELEASE_VERSION` | `latest.txt` is not promoted |
