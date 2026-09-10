@@ -30,6 +30,11 @@ whole integrated database, for one **organism** (a taxon from the net tows and c
 - **Sections** — a vertical slice along a line, station by depth, as values or as anomalies
   against the one climatology every product subtracts (see [The database](db.qmd)).
 
+[calcofi.io/species/](https://calcofi.io/species/) and
+[calcofi.io/measurements/](https://calcofi.io/measurements/) are the index — every organism or
+measurement, which datasets carry it, over what years; **the Explorer is the map**, opening
+already filtered on `?taxon=` or `?var=`.
+
 Four things make it different from an app with a server behind it:
 
 - **Nothing runs anywhere but your browser.** The SQL executes in DuckDB inside the page, against
