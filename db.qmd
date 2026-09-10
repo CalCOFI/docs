@@ -12,11 +12,21 @@ before a release ships.
 ```{r}
 #| label: setup
 #| include: false
-librarian::shelf(dplyr, gt, here, jsonlite, purrr, tibble, quiet = TRUE)
+librarian::shelf(dplyr, gt, here, jsonlite, purrr, readr, tibble, quiet = TRUE)
 `%||%` <- function(a, b) if (is.null(a)) b else a
 snap    <- jsonlite::fromJSON(here("data/_snapshot.json"))
 catalog <- jsonlite::fromJSON(here("data/release/catalog.json"), simplifyVector = FALSE)
 meta    <- jsonlite::fromJSON(here("data/release/metadata.json"), simplifyVector = FALSE)
+# measurements.json (§ Measurements below): NULL when neither the release nor
+# MEASUREMENTS_RELEASE_URL carried one (pre-render.R writes measurements_source = "none"
+# in that case) — the section reads snap$measurements_source and falls back to prose that
+# says so, never a typed count.
+meas_path <- here("data/release/measurements.json")
+meas      <- if (file.exists(meas_path)) jsonlite::fromJSON(meas_path, simplifyVector = FALSE) else NULL
+# variable.csv (D3): optional until its PR merges to main; a chapter that needs it falls
+# back to measurement_type.csv's own `variable` column, the same crosswalk with no label.
+var_path  <- here("data/registry/variable.csv")
+variable  <- if (file.exists(var_path)) readr::read_csv(var_path, na = "", comment = "#", show_col_types = FALSE) else NULL
 ```
 
 ## The core data model
@@ -154,6 +164,119 @@ When asserting lineage coverage, **split by rank position**: `family` is legitim
 family rank, and `kingdom` is NULL for `worms:1` *Biota*. A blanket non-NULL assertion is wrong,
 and someone will "fix" it by inventing data.
 
+### Measurements {#measurements}
+
+`measurement_type.csv` names a **series** — one dataset's own column of measured values
+(`calcofi_bottle.temperature`, `calcofi_ctd-cast.temperature_ave`). The bottle's temperature
+and the CTD's are the same physical quantity read two ways, and until 2026-09 nothing said so
+in one place: the Explorer hard-coded five such pairings in its own `UNIFIED` table with a note
+that the label "belongs in `measurement_type.csv`". The measurements catalog is that one place.
+
+**One page per measurement key at [`calcofi.io/measurements/{key}/`](https://calcofi.io/measurements/)** —
+the registry's `variable` where a series belongs to one, else the canonical `measurement_type`
+itself — lists every series that measures it, one row per `measurement_type` × dataset, each
+with the dataset's own source and flag column. A series that is not canonical for its key (a raw
+CTD sensor, a thermosalinograph past the first) gets no page and is listed under its dataset as
+`full_resolution_only[]`, the `vocabulary_only[]` of this catalog. This mirrors [Taxonomy](#taxonomy)
+one-for-one: `measurement_type.variable` plays `dataset_taxon`'s crosswalk role, and
+`metadata/variable.csv` — read with `calcofi4db::read_variable()`, appended with
+`register_variables()`, never a bare `write_csv()` — plays `taxon`'s role of holding the one
+label, description and NERC P01 concept a key is shown under.
+
+**A `variable` is assigned only where (i) the NERC P01 concept is identical — or the two
+concepts differ only by a method qualifier for the same quantity — (ii) the units are the same
+or a declared conversion, (iii) the series come from the same kind of sample, and (iv) the two
+are not plausibly the same physical samples.** `calcofi4db::check_variable_registry()` enforces
+(i) and (ii) at write time — a `variable.csv` row whose `nerc_p01` disagrees with a member
+series' own value is refused, so a crosswalk key can never silently misdescribe what it unifies.
+(iii) and (iv) are judgement calls a person records as evidence, not something a function can
+check from the column alone: the CTD files carry their own embedded bottle table (`btl_*`) that
+shares a P01 with the bottle dataset's series but is plausibly the *same physical bottles*
+measured twice, so it fails (iv) and stays its own key, related to the bottle's on each page with
+the reason (`same_bottles`); a replicate is not a mean (`replicate_vs_mean`); an underway intake
+is not a cast (`underway_vs_cast`). @tbl-measurements-unified is every key `variable.csv` carries
+on `r snap$version`, with its member series — `sigma_theta`'s two series keep their own NERC
+concepts (the bottle's *by computation*, the CTD's *by CTD and computation*) because criterion (i)
+reads "or a method qualifier," not "identical always."
+
+The record, `measurements.json` (`calcofi4db::build_measurements_catalog()`, schema
+`measurements.schema.json`, written beside `taxa.json` in `release_database.qmd`), is `taxa.json`'s
+twin for the environment half of the catalog: counts, one `datasets[]` entry per dataset carrying
+an `obs_env` row, one `measurements[]` entry per key with `series[]` carrying each series' values
+by year, month, depth band and quality code, the observed quantiles **within** the registry's
+declared bounds, and `related[]` naming the other keys that share a NERC P01 concept and are kept
+apart on purpose. `test_release.qmd`'s `measurements_catalog` gate re-derives the schema check and
+the **arithmetic gate** every consumer of this record leans on: the sum of `series[].n_values`
+over every key equals `obs_env`'s own row count, which is exactly what a series counted into two
+keys would break.
+
+```{r}
+#| label: measurements-counts
+#| echo: false
+#| results: asis
+mc <- meas$counts
+fmt <- function(n) format(n, big.mark = ",")
+if (!is.null(mc)) {
+  cat(sprintf(
+    "On %s, the record (%s) counts **%s measurements** over **%s series** in **%s datasets** — %s `obs_env` rows, %s once the two full-resolution supplementals are counted.\n",
+    snap$version, snap$measurements_source %||% "unknown",
+    fmt(mc$measurements), fmt(mc$series), mc$datasets, fmt(mc$obs_env_rows), fmt(mc$full_rows)))
+} else {
+  cat("The record is not available for this render (neither the promoted release nor `MEASUREMENTS_RELEASE_URL` carried a `measurements.json`), so no count is shown here rather than typed.\n")
+}
+```
+
+```{r}
+#| label: tbl-measurements-unified
+#| tbl-cap: Every unified measurement key on the record above, with its member series — the dataset, the series' own column, its values, and its own NERC P01 concept (identical for four keys; `sigma_theta`'s differ by method qualifier, D3 criterion i).
+#| echo: false
+if (!is.null(mc)) {
+  unified <- purrr::keep(meas$measurements, \(m) isTRUE(m$is_unified))
+  purrr::map_dfr(unified, \(m) purrr::map_dfr(m$series, \(s) tibble::tibble(
+    key = m$key, label = m$label, dataset = s$dataset_key, series = s$measurement_type,
+    n_values = s$n_values %||% NA_integer_, nerc_p01 = sub(".*/([A-Z0-9]+)/?$", "\\1", s$nerc_p01 %||% "")))) |>
+    dplyr::arrange(key, dplyr::desc(n_values)) |>
+    gt(groupname_col = "label", rowname_col = "dataset") |>
+    fmt_integer(columns = n_values) |>
+    cols_label(series = "series (column)", n_values = "values", nerc_p01 = "NERC P01") |>
+    cols_hide(key) |>
+    tab_options(table.font.size = "0.86em")
+} else {
+  gt::gt(tibble::tibble(note = "measurements.json not available for this render"))
+}
+```
+
+```{r}
+#| label: measurements-facts
+#| echo: false
+#| results: asis
+if (!is.null(mc)) {
+  all_series  <- purrr::flatten(purrr::map(meas$measurements, "series"))
+  n_series    <- length(all_series)
+  n_no_p01    <- sum(purrr::map_lgl(all_series, \(s) is.null(s$nerc_p01) || !nzchar(s$nerc_p01 %||% "")))
+  n_no_bound  <- sum(purrr::map_lgl(all_series, \(s) !is.null(s$flags) && "no_bound" %in% unlist(s$flags)))
+  n_sentinel  <- sum(purrr::map_lgl(all_series, \(s) !is.null(s$flags) && "sentinel_suspected" %in% unlist(s$flags)))
+  cat(sprintf(paste(
+    "Two facts the record states rather than leaves implicit. **A series with no NERC concept",
+    "says so** — `no_p01` on its flags, never a blank cell that reads as \"not looked at\" — the",
+    "same exact-match discipline as every controlled-vocabulary id in",
+    "[Metadata registries](#metadata-registries-the-single-sources-of-truth): **%s of the %s",
+    "series** on %s carry no P01. And **a bound is declared or questioned, never inferred from",
+    "the data** (the ingest's own rule — [measurement",
+    "bounds](https://github.com/CalCOFI/workflows/blob/main/.claude/skills/measurement-bounds/SKILL.md)):",
+    "a series' `observed{}` range is computed *within* its registry bound, what falls outside is",
+    "counted separately in `out_of_bounds{n, min, max}` rather than silently widening the range a",
+    "reader sees, and **%s series declare no bound at all** (`no_bound`) rather than letting their",
+    "widest reading stand in for one; %s series carry `sentinel_suspected` — a declared bound",
+    "broken, or, absent one, an extreme past ±99 and 100× the series' own 5th/95th percentile.",
+    "That is how the catalog surfaced a sea-surface reading of thousands of degrees and a PAR",
+    "sensor's numeric fill value on %s — both certain bugs, fixed at the ingest, not questions.\n"),
+    fmt(n_no_p01), fmt(n_series), snap$version, fmt(n_no_bound), fmt(n_sentinel), snap$version))
+} else {
+  cat("Two facts the record states rather than leaves implicit, unavailable for this render along with the counts above: **a series with no NERC concept says so** (`no_p01`), never a blank cell that reads as \"not looked at\"; and **a bound is declared or questioned, never inferred from the data** — a series' `observed{}` range sits within its registry bound, what falls outside is counted in `out_of_bounds{n, min, max}`, and a series with none says `no_bound`.\n")
+}
+```
+
 ### Quality flags reach consumers only if consumers apply them
 
 `obs.measurement_qual` is **each dataset's own vocabulary, uninterpreted** — bottle 6 = ok-from-CTD,
@@ -234,6 +357,7 @@ Shared, under `metadata/`:
 |---|---|
 | `field_dictionary.csv` | **Prescriptive** canonical field names, types, units and aliases; new datasets conform to it. `dwc_term` names the Darwin Core term a field publishes as. |
 | `measurement_type.csv` | The canonical measurement vocabulary — description, `units`, `category`, `variable` (which types measure the same thing comparably across datasets), `derivation` for a derived type, `is_canonical`, the validity bounds, and the controlled-vocabulary ids `nerc_p01` / `units_nerc_p06` (below). Released as a table. |
+| `variable.csv` | One row per crosswalk **key** `measurement_type.variable` points at (D3, [Measurements](#measurements)) — its label, description, units, category and NERC P01, held once for the key rather than repeated on each member series. Read with `read_variable()`, appended with `register_variables()`, checked against `measurement_type.csv` with `check_variable_registry()`. |
 | `measurement_qual.csv` | Each dataset's quality-flag vocabulary, uninterpreted. |
 | `category.csv` | The twelve data categories every dataset and measurement type is filed under. |
 | `provider.csv` | The curating organizations. **`provider` is the organization that holds and can license the data** — not the portal that serves it, and not a collection or lab inside it. |

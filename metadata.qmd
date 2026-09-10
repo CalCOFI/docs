@@ -151,7 +151,8 @@ of these steps it is waiting on and who owns it.
 
 ## See also
 
-- [The database schema](db.qmd) — the metadata registries and the `dataset` table.
+- [The database schema](db.qmd) — the metadata registries (including `variable.csv`, the label
+  registry for a measurement key shared across datasets) and the `dataset` table.
 - [Portals](portals.qmd) — where each dataset is archived and registered, and the policy per
   dataset.
 - [Cite this data](cite.qmd) — the citations the record produces.

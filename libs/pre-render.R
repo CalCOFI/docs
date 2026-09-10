@@ -72,6 +72,26 @@ fetch(rel("integrity.json"),     file.path(dir_rel, "integrity.json"),    requir
 fetch(file.path(gcs_releases, "versions.json"), file.path(dir_rel, "versions.json"))
 fetch(file.path(gcs_releases, "RELEASES.md"),   file.path(dir_rel, "RELEASES.md"))
 
+# measurements.json — the measurements catalog record (plan 2026-09-10 § D4/D10). The
+# promoted release may not carry one yet (it ships from calcofi4db >= 4.12.0 onward): fall
+# back to MEASUREMENTS_RELEASE_URL (the bridge record, as TAXA_RELEASE_URL is used for
+# taxa.json) when set, and record which source was used so a chapter can say so rather than
+# silently showing a stale or wrong count. Neither present is not fatal — measurements_source
+# is "none" and the chapter's numbers collapse rather than being typed.
+meas_dest <- file.path(dir_rel, "measurements.json")
+meas_bridge <- Sys.getenv("MEASUREMENTS_RELEASE_URL", "")
+measurements_source <- "none"
+if (fetch(rel("measurements.json"), meas_dest, required = FALSE)) {
+  measurements_source <- "release"
+} else if (nzchar(meas_bridge) && fetch(meas_bridge, meas_dest, required = FALSE)) {
+  measurements_source <- "bridge"
+  cat("pre-render: measurements.json not on ", version, "; used MEASUREMENTS_RELEASE_URL bridge\n", sep = "")
+} else {
+  if (file.exists(meas_dest)) unlink(meas_dest)
+  cat("pre-render: measurements.json not available (no release copy, no MEASUREMENTS_RELEASE_URL) — ",
+      "the Measurements section's counts will read NA\n", sep = "")
+}
+
 # the `dataset` table itself (citations, licenses, measured coverage), read through the
 # catalog's object list — never a hand-built releases/{v}/parquet path
 catalog <- jsonlite::fromJSON(file.path(dir_rel, "catalog.json"), simplifyVector = FALSE)
@@ -90,10 +110,14 @@ readr::write_csv(ds, file.path(dir_rel, "dataset.csv"), na = "")
 
 # the registries (CalCOFI/workflows main) -------------------------------------------
 registries <- c("field_dictionary.csv", "measurement_type.csv", "measurement_qual.csv",
-                "category.csv", "life_stage.csv", "gear.csv", "provider.csv", "license.csv",
-                "portal.csv", "distribution.csv", "dataset_meta_fields.csv", "dataset_status.csv",
-                "release_policy.yml", "relationships_cross.csv")
+                "category.csv", "life_stage.csv", "gear.csv", "provider.csv",
+                "license.csv", "portal.csv", "distribution.csv", "dataset_meta_fields.csv",
+                "dataset_status.csv", "release_policy.yml", "relationships_cross.csv")
 for (r in registries) fetch(file.path(wf_raw, "metadata", r), file.path(dir_reg, r))
+# variable.csv (D3, plan 2026-09-10) is new and optional until its PR merges to main: a
+# chapter that reads it falls back to measurement_type.csv's own `variable` column, which
+# carries the same crosswalk with no label.
+fetch(file.path(wf_raw, "metadata", "variable.csv"), file.path(dir_reg, "variable.csv"), required = FALSE)
 
 # each dataset's field crosswalk (legacy source names -> the standard names), for the
 # naming chapter's mapping tables; a dataset without one is skipped
@@ -111,6 +135,7 @@ snap <- list(
   fetched_utc = format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
   version     = version,
   n_datasets  = nrow(ds),
+  measurements_source = measurements_source,
   sources     = list(releases = gcs_releases, workflows = wf_raw, site = site_raw))
 jsonlite::write_json(snap, snap_path, auto_unbox = TRUE, pretty = TRUE)
 cat(sprintf("pre-render: snapshot of %s (%d datasets) written to data/\n", version, nrow(ds)))

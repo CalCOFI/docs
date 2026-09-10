@@ -1,7 +1,8 @@
 {
-  "fetched_utc": "2026-09-09T11:20:01Z",
+  "fetched_utc": "2026-09-10T14:58:11Z",
   "version": "v2026.09.06",
   "n_datasets": 16,
+  "measurements_source": "bridge",
   "sources": {
     "releases": "https://storage.googleapis.com/calcofi-db/ducklake/releases",
     "workflows": "https://raw.githubusercontent.com/CalCOFI/workflows/main",
