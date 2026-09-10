@@ -61,6 +61,8 @@ jobs:
         run: quarto render --to html
         env:
           CALCOFI_DOCS_REFRESH: "1"
+          # the measurements record bridge until a promoted release carries measurements.json (plan 2026-09-10 § D4)
+          MEASUREMENTS_RELEASE_URL: ${{ vars.MEASUREMENTS_RELEASE_URL }}
 
       - name: Check every external link answers
         run: Rscript libs/check_links.R
@@ -106,6 +108,8 @@ jobs:
         continue-on-error: true
         env:
           CALCOFI_DOCS_REFRESH: "1"
+          # the measurements record bridge until a promoted release carries measurements.json (plan 2026-09-10 § D4)
+          MEASUREMENTS_RELEASE_URL: ${{ vars.MEASUREMENTS_RELEASE_URL }}
 
       - name: Render (pdf)
         run: quarto render --to pdf && mkdir -p documents && cp _book/*.pdf documents/
