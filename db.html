@@ -815,7 +815,7 @@ Table&nbsp;4.1: The core family: what one row of each table stands for, and whet
 <section id="shared-reference-tables" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="shared-reference-tables"><span class="header-section-number">4.2.2</span> Shared reference tables</h3>
 <p><code>cruise</code> (one row per cruise, with <code>cruise_uuid</code>, the ship, and the observed <code>date_min</code>/<code>date_max</code> span that keys every other dataset’s events), <code>ship</code>, <code>grid</code> (the CalCOFI station grid, materialized deterministically from <code>calcofi4r::cc_grid</code>), <code>spatial</code> + <code>spatial_attribute</code> (boundary layers), <code>sample_spatial</code> (the sample→layer memberships), <code>region</code>, <code>lookup</code>, <code>dataset</code> (one row per released dataset, with its measured coverage and its citation), <code>measurement_type</code> (the measurement vocabulary, below) and <code>climatology</code>.</p>
-<p><strong><code>climatology</code> is the one baseline every anomaly subtracts.</strong> Until 2026-08-31 three products each computed their own and the same section read +1.4 °C in one and ~0 in another. It is a plain mean per dataset × <strong><code>site_key</code></strong> (the real station, since calcofi4db 4.10.0 — the inshore grid cells hold 2–4 stations 15–30 km apart, so a cell-grained baseline blended them; <code>grid_key</code> stays on the row as the station’s modal cell) × <strong>calendar month</strong> × 10 m depth bin × measurement type over <strong>1993–2013</strong>, kept only where ≥ 3 distinct cruises contribute, with the window stamped on every row. A cast’s anomaly is its value minus the row of <em>its own</em> station and calendar month; pooling months produces a seasonal-cycle map, not an anomaly.</p>
+<p><strong><code>climatology</code> is the one baseline every anomaly subtracts.</strong> Until 2026-08-31 three products each computed their own and the same section read +1.4 °C in one and ~0 in another. It is a plain mean per dataset × <strong><code>site_key</code></strong> (the real station, since calcofi4db 4.10.0 — the inshore grid cells hold 2–4 stations 15–30 km apart, so a cell-grained baseline blended them; <code>grid_key</code> stays on the row as the station’s modal cell) × <strong>calendar month</strong> × 10 m depth bin × measurement type over <strong>1993–2013</strong>, kept only where ≥ 5 distinct cruises contribute (3 until v2026.09.06), with the window stamped on every row. A cast’s anomaly is its value minus the row of <em>its own</em> station and calendar month; pooling months produces a seasonal-cycle map, not an anomaly.</p>
 </section>
 <section id="every-table-in-the-release" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="every-table-in-the-release"><span class="header-section-number">4.2.3</span> Every table in the release</h3>
@@ -828,23 +828,23 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
 </figcaption>
 <div aria-describedby="tbl-inventory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="hdojjrdxpp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hdojjrdxpp table {
+<div id="sivsxulmkg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sivsxulmkg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hdojjrdxpp thead, #hdojjrdxpp tbody, #hdojjrdxpp tfoot, #hdojjrdxpp tr, #hdojjrdxpp td, #hdojjrdxpp th {
+#sivsxulmkg thead, #sivsxulmkg tbody, #sivsxulmkg tfoot, #sivsxulmkg tr, #sivsxulmkg td, #sivsxulmkg th {
   border-style: none;
 }
 
-#hdojjrdxpp p {
+#sivsxulmkg p {
   margin: 0;
   padding: 0;
 }
 
-#hdojjrdxpp .gt_table {
+#sivsxulmkg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -870,12 +870,12 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-left-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_caption {
+#sivsxulmkg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hdojjrdxpp .gt_title {
+#sivsxulmkg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -887,7 +887,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-width: 0;
 }
 
-#hdojjrdxpp .gt_subtitle {
+#sivsxulmkg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -899,7 +899,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-top-width: 0;
 }
 
-#hdojjrdxpp .gt_heading {
+#sivsxulmkg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -911,13 +911,13 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_bottom_border {
+#sivsxulmkg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_col_headings {
+#sivsxulmkg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -932,7 +932,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_col_heading {
+#sivsxulmkg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -952,7 +952,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   overflow-x: hidden;
 }
 
-#hdojjrdxpp .gt_column_spanner_outer {
+#sivsxulmkg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -964,15 +964,15 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 4px;
 }
 
-#hdojjrdxpp .gt_column_spanner_outer:first-child {
+#sivsxulmkg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hdojjrdxpp .gt_column_spanner_outer:last-child {
+#sivsxulmkg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hdojjrdxpp .gt_column_spanner {
+#sivsxulmkg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -984,11 +984,11 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   width: 100%;
 }
 
-#hdojjrdxpp .gt_spanner_row {
+#sivsxulmkg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hdojjrdxpp .gt_group_heading {
+#sivsxulmkg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1014,7 +1014,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   text-align: left;
 }
 
-#hdojjrdxpp .gt_empty_group_heading {
+#sivsxulmkg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1029,15 +1029,15 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   vertical-align: middle;
 }
 
-#hdojjrdxpp .gt_from_md > :first-child {
+#sivsxulmkg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hdojjrdxpp .gt_from_md > :last-child {
+#sivsxulmkg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hdojjrdxpp .gt_row {
+#sivsxulmkg .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -1056,7 +1056,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   overflow-x: hidden;
 }
 
-#hdojjrdxpp .gt_stub {
+#sivsxulmkg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1069,7 +1069,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#hdojjrdxpp .gt_stub_row_group {
+#sivsxulmkg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1083,15 +1083,15 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   vertical-align: top;
 }
 
-#hdojjrdxpp .gt_row_group_first td {
+#sivsxulmkg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hdojjrdxpp .gt_row_group_first th {
+#sivsxulmkg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hdojjrdxpp .gt_summary_row {
+#sivsxulmkg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1101,16 +1101,16 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#hdojjrdxpp .gt_first_summary_row {
+#sivsxulmkg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_first_summary_row.thick {
+#sivsxulmkg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hdojjrdxpp .gt_last_summary_row {
+#sivsxulmkg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1120,7 +1120,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_grand_summary_row {
+#sivsxulmkg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1130,7 +1130,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#hdojjrdxpp .gt_first_grand_summary_row {
+#sivsxulmkg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1140,7 +1140,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-top-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_last_grand_summary_row_top {
+#sivsxulmkg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1150,11 +1150,11 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_striped {
+#sivsxulmkg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hdojjrdxpp .gt_table_body {
+#sivsxulmkg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1163,7 +1163,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_footnotes {
+#sivsxulmkg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1177,7 +1177,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_footnote {
+#sivsxulmkg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1186,7 +1186,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#hdojjrdxpp .gt_sourcenotes {
+#sivsxulmkg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1200,7 +1200,7 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#hdojjrdxpp .gt_sourcenote {
+#sivsxulmkg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1208,72 +1208,72 @@ Table&nbsp;4.2: Every table of v2026.09.06, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#hdojjrdxpp .gt_left {
+#sivsxulmkg .gt_left {
   text-align: left;
 }
 
-#hdojjrdxpp .gt_center {
+#sivsxulmkg .gt_center {
   text-align: center;
 }
 
-#hdojjrdxpp .gt_right {
+#sivsxulmkg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hdojjrdxpp .gt_font_normal {
+#sivsxulmkg .gt_font_normal {
   font-weight: normal;
 }
 
-#hdojjrdxpp .gt_font_bold {
+#sivsxulmkg .gt_font_bold {
   font-weight: bold;
 }
 
-#hdojjrdxpp .gt_font_italic {
+#sivsxulmkg .gt_font_italic {
   font-style: italic;
 }
 
-#hdojjrdxpp .gt_super {
+#sivsxulmkg .gt_super {
   font-size: 65%;
 }
 
-#hdojjrdxpp .gt_footnote_marks {
+#sivsxulmkg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hdojjrdxpp .gt_asterisk {
+#sivsxulmkg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hdojjrdxpp .gt_indent_1 {
+#sivsxulmkg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hdojjrdxpp .gt_indent_2 {
+#sivsxulmkg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hdojjrdxpp .gt_indent_3 {
+#sivsxulmkg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hdojjrdxpp .gt_indent_4 {
+#sivsxulmkg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hdojjrdxpp .gt_indent_5 {
+#sivsxulmkg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hdojjrdxpp .katex-display {
+#sivsxulmkg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hdojjrdxpp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sivsxulmkg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
