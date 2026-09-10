@@ -95,7 +95,7 @@ each computed their own and the same section read +1.4 °C in one and ~0 in anot
 plain mean per dataset × **`site_key`** (the real station, since calcofi4db 4.10.0 — the inshore
 grid cells hold 2–4 stations 15–30 km apart, so a cell-grained baseline blended them; `grid_key`
 stays on the row as the station's modal cell) × **calendar month** × 10 m depth bin × measurement
-type over **1993–2013**, kept only where ≥ 3 distinct cruises contribute, with the window stamped
+type over **1993–2013**, kept only where ≥ 5 distinct cruises contribute (3 until v2026.09.06), with the window stamped
 on every row. A cast's anomaly is its value minus the row of *its own* station and calendar month;
 pooling months produces a seasonal-cycle map, not an anomaly.
 
