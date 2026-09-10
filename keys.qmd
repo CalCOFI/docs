@@ -102,12 +102,10 @@ are the join back to the provider's own database.
 Wrangling-time provenance (`_source_file`, `_source_row`, …) is a different thing and is stripped
 at the freeze.
 
-![The core family and the references it joins to, with the keys that carry the integration. Every other released table hangs off one of these; the full diagram for any release is in the [schema browser](https://calcofi.io/db-schema/#erd).](diagrams/core_erd.svg){#fig-core-erd .cc-diagram .nolightbox}
-
 ## The contract, per table
 
 Every released table declares a primary key, and every foreign key between released tables —
-every arrow in @fig-core-erd — is declared in the release's `relationships.json` (`calcofi4db::core_relationships()` for the core
+every arrow in @fig-core-erd, the core family's diagram in the [Database](db.qmd) chapter — is declared in the release's `relationships.json` (`calcofi4db::core_relationships()` for the core
 family and the tables the release builds; `metadata/relationships_cross.csv` for the edges that
 cross datasets). @tbl-contract reads that file for `r snap$version`.
 

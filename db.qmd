@@ -25,7 +25,10 @@ Sixteen source datasets — ichthyoplankton, zooplankton, bottle hydrography, CT
 underway meteorology, seabird and mammal transects, and more — used to reach the database as
 ~40 per-dataset tables. They now project into a small **core family** that every consumer
 reads. A dataset's projection lives in its own ingest notebook (the generic shapes live in
-`calcofi4db`), so adding a dataset never edits a shared `switch()`.
+`calcofi4db`), so adding a dataset never edits a shared `switch()`. @fig-core-erd draws that
+family and the reference tables it joins to; @tbl-core says what one row of each stands for.
+
+![The core family and the references it joins to, with the keys that carry the integration. Every other released table hangs off one of these; the full diagram for any release is in the [schema browser](https://calcofi.io/db-schema/#erd).](diagrams/core_erd.svg){#fig-core-erd .cc-diagram .nolightbox}
 
 | table | grain | tier |
 |---|---|---|
