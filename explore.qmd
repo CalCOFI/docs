@@ -239,10 +239,16 @@ at once.
 ![The Sections lens for an organism: a station-by-year section along line 90 across all cruises, years down the y-axis because the tows are depth-integrated.](figs/explore/sections_bio.png){#fig-explore-section-bio .column-body-outset}
 
 For an ocean variable, the **3-D** button hangs the same section as a curtain over the GEBCO sea
-floor (@fig-explore-section-3d), with the vertical exaggeration in the URL; **2D** at the top right
-brings the flat one back.
+floor (@fig-explore-section-3d), with the station grid at the surface for reference: every station
+of the standard pattern as a dot with its number, a thread through each line and the line's name at
+both ends. The camera is driven by dragging (shift-drag or right-drag rotates and tilts), by the
+rotate, tilt and compass buttons that join the map's top-right row in 3-D (the compass resets the
+line's own framing), or by the keyboard once the scene has been clicked (arrows pan, shift + arrows
+rotate and tilt, + and − zoom). The vantage travels in the URL as `cam=` beside the vertical
+exaggeration, so a shared link reopens at the same angle; **2D** at the top right brings the flat
+one back.
 
-![The same depth section as a 3-D curtain over the GEBCO sea floor. Desktop and ocean variables only; the 2D button restores the flat section.](figs/explore/sections_3d.png){#fig-explore-section-3d .column-body-outset}
+![The same depth section as a 3-D curtain over the GEBCO sea floor, the standard station pattern threaded and labelled at the surface. Desktop and ocean variables only; the 2D button restores the flat section.](figs/explore/sections_3d.png){#fig-explore-section-3d .column-body-outset}
 
 ## Map layers {#sec-explore-layers}
 
@@ -323,7 +329,7 @@ tibble::tribble(
   "the summary",            "stat",                                   "stat=med",
   "hexagon size",           "res",                                    "res=5",
   "the contour surface",    "interp, grain, surface, inputs, labels", "interp=ok&grain=station&surface=se",
-  "the section",            "line, anom, cruise, view, exag",         "line=90&anom=1&view=3d",
+  "the section",            "line, anom, cruise, view, exag, cam",    "line=90&anom=1&view=3d&cam=-121.2,32.6,7.6,55,-40",
   "the region",             "layer, region",                          "layer=National+Marine+Sanctuaries",
   "the map extent",         "map",                                    "map=-120.4,34.1,6.2",
   "the map layers",         "layers, data, datao, ramp",              "layers=noaa_onms_sanctuaries,data&ramp=thermal",
