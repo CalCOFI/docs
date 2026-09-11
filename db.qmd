@@ -190,9 +190,8 @@ taxon without a match renders exactly as it does today (`taxon-reference` skill,
 ![The page head, composed: a PhyloPic silhouette in the page's own ink beside a licensed photo
 faded into the band, a two-bar glance at size against a familiar reference, and a sentence stitched
 from Wikipedia, the release record and WoRMS, each part underlined in the colour of its source —
-the Pacific sardine, light theme. This is the design mockup; the integrator swaps in a screenshot of
-the live page once the species-faces pages ship.](figs/db/species_face.png){#fig-species-face
-width=45%}
+the Pacific sardine's live page at calcofi.io, light theme, 2026-09-11.](figs/db/species_face.png){#fig-species-face
+width=60%}
 
 ### Measurements {#measurements}
 
@@ -532,7 +531,10 @@ notebook builds a parquet path by hand.
 The netCDF, ERDDAP, EDI and OBIS publishers are all **generic** — parameterised by dataset, driven by
 the release; the OBIS one (`publish_to-obis.qmd`, 2026-09-05) retired the per-dataset ichthyoplankton
 notebook. See [Darwin Core / OBIS ENV-DATA mapping](#darwin-core-obis-env-data-mapping) for what it
-reads, and [Portals](portals.qmd#obis) for the publishing steps.
+reads, and [Portals](portals.qmd#obis) for the publishing steps. All four run after every promoted
+release and rebuild a dataset's output only when its rows, metadata or the publisher's code changed;
+`publish_status.qmd` then lists which portal copies are due a fresh upload
+([Portals](portals.qmd#publish-after-release)).
 
 **ERDDAP** (`publish_to-erddap.qmd`) discovers one config block per
 `dataset_key` from what the core actually holds, rather than a
