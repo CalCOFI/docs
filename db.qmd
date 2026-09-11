@@ -164,6 +164,36 @@ When asserting lineage coverage, **split by rank position**: `family` is legitim
 family rank, and `kingdom` is NULL for `worms:1` *Biota*. A blanket non-NULL assertion is wrong,
 and someone will "fix" it by inventing data.
 
+### A face for every species page
+
+Every taxon has a page at [calcofi.io/species/](https://calcofi.io/species/) — the species catalog
+`calcofi4db::build_taxa_catalog()` writes as `taxa.json`, one row per `taxon_key` with its lineage,
+authority ids and observation stats. The page also shows a silhouette, a photo where one exists, a
+size on a familiar scale, and one sentence, so the reader has more than the taxonomy to go on
+(@fig-species-face). A PhyloPic silhouette, drawn in the page's own ink, is resolved by WoRMS id
+and, failing that, by name at each rank up the lineage until one exists. A full-colour photo appears
+where one clears the licence policy below; where none does, the slot is simply absent and the
+layout is unchanged. Size is drawn on a scale a reader already knows — the taxon's own length beside
+the nearest familiar reference (a US quarter, a person, the CalCOFI bongo net and ring, the ship) —
+and, for fishes, the egg-to-larva lengths FishBase carries from Matarese et al.'s [-@matarese1989]
+laboratory guide of Northeast Pacific early life stages, with CalCOFI Atlas 33 [@moser1996] held in
+reserve for the species NOAA's Ichthyoplankton Information System does not cover. The sentence
+reuses Wikipedia's lead under its own licence, followed by the release record's own numbers. Every
+source is named on the page: PhyloPic for the silhouette; Wikimedia Commons, iNaturalist and GBIF
+for the photo; WoRMS, FishBase and SeaLifeBase for the size; NOAA's Ichthyoplankton Information
+System for the fish plate. The licence policy is one sentence — Creative Commons and public-domain
+files are used, non-commercial licences are accepted but labelled, and every asset is credited and
+linked to its source. None of this is typed into the page: the sidecar (`taxa_media.json`) is
+fetched weekly by the landing repo's own scripts, keyed by `taxon_key` beside the catalog, and a
+taxon without a match renders exactly as it does today (`taxon-reference` skill, *Species faces*).
+
+![The page head, composed: a PhyloPic silhouette in the page's own ink beside a licensed photo
+faded into the band, a two-bar glance at size against a familiar reference, and a sentence stitched
+from Wikipedia, the release record and WoRMS, each part underlined in the colour of its source —
+the Pacific sardine, light theme. This is the design mockup; the integrator swaps in a screenshot of
+the live page once the species-faces pages ship.](figs/db/species_face.png){#fig-species-face
+width=45%}
+
 ### Measurements {#measurements}
 
 `measurement_type.csv` names a **series** — one dataset's own column of measured values
@@ -276,7 +306,6 @@ if (!is.null(mc)) {
   cat("Two facts the record states rather than leaves implicit, unavailable for this render along with the counts above: **a series with no NERC concept says so** (`no_p01`), never a blank cell that reads as \"not looked at\"; and **a bound is declared or questioned, never inferred from the data** — a series' `observed{}` range sits within its registry bound, what falls outside is counted in `out_of_bounds{n, min, max}`, and a series with none says `no_bound`.\n")
 }
 ```
-
 ### Quality flags reach consumers only if consumers apply them
 
 `obs.measurement_qual` is **each dataset's own vocabulary, uninterpreted** — bottle 6 = ok-from-CTD,
