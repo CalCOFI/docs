@@ -99,9 +99,13 @@ portals_tbl |>
 package is built from the release's own `eml/{dataset_key}.xml` plus CSV entities exported from
 the core — for the bottle database three tables totalling 2.1 GB plus the shared vocabulary
 table). (1) An EDI account for the open `edi` scope, held by Erin, with Ben granted editor access
-through the EML `access` element — created once at dashboard.edirepository.org. Every render
+through the EML `access` element — created once at dashboard.edirepository.org. Every release
 already stages the package at `gs://calcofi-db/publish/edi/{dataset_key}/{dataset_key}_{version}/`
-for review (the dataset page lists it as *built, not deposited*). (2) Set
+for review (the dataset page lists it as *built, not deposited*), `version` being the release it
+was last rebuilt from (a package is rebuilt only when its dataset changed — see
+[After every release](#publish-after-release)); every entity's
+EML `url` points at that staged copy, and the EML is checked against the EML 2.2 schema
+(`EML::eml_validate()`, inside `check_eml()`) on every run, a reused package included. (2) Set
 `EDI_USER`/`EDI_PASS` (or an EDI API key as `EDI_KEY`) wherever the pipeline runs and render the
 notebook: PASTA **evaluate** runs automatically against **staging** and the report lands beside the
 package; fix what it names and re-render. (3) Once evaluate is clean, render with
@@ -324,6 +328,40 @@ if (is.null(catalog_record) || is.null(catalog_record$datasets)) {
     tab_options(table.width = pct(100), data_row.padding = px(5))
 }
 ```
+
+## After every release: rebuild what changed, list what is due {#publish-after-release}
+
+The four publishers — `publish_to-edi.qmd`, `publish_to-obis.qmd`, `publish_to-netcdf.qmd` and
+`publish_to-erddap.qmd` — are targets in the same `targets` pipeline as the release, each
+depending on `test_release`, so they run after a release is tested and promoted and always read
+the promoted version. Most releases change a few datasets and leave the rest alone, so each
+publisher fingerprints, per dataset, what its output is a function of
+(`calcofi4db::publish_fingerprint()`): the dataset's rows in every table it reads, identified by
+the release's own row signatures rather than by bytes or version (a `dataset_key` partition is
+signed by its catalog `content_hash`, a shared object is read once and its per-dataset signatures
+cached by `content_hash`); the dataset's catalog record and the registries the output carries;
+and the publisher's own code. An unchanged fingerprint with the output still on disk is reused —
+the package, archive or file keeps the release it was built from, and records the release it was
+confirmed against — and anything else is rebuilt, the notebook naming the input that moved
+(`publish_decide()`). The slowest outputs — the full-resolution CTD netCDF and the EDI CSV
+exports — are therefore paid for once per change, not once per release.
+
+Whether a portal is behind is a second, separate comparison: the bytes built now against the
+bytes the portal was last given (`publish_upload_status()`: `never uploaded`, `current` or
+`changed since {version}`). `publish_status.qmd`, the target that runs after all four, makes that
+comparison for every dataset on every portal and writes the to-do list to
+`gs://calcofi-db/publish/portal_status.csv` and
+[calcofi.io/workflows/publish_status.html](https://calcofi.io/workflows/publish_status.html);
+@tbl-portal-status says where each portal's copy is recorded.
+
+| Portal | The copy it holds is recorded in | An upload is |
+|---|---|---|
+| EDI | `metadata/edi_packages.csv` (`content_hash`, `built_from`) | `CALCOFI_PUBLISH_EDI=true` with EDI credentials; refused while the record lacks a field the EML check requires |
+| OBIS (OBIS-USA IPT) | each archive's `{dataset_key}_manifest.json` (`uploaded_hash`) | manual, after the provider agrees ([OBIS](#obis)) |
+| netCDF | the site's `{dataset}/manifests.json` | `CALCOFI_PUBLISH=true`; bytes already online are listed for the new release, never re-uploaded |
+| ERDDAP | `data/erddap/deploy_status.json` | automatic, unless `CALCOFI_DEPLOY=false` or `CALCOFI_ERDDAP_DEPLOY=false` |
+
+: Where each portal's current copy is recorded, and what an upload takes. {#tbl-portal-status}
 
 ## Archive of record, per dataset
 

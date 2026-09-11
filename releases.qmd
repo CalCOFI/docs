@@ -210,5 +210,8 @@ only then promoted; the read-only consumers are refreshed afterwards by
 and the ones hosted on GitHub Actions, which the script dispatches: `db-viz-station`,
 `ctd-transects` and **this book**, whose pre-render snapshots the promoted release's
 `catalog.json`, `integrity.json` and sidecars and so describes the previous version until it
-re-renders ([Architecture](architecture.qmd)). A **staging** run exercises the whole path under a separate prefix without touching
+re-renders ([Architecture](architecture.qmd)). In the same `targets` run the four publishers
+follow `test_release`, rebuilding only the datasets that changed, and `publish_status.qmd` lists
+what each portal is due ([Portals](portals.qmd#publish-after-release)).
+A **staging** run exercises the whole path under a separate prefix without touching
 the promoted release or the shared object store.
