@@ -143,8 +143,9 @@ breath:
 
 - `?theme=dark|light` on any URL sets the theme, remembered across products only when a person
   chose it; a fresh visit is light.
-- The header is one bar: the lockup at the far left links to calcofi.io, the product's title beside
-  it links to its own root, the theme toggle sits at the right. Where a framework owns the bar
+- The header is one bar: the lockup (the mark and the wordmark "CalCOFI.io") at the far left links
+  to calcofi.io, the product's own name beside it ("Explorer", "Query", never "CalCOFI Query") links
+  to its own root, the theme toggle sits at the right. Where a framework owns the bar
   (Quarto, pkgdown, MkDocs, Shiny), the lockup goes in its brand slot and its toggle is bridged.
 - An application declares its scale (`<meta name="cc-scale" content="app">`); a page declares
   nothing and gets the reading rhythm. This book is a page.

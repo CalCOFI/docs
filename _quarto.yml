@@ -60,15 +60,15 @@ book:
   # calcofi.io brand contract (https://calcofi.io/brand/v2/): the CalCOFI favicon
   # set; in the sidebar quarto owns, the horizontal lockup (logo_calcofi_h*.svg,
   # 36 px — the mark alone is v1) linking to calcofi.io with the product title
-  # ("docs") beside it linking to this book's root. the theme half (both
+  # ("Docs") beside it linking to this book's root. the theme half (both
   # stylesheets, quarto's toggle bridged) is under format.html below.
   # favicon.png is https://calcofi.io/brand/v2/favicon-32x32.png (quarto rewrites a URL here to ./https://...)
   favicon: favicon.png
   sidebar:
-    title: docs
+    title: Docs
     logo:
-      light: {path: https://calcofi.io/brand/v2/logo_calcofi_h_light.svg, alt: CalCOFI}
-      dark: {path: https://calcofi.io/brand/v2/logo_calcofi_h.svg, alt: CalCOFI}
+      light: {path: https://calcofi.io/brand/v2/logo_calcofi_h_light.svg, alt: CalCOFI.io}
+      dark: {path: https://calcofi.io/brand/v2/logo_calcofi_h.svg, alt: CalCOFI.io}
     logo-href: https://calcofi.io
     # the pdf and docx are built by the non-blocking second CI job and published as the
     # assets of the rolling `documents` release, so these links never dangle when a
