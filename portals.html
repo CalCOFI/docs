@@ -641,8 +641,9 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   <li><a href="#data.gov-dcat-us" id="toc-data.gov-dcat-us" class="nav-link" data-scroll-target="#data.gov-dcat-us"><span class="header-section-number">10.5.3</span> data.gov (DCAT-US)</a></li>
   </ul></li>
   <li><a href="#the-dataset-catalog-and-who-registers-where" id="toc-the-dataset-catalog-and-who-registers-where" class="nav-link" data-scroll-target="#the-dataset-catalog-and-who-registers-where"><span class="header-section-number">10.6</span> The dataset catalog, and who registers where</a></li>
-  <li><a href="#archive-of-record-per-dataset" id="toc-archive-of-record-per-dataset" class="nav-link" data-scroll-target="#archive-of-record-per-dataset"><span class="header-section-number">10.7</span> Archive of record, per dataset</a></li>
-  <li><a href="#getting-the-data-through-calcofi.io" id="toc-getting-the-data-through-calcofi.io" class="nav-link" data-scroll-target="#getting-the-data-through-calcofi.io"><span class="header-section-number">10.8</span> Getting the data through calcofi.io</a></li>
+  <li><a href="#publish-after-release" id="toc-publish-after-release" class="nav-link" data-scroll-target="#publish-after-release"><span class="header-section-number">10.7</span> After every release: rebuild what changed, list what is due</a></li>
+  <li><a href="#archive-of-record-per-dataset" id="toc-archive-of-record-per-dataset" class="nav-link" data-scroll-target="#archive-of-record-per-dataset"><span class="header-section-number">10.8</span> Archive of record, per dataset</a></li>
+  <li><a href="#getting-the-data-through-calcofi.io" id="toc-getting-the-data-through-calcofi.io" class="nav-link" data-scroll-target="#getting-the-data-through-calcofi.io"><span class="header-section-number">10.9</span> Getting the data through calcofi.io</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/portals.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -699,23 +700,23 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </figcaption>
 <div aria-describedby="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="khyxgmpawk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#khyxgmpawk table {
+<div id="ikdlhmjvyh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ikdlhmjvyh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#khyxgmpawk thead, #khyxgmpawk tbody, #khyxgmpawk tfoot, #khyxgmpawk tr, #khyxgmpawk td, #khyxgmpawk th {
+#ikdlhmjvyh thead, #ikdlhmjvyh tbody, #ikdlhmjvyh tfoot, #ikdlhmjvyh tr, #ikdlhmjvyh td, #ikdlhmjvyh th {
   border-style: none;
 }
 
-#khyxgmpawk p {
+#ikdlhmjvyh p {
   margin: 0;
   padding: 0;
 }
 
-#khyxgmpawk .gt_table {
+#ikdlhmjvyh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -741,12 +742,12 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-left-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_caption {
+#ikdlhmjvyh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#khyxgmpawk .gt_title {
+#ikdlhmjvyh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -758,7 +759,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-width: 0;
 }
 
-#khyxgmpawk .gt_subtitle {
+#ikdlhmjvyh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -770,7 +771,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-width: 0;
 }
 
-#khyxgmpawk .gt_heading {
+#ikdlhmjvyh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -782,13 +783,13 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_bottom_border {
+#ikdlhmjvyh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_col_headings {
+#ikdlhmjvyh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -803,7 +804,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_col_heading {
+#ikdlhmjvyh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -823,7 +824,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#khyxgmpawk .gt_column_spanner_outer {
+#ikdlhmjvyh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -835,15 +836,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 4px;
 }
 
-#khyxgmpawk .gt_column_spanner_outer:first-child {
+#ikdlhmjvyh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#khyxgmpawk .gt_column_spanner_outer:last-child {
+#ikdlhmjvyh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#khyxgmpawk .gt_column_spanner {
+#ikdlhmjvyh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -855,11 +856,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   width: 100%;
 }
 
-#khyxgmpawk .gt_spanner_row {
+#ikdlhmjvyh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#khyxgmpawk .gt_group_heading {
+#ikdlhmjvyh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -885,7 +886,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   text-align: left;
 }
 
-#khyxgmpawk .gt_empty_group_heading {
+#ikdlhmjvyh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -900,15 +901,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: middle;
 }
 
-#khyxgmpawk .gt_from_md > :first-child {
+#ikdlhmjvyh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#khyxgmpawk .gt_from_md > :last-child {
+#ikdlhmjvyh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#khyxgmpawk .gt_row {
+#ikdlhmjvyh .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -927,7 +928,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#khyxgmpawk .gt_stub {
+#ikdlhmjvyh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -940,7 +941,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#khyxgmpawk .gt_stub_row_group {
+#ikdlhmjvyh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -954,15 +955,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: top;
 }
 
-#khyxgmpawk .gt_row_group_first td {
+#ikdlhmjvyh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#khyxgmpawk .gt_row_group_first th {
+#ikdlhmjvyh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#khyxgmpawk .gt_summary_row {
+#ikdlhmjvyh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -972,16 +973,16 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#khyxgmpawk .gt_first_summary_row {
+#ikdlhmjvyh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_first_summary_row.thick {
+#ikdlhmjvyh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#khyxgmpawk .gt_last_summary_row {
+#ikdlhmjvyh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -991,7 +992,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_grand_summary_row {
+#ikdlhmjvyh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1001,7 +1002,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#khyxgmpawk .gt_first_grand_summary_row {
+#ikdlhmjvyh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1011,7 +1012,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_last_grand_summary_row_top {
+#ikdlhmjvyh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1021,11 +1022,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_striped {
+#ikdlhmjvyh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#khyxgmpawk .gt_table_body {
+#ikdlhmjvyh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1034,7 +1035,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_footnotes {
+#ikdlhmjvyh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1048,7 +1049,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_footnote {
+#ikdlhmjvyh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1057,7 +1058,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#khyxgmpawk .gt_sourcenotes {
+#ikdlhmjvyh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1071,7 +1072,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#khyxgmpawk .gt_sourcenote {
+#ikdlhmjvyh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1079,72 +1080,72 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#khyxgmpawk .gt_left {
+#ikdlhmjvyh .gt_left {
   text-align: left;
 }
 
-#khyxgmpawk .gt_center {
+#ikdlhmjvyh .gt_center {
   text-align: center;
 }
 
-#khyxgmpawk .gt_right {
+#ikdlhmjvyh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#khyxgmpawk .gt_font_normal {
+#ikdlhmjvyh .gt_font_normal {
   font-weight: normal;
 }
 
-#khyxgmpawk .gt_font_bold {
+#ikdlhmjvyh .gt_font_bold {
   font-weight: bold;
 }
 
-#khyxgmpawk .gt_font_italic {
+#ikdlhmjvyh .gt_font_italic {
   font-style: italic;
 }
 
-#khyxgmpawk .gt_super {
+#ikdlhmjvyh .gt_super {
   font-size: 65%;
 }
 
-#khyxgmpawk .gt_footnote_marks {
+#ikdlhmjvyh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#khyxgmpawk .gt_asterisk {
+#ikdlhmjvyh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#khyxgmpawk .gt_indent_1 {
+#ikdlhmjvyh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#khyxgmpawk .gt_indent_2 {
+#ikdlhmjvyh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#khyxgmpawk .gt_indent_3 {
+#ikdlhmjvyh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#khyxgmpawk .gt_indent_4 {
+#ikdlhmjvyh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#khyxgmpawk .gt_indent_5 {
+#ikdlhmjvyh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#khyxgmpawk .katex-display {
+#ikdlhmjvyh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#khyxgmpawk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ikdlhmjvyh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1387,7 +1388,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 <li>CalCOFI datasets: <a href="http://portal.edirepository.org:80/nis/simpleSearch?defType=edismax&amp;q=CalCOFI&amp;fq=-scope:ecotrends&amp;fq=-scope:lter-landsat*&amp;fl=id,packageid,title,author,organization,pubdate,coordinates&amp;debug=false">EDI query “CalCOFI”</a></li>
 </ul></li>
 </ul>
-<p><strong>Publishing there is manual, in four steps</strong> (<code>publish_to-edi.qmd</code>, generic per dataset; the package is built from the release’s own <code>eml/{dataset_key}.xml</code> plus CSV entities exported from the core — for the bottle database three tables totalling 2.1 GB plus the shared vocabulary table). (1) An EDI account for the open <code>edi</code> scope, held by Erin, with Ben granted editor access through the EML <code>access</code> element — created once at dashboard.edirepository.org. Every render already stages the package at <code>gs://calcofi-db/publish/edi/{dataset_key}/{dataset_key}_{version}/</code> for review (the dataset page lists it as <em>built, not deposited</em>). (2) Set <code>EDI_USER</code>/<code>EDI_PASS</code> (or an EDI API key as <code>EDI_KEY</code>) wherever the pipeline runs and render the notebook: PASTA <strong>evaluate</strong> runs automatically against <strong>staging</strong> and the report lands beside the package; fix what it names and re-render. (3) Once evaluate is clean, render with <code>CALCOFI_PUBLISH_EDI=true</code> to <strong>create</strong> (or, on a later release, <strong>update</strong>) the package against <strong>production</strong> — this mints a DOI and a <code>scope.identifier.revision</code>, recorded in <code>metadata/edi_packages.csv</code>. (4) Add the DOI back as an <code>archive</code> row in <code>metadata/distribution.csv</code> (<code>portal: edi</code>) and as the dataset’s <code>doi</code> in its <code>metadata/{provider}/{dataset}/dataset_meta.yml</code>, so the record and the citation carry it from the next release on. CCE-LTER’s <code>knb-lter-cce</code> packages stay theirs and are never republished.</p>
+<p><strong>Publishing there is manual, in four steps</strong> (<code>publish_to-edi.qmd</code>, generic per dataset; the package is built from the release’s own <code>eml/{dataset_key}.xml</code> plus CSV entities exported from the core — for the bottle database three tables totalling 2.1 GB plus the shared vocabulary table). (1) An EDI account for the open <code>edi</code> scope, held by Erin, with Ben granted editor access through the EML <code>access</code> element — created once at dashboard.edirepository.org. Every release already stages the package at <code>gs://calcofi-db/publish/edi/{dataset_key}/{dataset_key}_{version}/</code> for review (the dataset page lists it as <em>built, not deposited</em>), <code>version</code> being the release it was last rebuilt from (a package is rebuilt only when its dataset changed — see <a href="#publish-after-release">After every release</a>); every entity’s EML <code>url</code> points at that staged copy, and the EML is checked against the EML 2.2 schema (<code>EML::eml_validate()</code>, inside <code>check_eml()</code>) on every run, a reused package included. (2) Set <code>EDI_USER</code>/<code>EDI_PASS</code> (or an EDI API key as <code>EDI_KEY</code>) wherever the pipeline runs and render the notebook: PASTA <strong>evaluate</strong> runs automatically against <strong>staging</strong> and the report lands beside the package; fix what it names and re-render. (3) Once evaluate is clean, render with <code>CALCOFI_PUBLISH_EDI=true</code> to <strong>create</strong> (or, on a later release, <strong>update</strong>) the package against <strong>production</strong> — this mints a DOI and a <code>scope.identifier.revision</code>, recorded in <code>metadata/edi_packages.csv</code>. (4) Add the DOI back as an <code>archive</code> row in <code>metadata/distribution.csv</code> (<code>portal: edi</code>) and as the dataset’s <code>doi</code> in its <code>metadata/{provider}/{dataset}/dataset_meta.yml</code>, so the record and the citation carry it from the next release on. CCE-LTER’s <code>knb-lter-cce</code> packages stay theirs and are never republished.</p>
 </section>
 <section id="ncei" class="level3" data-number="10.3.2">
 <h3 data-number="10.3.2" class="anchored" data-anchor-id="ncei"><span class="header-section-number">10.3.2</span> NCEI</h3>
@@ -1517,23 +1518,23 @@ Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is 
 Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted release’s <code>datasets.json</code>.
 </figcaption>
 <div aria-describedby="tbl-registrations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="qcehlkpioo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qcehlkpioo table {
+<div id="cwvzcaqxxi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cwvzcaqxxi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qcehlkpioo thead, #qcehlkpioo tbody, #qcehlkpioo tfoot, #qcehlkpioo tr, #qcehlkpioo td, #qcehlkpioo th {
+#cwvzcaqxxi thead, #cwvzcaqxxi tbody, #cwvzcaqxxi tfoot, #cwvzcaqxxi tr, #cwvzcaqxxi td, #cwvzcaqxxi th {
   border-style: none;
 }
 
-#qcehlkpioo p {
+#cwvzcaqxxi p {
   margin: 0;
   padding: 0;
 }
 
-#qcehlkpioo .gt_table {
+#cwvzcaqxxi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1559,12 +1560,12 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-left-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_caption {
+#cwvzcaqxxi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qcehlkpioo .gt_title {
+#cwvzcaqxxi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1576,7 +1577,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-width: 0;
 }
 
-#qcehlkpioo .gt_subtitle {
+#cwvzcaqxxi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1588,7 +1589,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-top-width: 0;
 }
 
-#qcehlkpioo .gt_heading {
+#cwvzcaqxxi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1600,13 +1601,13 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_bottom_border {
+#cwvzcaqxxi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_col_headings {
+#cwvzcaqxxi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1621,7 +1622,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_col_heading {
+#cwvzcaqxxi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1641,7 +1642,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   overflow-x: hidden;
 }
 
-#qcehlkpioo .gt_column_spanner_outer {
+#cwvzcaqxxi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1653,15 +1654,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 4px;
 }
 
-#qcehlkpioo .gt_column_spanner_outer:first-child {
+#cwvzcaqxxi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qcehlkpioo .gt_column_spanner_outer:last-child {
+#cwvzcaqxxi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qcehlkpioo .gt_column_spanner {
+#cwvzcaqxxi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1673,11 +1674,11 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   width: 100%;
 }
 
-#qcehlkpioo .gt_spanner_row {
+#cwvzcaqxxi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qcehlkpioo .gt_group_heading {
+#cwvzcaqxxi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1703,7 +1704,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   text-align: left;
 }
 
-#qcehlkpioo .gt_empty_group_heading {
+#cwvzcaqxxi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1718,15 +1719,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   vertical-align: middle;
 }
 
-#qcehlkpioo .gt_from_md > :first-child {
+#cwvzcaqxxi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qcehlkpioo .gt_from_md > :last-child {
+#cwvzcaqxxi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qcehlkpioo .gt_row {
+#cwvzcaqxxi .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1745,7 +1746,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   overflow-x: hidden;
 }
 
-#qcehlkpioo .gt_stub {
+#cwvzcaqxxi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1758,7 +1759,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#qcehlkpioo .gt_stub_row_group {
+#cwvzcaqxxi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1772,15 +1773,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   vertical-align: top;
 }
 
-#qcehlkpioo .gt_row_group_first td {
+#cwvzcaqxxi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qcehlkpioo .gt_row_group_first th {
+#cwvzcaqxxi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qcehlkpioo .gt_summary_row {
+#cwvzcaqxxi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1790,16 +1791,16 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#qcehlkpioo .gt_first_summary_row {
+#cwvzcaqxxi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_first_summary_row.thick {
+#cwvzcaqxxi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qcehlkpioo .gt_last_summary_row {
+#cwvzcaqxxi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1809,7 +1810,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_grand_summary_row {
+#cwvzcaqxxi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1819,7 +1820,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#qcehlkpioo .gt_first_grand_summary_row {
+#cwvzcaqxxi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1829,7 +1830,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-top-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_last_grand_summary_row_top {
+#cwvzcaqxxi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1839,11 +1840,11 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_striped {
+#cwvzcaqxxi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qcehlkpioo .gt_table_body {
+#cwvzcaqxxi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1852,7 +1853,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_footnotes {
+#cwvzcaqxxi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1866,7 +1867,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_footnote {
+#cwvzcaqxxi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1875,7 +1876,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#qcehlkpioo .gt_sourcenotes {
+#cwvzcaqxxi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1889,7 +1890,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#qcehlkpioo .gt_sourcenote {
+#cwvzcaqxxi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1897,72 +1898,72 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#qcehlkpioo .gt_left {
+#cwvzcaqxxi .gt_left {
   text-align: left;
 }
 
-#qcehlkpioo .gt_center {
+#cwvzcaqxxi .gt_center {
   text-align: center;
 }
 
-#qcehlkpioo .gt_right {
+#cwvzcaqxxi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qcehlkpioo .gt_font_normal {
+#cwvzcaqxxi .gt_font_normal {
   font-weight: normal;
 }
 
-#qcehlkpioo .gt_font_bold {
+#cwvzcaqxxi .gt_font_bold {
   font-weight: bold;
 }
 
-#qcehlkpioo .gt_font_italic {
+#cwvzcaqxxi .gt_font_italic {
   font-style: italic;
 }
 
-#qcehlkpioo .gt_super {
+#cwvzcaqxxi .gt_super {
   font-size: 65%;
 }
 
-#qcehlkpioo .gt_footnote_marks {
+#cwvzcaqxxi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qcehlkpioo .gt_asterisk {
+#cwvzcaqxxi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qcehlkpioo .gt_indent_1 {
+#cwvzcaqxxi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qcehlkpioo .gt_indent_2 {
+#cwvzcaqxxi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qcehlkpioo .gt_indent_3 {
+#cwvzcaqxxi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qcehlkpioo .gt_indent_4 {
+#cwvzcaqxxi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qcehlkpioo .gt_indent_5 {
+#cwvzcaqxxi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qcehlkpioo .katex-display {
+#cwvzcaqxxi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qcehlkpioo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cwvzcaqxxi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2126,7 +2127,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
 </tr>
 </tbody><tfoot>
 <tr class="gt_sourcenotes odd">
-<td colspan="7" class="gt_sourcenote"><strong>Status legend</strong>: ✔ = published, ▲ = planned, ✖ = n/a. Read from <code>v2026.09.10</code>’s <code>datasets.json</code>; the same rows back each dataset’s own page.</td>
+<td colspan="7" class="gt_sourcenote"><strong>Status legend</strong>: ✔ = published, ▲ = planned, ✖ = n/a. Read from <code>v2026.09.11</code>’s <code>datasets.json</code>; the same rows back each dataset’s own page.</td>
 </tr>
 </tfoot>
 
@@ -2137,8 +2138,53 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
 </figure>
 </div>
 </section>
-<section id="archive-of-record-per-dataset" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="archive-of-record-per-dataset"><span class="header-section-number">10.7</span> Archive of record, per dataset</h2>
+<section id="publish-after-release" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="publish-after-release"><span class="header-section-number">10.7</span> After every release: rebuild what changed, list what is due</h2>
+<p>The four publishers — <code>publish_to-edi.qmd</code>, <code>publish_to-obis.qmd</code>, <code>publish_to-netcdf.qmd</code> and <code>publish_to-erddap.qmd</code> — are targets in the same <code>targets</code> pipeline as the release, each depending on <code>test_release</code>, so they run after a release is tested and promoted and always read the promoted version. Most releases change a few datasets and leave the rest alone, so each publisher fingerprints, per dataset, what its output is a function of (<code>calcofi4db::publish_fingerprint()</code>): the dataset’s rows in every table it reads, identified by the release’s own row signatures rather than by bytes or version (a <code>dataset_key</code> partition is signed by its catalog <code>content_hash</code>, a shared object is read once and its per-dataset signatures cached by <code>content_hash</code>); the dataset’s catalog record and the registries the output carries; and the publisher’s own code. An unchanged fingerprint with the output still on disk is reused — the package, archive or file keeps the release it was built from, and records the release it was confirmed against — and anything else is rebuilt, the notebook naming the input that moved (<code>publish_decide()</code>). The slowest outputs — the full-resolution CTD netCDF and the EDI CSV exports — are therefore paid for once per change, not once per release.</p>
+<p>Whether a portal is behind is a second, separate comparison: the bytes built now against the bytes the portal was last given (<code>publish_upload_status()</code>: <code>never uploaded</code>, <code>current</code> or <code>changed since {version}</code>). <code>publish_status.qmd</code>, the target that runs after all four, makes that comparison for every dataset on every portal and writes the to-do list to <code>gs://calcofi-db/publish/portal_status.csv</code> and <a href="https://calcofi.io/workflows/publish_status.html">calcofi.io/workflows/publish_status.html</a>; <a href="#tbl-portal-status" class="quarto-xref">Table&nbsp;<span>10.3</span></a> says where each portal’s copy is recorded.</p>
+<div id="tbl-portal-status" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-portal-status-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.3: Where each portal’s current copy is recorded, and what an upload takes.
+</figcaption>
+<div aria-describedby="tbl-portal-status-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Portal</th>
+<th>The copy it holds is recorded in</th>
+<th>An upload is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EDI</td>
+<td><code>metadata/edi_packages.csv</code> (<code>content_hash</code>, <code>built_from</code>)</td>
+<td><code>CALCOFI_PUBLISH_EDI=true</code> with EDI credentials; refused while the record lacks a field the EML check requires</td>
+</tr>
+<tr class="even">
+<td>OBIS (OBIS-USA IPT)</td>
+<td>each archive’s <code>{dataset_key}_manifest.json</code> (<code>uploaded_hash</code>)</td>
+<td>manual, after the provider agrees (<a href="#obis">OBIS</a>)</td>
+</tr>
+<tr class="odd">
+<td>netCDF</td>
+<td>the site’s <code>{dataset}/manifests.json</code></td>
+<td><code>CALCOFI_PUBLISH=true</code>; bytes already online are listed for the new release, never re-uploaded</td>
+</tr>
+<tr class="even">
+<td>ERDDAP</td>
+<td><code>data/erddap/deploy_status.json</code></td>
+<td>automatic, unless <code>CALCOFI_DEPLOY=false</code> or <code>CALCOFI_ERDDAP_DEPLOY=false</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="archive-of-record-per-dataset" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="archive-of-record-per-dataset"><span class="header-section-number">10.8</span> Archive of record, per dataset</h2>
 <p>Every dataset has <strong>one</strong> portal that holds its citable, DOI-bearing copy — its archive of record — and the others are either aggregators and services that read from it or do not apply. The rule is stated per dataset, in one sentence, in <code>metadata/dataset_status.csv</code>’s <code>publish_policy</code> column (CalCOFI/workflows), carried into <code>datasets.json</code> as <code>status.publish_policy</code> (calcofi4db ≥ 4.6.3) and shown on each dataset page above its <em>Archives &amp; portals</em> table. The rules behind the sentences:</p>
 <ul>
 <li><strong>A provider’s own archive is the archive of record, and is never republished.</strong> The nine CCE-LTER-adjacent datasets live in <code>knb-lter-cce</code> on EDI (phyllosoma, phytoplankton, euphausiids, picoplankton, the Farallon bird and mammal census) or in CCE-LTER’s DataZoo exports (ZooDB, ZooScan); DIC is NCEI accession 0301029; the mesopelagic fish and the Dungeness crab megalopae are UC San Diego Library deposits; CUFES is SWFSC’s CoastWatch ERDDAP dataset.</li>
@@ -2147,30 +2193,30 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
 <li><strong>NCEI is the provider’s to deposit for NOAA-collected data</strong> (SWFSC’s ichthyoplankton and CUFES), so it reads <code>n/a</code> on those rather than <code>planned</code>.</li>
 <li><strong>Zenodo</strong> holds the integrated database release itself, one DOI per version.</li>
 </ul>
-<p><a href="#tbl-policy" class="quarto-xref">Table&nbsp;<span>10.3</span></a> states that policy per dataset, as the record carries it.</p>
+<p><a href="#tbl-policy" class="quarto-xref">Table&nbsp;<span>10.4</span></a> states that policy per dataset, as the record carries it.</p>
 <div id="tbl-policy" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-policy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promoted release’s <code>datasets.json</code> (the registry it comes from until a release carries it).
+Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promoted release’s <code>datasets.json</code> (the registry it comes from until a release carries it).
 </figcaption>
 <div aria-describedby="tbl-policy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="evfwborgio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#evfwborgio table {
+<div id="yowhphlojs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yowhphlojs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#evfwborgio thead, #evfwborgio tbody, #evfwborgio tfoot, #evfwborgio tr, #evfwborgio td, #evfwborgio th {
+#yowhphlojs thead, #yowhphlojs tbody, #yowhphlojs tfoot, #yowhphlojs tr, #yowhphlojs td, #yowhphlojs th {
   border-style: none;
 }
 
-#evfwborgio p {
+#yowhphlojs p {
   margin: 0;
   padding: 0;
 }
 
-#evfwborgio .gt_table {
+#yowhphlojs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2196,12 +2242,12 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-left-color: #D3D3D3;
 }
 
-#evfwborgio .gt_caption {
+#yowhphlojs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#evfwborgio .gt_title {
+#yowhphlojs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2213,7 +2259,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-width: 0;
 }
 
-#evfwborgio .gt_subtitle {
+#yowhphlojs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2225,7 +2271,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-top-width: 0;
 }
 
-#evfwborgio .gt_heading {
+#yowhphlojs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2237,13 +2283,13 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#evfwborgio .gt_bottom_border {
+#yowhphlojs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#evfwborgio .gt_col_headings {
+#yowhphlojs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2258,7 +2304,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#evfwborgio .gt_col_heading {
+#yowhphlojs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2278,7 +2324,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   overflow-x: hidden;
 }
 
-#evfwborgio .gt_column_spanner_outer {
+#yowhphlojs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2290,15 +2336,15 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 4px;
 }
 
-#evfwborgio .gt_column_spanner_outer:first-child {
+#yowhphlojs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#evfwborgio .gt_column_spanner_outer:last-child {
+#yowhphlojs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#evfwborgio .gt_column_spanner {
+#yowhphlojs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2310,11 +2356,11 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   width: 100%;
 }
 
-#evfwborgio .gt_spanner_row {
+#yowhphlojs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#evfwborgio .gt_group_heading {
+#yowhphlojs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2340,7 +2386,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   text-align: left;
 }
 
-#evfwborgio .gt_empty_group_heading {
+#yowhphlojs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2355,15 +2401,15 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   vertical-align: middle;
 }
 
-#evfwborgio .gt_from_md > :first-child {
+#yowhphlojs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#evfwborgio .gt_from_md > :last-child {
+#yowhphlojs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#evfwborgio .gt_row {
+#yowhphlojs .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -2382,7 +2428,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   overflow-x: hidden;
 }
 
-#evfwborgio .gt_stub {
+#yowhphlojs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2395,7 +2441,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#evfwborgio .gt_stub_row_group {
+#yowhphlojs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2409,15 +2455,15 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   vertical-align: top;
 }
 
-#evfwborgio .gt_row_group_first td {
+#yowhphlojs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#evfwborgio .gt_row_group_first th {
+#yowhphlojs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#evfwborgio .gt_summary_row {
+#yowhphlojs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2427,16 +2473,16 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#evfwborgio .gt_first_summary_row {
+#yowhphlojs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#evfwborgio .gt_first_summary_row.thick {
+#yowhphlojs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#evfwborgio .gt_last_summary_row {
+#yowhphlojs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2446,7 +2492,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#evfwborgio .gt_grand_summary_row {
+#yowhphlojs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2456,7 +2502,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#evfwborgio .gt_first_grand_summary_row {
+#yowhphlojs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2466,7 +2512,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-top-color: #D3D3D3;
 }
 
-#evfwborgio .gt_last_grand_summary_row_top {
+#yowhphlojs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2476,11 +2522,11 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#evfwborgio .gt_striped {
+#yowhphlojs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#evfwborgio .gt_table_body {
+#yowhphlojs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2489,7 +2535,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#evfwborgio .gt_footnotes {
+#yowhphlojs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2503,7 +2549,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#evfwborgio .gt_footnote {
+#yowhphlojs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2512,7 +2558,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#evfwborgio .gt_sourcenotes {
+#yowhphlojs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2526,7 +2572,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#evfwborgio .gt_sourcenote {
+#yowhphlojs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2534,72 +2580,72 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#evfwborgio .gt_left {
+#yowhphlojs .gt_left {
   text-align: left;
 }
 
-#evfwborgio .gt_center {
+#yowhphlojs .gt_center {
   text-align: center;
 }
 
-#evfwborgio .gt_right {
+#yowhphlojs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#evfwborgio .gt_font_normal {
+#yowhphlojs .gt_font_normal {
   font-weight: normal;
 }
 
-#evfwborgio .gt_font_bold {
+#yowhphlojs .gt_font_bold {
   font-weight: bold;
 }
 
-#evfwborgio .gt_font_italic {
+#yowhphlojs .gt_font_italic {
   font-style: italic;
 }
 
-#evfwborgio .gt_super {
+#yowhphlojs .gt_super {
   font-size: 65%;
 }
 
-#evfwborgio .gt_footnote_marks {
+#yowhphlojs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#evfwborgio .gt_asterisk {
+#yowhphlojs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#evfwborgio .gt_indent_1 {
+#yowhphlojs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#evfwborgio .gt_indent_2 {
+#yowhphlojs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#evfwborgio .gt_indent_3 {
+#yowhphlojs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#evfwborgio .gt_indent_4 {
+#yowhphlojs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#evfwborgio .gt_indent_5 {
+#yowhphlojs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#evfwborgio .katex-display {
+#yowhphlojs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#evfwborgio div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yowhphlojs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2678,7 +2724,7 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
 </tr>
 </tbody><tfoot>
 <tr class="gt_sourcenotes odd">
-<td colspan="2" class="gt_sourcenote">Read from <code>v2026.09.10</code>’s <code>datasets.json</code>; the same sentence heads each dataset page’s <em>Archives &amp; portals</em> table.</td>
+<td colspan="2" class="gt_sourcenote">Read from <code>v2026.09.11</code>’s <code>datasets.json</code>; the same sentence heads each dataset page’s <em>Archives &amp; portals</em> table.</td>
 </tr>
 </tfoot>
 
@@ -2689,8 +2735,8 @@ Table&nbsp;10.3: Each dataset’s archive-of-record policy, read from the promot
 </figure>
 </div>
 </section>
-<section id="getting-the-data-through-calcofi.io" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="getting-the-data-through-calcofi.io"><span class="header-section-number">10.8</span> Getting the data through calcofi.io</h2>
+<section id="getting-the-data-through-calcofi.io" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="getting-the-data-through-calcofi.io"><span class="header-section-number">10.9</span> Getting the data through calcofi.io</h2>
 <p>The portals above are where CalCOFI data is discoverable <em>outside</em> calcofi.io; calcofi.io itself is a fourth way in, and it is where the record lives:</p>
 <ul>
 <li><strong><a href="https://calcofi.io/datasets/">The dataset catalog</a></strong> — one page per dataset (and per holding not yet ingested), with its coverage, every distribution above, its citation and provenance, and machine surfaces (<code>{key}.json</code>, <code>{key}.jsonld</code>, the sitemap and <code>data.json</code> described above).</li>
