@@ -326,8 +326,8 @@ scripts, keyed by measurement key beside the catalog, and a key without media re
 
 ![The page head, composed: the existing crumb, label, NERC ids and stats band, with a new face row beneath it — a molecule drawn from
 ChEBI's own coordinates in the page's own ink, a link to the method on calcofi.org, and a sentence stitched from the NERC definition,
-the release record and an authored, cited line, each part underlined in the colour of its source — nitrate, light theme, the design
-mockup, until the live page's own screenshot replaces it.](figs/db/measurement_face.png){#fig-measurement-face width=60%}
+the release record and an authored, cited line, each part underlined in the colour of its source — the live nitrate page at calcofi.io,
+light theme, 2026-09-12.](figs/db/measurement_face.png){#fig-measurement-face width=60%}
 
 ### Quality flags reach consumers only if consumers apply them
 
