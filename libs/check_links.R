@@ -18,7 +18,15 @@ if (!length(htmls)) stop("check_links: no _book/*.html — render first")
 hrefs <- unlist(lapply(htmls, function(f) {
   x <- paste(readLines(f, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
   m <- regmatches(x, gregexpr('href="https?://[^"#]+', x))[[1]]
-  sub('^href="', "", m)
+  # the href as WRITTEN in the HTML, so its entities are still escaped: probing a query
+  # string with a literal "&amp;" is a different request, and EDI's simpleSearch answered
+  # 500 to it for months (200 to the same URL with a real "&") — a warning about our own
+  # escaping, not about their server
+  u <- sub('^href="', "", m)
+  u <- gsub("&amp;", "&", u, fixed = TRUE)
+  u <- gsub("&lt;", "<", u, fixed = TRUE)
+  u <- gsub("&gt;", ">", u, fixed = TRUE)
+  gsub("&quot;", '"', u, fixed = TRUE)
 }))
 hrefs <- unique(hrefs)
 # quarto's own assets, its share buttons (a |url| placeholder), the two hosts that answer
