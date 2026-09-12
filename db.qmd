@@ -305,6 +305,30 @@ if (!is.null(mc)) {
   cat("Two facts the record states rather than leaves implicit, unavailable for this render along with the counts above: **a series with no NERC concept says so** (`no_p01`), never a blank cell that reads as \"not looked at\"; and **a bound is declared or questioned, never inferred from the data** — a series' `observed{}` range sits within its registry bound, what falls outside is counted in `out_of_bounds{n, min, max}`, and a series with none says `no_bound`.\n")
 }
 ```
+### A face for every measurement page
+
+Every measurement page at [calcofi.io/measurements/{key}/](https://calcofi.io/measurements/) carries the catalog above, and beneath
+it a face that answers three questions in one glance: what the thing is, how CalCOFI takes it, and why it matters
+(@fig-measurement-face). **What** follows NERC's own identity chain — a P01 concept's `sameAs` link to a chemical entity in ChEBI, or
+a biological one in WoRMS — down to a structure drawn from ChEBI's own coordinates, in the page's own ink; a mixture such as salinity
+shows its composition instead, the mass fractions of TEOS-10's Reference-Composition Salinity Scale [@millero2008] rather than a
+single molecule, and a property with no chemical identity of its own shows its familiar scale alone. **How** comes from
+`metadata/measurement_method.csv`, one row per dataset and measurement key naming the platform, the instrument, the principle, and a
+link into the method's own section of calcofi.org, styled like the front door's pins. **Why** is one sentence stitched from the NERC
+definition, the release record's own anomaly for every depth band where the quantity is measured against its climatology, and a
+single authored, cited line picked as the best one-sentence answer; the alternatives not picked — a second authored line, the GOOS
+essential-ocean-variable question, the Wikipedia lead — wait one click away in a collapsed panel, the same idiom the datasets catalog
+uses for what is "not yet in the database." A key with no NERC concept of its own — an instrument voltage, an estimate, a sensor
+pair's average — borrows the face of the quantity it stands in for and says so on the page, rather than showing a face for a concept
+it does not carry. None of this is typed into the page: the sidecar (`measurements_media.json`) is fetched by the landing repo's own
+scripts, keyed by measurement key beside the catalog, and a key without media renders exactly as it does today
+(`metadata-registries` skill, *Measurement faces*).
+
+![The page head, composed: the existing crumb, label, NERC ids and stats band, with a new face row beneath it — a molecule drawn from
+ChEBI's own coordinates in the page's own ink, a link to the method on calcofi.org, and a sentence stitched from the NERC definition,
+the release record and an authored, cited line, each part underlined in the colour of its source — nitrate, light theme, the design
+mockup, until the live page's own screenshot replaces it.](figs/db/measurement_face.png){#fig-measurement-face width=60%}
+
 ### Quality flags reach consumers only if consumers apply them
 
 `obs.measurement_qual` is **each dataset's own vocabulary, uninterpreted** — bottle 6 = ok-from-CTD,
