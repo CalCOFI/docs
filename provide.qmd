@@ -10,10 +10,6 @@ practices that make it durable. It is *guidance for a provider*, not the databas
 that is [Naming conventions](naming.qmd) — and it asks for less than the database keeps.
 :::
 
-Drafted by Betty Huang with Erin Satterthwaite for the data management plan's naming-conventions
-task (Task 12), reconciled against the database's registries on 2026-09-08, and kept here as the
-record; the working copy stays a Google Doc until the guide is agreed.
-
 ## The shape of a good dataset
 
 A dataset CalCOFI can integrate answers three questions for every row: **what** was measured or
@@ -31,7 +27,7 @@ effort, or a species with no name that resolves. Those are the mandatory fields 
 | field | what we need | example |
 |---|---|---|
 | **the quantity** | what was measured or counted, in words, with its **unit** — one column per quantity, or one `variable` / `value` / `unit` triple | `temperature` in `degC`; `larvae` as a count per tow |
-| **the time** | date and time of the event in **UTC** (ISO 8601, `2019-02-06T23:48:00Z`), or a local clock time *and* the offset that was in effect | `2019-02-06T23:48:00Z` |
+| **the time** | date and time of the event in **UTC** (ISO 8601, `2019-02-07T23:48:00Z`), or a local clock time *and* the offset that was in effect | `2019-02-07T23:48:00Z` |
 | **the place** | latitude and longitude in **decimal degrees**, WGS 84, signed (south and west negative) | `33.48066, -117.769` |
 | **the depth**, where it applies | metres below the surface, positive down; a range (`depth_min`, `depth_max`) for a tow or a bin | `115.5`; `0 – 210` |
 | **the organism**, for a biological count | a scientific name, and where you have it an identifier from WoRMS (`AphiaID`), ITIS or GBIF; a life stage if the count is stage-specific | `Sardinops sagax`, WoRMS `217452`, `larva` |
@@ -44,13 +40,18 @@ effort, or a species with no name that resolves. Those are the mandatory fields 
 
 These let the data team join your rows to everything else, rather than only place them on a map.
 
-- **The cruise** — the cruise designation as your records carry it (`1902SR`, `CalCOFI 2019-02`,
+- **The cruise** — the cruise designation as your records carry it (`1902RL`, `CalCOFI 2019-02`,
   a NOAA cruise id). The database keys every event to a cruise by its date span, so a designation
   is a check, not a requirement.
 - **The station** — CalCOFI line and station where the event was on the grid (`93.3`, `26.4`), or
   your own station name where it was not.
 - **The gear and the tow** — the net or instrument (a CalCOFI tow-type code such as `CB` for the
-  standard bongo, or a description), the tow number within the cruise, the net side.
+  standard bongo, or a description), the tow number within the cruise, the net side, and the net's
+  mesh size in millimetres where it applies — it sets the smallest organism the gear retains.
+- **A haul factor**, if you already compute one — the factor you use to standardize a catch to a
+  reference tow, so it's comparable across gear. The database can derive this from volume filtered
+  and tow geometry when you don't supply it, but if you already have your own, send it rather than
+  have it recomputed.
 - **Quality flags** — your own vocabulary, as long as it is written down; the database keeps every
   flag exactly as you assign it and never re-interprets it.
 - **Precision and method** — the significant digits of a measurement, the analytical method, the
@@ -74,23 +75,25 @@ These let the data team join your rows to everything else, rather than only plac
 - **Time zones and coordinate systems stated once**, at the top, even when they are the standard
   ones.
 - **Versions, not edits** — when the data change, a new file with a date, not a corrected copy
-  under the same name.
+  under the same name, with the same columns in the same types: a column that turns from a number
+  into text between versions stalls every automated update downstream.
 
 ## An example
 
 A net-tow dataset that carries everything above, as one row per taxon per tow:
 
-| cruise | line | station | tow_number | tow_type | datetime_utc | latitude | longitude | depth_max_m | volume_sampled_m3 | prop_sorted | scientific_name | worms_id | life_stage | count | qual |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1902SR | 93.3 | 26.4 | 12 | CB | 2019-02-06T23:48:00Z | 33.48066 | -117.769 | 210 | 467.3 | 0.48 | Sardinops sagax | 217452 | larva | 42 | |
+| cruise | line | station | tow_number | tow_type | mesh_mm | datetime_utc | latitude | longitude | depth_max_m | volume_sampled_m3 | std_haul_factor | prop_sorted | scientific_name | worms_id | life_stage | count | qual |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1902RL | 93.3 | 26.4 | 12 | CB | 0.505 | 2019-02-07T23:48:00Z | 33.48066 | -117.769 | 210 | 467.3 | 4.49 | 0.48 | Sardinops sagax | 217452 | larva | 42 | |
 
 : One row of a net-tow dataset that carries every mandatory field, and the optional ones that make it CalCOFI. {#tbl-example-row}
 
-From @tbl-example-row the data team's ingest would map `cruise` to `cruise_key` (`2019-02-33P4` after resolving the
+From @tbl-example-row the data team's ingest would map `cruise` to `cruise_key` (`2019-02-33UD` after resolving the
 ship), `line` and `station` to `site_key` (`093.3 026.4`), the tow to a `sample` row with `tow_type`
-`CB`, each count to an `obs_bio` row with `taxon_key` `worms:217452` and `life_stage` `larva`,
-`volume_sampled_m3` and `prop_sorted` to `sample_measurement`, and keep your `tow_number` beside
-them. Nothing in your file changes.
+`CB`, each count to an `obs_bio` row with `taxon_key` `worms:217452` and
+`life_stage` `larva`, `volume_sampled_m3`, `std_haul_factor` and `prop_sorted` to
+`sample_measurement`, and keep your `tow_number` and `mesh_mm` beside them (the gear registry already records the
+standard bongo's 0.505 mm; a mesh that differs is what matters). Nothing in your file changes.
 
 ## What happens next
 
@@ -107,20 +110,20 @@ them. Nothing in your file changes.
 
 Write to **data@calcofi.io** to start.
 
-## Reconciled with the database
+## Names you may see elsewhere
 
-The guide's first drafts and the database's registries disagreed on a handful of names. The
-registry is the record, so the guide follows it; each is noted in @tbl-reconciled so nobody
-reintroduces the older form.
+A handful of names are common in older CalCOFI files and documents but differ from the database's
+registries. The registry is the record, so the ingest maps the older form onto it; @tbl-reconciled
+lists them so nobody reintroduces the older form.
 
-| the draft said | the registry has | why |
+| often written as | the registry has | why |
 |---|---|---|
-| `ship_code` for the NODC code, `ship_key` for a two-letter CalCOFI code | **`ship_key` *is* the NODC code** (`31JD`); there is no `ship_code` | the four-character NODC code is the primary key of `ship` and the suffix of every `cruise_key` |
-| `depth` | **`depth_m`**, `depth_min_m`, `depth_max_m` | units are suffixes on every measured column |
+| a ship as a two-letter code *or* an NODC code, in one column | a `ship_code` as your file has it, resolved to the `ship` row: **`ship_key`**, the two-letter CalCOFI code (`RL`), and **`ship_nodc`**, the four-character NODC code (`33UD`) | the NODC code is the suffix of every `cruise_key` (`YYYY-MM-NODC`, e.g. `2019-02-33UD`, the form the older `1902RL` becomes) |
+| `depth` | **`depth_m`** for a point, **`depth_min_m`** / **`depth_max_m`** for a tow or a bin (on `sample` and `obs`); `seafloor_depth_m` for the seafloor under a sample | units are suffixes on every measured column; `valid_depth_min_m` / `valid_depth_max_m` are bounds on a *measurement type*, not a field on a sample |
 | `datetime_utc`, `datetime_local`, `utc_offset` | **`datetime_start_utc`** / `datetime_end_utc` in the dictionary; `datetime` on the released `sample` | an event has a span; local time is recoverable from UTC and the position, never the reverse |
 | larval stages as codes (`YOLK`, `PREF`, `FLEX`, `TRNS`, `POST`) | **`life_stage`** as words from the registry (`egg`, `larva`, …), with Darwin Core and NERC ids where exact | one vocabulary for every dataset; the ichthyoplankton stage codes map onto it at ingest |
 | `cruise_id` in the long form `1949-03-01-C-31CR` | an **alias** of `cruise_key` in the dictionary, not a field | legacy names are kept in the crosswalk, not in the schema |
-| `M2` as the MOCNESS 10 m frame | the registry names `M2` **MOCNESS (3 m²)** — to be checked against the source with SWFSC | the gear registry is the record; if the source says otherwise the registry changes, not the guide |
+| `M2` as the MOCNESS 10 m frame | the registry names `M2` **MOCNESS (3 m²)**, which is not a standard MOCNESS size; being checked against the source with SWFSC ([docs#14](https://github.com/CalCOFI/docs/issues/14)) | the gear registry is the record; if the source says otherwise the registry changes, not the guide |
 | no `OBLIQUE` gear | **`OBLIQUE`** — an oblique tow whose gear was not recorded | the registry lists every code that appears in the data |
 
-: Where the guide's drafts and the database's registries disagreed, and what the registry has. {#tbl-reconciled}
+: Older names and what the registry has. {#tbl-reconciled}
