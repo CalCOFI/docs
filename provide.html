@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6794274f46ceb0ad8b85daaa5eb348a9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-82712176d6372d89cf0722a174a65022.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-6794274f46ceb0ad8b85daaa5eb348a9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-db145924cc11e9f06a2a79f299180345.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b1d8133c248c729780d8bc8dbaa6aaba.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-db145924cc11e9f06a2a79f299180345.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -608,7 +608,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   <li><a href="#best-practice-what-makes-it-durable" id="toc-best-practice-what-makes-it-durable" class="nav-link" data-scroll-target="#best-practice-what-makes-it-durable"><span class="header-section-number">8.4</span> Best practice: what makes it durable</a></li>
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"><span class="header-section-number">8.5</span> An example</a></li>
   <li><a href="#what-happens-next" id="toc-what-happens-next" class="nav-link" data-scroll-target="#what-happens-next"><span class="header-section-number">8.6</span> What happens next</a></li>
-  <li><a href="#reconciled-with-the-database" id="toc-reconciled-with-the-database" class="nav-link" data-scroll-target="#reconciled-with-the-database"><span class="header-section-number">8.7</span> Reconciled with the database</a></li>
+  <li><a href="#names-you-may-see-elsewhere" id="toc-names-you-may-see-elsewhere" class="nav-link" data-scroll-target="#names-you-may-see-elsewhere"><span class="header-section-number">8.7</span> Names you may see elsewhere</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CalCOFI/docs/edit/main/provide.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -645,7 +645,6 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </div>
 </div>
 </div>
-<p>Drafted by Betty Huang with Erin Satterthwaite for the data management plan’s naming-conventions task (Task 12), reconciled against the database’s registries on 2026-09-08, and kept here as the record; the working copy stays a Google Doc until the guide is agreed.</p>
 <section id="the-shape-of-a-good-dataset" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="the-shape-of-a-good-dataset"><span class="header-section-number">8.1</span> The shape of a good dataset</h2>
 <p>A dataset CalCOFI can integrate answers three questions for every row: <strong>what</strong> was measured or counted, <strong>when</strong> and <strong>where</strong>. Everything else is context that makes the answer more useful. One row is one measurement or one count of one thing at one place and time; a spreadsheet with one column per variable is fine (the ingest turns it long), as long as each row is one event.</p>
@@ -680,8 +679,8 @@ Table&nbsp;8.1: What every dataset must carry, in the form the ingest can read i
 </tr>
 <tr class="even">
 <td><strong>the time</strong></td>
-<td>date and time of the event in <strong>UTC</strong> (ISO 8601, <code>2019-02-06T23:48:00Z</code>), or a local clock time <em>and</em> the offset that was in effect</td>
-<td><code>2019-02-06T23:48:00Z</code></td>
+<td>date and time of the event in <strong>UTC</strong> (ISO 8601, <code>2019-02-07T23:48:00Z</code>), or a local clock time <em>and</em> the offset that was in effect</td>
+<td><code>2019-02-07T23:48:00Z</code></td>
 </tr>
 <tr class="odd">
 <td><strong>the place</strong></td>
@@ -718,9 +717,10 @@ Table&nbsp;8.1: What every dataset must carry, in the form the ingest can read i
 <h2 data-number="8.3" class="anchored" data-anchor-id="optional-what-makes-it-calcofi"><span class="header-section-number">8.3</span> Optional: what makes it CalCOFI</h2>
 <p>These let the data team join your rows to everything else, rather than only place them on a map.</p>
 <ul>
-<li><strong>The cruise</strong> — the cruise designation as your records carry it (<code>1902SR</code>, <code>CalCOFI 2019-02</code>, a NOAA cruise id). The database keys every event to a cruise by its date span, so a designation is a check, not a requirement.</li>
+<li><strong>The cruise</strong> — the cruise designation as your records carry it (<code>1902RL</code>, <code>CalCOFI 2019-02</code>, a NOAA cruise id). The database keys every event to a cruise by its date span, so a designation is a check, not a requirement.</li>
 <li><strong>The station</strong> — CalCOFI line and station where the event was on the grid (<code>93.3</code>, <code>26.4</code>), or your own station name where it was not.</li>
-<li><strong>The gear and the tow</strong> — the net or instrument (a CalCOFI tow-type code such as <code>CB</code> for the standard bongo, or a description), the tow number within the cruise, the net side.</li>
+<li><strong>The gear and the tow</strong> — the net or instrument (a CalCOFI tow-type code such as <code>CB</code> for the standard bongo, or a description), the tow number within the cruise, the net side, and the net’s mesh size in millimetres where it applies — it sets the smallest organism the gear retains.</li>
+<li><strong>A haul factor</strong>, if you already compute one — the factor you use to standardize a catch to a reference tow, so it’s comparable across gear. The database can derive this from volume filtered and tow geometry when you don’t supply it, but if you already have your own, send it rather than have it recomputed.</li>
 <li><strong>Quality flags</strong> — your own vocabulary, as long as it is written down; the database keeps every flag exactly as you assign it and never re-interprets it.</li>
 <li><strong>Precision and method</strong> — the significant digits of a measurement, the analytical method, the processing stage (preliminary, final).</li>
 </ul>
@@ -733,7 +733,7 @@ Table&nbsp;8.1: What every dataset must carry, in the form the ingest can read i
 <li><strong>A citation and a DOI</strong> — how you want to be credited; if your data already has a DOI (at EDI, NCEI, Zenodo, a library repository), that is the citation the integrated database carries.</li>
 <li><strong>A data dictionary</strong> — one line per column: what it is, its unit, how a missing value is written (<code>NA</code>, blank, <code>-99</code>; never a plausible number).</li>
 <li><strong>Time zones and coordinate systems stated once</strong>, at the top, even when they are the standard ones.</li>
-<li><strong>Versions, not edits</strong> — when the data change, a new file with a date, not a corrected copy under the same name.</li>
+<li><strong>Versions, not edits</strong> — when the data change, a new file with a date, not a corrected copy under the same name, with the same columns in the same types: a column that turns from a number into text between versions stalls every automated update downstream.</li>
 </ul>
 </section>
 <section id="an-example" class="level2" data-number="8.5">
@@ -747,22 +747,24 @@ Table&nbsp;8.2: One row of a net-tow dataset that carries every mandatory field,
 <div aria-describedby="tbl-example-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -771,11 +773,13 @@ Table&nbsp;8.2: One row of a net-tow dataset that carries every mandatory field,
 <th>station</th>
 <th>tow_number</th>
 <th>tow_type</th>
+<th>mesh_mm</th>
 <th>datetime_utc</th>
 <th>latitude</th>
 <th>longitude</th>
 <th>depth_max_m</th>
 <th>volume_sampled_m3</th>
+<th>std_haul_factor</th>
 <th>prop_sorted</th>
 <th>scientific_name</th>
 <th>worms_id</th>
@@ -786,16 +790,18 @@ Table&nbsp;8.2: One row of a net-tow dataset that carries every mandatory field,
 </thead>
 <tbody>
 <tr class="odd">
-<td>1902SR</td>
+<td>1902RL</td>
 <td>93.3</td>
 <td>26.4</td>
 <td>12</td>
 <td>CB</td>
-<td>2019-02-06T23:48:00Z</td>
+<td>0.505</td>
+<td>2019-02-07T23:48:00Z</td>
 <td>33.48066</td>
 <td>-117.769</td>
 <td>210</td>
 <td>467.3</td>
+<td>4.49</td>
 <td>0.48</td>
 <td>Sardinops sagax</td>
 <td>217452</td>
@@ -808,7 +814,7 @@ Table&nbsp;8.2: One row of a net-tow dataset that carries every mandatory field,
 </div>
 </figure>
 </div>
-<p>From <a href="#tbl-example-row" class="quarto-xref">Table&nbsp;<span>8.2</span></a> the data team’s ingest would map <code>cruise</code> to <code>cruise_key</code> (<code>2019-02-33P4</code> after resolving the ship), <code>line</code> and <code>station</code> to <code>site_key</code> (<code>093.3 026.4</code>), the tow to a <code>sample</code> row with <code>tow_type</code> <code>CB</code>, each count to an <code>obs_bio</code> row with <code>taxon_key</code> <code>worms:217452</code> and <code>life_stage</code> <code>larva</code>, <code>volume_sampled_m3</code> and <code>prop_sorted</code> to <code>sample_measurement</code>, and keep your <code>tow_number</code> beside them. Nothing in your file changes.</p>
+<p>From <a href="#tbl-example-row" class="quarto-xref">Table&nbsp;<span>8.2</span></a> the data team’s ingest would map <code>cruise</code> to <code>cruise_key</code> (<code>2019-02-33UD</code> after resolving the ship), <code>line</code> and <code>station</code> to <code>site_key</code> (<code>093.3 026.4</code>), the tow to a <code>sample</code> row with <code>tow_type</code> <code>CB</code>, each count to an <code>obs_bio</code> row with <code>taxon_key</code> <code>worms:217452</code> and <code>life_stage</code> <code>larva</code>, <code>volume_sampled_m3</code>, <code>std_haul_factor</code> and <code>prop_sorted</code> to <code>sample_measurement</code>, and keep your <code>tow_number</code> and <code>mesh_mm</code> beside them (the gear registry already records the standard bongo’s 0.505 mm; a mesh that differs is what matters). Nothing in your file changes.</p>
 </section>
 <section id="what-happens-next" class="level2" data-number="8.6">
 <h2 data-number="8.6" class="anchored" data-anchor-id="what-happens-next"><span class="header-section-number">8.6</span> What happens next</h2>
@@ -820,38 +826,33 @@ Table&nbsp;8.2: One row of a net-tow dataset that carries every mandatory field,
 </ol>
 <p>Write to <strong>data@calcofi.io</strong> to start.</p>
 </section>
-<section id="reconciled-with-the-database" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="reconciled-with-the-database"><span class="header-section-number">8.7</span> Reconciled with the database</h2>
-<p>The guide’s first drafts and the database’s registries disagreed on a handful of names. The registry is the record, so the guide follows it; each is noted in <a href="#tbl-reconciled" class="quarto-xref">Table&nbsp;<span>8.3</span></a> so nobody reintroduces the older form.</p>
+<section id="names-you-may-see-elsewhere" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="names-you-may-see-elsewhere"><span class="header-section-number">8.7</span> Names you may see elsewhere</h2>
+<p>A handful of names are common in older CalCOFI files and documents but differ from the database’s registries. The registry is the record, so the ingest maps the older form onto it; <a href="#tbl-reconciled" class="quarto-xref">Table&nbsp;<span>8.3</span></a> lists them so nobody reintroduces the older form.</p>
 <div id="tbl-reconciled" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-reconciled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8.3: Where the guide’s drafts and the database’s registries disagreed, and what the registry has.
+Table&nbsp;8.3: Older names and what the registry has.
 </figcaption>
 <div aria-describedby="tbl-reconciled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>the draft said</th>
+<th>often written as</th>
 <th>the registry has</th>
 <th>why</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>ship_code</code> for the NODC code, <code>ship_key</code> for a two-letter CalCOFI code</td>
-<td><strong><code>ship_key</code> <em>is</em> the NODC code</strong> (<code>31JD</code>); there is no <code>ship_code</code></td>
-<td>the four-character NODC code is the primary key of <code>ship</code> and the suffix of every <code>cruise_key</code></td>
+<td>a ship as a two-letter code <em>or</em> an NODC code, in one column</td>
+<td>a <code>ship_code</code> as your file has it, resolved to the <code>ship</code> row: <strong><code>ship_key</code></strong>, the two-letter CalCOFI code (<code>RL</code>), and <strong><code>ship_nodc</code></strong>, the four-character NODC code (<code>33UD</code>)</td>
+<td>the NODC code is the suffix of every <code>cruise_key</code> (<code>YYYY-MM-NODC</code>, e.g.&nbsp;<code>2019-02-33UD</code>, the form the older <code>1902RL</code> becomes)</td>
 </tr>
 <tr class="even">
 <td><code>depth</code></td>
-<td><strong><code>depth_m</code></strong>, <code>depth_min_m</code>, <code>depth_max_m</code></td>
-<td>units are suffixes on every measured column</td>
+<td><strong><code>depth_m</code></strong> for a point, <strong><code>depth_min_m</code></strong> / <strong><code>depth_max_m</code></strong> for a tow or a bin (on <code>sample</code> and <code>obs</code>); <code>seafloor_depth_m</code> for the seafloor under a sample</td>
+<td>units are suffixes on every measured column; <code>valid_depth_min_m</code> / <code>valid_depth_max_m</code> are bounds on a <em>measurement type</em>, not a field on a sample</td>
 </tr>
 <tr class="odd">
 <td><code>datetime_utc</code>, <code>datetime_local</code>, <code>utc_offset</code></td>
@@ -870,7 +871,7 @@ Table&nbsp;8.3: Where the guide’s drafts and the database’s registries disag
 </tr>
 <tr class="even">
 <td><code>M2</code> as the MOCNESS 10 m frame</td>
-<td>the registry names <code>M2</code> <strong>MOCNESS (3 m²)</strong> — to be checked against the source with SWFSC</td>
+<td>the registry names <code>M2</code> <strong>MOCNESS (3 m²)</strong>, which is not a standard MOCNESS size; being checked against the source with SWFSC (<a href="https://github.com/CalCOFI/docs/issues/14">docs#14</a>)</td>
 <td>the gear registry is the record; if the source says otherwise the registry changes, not the guide</td>
 </tr>
 <tr class="odd">
