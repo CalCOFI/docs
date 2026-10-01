@@ -684,21 +684,17 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </div>
 <section id="citing-the-database-release" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="citing-the-database-release"><span class="header-section-number">3.1</span> Citing the database release</h2>
-<p>CalCOFI (2026). CalCOFI Integrated Database, release v2026.09.11 [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://doi.org/10.5281/zenodo.22714951</p>
+<p>CalCOFI (2026). CalCOFI Integrated Database, release v2026.10.01 [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://calcofi.io/db-schema/?v=v2026.10.01</p>
 <p>Every release also has a DOI of its own, minted on Zenodo when the release is tagged, and one <strong>concept DOI</strong> that always resolves to the newest release. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code> (<code>doi</code>, <code>concept_doi</code>) and in the release notes’ <em>How to cite</em>:</p>
-<ul>
-<li>this release, <code>v2026.09.11</code>: <a href="https://doi.org/10.5281/zenodo.22714951" class="uri">https://doi.org/10.5281/zenodo.22714951</a></li>
-<li>the concept DOI, every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
-</ul>
 </section>
 <section id="citing-an-individual-dataset" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="citing-an-individual-dataset"><span class="header-section-number">3.2</span> Citing an individual dataset</h2>
-<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. <a href="#tbl-dataset-citations" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is the <code>dataset</code> table of the promoted release, v2026.09.11.</p>
+<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. <a href="#tbl-dataset-citations" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is the <code>dataset</code> table of the promoted release, v2026.10.01.</p>
 <div class="cell">
 <div id="tbl-dataset-citations" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.1: Every dataset of v2026.09.11 with the citation, licence, DOI and contact a use should carry.
+Table&nbsp;3.1: Every dataset of v2026.10.01 with the citation, licence, DOI and contact a use should carry.
 </figcaption>
 <div aria-describedby="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1170,7 +1166,7 @@ Table&nbsp;3.1: Every dataset of v2026.09.11 with the citation, licence, DOI and
 <th id="citation_main" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">citation</th>
 <th id="license" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">license</th>
 <th id="doi" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">DOI</th>
-<th id="contact" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">contact</th>
+<th id="contact" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">contact</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1181,7 +1177,7 @@ Table&nbsp;3.1: Every dataset of v2026.09.11 with the citation, licence, DOI and
 </td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
+<td class="gt_row gt_left" headers="contact"><br>
 </td>
 </tr>
 <tr class="even">
@@ -1191,109 +1187,109 @@ Table&nbsp;3.1: Every dataset of v2026.09.11 with the citation, licence, DOI and
 </td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">rswalethorp@ucsd.edu</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_ctd-derived/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_ctd-derived</a></span></td>
+<td class="gt_row gt_left" headers="citation_main">CalCOFI. (2026). CalCOFI CTD Derived Hydrographic Products (from the CalCOFI CTD Cast Files). CalCOFI.io. https://calcofi.io/workflows/ingest_calcofi_ctd-derived.html</td>
+<td class="gt_row gt_left" headers="license"><br>
+</td>
+<td class="gt_row gt_left" headers="doi"><br>
+</td>
+<td class="gt_row gt_left" headers="contact"><br>
+</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_dic/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_dic</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">Keeling, C.D.; Lueker, T.J.; Emanuele, G.; Dickson, A.G.; Martz, T.R.; Wolfe, W.H.; Mau, A. (2025). Discrete profile dissolved inorganic carbon, total alkalinity, water temperature and salinity measurements for CalCOFI (NCEI Accession 0301029). NOAA NCEI. https://doi.org/10.25921/3w9f-jd72</td>
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.25921/3w9f-jd72" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">ncei.info@noaa.gov</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_mets/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_mets</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">CalCOFI. Underway (METS) TSG/Meteorology Data. CalCOFI.org.</td>
 <td class="gt_row gt_left" headers="license"><br>
 </td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">rswalethorp@ucsd.edu</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_phyllosoma/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_phyllosoma</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">CalCOFI - Scripps Institution of Oceanography and T. Koslow. 2017. Data pertaining to lobster phyllosoma, Panulirus interruptus, collection methods, locations, identification and staging (1951-2008, months of July and August) ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa</td>
 <td class="gt_row gt_left" headers="license">custom</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">tkoslow@ucsd.edu</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_phytoplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_phytoplankton</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">CalCOFI - Scripps Institution of Oceanography, California Current Ecosystem LTER, and E. Venrick. 2023. Temporal and spatial changes of the abundance and species composition of phytoplankton in the California Current from samples collected aboard CalCOFI cruises from summer 1996 through 2022. ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/60edabfbfd85c623fce05822befaa071</td>
 <td class="gt_row gt_left" headers="license">CC0-1.0</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.6073/pasta/60edabfbfd85c623fce05822befaa071" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">evenrick@ucsd.edu</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_euphausiids/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">cce-lter_euphausiids</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">Ohman, M.D. 2022. California Current Ecosystem Euphausiid data, Brinton and Townsend Euphausiid Database (BTEDB) ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4a92a0044bcd1523a4f994ece874a57d</td>
 <td class="gt_row gt_left" headers="license">custom</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.6073/pasta/4a92a0044bcd1523a4f994ece874a57d" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">mohman@ucsd.edu</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_picoplankton-bacteria/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">cce-lter_picoplankton-bacteria</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">Landry, M. (2004-2023). Picoplankton and Bacteria Abundance (CalCOFI Cruise). CCE LTER.</td>
 <td class="gt_row gt_left" headers="license"><br>
 </td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">mlandry@ucsd.edu</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_zoodb/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">cce-lter_zoodb</a></span></td>
 <td class="gt_row gt_left" headers="citation_main"><br>
 </td>
 <td class="gt_row gt_left" headers="license">custom</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">mohman@ucsd.edu</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cce-lter_zooscan/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">cce-lter_zooscan</a></span></td>
 <td class="gt_row gt_left" headers="citation_main"><br>
 </td>
 <td class="gt_row gt_left" headers="license">custom</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">mohman@ucsd.edu</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/cdfw_dungeness-crab/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">cdfw_dungeness-crab</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">Rogers-Bennett, L.; Jones, E.; Klemmedson, A. (2026). CDFW Dungeness Crab Megalopae from archived CalCOFI plankton samples (1949-2014). California Department of Fish and Wildlife, published through CalCOFI / Scripps Institution of Oceanography.</td>
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
+<td class="gt_row gt_left" headers="contact"><br>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/farallon_bird-mammal/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">farallon_bird-mammal</a></span></td>
 <td class="gt_row gt_left" headers="citation_main"><br>
 </td>
 <td class="gt_row gt_left" headers="license">custom</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">wsydeman@faralloninstitute.org</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/sio_mesopelagic-fish/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">sio_mesopelagic-fish</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">Koslow, J. Anthony (2016). CalCOFI Trawl Data. In California Cooperative Oceanic Fisheries Investigations (CalCOFI): Acoustic and Trawl Data. UC San Diego Library Digital Collections. https://doi.org/10.6075/J0BZ64DH</td>
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.6075/J0BZ64DH" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
-<td class="gt_row gt_center" headers="contact"><br>
+<td class="gt_row gt_left" headers="contact"><br>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/sio_pic-zooplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">sio_pic-zooplankton</a></span></td>
 <td class="gt_row gt_left" headers="citation_main"><br>
 </td>
@@ -1301,27 +1297,27 @@ Table&nbsp;3.1: Every dataset of v2026.09.11 with the citation, licence, DOI and
 </td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
+<td class="gt_row gt_left" headers="contact"><br>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_cufes/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">swfsc_cufes</a></span></td>
 <td class="gt_row gt_left" headers="citation_main"><br>
 </td>
 <td class="gt_row gt_left" headers="license">custom</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
+<td class="gt_row gt_left" headers="contact"><br>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_ichthyo/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">swfsc_ichthyo</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">NOAA Fisheries SWFSC. CalCOFI Ichthyoplankton Database.</td>
 <td class="gt_row gt_left" headers="license"><br>
 </td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_center" headers="contact"><br>
+<td class="gt_row gt_left" headers="contact"><br>
 </td>
 </tr>
 </tbody>
