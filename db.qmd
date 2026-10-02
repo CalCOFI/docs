@@ -48,7 +48,7 @@ family and the reference tables it joins to; @tbl-core says what one row of each
 | **`obs`** | the two above under one name — `realm` = `bio` or `env`, `value` as `measurement_value` — as a **view** the catalog carries; its own objects are deprecated | view |
 | **`obs_attribute`** | **sub-occurrence** detail — length- and stage-frequency bins (`bin_value`, `bin_label`, `count`) and categorical behaviour | core |
 | **`sample_measurement`** | **event-level effort and conditions** — a net's `volume_sampled` and `std_haul_factor`, a cast's surface observations | core |
-| **`sample_root`** | one row per root sampling event with the dense integer `root_id` the browser objects join on, its position, time, depth span, gear and seafloor depth | supplemental |
+| **`sample_root`** | one row per root sampling event with the dense integer `root_id` the browser objects join on, its position and the position's H3 cell (`hex7`), time, depth span, gear and seafloor depth | supplemental |
 | **`obs_ctd_full`** | full-resolution CTD scans (~271 M rows); `obs_env` carries the thinned series | supplemental |
 | **`obs_mets_full`** | full-resolution underway meteorology (~20 M rows) | supplemental |
 
@@ -61,6 +61,19 @@ An observation's provenance is denormalized onto it on purpose: `obs` carries `d
 coarser aggregations use `h3_cell_to_parent(hex_id, res)` rather than a column per resolution),
 so a rollup groups without a join. `geom` lives on `sample` and on the reference tables, never
 on `obs`.
+
+A sampling event has a hexagon too. `sample.hex7`, copied onto `sample_root.hex7` for the root
+events, is the resolution-7 H3 cell that is the **parent of the resolution-10 cell** of the
+event's own position: the same definition as `hex7` on `obs_bio` and `obs_env`, and not the
+resolution-7 cell the position falls in, because H3 cells do not nest exactly and the two differ
+near every cell edge. It is `NULL` where the event has no finite position. This is what places a
+value held per event in `sample_measurement` (a cast's mixed-layer depth) in a hexagon, since such
+a value has no observation row to borrow a cell from. `calcofi4db::check_sample_hex7()` fails the
+release unless the cell is present exactly where the position is finite, is equal on the two
+tables for every root, and equals the cell of every observation sitting at the same position.
+An observation carries its *own* position, so a scan of a CTD cast that drifted across a cell
+edge lies in the neighbouring hexagon: join an observation to its sample on `sample_key`, never
+on the cell.
 
 ### What the release publishes: `obs_bio` + `obs_env`, and `obs` as a view
 

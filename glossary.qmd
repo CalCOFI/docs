@@ -31,7 +31,8 @@ in `obs_env`, one taxon's headline in `obs_bio`, one bin in `obs_attribute`.
 stations share one nearshore cell. → [Keys and integrity](keys.qmd)
 
 **hexagon** — an H3 cell; every observation carries its resolution-10 cell (`hex_id`) and coarser
-hexagons are computed from it. → [Explore](explore.qmd)
+hexagons are computed from it; a sampling event carries the resolution-7 parent of its own
+position's cell (`hex7` on `sample`). → [Explore](explore.qmd)
 
 **holding** — a dataset CalCOFI has or knows of but has not ingested; it has a page and a record
 but no rows. → [Metadata & the ingest loop](metadata.qmd)
