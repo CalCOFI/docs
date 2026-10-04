@@ -42,7 +42,7 @@ family and the reference tables it joins to; @tbl-core says what one row of each
 
 | table | grain | tier |
 |---|---|---|
-| **`sample`** | one row per **physical sampling event** — site, tow, net, cast, bottle, underway record, transect, subsample, eDNA water filter, region pool — with the hierarchy as an adjacency list (`parent_sample_key`, plus `root_sample_key` for the top of the chain) | core |
+| **`sample`** | one row per **physical sampling event** — site, tow, net, cast, bottle, underway record, transect, subsample, eDNA water sample (`water`) and filter (`filter`), cetacean sighting, sonobuoy deployment, analysed hour of a recording (`scan`), region pool — with the hierarchy as an adjacency list (`parent_sample_key`, plus `root_sample_key` for the top of the chain) | core |
 | **`obs_bio`** | the **biological occurrence headline**: one scalar per row for a taxon (`taxon_key`, `life_stage`, `measurement_type`, `value`) with its event's gear, effort and the two standardized densities inline | core |
 | **`obs_env`** | the **environmental headline**: one measured scalar per row (`measurement_type`, `value`, `measurement_qual`, `qual_ok`), one parquet object per measurement type | core |
 | **`obs`** | the two above under one name — `realm` = `bio` or `env`, `value` as `measurement_value` — as a **view** the catalog carries; its own objects are deprecated | view |
