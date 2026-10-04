@@ -21,8 +21,8 @@ fetched ([Metadata & the ingest loop](metadata.qmd)).
 ## The pipeline
 
 [CalCOFI/workflows](https://github.com/CalCOFI/workflows) holds one Quarto notebook per dataset —
-`ingest_{provider}_{dataset}.qmd`, sixteen datasets today, plus the boundary layers and the ship
-reference — orchestrated by `targets` from the `calcofi:` block in each notebook's front matter,
+`ingest_{provider}_{dataset}.qmd`, plus the boundary layers and the ship reference (the datasets
+and their number are in [Naming conventions](naming.qmd#providers-licences-and-dataset-names)) — orchestrated by `targets` from the `calcofi:` block in each notebook's front matter,
 with the engine in the [calcofi4db](https://calcofi.io/calcofi4db/) R package. Each notebook writes
 its tables as parquet shards to a staging directory outside the repository (mirrored to
 `gs://calcofi-db/parquet/`) and its JSON sidecars — the manifest, the metadata, the keys — into

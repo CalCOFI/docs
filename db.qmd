@@ -31,8 +31,9 @@ variable  <- if (file.exists(var_path)) readr::read_csv(var_path, na = "", comme
 
 ## The core data model
 
-Sixteen source datasets — ichthyoplankton, zooplankton, bottle hydrography, CTD casts, DIC,
-underway meteorology, seabird and mammal transects, and more — used to reach the database as
+`r snap$n_datasets` source datasets — ichthyoplankton, zooplankton, bottle hydrography, CTD casts, DIC,
+underway meteorology, seabird and mammal transects, cetacean sightings, acoustics and eDNA,
+and more — used to reach the database as
 ~40 per-dataset tables. They now project into a small **core family** that every consumer
 reads. A dataset's projection lives in its own ingest notebook (the generic shapes live in
 `calcofi4db`), so adding a dataset never edits a shared `switch()`. @fig-core-erd draws that
@@ -108,7 +109,11 @@ maps names, so consumers never have to.
 
 `cruise` (one row per cruise, with `cruise_uuid`, the ship, and the observed
 `date_min`/`date_max` span that keys every other dataset's events), `ship`, `grid` (the CalCOFI
-station grid, materialized deterministically from `calcofi4r::cc_grid`), `spatial` +
+station grid, materialized deterministically from `calcofi4r::cc_grid`: one cell per official
+station, beside the previous cells that lay beyond the official pattern, kept as they were) with
+`grid_crosswalk` (how the previous grid's keys map onto it — a key keeps its form but not
+necessarily its polygon, so never match one across releases by name; see
+[The grid key changed in October 2026](keys.qmd#sec-grid-migration)), `spatial` +
 `spatial_attribute` (boundary layers), `sample_spatial` (the sample→layer memberships),
 `region`, `lookup`, `dataset` (one row per released dataset, with its measured coverage and its
 citation), `measurement_type` (the measurement vocabulary, below) and `climatology`.
@@ -116,8 +121,9 @@ citation), `measurement_type` (the measurement vocabulary, below) and `climatolo
 **`climatology` is the one baseline every anomaly subtracts.** Until 2026-08-31 three products
 each computed their own and the same section read +1.4 °C in one and ~0 in another. It is a
 plain mean per dataset × **`site_key`** (the real station, since calcofi4db 4.10.0 — the inshore
-grid cells hold 2–4 stations 15–30 km apart, so a cell-grained baseline blended them; `grid_key`
-stays on the row as the station's modal cell) × **calendar month** × 10 m depth bin × measurement
+cells of the earlier grid held 2–4 stations 15–30 km apart, so a cell-grained baseline blended
+them, and the key on the baseline stayed `site_key` when the grid was rebuilt one cell per station;
+`grid_key` stays on the row as the station's modal cell, labelled by the current grid) × **calendar month** × 10 m depth bin × measurement
 type over **1993–2013**, kept only where ≥ 5 distinct cruises contribute (3 until v2026.09.06), with the window stamped
 on every row. A cast's anomaly is its value minus the row of *its own* station and calendar month;
 pooling months produces a seasonal-cycle map, not an anomaly.
@@ -318,6 +324,60 @@ if (!is.null(mc)) {
   cat("Two facts the record states rather than leaves implicit, unavailable for this render along with the counts above: **a series with no NERC concept says so** (`no_p01`), never a blank cell that reads as \"not looked at\"; and **a bound is declared or questioned, never inferred from the data** — a series' `observed{}` range sits within its registry bound, what falls outside is counted in `out_of_bounds{n, min, max}`, and a series with none says `no_bound`.\n")
 }
 ```
+
+### Some measurements are one value per cast, not per depth {#sec-per-cast-grain}
+
+Nearly every series above is a value *at a depth*: a row of `obs_env`. A **product of a whole
+cast** — its mixed-layer depth, the depth and value of its chlorophyll maximum, its integrated
+chlorophyll — has no depth, so it is not a depth observation and is not projected into `obs_env`.
+The release keeps it in `sample_measurement`, on the cast's `sample` (the registry's `grain` is
+`sample`), and the measurements catalog lists it with `grain: "sample"` so it has a page like any
+other key. These are computed, not measured: `calcofi_ctd-derived` derives them from the CTD
+profiles by the CTD team's own definitions, and the definition of each lives in the registry's
+`description` and `derivation` columns, which @tbl-measurements-percast reads, rather than being
+restated here. A definition that changes gets a **new key** instead of reusing the old name, which
+states its threshold; the superseded key stays in the registry marked `RETIRED`, not canonical,
+and no row carries it.
+
+```{r}
+#| label: measurements-percast-facts
+#| echo: false
+#| results: asis
+if (!is.null(meas)) {
+  n_pc <- sum(purrr::map_lgl(meas$measurements, \(m) identical(m$grain, "sample")))
+  cat(sprintf("On %s the record lists **%s** measurement keys with `grain: \"sample\"`.\n",
+              snap$version, format(n_pc, big.mark = ",")))
+}
+```
+
+```{r}
+#| label: tbl-measurements-percast
+#| tbl-cap: !expr paste0("The per-cast products of `calcofi_ctd-derived` in the registry on ", snap$version, " (canonical keys only), with the registry's own description and units. How each is computed is in the registry's `derivation` column.")
+#| echo: false
+mt_path <- here("data/registry/measurement_type.csv")
+mt <- if (file.exists(mt_path)) readr::read_csv(mt_path, na = "", show_col_types = FALSE) else NULL
+pc <- if (is.null(mt)) NULL else
+  mt |>
+    dplyr::filter(grain %in% "sample", is_canonical %in% TRUE,
+                  grepl("calcofi_ctd-derived", `_source_datasets`, fixed = TRUE)) |>
+    dplyr::transmute(measurement_type, units, description = gsub("&", "and", description, fixed = TRUE)) |>
+    dplyr::arrange(measurement_type)
+if (!is.null(pc) && nrow(pc)) {
+  pc |>
+    gt() |>
+    sub_missing(missing_text = "") |>
+    tab_style(style = cell_text(font = "monospace", size = "0.85em"),
+              locations = cells_body(columns = c(measurement_type, units))) |>
+    tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.86em")
+} else {
+  gt::gt(tibble::tibble(note = "no per-cast derived product in this snapshot of the registry"))
+}
+```
+
+To place one on a map or in a hexagon, join `sample_measurement` to `sample` on `sample_key`: the
+cast's `sample` row carries its position, its time and its `hex7`, and the row's own `dataset_key` is
+the derived dataset's, not the cast's.
+
 ### A face for every measurement page
 
 Every measurement page at [calcofi.io/measurements/{key}/](https://calcofi.io/measurements/) carries the catalog above, and beneath
@@ -354,6 +414,26 @@ the source **since 1955** — it reached a plotted app because no consumer filte
 There is now one predicate per language — `calcofi4r::cc_qual_ok_sql()`, `calcofi4py.qual_ok_sql()`,
 the query site's `qualOkSQL()` — NULL-safe, so an unflagged row is kept. **Apply it.** A value with
 a flag you do not read is not a value you can trust.
+
+### A data fix is diffed against the release before it is re-staged
+
+A fix to an ingest changes values that consumers already hold, and the series it was *meant* to
+change is rarely the only one it touches: a corrected sensor pair moves every average built from
+it, a dropped sentinel changes a count. The rule is therefore that **before a fixed ingest is
+re-staged it is diffed against the release it will replace — per measurement type, the rows
+changed, filled and removed and the largest change, for every series the fix can touch** — and a
+dry run that leaves a series out of its breakdown is not a dry run.
+
+How it is enforced: by a function, not by a gate. `calcofi4db::diff_stage_vs_release()` compares an
+ingest's staged `obs`, `obs_ctd_full` and `sample_measurement` with a published release (a version,
+`"latest"`, or a local copy) and returns one row per table × `measurement_type` with the rows
+`added`, `removed`, `filled`, `blanked`, `changed` and unchanged, the rows whose `measurement_qual`
+changed, the largest absolute change, and the duplicate keys on each side. Every type present on
+either side gets a row, and so does every type the caller names that is on neither, so a series
+cannot drop out unseen; `diff_stage_vs_release_rows()` returns the differing rows themselves.
+Nothing in the pipeline stops a re-stage that skipped the diff: what the release carries is the
+result, as the per-type change table the release notes (`RELEASES.md`) give for a fix, which is filled
+from this function's output. The rule is stated as a practice because that is how it is kept.
 
 ### Depth is a coordinate, and it is bounded as one
 
@@ -653,8 +733,17 @@ in `RELEASES.md`, and most of them are questions for a data provider rather than
 vocabulary: an unrecorded transmissometer wavelength, radiation channels that do not say
 whether they are upwelling or downwelling, flow-cytometry gating that was never written down.
 
-### Three caveats for anyone building an export
+### Four caveats for anyone building an export
 
+- **`edna_presence` does not mean the same thing in every eDNA dataset.** `sio_cetacean-edna`
+  publishes a row for every sequenced sample × species, `1` for a detection and `0` for a sequenced
+  non-detection; a sample that did not amplify (PCR-negative, never sequenced) has *no* row, not a
+  zero, until its provider says what that means. `calcofi_2022-edna` publishes **detections only**:
+  its source archive lists only positives, so there a missing row is *not* a non-detection and
+  `occurrenceStatus = "absent"` cannot be derived from it. The read counts of the same datasets
+  (`edna_reads_*`) are a semi-quantitative signal of amplified DNA, not an abundance, and are not
+  comparable between assays. Whether the detections-only archive omitted filters or assay runs
+  with no detection is a question put to its provider and still open.
 - **`obs` is positive-only for ichthyoplankton.** A tow that was sorted and found nothing has
   **no row**, so `occurrenceStatus = "absent"` cannot be derived from zero values. Absences come
   from the sampling events (`sample`, root rows) minus the taxa observed on them — and a surveyed

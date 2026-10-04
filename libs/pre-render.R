@@ -92,21 +92,42 @@ if (fetch(rel("measurements.json"), meas_dest, required = FALSE)) {
       "the Measurements section's counts will read NA\n", sep = "")
 }
 
-# the `dataset` table itself (citations, licenses, measured coverage), read through the
-# catalog's object list — never a hand-built releases/{v}/parquet path
+# a released table, read through the catalog's object list — never a hand-built
+# releases/{v}/parquet path. NULL when the promoted release does not list the table; a
+# table that IS listed but cannot be read stops the render like any other fetch.
 catalog <- jsonlite::fromJSON(file.path(dir_rel, "catalog.json"), simplifyVector = FALSE)
-tbl_entry <- Filter(function(t) identical(t$name, "dataset"), catalog$tables)[[1]]
-obj_path  <- tbl_entry$objects[[1]]$path
-obj_url   <- if (grepl("^https?://", obj_path)) obj_path else
-  if (grepl("^gs://", obj_path)) sub("^gs://", "https://storage.googleapis.com/", obj_path) else
-  file.path("https://storage.googleapis.com/calcofi-db", obj_path)
-con <- DBI::dbConnect(duckdb::duckdb())
-DBI::dbExecute(con, "INSTALL httpfs; LOAD httpfs;")
-ds <- DBI::dbGetQuery(con, sprintf("SELECT * FROM read_parquet('%s')", obj_url))
-DBI::dbDisconnect(con, shutdown = TRUE)
+read_release_table <- function(name) {
+  entry <- Filter(function(t) identical(t$name, name), catalog$tables)
+  if (!length(entry)) return(NULL)
+  urls <- vapply(entry[[1]]$objects, function(o) {
+    p <- o$path
+    if (grepl("^https?://", p)) p else
+      if (grepl("^gs://", p)) sub("^gs://", "https://storage.googleapis.com/", p) else
+      file.path("https://storage.googleapis.com/calcofi-db", p)
+  }, character(1))
+  con <- DBI::dbConnect(duckdb::duckdb())
+  on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
+  DBI::dbExecute(con, "INSTALL httpfs; LOAD httpfs;")
+  DBI::dbGetQuery(con, sprintf("SELECT * FROM read_parquet([%s])",
+                               paste0("'", urls, "'", collapse = ", ")))
+}
+
+# the `dataset` table itself (citations, licenses, measured coverage)
+ds <- read_release_table("dataset")
+stopifnot(!is.null(ds))
 # geometry cannot go in a CSV, and the book never plots it
 ds <- ds[, !vapply(ds, function(x) inherits(x, "blob") || is.list(x), logical(1)), drop = FALSE]
 readr::write_csv(ds, file.path(dir_rel, "dataset.csv"), na = "")
+
+# `grid_crosswalk`: how the previous grid's keys map onto the current ones (keys.qmd, "The grid
+# key changed in October 2026"); a few hundred rows. Optional: a release from before the rebuilt
+# grid has no such table, and a copy left by a later release must not outlive it.
+xw      <- read_release_table("grid_crosswalk")
+xw_path <- file.path(dir_rel, "grid_crosswalk.csv")
+if (is.null(xw)) {
+  unlink(xw_path)
+  cat("pre-render: ", version, " has no grid_crosswalk table; the keys chapter's grid section shows prose only\n", sep = "")
+} else readr::write_csv(xw, xw_path, na = "")
 
 # the registries (CalCOFI/workflows main) -------------------------------------------
 registries <- c("field_dictionary.csv", "measurement_type.csv", "measurement_qual.csv",

@@ -27,8 +27,10 @@ its metadata folder, its record, its page, the provenance stamp on every observa
 in `obs_env`, one taxon's headline in `obs_bio`, one bin in `obs_attribute`.
 → [The database](db.qmd)
 
-**grid cell** — a cell of the CalCOFI station grid a sample falls in (`grid_key`); several real
-stations share one nearshore cell. → [Keys and integrity](keys.qmd)
+**grid cell** — a cell of the CalCOFI grid a sample's position falls in (`grid_key`): one cell per
+official station, beside the earlier cells that lay beyond the official pattern. A key keeps its
+form between releases but may name a different polygon; `grid_crosswalk` maps the earlier keys onto
+the current ones. → [Keys and integrity](keys.qmd#sec-grid-migration)
 
 **hexagon** — an H3 cell; every observation carries its resolution-10 cell (`hex_id`) and coarser
 hexagons are computed from it; a sampling event carries the resolution-7 parent of its own

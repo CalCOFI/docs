@@ -124,6 +124,14 @@ it is folded into `ctd` by the data team.
   cast — a 10 m grid plus the profile's inflection points plus every bottle depth, one direction —
   which is what the Explorer's sections and the anomaly climatology read. `obs_ctd_full` holds every
   scan (~271 M rows), supplemental: catalogued, downloadable, off by default.
+- **Derived products are one value per cast.** `calcofi_ctd-derived` computes from the processed
+  profiles a mixed-layer depth, the depth and value of the chlorophyll maximum and the integrated
+  chlorophyll, by the definitions the CTD team gave; each definition is in the measurement registry
+  ([The database](db.qmd#sec-per-cast-grain)). A cast-level value has no depth, so it ships in
+  `sample_measurement` on the cast, not in `obs_env`, and the measurements catalog lists it with
+  `grain: "sample"`. A change of definition is a new key, not a quiet change to the old one: the
+  interim mixed-layer headline was retired for `mld_sigma_theta_002`, the CTD team's legacy
+  definition, and a consumer that asked for the old key by name must switch.
 - **`measurement_qual` is your vocabulary, uninterpreted** — `1`/`2` use the primary/secondary
   sensor, `8` questionable, `9` bad or missing — and `qual_ok` is the release's verdict from it.
   Your accepted flags become that column at the next ingest; nothing is re-interpreted on the way.

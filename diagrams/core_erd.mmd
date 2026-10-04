@@ -3,6 +3,7 @@ erDiagram
   %% integration; every other released table hangs off one of these (keys.qmd)
   cruise ||--o{ sample : "cruise_key"
   grid   ||--o{ sample : "grid_key"
+  grid   ||--o{ grid_crosswalk : "grid_key"
   sample ||--o{ sample : "parent_sample_key"
   sample ||--|| sample_root : "root_sample_key (roots only)"
   sample ||--o{ obs_bio : "sample_key"
@@ -67,6 +68,13 @@ erDiagram
   }
   grid {
     string grid_key PK
+  }
+  grid_crosswalk {
+    string prev_grid_key PK "a key of the previous grid"
+    string grid_key PK, FK
+    double overlap_km2
+    double prev_frac
+    double grid_frac
   }
   ship {
     string ship_key PK "NODC code"
