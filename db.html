@@ -669,8 +669,11 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   <li><a href="#taxonomy" id="toc-taxonomy" class="nav-link" data-scroll-target="#taxonomy"><span class="header-section-number">4.2.4</span> Taxonomy</a></li>
   <li><a href="#a-face-for-every-species-page" id="toc-a-face-for-every-species-page" class="nav-link" data-scroll-target="#a-face-for-every-species-page"><span class="header-section-number">4.2.5</span> A face for every species page</a></li>
   <li><a href="#measurements" id="toc-measurements" class="nav-link" data-scroll-target="#measurements"><span class="header-section-number">4.2.6</span> Measurements</a></li>
-  <li><a href="#quality-flags-reach-consumers-only-if-consumers-apply-them" id="toc-quality-flags-reach-consumers-only-if-consumers-apply-them" class="nav-link" data-scroll-target="#quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">4.2.7</span> Quality flags reach consumers only if consumers apply them</a></li>
-  <li><a href="#depth-is-a-coordinate-and-it-is-bounded-as-one" id="toc-depth-is-a-coordinate-and-it-is-bounded-as-one" class="nav-link" data-scroll-target="#depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">4.2.8</span> Depth is a coordinate, and it is bounded as one</a></li>
+  <li><a href="#sec-per-cast-grain" id="toc-sec-per-cast-grain" class="nav-link" data-scroll-target="#sec-per-cast-grain"><span class="header-section-number">4.2.7</span> Some measurements are one value per cast, not per depth</a></li>
+  <li><a href="#a-face-for-every-measurement-page" id="toc-a-face-for-every-measurement-page" class="nav-link" data-scroll-target="#a-face-for-every-measurement-page"><span class="header-section-number">4.2.8</span> A face for every measurement page</a></li>
+  <li><a href="#quality-flags-reach-consumers-only-if-consumers-apply-them" id="toc-quality-flags-reach-consumers-only-if-consumers-apply-them" class="nav-link" data-scroll-target="#quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">4.2.9</span> Quality flags reach consumers only if consumers apply them</a></li>
+  <li><a href="#a-data-fix-is-diffed-against-the-release-before-it-is-re-staged" id="toc-a-data-fix-is-diffed-against-the-release-before-it-is-re-staged" class="nav-link" data-scroll-target="#a-data-fix-is-diffed-against-the-release-before-it-is-re-staged"><span class="header-section-number">4.2.10</span> A data fix is diffed against the release before it is re-staged</a></li>
+  <li><a href="#depth-is-a-coordinate-and-it-is-bounded-as-one" id="toc-depth-is-a-coordinate-and-it-is-bounded-as-one" class="nav-link" data-scroll-target="#depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">4.2.11</span> Depth is a coordinate, and it is bounded as one</a></li>
   </ul></li>
   <li><a href="#integrated-database-ingestion-strategy" id="toc-integrated-database-ingestion-strategy" class="nav-link" data-scroll-target="#integrated-database-ingestion-strategy"><span class="header-section-number">4.3</span> Integrated database ingestion strategy</a>
   <ul class="collapse">
@@ -685,7 +688,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   <li><a href="#darwin-core-obis-env-data-mapping" id="toc-darwin-core-obis-env-data-mapping" class="nav-link" data-scroll-target="#darwin-core-obis-env-data-mapping"><span class="header-section-number">4.4</span> Darwin Core / OBIS ENV-DATA mapping</a>
   <ul class="collapse">
   <li><a href="#an-id-is-filled-only-on-an-exact-match" id="toc-an-id-is-filled-only-on-an-exact-match" class="nav-link" data-scroll-target="#an-id-is-filled-only-on-an-exact-match"><span class="header-section-number">4.4.1</span> An id is filled only on an exact match</a></li>
-  <li><a href="#three-caveats-for-anyone-building-an-export" id="toc-three-caveats-for-anyone-building-an-export" class="nav-link" data-scroll-target="#three-caveats-for-anyone-building-an-export"><span class="header-section-number">4.4.2</span> Three caveats for anyone building an export</a></li>
+  <li><a href="#four-caveats-for-anyone-building-an-export" id="toc-four-caveats-for-anyone-building-an-export" class="nav-link" data-scroll-target="#four-caveats-for-anyone-building-an-export"><span class="header-section-number">4.4.2</span> Four caveats for anyone building an export</a></li>
   </ul></li>
   <li><a href="#relationships-between-tables" id="toc-relationships-between-tables" class="nav-link" data-scroll-target="#relationships-between-tables"><span class="header-section-number">4.5</span> Relationships between tables</a></li>
   <li><a href="#spatial-tips" id="toc-spatial-tips" class="nav-link" data-scroll-target="#spatial-tips"><span class="header-section-number">4.6</span> Spatial Tips</a></li>
@@ -721,7 +724,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </section>
 <section id="the-core-data-model" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="the-core-data-model"><span class="header-section-number">4.2</span> The core data model</h2>
-<p>Sixteen source datasets — ichthyoplankton, zooplankton, bottle hydrography, CTD casts, DIC, underway meteorology, seabird and mammal transects, and more — used to reach the database as ~40 per-dataset tables. They now project into a small <strong>core family</strong> that every consumer reads. A dataset’s projection lives in its own ingest notebook (the generic shapes live in <code>calcofi4db</code>), so adding a dataset never edits a shared <code>switch()</code>. <a href="#fig-core-erd" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> draws that family and the reference tables it joins to; <a href="#tbl-core" class="quarto-xref">Table&nbsp;<span>4.1</span></a> says what one row of each stands for.</p>
+<p>22 source datasets — ichthyoplankton, zooplankton, bottle hydrography, CTD casts, DIC, underway meteorology, seabird and mammal transects, cetacean sightings, acoustics and eDNA, and more — used to reach the database as ~40 per-dataset tables. They now project into a small <strong>core family</strong> that every consumer reads. A dataset’s projection lives in its own ingest notebook (the generic shapes live in <code>calcofi4db</code>), so adding a dataset never edits a shared <code>switch()</code>. <a href="#fig-core-erd" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> draws that family and the reference tables it joins to; <a href="#tbl-core" class="quarto-xref">Table&nbsp;<span>4.1</span></a> says what one row of each stands for.</p>
 <div id="fig-core-erd" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-core-erd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -754,7 +757,7 @@ Table&nbsp;4.1: The core family: what one row of each table stands for, and whet
 <tbody>
 <tr class="odd">
 <td><strong><code>sample</code></strong></td>
-<td>one row per <strong>physical sampling event</strong> — site, tow, net, cast, bottle, underway record, transect, subsample, region pool — with the hierarchy as an adjacency list (<code>parent_sample_key</code>, plus <code>root_sample_key</code> for the top of the chain)</td>
+<td>one row per <strong>physical sampling event</strong> — site, tow, net, cast, bottle, underway record, transect, subsample, eDNA water sample (<code>water</code>) and filter (<code>filter</code>), cetacean sighting, sonobuoy deployment, analysed hour of a recording (<code>scan</code>), region pool — with the hierarchy as an adjacency list (<code>parent_sample_key</code>, plus <code>root_sample_key</code> for the top of the chain)</td>
 <td>core</td>
 </tr>
 <tr class="even">
@@ -784,7 +787,7 @@ Table&nbsp;4.1: The core family: what one row of each table stands for, and whet
 </tr>
 <tr class="odd">
 <td><strong><code>sample_root</code></strong></td>
-<td>one row per root sampling event with the dense integer <code>root_id</code> the browser objects join on, its position, time, depth span, gear and seafloor depth</td>
+<td>one row per root sampling event with the dense integer <code>root_id</code> the browser objects join on, its position and the position’s H3 cell (<code>hex7</code>), time, depth span, gear and seafloor depth</td>
 <td>supplemental</td>
 </tr>
 <tr class="even">
@@ -803,6 +806,7 @@ Table&nbsp;4.1: The core family: what one row of each table stands for, and whet
 </figure>
 </div>
 <p><a href="#tbl-core" class="quarto-xref">Table&nbsp;<span>4.1</span></a> is the whole model in nine rows; <a href="#tbl-inventory" class="quarto-xref">Table&nbsp;<span>4.2</span></a> below is every table the release actually ships. An observation’s provenance is denormalized onto it on purpose: <code>obs</code> carries <code>dataset_key</code>, <code>cruise_key</code>, <code>grid_key</code>, the position, the datetime and <code>hex_id</code> (H3 at resolution 10, so coarser aggregations use <code>h3_cell_to_parent(hex_id, res)</code> rather than a column per resolution), so a rollup groups without a join. <code>geom</code> lives on <code>sample</code> and on the reference tables, never on <code>obs</code>.</p>
+<p>A sampling event has a hexagon too. <code>sample.hex7</code>, copied onto <code>sample_root.hex7</code> for the root events, is the resolution-7 H3 cell that is the <strong>parent of the resolution-10 cell</strong> of the event’s own position: the same definition as <code>hex7</code> on <code>obs_bio</code> and <code>obs_env</code>, and not the resolution-7 cell the position falls in, because H3 cells do not nest exactly and the two differ near every cell edge. It is <code>NULL</code> where the event has no finite position. This is what places a value held per event in <code>sample_measurement</code> (a cast’s mixed-layer depth) in a hexagon, since such a value has no observation row to borrow a cell from. <code>calcofi4db::check_sample_hex7()</code> fails the release unless the cell is present exactly where the position is finite, is equal on the two tables for every root, and equals the cell of every observation sitting at the same position. An observation carries its <em>own</em> position, so a scan of a CTD cast that drifted across a cell edge lies in the neighbouring hexagon: join an observation to its sample on <code>sample_key</code>, never on the cell.</p>
 <section id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="what-the-release-publishes-obs_bio-obs_env-and-obs-as-a-view"><span class="header-section-number">4.2.1</span> What the release publishes: <code>obs_bio</code> + <code>obs_env</code>, and <code>obs</code> as a view</h3>
 <p>The assembly grain is <code>obs</code>; what the <strong>release</strong> publishes is the pair cut from it, because the questions consumers ask are shaped differently for the two realms:</p>
@@ -819,8 +823,8 @@ Table&nbsp;4.1: The core family: what one row of each table stands for, and whet
 </section>
 <section id="shared-reference-tables" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="shared-reference-tables"><span class="header-section-number">4.2.2</span> Shared reference tables</h3>
-<p><code>cruise</code> (one row per cruise, with <code>cruise_uuid</code>, the ship, and the observed <code>date_min</code>/<code>date_max</code> span that keys every other dataset’s events), <code>ship</code>, <code>grid</code> (the CalCOFI station grid, materialized deterministically from <code>calcofi4r::cc_grid</code>), <code>spatial</code> + <code>spatial_attribute</code> (boundary layers), <code>sample_spatial</code> (the sample→layer memberships), <code>region</code>, <code>lookup</code>, <code>dataset</code> (one row per released dataset, with its measured coverage and its citation), <code>measurement_type</code> (the measurement vocabulary, below) and <code>climatology</code>.</p>
-<p><strong><code>climatology</code> is the one baseline every anomaly subtracts.</strong> Until 2026-08-31 three products each computed their own and the same section read +1.4 °C in one and ~0 in another. It is a plain mean per dataset × <strong><code>site_key</code></strong> (the real station, since calcofi4db 4.10.0 — the inshore grid cells hold 2–4 stations 15–30 km apart, so a cell-grained baseline blended them; <code>grid_key</code> stays on the row as the station’s modal cell) × <strong>calendar month</strong> × 10 m depth bin × measurement type over <strong>1993–2013</strong>, kept only where ≥ 5 distinct cruises contribute (3 until v2026.09.06), with the window stamped on every row. A cast’s anomaly is its value minus the row of <em>its own</em> station and calendar month; pooling months produces a seasonal-cycle map, not an anomaly.</p>
+<p><code>cruise</code> (one row per cruise, with <code>cruise_uuid</code>, the ship, and the observed <code>date_min</code>/<code>date_max</code> span that keys every other dataset’s events), <code>ship</code>, <code>grid</code> (the CalCOFI station grid, materialized deterministically from <code>calcofi4r::cc_grid</code>: one cell per official station, beside the previous cells that lay beyond the official pattern, kept as they were) with <code>grid_crosswalk</code> (how the previous grid’s keys map onto it — a key keeps its form but not necessarily its polygon, so never match one across releases by name; see <a href="./keys.html#sec-grid-migration">The grid key changed in October 2026</a>), <code>spatial</code> + <code>spatial_attribute</code> (boundary layers), <code>sample_spatial</code> (the sample→layer memberships), <code>region</code>, <code>lookup</code>, <code>dataset</code> (one row per released dataset, with its measured coverage and its citation), <code>measurement_type</code> (the measurement vocabulary, below) and <code>climatology</code>.</p>
+<p><strong><code>climatology</code> is the one baseline every anomaly subtracts.</strong> Until 2026-08-31 three products each computed their own and the same section read +1.4 °C in one and ~0 in another. It is a plain mean per dataset × <strong><code>site_key</code></strong> (the real station, since calcofi4db 4.10.0 — the inshore cells of the earlier grid held 2–4 stations 15–30 km apart, so a cell-grained baseline blended them, and the key on the baseline stayed <code>site_key</code> when the grid was rebuilt one cell per station; <code>grid_key</code> stays on the row as the station’s modal cell, labelled by the current grid) × <strong>calendar month</strong> × 10 m depth bin × measurement type over <strong>1993–2013</strong>, kept only where ≥ 5 distinct cruises contribute (3 until v2026.09.06), with the window stamped on every row. A cast’s anomaly is its value minus the row of <em>its own</em> station and calendar month; pooling months produces a seasonal-cycle map, not an anomaly.</p>
 </section>
 <section id="every-table-in-the-release" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="every-table-in-the-release"><span class="header-section-number">4.2.3</span> Every table in the release</h3>
@@ -829,27 +833,27 @@ Table&nbsp;4.1: The core family: what one row of each table stands for, and whet
 <div id="tbl-inventory" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-inventory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and description.
+Table&nbsp;4.2: Every table of v2026.10.05, with its tier, rows, columns and description.
 </figcaption>
 <div aria-describedby="tbl-inventory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="alxzacybrl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#alxzacybrl table {
+<div id="weogmgtbhl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#weogmgtbhl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#alxzacybrl thead, #alxzacybrl tbody, #alxzacybrl tfoot, #alxzacybrl tr, #alxzacybrl td, #alxzacybrl th {
+#weogmgtbhl thead, #weogmgtbhl tbody, #weogmgtbhl tfoot, #weogmgtbhl tr, #weogmgtbhl td, #weogmgtbhl th {
   border-style: none;
 }
 
-#alxzacybrl p {
+#weogmgtbhl p {
   margin: 0;
   padding: 0;
 }
 
-#alxzacybrl .gt_table {
+#weogmgtbhl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -875,12 +879,12 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-left-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_caption {
+#weogmgtbhl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#alxzacybrl .gt_title {
+#weogmgtbhl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -892,7 +896,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-bottom-width: 0;
 }
 
-#alxzacybrl .gt_subtitle {
+#weogmgtbhl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -904,7 +908,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-top-width: 0;
 }
 
-#alxzacybrl .gt_heading {
+#weogmgtbhl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -916,13 +920,13 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_bottom_border {
+#weogmgtbhl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_col_headings {
+#weogmgtbhl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -937,7 +941,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_col_heading {
+#weogmgtbhl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -957,7 +961,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   overflow-x: hidden;
 }
 
-#alxzacybrl .gt_column_spanner_outer {
+#weogmgtbhl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -969,15 +973,15 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   padding-right: 4px;
 }
 
-#alxzacybrl .gt_column_spanner_outer:first-child {
+#weogmgtbhl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#alxzacybrl .gt_column_spanner_outer:last-child {
+#weogmgtbhl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#alxzacybrl .gt_column_spanner {
+#weogmgtbhl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -989,11 +993,11 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   width: 100%;
 }
 
-#alxzacybrl .gt_spanner_row {
+#weogmgtbhl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#alxzacybrl .gt_group_heading {
+#weogmgtbhl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1019,7 +1023,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   text-align: left;
 }
 
-#alxzacybrl .gt_empty_group_heading {
+#weogmgtbhl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1034,15 +1038,15 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   vertical-align: middle;
 }
 
-#alxzacybrl .gt_from_md > :first-child {
+#weogmgtbhl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#alxzacybrl .gt_from_md > :last-child {
+#weogmgtbhl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#alxzacybrl .gt_row {
+#weogmgtbhl .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -1061,7 +1065,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   overflow-x: hidden;
 }
 
-#alxzacybrl .gt_stub {
+#weogmgtbhl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1074,7 +1078,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#alxzacybrl .gt_stub_row_group {
+#weogmgtbhl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1088,15 +1092,15 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   vertical-align: top;
 }
 
-#alxzacybrl .gt_row_group_first td {
+#weogmgtbhl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#alxzacybrl .gt_row_group_first th {
+#weogmgtbhl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#alxzacybrl .gt_summary_row {
+#weogmgtbhl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1106,16 +1110,16 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#alxzacybrl .gt_first_summary_row {
+#weogmgtbhl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_first_summary_row.thick {
+#weogmgtbhl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#alxzacybrl .gt_last_summary_row {
+#weogmgtbhl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +1129,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_grand_summary_row {
+#weogmgtbhl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1135,7 +1139,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#alxzacybrl .gt_first_grand_summary_row {
+#weogmgtbhl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1145,7 +1149,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-top-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_last_grand_summary_row_top {
+#weogmgtbhl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1155,11 +1159,11 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_striped {
+#weogmgtbhl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#alxzacybrl .gt_table_body {
+#weogmgtbhl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1168,7 +1172,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-bottom-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_footnotes {
+#weogmgtbhl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1182,7 +1186,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_footnote {
+#weogmgtbhl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1191,7 +1195,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#alxzacybrl .gt_sourcenotes {
+#weogmgtbhl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1205,7 +1209,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   border-right-color: #D3D3D3;
 }
 
-#alxzacybrl .gt_sourcenote {
+#weogmgtbhl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1213,72 +1217,72 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
   padding-right: 5px;
 }
 
-#alxzacybrl .gt_left {
+#weogmgtbhl .gt_left {
   text-align: left;
 }
 
-#alxzacybrl .gt_center {
+#weogmgtbhl .gt_center {
   text-align: center;
 }
 
-#alxzacybrl .gt_right {
+#weogmgtbhl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#alxzacybrl .gt_font_normal {
+#weogmgtbhl .gt_font_normal {
   font-weight: normal;
 }
 
-#alxzacybrl .gt_font_bold {
+#weogmgtbhl .gt_font_bold {
   font-weight: bold;
 }
 
-#alxzacybrl .gt_font_italic {
+#weogmgtbhl .gt_font_italic {
   font-style: italic;
 }
 
-#alxzacybrl .gt_super {
+#weogmgtbhl .gt_super {
   font-size: 65%;
 }
 
-#alxzacybrl .gt_footnote_marks {
+#weogmgtbhl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#alxzacybrl .gt_asterisk {
+#weogmgtbhl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#alxzacybrl .gt_indent_1 {
+#weogmgtbhl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#alxzacybrl .gt_indent_2 {
+#weogmgtbhl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#alxzacybrl .gt_indent_3 {
+#weogmgtbhl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#alxzacybrl .gt_indent_4 {
+#weogmgtbhl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#alxzacybrl .gt_indent_5 {
+#weogmgtbhl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#alxzacybrl .katex-display {
+#weogmgtbhl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#alxzacybrl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#weogmgtbhl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1298,23 +1302,23 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">climatology</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">821,001</td>
+<td class="gt_row gt_right" headers="rows">821,390</td>
 <td class="gt_row gt_right" headers="columns">12</td>
-<td class="gt_row gt_left" headers="name"></td>
-<td class="gt_row gt_left" headers="description"></td>
+<td class="gt_row gt_left" headers="name">Climatology</td>
+<td class="gt_row gt_left" headers="description">The one seasonal baseline every CalCOFI anomaly is a departure from (calcofi4db::build_climatology(), release_database.qmd browser_objects). A plain mean of the env realm of obs per dataset × station (site_key, with grid_key as the station’s modal cell) × calendar month × 10 m floor depth bin × measurement type across the window stamped on every row (clim_yr_min–clim_yr_max, 1993–2013), kept only where at least 5 distinct cruises contribute. Calendar month because CalCOFI’s quarterly cruises give many years per month at a station but few days; 10 m floor bins (labelled by the shallow edge) because obs carries the thinned CTD series and 5 m off-grid bins sample only the profile’s inflection points. Partitioned by measurement_type. ctd-transects, the Explorer’s Sections lens and calcofi4r::cc_climatology() subtract this table; a cell that is absent has no baseline and its anomaly is blank, never zero.</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">842</td>
-<td class="gt_row gt_right" headers="columns">20</td>
+<td class="gt_row gt_right" headers="rows">845</td>
+<td class="gt_row gt_right" headers="columns">21</td>
 <td class="gt_row gt_left" headers="name">Cruise</td>
 <td class="gt_row gt_left" headers="description">unique by ship and year-month</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">17</td>
+<td class="gt_row gt_right" headers="rows">22</td>
 <td class="gt_row gt_right" headers="columns">24</td>
 <td class="gt_row gt_left" headers="name">Dataset</td>
 <td class="gt_row gt_left" headers="description"></td>
@@ -1322,18 +1326,34 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset_taxon</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">1,921</td>
+<td class="gt_row gt_right" headers="rows">1,982</td>
 <td class="gt_row gt_right" headers="columns">7</td>
 <td class="gt_row gt_left" headers="name">Dataset Taxon</td>
 <td class="gt_row gt_left" headers="description">Crosswalk from each dataset’s own taxon vocabulary to the global <code>taxon_key</code>. <code>obs</code> resolves its taxon by joining this on (<code>dataset_key</code>, <code>ds_taxa_code</code>), so a dataset can keep its local codes without leaking them into the shared model.</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">fish</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">10,796</td>
+<td class="gt_row gt_right" headers="columns">4</td>
+<td class="gt_row gt_left" headers="name">Fish</td>
+<td class="gt_row gt_left" headers="description">Fish grown past the larval stage (SWFSC Fish table): counts per net and CalCOFI species code. Not in obs: whether these fish are also in the larval count, and which life stage they are, is asked (swfsc_ichthyo_20).</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">grid</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">218</td>
+<td class="gt_row gt_right" headers="rows">225</td>
 <td class="gt_row gt_right" headers="columns">10</td>
 <td class="gt_row gt_left" headers="name">Grid</td>
 <td class="gt_row gt_left" headers="description">CalCOFI survey grid polygons with standard and historical station patterns</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">grid_crosswalk</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">673</td>
+<td class="gt_row gt_right" headers="columns">5</td>
+<td class="gt_row gt_left" headers="name">Grid Crosswalk</td>
+<td class="gt_row gt_left" headers="description">How the cells of the previous CalCOFI grid (every release through v2026.10.01; <code>calcofi4r::cc_grid_v1</code>) map onto the cells of this release’s <code>grid</code>, rebuilt as one cell per official station beside the previous cells kept as they were (CalCOFI/workflows#130). One row per overlapping pair of a previous and a current cell, with the overlap area and its share of each cell (<code>prev_frac</code>, <code>grid_frac</code>), built at release by calcofi4db::build_grid_crosswalk() and gated by check_grid_crosswalk(). 196 of the 218 previous keys are also keys of the rebuilt grid, 84 of them over a polygon that changed, so a <code>grid_key</code> saved from an earlier release must be mapped through this table, never matched by name: <code>prev_frac</code> is the weight that carries a per-cell value to the current cells. Keyed on (<code>prev_grid_key</code>, <code>grid_key</code>).</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">lookup</td>
@@ -1346,7 +1366,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">211</td>
+<td class="gt_row gt_right" headers="rows">231</td>
 <td class="gt_row gt_right" headers="columns">22</td>
 <td class="gt_row gt_left" headers="name">Measurement Type</td>
 <td class="gt_row gt_left" headers="description"></td>
@@ -1354,7 +1374,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_attribute</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">458,184</td>
+<td class="gt_row gt_right" headers="rows">476,615</td>
 <td class="gt_row gt_right" headers="columns">10</td>
 <td class="gt_row gt_left" headers="name">Observation Attribute</td>
 <td class="gt_row gt_left" headers="description">Sub-occurrence attribution: the breakdown <em>within</em> an <code>obs</code> headline row. Covers numeric frequency distributions (length bins, stage numbers) and categorical breakdowns (seabird behavior). Counts here sum to the headline where the source is internally consistent.</td>
@@ -1362,18 +1382,18 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_bio</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">1,319,467</td>
+<td class="gt_row gt_right" headers="rows">1,602,659</td>
 <td class="gt_row gt_right" headers="columns">32</td>
-<td class="gt_row gt_left" headers="name"></td>
-<td class="gt_row gt_left" headers="description"></td>
+<td class="gt_row gt_left" headers="name">Biological Observations</td>
+<td class="gt_row gt_left" headers="description">The bio realm of the observations — one row per taxon occurrence headline (count, density or biomass) with the gear and effort of its own sampling event inline (<code>tow_type</code>, <code>std_haul_factor</code>, <code>prop_sorted</code>, <code>volume_sampled_m3</code>), the two standardized densities (<code>density_per_10m2</code>, <code>density_per_1000m3</code>) and <code>effort_class</code>, <code>qual_ok</code>, <code>root_id</code> (→ <code>sample_root</code>), <code>sample_key</code> (→ <code>sample</code>, the net / tow itself), <code>hex_id</code> (H3 res 10) and <code>hex7</code>. A strict superset of <code>obs</code>’s bio rows under a name mapping (<code>value</code> = <code>measurement_value</code>, realm implied); <code>obs</code> is a view over this table and <code>obs_env</code>. One object (~26 MB), read whole by the CalCOFI Explorer. Depth is the observation’s, falling back to its sample’s span (a net tow) and its root’s.</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">31,819,982</td>
+<td class="gt_row gt_right" headers="rows">31,737,343</td>
 <td class="gt_row gt_right" headers="columns">32</td>
-<td class="gt_row gt_left" headers="name"></td>
-<td class="gt_row gt_left" headers="description"></td>
+<td class="gt_row gt_left" headers="name">Environmental Observations</td>
+<td class="gt_row gt_left" headers="description">The env realm of the observations — one row per measured scalar (bottle, CTD headline series <code>ctd_thin</code>, DIC, METS, picoplankton) with the same columns as <code>obs_bio</code> (effort and taxon NULL), <code>qual_ok</code> evaluated, <code>root_id</code> (→ <code>sample_root</code>), <code>sample_key</code> (→ <code>sample</code>, the bottle / cast), <code>hex_id</code> and <code>hex7</code>. Hive-partitioned by <code>measurement_type</code> so one variable is one object (~4 MB median); <code>obs</code> is a view over <code>obs_bio</code> and this table. A strict superset of <code>obs</code>’s env rows under a name mapping (<code>value</code> = <code>measurement_value</code>).</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">region</td>
@@ -1386,15 +1406,15 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">1,469,239</td>
-<td class="gt_row gt_right" headers="columns">21</td>
+<td class="gt_row gt_right" headers="rows">1,479,442</td>
+<td class="gt_row gt_right" headers="columns">22</td>
 <td class="gt_row gt_left" headers="name">Sample</td>
-<td class="gt_row gt_left" headers="description">One row per physical sampling event at its native grain (site, tow, net, cast, bottle, underway, transect, region pool). An adjacency list: <code>parent_sample_key</code> points at the containing event and <code>root_sample_key</code> at the top of the chain, so counting distinct events at any level is a single <code>GROUP BY</code>.</td>
+<td class="gt_row gt_left" headers="description">One row per physical sampling event at its native grain (site, tow, net, subsample, cast, bottle, water, filter, underway, transect, sighting, deployment, scan, region pool). An adjacency list: <code>parent_sample_key</code> points at the containing event and <code>root_sample_key</code> at the top of the chain, so counting distinct events at any level is a single <code>GROUP BY</code>.</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_measurement</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">652,879</td>
+<td class="gt_row gt_right" headers="rows">659,989</td>
 <td class="gt_row gt_right" headers="columns">6</td>
 <td class="gt_row gt_left" headers="name">Sample Measurement</td>
 <td class="gt_row gt_left" headers="description">Event-level (effort) measurements: quantities that describe the sampling event itself rather than anything observed in it — net volume filtered, standard haul factor, proportion sorted, bottle cast conditions. Kept apart from <code>obs</code> so effort is never mistaken for an observation.</td>
@@ -1402,16 +1422,16 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">929,664</td>
+<td class="gt_row gt_right" headers="rows">945,262</td>
 <td class="gt_row gt_right" headers="columns">5</td>
-<td class="gt_row gt_left" headers="name"></td>
-<td class="gt_row gt_left" headers="description"></td>
+<td class="gt_row gt_left" headers="name">Sample Spatial Membership</td>
+<td class="gt_row gt_left" headers="description">Exact polygon membership per root sample — one row per (root sample, spatial feature) for every layer in <code>spatial</code> — computed once at release so every consumer inherits the same membership (Explorer plan D4). Keyed on (<code>root_sample_key</code>, <code>spatial_key</code>).</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">49</td>
-<td class="gt_row gt_right" headers="columns">7</td>
+<td class="gt_row gt_right" headers="columns">8</td>
 <td class="gt_row gt_left" headers="name">Ship</td>
 <td class="gt_row gt_left" headers="description">unique ship with many cruises</td>
 </tr>
@@ -1420,21 +1440,21 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">13,206</td>
 <td class="gt_row gt_right" headers="columns">5</td>
-<td class="gt_row gt_left" headers="name"></td>
-<td class="gt_row gt_left" headers="description"></td>
+<td class="gt_row gt_left" headers="name">Spatial Layers</td>
+<td class="gt_row gt_left" headers="description">Geometries for ancillary spatial layers (CA jurisdictions NOAA boundaries marine protected areas etc.) keyed by spatial_key. Sourced from metadata/spatial_layers.csv. Companion to spatial_attribute.</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">148,461</td>
 <td class="gt_row gt_right" headers="columns">9</td>
-<td class="gt_row gt_left" headers="name"></td>
-<td class="gt_row gt_left" headers="description"></td>
+<td class="gt_row gt_left" headers="name">Spatial Layer Attributes</td>
+<td class="gt_row gt_left" headers="description">Non-geometry attributes for features in spatial in long entity-attribute-value form (spatial_key layer fld and one typed val_* column). Allows attribute schemas to differ across layers without column proliferation.</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">2,623</td>
+<td class="gt_row gt_right" headers="rows">2,608</td>
 <td class="gt_row gt_right" headers="columns">19</td>
 <td class="gt_row gt_left" headers="name">Taxon</td>
 <td class="gt_row gt_left" headers="description">Taxonomic hierarchy for species via WoRMS and ITIS authorities (built from spp.duckdb via recursive CTEs)</td>
@@ -1442,7 +1462,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">441</td>
+<td class="gt_row gt_right" headers="rows">444</td>
 <td class="gt_row gt_right" headers="columns">3</td>
 <td class="gt_row gt_left" headers="name">Taxon Group</td>
 <td class="gt_row gt_left" headers="description">Portable groupings of taxa (phytoplankton functional groups, seabirds, marine mammals). Many taxa per group; a taxon may belong to several.</td>
@@ -1450,7 +1470,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
 <td class="gt_row gt_left" headers="tier">deprecated</td>
-<td class="gt_row gt_right" headers="rows">33,139,449</td>
+<td class="gt_row gt_right" headers="rows">33,340,002</td>
 <td class="gt_row gt_right" headers="columns">18</td>
 <td class="gt_row gt_left" headers="name">Observation</td>
 <td class="gt_row gt_left" headers="description">The occurrence-headline long table: one scalar measurement per row, environmental (<code>realm = 'env'</code>) and biological (<code>realm = 'bio'</code>) together. Biological taxon is the global <code>taxon_key</code>; sub-occurrence detail (length/stage bins, behavior) lives in <code>obs_attribute</code>, and event-level effort in <code>sample_measurement</code>.</td>
@@ -1458,7 +1478,7 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_ctd_full</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
-<td class="gt_row gt_right" headers="rows">284,379,888</td>
+<td class="gt_row gt_right" headers="rows">281,880,519</td>
 <td class="gt_row gt_right" headers="columns">18</td>
 <td class="gt_row gt_left" headers="name">Observation (Full CTD)</td>
 <td class="gt_row gt_left" headers="description">Supplemental full-resolution CTD scans, identical in shape to <code>obs</code>. Excluded from the default table list and the ERD because of its size; opt in with <code>cc_get_db(supplemental = TRUE)</code>. The default <code>obs</code> carries CTD via the adaptively thinned <code>ctd_thin</code>.</td>
@@ -1474,10 +1494,10 @@ Table&nbsp;4.2: Every table of v2026.10.01, with its tier, rows, columns and des
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
-<td class="gt_row gt_right" headers="rows">421,538</td>
-<td class="gt_row gt_right" headers="columns">14</td>
-<td class="gt_row gt_left" headers="name"></td>
-<td class="gt_row gt_left" headers="description"></td>
+<td class="gt_row gt_right" headers="rows">425,539</td>
+<td class="gt_row gt_right" headers="columns">15</td>
+<td class="gt_row gt_left" headers="name">Root Samples</td>
+<td class="gt_row gt_left" headers="description">One row per root sampling event (a <code>sample</code> with no parent) with the dense integer <code>root_id</code> the browser objects (<code>obs_bio</code>, <code>obs_env</code>, <code>sample_spatial</code>) join on, its position, datetime, depth span, gear and GEBCO seafloor depth. Supplemental: built by release_database.qmd, hidden from <code>cc_get_db()</code> unless <code>supplemental = TRUE</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -1518,9 +1538,9 @@ Figure&nbsp;4.2: The page head, composed: a PhyloPic silhouette in the page’s 
 <h3 data-number="4.2.6" class="anchored" data-anchor-id="measurements"><span class="header-section-number">4.2.6</span> Measurements</h3>
 <p><code>measurement_type.csv</code> names a <strong>series</strong> — one dataset’s own column of measured values (<code>calcofi_bottle.temperature</code>, <code>calcofi_ctd-cast.temperature_ave</code>). The bottle’s temperature and the CTD’s are the same physical quantity read two ways, and until 2026-09 nothing said so in one place: the Explorer hard-coded five such pairings in its own <code>UNIFIED</code> table with a note that the label “belongs in <code>measurement_type.csv</code>”. The measurements catalog is that one place.</p>
 <p><strong>One page per measurement key at <a href="https://calcofi.io/measurements/"><code>calcofi.io/measurements/{key}/</code></a></strong> — the registry’s <code>variable</code> where a series belongs to one, else the canonical <code>measurement_type</code> itself — lists every series that measures it, one row per <code>measurement_type</code> × dataset, each with the dataset’s own source and flag column. A series that is not canonical for its key (a raw CTD sensor, a thermosalinograph past the first) gets no page and is listed under its dataset as <code>full_resolution_only[]</code>, the <code>vocabulary_only[]</code> of this catalog. This mirrors <a href="#taxonomy">Taxonomy</a> one-for-one: <code>measurement_type.variable</code> plays <code>dataset_taxon</code>’s crosswalk role, and <code>metadata/variable.csv</code> — read with <code>calcofi4db::read_variable()</code>, appended with <code>register_variables()</code>, never a bare <code>write_csv()</code> — plays <code>taxon</code>’s role of holding the one label, description and NERC P01 concept a key is shown under.</p>
-<p><strong>A <code>variable</code> is assigned only where (i) the NERC P01 concept is identical — or the two concepts differ only by a method qualifier for the same quantity — (ii) the units are the same or a declared conversion, (iii) the series come from the same kind of sample, and (iv) the two are not plausibly the same physical samples.</strong> <code>calcofi4db::check_variable_registry()</code> enforces (i) and (ii) at write time — a <code>variable.csv</code> row whose <code>nerc_p01</code> disagrees with a member series’ own value is refused, so a crosswalk key can never silently misdescribe what it unifies. (iii) and (iv) are judgement calls a person records as evidence, not something a function can check from the column alone: the CTD files carry their own embedded bottle table (<code>btl_*</code>) that shares a P01 with the bottle dataset’s series but is plausibly the <em>same physical bottles</em> measured twice, so it fails (iv) and stays its own key, related to the bottle’s on each page with the reason (<code>same_bottles</code>); a replicate is not a mean (<code>replicate_vs_mean</code>); an underway intake is not a cast (<code>underway_vs_cast</code>). <a href="#tbl-measurements-unified" class="quarto-xref">Table&nbsp;<span>4.3</span></a> is every key <code>variable.csv</code> carries on v2026.10.01, with its member series — <code>sigma_theta</code>’s two series keep their own NERC concepts (the bottle’s <em>by computation</em>, the CTD’s <em>by CTD and computation</em>) because criterion (i) reads “or a method qualifier,” not “identical always.”</p>
+<p><strong>A <code>variable</code> is assigned only where (i) the NERC P01 concept is identical — or the two concepts differ only by a method qualifier for the same quantity — (ii) the units are the same or a declared conversion, (iii) the series come from the same kind of sample, and (iv) the two are not plausibly the same physical samples.</strong> <code>calcofi4db::check_variable_registry()</code> enforces (i) and (ii) at write time — a <code>variable.csv</code> row whose <code>nerc_p01</code> disagrees with a member series’ own value is refused, so a crosswalk key can never silently misdescribe what it unifies. (iii) and (iv) are judgement calls a person records as evidence, not something a function can check from the column alone: the CTD files carry their own embedded bottle table (<code>btl_*</code>) that shares a P01 with the bottle dataset’s series but is plausibly the <em>same physical bottles</em> measured twice, so it fails (iv) and stays its own key, related to the bottle’s on each page with the reason (<code>same_bottles</code>); a replicate is not a mean (<code>replicate_vs_mean</code>); an underway intake is not a cast (<code>underway_vs_cast</code>). <a href="#tbl-measurements-unified" class="quarto-xref">Table&nbsp;<span>4.3</span></a> is every key <code>variable.csv</code> carries on v2026.10.05, with its member series — <code>sigma_theta</code>’s two series keep their own NERC concepts (the bottle’s <em>by computation</em>, the CTD’s <em>by CTD and computation</em>) because criterion (i) reads “or a method qualifier,” not “identical always.”</p>
 <p>The record, <code>measurements.json</code> (<code>calcofi4db::build_measurements_catalog()</code>, schema <code>measurements.schema.json</code>, written beside <code>taxa.json</code> in <code>release_database.qmd</code>), is <code>taxa.json</code>‘s twin for the environment half of the catalog: counts, one <code>datasets[]</code> entry per dataset carrying an <code>obs_env</code> row, one <code>measurements[]</code> entry per key with <code>series[]</code> carrying each series’ values by year, month, depth band and quality code, the observed quantiles <strong>within</strong> the registry’s declared bounds, and <code>related[]</code> naming the other keys that share a NERC P01 concept and are kept apart on purpose. <code>test_release.qmd</code>’s <code>measurements_catalog</code> gate re-derives the schema check and the <strong>arithmetic gate</strong> every consumer of this record leans on: the sum of <code>series[].n_values</code> over every key equals <code>obs_env</code>’s own row count, which is exactly what a series counted into two keys would break.</p>
-<p>On v2026.10.01, the record (release) counts <strong>88 measurements</strong> over <strong>93 series</strong> in <strong>5 datasets</strong> — 31,819,982 <code>obs_env</code> rows, 336,126,393 once the two full-resolution supplementals are counted.</p>
+<p>On v2026.10.05, the record (release) counts <strong>96 measurements</strong> over <strong>101 series</strong> in <strong>6 datasets</strong> — 31,737,343 <code>obs_env</code> rows, 333,544,385 once the two full-resolution supplementals are counted.</p>
 <div class="cell">
 <div id="tbl-measurements-unified" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1529,23 +1549,23 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
 </figcaption>
 <div aria-describedby="tbl-measurements-unified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="styvsbjsmo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#styvsbjsmo table {
+<div id="ulzttbjxxo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ulzttbjxxo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#styvsbjsmo thead, #styvsbjsmo tbody, #styvsbjsmo tfoot, #styvsbjsmo tr, #styvsbjsmo td, #styvsbjsmo th {
+#ulzttbjxxo thead, #ulzttbjxxo tbody, #ulzttbjxxo tfoot, #ulzttbjxxo tr, #ulzttbjxxo td, #ulzttbjxxo th {
   border-style: none;
 }
 
-#styvsbjsmo p {
+#ulzttbjxxo p {
   margin: 0;
   padding: 0;
 }
 
-#styvsbjsmo .gt_table {
+#ulzttbjxxo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1571,12 +1591,12 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-left-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_caption {
+#ulzttbjxxo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#styvsbjsmo .gt_title {
+#ulzttbjxxo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1588,7 +1608,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-bottom-width: 0;
 }
 
-#styvsbjsmo .gt_subtitle {
+#ulzttbjxxo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1600,7 +1620,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-top-width: 0;
 }
 
-#styvsbjsmo .gt_heading {
+#ulzttbjxxo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1612,13 +1632,13 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-right-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_bottom_border {
+#ulzttbjxxo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_col_headings {
+#ulzttbjxxo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1633,7 +1653,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-right-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_col_heading {
+#ulzttbjxxo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1653,7 +1673,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   overflow-x: hidden;
 }
 
-#styvsbjsmo .gt_column_spanner_outer {
+#ulzttbjxxo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1665,15 +1685,15 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   padding-right: 4px;
 }
 
-#styvsbjsmo .gt_column_spanner_outer:first-child {
+#ulzttbjxxo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#styvsbjsmo .gt_column_spanner_outer:last-child {
+#ulzttbjxxo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#styvsbjsmo .gt_column_spanner {
+#ulzttbjxxo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1685,11 +1705,11 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   width: 100%;
 }
 
-#styvsbjsmo .gt_spanner_row {
+#ulzttbjxxo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#styvsbjsmo .gt_group_heading {
+#ulzttbjxxo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1715,7 +1735,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   text-align: left;
 }
 
-#styvsbjsmo .gt_empty_group_heading {
+#ulzttbjxxo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1730,15 +1750,15 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   vertical-align: middle;
 }
 
-#styvsbjsmo .gt_from_md > :first-child {
+#ulzttbjxxo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#styvsbjsmo .gt_from_md > :last-child {
+#ulzttbjxxo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#styvsbjsmo .gt_row {
+#ulzttbjxxo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1757,7 +1777,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   overflow-x: hidden;
 }
 
-#styvsbjsmo .gt_stub {
+#ulzttbjxxo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1770,7 +1790,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   padding-right: 5px;
 }
 
-#styvsbjsmo .gt_stub_row_group {
+#ulzttbjxxo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1784,15 +1804,15 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   vertical-align: top;
 }
 
-#styvsbjsmo .gt_row_group_first td {
+#ulzttbjxxo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#styvsbjsmo .gt_row_group_first th {
+#ulzttbjxxo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#styvsbjsmo .gt_summary_row {
+#ulzttbjxxo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1802,16 +1822,16 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   padding-right: 5px;
 }
 
-#styvsbjsmo .gt_first_summary_row {
+#ulzttbjxxo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_first_summary_row.thick {
+#ulzttbjxxo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#styvsbjsmo .gt_last_summary_row {
+#ulzttbjxxo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1821,7 +1841,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-bottom-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_grand_summary_row {
+#ulzttbjxxo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1831,7 +1851,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   padding-right: 5px;
 }
 
-#styvsbjsmo .gt_first_grand_summary_row {
+#ulzttbjxxo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1841,7 +1861,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-top-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_last_grand_summary_row_top {
+#ulzttbjxxo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1851,11 +1871,11 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-bottom-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_striped {
+#ulzttbjxxo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#styvsbjsmo .gt_table_body {
+#ulzttbjxxo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1864,7 +1884,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-bottom-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_footnotes {
+#ulzttbjxxo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1878,7 +1898,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-right-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_footnote {
+#ulzttbjxxo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1887,7 +1907,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   padding-right: 5px;
 }
 
-#styvsbjsmo .gt_sourcenotes {
+#ulzttbjxxo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1901,7 +1921,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   border-right-color: #D3D3D3;
 }
 
-#styvsbjsmo .gt_sourcenote {
+#ulzttbjxxo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1909,72 +1929,72 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
   padding-right: 5px;
 }
 
-#styvsbjsmo .gt_left {
+#ulzttbjxxo .gt_left {
   text-align: left;
 }
 
-#styvsbjsmo .gt_center {
+#ulzttbjxxo .gt_center {
   text-align: center;
 }
 
-#styvsbjsmo .gt_right {
+#ulzttbjxxo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#styvsbjsmo .gt_font_normal {
+#ulzttbjxxo .gt_font_normal {
   font-weight: normal;
 }
 
-#styvsbjsmo .gt_font_bold {
+#ulzttbjxxo .gt_font_bold {
   font-weight: bold;
 }
 
-#styvsbjsmo .gt_font_italic {
+#ulzttbjxxo .gt_font_italic {
   font-style: italic;
 }
 
-#styvsbjsmo .gt_super {
+#ulzttbjxxo .gt_super {
   font-size: 65%;
 }
 
-#styvsbjsmo .gt_footnote_marks {
+#ulzttbjxxo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#styvsbjsmo .gt_asterisk {
+#ulzttbjxxo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#styvsbjsmo .gt_indent_1 {
+#ulzttbjxxo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#styvsbjsmo .gt_indent_2 {
+#ulzttbjxxo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#styvsbjsmo .gt_indent_3 {
+#ulzttbjxxo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#styvsbjsmo .gt_indent_4 {
+#ulzttbjxxo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#styvsbjsmo .gt_indent_5 {
+#ulzttbjxxo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#styvsbjsmo .katex-display {
+#ulzttbjxxo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#styvsbjsmo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ulzttbjxxo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2001,7 +2021,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
 <tr class="odd">
 <th id="stub_1_2" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">calcofi_ctd-cast</th>
 <td class="gt_row gt_left" headers="Dissolved oxygen (ml/L) stub_1_2 series">oxygen_ml_l_ave_sta_corr</td>
-<td class="gt_row gt_right" headers="Dissolved oxygen (ml/L) stub_1_2 n_values">653,231</td>
+<td class="gt_row gt_right" headers="Dissolved oxygen (ml/L) stub_1_2 n_values">651,142</td>
 <td class="gt_row gt_left" headers="Dissolved oxygen (ml/L) stub_1_2 nerc_p01">DOXYZZXX</td>
 </tr>
 <tr class="gt_group_heading_row even">
@@ -2016,7 +2036,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
 <tr class="even">
 <th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">calcofi_ctd-cast</th>
 <td class="gt_row gt_left" headers="Dissolved oxygen (µmol/kg) stub_1_4 series">oxygen_umol_kg_ave_sta_corr</td>
-<td class="gt_row gt_right" headers="Dissolved oxygen (µmol/kg) stub_1_4 n_values">626,394</td>
+<td class="gt_row gt_right" headers="Dissolved oxygen (µmol/kg) stub_1_4 n_values">613,609</td>
 <td class="gt_row gt_left" headers="Dissolved oxygen (µmol/kg) stub_1_4 nerc_p01">DOXMZZXX</td>
 </tr>
 <tr class="gt_group_heading_row odd">
@@ -2031,7 +2051,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
 <tr class="odd">
 <th id="stub_1_6" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">calcofi_ctd-cast</th>
 <td class="gt_row gt_left" headers="Salinity stub_1_6 series">salinity_ave_corr</td>
-<td class="gt_row gt_right" headers="Salinity stub_1_6 n_values">673,276</td>
+<td class="gt_row gt_right" headers="Salinity stub_1_6 n_values">672,180</td>
 <td class="gt_row gt_left" headers="Salinity stub_1_6 nerc_p01">PSLTZZ01</td>
 </tr>
 <tr class="gt_group_heading_row even">
@@ -2046,7 +2066,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
 <tr class="even">
 <th id="stub_1_8" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">calcofi_ctd-cast</th>
 <td class="gt_row gt_left" headers="Potential density (σθ) stub_1_8 series">sigma_theta_1</td>
-<td class="gt_row gt_right" headers="Potential density (σθ) stub_1_8 n_values">693,743</td>
+<td class="gt_row gt_right" headers="Potential density (σθ) stub_1_8 n_values">688,923</td>
 <td class="gt_row gt_left" headers="Potential density (σθ) stub_1_8 nerc_p01">SIGTPR01</td>
 </tr>
 <tr class="gt_group_heading_row odd">
@@ -2061,7 +2081,7 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
 <tr class="odd">
 <th id="stub_1_10" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">calcofi_ctd-cast</th>
 <td class="gt_row gt_left" headers="Temperature stub_1_10 series">temperature_ave</td>
-<td class="gt_row gt_right" headers="Temperature stub_1_10 n_values">694,021</td>
+<td class="gt_row gt_right" headers="Temperature stub_1_10 n_values">689,201</td>
 <td class="gt_row gt_left" headers="Temperature stub_1_10 nerc_p01">TEMPPR01</td>
 </tr>
 </tbody>
@@ -2073,7 +2093,527 @@ Table&nbsp;4.3: Every unified measurement key on the record above, with its memb
 </figure>
 </div>
 </div>
-<p>Two facts the record states rather than leaves implicit. <strong>A series with no NERC concept says so</strong> — <code>no_p01</code> on its flags, never a blank cell that reads as “not looked at” — the same exact-match discipline as every controlled-vocabulary id in <a href="#metadata-registries-the-single-sources-of-truth">Metadata registries</a>: <strong>38 of the 93 series</strong> on v2026.10.01 carry no P01. And <strong>a bound is declared or questioned, never inferred from the data</strong> (the ingest’s own rule — <a href="https://github.com/CalCOFI/workflows/blob/main/.claude/skills/measurement-bounds/SKILL.md">measurement bounds</a>): a series’ <code>observed{}</code> range is computed <em>within</em> its registry bound, what falls outside is counted separately in <code>out_of_bounds{n, min, max}</code> rather than silently widening the range a reader sees, and <strong>15 series declare no bound at all</strong> (<code>no_bound</code>) rather than letting their widest reading stand in for one; 2 series carry <code>sentinel_suspected</code> — a declared bound broken, or, absent one, an extreme past ±99 and 100× the series’ own 5th/95th percentile. That is how the catalog surfaced a sea-surface reading of thousands of degrees and a PAR sensor’s numeric fill value on v2026.10.01 — both certain bugs, fixed at the ingest, not questions. ### A face for every measurement page</p>
+<p>Two facts the record states rather than leaves implicit. <strong>A series with no NERC concept says so</strong> — <code>no_p01</code> on its flags, never a blank cell that reads as “not looked at” — the same exact-match discipline as every controlled-vocabulary id in <a href="#metadata-registries-the-single-sources-of-truth">Metadata registries</a>: <strong>46 of the 101 series</strong> on v2026.10.05 carry no P01. And <strong>a bound is declared or questioned, never inferred from the data</strong> (the ingest’s own rule — <a href="https://github.com/CalCOFI/workflows/blob/main/.claude/skills/measurement-bounds/SKILL.md">measurement bounds</a>): a series’ <code>observed{}</code> range is computed <em>within</em> its registry bound, what falls outside is counted separately in <code>out_of_bounds{n, min, max}</code> rather than silently widening the range a reader sees, and <strong>14 series declare no bound at all</strong> (<code>no_bound</code>) rather than letting their widest reading stand in for one; 2 series carry <code>sentinel_suspected</code> — a declared bound broken, or, absent one, an extreme past ±99 and 100× the series’ own 5th/95th percentile. That is how the catalog surfaced a sea-surface reading of thousands of degrees and a PAR sensor’s numeric fill value on v2026.10.05 — both certain bugs, fixed at the ingest, not questions.</p>
+</section>
+<section id="sec-per-cast-grain" class="level3" data-number="4.2.7">
+<h3 data-number="4.2.7" class="anchored" data-anchor-id="sec-per-cast-grain"><span class="header-section-number">4.2.7</span> Some measurements are one value per cast, not per depth</h3>
+<p>Nearly every series above is a value <em>at a depth</em>: a row of <code>obs_env</code>. A <strong>product of a whole cast</strong> — its mixed-layer depth, the depth and value of its chlorophyll maximum, its integrated chlorophyll — has no depth, so it is not a depth observation and is not projected into <code>obs_env</code>. The release keeps it in <code>sample_measurement</code>, on the cast’s <code>sample</code> (the registry’s <code>grain</code> is <code>sample</code>), and the measurements catalog lists it with <code>grain: "sample"</code> so it has a page like any other key. These are computed, not measured: <code>calcofi_ctd-derived</code> derives them from the CTD profiles by the CTD team’s own definitions, and the definition of each lives in the registry’s <code>description</code> and <code>derivation</code> columns, which <a href="#tbl-measurements-percast" class="quarto-xref">Table&nbsp;<span>4.4</span></a> reads, rather than being restated here. A definition that changes gets a <strong>new key</strong> instead of reusing the old name, which states its threshold; the superseded key stays in the registry marked <code>RETIRED</code>, not canonical, and no row carries it.</p>
+<p>On v2026.10.05 the record lists <strong>7</strong> measurement keys with <code>grain: "sample"</code>.</p>
+<div class="cell">
+<div id="tbl-measurements-percast" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-measurements-percast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.4: The per-cast products of <code>calcofi_ctd-derived</code> in the registry on v2026.10.05 (canonical keys only), with the registry’s own description and units. How each is computed is in the registry’s <code>derivation</code> column.
+</figcaption>
+<div aria-describedby="tbl-measurements-percast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="vxxfodpaxk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vxxfodpaxk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vxxfodpaxk thead, #vxxfodpaxk tbody, #vxxfodpaxk tfoot, #vxxfodpaxk tr, #vxxfodpaxk td, #vxxfodpaxk th {
+  border-style: none;
+}
+
+#vxxfodpaxk p {
+  margin: 0;
+  padding: 0;
+}
+
+#vxxfodpaxk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 0.86em;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vxxfodpaxk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vxxfodpaxk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vxxfodpaxk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vxxfodpaxk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vxxfodpaxk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vxxfodpaxk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vxxfodpaxk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vxxfodpaxk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vxxfodpaxk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vxxfodpaxk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vxxfodpaxk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vxxfodpaxk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vxxfodpaxk .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vxxfodpaxk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxxfodpaxk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vxxfodpaxk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vxxfodpaxk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vxxfodpaxk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxxfodpaxk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vxxfodpaxk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxxfodpaxk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vxxfodpaxk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxxfodpaxk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vxxfodpaxk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxxfodpaxk .gt_left {
+  text-align: left;
+}
+
+#vxxfodpaxk .gt_center {
+  text-align: center;
+}
+
+#vxxfodpaxk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vxxfodpaxk .gt_font_normal {
+  font-weight: normal;
+}
+
+#vxxfodpaxk .gt_font_bold {
+  font-weight: bold;
+}
+
+#vxxfodpaxk .gt_font_italic {
+  font-style: italic;
+}
+
+#vxxfodpaxk .gt_super {
+  font-size: 65%;
+}
+
+#vxxfodpaxk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vxxfodpaxk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vxxfodpaxk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vxxfodpaxk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vxxfodpaxk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vxxfodpaxk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vxxfodpaxk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vxxfodpaxk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vxxfodpaxk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="measurement_type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">measurement_type</th>
+<th id="units" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">units</th>
+<th id="description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="measurement_type" style="font-family: monospace; font-size: 0.85em">chl_integrated</td>
+<td class="gt_row gt_left" headers="units" style="font-family: monospace; font-size: 0.85em">mg/m2</td>
+<td class="gt_row gt_left" headers="description">Chlorophyll-a integrated over the top 200 m (or the cast bottom): the sum of the 1 m bins</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="measurement_type" style="font-family: monospace; font-size: 0.85em">chl_integrated_depth</td>
+<td class="gt_row gt_left" headers="units" style="font-family: monospace; font-size: 0.85em">m</td>
+<td class="gt_row gt_left" headers="description">Depth reached by chl_integrated (200 m unless the cast is shallower)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="measurement_type" style="font-family: monospace; font-size: 0.85em">chl_max</td>
+<td class="gt_row gt_left" headers="units" style="font-family: monospace; font-size: 0.85em">ug/L</td>
+<td class="gt_row gt_left" headers="description">Chlorophyll-a at its maximum: the 3 m running mean at chl_max_depth</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="measurement_type" style="font-family: monospace; font-size: 0.85em">chl_max_depth</td>
+<td class="gt_row gt_left" headers="units" style="font-family: monospace; font-size: 0.85em">m</td>
+<td class="gt_row gt_left" headers="description">Depth of the chlorophyll-a maximum (DCM): the highest value of a 3 m running mean</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="measurement_type" style="font-family: monospace; font-size: 0.85em">mld_sigma_theta_002</td>
+<td class="gt_row gt_left" headers="units" style="font-family: monospace; font-size: 0.85em">m</td>
+<td class="gt_row gt_left" headers="description">Mixed-layer depth: where sigma-theta is 0.02 kg/m3 greater than at 10 m (CalCOFI legacy definition)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="measurement_type" style="font-family: monospace; font-size: 0.85em">mld_sigma_theta_0125</td>
+<td class="gt_row gt_left" headers="units" style="font-family: monospace; font-size: 0.85em">m</td>
+<td class="gt_row gt_left" headers="description">Mixed-layer depth, sigma-theta increase of 0.125 kg/m3 from 10 m (Levitus 1982)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="measurement_type" style="font-family: monospace; font-size: 0.85em">mld_temperature_02</td>
+<td class="gt_row gt_left" headers="units" style="font-family: monospace; font-size: 0.85em">m</td>
+<td class="gt_row gt_left" headers="description">Mixed-layer depth, temperature departure of 0.2 degC from 10 m (de Boyer Montegut et al. 2004)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>To place one on a map or in a hexagon, join <code>sample_measurement</code> to <code>sample</code> on <code>sample_key</code>: the cast’s <code>sample</code> row carries its position, its time and its <code>hex7</code>, and the row’s own <code>dataset_key</code> is the derived dataset’s, not the cast’s.</p>
+</section>
+<section id="a-face-for-every-measurement-page" class="level3" data-number="4.2.8">
+<h3 data-number="4.2.8" class="anchored" data-anchor-id="a-face-for-every-measurement-page"><span class="header-section-number">4.2.8</span> A face for every measurement page</h3>
 <p>Every measurement page at <a href="https://calcofi.io/measurements/">calcofi.io/measurements/{key}/</a> carries the catalog above, and beneath it a face that answers three questions in one glance: what the thing is, how CalCOFI takes it, and why it matters (<a href="#fig-measurement-face" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>). <strong>What</strong> follows NERC’s own identity chain — a P01 concept’s <code>sameAs</code> link to a chemical entity in ChEBI, or a biological one in WoRMS — down to a structure drawn from ChEBI’s own coordinates, in the page’s own ink; a mixture such as salinity shows its composition instead, the mass fractions of TEOS-10’s Reference-Composition Salinity Scale <span class="citation" data-cites="millero2008">(<a href="refs.html#ref-millero2008" role="doc-biblioref">Millero et al. 2008</a>)</span> rather than a single molecule, and a property with no chemical identity of its own shows its familiar scale alone. <strong>How</strong> comes from <code>metadata/measurement_method.csv</code>, one row per dataset and measurement key naming the platform, the instrument, the principle, and a link into the method’s own section of calcofi.org, styled like the front door’s pins. <strong>Why</strong> is one sentence stitched from the NERC definition, the release record’s own anomaly for every depth band where the quantity is measured against its climatology, and a single authored, cited line picked as the best one-sentence answer; the alternatives not picked — a second authored line, the GOOS essential-ocean-variable question, the Wikipedia lead — wait one click away in a collapsed panel, the same idiom the datasets catalog uses for what is “not yet in the database.” A key with no NERC concept of its own — an instrument voltage, an estimate, a sensor pair’s average — borrows the face of the quantity it stands in for and says so on the page, rather than showing a face for a concept it does not carry. None of this is typed into the page: the sidecar (<code>measurements_media.json</code>) is fetched by the landing repo’s own scripts, keyed by measurement key beside the catalog, and a key without media renders exactly as it does today (<code>metadata-registries</code> skill, <em>Measurement faces</em>).</p>
 <div id="fig-measurement-face" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -2086,13 +2626,18 @@ Figure&nbsp;4.3: The page head, composed: the existing crumb, label, NERC ids an
 </figure>
 </div>
 </section>
-<section id="quality-flags-reach-consumers-only-if-consumers-apply-them" class="level3" data-number="4.2.7">
-<h3 data-number="4.2.7" class="anchored" data-anchor-id="quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">4.2.7</span> Quality flags reach consumers only if consumers apply them</h3>
+<section id="quality-flags-reach-consumers-only-if-consumers-apply-them" class="level3" data-number="4.2.9">
+<h3 data-number="4.2.9" class="anchored" data-anchor-id="quality-flags-reach-consumers-only-if-consumers-apply-them"><span class="header-section-number">4.2.9</span> Quality flags reach consumers only if consumers apply them</h3>
 <p><code>obs.measurement_qual</code> is <strong>each dataset’s own vocabulary, uninterpreted</strong> — bottle 6 = ok-from-CTD, 8 = suspect, 9 = missing; CTD 1/2 = use primary/secondary sensor, 8 = questionable, 9 = bad; DIC follows WOCE (2 good, 3 questionable, 4 bad, 9 missing). The registry is <code>metadata/measurement_qual.csv</code> in the workflows repo and it ships in <code>metadata.json</code>.</p>
 <p>In August 2026 a 2.18 ml/L oxygen spike at 1,144 m turned out to be a bottle flagged suspect in the source <strong>since 1955</strong> — it reached a plotted app because no consumer filtered on the column. There is now one predicate per language — <code>calcofi4r::cc_qual_ok_sql()</code>, <code>calcofi4py.qual_ok_sql()</code>, the query site’s <code>qualOkSQL()</code> — NULL-safe, so an unflagged row is kept. <strong>Apply it.</strong> A value with a flag you do not read is not a value you can trust.</p>
 </section>
-<section id="depth-is-a-coordinate-and-it-is-bounded-as-one" class="level3" data-number="4.2.8">
-<h3 data-number="4.2.8" class="anchored" data-anchor-id="depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">4.2.8</span> Depth is a coordinate, and it is bounded as one</h3>
+<section id="a-data-fix-is-diffed-against-the-release-before-it-is-re-staged" class="level3" data-number="4.2.10">
+<h3 data-number="4.2.10" class="anchored" data-anchor-id="a-data-fix-is-diffed-against-the-release-before-it-is-re-staged"><span class="header-section-number">4.2.10</span> A data fix is diffed against the release before it is re-staged</h3>
+<p>A fix to an ingest changes values that consumers already hold, and the series it was <em>meant</em> to change is rarely the only one it touches: a corrected sensor pair moves every average built from it, a dropped sentinel changes a count. The rule is therefore that <strong>before a fixed ingest is re-staged it is diffed against the release it will replace — per measurement type, the rows changed, filled and removed and the largest change, for every series the fix can touch</strong> — and a dry run that leaves a series out of its breakdown is not a dry run.</p>
+<p>How it is enforced: by a function, not by a gate. <code>calcofi4db::diff_stage_vs_release()</code> compares an ingest’s staged <code>obs</code>, <code>obs_ctd_full</code> and <code>sample_measurement</code> with a published release (a version, <code>"latest"</code>, or a local copy) and returns one row per table × <code>measurement_type</code> with the rows <code>added</code>, <code>removed</code>, <code>filled</code>, <code>blanked</code>, <code>changed</code> and unchanged, the rows whose <code>measurement_qual</code> changed, the largest absolute change, and the duplicate keys on each side. Every type present on either side gets a row, and so does every type the caller names that is on neither, so a series cannot drop out unseen; <code>diff_stage_vs_release_rows()</code> returns the differing rows themselves. Nothing in the pipeline stops a re-stage that skipped the diff: what the release carries is the result, as the per-type change table the release notes (<code>RELEASES.md</code>) give for a fix, which is filled from this function’s output. The rule is stated as a practice because that is how it is kept.</p>
+</section>
+<section id="depth-is-a-coordinate-and-it-is-bounded-as-one" class="level3" data-number="4.2.11">
+<h3 data-number="4.2.11" class="anchored" data-anchor-id="depth-is-a-coordinate-and-it-is-bounded-as-one"><span class="header-section-number">4.2.11</span> Depth is a coordinate, and it is bounded as one</h3>
 <p>Every released depth is finite, non-negative and no deeper than <strong>6,500 m</strong>, on <code>obs</code>, on <code>sample</code> and on the supplemental tables; a violation fails the release rather than shipping. Separately, <code>sample.seafloor_depth_m</code> carries the GEBCO 2025 sea-floor depth at the sample’s position (positive down, 0 on land, NULL outside the raster) so a consumer can judge a deep sample without fetching a raster. Where a sample’s deepest attributed depth exceeds the deepest GEBCO cell near it, that is <strong>reported and ratcheted, never deleted</strong>: nearly all such cases are minute-rounded 1949–1975 positions on slopes and canyons — the measurement is fine, the place is imprecise.</p>
 </section>
 </section>
@@ -2123,7 +2668,7 @@ Figure&nbsp;4.3: The page head, composed: the existing crumb, label, NERC ids an
 <div id="tbl-registries" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-registries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.4: The shared registries under <code>metadata/</code> in <code>CalCOFI/workflows</code>, and what each is the record of.
+Table&nbsp;4.5: The shared registries under <code>metadata/</code> in <code>CalCOFI/workflows</code>, and what each is the record of.
 </figcaption>
 <div aria-describedby="tbl-registries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -2227,7 +2772,7 @@ Table&nbsp;4.4: The shared registries under <code>metadata/</code> in <code>CalC
 </div>
 </figure>
 </div>
-<p>The per-dataset files above and the shared registries of <a href="#tbl-registries" class="quarto-xref">Table&nbsp;<span>4.4</span></a> flow through two stages:</p>
+<p>The per-dataset files above and the shared registries of <a href="#tbl-registries" class="quarto-xref">Table&nbsp;<span>4.5</span></a> flow through two stages:</p>
 <ol type="1">
 <li><p><strong>Per ingest</strong>: <code>calcofi4db::build_metadata_json()</code> writes <code>data/parquet/{provider}_{dataset}/metadata.json</code> (schema version 1.0) beside the parquet outputs, and reports its own documentation gaps.</p></li>
 <li><p><strong>Per release</strong>: <code>calcofi4db::merge_metadata_json()</code> merges every per-ingest sidecar plus the release-only registries into <code>gs://calcofi-db/ducklake/releases/{version}/metadata.json</code> (schema version 1.2):</p>
@@ -2297,7 +2842,7 @@ of Fish and Wildlife. https://doi.org/10.5281/zenodo.22514953</code></pre>
 <div id="tbl-dwc" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dwc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.5: How each core table publishes as Darwin Core under the OBIS ENV-DATA pattern.
+Table&nbsp;4.6: How each core table publishes as Darwin Core under the OBIS ENV-DATA pattern.
 </figcaption>
 <div aria-describedby="tbl-dwc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -2344,7 +2889,7 @@ Table&nbsp;4.5: How each core table publishes as Darwin Core under the OBIS ENV-
 </div>
 </figure>
 </div>
-<p>Every row of <a href="#tbl-dwc" class="quarto-xref">Table&nbsp;<span>4.5</span></a> is a lookup in a registry the release already publishes, not a judgement made at export time. <code>metadata/field_dictionary.csv</code> carries a <code>dwc_term</code> column holding the full term URI for the <strong>12 of 57</strong> canonical fields that one Darwin Core term means exactly. A field Darwin Core <em>splits</em> — <code>depth_m</code> becomes <code>minimumDepthInMeters</code> <strong>and</strong> <code>maximumDepthInMeters</code> — or has no term for is deliberately left empty rather than mapped approximately.</p>
+<p>Every row of <a href="#tbl-dwc" class="quarto-xref">Table&nbsp;<span>4.6</span></a> is a lookup in a registry the release already publishes, not a judgement made at export time. <code>metadata/field_dictionary.csv</code> carries a <code>dwc_term</code> column holding the full term URI for the <strong>12 of 57</strong> canonical fields that one Darwin Core term means exactly. A field Darwin Core <em>splits</em> — <code>depth_m</code> becomes <code>minimumDepthInMeters</code> <strong>and</strong> <code>maximumDepthInMeters</code> — or has no term for is deliberately left empty rather than mapped approximately.</p>
 <section id="an-id-is-filled-only-on-an-exact-match" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="an-id-is-filled-only-on-an-exact-match"><span class="header-section-number">4.4.1</span> An id is filled only on an exact match</h3>
 <p><strong>Empty means “no concept in the vocabulary says exactly this”, never “nobody looked.”</strong> An id is written only when every facet the concept states — quantity, matrix, phase, method — is something the registry or the dataset’s documented protocol actually supplies. A <em>generic</em> concept is an exact match at coarser specificity: NERC P01 <code>TEMPPR01</code>, <em>Temperature of the water body</em>, is exactly what a QC’d bottle temperature is. A concept that adds a facet nobody recorded is not: <code>IRRDUV01</code> pins PAR to a cosine-collector radiometer, which no CalCOFI metadata states, so PAR has no id.</p>
@@ -2353,7 +2898,7 @@ Table&nbsp;4.5: How each core table publishes as Darwin Core under the OBIS ENV-
 <div id="tbl-vocab-coverage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vocab-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.6: Controlled-vocabulary coverage per registry — filled only on an exact match.
+Table&nbsp;4.7: Controlled-vocabulary coverage per registry — filled only on an exact match.
 </figcaption>
 <div aria-describedby="tbl-vocab-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -2400,11 +2945,12 @@ Table&nbsp;4.6: Controlled-vocabulary coverage per registry — filled only on a
 </div>
 </figure>
 </div>
-<p>The gaps in <a href="#tbl-vocab-coverage" class="quarto-xref">Table&nbsp;<span>4.6</span></a> are deliberate, and mostly not gaps. Of the 85 measurement types with no P01, <strong>29 are taxon-bearing</strong> abundance, biomass or size types — P01 encodes the taxon <em>in the concept</em>, and CalCOFI carries it in <code>taxon_key</code>, so a per-type id there would be wrong rather than missing. Another 8 are event-level effort and sub-occurrence attributes BODC does not model as parameters. The genuine gaps are documented in <code>RELEASES.md</code>, and most of them are questions for a data provider rather than for the vocabulary: an unrecorded transmissometer wavelength, radiation channels that do not say whether they are upwelling or downwelling, flow-cytometry gating that was never written down.</p>
+<p>The gaps in <a href="#tbl-vocab-coverage" class="quarto-xref">Table&nbsp;<span>4.7</span></a> are deliberate, and mostly not gaps. Of the 85 measurement types with no P01, <strong>29 are taxon-bearing</strong> abundance, biomass or size types — P01 encodes the taxon <em>in the concept</em>, and CalCOFI carries it in <code>taxon_key</code>, so a per-type id there would be wrong rather than missing. Another 8 are event-level effort and sub-occurrence attributes BODC does not model as parameters. The genuine gaps are documented in <code>RELEASES.md</code>, and most of them are questions for a data provider rather than for the vocabulary: an unrecorded transmissometer wavelength, radiation channels that do not say whether they are upwelling or downwelling, flow-cytometry gating that was never written down.</p>
 </section>
-<section id="three-caveats-for-anyone-building-an-export" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="three-caveats-for-anyone-building-an-export"><span class="header-section-number">4.4.2</span> Three caveats for anyone building an export</h3>
+<section id="four-caveats-for-anyone-building-an-export" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="four-caveats-for-anyone-building-an-export"><span class="header-section-number">4.4.2</span> Four caveats for anyone building an export</h3>
 <ul>
+<li><strong><code>edna_presence</code> does not mean the same thing in every eDNA dataset.</strong> <code>sio_cetacean-edna</code> publishes a row for every sequenced sample × species, <code>1</code> for a detection and <code>0</code> for a sequenced non-detection; a sample that did not amplify (PCR-negative, never sequenced) has <em>no</em> row, not a zero, until its provider says what that means. <code>calcofi_2022-edna</code> publishes <strong>detections only</strong>: its source archive lists only positives, so there a missing row is <em>not</em> a non-detection and <code>occurrenceStatus = "absent"</code> cannot be derived from it. The read counts of the same datasets (<code>edna_reads_*</code>) are a semi-quantitative signal of amplified DNA, not an abundance, and are not comparable between assays. Whether the detections-only archive omitted filters or assay runs with no detection is a question put to its provider and still open.</li>
 <li><strong><code>obs</code> is positive-only for ichthyoplankton.</strong> A tow that was sorted and found nothing has <strong>no row</strong>, so <code>occurrenceStatus = "absent"</code> cannot be derived from zero values. Absences come from the sampling events (<code>sample</code>, root rows) minus the taxa observed on them — and a surveyed year with no positives is indistinguishable from an unsurveyed year if you count rows instead of events.</li>
 <li><strong><code>organismQuantityType</code> is the whole meaning of the number.</strong> Areal (individuals per 10 m², from an oblique or vertical tow standardized by the haul factor) and volumetric (individuals per 1000 m³, from a surface Manta tow or any tow with a filtered volume) are <strong>not interconvertible</strong> without an integrated depth and a vertical-distribution assumption. Publish the denominator with the number, never a bare count.</li>
 <li><strong>Two <code>life_stage</code> values are not life stages.</strong> Euphausiid <code>damaged</code> marks specimens too damaged to stage (<code>occurrenceRemarks</code>), and ichthyoplankton <code>invert</code> is a provenance flag for the merged invertebrate counts. <code>metadata/life_stage.csv</code> says so per value; do not pass either through as <code>lifeStage</code>.</li>
