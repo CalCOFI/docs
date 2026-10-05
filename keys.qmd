@@ -64,7 +64,9 @@ dataset joins to the others through them:
   at the containing event, `root_sample_key` at the top of the chain — so counting distinct events at
   any level is one `GROUP BY`.
 - **`site_key`** is the CalCOFI station as `"line station"` (`"090.0 062.0"`); **`grid_key`** is the
-  shared grid cell; **`dataset_key` = `{provider}_{dataset}`** is the provenance stamp on every
+  cell of the CalCOFI grid a position falls in — one cell per official station — and, unlike
+  `site_key`, names a polygon that can differ between releases ([The grid key changed in October
+  2026](#sec-grid-migration)); **`dataset_key` = `{provider}_{dataset}`** is the provenance stamp on every
   observation.
 - **`taxon_key`** is a lowercase authority prefix plus that authority's *accepted* id —
   `worms:<AphiaID>`, or `itis:<TSN>` for birds, whose WoRMS taxonomy lags (see
@@ -85,7 +87,7 @@ read-only, its keys are minted from the corrected fields at the freeze
 (`create_cruise_key()` refuses a blank or malformed NODC code outright), and the gate below fails
 the release if a key disagrees with its parts. What a natural key buys in return is legibility —
 `2019-07-39C2` says which cruise it is; a UUID says nothing until joined — and stability across the
-fifteen datasets whose sources mint no UUID at all.
+the datasets whose sources mint no UUID at all.
 
 **The provider's identifiers are released as typed columns beside the keys**, never dropped: they
 are the join back to the provider's own database.
@@ -208,10 +210,11 @@ keys are:
 
 {{< include _gates.qmd >}}
 
-: The gates that stop a release outright, of which the first three are key gates. {#tbl-gates-keys}
+: The gates that stop a release outright, of which the first five are key gates. {#tbl-gates-keys}
 
-The first three rows of @tbl-gates-keys are the key gates proper; the last three catch a key
-problem on its way to a consumer.
+The rows of @tbl-gates-keys down to `check_grid_crosswalk()` are the key gates proper — the last two
+exist because a `grid_key` can resolve and still name the wrong cell ([the grid
+key](#sec-grid-migration)); the rows after it catch a key problem on its way to a consumer.
 
 ## Walking the keys
 
@@ -260,3 +263,154 @@ LEFT JOIN obs_bio o ON o.sample_key = n.sample_key AND o.life_stage = 'larva'
 GROUP BY 1, 2
 ORDER BY 2;
 ```
+
+## The grid key changed in October 2026 {#sec-grid-migration}
+
+Until `v2026.10.01`, `grid` was the cells of an idealized lattice, clipped by a coarse coastline and
+patched by hand: an inshore cell could hold two to four of the real stations, which is why the
+climatology moved to `site_key` ([The database](db.qmd#shared-reference-tables)). The release that
+follows it ships a rebuilt `grid`: **one cell per official station** — the Voronoi tessellation of
+the station positions CalCOFI publishes at
+[calcofi.org/sampling-info/station-positions](https://calcofi.org/sampling-info/station-positions/),
+confined to the footprint of the previous cells it replaces — **beside the previous cells that lay
+beyond the official pattern, kept exactly as they were**, so a historical position outside the
+pattern keys as it always did. Both end at the OpenStreetMap coastline. The table's columns are
+unchanged; `grid.geom_ctr` is now the station itself rather than a centroid. The build, its rules and
+the evidence are in the workflows notebook
+[`explore_grid_voronoi`](https://calcofi.io/workflows/explore_grid_voronoi.html) and
+`calcofi4r::cc_grid_build()`.
+
+**A `grid_key` keeps its form (`st{station}-ln{line}`) but is no longer a name for the same water
+across releases.** A station's cell is named for its station, and a name that already existed can now
+be a different polygon.
+
+```{r}
+#| label: grid-migration-facts
+#| echo: false
+#| results: asis
+xw_path <- here("data/release/grid_crosswalk.csv")
+xw      <- if (file.exists(xw_path)) readr::read_csv(xw_path, show_col_types = FALSE) else NULL
+fmt     <- function(n) format(n, big.mark = ",")
+if (is.null(xw)) {
+  cat("> `", snap$version, "` predates the rebuilt grid, so it has no `grid_crosswalk` table and",
+      " the figures this section reads from it are absent until a release carries one.\n", sep = "")
+} else {
+  p <- unique(xw$prev_grid_key); g <- unique(xw$grid_key)
+  cat(sprintf(paste(
+    "For `%s` the crosswalk holds **%s** previous keys and **%s** current ones, and",
+    "`grid` has **%s** cells. **%s** keys exist in both grids; **%s** previous keys are",
+    "no longer a key at all (retired) and **%s** current keys are new. A key present in both is",
+    "not necessarily the same polygon: @tbl-grid-moved lists the ones that kept the least of",
+    "their previous cell.\n"),
+    snap$version, fmt(length(p)), fmt(length(g)), fmt(tabs$rows[tabs$table == "grid"]),
+    fmt(length(intersect(p, g))), fmt(length(setdiff(p, g))), fmt(length(setdiff(g, p)))))
+}
+```
+
+```{r}
+#| label: tbl-grid-moved
+#| tbl-cap: !expr paste0("The keys of ", snap$version, " that exist in both grids but keep the least of their previous cell. `prev_frac` is the share of the previous cell still inside the cell of the same name, `grid_frac` the share of today's cell that was inside it; a kept cell reads close to one on both (its coastline moved, not its boundary).")
+#| eval: !expr is.data.frame(xw)
+xw |>
+  dplyr::filter(prev_grid_key == grid_key) |>
+  dplyr::arrange(prev_frac, grid_key) |>
+  utils::head(8) |>
+  dplyr::select(grid_key, overlap_km2, prev_frac, grid_frac) |>
+  gt() |>
+  fmt_number(columns = overlap_km2, decimals = 0) |>
+  fmt_number(columns = c(prev_frac, grid_frac), decimals = 2) |>
+  tab_style(style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = grid_key)) |>
+  tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+```
+
+### What stays the same, and what to do about what does not
+
+- **Inside one release nothing changes.** `sample.grid_key` (and `obs.grid_key`) is the cell the
+  event's position falls in under *that release's* `grid`. A position on an edge two cells share
+  takes the key that sorts first, in the database (`calcofi4db::assign_grid_key()`) and in R
+  (`calcofi4r::cc_grid_key()`) alike. `calcofi4db::check_grid_key_assignment()` recomputes the cell
+  of every `sample` position before the release freezes and stops it on a key that is not that cell.
+  It exists because the foreign-key check cannot see this fault: an ingest staged against the
+  previous grid names cells that still exist, so every `grid_key` resolves while naming the wrong water.
+- **Re-read the key, do not translate it.** Anything you derived *from samples* — a count, a mean,
+  a series per cell — is recomputed from the new release's `sample.grid_key` and needs no crosswalk.
+- **A key you stored from an earlier release** — a per-cell statistic, a cache, a saved link such as
+  an Explorer `station=` — is the case the crosswalk is for. Never match it by name.
+- **A station is not a polygon.** If you want *the station*, key on `site_key`
+  (`"090.0 060.0"`), which is the same in every release; the climatology is keyed on it and no mean
+  moved. `grid.line` and `grid.station` are no longer whole numbers for some cells, so a line is
+  never matched by rounding it (a section of line 93.3 must not pick up the station on line 93.4).
+
+`grid_crosswalk` has one row per overlapping pair of a previous and a current cell:
+`prev_grid_key`, `grid_key`, `overlap_km2` (in an equal-area projection), `prev_frac` (the overlap as
+a share of the previous cell) and `grid_frac` (as a share of the current one). The primary key is the
+pair and `grid_key` references `grid` (@tbl-contract). The shares are of the *whole* cell and are
+never rescaled, so a previous cell's shares add to one less the part of it that is land under the
+finer coastline. `calcofi4db::check_grid_crosswalk()` fails the release when a cell of either grid is
+missing from the crosswalk, a pair repeats, or a previous cell is covered by less than its `min_cover`.
+
+```{r}
+#| label: grid-example-text
+#| echo: false
+#| results: asis
+if (!is.null(xw)) {
+  ex <- xw |> dplyr::count(prev_grid_key) |> dplyr::arrange(dplyr::desc(n), prev_grid_key) |> dplyr::slice(1)
+  cat(sprintf(paste(
+    "@tbl-grid-example is the previous cell that fans out to the most current ones in `%s`,",
+    "`%s`: its water is shared by %d cells, and a value stored under that key belongs to all of them",
+    "in the proportions `prev_frac` gives.\n"),
+    snap$version, ex$prev_grid_key, ex$n))
+}
+```
+
+```{r}
+#| label: tbl-grid-example
+#| tbl-cap: !expr paste0("Where one previous cell went in ", snap$version, ", read from `grid_crosswalk` — the previous cell with the most successors (up to eight shown, largest share first).")
+#| eval: !expr is.data.frame(xw)
+ex_key <- xw |> dplyr::count(prev_grid_key) |> dplyr::arrange(dplyr::desc(n), prev_grid_key) |> dplyr::pull(prev_grid_key) |> utils::head(1)
+xw |>
+  dplyr::filter(prev_grid_key == ex_key) |>
+  dplyr::arrange(dplyr::desc(prev_frac), grid_key) |>
+  utils::head(8) |>
+  dplyr::select(grid_key, overlap_km2, prev_frac, grid_frac) |>
+  gt() |>
+  tab_header(title = md(paste0("previous key `", ex_key, "`"))) |>
+  fmt_number(columns = overlap_km2, decimals = 0) |>
+  fmt_number(columns = c(prev_frac, grid_frac), decimals = 2) |>
+  tab_style(style = cell_text(font = "monospace", size = "0.85em"), locations = cells_body(columns = grid_key)) |>
+  tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
+```
+
+**Carry a total** (a count, an effort) from the previous keys onto the current cells by the share of
+each previous cell's area that each current cell received. Dividing by the previous cell's summed
+share keeps the total whole where the finer coastline took a sliver of land out of it:
+
+```sql
+-- old_counts(prev_grid_key, n): a per-cell count you kept from an earlier release
+WITH share AS (
+  SELECT prev_grid_key, grid_key,
+         prev_frac / sum(prev_frac) OVER (PARTITION BY prev_grid_key) AS w
+  FROM grid_crosswalk)
+SELECT s.grid_key, sum(o.n * s.w) AS n
+FROM old_counts o
+JOIN share s ON s.prev_grid_key = o.prev_grid_key
+GROUP BY s.grid_key
+ORDER BY s.grid_key;
+```
+
+**Carry a mean** (a temperature, a density) as an area-weighted mean of the previous cells' means:
+
+```sql
+-- old_means(prev_grid_key, mean): a per-cell mean you kept from an earlier release
+SELECT x.grid_key, sum(o.mean * x.overlap_km2) / sum(x.overlap_km2) AS mean
+FROM old_means o
+JOIN grid_crosswalk x ON x.prev_grid_key = o.prev_grid_key
+GROUP BY x.grid_key
+ORDER BY x.grid_key;
+```
+
+Both assume the quantity was spread evenly across each previous cell, which a station-sampled
+quantity was not: the mean in particular says nothing about where in the old cell the samples fell.
+Where you still have the samples, recompute from them with the new `sample.grid_key`; the crosswalk
+is for what you can no longer recompute. The previous cells themselves, with the keys every release
+through `v2026.10.01` carries, are `calcofi4r::cc_grid_v1`.

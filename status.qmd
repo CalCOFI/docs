@@ -27,7 +27,7 @@ The state of the system at the start of the new contract, by phase. The promoted
 `r catalog$version` (`r nrow(ds)` datasets, `r length(catalog$tables)` tables,
 `r fmt_n(catalog$total_rows)` rows, DOI `r catalog$doi`).
 
-**Ingest.** Sixteen datasets run through one pipeline of reproducible notebooks. The CTD team's
+**Ingest.** `r nrow(ds)` datasets run through one pipeline of reproducible notebooks. The CTD team's
 PostgreSQL working store (2026-08-19) holds the cast archive verbatim with a flag ledger whose
 accepted flags would reach the next ingest through a nightly snapshot; it is built, running and
 documented, but **not yet adopted** — CTD flags still arrive with the provider's files, so the

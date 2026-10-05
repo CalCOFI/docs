@@ -351,7 +351,13 @@ tibble::tribble(
   tab_options(table.width = pct(100), data_row.padding = px(5), table.font.size = "0.92em")
 ```
 
-Two of them are worth knowing by name. `?theme=dark` and `?theme=light` set the theme for one
+One caution about a link kept for a long time: `station=` carries a `grid_key`, and a `grid_key`
+keeps its form between releases but not necessarily its polygon, so a saved link made against an
+earlier release can open a different station's card in a later one
+([the grid key](keys.qmd#sec-grid-migration)). Pin `release=` where the link must keep meaning
+what it did.
+
+Two other parameters are worth knowing by name. `?theme=dark` and `?theme=light` set the theme for one
 view (@fig-explore-dark) — the app otherwise follows the theme you chose anywhere on calcofi.io —
 and `?tour=off` suppresses the welcome card and the tour, which is what makes a screenshot of the
 app deterministic (see [Products, brand and uptime](products.qmd)).

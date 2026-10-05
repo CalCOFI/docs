@@ -208,7 +208,11 @@ A release that passes is uploaded, tested once more from the bucket by `test_rel
 only then promoted; the read-only consumers are refreshed afterwards by
 `scripts/deploy_consumers.sh` — the Explorer, ERDDAP and the Shiny apps on the CalCOFI server,
 and the ones hosted on GitHub Actions, which the script dispatches: `db-viz-station`,
-`ctd-transects` and **this book**, whose pre-render snapshots the promoted release's
+`ctd-transects`, **the landing site** ([calcofi.io](https://calcofi.io), whose dataset,
+measurement and species sections are drawn from the promoted release's `datasets.json`,
+`measurements.json` and `taxa.json`, and which the script then polls until each shows the promoted
+version), the `calcofi4r` and `calcofi4py` workflows that re-run their examples against it, and
+**this book**, whose pre-render snapshots the promoted release's
 `catalog.json`, `integrity.json` and sidecars and so describes the previous version until it
 re-renders ([Architecture](architecture.qmd)). In the same `targets` run the four publishers
 follow `test_release`, rebuilding only the datasets that changed, and `publish_status.qmd` lists

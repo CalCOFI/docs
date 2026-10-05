@@ -163,7 +163,12 @@ ds |>
   gt() |> sub_missing(missing_text = "") |> mono(c(dataset_key, provider, category, license)) |> compact()
 ```
 
-A dataset's `license` is one of the ids in @tbl-licenses, and nothing else is accepted.
+A dataset's `license` is one of the ids in @tbl-licenses, and nothing else is accepted. One of the
+ids, `unknown`, means the licence is **pending**: the source states none and the provider has been
+asked. A dataset carrying it shows `unknown` in @tbl-datasets, its citation may be empty for the same
+reason, and `check_dataset_citation()` lets it through only while an open question on the `license`
+field names the gap — no licence is ever invented to fill it, and none is implied for reuse until
+the provider answers.
 
 ```{r}
 #| label: tbl-licenses
