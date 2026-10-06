@@ -207,7 +207,8 @@ for the photo; WoRMS, FishBase and SeaLifeBase for the size; NOAA's Ichthyoplank
 System for the fish plate. The licence policy is one sentence — Creative Commons and public-domain
 files are used, non-commercial licences are accepted but labelled, and every asset is credited and
 linked to its source. None of this is typed into the page: the sidecar (`taxa_media.json`) is
-fetched weekly by the landing repo's own scripts, keyed by `taxon_key` beside the catalog, and a
+refreshed by the landing repo's own scripts whenever a release adds a taxon it has no entry for
+(the release's deploy checks after every promotion), keyed by `taxon_key` beside the catalog, and a
 taxon without a match renders exactly as it does today (`taxon-reference` skill, *Species faces*).
 
 ![The page head, composed: a PhyloPic silhouette in the page's own ink beside a licensed photo
@@ -398,7 +399,7 @@ essential-ocean-variable question, the Wikipedia lead — wait one click away in
 uses for what is "not yet in the database." A key with no NERC concept of its own — an instrument voltage, an estimate, a sensor
 pair's average — borrows the face of the quantity it stands in for and says so on the page, rather than showing a face for a concept
 it does not carry. None of this is typed into the page: the sidecar (`measurements_media.json`) is fetched by the landing repo's own
-scripts, keyed by measurement key beside the catalog, and a key without media renders exactly as it does today
+scripts whenever a release adds a key it lacks, keyed by measurement key beside the catalog, and a key without media renders exactly as it does today
 (`metadata-registries` skill, *Measurement faces*).
 
 ![The page head, composed: the existing crumb, label, NERC ids and stats band, with a new face row beneath it — a molecule drawn from
