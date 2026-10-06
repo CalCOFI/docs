@@ -225,7 +225,7 @@ shape changes with what you picked.
 
 For an **ocean variable** it is a **depth section**: the stations along the line across the
 x-axis, depth down the y-axis, for **one cruise** (@fig-explore-section-env). The checkbox *difference from the 1993–2013 normal* subtracts the release's own
-`climatology` table — the mean for that station, the cast's own calendar month and its 10 m depth
+`climatology` table — the mean for that station, the cruise's month and its 10 m depth
 bin — so an anomaly here and an anomaly in [ctd-transects](https://calcofi.io/ctd-transects/)
 cannot disagree ([The database](db.qmd)).
 
