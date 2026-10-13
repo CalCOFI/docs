@@ -267,6 +267,9 @@ The layers button on the map opens one card for everything drawn under and over 
   colour you pick (black by default), in every lens and on top of everything. It does not depend on
   the Data row: with Data off it shows where the ship sampled, over the sea floor and the boundary
   layers, with no summary colour (`data=off&obs=on`).
+- **Lines** — each CalCOFI line threaded through its official stations and named at both ends,
+  in every lens and with or without Data (`lines=on`); with Observations and Data off it is the
+  map of where the program samples (`data=off&obs=on&lines=on`).
 - **Sea floor** — GEBCO 2025 as three parts you can toggle separately (shaded relief, depth
   colour, contours) with its own opacity. It is the same bathymetry the 3-D curtain stands on.
 - **Basemap labels** — the basemap's own place names, road names, points of interest and water
@@ -341,7 +344,7 @@ tibble::tribble(
   "the section",            "line, anom, cruise, view, exag, cam",    "line=90&anom=1&view=3d&cam=-121.2,32.6,7.6,55,-40",
   "the region",             "layer, region",                          "layer=National+Marine+Sanctuaries",
   "the map extent",         "map",                                    "map=-120.4,34.1,6.2",
-  "the map layers",         "layers, data, datao, ramp, obs",         "layers=noaa_onms_sanctuaries,data&ramp=thermal&obs=on",
+  "the map layers",         "layers, data, datao, ramp, obs, lines",  "layers=noaa_onms_sanctuaries,data&obs=on&lines=on",
   "the sea floor",          "bathy, bathyo",                          "bathy=relief,contours&bathyo=0.5",
   "the Time panel",         "strip, yview",                           "strip=mean",
   "the panes",              "show, hide, max",                        "show=depth&max=section",
