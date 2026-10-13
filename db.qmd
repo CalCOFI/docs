@@ -60,7 +60,12 @@ An observation's provenance is denormalized onto it on purpose: `obs` carries `d
 `cruise_key`, `grid_key`, the position, the datetime and `hex_id` (H3 at resolution 10, so
 coarser aggregations use `h3_cell_to_parent(hex_id, res)` rather than a column per resolution),
 so a rollup groups without a join. `geom` lives on `sample` and on the reference tables, never
-on `obs`.
+on `obs`. `obs_bio` and `obs_env` also carry `year` and `quarter`, and these are the **cruise's**,
+read from `cruise_key` (`YYYY-MM-NODC`, the month SWFSC designates for the cruise), not from the
+calendar date of the cast; the date is used only where the key does not parse. A cruise often
+begins in the last days of the month before its own, so a cast taken on 30 June of CalCOFI 2607
+(`2026-07-3322`) is in the third quarter with the rest of that cruise, which is also the quarter
+its climatology baseline is filed under. `test_release.qmd` asserts it for that cruise.
 
 A sampling event has a hexagon too. `sample.hex7`, copied onto `sample_root.hex7` for the root
 events, is the resolution-7 H3 cell that is the **parent of the resolution-10 cell** of the
@@ -130,6 +135,36 @@ month before, and keyed on the calendar date CalCOFI 2607's line 93.3 stations i
 worked on 30 June, looked up a June baseline no cruise samples and drew no anomaly. A cast's anomaly
 is its value minus the row of *its own* station and cruise month; pooling months produces a
 seasonal-cycle map, not an anomaly.
+
+The table has two arms and one extra baseline, none of which changes the grain above:
+
+- **Per-bin rows** are the depth series of `obs_env`, one row per 10 m `depth_bin`.
+- **Per-cast rows** are the derived CTD products of @sec-per-cast-grain (the three mixed-layer
+  depths, `chl_max_depth`, `chl_max` and `chl_integrated`), pooled by the same rules (station,
+  cruise month, window, quality, cruise floor). A cast-level value has no depth, so its
+  **`depth_bin` is NULL**, meaning "a per-cast value", never a depth. A NULL never matches `=`, so a
+  per-bin join on `depth_bin = 40` cannot pick one up by accident; a per-cast consumer matches
+  `depth_bin IS NULL`. `relationships.json` declares the column under `nullable_key_columns`, and
+  `check_release_relationships()` reads a declared nullable key column as a value rather than as a
+  failure. The release names the types, so `calcofi4db` carries no list of datasets.
+- **A seasonal baseline** sits beside the monthly one as appended columns (nothing was renamed):
+  `quarter` and `season_mean`, `season_sd`, `season_n`, `season_n_cruises`. The quarter is that of
+  the **cruise's month** (Q1 January–March, Q2 April–June, Q3 July–September, Q4 October–December),
+  the same quarter the Explorer's season filter keys on, so CalCOFI 2607's 30 June casts are Q3.
+  The columns are set on every month of a quarter that passes the same cruise floor, so a baseline
+  is still looked up by station, month, bin and type, and nothing that sums the table counts a cell
+  twice. Where a station's months are each below the floor but its quarter is not (mostly the
+  northern lines 60–73.3, whose winter and spring cruises are split across January–April), the row
+  has a seasonal mean and a **NULL `clim_mean`**: a NULL `clim_mean` means "no monthly baseline",
+  exactly as an absent row does, so a consumer tests `clim_mean IS NOT NULL` before it subtracts.
+  `calcofi4r::cc_climatology(season = TRUE)` reads the seasonal arm and
+  `calcofi4r::cc_cast_anomaly()` the per-cast one.
+
+These rules are enforced. `test_release.qmd`'s consumer contract withholds `latest.txt` unless a
+per-cast cell exists for a derived product, every monthly cell also carries a seasonal baseline,
+seasonal-only cells exist, a NULL `depth_bin` appears only on a per-cast type (never on a type
+`obs_env` carries by depth), `depth_bin` is otherwise a 10 m floor bin, one window is stamped on
+every row, and every `obs_env` row of CalCOFI 2607 is in quarter 3 ([the gates](releases.qmd)).
 
 ### Every table in the release
 
@@ -341,7 +376,8 @@ profiles by the CTD team's own definitions, and the definition of each lives in 
 `description` and `derivation` columns, which @tbl-measurements-percast reads, rather than being
 restated here. A definition that changes gets a **new key** instead of reusing the old name, which
 states its threshold; the superseded key stays in the registry marked `RETIRED`, not canonical,
-and no row carries it.
+and no row carries it. Each per-cast product also has a baseline in `climatology`, with `depth_bin`
+NULL, so its anomaly is read like any other ([Shared reference tables](#shared-reference-tables)).
 
 ```{r}
 #| label: measurements-percast-facts
@@ -409,9 +445,16 @@ light theme, 2026-09-12.](figs/db/measurement_face.png){#fig-measurement-face wi
 ### Quality flags reach consumers only if consumers apply them
 
 `obs.measurement_qual` is **each dataset's own vocabulary, uninterpreted** — bottle 6 = ok-from-CTD,
-8 = suspect, 9 = missing; CTD 1/2 = use primary/secondary sensor, 8 = questionable, 9 = bad;
-DIC follows WOCE (2 good, 3 questionable, 4 bad, 9 missing). The registry is
-`metadata/measurement_qual.csv` in the workflows repo and it ships in `metadata.json`.
+8 = suspect, 9 = missing; CTD 1/2 = use primary/secondary sensor, 4 = set to zero, 8 = questionable,
+9 = bad; DIC follows WOCE (2 good, 3 questionable, 4 bad, 9 missing). The same number means different
+things in different datasets (a CTD 4 is not a DIC 4), so a code is always read with its dataset. The
+registry is `metadata/measurement_qual.csv` in the workflows repo and it ships in `metadata.json`.
+
+CTD code **4**, `set_to_zero`, marks a corrected chlorophyll-a or nitrate estimate that came out
+negative (sensor noise at the detection floor) and that the provider reports as 0 instead of leaving
+blank (Ben Gire, 2026-10-12). It is a real value, not a flag against the value: the quality predicate
+keeps it, so the zero counts in averages, integrated chlorophyll and anomalies. Where the raw sensor
+was unreliable the code is 9, with no corrected value.
 
 In August 2026 a 2.18 ml/L oxygen spike at 1,144 m turned out to be a bottle flagged suspect in
 the source **since 1955** — it reached a plotted app because no consumer filtered on the column.

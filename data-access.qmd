@@ -277,7 +277,8 @@ a table through the catalog:
 
 `measurement_qual` carries each dataset's **own** flag vocabulary, uninterpreted — bottle
 (6 = OK but from CTD, 8 = suspect, 9 = missing), CTD cast files (1/2 = use the primary/secondary
-sensor, 8 = questionable, 9 = bad/missing), DIC WOCE (2 = good, 3 = questionable, 4 = bad,
+sensor, 4 = a negative corrected chlorophyll-a or nitrate estimate set to zero by the provider,
+8 = questionable, 9 = bad/missing), DIC WOCE (2 = good, 3 = questionable, 4 = bad,
 9 = missing); the registry is
 [`metadata/measurement_qual.csv`](https://github.com/CalCOFI/workflows/blob/main/metadata/measurement_qual.csv).
 A flagged value is still a row. `obs_bio` and `obs_env` carry the verdict as a column, **`qual_ok`**,
@@ -294,7 +295,9 @@ calcofi4r::cc_qual_ok_sql("o")         # the predicate, for obs / obs_ctd_full /
 calcofi4py.qual_ok_sql("o")
 ```
 
-The predicate is NULL-safe — an unflagged row is kept — and every CalCOFI app applies it. A 2.18 ml/L
+The predicate is NULL-safe — an unflagged row is kept — and every CalCOFI app applies it. It keeps
+a CTD code 4: that zero is a real value, so it counts in averages and anomalies, and the predicate
+itself did not change when the code was added. A 2.18 ml/L
 oxygen spike at 1,144 m that had been flagged suspect since 1955 reached a plot in 2026 because no
 consumer did; that is why the column exists.
 
