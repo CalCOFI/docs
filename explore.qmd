@@ -230,7 +230,17 @@ x-axis, depth down the y-axis, for **one cruise** (@fig-explore-section-env). Th
 bin — so an anomaly here and an anomaly in [ctd-transects](https://calcofi.io/ctd-transects/)
 cannot disagree ([The database](db.qmd)). A cell with no monthly baseline (an absent row, or one whose
 `clim_mean` is NULL because only its season passes the cruise floor) is left blank, never drawn as
-zero.
+zero. Beside the checkbox, **month · season** picks the baseline: the cruise's month, or its quarter
+(Q1 Jan–Mar … Q4 Oct–Dec, the release's `season_*` columns), which fills stations whose month alone
+has fewer than five baseline cruises; the caption names the one shown ("the July normal", "the
+Jul–Sep normal"). A release without the seasonal columns keeps the season button disabled.
+
+The **Hexagons** and **Contours** lenses offer the same difference for an ocean variable, including
+the per-cast derived products (mixed-layer depth, chlorophyll maximum, integrated chlorophyll):
+each observation's own baseline cell is subtracted *before* anything is pooled, an observation with
+no baseline drops out rather than counting as zero, and the lens says what share of the
+observations in view had one. The map draws the anomaly for the mean and median statistics; a
+count stays a count.
 
 For an **organism** the tows are depth-integrated, so there is no depth axis: the lens draws a
 **station-by-year** section — the same stations across the x-axis, years down the y-axis, across
