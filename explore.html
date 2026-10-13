@@ -920,6 +920,7 @@ Figure&nbsp;1.12: The same depth section as a 3-D curtain over the GEBCO sea flo
 <ul>
 <li><strong>Data</strong> — the selection as the lens draws it: on or off, its opacity, and its <strong>colour ramp</strong> (cmocean’s ramps, viridis and GEBCO’s, reversible). With no ramp chosen, the variable takes its cmocean convention — thermal for temperature, haline for salinity, ice for oxygen.</li>
 <li><strong>Observations</strong> — every cast, tow or site in the selection at its own position, as a dot of the colour you pick (black by default), in every lens and on top of everything. It does not depend on the Data row: with Data off it shows where the ship sampled, over the sea floor and the boundary layers, with no summary colour (<code>data=off&amp;obs=on</code>).</li>
+<li><strong>Lines</strong> — each CalCOFI line threaded through its official stations and named at both ends, in every lens and with or without Data (<code>lines=on</code>); with Observations and Data off it is the map of where the program samples (<code>data=off&amp;obs=on&amp;lines=on</code>).</li>
 <li><strong>Sea floor</strong> — GEBCO 2025 as three parts you can toggle separately (shaded relief, depth colour, contours) with its own opacity. It is the same bathymetry the 3-D curtain stands on.</li>
 <li><strong>Basemap labels</strong> — the basemap’s own place names, road names, points of interest and water names, toned down so they never outrank the data (one grey, Regular weight, an opacity slider, <code>basemapo=</code>), plus the island names the basemap carries but never drew; off (<code>basemap=nolabels</code>) for a data-centric view, with the isobath labels and the undersea feature names untouched. The names layer has its own opacity in its <em>On the map</em> row.</li>
 <li><strong>On the map</strong> — the boundary layers <em>and</em> the Data row in draw order, top first, re-ordered by dragging a row or with ▲ ▼. Putting a boundary above Data draws it over your data; putting Data above it draws the data over the boundary. The Data row is the sea surface: it and every row below it are clipped to the ocean by the coast, rows above it draw over the land too.</li>
@@ -970,23 +971,23 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
 </figcaption>
 <div aria-describedby="tbl-explore-url-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tdyucmxibu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tdyucmxibu table {
+<div id="kcyeflvtee" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kcyeflvtee table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tdyucmxibu thead, #tdyucmxibu tbody, #tdyucmxibu tfoot, #tdyucmxibu tr, #tdyucmxibu td, #tdyucmxibu th {
+#kcyeflvtee thead, #kcyeflvtee tbody, #kcyeflvtee tfoot, #kcyeflvtee tr, #kcyeflvtee td, #kcyeflvtee th {
   border-style: none;
 }
 
-#tdyucmxibu p {
+#kcyeflvtee p {
   margin: 0;
   padding: 0;
 }
 
-#tdyucmxibu .gt_table {
+#kcyeflvtee .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1012,12 +1013,12 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-left-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_caption {
+#kcyeflvtee .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tdyucmxibu .gt_title {
+#kcyeflvtee .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1029,7 +1030,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-width: 0;
 }
 
-#tdyucmxibu .gt_subtitle {
+#kcyeflvtee .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1041,7 +1042,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-top-width: 0;
 }
 
-#tdyucmxibu .gt_heading {
+#kcyeflvtee .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1053,13 +1054,13 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_bottom_border {
+#kcyeflvtee .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_col_headings {
+#kcyeflvtee .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1074,7 +1075,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_col_heading {
+#kcyeflvtee .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1094,7 +1095,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   overflow-x: hidden;
 }
 
-#tdyucmxibu .gt_column_spanner_outer {
+#kcyeflvtee .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1106,15 +1107,15 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 4px;
 }
 
-#tdyucmxibu .gt_column_spanner_outer:first-child {
+#kcyeflvtee .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tdyucmxibu .gt_column_spanner_outer:last-child {
+#kcyeflvtee .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tdyucmxibu .gt_column_spanner {
+#kcyeflvtee .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1126,11 +1127,11 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   width: 100%;
 }
 
-#tdyucmxibu .gt_spanner_row {
+#kcyeflvtee .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tdyucmxibu .gt_group_heading {
+#kcyeflvtee .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1156,7 +1157,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   text-align: left;
 }
 
-#tdyucmxibu .gt_empty_group_heading {
+#kcyeflvtee .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1171,15 +1172,15 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   vertical-align: middle;
 }
 
-#tdyucmxibu .gt_from_md > :first-child {
+#kcyeflvtee .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tdyucmxibu .gt_from_md > :last-child {
+#kcyeflvtee .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tdyucmxibu .gt_row {
+#kcyeflvtee .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1198,7 +1199,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   overflow-x: hidden;
 }
 
-#tdyucmxibu .gt_stub {
+#kcyeflvtee .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1211,7 +1212,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#tdyucmxibu .gt_stub_row_group {
+#kcyeflvtee .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1225,15 +1226,15 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   vertical-align: top;
 }
 
-#tdyucmxibu .gt_row_group_first td {
+#kcyeflvtee .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tdyucmxibu .gt_row_group_first th {
+#kcyeflvtee .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tdyucmxibu .gt_summary_row {
+#kcyeflvtee .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1243,16 +1244,16 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#tdyucmxibu .gt_first_summary_row {
+#kcyeflvtee .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_first_summary_row.thick {
+#kcyeflvtee .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tdyucmxibu .gt_last_summary_row {
+#kcyeflvtee .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1262,7 +1263,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_grand_summary_row {
+#kcyeflvtee .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1272,7 +1273,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#tdyucmxibu .gt_first_grand_summary_row {
+#kcyeflvtee .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1282,7 +1283,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-top-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_last_grand_summary_row_top {
+#kcyeflvtee .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1292,11 +1293,11 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_striped {
+#kcyeflvtee .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tdyucmxibu .gt_table_body {
+#kcyeflvtee .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1305,7 +1306,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_footnotes {
+#kcyeflvtee .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1319,7 +1320,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_footnote {
+#kcyeflvtee .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1328,7 +1329,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#tdyucmxibu .gt_sourcenotes {
+#kcyeflvtee .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1342,7 +1343,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#tdyucmxibu .gt_sourcenote {
+#kcyeflvtee .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1350,72 +1351,72 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#tdyucmxibu .gt_left {
+#kcyeflvtee .gt_left {
   text-align: left;
 }
 
-#tdyucmxibu .gt_center {
+#kcyeflvtee .gt_center {
   text-align: center;
 }
 
-#tdyucmxibu .gt_right {
+#kcyeflvtee .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tdyucmxibu .gt_font_normal {
+#kcyeflvtee .gt_font_normal {
   font-weight: normal;
 }
 
-#tdyucmxibu .gt_font_bold {
+#kcyeflvtee .gt_font_bold {
   font-weight: bold;
 }
 
-#tdyucmxibu .gt_font_italic {
+#kcyeflvtee .gt_font_italic {
   font-style: italic;
 }
 
-#tdyucmxibu .gt_super {
+#kcyeflvtee .gt_super {
   font-size: 65%;
 }
 
-#tdyucmxibu .gt_footnote_marks {
+#kcyeflvtee .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tdyucmxibu .gt_asterisk {
+#kcyeflvtee .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tdyucmxibu .gt_indent_1 {
+#kcyeflvtee .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tdyucmxibu .gt_indent_2 {
+#kcyeflvtee .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tdyucmxibu .gt_indent_3 {
+#kcyeflvtee .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tdyucmxibu .gt_indent_4 {
+#kcyeflvtee .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tdyucmxibu .gt_indent_5 {
+#kcyeflvtee .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tdyucmxibu .katex-display {
+#kcyeflvtee .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tdyucmxibu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kcyeflvtee div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1481,8 +1482,8 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="Sets">the map layers</td>
-<td class="gt_row gt_left" headers="Parameters">layers, data, datao, ramp, obs</td>
-<td class="gt_row gt_left" headers="Example">layers=noaa_onms_sanctuaries,data&amp;ramp=thermal&amp;obs=on</td>
+<td class="gt_row gt_left" headers="Parameters">layers, data, datao, ramp, obs, lines</td>
+<td class="gt_row gt_left" headers="Example">layers=noaa_onms_sanctuaries,data&amp;obs=on&amp;lines=on</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="Sets">the sea floor</td>
@@ -1584,23 +1585,23 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
 </figcaption>
 <div aria-describedby="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="yiomsbdhsu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yiomsbdhsu table {
+<div id="qqxqtosxtq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qqxqtosxtq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yiomsbdhsu thead, #yiomsbdhsu tbody, #yiomsbdhsu tfoot, #yiomsbdhsu tr, #yiomsbdhsu td, #yiomsbdhsu th {
+#qqxqtosxtq thead, #qqxqtosxtq tbody, #qqxqtosxtq tfoot, #qqxqtosxtq tr, #qqxqtosxtq td, #qqxqtosxtq th {
   border-style: none;
 }
 
-#yiomsbdhsu p {
+#qqxqtosxtq p {
   margin: 0;
   padding: 0;
 }
 
-#yiomsbdhsu .gt_table {
+#qqxqtosxtq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1626,12 +1627,12 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-left-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_caption {
+#qqxqtosxtq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yiomsbdhsu .gt_title {
+#qqxqtosxtq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1643,7 +1644,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-width: 0;
 }
 
-#yiomsbdhsu .gt_subtitle {
+#qqxqtosxtq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1655,7 +1656,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-top-width: 0;
 }
 
-#yiomsbdhsu .gt_heading {
+#qqxqtosxtq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1667,13 +1668,13 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_bottom_border {
+#qqxqtosxtq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_col_headings {
+#qqxqtosxtq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1688,7 +1689,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_col_heading {
+#qqxqtosxtq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1708,7 +1709,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#yiomsbdhsu .gt_column_spanner_outer {
+#qqxqtosxtq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1720,15 +1721,15 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 4px;
 }
 
-#yiomsbdhsu .gt_column_spanner_outer:first-child {
+#qqxqtosxtq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yiomsbdhsu .gt_column_spanner_outer:last-child {
+#qqxqtosxtq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yiomsbdhsu .gt_column_spanner {
+#qqxqtosxtq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1740,11 +1741,11 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   width: 100%;
 }
 
-#yiomsbdhsu .gt_spanner_row {
+#qqxqtosxtq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yiomsbdhsu .gt_group_heading {
+#qqxqtosxtq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1770,7 +1771,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   text-align: left;
 }
 
-#yiomsbdhsu .gt_empty_group_heading {
+#qqxqtosxtq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1785,15 +1786,15 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: middle;
 }
 
-#yiomsbdhsu .gt_from_md > :first-child {
+#qqxqtosxtq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yiomsbdhsu .gt_from_md > :last-child {
+#qqxqtosxtq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yiomsbdhsu .gt_row {
+#qqxqtosxtq .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1812,7 +1813,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#yiomsbdhsu .gt_stub {
+#qqxqtosxtq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1825,7 +1826,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#yiomsbdhsu .gt_stub_row_group {
+#qqxqtosxtq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1839,15 +1840,15 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: top;
 }
 
-#yiomsbdhsu .gt_row_group_first td {
+#qqxqtosxtq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yiomsbdhsu .gt_row_group_first th {
+#qqxqtosxtq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yiomsbdhsu .gt_summary_row {
+#qqxqtosxtq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1857,16 +1858,16 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#yiomsbdhsu .gt_first_summary_row {
+#qqxqtosxtq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_first_summary_row.thick {
+#qqxqtosxtq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yiomsbdhsu .gt_last_summary_row {
+#qqxqtosxtq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1876,7 +1877,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_grand_summary_row {
+#qqxqtosxtq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1886,7 +1887,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#yiomsbdhsu .gt_first_grand_summary_row {
+#qqxqtosxtq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1896,7 +1897,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-top-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_last_grand_summary_row_top {
+#qqxqtosxtq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1906,11 +1907,11 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_striped {
+#qqxqtosxtq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yiomsbdhsu .gt_table_body {
+#qqxqtosxtq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1919,7 +1920,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_footnotes {
+#qqxqtosxtq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1933,7 +1934,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_footnote {
+#qqxqtosxtq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1942,7 +1943,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#yiomsbdhsu .gt_sourcenotes {
+#qqxqtosxtq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1956,7 +1957,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#yiomsbdhsu .gt_sourcenote {
+#qqxqtosxtq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1964,72 +1965,72 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#yiomsbdhsu .gt_left {
+#qqxqtosxtq .gt_left {
   text-align: left;
 }
 
-#yiomsbdhsu .gt_center {
+#qqxqtosxtq .gt_center {
   text-align: center;
 }
 
-#yiomsbdhsu .gt_right {
+#qqxqtosxtq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yiomsbdhsu .gt_font_normal {
+#qqxqtosxtq .gt_font_normal {
   font-weight: normal;
 }
 
-#yiomsbdhsu .gt_font_bold {
+#qqxqtosxtq .gt_font_bold {
   font-weight: bold;
 }
 
-#yiomsbdhsu .gt_font_italic {
+#qqxqtosxtq .gt_font_italic {
   font-style: italic;
 }
 
-#yiomsbdhsu .gt_super {
+#qqxqtosxtq .gt_super {
   font-size: 65%;
 }
 
-#yiomsbdhsu .gt_footnote_marks {
+#qqxqtosxtq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yiomsbdhsu .gt_asterisk {
+#qqxqtosxtq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yiomsbdhsu .gt_indent_1 {
+#qqxqtosxtq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yiomsbdhsu .gt_indent_2 {
+#qqxqtosxtq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yiomsbdhsu .gt_indent_3 {
+#qqxqtosxtq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yiomsbdhsu .gt_indent_4 {
+#qqxqtosxtq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yiomsbdhsu .gt_indent_5 {
+#qqxqtosxtq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yiomsbdhsu .katex-display {
+#qqxqtosxtq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yiomsbdhsu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qqxqtosxtq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2099,23 +2100,23 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
 </figcaption>
 <div aria-describedby="tbl-students-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="vtusgyiwnd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vtusgyiwnd table {
+<div id="wrphutuxas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wrphutuxas table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vtusgyiwnd thead, #vtusgyiwnd tbody, #vtusgyiwnd tfoot, #vtusgyiwnd tr, #vtusgyiwnd td, #vtusgyiwnd th {
+#wrphutuxas thead, #wrphutuxas tbody, #wrphutuxas tfoot, #wrphutuxas tr, #wrphutuxas td, #wrphutuxas th {
   border-style: none;
 }
 
-#vtusgyiwnd p {
+#wrphutuxas p {
   margin: 0;
   padding: 0;
 }
 
-#vtusgyiwnd .gt_table {
+#wrphutuxas .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2141,12 +2142,12 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-left-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_caption {
+#wrphutuxas .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vtusgyiwnd .gt_title {
+#wrphutuxas .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2158,7 +2159,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-width: 0;
 }
 
-#vtusgyiwnd .gt_subtitle {
+#wrphutuxas .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2170,7 +2171,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-top-width: 0;
 }
 
-#vtusgyiwnd .gt_heading {
+#wrphutuxas .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2182,13 +2183,13 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_bottom_border {
+#wrphutuxas .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_col_headings {
+#wrphutuxas .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2203,7 +2204,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_col_heading {
+#wrphutuxas .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2223,7 +2224,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#vtusgyiwnd .gt_column_spanner_outer {
+#wrphutuxas .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2235,15 +2236,15 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 4px;
 }
 
-#vtusgyiwnd .gt_column_spanner_outer:first-child {
+#wrphutuxas .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vtusgyiwnd .gt_column_spanner_outer:last-child {
+#wrphutuxas .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vtusgyiwnd .gt_column_spanner {
+#wrphutuxas .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2255,11 +2256,11 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   width: 100%;
 }
 
-#vtusgyiwnd .gt_spanner_row {
+#wrphutuxas .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vtusgyiwnd .gt_group_heading {
+#wrphutuxas .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2285,7 +2286,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   text-align: left;
 }
 
-#vtusgyiwnd .gt_empty_group_heading {
+#wrphutuxas .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2300,15 +2301,15 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   vertical-align: middle;
 }
 
-#vtusgyiwnd .gt_from_md > :first-child {
+#wrphutuxas .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vtusgyiwnd .gt_from_md > :last-child {
+#wrphutuxas .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vtusgyiwnd .gt_row {
+#wrphutuxas .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -2327,7 +2328,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#vtusgyiwnd .gt_stub {
+#wrphutuxas .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2340,7 +2341,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#vtusgyiwnd .gt_stub_row_group {
+#wrphutuxas .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2354,15 +2355,15 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   vertical-align: top;
 }
 
-#vtusgyiwnd .gt_row_group_first td {
+#wrphutuxas .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vtusgyiwnd .gt_row_group_first th {
+#wrphutuxas .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vtusgyiwnd .gt_summary_row {
+#wrphutuxas .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2372,16 +2373,16 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#vtusgyiwnd .gt_first_summary_row {
+#wrphutuxas .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_first_summary_row.thick {
+#wrphutuxas .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vtusgyiwnd .gt_last_summary_row {
+#wrphutuxas .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2391,7 +2392,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_grand_summary_row {
+#wrphutuxas .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2401,7 +2402,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#vtusgyiwnd .gt_first_grand_summary_row {
+#wrphutuxas .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2411,7 +2412,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-top-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_last_grand_summary_row_top {
+#wrphutuxas .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2421,11 +2422,11 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_striped {
+#wrphutuxas .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vtusgyiwnd .gt_table_body {
+#wrphutuxas .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2434,7 +2435,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_footnotes {
+#wrphutuxas .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2448,7 +2449,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_footnote {
+#wrphutuxas .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2457,7 +2458,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#vtusgyiwnd .gt_sourcenotes {
+#wrphutuxas .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2471,7 +2472,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#vtusgyiwnd .gt_sourcenote {
+#wrphutuxas .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2479,72 +2480,72 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#vtusgyiwnd .gt_left {
+#wrphutuxas .gt_left {
   text-align: left;
 }
 
-#vtusgyiwnd .gt_center {
+#wrphutuxas .gt_center {
   text-align: center;
 }
 
-#vtusgyiwnd .gt_right {
+#wrphutuxas .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vtusgyiwnd .gt_font_normal {
+#wrphutuxas .gt_font_normal {
   font-weight: normal;
 }
 
-#vtusgyiwnd .gt_font_bold {
+#wrphutuxas .gt_font_bold {
   font-weight: bold;
 }
 
-#vtusgyiwnd .gt_font_italic {
+#wrphutuxas .gt_font_italic {
   font-style: italic;
 }
 
-#vtusgyiwnd .gt_super {
+#wrphutuxas .gt_super {
   font-size: 65%;
 }
 
-#vtusgyiwnd .gt_footnote_marks {
+#wrphutuxas .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vtusgyiwnd .gt_asterisk {
+#wrphutuxas .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vtusgyiwnd .gt_indent_1 {
+#wrphutuxas .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vtusgyiwnd .gt_indent_2 {
+#wrphutuxas .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vtusgyiwnd .gt_indent_3 {
+#wrphutuxas .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vtusgyiwnd .gt_indent_4 {
+#wrphutuxas .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vtusgyiwnd .gt_indent_5 {
+#wrphutuxas .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vtusgyiwnd .katex-display {
+#wrphutuxas .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vtusgyiwnd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wrphutuxas div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
