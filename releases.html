@@ -672,7 +672,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <p>The integrated database is published as <strong>frozen releases</strong>: an immutable, versioned copy of every table, with a catalog that says exactly which bytes it holds and a DOI that names it. Nothing a consumer reads is ever edited in place. This chapter says what a release is, what ships with it, which versions are kept, and what is checked before one is cut.</p>
 <section id="a-release-in-one-line" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="a-release-in-one-line"><span class="header-section-number">7.1</span> A release in one line</h2>
-<p>The promoted release is <strong>v2026.10.13</strong>, cut 2026-10-13: 25 tables, 374,740,011 rows, 2.74 GB of parquet, DOI <a href="https://doi.org/10.5281/zenodo.23354090">10.5281/zenodo.23354090</a>. A version is a date (<code>vYYYY.MM.DD</code>), and a release is cut whenever the data or the schema change enough to matter — every few weeks, in practice. <code>latest.txt</code> on the bucket names the promoted one, and it is promoted only after the consumer-contract suite and the client packages’ README examples (<code>calcofi4r</code>, <code>calcofi4py</code>) have passed against the frozen files.</p>
+<p>The promoted release is <strong>v2026.10.14</strong>, cut 2026-10-14: 25 tables, 375,348,707 rows, 2.75 GB of parquet, DOI <a href="https://doi.org/10.5281/zenodo.23371724">10.5281/zenodo.23371724</a>. A version is a date (<code>vYYYY.MM.DD</code>), and a release is cut whenever the data or the schema change enough to matter — every few weeks, in practice. <code>latest.txt</code> on the bucket names the promoted one, and it is promoted only after the consumer-contract suite and the client packages’ README examples (<code>calcofi4r</code>, <code>calcofi4py</code>) have passed against the frozen files.</p>
 </section>
 <section id="what-ships" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="what-ships"><span class="header-section-number">7.2</span> What ships</h2>
@@ -687,27 +687,27 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <div id="tbl-objects" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — objects, partitioning, size, and the release whose bytes each table last changed in.
+Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — objects, partitioning, size, and the release whose bytes each table last changed in.
 </figcaption>
 <div aria-describedby="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="wbsnxiomxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wbsnxiomxq table {
+<div id="ukazayzgix" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ukazayzgix table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wbsnxiomxq thead, #wbsnxiomxq tbody, #wbsnxiomxq tfoot, #wbsnxiomxq tr, #wbsnxiomxq td, #wbsnxiomxq th {
+#ukazayzgix thead, #ukazayzgix tbody, #ukazayzgix tfoot, #ukazayzgix tr, #ukazayzgix td, #ukazayzgix th {
   border-style: none;
 }
 
-#wbsnxiomxq p {
+#ukazayzgix p {
   margin: 0;
   padding: 0;
 }
 
-#wbsnxiomxq .gt_table {
+#ukazayzgix .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -733,12 +733,12 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-left-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_caption {
+#ukazayzgix .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wbsnxiomxq .gt_title {
+#ukazayzgix .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -750,7 +750,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-bottom-width: 0;
 }
 
-#wbsnxiomxq .gt_subtitle {
+#ukazayzgix .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -762,7 +762,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-top-width: 0;
 }
 
-#wbsnxiomxq .gt_heading {
+#ukazayzgix .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -774,13 +774,13 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_bottom_border {
+#ukazayzgix .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_col_headings {
+#ukazayzgix .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -795,7 +795,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_col_heading {
+#ukazayzgix .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -815,7 +815,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   overflow-x: hidden;
 }
 
-#wbsnxiomxq .gt_column_spanner_outer {
+#ukazayzgix .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -827,15 +827,15 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   padding-right: 4px;
 }
 
-#wbsnxiomxq .gt_column_spanner_outer:first-child {
+#ukazayzgix .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wbsnxiomxq .gt_column_spanner_outer:last-child {
+#ukazayzgix .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wbsnxiomxq .gt_column_spanner {
+#ukazayzgix .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -847,11 +847,11 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   width: 100%;
 }
 
-#wbsnxiomxq .gt_spanner_row {
+#ukazayzgix .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wbsnxiomxq .gt_group_heading {
+#ukazayzgix .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -877,7 +877,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   text-align: left;
 }
 
-#wbsnxiomxq .gt_empty_group_heading {
+#ukazayzgix .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -892,15 +892,15 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   vertical-align: middle;
 }
 
-#wbsnxiomxq .gt_from_md > :first-child {
+#ukazayzgix .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wbsnxiomxq .gt_from_md > :last-child {
+#ukazayzgix .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wbsnxiomxq .gt_row {
+#ukazayzgix .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -919,7 +919,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   overflow-x: hidden;
 }
 
-#wbsnxiomxq .gt_stub {
+#ukazayzgix .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,7 +932,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#wbsnxiomxq .gt_stub_row_group {
+#ukazayzgix .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -946,15 +946,15 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   vertical-align: top;
 }
 
-#wbsnxiomxq .gt_row_group_first td {
+#ukazayzgix .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wbsnxiomxq .gt_row_group_first th {
+#ukazayzgix .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wbsnxiomxq .gt_summary_row {
+#ukazayzgix .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -964,16 +964,16 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#wbsnxiomxq .gt_first_summary_row {
+#ukazayzgix .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_first_summary_row.thick {
+#ukazayzgix .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wbsnxiomxq .gt_last_summary_row {
+#ukazayzgix .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -983,7 +983,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_grand_summary_row {
+#ukazayzgix .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -993,7 +993,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#wbsnxiomxq .gt_first_grand_summary_row {
+#ukazayzgix .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1003,7 +1003,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-top-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_last_grand_summary_row_top {
+#ukazayzgix .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1013,11 +1013,11 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_striped {
+#ukazayzgix .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wbsnxiomxq .gt_table_body {
+#ukazayzgix .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1026,7 +1026,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_footnotes {
+#ukazayzgix .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1040,7 +1040,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_footnote {
+#ukazayzgix .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1049,7 +1049,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#wbsnxiomxq .gt_sourcenotes {
+#ukazayzgix .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1063,7 +1063,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#wbsnxiomxq .gt_sourcenote {
+#ukazayzgix .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1071,72 +1071,72 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#wbsnxiomxq .gt_left {
+#ukazayzgix .gt_left {
   text-align: left;
 }
 
-#wbsnxiomxq .gt_center {
+#ukazayzgix .gt_center {
   text-align: center;
 }
 
-#wbsnxiomxq .gt_right {
+#ukazayzgix .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wbsnxiomxq .gt_font_normal {
+#ukazayzgix .gt_font_normal {
   font-weight: normal;
 }
 
-#wbsnxiomxq .gt_font_bold {
+#ukazayzgix .gt_font_bold {
   font-weight: bold;
 }
 
-#wbsnxiomxq .gt_font_italic {
+#ukazayzgix .gt_font_italic {
   font-style: italic;
 }
 
-#wbsnxiomxq .gt_super {
+#ukazayzgix .gt_super {
   font-size: 65%;
 }
 
-#wbsnxiomxq .gt_footnote_marks {
+#ukazayzgix .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wbsnxiomxq .gt_asterisk {
+#ukazayzgix .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wbsnxiomxq .gt_indent_1 {
+#ukazayzgix .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wbsnxiomxq .gt_indent_2 {
+#ukazayzgix .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wbsnxiomxq .gt_indent_3 {
+#ukazayzgix .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wbsnxiomxq .gt_indent_4 {
+#ukazayzgix .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wbsnxiomxq .gt_indent_5 {
+#ukazayzgix .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wbsnxiomxq .katex-display {
+#ukazayzgix .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wbsnxiomxq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ukazayzgix div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1161,7 +1161,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
 <td class="gt_row gt_right" headers="objects">82</td>
 <td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_right" headers="bytes">21.3 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
@@ -1179,7 +1179,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
 <td class="gt_row gt_right" headers="objects">1</td>
 <td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">18.2 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.08</td>
+<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset_taxon</td>
@@ -1292,11 +1292,11 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">1,387,517</td>
+<td class="gt_row gt_right" headers="rows">1,994,263</td>
 <td class="gt_row gt_right" headers="objects">1</td>
 <td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
-<td class="gt_row gt_right" headers="bytes">11.4 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_right" headers="bytes">16.4 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
@@ -1310,20 +1310,20 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">3,122</td>
+<td class="gt_row gt_right" headers="rows">3,390</td>
 <td class="gt_row gt_right" headers="objects">1</td>
 <td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
-<td class="gt_row gt_right" headers="bytes">44.6 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_right" headers="bytes">46.1 MB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">36,261</td>
+<td class="gt_row gt_right" headers="rows">37,943</td>
 <td class="gt_row gt_right" headers="objects">1</td>
 <td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
-<td class="gt_row gt_right" headers="bytes">127.2 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_right" headers="bytes">134.8 kB</td>
+<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
@@ -1332,7 +1332,7 @@ Table&nbsp;7.1: The tables of v2026.10.13 as the catalog describes them — obje
 <td class="gt_row gt_right" headers="objects">1</td>
 <td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">88.5 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
@@ -1400,23 +1400,23 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </figcaption>
 <div aria-describedby="tbl-versions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="mgtgngkacx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mgtgngkacx table {
+<div id="dtgltcpxdn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dtgltcpxdn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mgtgngkacx thead, #mgtgngkacx tbody, #mgtgngkacx tfoot, #mgtgngkacx tr, #mgtgngkacx td, #mgtgngkacx th {
+#dtgltcpxdn thead, #dtgltcpxdn tbody, #dtgltcpxdn tfoot, #dtgltcpxdn tr, #dtgltcpxdn td, #dtgltcpxdn th {
   border-style: none;
 }
 
-#mgtgngkacx p {
+#dtgltcpxdn p {
   margin: 0;
   padding: 0;
 }
 
-#mgtgngkacx .gt_table {
+#dtgltcpxdn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1442,12 +1442,12 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-left-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_caption {
+#dtgltcpxdn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mgtgngkacx .gt_title {
+#dtgltcpxdn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1459,7 +1459,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-width: 0;
 }
 
-#mgtgngkacx .gt_subtitle {
+#dtgltcpxdn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1471,7 +1471,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-top-width: 0;
 }
 
-#mgtgngkacx .gt_heading {
+#dtgltcpxdn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1483,13 +1483,13 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_bottom_border {
+#dtgltcpxdn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_col_headings {
+#dtgltcpxdn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1504,7 +1504,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_col_heading {
+#dtgltcpxdn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1524,7 +1524,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   overflow-x: hidden;
 }
 
-#mgtgngkacx .gt_column_spanner_outer {
+#dtgltcpxdn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1536,15 +1536,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 4px;
 }
 
-#mgtgngkacx .gt_column_spanner_outer:first-child {
+#dtgltcpxdn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mgtgngkacx .gt_column_spanner_outer:last-child {
+#dtgltcpxdn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mgtgngkacx .gt_column_spanner {
+#dtgltcpxdn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1556,11 +1556,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   width: 100%;
 }
 
-#mgtgngkacx .gt_spanner_row {
+#dtgltcpxdn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mgtgngkacx .gt_group_heading {
+#dtgltcpxdn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1586,7 +1586,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   text-align: left;
 }
 
-#mgtgngkacx .gt_empty_group_heading {
+#dtgltcpxdn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1601,15 +1601,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   vertical-align: middle;
 }
 
-#mgtgngkacx .gt_from_md > :first-child {
+#dtgltcpxdn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mgtgngkacx .gt_from_md > :last-child {
+#dtgltcpxdn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mgtgngkacx .gt_row {
+#dtgltcpxdn .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1628,7 +1628,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   overflow-x: hidden;
 }
 
-#mgtgngkacx .gt_stub {
+#dtgltcpxdn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1641,7 +1641,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#mgtgngkacx .gt_stub_row_group {
+#dtgltcpxdn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1655,15 +1655,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   vertical-align: top;
 }
 
-#mgtgngkacx .gt_row_group_first td {
+#dtgltcpxdn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mgtgngkacx .gt_row_group_first th {
+#dtgltcpxdn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mgtgngkacx .gt_summary_row {
+#dtgltcpxdn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1673,16 +1673,16 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#mgtgngkacx .gt_first_summary_row {
+#dtgltcpxdn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_first_summary_row.thick {
+#dtgltcpxdn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mgtgngkacx .gt_last_summary_row {
+#dtgltcpxdn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1692,7 +1692,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_grand_summary_row {
+#dtgltcpxdn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1702,7 +1702,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#mgtgngkacx .gt_first_grand_summary_row {
+#dtgltcpxdn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1712,7 +1712,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-top-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_last_grand_summary_row_top {
+#dtgltcpxdn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1722,11 +1722,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_striped {
+#dtgltcpxdn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mgtgngkacx .gt_table_body {
+#dtgltcpxdn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1735,7 +1735,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_footnotes {
+#dtgltcpxdn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1749,7 +1749,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_footnote {
+#dtgltcpxdn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1758,7 +1758,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#mgtgngkacx .gt_sourcenotes {
+#dtgltcpxdn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1772,7 +1772,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#mgtgngkacx .gt_sourcenote {
+#dtgltcpxdn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1780,72 +1780,72 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#mgtgngkacx .gt_left {
+#dtgltcpxdn .gt_left {
   text-align: left;
 }
 
-#mgtgngkacx .gt_center {
+#dtgltcpxdn .gt_center {
   text-align: center;
 }
 
-#mgtgngkacx .gt_right {
+#dtgltcpxdn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mgtgngkacx .gt_font_normal {
+#dtgltcpxdn .gt_font_normal {
   font-weight: normal;
 }
 
-#mgtgngkacx .gt_font_bold {
+#dtgltcpxdn .gt_font_bold {
   font-weight: bold;
 }
 
-#mgtgngkacx .gt_font_italic {
+#dtgltcpxdn .gt_font_italic {
   font-style: italic;
 }
 
-#mgtgngkacx .gt_super {
+#dtgltcpxdn .gt_super {
   font-size: 65%;
 }
 
-#mgtgngkacx .gt_footnote_marks {
+#dtgltcpxdn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mgtgngkacx .gt_asterisk {
+#dtgltcpxdn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mgtgngkacx .gt_indent_1 {
+#dtgltcpxdn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mgtgngkacx .gt_indent_2 {
+#dtgltcpxdn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mgtgngkacx .gt_indent_3 {
+#dtgltcpxdn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mgtgngkacx .gt_indent_4 {
+#dtgltcpxdn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mgtgngkacx .gt_indent_5 {
+#dtgltcpxdn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mgtgngkacx .katex-display {
+#dtgltcpxdn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mgtgngkacx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dtgltcpxdn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1873,6 +1873,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.10.14</td>
+<td class="gt_row gt_right" headers="date">2026-10-14</td>
+<td class="gt_row gt_right" headers="tables">25</td>
+<td class="gt_row gt_right" headers="rows">375,348,707</td>
+<td class="gt_row gt_right" headers="size (MB)">2,620</td>
+<td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23371724</td>
+<td class="gt_row gt_left" headers="kept">current</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.10.13</td>
 <td class="gt_row gt_right" headers="date">2026-10-13</td>
 <td class="gt_row gt_right" headers="tables">25</td>
@@ -1881,7 +1890,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23354090</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.10.08</td>
 <td class="gt_row gt_right" headers="date">2026-10-08</td>
 <td class="gt_row gt_right" headers="tables">25</td>
@@ -1890,7 +1899,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23241748</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.10.06</td>
 <td class="gt_row gt_right" headers="date">2026-10-06</td>
 <td class="gt_row gt_right" headers="tables">25</td>
@@ -1899,7 +1908,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23190178</td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.10.08</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.10.05</td>
 <td class="gt_row gt_right" headers="date">2026-10-05</td>
 <td class="gt_row gt_right" headers="tables">25</td>
@@ -1908,7 +1917,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23170248</td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.10.08</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.10.01</td>
 <td class="gt_row gt_right" headers="date">2026-10-01</td>
 <td class="gt_row gt_right" headers="tables">23</td>
@@ -1917,7 +1926,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23085119</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.09.11</td>
 <td class="gt_row gt_right" headers="date">2026-09-11</td>
 <td class="gt_row gt_right" headers="tables">23</td>
@@ -1926,7 +1935,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22714951</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.09.10</td>
 <td class="gt_row gt_right" headers="date">2026-09-11</td>
 <td class="gt_row gt_right" headers="tables">23</td>
@@ -1935,7 +1944,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22698724</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.09.06</td>
 <td class="gt_row gt_right" headers="date">2026-09-06</td>
 <td class="gt_row gt_right" headers="tables">23</td>
@@ -1944,7 +1953,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22514953</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.09.04</td>
 <td class="gt_row gt_right" headers="date">2026-09-04</td>
 <td class="gt_row gt_right" headers="tables">23</td>
@@ -1953,7 +1962,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22310858</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.25</td>
 <td class="gt_row gt_right" headers="date">2026-08-25</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -1963,7 +1972,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.14</td>
 <td class="gt_row gt_right" headers="date">2026-08-14</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -1973,7 +1982,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.11</td>
 <td class="gt_row gt_right" headers="date">2026-08-11</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -1983,7 +1992,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.10</td>
 <td class="gt_row gt_right" headers="date">2026-08-11</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -1993,7 +2002,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.08</td>
 <td class="gt_row gt_right" headers="date">2026-08-08</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2003,7 +2012,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.07</td>
 <td class="gt_row gt_right" headers="date">2026-08-07</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2013,7 +2022,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.06</td>
 <td class="gt_row gt_right" headers="date">2026-08-06</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2023,7 +2032,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.05</td>
 <td class="gt_row gt_right" headers="date">2026-08-05</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2033,7 +2042,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.04</td>
 <td class="gt_row gt_right" headers="date">2026-08-04</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2043,7 +2052,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.03</td>
 <td class="gt_row gt_right" headers="date">2026-08-03</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2053,7 +2062,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.02</td>
 <td class="gt_row gt_right" headers="date">2026-08-02</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2063,7 +2072,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.07.30</td>
 <td class="gt_row gt_right" headers="date">2026-07-30</td>
 <td class="gt_row gt_right" headers="tables">17</td>
@@ -2073,7 +2082,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.07.17</td>
 <td class="gt_row gt_right" headers="date">2026-07-17</td>
 <td class="gt_row gt_right" headers="tables">17</td>
@@ -2083,7 +2092,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.07.16</td>
 <td class="gt_row gt_right" headers="date">2026-07-16</td>
 <td class="gt_row gt_right" headers="tables">17</td>
@@ -2093,7 +2102,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.07.17</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.07.15</td>
 <td class="gt_row gt_right" headers="date">2026-07-15</td>
 <td class="gt_row gt_right" headers="tables">22</td>
@@ -2103,7 +2112,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.07.17</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.06.26</td>
 <td class="gt_row gt_right" headers="date">2026-06-26</td>
 <td class="gt_row gt_right" headers="tables">50</td>
@@ -2113,7 +2122,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.06.08</td>
 <td class="gt_row gt_right" headers="date">2026-06-08</td>
 <td class="gt_row gt_right" headers="tables">44</td>
@@ -2123,7 +2132,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.06.07</td>
 <td class="gt_row gt_right" headers="date">2026-06-07</td>
 <td class="gt_row gt_right" headers="tables">28</td>
@@ -2133,7 +2142,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.05.20</td>
 <td class="gt_row gt_right" headers="date">2026-05-20</td>
 <td class="gt_row gt_right" headers="tables">28</td>
@@ -2143,7 +2152,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.05.19</td>
 <td class="gt_row gt_right" headers="date">2026-05-19</td>
 <td class="gt_row gt_right" headers="tables">28</td>
@@ -2153,7 +2162,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.05.15</td>
 <td class="gt_row gt_right" headers="date">2026-05-15</td>
 <td class="gt_row gt_right" headers="tables">28</td>
@@ -2163,7 +2172,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.05.14</td>
 <td class="gt_row gt_right" headers="date">2026-05-14</td>
 <td class="gt_row gt_right" headers="tables">28</td>
@@ -2173,7 +2182,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.04.08</td>
 <td class="gt_row gt_right" headers="date">2026-04-08</td>
 <td class="gt_row gt_right" headers="tables">28</td>
@@ -2183,7 +2192,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.04.06</td>
 <td class="gt_row gt_right" headers="date">2026-04-06</td>
 <td class="gt_row gt_right" headers="tables">29</td>
@@ -2193,7 +2202,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.04.03</td>
 <td class="gt_row gt_right" headers="date">2026-04-03</td>
 <td class="gt_row gt_right" headers="tables">29</td>
@@ -2203,7 +2212,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.04.02</td>
 <td class="gt_row gt_right" headers="date">2026-04-02</td>
 <td class="gt_row gt_right" headers="tables">43</td>
@@ -2213,7 +2222,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.03.25</td>
 <td class="gt_row gt_right" headers="date">2026-03-25</td>
 <td class="gt_row gt_right" headers="tables">18</td>
@@ -2223,7 +2232,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.03.14</td>
 <td class="gt_row gt_right" headers="date">2026-03-14</td>
 <td class="gt_row gt_right" headers="tables">20</td>
@@ -2254,7 +2263,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <h2 data-number="7.4" class="anchored" data-anchor-id="two-dois"><span class="header-section-number">7.4</span> Two DOIs</h2>
 <p>Each release is tagged on GitHub, and Zenodo mints a <strong>version DOI</strong> for it; one <strong>concept DOI</strong> always resolves to the newest. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code>, in the release notes’ <em>How to cite</em>, and on <a href="./cite.html">Cite this data</a>:</p>
 <ul>
-<li>this release: <a href="https://doi.org/10.5281/zenodo.23354090" class="uri">https://doi.org/10.5281/zenodo.23354090</a></li>
+<li>this release: <a href="https://doi.org/10.5281/zenodo.23371724" class="uri">https://doi.org/10.5281/zenodo.23371724</a></li>
 <li>every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
 </ul>
 </section>
@@ -2265,11 +2274,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <p>The most recent sections of the <a href="https://storage.calcofi.io/calcofi-db/ducklake/releases/RELEASES.html">rendered changelog</a> (raw markdown at <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md"><code>RELEASES.md</code></a>):</p>
 <ul>
 <li>Unreleased</li>
+<li>v2026.10.14</li>
 <li>v2026.10.13</li>
 <li>v2026.10.08</li>
 <li>v2026.10.06</li>
 <li>v2026.10.05</li>
-<li>v2026.10.01</li>
 </ul>
 </section>
 <section id="sec-release-gates" class="level2" data-number="7.6">
@@ -2404,7 +2413,7 @@ Table&nbsp;7.4: The gates that report and ratchet rather than stop the release.
 </figure>
 </div>
 <p>A failure in <a href="#tbl-gates" class="quarto-xref">Table&nbsp;<span>7.3</span></a> stops the release; a number in <a href="#tbl-ratchets" class="quarto-xref">Table&nbsp;<span>7.4</span></a> that went up since the last release stops it too, and one that went down becomes the new ceiling.</p>
-<p>For v2026.10.13 the consumer-contract suite ran 101 queries: <strong>97 passed</strong>, 0 failed, 4 skipped (<code>test_results.json</code>).</p>
+<p>For v2026.10.14 the consumer-contract suite ran 101 queries: <strong>97 passed</strong>, 0 failed, 4 skipped (<code>test_results.json</code>).</p>
 <p>A release that passes is uploaded, tested once more from the bucket by <code>test_release.qmd</code>, and only then promoted; the read-only consumers are refreshed afterwards by <code>scripts/deploy_consumers.sh</code> — the Explorer, ERDDAP and the Shiny apps on the CalCOFI server, and the ones hosted on GitHub Actions, which the script dispatches: <code>db-viz-station</code>, <code>ctd-transects</code>, <strong>the landing site</strong> (<a href="https://calcofi.io">calcofi.io</a>, whose dataset, measurement and species sections are drawn from the promoted release’s <code>datasets.json</code>, <code>measurements.json</code> and <code>taxa.json</code>, and which the script then polls until each shows the promoted version), the <code>calcofi4r</code> and <code>calcofi4py</code> workflows that re-run their examples against it, and <strong>this book</strong>, whose pre-render snapshots the promoted release’s <code>catalog.json</code>, <code>integrity.json</code> and sidecars and so describes the previous version until it re-renders (<a href="./architecture.html">Architecture</a>). In the same <code>targets</code> run the four publishers follow <code>test_release</code>, rebuilding only the datasets that changed, and <code>publish_status.qmd</code> lists what each portal is due (<a href="./portals.html#publish-after-release">Portals</a>). A <strong>staging</strong> run exercises the whole path under a separate prefix without touching the promoted release or the shared object store.</p>
 
 
