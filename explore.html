@@ -726,7 +726,7 @@ Figure&nbsp;1.2: The title sentence opened as chips, with the <em>View as</em> c
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="sec-explore-controls"><span class="header-section-number">1.2.2</span> Select, Refine, Share</h3>
 <p>The Controls panel is three steps in order (<a href="#fig-explore-controls" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>).</p>
 <p><strong>① Select</strong> is what you are looking at: <strong>Biology</strong> or <strong>Environment</strong>, then the organism (a taxon — species, genus or family) or the ocean variable, and the life stage that goes with it. The picker opens folded by category, each category with its icon, how many items it holds and a log-scale bar of how much data — type to search within it, or use the flat A–Z list. <em>View as</em> holds the six lenses: the active one full size with a line of help under it, the other five as icon slivers. <em>More options</em> is the disclosure that decides what is pooled: the summary statistic, how counts are standardized (per 10 m² of sea surface, per 1000 m³ strained, or the raw count), whether tows that were sampled and caught nothing count as zeros, one pill per dataset × stage, and the <em>Sources</em> line naming every dataset the average pools. A statistic is averaged across datasets that share the life stage and the standardization, and never across them — eggs are never merged with larvae, counts never with densities.</p>
-<p><strong>② Refine</strong> narrows it: the years (typed, or dragged on the Time panel), the seasons as quarters, the depth band (typed, or brushed on the Depth panel) and the datasets in view.</p>
+<p><strong>② Refine</strong> narrows it: the years (typed, or dragged on the Time panel), the seasons as quarters (the quarter of the cruise’s designated month, so a cast taken on 30 June on a July cruise is in the third quarter with the rest of its cruise; <code>test_release.qmd</code> asserts it for CalCOFI 2607), the depth band (typed, or brushed on the Depth panel) and the datasets in view.</p>
 <p><strong>③ Share</strong> is everything that leaves the app: <em>Download data (zip)</em> — the summary and the observations, the exact SQL against the release’s object URLs, a README, the citations and <code>reproduce.R</code> / <code>reproduce.py</code> that re-run the query; <em>Copy code</em> for SQL, R or Python; <em>Cite this data</em>; <em>Copy link</em>; <em>Copy image</em> / <em>Download PNG</em> of the whole view with the selection, release and URL stamped in the footer; <em>Register a product</em>, <em>Send feedback</em>, and <em>SQL and timing</em> for what the browser actually ran.</p>
 <div id="fig-explore-controls" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -878,7 +878,8 @@ Figure&nbsp;1.9: The Regions lens: the selection averaged within National Marine
 <section id="sec-explore-sections" class="level3 page-columns page-full" data-number="1.3.6">
 <h3 data-number="1.3.6" class="anchored" data-anchor-id="sec-explore-sections"><span class="header-section-number">1.3.6</span> Sections</h3>
 <p>A section cuts one CalCOFI line, and <strong>its y-axis is the realm</strong> — this is the one lens whose shape changes with what you picked.</p>
-<p>For an <strong>ocean variable</strong> it is a <strong>depth section</strong>: the stations along the line across the x-axis, depth down the y-axis, for <strong>one cruise</strong> (<a href="#fig-explore-section-env" class="quarto-xref">Figure&nbsp;<span>1.10</span></a>). The checkbox <em>difference from the 1993–2013 normal</em> subtracts the release’s own <code>climatology</code> table — the mean for that station, the cruise’s month and its 10 m depth bin — so an anomaly here and an anomaly in <a href="https://calcofi.io/ctd-transects/">ctd-transects</a> cannot disagree (<a href="./db.html">The database</a>).</p>
+<p>For an <strong>ocean variable</strong> it is a <strong>depth section</strong>: the stations along the line across the x-axis, depth down the y-axis, for <strong>one cruise</strong> (<a href="#fig-explore-section-env" class="quarto-xref">Figure&nbsp;<span>1.10</span></a>). The checkbox <em>difference from the 1993–2013 normal</em> subtracts the release’s own <code>climatology</code> table — the mean for that station, the cruise’s month and its 10 m depth bin — so an anomaly here and an anomaly in <a href="https://calcofi.io/ctd-transects/">ctd-transects</a> cannot disagree (<a href="./db.html">The database</a>). A cell with no monthly baseline (an absent row, or one whose <code>clim_mean</code> is NULL because only its season passes the cruise floor) is left blank, never drawn as zero. Beside the checkbox, <strong>month · season</strong> picks the baseline: the cruise’s month, or its quarter (Q1 Jan–Mar … Q4 Oct–Dec, the release’s <code>season_*</code> columns), which fills stations whose month alone has fewer than five baseline cruises; the caption names the one shown (“the July normal”, “the Jul–Sep normal”). A release without the seasonal columns keeps the season button disabled.</p>
+<p>The <strong>Hexagons</strong> and <strong>Contours</strong> lenses offer the same difference for an ocean variable, including the per-cast derived products (mixed-layer depth, chlorophyll maximum, integrated chlorophyll): each observation’s own baseline cell is subtracted <em>before</em> anything is pooled, an observation with no baseline drops out rather than counting as zero, and the lens says what share of the observations in view had one. The map draws the anomaly for the mean and median statistics; a count stays a count.</p>
 <p>For an <strong>organism</strong> the tows are depth-integrated, so there is no depth axis: the lens draws a <strong>station-by-year</strong> section — the same stations across the x-axis, years down the y-axis, across <strong>all cruises</strong> (<a href="#fig-explore-section-bio" class="quarto-xref">Figure&nbsp;<span>1.11</span></a>). White is a station-year that was never sampled, not a zero.</p>
 <p>Both are laid out like the map — <strong>offshore on the left, the coast on the right</strong> — and both carry two rulers on the x-axis: station number above, distance offshore below. They are one ruler, because a CalCOFI line is equidistant at 7.386 km per station unit, so the axis is linear in both at once.</p>
 <div id="fig-explore-section-env" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
@@ -971,23 +972,23 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
 </figcaption>
 <div aria-describedby="tbl-explore-url-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="kcyeflvtee" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kcyeflvtee table {
+<div id="rtwocyrmwz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rtwocyrmwz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kcyeflvtee thead, #kcyeflvtee tbody, #kcyeflvtee tfoot, #kcyeflvtee tr, #kcyeflvtee td, #kcyeflvtee th {
+#rtwocyrmwz thead, #rtwocyrmwz tbody, #rtwocyrmwz tfoot, #rtwocyrmwz tr, #rtwocyrmwz td, #rtwocyrmwz th {
   border-style: none;
 }
 
-#kcyeflvtee p {
+#rtwocyrmwz p {
   margin: 0;
   padding: 0;
 }
 
-#kcyeflvtee .gt_table {
+#rtwocyrmwz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1013,12 +1014,12 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-left-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_caption {
+#rtwocyrmwz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kcyeflvtee .gt_title {
+#rtwocyrmwz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1030,7 +1031,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-width: 0;
 }
 
-#kcyeflvtee .gt_subtitle {
+#rtwocyrmwz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1042,7 +1043,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-top-width: 0;
 }
 
-#kcyeflvtee .gt_heading {
+#rtwocyrmwz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1054,13 +1055,13 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_bottom_border {
+#rtwocyrmwz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_col_headings {
+#rtwocyrmwz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1075,7 +1076,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_col_heading {
+#rtwocyrmwz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1095,7 +1096,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   overflow-x: hidden;
 }
 
-#kcyeflvtee .gt_column_spanner_outer {
+#rtwocyrmwz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1107,15 +1108,15 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 4px;
 }
 
-#kcyeflvtee .gt_column_spanner_outer:first-child {
+#rtwocyrmwz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kcyeflvtee .gt_column_spanner_outer:last-child {
+#rtwocyrmwz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kcyeflvtee .gt_column_spanner {
+#rtwocyrmwz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1127,11 +1128,11 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   width: 100%;
 }
 
-#kcyeflvtee .gt_spanner_row {
+#rtwocyrmwz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kcyeflvtee .gt_group_heading {
+#rtwocyrmwz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1157,7 +1158,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   text-align: left;
 }
 
-#kcyeflvtee .gt_empty_group_heading {
+#rtwocyrmwz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1172,15 +1173,15 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   vertical-align: middle;
 }
 
-#kcyeflvtee .gt_from_md > :first-child {
+#rtwocyrmwz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kcyeflvtee .gt_from_md > :last-child {
+#rtwocyrmwz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kcyeflvtee .gt_row {
+#rtwocyrmwz .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1199,7 +1200,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   overflow-x: hidden;
 }
 
-#kcyeflvtee .gt_stub {
+#rtwocyrmwz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1212,7 +1213,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#kcyeflvtee .gt_stub_row_group {
+#rtwocyrmwz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1226,15 +1227,15 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   vertical-align: top;
 }
 
-#kcyeflvtee .gt_row_group_first td {
+#rtwocyrmwz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kcyeflvtee .gt_row_group_first th {
+#rtwocyrmwz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kcyeflvtee .gt_summary_row {
+#rtwocyrmwz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1244,16 +1245,16 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#kcyeflvtee .gt_first_summary_row {
+#rtwocyrmwz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_first_summary_row.thick {
+#rtwocyrmwz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kcyeflvtee .gt_last_summary_row {
+#rtwocyrmwz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1263,7 +1264,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_grand_summary_row {
+#rtwocyrmwz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1273,7 +1274,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#kcyeflvtee .gt_first_grand_summary_row {
+#rtwocyrmwz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1283,7 +1284,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-top-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_last_grand_summary_row_top {
+#rtwocyrmwz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1293,11 +1294,11 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_striped {
+#rtwocyrmwz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kcyeflvtee .gt_table_body {
+#rtwocyrmwz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1306,7 +1307,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-bottom-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_footnotes {
+#rtwocyrmwz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1320,7 +1321,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_footnote {
+#rtwocyrmwz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1329,7 +1330,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#kcyeflvtee .gt_sourcenotes {
+#rtwocyrmwz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1343,7 +1344,7 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   border-right-color: #D3D3D3;
 }
 
-#kcyeflvtee .gt_sourcenote {
+#rtwocyrmwz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1351,72 +1352,72 @@ Table&nbsp;1.1: The Explorer’s URL parameters, grouped by what they set. Anyth
   padding-right: 5px;
 }
 
-#kcyeflvtee .gt_left {
+#rtwocyrmwz .gt_left {
   text-align: left;
 }
 
-#kcyeflvtee .gt_center {
+#rtwocyrmwz .gt_center {
   text-align: center;
 }
 
-#kcyeflvtee .gt_right {
+#rtwocyrmwz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kcyeflvtee .gt_font_normal {
+#rtwocyrmwz .gt_font_normal {
   font-weight: normal;
 }
 
-#kcyeflvtee .gt_font_bold {
+#rtwocyrmwz .gt_font_bold {
   font-weight: bold;
 }
 
-#kcyeflvtee .gt_font_italic {
+#rtwocyrmwz .gt_font_italic {
   font-style: italic;
 }
 
-#kcyeflvtee .gt_super {
+#rtwocyrmwz .gt_super {
   font-size: 65%;
 }
 
-#kcyeflvtee .gt_footnote_marks {
+#rtwocyrmwz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kcyeflvtee .gt_asterisk {
+#rtwocyrmwz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kcyeflvtee .gt_indent_1 {
+#rtwocyrmwz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kcyeflvtee .gt_indent_2 {
+#rtwocyrmwz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kcyeflvtee .gt_indent_3 {
+#rtwocyrmwz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kcyeflvtee .gt_indent_4 {
+#rtwocyrmwz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kcyeflvtee .gt_indent_5 {
+#rtwocyrmwz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kcyeflvtee .katex-display {
+#rtwocyrmwz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kcyeflvtee div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rtwocyrmwz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1585,23 +1586,23 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
 </figcaption>
 <div aria-describedby="tbl-apps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="qqxqtosxtq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qqxqtosxtq table {
+<div id="ynuncbqgse" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ynuncbqgse table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qqxqtosxtq thead, #qqxqtosxtq tbody, #qqxqtosxtq tfoot, #qqxqtosxtq tr, #qqxqtosxtq td, #qqxqtosxtq th {
+#ynuncbqgse thead, #ynuncbqgse tbody, #ynuncbqgse tfoot, #ynuncbqgse tr, #ynuncbqgse td, #ynuncbqgse th {
   border-style: none;
 }
 
-#qqxqtosxtq p {
+#ynuncbqgse p {
   margin: 0;
   padding: 0;
 }
 
-#qqxqtosxtq .gt_table {
+#ynuncbqgse .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1627,12 +1628,12 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-left-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_caption {
+#ynuncbqgse .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qqxqtosxtq .gt_title {
+#ynuncbqgse .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1644,7 +1645,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-width: 0;
 }
 
-#qqxqtosxtq .gt_subtitle {
+#ynuncbqgse .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1656,7 +1657,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-top-width: 0;
 }
 
-#qqxqtosxtq .gt_heading {
+#ynuncbqgse .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1668,13 +1669,13 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_bottom_border {
+#ynuncbqgse .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_col_headings {
+#ynuncbqgse .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1689,7 +1690,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_col_heading {
+#ynuncbqgse .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1709,7 +1710,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#qqxqtosxtq .gt_column_spanner_outer {
+#ynuncbqgse .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1721,15 +1722,15 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 4px;
 }
 
-#qqxqtosxtq .gt_column_spanner_outer:first-child {
+#ynuncbqgse .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qqxqtosxtq .gt_column_spanner_outer:last-child {
+#ynuncbqgse .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qqxqtosxtq .gt_column_spanner {
+#ynuncbqgse .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1741,11 +1742,11 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   width: 100%;
 }
 
-#qqxqtosxtq .gt_spanner_row {
+#ynuncbqgse .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qqxqtosxtq .gt_group_heading {
+#ynuncbqgse .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1771,7 +1772,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   text-align: left;
 }
 
-#qqxqtosxtq .gt_empty_group_heading {
+#ynuncbqgse .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1786,15 +1787,15 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: middle;
 }
 
-#qqxqtosxtq .gt_from_md > :first-child {
+#ynuncbqgse .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qqxqtosxtq .gt_from_md > :last-child {
+#ynuncbqgse .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qqxqtosxtq .gt_row {
+#ynuncbqgse .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1813,7 +1814,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   overflow-x: hidden;
 }
 
-#qqxqtosxtq .gt_stub {
+#ynuncbqgse .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1826,7 +1827,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#qqxqtosxtq .gt_stub_row_group {
+#ynuncbqgse .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1840,15 +1841,15 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   vertical-align: top;
 }
 
-#qqxqtosxtq .gt_row_group_first td {
+#ynuncbqgse .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qqxqtosxtq .gt_row_group_first th {
+#ynuncbqgse .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qqxqtosxtq .gt_summary_row {
+#ynuncbqgse .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1858,16 +1859,16 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#qqxqtosxtq .gt_first_summary_row {
+#ynuncbqgse .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_first_summary_row.thick {
+#ynuncbqgse .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qqxqtosxtq .gt_last_summary_row {
+#ynuncbqgse .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1877,7 +1878,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_grand_summary_row {
+#ynuncbqgse .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1887,7 +1888,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#qqxqtosxtq .gt_first_grand_summary_row {
+#ynuncbqgse .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1897,7 +1898,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-top-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_last_grand_summary_row_top {
+#ynuncbqgse .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1907,11 +1908,11 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_striped {
+#ynuncbqgse .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qqxqtosxtq .gt_table_body {
+#ynuncbqgse .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1920,7 +1921,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-bottom-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_footnotes {
+#ynuncbqgse .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1934,7 +1935,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_footnote {
+#ynuncbqgse .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1943,7 +1944,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#qqxqtosxtq .gt_sourcenotes {
+#ynuncbqgse .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1957,7 +1958,7 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   border-right-color: #D3D3D3;
 }
 
-#qqxqtosxtq .gt_sourcenote {
+#ynuncbqgse .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1965,72 +1966,72 @@ Table&nbsp;1.2: The applications on calcofi.io besides the Explorer, from the la
   padding-right: 5px;
 }
 
-#qqxqtosxtq .gt_left {
+#ynuncbqgse .gt_left {
   text-align: left;
 }
 
-#qqxqtosxtq .gt_center {
+#ynuncbqgse .gt_center {
   text-align: center;
 }
 
-#qqxqtosxtq .gt_right {
+#ynuncbqgse .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qqxqtosxtq .gt_font_normal {
+#ynuncbqgse .gt_font_normal {
   font-weight: normal;
 }
 
-#qqxqtosxtq .gt_font_bold {
+#ynuncbqgse .gt_font_bold {
   font-weight: bold;
 }
 
-#qqxqtosxtq .gt_font_italic {
+#ynuncbqgse .gt_font_italic {
   font-style: italic;
 }
 
-#qqxqtosxtq .gt_super {
+#ynuncbqgse .gt_super {
   font-size: 65%;
 }
 
-#qqxqtosxtq .gt_footnote_marks {
+#ynuncbqgse .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qqxqtosxtq .gt_asterisk {
+#ynuncbqgse .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qqxqtosxtq .gt_indent_1 {
+#ynuncbqgse .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qqxqtosxtq .gt_indent_2 {
+#ynuncbqgse .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qqxqtosxtq .gt_indent_3 {
+#ynuncbqgse .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qqxqtosxtq .gt_indent_4 {
+#ynuncbqgse .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qqxqtosxtq .gt_indent_5 {
+#ynuncbqgse .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qqxqtosxtq .katex-display {
+#ynuncbqgse .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qqxqtosxtq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ynuncbqgse div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2100,23 +2101,23 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
 </figcaption>
 <div aria-describedby="tbl-students-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="wrphutuxas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wrphutuxas table {
+<div id="gamueujqhu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gamueujqhu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wrphutuxas thead, #wrphutuxas tbody, #wrphutuxas tfoot, #wrphutuxas tr, #wrphutuxas td, #wrphutuxas th {
+#gamueujqhu thead, #gamueujqhu tbody, #gamueujqhu tfoot, #gamueujqhu tr, #gamueujqhu td, #gamueujqhu th {
   border-style: none;
 }
 
-#wrphutuxas p {
+#gamueujqhu p {
   margin: 0;
   padding: 0;
 }
 
-#wrphutuxas .gt_table {
+#gamueujqhu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2142,12 +2143,12 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-left-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_caption {
+#gamueujqhu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wrphutuxas .gt_title {
+#gamueujqhu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2159,7 +2160,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-width: 0;
 }
 
-#wrphutuxas .gt_subtitle {
+#gamueujqhu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2171,7 +2172,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-top-width: 0;
 }
 
-#wrphutuxas .gt_heading {
+#gamueujqhu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2183,13 +2184,13 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_bottom_border {
+#gamueujqhu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_col_headings {
+#gamueujqhu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2204,7 +2205,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_col_heading {
+#gamueujqhu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2224,7 +2225,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#wrphutuxas .gt_column_spanner_outer {
+#gamueujqhu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2236,15 +2237,15 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 4px;
 }
 
-#wrphutuxas .gt_column_spanner_outer:first-child {
+#gamueujqhu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wrphutuxas .gt_column_spanner_outer:last-child {
+#gamueujqhu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wrphutuxas .gt_column_spanner {
+#gamueujqhu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2256,11 +2257,11 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   width: 100%;
 }
 
-#wrphutuxas .gt_spanner_row {
+#gamueujqhu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wrphutuxas .gt_group_heading {
+#gamueujqhu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2286,7 +2287,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   text-align: left;
 }
 
-#wrphutuxas .gt_empty_group_heading {
+#gamueujqhu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2301,15 +2302,15 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   vertical-align: middle;
 }
 
-#wrphutuxas .gt_from_md > :first-child {
+#gamueujqhu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wrphutuxas .gt_from_md > :last-child {
+#gamueujqhu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wrphutuxas .gt_row {
+#gamueujqhu .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -2328,7 +2329,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   overflow-x: hidden;
 }
 
-#wrphutuxas .gt_stub {
+#gamueujqhu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2341,7 +2342,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#wrphutuxas .gt_stub_row_group {
+#gamueujqhu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2355,15 +2356,15 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   vertical-align: top;
 }
 
-#wrphutuxas .gt_row_group_first td {
+#gamueujqhu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wrphutuxas .gt_row_group_first th {
+#gamueujqhu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wrphutuxas .gt_summary_row {
+#gamueujqhu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2373,16 +2374,16 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#wrphutuxas .gt_first_summary_row {
+#gamueujqhu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_first_summary_row.thick {
+#gamueujqhu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wrphutuxas .gt_last_summary_row {
+#gamueujqhu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2392,7 +2393,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_grand_summary_row {
+#gamueujqhu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2402,7 +2403,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#wrphutuxas .gt_first_grand_summary_row {
+#gamueujqhu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2412,7 +2413,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-top-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_last_grand_summary_row_top {
+#gamueujqhu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2422,11 +2423,11 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_striped {
+#gamueujqhu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wrphutuxas .gt_table_body {
+#gamueujqhu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2435,7 +2436,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-bottom-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_footnotes {
+#gamueujqhu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2449,7 +2450,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_footnote {
+#gamueujqhu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2458,7 +2459,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#wrphutuxas .gt_sourcenotes {
+#gamueujqhu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2472,7 +2473,7 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   border-right-color: #D3D3D3;
 }
 
-#wrphutuxas .gt_sourcenote {
+#gamueujqhu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2480,72 +2481,72 @@ Table&nbsp;1.3: Student contributions, from the landing page’s product cards.
   padding-right: 5px;
 }
 
-#wrphutuxas .gt_left {
+#gamueujqhu .gt_left {
   text-align: left;
 }
 
-#wrphutuxas .gt_center {
+#gamueujqhu .gt_center {
   text-align: center;
 }
 
-#wrphutuxas .gt_right {
+#gamueujqhu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wrphutuxas .gt_font_normal {
+#gamueujqhu .gt_font_normal {
   font-weight: normal;
 }
 
-#wrphutuxas .gt_font_bold {
+#gamueujqhu .gt_font_bold {
   font-weight: bold;
 }
 
-#wrphutuxas .gt_font_italic {
+#gamueujqhu .gt_font_italic {
   font-style: italic;
 }
 
-#wrphutuxas .gt_super {
+#gamueujqhu .gt_super {
   font-size: 65%;
 }
 
-#wrphutuxas .gt_footnote_marks {
+#gamueujqhu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wrphutuxas .gt_asterisk {
+#gamueujqhu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wrphutuxas .gt_indent_1 {
+#gamueujqhu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wrphutuxas .gt_indent_2 {
+#gamueujqhu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wrphutuxas .gt_indent_3 {
+#gamueujqhu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wrphutuxas .gt_indent_4 {
+#gamueujqhu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wrphutuxas .gt_indent_5 {
+#gamueujqhu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wrphutuxas .katex-display {
+#gamueujqhu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wrphutuxas div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gamueujqhu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
