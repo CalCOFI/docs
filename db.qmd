@@ -450,9 +450,10 @@ light theme, 2026-09-12.](figs/db/measurement_face.png){#fig-measurement-face wi
 things in different datasets (a CTD 4 is not a DIC 4), so a code is always read with its dataset. The
 registry is `metadata/measurement_qual.csv` in the workflows repo and it ships in `metadata.json`.
 
-CTD code **4**, `set_to_zero`, marks a corrected chlorophyll-a or nitrate estimate that came out
-negative (sensor noise at the detection floor) and that the provider reports as 0 instead of leaving
-blank (Ben Gire, 2026-10-12). It is a real value, not a flag against the value: the quality predicate
+CTD code **4**, `below_detection`, means below the detection limit, reported as 0 (Ben Gire,
+2026-10-13). On the corrected chlorophyll-a and nitrate estimates the provider sets only a negative
+value (sensor noise at the detection floor) to 0 and codes it 4, instead of leaving it blank; the code
+may be used on any CTD sensor series. It is a real value, not a flag against the value: the quality predicate
 keeps it, so the zero counts in averages, integrated chlorophyll and anomalies. Where the raw sensor
 was unreliable the code is 9, with no corrected value.
 
