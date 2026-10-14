@@ -188,12 +188,17 @@ as_tibble(integ$foreign_keys) |>
   tab_options(table.width = pct(100), data_row.padding = px(3), table.font.size = "0.88em")
 ```
 
-Two things @tbl-pk and @tbl-fk do not show, on purpose:
+Three things @tbl-pk and @tbl-fk do not show, on purpose:
 
 - **A NULL is not an orphan.** Where a column is NULL the row has nothing to point at — an
   environmental observation has no taxon, a region-pooled sample has no grid cell, a root sample
   has no parent. The counts are shown so a reader can see how nullable an edge is; they are not
   failures.
+- **One key column is declared nullable.** `climatology.depth_bin` is NULL on the per-cast rows
+  (a mixed-layer depth has no depth), so `relationships.json` lists it under `nullable_key_columns`
+  and `check_release_relationships()` reads it as a value, not a missing key. A NULL there is never
+  matched by `=`, so a join on a depth bin cannot reach a per-cast row by accident
+  ([The database](db.qmd#shared-reference-tables)).
 - **One edge is knowingly undeclared.** `obs_mets_full.sample_key` would point at `sample`, but the
   full-resolution meteorology mints one key per underway record and only the headline series' events
   reach `sample`: 73,607 of its 2,168,850 distinct keys resolve. Declaring the edge would fail every

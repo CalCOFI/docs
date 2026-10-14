@@ -110,8 +110,9 @@ and the *Sources* line naming every dataset the average pools. A statistic is av
 datasets that share the life stage and the standardization, and never across them — eggs are never
 merged with larvae, counts never with densities.
 
-**② Refine** narrows it: the years (typed, or dragged on the Time panel), the seasons as quarters,
-the depth band (typed, or brushed on the Depth panel) and the datasets in view.
+**② Refine** narrows it: the years (typed, or dragged on the Time panel), the seasons as quarters (the quarter of the cruise's designated month, so a cast taken on 30 June on a
+July cruise is in the third quarter with the rest of its cruise; `test_release.qmd` asserts it for
+CalCOFI 2607), the depth band (typed, or brushed on the Depth panel) and the datasets in view.
 
 **③ Share** is everything that leaves the app: *Download data (zip)* — the summary and the
 observations, the exact SQL against the release's object URLs, a README, the citations and
@@ -227,7 +228,19 @@ For an **ocean variable** it is a **depth section**: the stations along the line
 x-axis, depth down the y-axis, for **one cruise** (@fig-explore-section-env). The checkbox *difference from the 1993–2013 normal* subtracts the release's own
 `climatology` table — the mean for that station, the cruise's month and its 10 m depth
 bin — so an anomaly here and an anomaly in [ctd-transects](https://calcofi.io/ctd-transects/)
-cannot disagree ([The database](db.qmd)).
+cannot disagree ([The database](db.qmd)). A cell with no monthly baseline (an absent row, or one whose
+`clim_mean` is NULL because only its season passes the cruise floor) is left blank, never drawn as
+zero. Beside the checkbox, **month · season** picks the baseline: the cruise's month, or its quarter
+(Q1 Jan–Mar … Q4 Oct–Dec, the release's `season_*` columns), which fills stations whose month alone
+has fewer than five baseline cruises; the caption names the one shown ("the July normal", "the
+Jul–Sep normal"). A release without the seasonal columns keeps the season button disabled.
+
+The **Hexagons** and **Contours** lenses offer the same difference for an ocean variable, including
+the per-cast derived products (mixed-layer depth, chlorophyll maximum, integrated chlorophyll):
+each observation's own baseline cell is subtracted *before* anything is pooled, an observation with
+no baseline drops out rather than counting as zero, and the lens says what share of the
+observations in view had one. The map draws the anomaly for the mean and median statistics; a
+count stays a count.
 
 For an **organism** the tows are depth-integrated, so there is no depth axis: the lens draws a
 **station-by-year** section — the same stations across the x-axis, years down the y-axis, across
