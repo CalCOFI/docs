@@ -133,10 +133,11 @@ it is folded into `ctd` by the data team.
   interim mixed-layer headline was retired for `mld_sigma_theta_002`, the CTD team's legacy
   definition, and a consumer that asked for the old key by name must switch.
 - **`measurement_qual` is your vocabulary, uninterpreted** — `1`/`2` use the primary/secondary
-  sensor, `4` a negative corrected chlorophyll-a or nitrate estimate that you set to zero, `8`
+  sensor, `4` below the detection limit, reported as 0 (on the corrected chlorophyll-a and nitrate
+  estimates, a negative value you set to zero), `8`
   questionable, `9` bad or missing — and `qual_ok` is the release's verdict from it. The `4` is a real
   value, so `qual_ok` keeps it and it counts in averages, integrated chlorophyll and anomalies; it is
-  registered in `metadata/measurement_qual.csv` as `set_to_zero` (Ben Gire, 2026-10-12).
+  registered in `metadata/measurement_qual.csv` as `below_detection` (Ben Gire, 2026-10-13).
   Your accepted flags become that column at the next ingest; nothing is re-interpreted on the way.
 - **Bottle data is its own dataset** (`calcofi_bottle`), keyed to the same cruises and stations;
   the plan to migrate the bottle database off Access into this same store is Task 1 of the [data
