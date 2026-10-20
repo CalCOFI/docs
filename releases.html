@@ -672,7 +672,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <p>The integrated database is published as <strong>frozen releases</strong>: an immutable, versioned copy of every table, with a catalog that says exactly which bytes it holds and a DOI that names it. Nothing a consumer reads is ever edited in place. This chapter says what a release is, what ships with it, which versions are kept, and what is checked before one is cut.</p>
 <section id="a-release-in-one-line" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="a-release-in-one-line"><span class="header-section-number">7.1</span> A release in one line</h2>
-<p>The promoted release is <strong>v2026.10.14</strong>, cut 2026-10-14: 25 tables, 375,348,707 rows, 2.75 GB of parquet, DOI <a href="https://doi.org/10.5281/zenodo.23371724">10.5281/zenodo.23371724</a>. A version is a date (<code>vYYYY.MM.DD</code>), and a release is cut whenever the data or the schema change enough to matter — every few weeks, in practice. <code>latest.txt</code> on the bucket names the promoted one, and it is promoted only after the consumer-contract suite and the client packages’ README examples (<code>calcofi4r</code>, <code>calcofi4py</code>) have passed against the frozen files.</p>
+<p>The promoted release is <strong>v2026.10.19</strong>, cut 2026-10-19: 25 tables, 375,348,707 rows, 2.75 GB of parquet, DOI <a href="https://doi.org/10.5281/zenodo.23484176">10.5281/zenodo.23484176</a>. A version is a date (<code>vYYYY.MM.DD</code>), and a release is cut whenever the data or the schema change enough to matter — every few weeks, in practice. <code>latest.txt</code> on the bucket names the promoted one, and it is promoted only after the consumer-contract suite and the client packages’ README examples (<code>calcofi4r</code>, <code>calcofi4py</code>) have passed against the frozen files.</p>
 </section>
 <section id="what-ships" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="what-ships"><span class="header-section-number">7.2</span> What ships</h2>
@@ -687,27 +687,27 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <div id="tbl-objects" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — objects, partitioning, size, and the release whose bytes each table last changed in.
+Table&nbsp;7.1: The tables of v2026.10.19 as the catalog describes them — objects, partitioning, size, and the release whose bytes each table last changed in.
 </figcaption>
 <div aria-describedby="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="ukazayzgix" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ukazayzgix table {
+<div id="saycamrqst" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#saycamrqst table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ukazayzgix thead, #ukazayzgix tbody, #ukazayzgix tfoot, #ukazayzgix tr, #ukazayzgix td, #ukazayzgix th {
+#saycamrqst thead, #saycamrqst tbody, #saycamrqst tfoot, #saycamrqst tr, #saycamrqst td, #saycamrqst th {
   border-style: none;
 }
 
-#ukazayzgix p {
+#saycamrqst p {
   margin: 0;
   padding: 0;
 }
 
-#ukazayzgix .gt_table {
+#saycamrqst .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -733,12 +733,12 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-left-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_caption {
+#saycamrqst .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ukazayzgix .gt_title {
+#saycamrqst .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -750,7 +750,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-bottom-width: 0;
 }
 
-#ukazayzgix .gt_subtitle {
+#saycamrqst .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -762,7 +762,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-top-width: 0;
 }
 
-#ukazayzgix .gt_heading {
+#saycamrqst .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -774,13 +774,13 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_bottom_border {
+#saycamrqst .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_col_headings {
+#saycamrqst .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -795,7 +795,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_col_heading {
+#saycamrqst .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -815,7 +815,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   overflow-x: hidden;
 }
 
-#ukazayzgix .gt_column_spanner_outer {
+#saycamrqst .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -827,15 +827,15 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   padding-right: 4px;
 }
 
-#ukazayzgix .gt_column_spanner_outer:first-child {
+#saycamrqst .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ukazayzgix .gt_column_spanner_outer:last-child {
+#saycamrqst .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ukazayzgix .gt_column_spanner {
+#saycamrqst .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -847,11 +847,11 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   width: 100%;
 }
 
-#ukazayzgix .gt_spanner_row {
+#saycamrqst .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ukazayzgix .gt_group_heading {
+#saycamrqst .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -877,7 +877,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   text-align: left;
 }
 
-#ukazayzgix .gt_empty_group_heading {
+#saycamrqst .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -892,15 +892,15 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   vertical-align: middle;
 }
 
-#ukazayzgix .gt_from_md > :first-child {
+#saycamrqst .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ukazayzgix .gt_from_md > :last-child {
+#saycamrqst .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ukazayzgix .gt_row {
+#saycamrqst .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -919,7 +919,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   overflow-x: hidden;
 }
 
-#ukazayzgix .gt_stub {
+#saycamrqst .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,7 +932,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#ukazayzgix .gt_stub_row_group {
+#saycamrqst .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -946,15 +946,15 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   vertical-align: top;
 }
 
-#ukazayzgix .gt_row_group_first td {
+#saycamrqst .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ukazayzgix .gt_row_group_first th {
+#saycamrqst .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ukazayzgix .gt_summary_row {
+#saycamrqst .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -964,16 +964,16 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#ukazayzgix .gt_first_summary_row {
+#saycamrqst .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_first_summary_row.thick {
+#saycamrqst .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ukazayzgix .gt_last_summary_row {
+#saycamrqst .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -983,7 +983,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_grand_summary_row {
+#saycamrqst .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -993,7 +993,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#ukazayzgix .gt_first_grand_summary_row {
+#saycamrqst .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1003,7 +1003,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-top-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_last_grand_summary_row_top {
+#saycamrqst .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1013,11 +1013,11 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_striped {
+#saycamrqst .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ukazayzgix .gt_table_body {
+#saycamrqst .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1026,7 +1026,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_footnotes {
+#saycamrqst .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1040,7 +1040,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_footnote {
+#saycamrqst .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1049,7 +1049,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#ukazayzgix .gt_sourcenotes {
+#saycamrqst .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1063,7 +1063,7 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#ukazayzgix .gt_sourcenote {
+#saycamrqst .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1071,72 +1071,72 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#ukazayzgix .gt_left {
+#saycamrqst .gt_left {
   text-align: left;
 }
 
-#ukazayzgix .gt_center {
+#saycamrqst .gt_center {
   text-align: center;
 }
 
-#ukazayzgix .gt_right {
+#saycamrqst .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ukazayzgix .gt_font_normal {
+#saycamrqst .gt_font_normal {
   font-weight: normal;
 }
 
-#ukazayzgix .gt_font_bold {
+#saycamrqst .gt_font_bold {
   font-weight: bold;
 }
 
-#ukazayzgix .gt_font_italic {
+#saycamrqst .gt_font_italic {
   font-style: italic;
 }
 
-#ukazayzgix .gt_super {
+#saycamrqst .gt_super {
   font-size: 65%;
 }
 
-#ukazayzgix .gt_footnote_marks {
+#saycamrqst .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ukazayzgix .gt_asterisk {
+#saycamrqst .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ukazayzgix .gt_indent_1 {
+#saycamrqst .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ukazayzgix .gt_indent_2 {
+#saycamrqst .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ukazayzgix .gt_indent_3 {
+#saycamrqst .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ukazayzgix .gt_indent_4 {
+#saycamrqst .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ukazayzgix .gt_indent_5 {
+#saycamrqst .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ukazayzgix .katex-display {
+#saycamrqst .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ukazayzgix div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#saycamrqst div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1159,225 +1159,225 @@ Table&nbsp;7.1: The tables of v2026.10.14 as the catalog describes them — obje
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">1,828,215</td>
 <td class="gt_row gt_right" headers="objects">82</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_right" headers="bytes">21.3 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.19</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">845</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">21 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">19</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
-<td class="gt_row gt_right" headers="bytes">18.2 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_right" headers="bytes">18.3 kB</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.19</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset_taxon</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">1,940</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">59.2 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.08</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.08</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">fish</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">10,796</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">45.8 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.05</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.05</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">grid</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">225</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">336.9 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.05</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.05</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">grid_crosswalk</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">673</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">17.7 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.05</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.05</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">lookup</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">26</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">1.6 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.08.25</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">231</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">15.9 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.05</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.05</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_attribute</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">455,300</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">1.8 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.08</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.08</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_bio</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">32.1 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">31,739,611</td>
 <td class="gt_row gt_right" headers="objects">94</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_right" headers="bytes">423.1 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">region</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">4</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">4 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.08.25</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.08.25</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">1,467,016</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">27.9 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_measurement</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">658,009</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">2.6 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">1,994,263</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">16.4 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.14</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">49</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">1.6 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.05</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.05</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">3,390</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">46.1 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.14</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">37,943</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">134.8 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.14</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">2,606</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">88.5 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.14</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.19</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">438</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">2.8 kB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.08</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.08</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
 <td class="gt_row gt_left" headers="tier">deprecated</td>
 <td class="gt_row gt_right" headers="rows">33,326,406</td>
 <td class="gt_row gt_right" headers="objects">19</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">dataset_key</td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em">dataset_key</td>
 <td class="gt_row gt_right" headers="bytes">502.4 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_ctd_full</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
 <td class="gt_row gt_right" headers="rows">281,888,334</td>
 <td class="gt_row gt_right" headers="objects">134</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
 <td class="gt_row gt_right" headers="bytes">1.4 GB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_mets_full</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
 <td class="gt_row gt_right" headers="rows">19,926,523</td>
 <td class="gt_row gt_right" headers="objects">49</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
 <td class="gt_row gt_right" headers="bytes">249.2 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.05</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.05</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
 <td class="gt_row gt_right" headers="rows">419,050</td>
 <td class="gt_row gt_right" headers="objects">1</td>
-<td class="gt_row gt_left" headers="partitioned by" style="font-family: monospace; font-size: 0.85em"></td>
+<td class="gt_row gt_left" headers="partitioned-by" style="font-family: monospace; font-size: 0.85em"></td>
 <td class="gt_row gt_right" headers="bytes">11.4 MB</td>
-<td class="gt_row gt_left" headers="last changed">v2026.10.13</td>
+<td class="gt_row gt_left" headers="last-changed">v2026.10.13</td>
 </tr>
 </tbody>
 </table>
@@ -1400,23 +1400,23 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </figcaption>
 <div aria-describedby="tbl-versions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="dtgltcpxdn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dtgltcpxdn table {
+<div id="rcdpgegewp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rcdpgegewp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dtgltcpxdn thead, #dtgltcpxdn tbody, #dtgltcpxdn tfoot, #dtgltcpxdn tr, #dtgltcpxdn td, #dtgltcpxdn th {
+#rcdpgegewp thead, #rcdpgegewp tbody, #rcdpgegewp tfoot, #rcdpgegewp tr, #rcdpgegewp td, #rcdpgegewp th {
   border-style: none;
 }
 
-#dtgltcpxdn p {
+#rcdpgegewp p {
   margin: 0;
   padding: 0;
 }
 
-#dtgltcpxdn .gt_table {
+#rcdpgegewp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1442,12 +1442,12 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-left-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_caption {
+#rcdpgegewp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dtgltcpxdn .gt_title {
+#rcdpgegewp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1459,7 +1459,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-width: 0;
 }
 
-#dtgltcpxdn .gt_subtitle {
+#rcdpgegewp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1471,7 +1471,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-top-width: 0;
 }
 
-#dtgltcpxdn .gt_heading {
+#rcdpgegewp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1483,13 +1483,13 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_bottom_border {
+#rcdpgegewp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_col_headings {
+#rcdpgegewp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1504,7 +1504,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_col_heading {
+#rcdpgegewp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1524,7 +1524,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   overflow-x: hidden;
 }
 
-#dtgltcpxdn .gt_column_spanner_outer {
+#rcdpgegewp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1536,15 +1536,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 4px;
 }
 
-#dtgltcpxdn .gt_column_spanner_outer:first-child {
+#rcdpgegewp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dtgltcpxdn .gt_column_spanner_outer:last-child {
+#rcdpgegewp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dtgltcpxdn .gt_column_spanner {
+#rcdpgegewp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1556,11 +1556,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   width: 100%;
 }
 
-#dtgltcpxdn .gt_spanner_row {
+#rcdpgegewp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dtgltcpxdn .gt_group_heading {
+#rcdpgegewp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1586,7 +1586,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   text-align: left;
 }
 
-#dtgltcpxdn .gt_empty_group_heading {
+#rcdpgegewp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1601,15 +1601,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   vertical-align: middle;
 }
 
-#dtgltcpxdn .gt_from_md > :first-child {
+#rcdpgegewp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dtgltcpxdn .gt_from_md > :last-child {
+#rcdpgegewp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dtgltcpxdn .gt_row {
+#rcdpgegewp .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1628,7 +1628,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   overflow-x: hidden;
 }
 
-#dtgltcpxdn .gt_stub {
+#rcdpgegewp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1641,7 +1641,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#dtgltcpxdn .gt_stub_row_group {
+#rcdpgegewp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1655,15 +1655,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   vertical-align: top;
 }
 
-#dtgltcpxdn .gt_row_group_first td {
+#rcdpgegewp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dtgltcpxdn .gt_row_group_first th {
+#rcdpgegewp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dtgltcpxdn .gt_summary_row {
+#rcdpgegewp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1673,16 +1673,16 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#dtgltcpxdn .gt_first_summary_row {
+#rcdpgegewp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_first_summary_row.thick {
+#rcdpgegewp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dtgltcpxdn .gt_last_summary_row {
+#rcdpgegewp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1692,7 +1692,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_grand_summary_row {
+#rcdpgegewp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1702,7 +1702,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#dtgltcpxdn .gt_first_grand_summary_row {
+#rcdpgegewp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1712,7 +1712,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-top-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_last_grand_summary_row_top {
+#rcdpgegewp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1722,11 +1722,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_striped {
+#rcdpgegewp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dtgltcpxdn .gt_table_body {
+#rcdpgegewp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1735,7 +1735,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_footnotes {
+#rcdpgegewp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1749,7 +1749,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_footnote {
+#rcdpgegewp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1758,7 +1758,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#dtgltcpxdn .gt_sourcenotes {
+#rcdpgegewp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1772,7 +1772,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#dtgltcpxdn .gt_sourcenote {
+#rcdpgegewp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1780,72 +1780,72 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#dtgltcpxdn .gt_left {
+#rcdpgegewp .gt_left {
   text-align: left;
 }
 
-#dtgltcpxdn .gt_center {
+#rcdpgegewp .gt_center {
   text-align: center;
 }
 
-#dtgltcpxdn .gt_right {
+#rcdpgegewp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dtgltcpxdn .gt_font_normal {
+#rcdpgegewp .gt_font_normal {
   font-weight: normal;
 }
 
-#dtgltcpxdn .gt_font_bold {
+#rcdpgegewp .gt_font_bold {
   font-weight: bold;
 }
 
-#dtgltcpxdn .gt_font_italic {
+#rcdpgegewp .gt_font_italic {
   font-style: italic;
 }
 
-#dtgltcpxdn .gt_super {
+#rcdpgegewp .gt_super {
   font-size: 65%;
 }
 
-#dtgltcpxdn .gt_footnote_marks {
+#rcdpgegewp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dtgltcpxdn .gt_asterisk {
+#rcdpgegewp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dtgltcpxdn .gt_indent_1 {
+#rcdpgegewp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dtgltcpxdn .gt_indent_2 {
+#rcdpgegewp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dtgltcpxdn .gt_indent_3 {
+#rcdpgegewp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dtgltcpxdn .gt_indent_4 {
+#rcdpgegewp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dtgltcpxdn .gt_indent_5 {
+#rcdpgegewp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dtgltcpxdn .katex-display {
+#rcdpgegewp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dtgltcpxdn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rcdpgegewp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1873,371 +1873,380 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
+<td class="gt_row gt_left" headers="version">v2026.10.19</td>
+<td class="gt_row gt_right" headers="date">2026-10-19</td>
+<td class="gt_row gt_right" headers="tables">25</td>
+<td class="gt_row gt_right" headers="rows">375,348,707</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,620</td>
+<td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23484176</td>
+<td class="gt_row gt_left" headers="kept">current</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.10.14</td>
 <td class="gt_row gt_right" headers="date">2026-10-14</td>
 <td class="gt_row gt_right" headers="tables">25</td>
 <td class="gt_row gt_right" headers="rows">375,348,707</td>
-<td class="gt_row gt_right" headers="size (MB)">2,620</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,620</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23371724</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.10.13</td>
 <td class="gt_row gt_right" headers="date">2026-10-13</td>
 <td class="gt_row gt_right" headers="tables">25</td>
 <td class="gt_row gt_right" headers="rows">374,740,011</td>
-<td class="gt_row gt_right" headers="size (MB)">2,614</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,614</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23354090</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.10.08</td>
 <td class="gt_row gt_right" headers="date">2026-10-08</td>
 <td class="gt_row gt_right" headers="tables">25</td>
 <td class="gt_row gt_right" headers="rows">373,376,204</td>
-<td class="gt_row gt_right" headers="size (MB)">2,605</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,605</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23241748</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.10.06</td>
 <td class="gt_row gt_right" headers="date">2026-10-06</td>
 <td class="gt_row gt_right" headers="tables">25</td>
 <td class="gt_row gt_right" headers="rows">373,467,857</td>
-<td class="gt_row gt_right" headers="size (MB)">2,606</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,606</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23190178</td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.10.08</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.10.05</td>
 <td class="gt_row gt_right" headers="date">2026-10-05</td>
 <td class="gt_row gt_right" headers="tables">25</td>
 <td class="gt_row gt_right" headers="rows">373,474,855</td>
-<td class="gt_row gt_right" headers="size (MB)">2,606</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,606</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23170248</td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.10.08</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.10.01</td>
 <td class="gt_row gt_right" headers="date">2026-10-01</td>
 <td class="gt_row gt_right" headers="tables">23</td>
 <td class="gt_row gt_right" headers="rows">375,505,833</td>
-<td class="gt_row gt_right" headers="size (MB)">2,603</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,603</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23085119</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.09.11</td>
 <td class="gt_row gt_right" headers="date">2026-09-11</td>
 <td class="gt_row gt_right" headers="tables">23</td>
 <td class="gt_row gt_right" headers="rows">362,124,968</td>
-<td class="gt_row gt_right" headers="size (MB)">2,497</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,497</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22714951</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.09.10</td>
 <td class="gt_row gt_right" headers="date">2026-09-11</td>
 <td class="gt_row gt_right" headers="tables">23</td>
 <td class="gt_row gt_right" headers="rows">356,635,055</td>
-<td class="gt_row gt_right" headers="size (MB)">2,462</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,462</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22698724</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.09.06</td>
 <td class="gt_row gt_right" headers="date">2026-09-06</td>
 <td class="gt_row gt_right" headers="tables">23</td>
 <td class="gt_row gt_right" headers="rows">348,657,010</td>
-<td class="gt_row gt_right" headers="size (MB)">2,350</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,350</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22514953</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.09.04</td>
 <td class="gt_row gt_right" headers="date">2026-09-04</td>
 <td class="gt_row gt_right" headers="tables">23</td>
 <td class="gt_row gt_right" headers="rows">348,657,010</td>
-<td class="gt_row gt_right" headers="size (MB)">2,351</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,351</td>
 <td class="gt_row gt_left" headers="DOI">10.5281/zenodo.22310858</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.25</td>
 <td class="gt_row gt_right" headers="date">2026-08-25</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">320,260,205</td>
-<td class="gt_row gt_right" headers="size (MB)">1,998</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,998</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.14</td>
 <td class="gt_row gt_right" headers="date">2026-08-14</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">307,537,056</td>
-<td class="gt_row gt_right" headers="size (MB)">1,930</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,930</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.11</td>
 <td class="gt_row gt_right" headers="date">2026-08-11</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">323,912,311</td>
-<td class="gt_row gt_right" headers="size (MB)">2,016</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,016</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.10</td>
 <td class="gt_row gt_right" headers="date">2026-08-11</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">323,912,364</td>
-<td class="gt_row gt_right" headers="size (MB)">2,017</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,017</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.08</td>
 <td class="gt_row gt_right" headers="date">2026-08-08</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">309,122,838</td>
-<td class="gt_row gt_right" headers="size (MB)">1,947</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,947</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.07</td>
 <td class="gt_row gt_right" headers="date">2026-08-07</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">323,733,662</td>
-<td class="gt_row gt_right" headers="size (MB)">2,024</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,024</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.06</td>
 <td class="gt_row gt_right" headers="date">2026-08-06</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">255,137,845</td>
-<td class="gt_row gt_right" headers="size (MB)">1,636</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,636</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.05</td>
 <td class="gt_row gt_right" headers="date">2026-08-05</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">255,137,845</td>
-<td class="gt_row gt_right" headers="size (MB)">1,636</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,636</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.04</td>
 <td class="gt_row gt_right" headers="date">2026-08-04</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">255,155,031</td>
-<td class="gt_row gt_right" headers="size (MB)">1,635</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,635</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.08.03</td>
 <td class="gt_row gt_right" headers="date">2026-08-03</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">255,037,035</td>
-<td class="gt_row gt_right" headers="size (MB)">2,057</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,057</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.08.02</td>
 <td class="gt_row gt_right" headers="date">2026-08-02</td>
 <td class="gt_row gt_right" headers="tables">18</td>
 <td class="gt_row gt_right" headers="rows">255,037,035</td>
-<td class="gt_row gt_right" headers="size (MB)">2,087</td>
+<td class="gt_row gt_right" headers="size-(MB)">2,087</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.07.30</td>
 <td class="gt_row gt_right" headers="date">2026-07-30</td>
 <td class="gt_row gt_right" headers="tables">17</td>
 <td class="gt_row gt_right" headers="rows">233,730,737</td>
-<td class="gt_row gt_right" headers="size (MB)">1,710</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,710</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.08.14</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.07.17</td>
 <td class="gt_row gt_right" headers="date">2026-07-17</td>
 <td class="gt_row gt_right" headers="tables">17</td>
 <td class="gt_row gt_right" headers="rows">236,577,241</td>
-<td class="gt_row gt_right" headers="size (MB)">1,943</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,943</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.07.16</td>
 <td class="gt_row gt_right" headers="date">2026-07-16</td>
 <td class="gt_row gt_right" headers="tables">17</td>
 <td class="gt_row gt_right" headers="rows">236,577,241</td>
-<td class="gt_row gt_right" headers="size (MB)">1,945</td>
+<td class="gt_row gt_right" headers="size-(MB)">1,945</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.07.17</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.07.15</td>
 <td class="gt_row gt_right" headers="date">2026-07-15</td>
 <td class="gt_row gt_right" headers="tables">22</td>
 <td class="gt_row gt_right" headers="rows">236,371,206</td>
-<td class="gt_row gt_right" headers="size (MB)">5,472</td>
+<td class="gt_row gt_right" headers="size-(MB)">5,472</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.07.17</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.06.26</td>
 <td class="gt_row gt_right" headers="date">2026-06-26</td>
 <td class="gt_row gt_right" headers="tables">50</td>
 <td class="gt_row gt_right" headers="rows">133,966,996</td>
-<td class="gt_row gt_right" headers="size (MB)">3,554</td>
+<td class="gt_row gt_right" headers="size-(MB)">3,554</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.06.08</td>
 <td class="gt_row gt_right" headers="date">2026-06-08</td>
 <td class="gt_row gt_right" headers="tables">44</td>
 <td class="gt_row gt_right" headers="rows">133,807,311</td>
-<td class="gt_row gt_right" headers="size (MB)">3,553</td>
+<td class="gt_row gt_right" headers="size-(MB)">3,553</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.06.07</td>
 <td class="gt_row gt_right" headers="date">2026-06-07</td>
 <td class="gt_row gt_right" headers="tables">28</td>
 <td class="gt_row gt_right" headers="rows">133,015,544</td>
-<td class="gt_row gt_right" headers="size (MB)">3,547</td>
+<td class="gt_row gt_right" headers="size-(MB)">3,547</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.05.20</td>
 <td class="gt_row gt_right" headers="date">2026-05-20</td>
 <td class="gt_row gt_right" headers="tables">28</td>
 <td class="gt_row gt_right" headers="rows">133,022,102</td>
-<td class="gt_row gt_right" headers="size (MB)">5,503</td>
+<td class="gt_row gt_right" headers="size-(MB)">5,503</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.05.19</td>
 <td class="gt_row gt_right" headers="date">2026-05-19</td>
 <td class="gt_row gt_right" headers="tables">28</td>
 <td class="gt_row gt_right" headers="rows">133,022,102</td>
-<td class="gt_row gt_right" headers="size (MB)">5,503</td>
+<td class="gt_row gt_right" headers="size-(MB)">5,503</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.05.15</td>
 <td class="gt_row gt_right" headers="date">2026-05-15</td>
 <td class="gt_row gt_right" headers="tables">28</td>
 <td class="gt_row gt_right" headers="rows">133,013,839</td>
-<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_right" headers="size-(MB)">0</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.06.26</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.05.14</td>
 <td class="gt_row gt_right" headers="date">2026-05-14</td>
 <td class="gt_row gt_right" headers="tables">28</td>
 <td class="gt_row gt_right" headers="rows">133,013,839</td>
-<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_right" headers="size-(MB)">0</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.04.08</td>
 <td class="gt_row gt_right" headers="date">2026-04-08</td>
 <td class="gt_row gt_right" headers="tables">28</td>
 <td class="gt_row gt_right" headers="rows">357,418,040</td>
-<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_right" headers="size-(MB)">0</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">consolidated</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.04.06</td>
 <td class="gt_row gt_right" headers="date">2026-04-06</td>
 <td class="gt_row gt_right" headers="tables">29</td>
 <td class="gt_row gt_right" headers="rows">361,200,542</td>
-<td class="gt_row gt_right" headers="size (MB)">0</td>
+<td class="gt_row gt_right" headers="size-(MB)">0</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="version">v2026.04.03</td>
 <td class="gt_row gt_right" headers="date">2026-04-03</td>
 <td class="gt_row gt_right" headers="tables">29</td>
 <td class="gt_row gt_right" headers="rows">361,183,451</td>
-<td class="gt_row gt_right" headers="size (MB)">0</td>
-<td class="gt_row gt_left" headers="DOI"><br>
-</td>
-<td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="version">v2026.04.02</td>
-<td class="gt_row gt_right" headers="date">2026-04-02</td>
-<td class="gt_row gt_right" headers="tables">43</td>
-<td class="gt_row gt_right" headers="rows">361,152,303</td>
-<td class="gt_row gt_right" headers="size (MB)">11,498</td>
+<td class="gt_row gt_right" headers="size-(MB)">0</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="version">v2026.03.25</td>
-<td class="gt_row gt_right" headers="date">2026-03-25</td>
-<td class="gt_row gt_right" headers="tables">18</td>
-<td class="gt_row gt_right" headers="rows">354,898,020</td>
-<td class="gt_row gt_right" headers="size (MB)">11,263</td>
+<td class="gt_row gt_left" headers="version">v2026.04.02</td>
+<td class="gt_row gt_right" headers="date">2026-04-02</td>
+<td class="gt_row gt_right" headers="tables">43</td>
+<td class="gt_row gt_right" headers="rows">361,152,303</td>
+<td class="gt_row gt_right" headers="size-(MB)">11,498</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="version">v2026.03.25</td>
+<td class="gt_row gt_right" headers="date">2026-03-25</td>
+<td class="gt_row gt_right" headers="tables">18</td>
+<td class="gt_row gt_right" headers="rows">354,898,020</td>
+<td class="gt_row gt_right" headers="size-(MB)">11,263</td>
+<td class="gt_row gt_left" headers="DOI"><br>
+</td>
+<td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="version">v2026.03.14</td>
 <td class="gt_row gt_right" headers="date">2026-03-14</td>
 <td class="gt_row gt_right" headers="tables">20</td>
 <td class="gt_row gt_right" headers="rows">357,001,188</td>
-<td class="gt_row gt_right" headers="size (MB)">11,330</td>
+<td class="gt_row gt_right" headers="size-(MB)">11,330</td>
 <td class="gt_row gt_left" headers="DOI"><br>
 </td>
 <td class="gt_row gt_left" headers="kept">retired → v2026.04.08</td>
@@ -2263,7 +2272,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <h2 data-number="7.4" class="anchored" data-anchor-id="two-dois"><span class="header-section-number">7.4</span> Two DOIs</h2>
 <p>Each release is tagged on GitHub, and Zenodo mints a <strong>version DOI</strong> for it; one <strong>concept DOI</strong> always resolves to the newest. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code>, in the release notes’ <em>How to cite</em>, and on <a href="./cite.html">Cite this data</a>:</p>
 <ul>
-<li>this release: <a href="https://doi.org/10.5281/zenodo.23371724" class="uri">https://doi.org/10.5281/zenodo.23371724</a></li>
+<li>this release: <a href="https://doi.org/10.5281/zenodo.23484176" class="uri">https://doi.org/10.5281/zenodo.23484176</a></li>
 <li>every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
 </ul>
 </section>
@@ -2274,11 +2283,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <p>The most recent sections of the <a href="https://storage.calcofi.io/calcofi-db/ducklake/releases/RELEASES.html">rendered changelog</a> (raw markdown at <a href="https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md"><code>RELEASES.md</code></a>):</p>
 <ul>
 <li>Unreleased</li>
+<li>v2026.10.19</li>
 <li>v2026.10.14</li>
 <li>v2026.10.13</li>
 <li>v2026.10.08</li>
 <li>v2026.10.06</li>
-<li>v2026.10.05</li>
 </ul>
 </section>
 <section id="sec-release-gates" class="level2" data-number="7.6">
@@ -2413,7 +2422,7 @@ Table&nbsp;7.4: The gates that report and ratchet rather than stop the release.
 </figure>
 </div>
 <p>A failure in <a href="#tbl-gates" class="quarto-xref">Table&nbsp;<span>7.3</span></a> stops the release; a number in <a href="#tbl-ratchets" class="quarto-xref">Table&nbsp;<span>7.4</span></a> that went up since the last release stops it too, and one that went down becomes the new ceiling.</p>
-<p>For v2026.10.14 the consumer-contract suite ran 101 queries: <strong>97 passed</strong>, 0 failed, 4 skipped (<code>test_results.json</code>).</p>
+<p>For v2026.10.19 the consumer-contract suite ran 101 queries: <strong>97 passed</strong>, 0 failed, 4 skipped (<code>test_results.json</code>).</p>
 <p>A release that passes is uploaded, tested once more from the bucket by <code>test_release.qmd</code>, and only then promoted; the read-only consumers are refreshed afterwards by <code>scripts/deploy_consumers.sh</code> — the Explorer, ERDDAP and the Shiny apps on the CalCOFI server, and the ones hosted on GitHub Actions, which the script dispatches: <code>db-viz-station</code>, <code>ctd-transects</code>, <strong>the landing site</strong> (<a href="https://calcofi.io">calcofi.io</a>, whose dataset, measurement and species sections are drawn from the promoted release’s <code>datasets.json</code>, <code>measurements.json</code> and <code>taxa.json</code>, and which the script then polls until each shows the promoted version), the <code>calcofi4r</code> and <code>calcofi4py</code> workflows that re-run their examples against it, and <strong>this book</strong>, whose pre-render snapshots the promoted release’s <code>catalog.json</code>, <code>integrity.json</code> and sidecars and so describes the previous version until it re-renders (<a href="./architecture.html">Architecture</a>). In the same <code>targets</code> run the four publishers follow <code>test_release</code>, rebuilding only the datasets that changed, and <code>publish_status.qmd</code> lists what each portal is due (<a href="./portals.html#publish-after-release">Portals</a>). A <strong>staging</strong> run exercises the whole path under a separate prefix without touching the promoted release or the shared object store.</p>
 
 
