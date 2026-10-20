@@ -418,6 +418,20 @@ To place one on a map or in a hexagon, join `sample_measurement` to `sample` on 
 cast's `sample` row carries its position, its time and its `hex7`, and the row's own `dataset_key` is
 the derived dataset's, not the cast's.
 
+### Some measurements are derived per bottle {#sec-bottle-derived}
+
+`calcofi_bottle-derived` computes values from the bottle database's own temperature and salinity,
+one per bottle and back to the start of the record: spice (`spiciness0`, the same key and rule as the
+CTD series) and the TEOS-10 sigma-theta (`sigma_theta_teos10`). Its rows are depth observations in
+`obs_env`. Each sits on the `calcofi_bottle` bottle it was computed from, so the dataset adds no
+`sample` rows of its own. A bottle whose temperature or salinity its provider flags as suspect or
+missing gets no value, because a derived value carries no flag. The bottle database's own
+`sigma_theta`, computed by the provider's legacy software, stays as it is in `calcofi_bottle`, and the
+TEOS-10 value is published beside it under a key of its own. The two are not unified under one
+`variable`, because they come from the same bottles. A key that two datasets publish lists both in
+the registry's `_source_datasets`. Filter on `dataset_key` to keep the bottle spice apart from the
+CTD spice.
+
 ### A face for every measurement page
 
 Every measurement page at [calcofi.io/measurements/{key}/](https://calcofi.io/measurements/) carries the catalog above, and beneath
