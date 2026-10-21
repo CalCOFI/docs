@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-db145924cc11e9f06a2a79f299180345.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b1d8133c248c729780d8bc8dbaa6aaba.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-db145924cc11e9f06a2a79f299180345.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5712b2b45069c9db74c0b5b13d8467a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-448754dc9c8c59380709b49b289babcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-5712b2b45069c9db74c0b5b13d8467a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -742,32 +742,32 @@ Table&nbsp;5.1: What each column-name suffix promises about the value the column
 </section>
 <section id="the-contract-per-table" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="the-contract-per-table"><span class="header-section-number">5.2</span> The contract, per table</h2>
-<p>Every released table declares a primary key, and every foreign key between released tables — every arrow in <a href="db.html#fig-core-erd" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>, the core family’s diagram in the <a href="./db.html">Database</a> chapter — is declared in the release’s <code>relationships.json</code> (<code>calcofi4db::core_relationships()</code> for the core family and the tables the release builds; <code>metadata/relationships_cross.csv</code> for the edges that cross datasets). <a href="#tbl-contract" class="quarto-xref">Table&nbsp;<span>5.2</span></a> reads that file for v2026.10.19.</p>
+<p>Every released table declares a primary key, and every foreign key between released tables — every arrow in <a href="db.html#fig-core-erd" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>, the core family’s diagram in the <a href="./db.html">Database</a> chapter — is declared in the release’s <code>relationships.json</code> (<code>calcofi4db::core_relationships()</code> for the core family and the tables the release builds; <code>metadata/relationships_cross.csv</code> for the edges that cross datasets). <a href="#tbl-contract" class="quarto-xref">Table&nbsp;<span>5.2</span></a> reads that file for v2026.10.20.</p>
 <div class="cell">
 <div id="tbl-contract" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.
+Table&nbsp;5.2: Keys declared for every table of v2026.10.20. A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.
 </figcaption>
 <div aria-describedby="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="lhkvzgbyfg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lhkvzgbyfg table {
+<div id="ixfzegegdj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ixfzegegdj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lhkvzgbyfg thead, #lhkvzgbyfg tbody, #lhkvzgbyfg tfoot, #lhkvzgbyfg tr, #lhkvzgbyfg td, #lhkvzgbyfg th {
+#ixfzegegdj thead, #ixfzegegdj tbody, #ixfzegegdj tfoot, #ixfzegegdj tr, #ixfzegegdj td, #ixfzegegdj th {
   border-style: none;
 }
 
-#lhkvzgbyfg p {
+#ixfzegegdj p {
   margin: 0;
   padding: 0;
 }
 
-#lhkvzgbyfg .gt_table {
+#ixfzegegdj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -793,12 +793,12 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-left-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_caption {
+#ixfzegegdj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lhkvzgbyfg .gt_title {
+#ixfzegegdj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -810,7 +810,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-bottom-width: 0;
 }
 
-#lhkvzgbyfg .gt_subtitle {
+#ixfzegegdj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -822,7 +822,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-top-width: 0;
 }
 
-#lhkvzgbyfg .gt_heading {
+#ixfzegegdj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -834,13 +834,13 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_bottom_border {
+#ixfzegegdj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_col_headings {
+#ixfzegegdj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -855,7 +855,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_col_heading {
+#ixfzegegdj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -875,7 +875,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   overflow-x: hidden;
 }
 
-#lhkvzgbyfg .gt_column_spanner_outer {
+#ixfzegegdj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -887,15 +887,15 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   padding-right: 4px;
 }
 
-#lhkvzgbyfg .gt_column_spanner_outer:first-child {
+#ixfzegegdj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lhkvzgbyfg .gt_column_spanner_outer:last-child {
+#ixfzegegdj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lhkvzgbyfg .gt_column_spanner {
+#ixfzegegdj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -907,11 +907,11 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   width: 100%;
 }
 
-#lhkvzgbyfg .gt_spanner_row {
+#ixfzegegdj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lhkvzgbyfg .gt_group_heading {
+#ixfzegegdj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -937,7 +937,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   text-align: left;
 }
 
-#lhkvzgbyfg .gt_empty_group_heading {
+#ixfzegegdj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -952,15 +952,15 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   vertical-align: middle;
 }
 
-#lhkvzgbyfg .gt_from_md > :first-child {
+#ixfzegegdj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lhkvzgbyfg .gt_from_md > :last-child {
+#ixfzegegdj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lhkvzgbyfg .gt_row {
+#ixfzegegdj .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -979,7 +979,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   overflow-x: hidden;
 }
 
-#lhkvzgbyfg .gt_stub {
+#ixfzegegdj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -992,7 +992,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   padding-right: 5px;
 }
 
-#lhkvzgbyfg .gt_stub_row_group {
+#ixfzegegdj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1006,15 +1006,15 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   vertical-align: top;
 }
 
-#lhkvzgbyfg .gt_row_group_first td {
+#ixfzegegdj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lhkvzgbyfg .gt_row_group_first th {
+#ixfzegegdj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lhkvzgbyfg .gt_summary_row {
+#ixfzegegdj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1024,16 +1024,16 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   padding-right: 5px;
 }
 
-#lhkvzgbyfg .gt_first_summary_row {
+#ixfzegegdj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_first_summary_row.thick {
+#ixfzegegdj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lhkvzgbyfg .gt_last_summary_row {
+#ixfzegegdj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1043,7 +1043,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_grand_summary_row {
+#ixfzegegdj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1053,7 +1053,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   padding-right: 5px;
 }
 
-#lhkvzgbyfg .gt_first_grand_summary_row {
+#ixfzegegdj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1063,7 +1063,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-top-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_last_grand_summary_row_top {
+#ixfzegegdj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1073,11 +1073,11 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_striped {
+#ixfzegegdj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lhkvzgbyfg .gt_table_body {
+#ixfzegegdj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1086,7 +1086,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_footnotes {
+#ixfzegegdj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1100,7 +1100,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_footnote {
+#ixfzegegdj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1109,7 +1109,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   padding-right: 5px;
 }
 
-#lhkvzgbyfg .gt_sourcenotes {
+#ixfzegegdj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1123,7 +1123,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#lhkvzgbyfg .gt_sourcenote {
+#ixfzegegdj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1131,72 +1131,72 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
   padding-right: 5px;
 }
 
-#lhkvzgbyfg .gt_left {
+#ixfzegegdj .gt_left {
   text-align: left;
 }
 
-#lhkvzgbyfg .gt_center {
+#ixfzegegdj .gt_center {
   text-align: center;
 }
 
-#lhkvzgbyfg .gt_right {
+#ixfzegegdj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lhkvzgbyfg .gt_font_normal {
+#ixfzegegdj .gt_font_normal {
   font-weight: normal;
 }
 
-#lhkvzgbyfg .gt_font_bold {
+#ixfzegegdj .gt_font_bold {
   font-weight: bold;
 }
 
-#lhkvzgbyfg .gt_font_italic {
+#ixfzegegdj .gt_font_italic {
   font-style: italic;
 }
 
-#lhkvzgbyfg .gt_super {
+#ixfzegegdj .gt_super {
   font-size: 65%;
 }
 
-#lhkvzgbyfg .gt_footnote_marks {
+#ixfzegegdj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lhkvzgbyfg .gt_asterisk {
+#ixfzegegdj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lhkvzgbyfg .gt_indent_1 {
+#ixfzegegdj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lhkvzgbyfg .gt_indent_2 {
+#ixfzegegdj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lhkvzgbyfg .gt_indent_3 {
+#ixfzegegdj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lhkvzgbyfg .gt_indent_4 {
+#ixfzegegdj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lhkvzgbyfg .gt_indent_5 {
+#ixfzegegdj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lhkvzgbyfg .katex-display {
+#ixfzegegdj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lhkvzgbyfg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ixfzegegdj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1224,7 +1224,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">climatology</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">1,828,215</td>
+<td class="gt_row gt_right" headers="rows">1,878,006</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">dataset_key, site_key, month, depth_bin, measurement_type</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">grid_key → grid; measurement_type → measurement_type; dataset_key → dataset</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
@@ -1232,7 +1232,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">845</td>
+<td class="gt_row gt_right" headers="rows">869</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">ship_key → ship</td>
 <td class="gt_row gt_right" headers="referenced-by">7</td>
@@ -1240,7 +1240,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">19</td>
+<td class="gt_row gt_right" headers="rows">20</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">dataset_key</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em"><br>
 </td>
@@ -1280,6 +1280,14 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ichthyo_net</td>
+<td class="gt_row gt_left" headers="tier">core</td>
+<td class="gt_row gt_right" headers="rows">77,888</td>
+<td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">sample_key</td>
+<td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample</td>
+<td class="gt_row gt_right" headers="referenced-by">0</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">lookup</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">26</td>
@@ -1288,16 +1296,16 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 </td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">231</td>
+<td class="gt_row gt_right" headers="rows">232</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em"><br>
 </td>
 <td class="gt_row gt_right" headers="referenced-by">8</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_attribute</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">455,300</td>
@@ -1305,7 +1313,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; taxon_key → taxon; measurement_type → measurement_type; dataset_key → dataset</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_bio</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
@@ -1313,15 +1321,15 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">root_id → sample_root; sample_key → sample; dataset_key → dataset; grid_key → grid; cruise_key → cruise; measurement_type → measurement_type; taxon_key → taxon</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">root_id → sample_root; sample_key → sample; dataset_key → dataset; grid_key → grid; cruise_key → cruise; measurement_type → measurement_type</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">region</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">4</td>
@@ -1330,31 +1338,31 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 </td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">sample_key</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">parent_sample_key → sample; root_sample_key → sample; grid_key → grid; cruise_key → cruise; dataset_key → dataset; station_uuid → sample</td>
-<td class="gt_row gt_right" headers="referenced-by">9</td>
+<td class="gt_row gt_right" headers="referenced-by">10</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_measurement</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">658,009</td>
+<td class="gt_row gt_right" headers="rows">659,253</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">sample_measurement_id</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; measurement_type → measurement_type; dataset_key → dataset</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
 <td class="gt_row gt_left" headers="tier">core</td>
-<td class="gt_row gt_right" headers="rows">1,994,263</td>
+<td class="gt_row gt_right" headers="rows">1,996,331</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">root_sample_key, spatial_key</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">root_sample_key → sample; spatial_key → spatial; root_id → sample_root</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">49</td>
@@ -1363,7 +1371,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 </td>
 <td class="gt_row gt_right" headers="referenced-by">1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">3,390</td>
@@ -1372,7 +1380,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 </td>
 <td class="gt_row gt_right" headers="referenced-by">2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">37,943</td>
@@ -1380,7 +1388,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">spatial_key → spatial</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">2,606</td>
@@ -1388,7 +1396,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">parent_taxon_key → taxon</td>
 <td class="gt_row gt_right" headers="referenced-by">6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
 <td class="gt_row gt_left" headers="tier">core</td>
 <td class="gt_row gt_right" headers="rows">438</td>
@@ -1396,23 +1404,23 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">taxon_key → taxon</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
 <td class="gt_row gt_left" headers="tier">deprecated</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; taxon_key → taxon; measurement_type → measurement_type; grid_key → grid; cruise_key → cruise; dataset_key → dataset</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_ctd_full</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
-<td class="gt_row gt_right" headers="rows">281,888,334</td>
+<td class="gt_row gt_right" headers="rows">286,148,061</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">sample_key → sample; dataset_key → dataset; measurement_type → measurement_type; cruise_key → cruise; grid_key → grid</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_mets_full</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
 <td class="gt_row gt_right" headers="rows">19,926,523</td>
@@ -1420,10 +1428,10 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">dataset_key → dataset; measurement_type → measurement_type; cruise_key → cruise; grid_key → grid</td>
 <td class="gt_row gt_right" headers="referenced-by">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
 <td class="gt_row gt_left" headers="tier">supplemental</td>
-<td class="gt_row gt_right" headers="rows">419,050</td>
+<td class="gt_row gt_right" headers="rows">419,418</td>
 <td class="gt_row gt_left" headers="primary-key" style="font-family: monospace; font-size: 0.85em">root_id</td>
 <td class="gt_row gt_left" headers="foreign-keys" style="font-family: monospace; font-size: 0.85em">root_sample_key → sample; dataset_key → dataset; cruise_key → cruise; grid_key → grid</td>
 <td class="gt_row gt_right" headers="referenced-by">3</td>
@@ -1441,7 +1449,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.10.19. A NULL in a foreig
 <section id="measured-this-release" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="measured-this-release"><span class="header-section-number">5.3</span> Measured, this release</h2>
 <p>Declaring a key is cheap. Since 2026-09-08 the release <em>measures</em> every declaration on the assembled tables before it freezes — <code>calcofi4db::check_release_relationships()</code> — and writes the result beside <code>catalog.json</code> as <code>integrity.json</code>. A duplicate or NULL primary key, or any non-NULL foreign key with no match, <strong>stops the release</strong>. The schema browser reads the same file, so a ✓ on a key there means measured, not declared.</p>
-<p>For <strong>v2026.10.19</strong>: 25 primary keys and 60 foreign keys measured, 0 skipped, <strong>every key ok</strong>.</p>
+<p>For <strong>v2026.10.20</strong>: 26 primary keys and 61 foreign keys measured, 0 skipped, <strong>every key ok</strong>.</p>
 <div class="cell">
 <div id="tbl-pk" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1450,23 +1458,23 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 </figcaption>
 <div aria-describedby="tbl-pk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="fyfczaktmc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fyfczaktmc table {
+<div id="zhsgmnicog" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zhsgmnicog table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fyfczaktmc thead, #fyfczaktmc tbody, #fyfczaktmc tfoot, #fyfczaktmc tr, #fyfczaktmc td, #fyfczaktmc th {
+#zhsgmnicog thead, #zhsgmnicog tbody, #zhsgmnicog tfoot, #zhsgmnicog tr, #zhsgmnicog td, #zhsgmnicog th {
   border-style: none;
 }
 
-#fyfczaktmc p {
+#zhsgmnicog p {
   margin: 0;
   padding: 0;
 }
 
-#fyfczaktmc .gt_table {
+#zhsgmnicog .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1492,12 +1500,12 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-left-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_caption {
+#zhsgmnicog .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fyfczaktmc .gt_title {
+#zhsgmnicog .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1509,7 +1517,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-width: 0;
 }
 
-#fyfczaktmc .gt_subtitle {
+#zhsgmnicog .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1521,7 +1529,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-top-width: 0;
 }
 
-#fyfczaktmc .gt_heading {
+#zhsgmnicog .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1533,13 +1541,13 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_bottom_border {
+#zhsgmnicog .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_col_headings {
+#zhsgmnicog .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1554,7 +1562,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_col_heading {
+#zhsgmnicog .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1574,7 +1582,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   overflow-x: hidden;
 }
 
-#fyfczaktmc .gt_column_spanner_outer {
+#zhsgmnicog .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1586,15 +1594,15 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 4px;
 }
 
-#fyfczaktmc .gt_column_spanner_outer:first-child {
+#zhsgmnicog .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fyfczaktmc .gt_column_spanner_outer:last-child {
+#zhsgmnicog .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fyfczaktmc .gt_column_spanner {
+#zhsgmnicog .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1606,11 +1614,11 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   width: 100%;
 }
 
-#fyfczaktmc .gt_spanner_row {
+#zhsgmnicog .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fyfczaktmc .gt_group_heading {
+#zhsgmnicog .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1636,7 +1644,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   text-align: left;
 }
 
-#fyfczaktmc .gt_empty_group_heading {
+#zhsgmnicog .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1651,15 +1659,15 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   vertical-align: middle;
 }
 
-#fyfczaktmc .gt_from_md > :first-child {
+#zhsgmnicog .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fyfczaktmc .gt_from_md > :last-child {
+#zhsgmnicog .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fyfczaktmc .gt_row {
+#zhsgmnicog .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1678,7 +1686,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   overflow-x: hidden;
 }
 
-#fyfczaktmc .gt_stub {
+#zhsgmnicog .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1691,7 +1699,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#fyfczaktmc .gt_stub_row_group {
+#zhsgmnicog .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1705,15 +1713,15 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   vertical-align: top;
 }
 
-#fyfczaktmc .gt_row_group_first td {
+#zhsgmnicog .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fyfczaktmc .gt_row_group_first th {
+#zhsgmnicog .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fyfczaktmc .gt_summary_row {
+#zhsgmnicog .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1723,16 +1731,16 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#fyfczaktmc .gt_first_summary_row {
+#zhsgmnicog .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_first_summary_row.thick {
+#zhsgmnicog .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fyfczaktmc .gt_last_summary_row {
+#zhsgmnicog .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1742,7 +1750,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_grand_summary_row {
+#zhsgmnicog .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1752,7 +1760,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#fyfczaktmc .gt_first_grand_summary_row {
+#zhsgmnicog .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1762,7 +1770,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-top-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_last_grand_summary_row_top {
+#zhsgmnicog .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1772,11 +1780,11 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_striped {
+#zhsgmnicog .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fyfczaktmc .gt_table_body {
+#zhsgmnicog .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1785,7 +1793,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_footnotes {
+#zhsgmnicog .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1799,7 +1807,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_footnote {
+#zhsgmnicog .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1808,7 +1816,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#fyfczaktmc .gt_sourcenotes {
+#zhsgmnicog .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1822,7 +1830,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#fyfczaktmc .gt_sourcenote {
+#zhsgmnicog .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1830,72 +1838,72 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#fyfczaktmc .gt_left {
+#zhsgmnicog .gt_left {
   text-align: left;
 }
 
-#fyfczaktmc .gt_center {
+#zhsgmnicog .gt_center {
   text-align: center;
 }
 
-#fyfczaktmc .gt_right {
+#zhsgmnicog .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fyfczaktmc .gt_font_normal {
+#zhsgmnicog .gt_font_normal {
   font-weight: normal;
 }
 
-#fyfczaktmc .gt_font_bold {
+#zhsgmnicog .gt_font_bold {
   font-weight: bold;
 }
 
-#fyfczaktmc .gt_font_italic {
+#zhsgmnicog .gt_font_italic {
   font-style: italic;
 }
 
-#fyfczaktmc .gt_super {
+#zhsgmnicog .gt_super {
   font-size: 65%;
 }
 
-#fyfczaktmc .gt_footnote_marks {
+#zhsgmnicog .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fyfczaktmc .gt_asterisk {
+#zhsgmnicog .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fyfczaktmc .gt_indent_1 {
+#zhsgmnicog .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fyfczaktmc .gt_indent_2 {
+#zhsgmnicog .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fyfczaktmc .gt_indent_3 {
+#zhsgmnicog .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fyfczaktmc .gt_indent_4 {
+#zhsgmnicog .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fyfczaktmc .gt_indent_5 {
+#zhsgmnicog .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fyfczaktmc .katex-display {
+#zhsgmnicog .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fyfczaktmc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zhsgmnicog div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1916,8 +1924,8 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">climatology</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">dataset_key,site_key,month,depth_bin,measurement_type</td>
-<td class="gt_row gt_right" headers="rows">1,828,215</td>
-<td class="gt_row gt_right" headers="distinct">1,828,215</td>
+<td class="gt_row gt_right" headers="rows">1,878,006</td>
+<td class="gt_row gt_right" headers="distinct">1,878,006</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
@@ -1925,8 +1933,8 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">cruise</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">cruise_key</td>
-<td class="gt_row gt_right" headers="rows">845</td>
-<td class="gt_row gt_right" headers="distinct">845</td>
+<td class="gt_row gt_right" headers="rows">869</td>
+<td class="gt_row gt_right" headers="distinct">869</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
@@ -1934,8 +1942,8 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">dataset</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">dataset_key</td>
-<td class="gt_row gt_right" headers="rows">19</td>
-<td class="gt_row gt_right" headers="distinct">19</td>
+<td class="gt_row gt_right" headers="rows">20</td>
+<td class="gt_row gt_right" headers="distinct">20</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
@@ -1977,6 +1985,15 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ichthyo_net</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">sample_key</td>
+<td class="gt_row gt_right" headers="rows">77,888</td>
+<td class="gt_row gt_right" headers="distinct">77,888</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">lookup</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">lookup_id</td>
 <td class="gt_row gt_right" headers="rows">26</td>
@@ -1985,25 +2002,25 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">measurement_type</td>
-<td class="gt_row gt_right" headers="rows">231</td>
-<td class="gt_row gt_right" headers="distinct">231</td>
+<td class="gt_row gt_right" headers="rows">232</td>
+<td class="gt_row gt_right" headers="distinct">232</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
+<td class="gt_row gt_right" headers="distinct">35,358,143</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs</td>
-<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
-<td class="gt_row gt_right" headers="distinct">33,326,406</td>
-<td class="gt_row gt_right" headers="duplicates">0</td>
-<td class="gt_row gt_right" headers="NULL">0</td>
-<td class="gt_row gt_left" headers="status">ok</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_attribute</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_attribute_id</td>
 <td class="gt_row gt_right" headers="rows">455,300</td>
@@ -2012,7 +2029,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_bio</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
@@ -2021,25 +2038,25 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_ctd_full</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
-<td class="gt_row gt_right" headers="rows">281,888,334</td>
-<td class="gt_row gt_right" headers="distinct">281,888,334</td>
+<td class="gt_row gt_right" headers="rows">286,148,061</td>
+<td class="gt_row gt_right" headers="distinct">286,148,061</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
+<td class="gt_row gt_right" headers="distinct">33,771,348</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_env</td>
-<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
-<td class="gt_row gt_right" headers="distinct">31,739,611</td>
-<td class="gt_row gt_right" headers="duplicates">0</td>
-<td class="gt_row gt_right" headers="NULL">0</td>
-<td class="gt_row gt_left" headers="status">ok</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">obs_mets_full</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">obs_id</td>
 <td class="gt_row gt_right" headers="rows">19,926,523</td>
@@ -2048,7 +2065,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">region</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">region_key</td>
 <td class="gt_row gt_right" headers="rows">4</td>
@@ -2057,43 +2074,43 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">sample_key</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
-<td class="gt_row gt_right" headers="distinct">1,467,016</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
+<td class="gt_row gt_right" headers="distinct">1,467,375</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_measurement</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">sample_measurement_id</td>
-<td class="gt_row gt_right" headers="rows">658,009</td>
-<td class="gt_row gt_right" headers="distinct">658,009</td>
-<td class="gt_row gt_right" headers="duplicates">0</td>
-<td class="gt_row gt_right" headers="NULL">0</td>
-<td class="gt_row gt_left" headers="status">ok</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
-<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">root_id</td>
-<td class="gt_row gt_right" headers="rows">419,050</td>
-<td class="gt_row gt_right" headers="distinct">419,050</td>
+<td class="gt_row gt_right" headers="rows">659,253</td>
+<td class="gt_row gt_right" headers="distinct">659,253</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
-<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">root_sample_key,spatial_key</td>
-<td class="gt_row gt_right" headers="rows">1,994,263</td>
-<td class="gt_row gt_right" headers="distinct">1,994,263</td>
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_root</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">root_id</td>
+<td class="gt_row gt_right" headers="rows">419,418</td>
+<td class="gt_row gt_right" headers="distinct">419,418</td>
 <td class="gt_row gt_right" headers="duplicates">0</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">sample_spatial</td>
+<td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">root_sample_key,spatial_key</td>
+<td class="gt_row gt_right" headers="rows">1,996,331</td>
+<td class="gt_row gt_right" headers="distinct">1,996,331</td>
+<td class="gt_row gt_right" headers="duplicates">0</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">ship</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">ship_key</td>
 <td class="gt_row gt_right" headers="rows">49</td>
@@ -2102,7 +2119,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">spatial_key</td>
 <td class="gt_row gt_right" headers="rows">3,390</td>
@@ -2111,7 +2128,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">spatial_attribute</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">spatial_key,fld</td>
 <td class="gt_row gt_right" headers="rows">37,943</td>
@@ -2120,7 +2137,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">taxon_key</td>
 <td class="gt_row gt_right" headers="rows">2,606</td>
@@ -2129,7 +2146,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="table" style="font-family: monospace; font-size: 0.85em">taxon_group</td>
 <td class="gt_row gt_left" headers="key" style="font-family: monospace; font-size: 0.85em">taxon_group_key,taxon_key</td>
 <td class="gt_row gt_right" headers="rows">438</td>
@@ -2155,23 +2172,23 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
 </figcaption>
 <div aria-describedby="tbl-fk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="yaxfuukljz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yaxfuukljz table {
+<div id="jsyyaxbcxs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jsyyaxbcxs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yaxfuukljz thead, #yaxfuukljz tbody, #yaxfuukljz tfoot, #yaxfuukljz tr, #yaxfuukljz td, #yaxfuukljz th {
+#jsyyaxbcxs thead, #jsyyaxbcxs tbody, #jsyyaxbcxs tfoot, #jsyyaxbcxs tr, #jsyyaxbcxs td, #jsyyaxbcxs th {
   border-style: none;
 }
 
-#yaxfuukljz p {
+#jsyyaxbcxs p {
   margin: 0;
   padding: 0;
 }
 
-#yaxfuukljz .gt_table {
+#jsyyaxbcxs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2197,12 +2214,12 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-left-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_caption {
+#jsyyaxbcxs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yaxfuukljz .gt_title {
+#jsyyaxbcxs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2214,7 +2231,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-width: 0;
 }
 
-#yaxfuukljz .gt_subtitle {
+#jsyyaxbcxs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2226,7 +2243,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-top-width: 0;
 }
 
-#yaxfuukljz .gt_heading {
+#jsyyaxbcxs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2238,13 +2255,13 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_bottom_border {
+#jsyyaxbcxs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_col_headings {
+#jsyyaxbcxs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2259,7 +2276,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_col_heading {
+#jsyyaxbcxs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2279,7 +2296,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   overflow-x: hidden;
 }
 
-#yaxfuukljz .gt_column_spanner_outer {
+#jsyyaxbcxs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2291,15 +2308,15 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 4px;
 }
 
-#yaxfuukljz .gt_column_spanner_outer:first-child {
+#jsyyaxbcxs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yaxfuukljz .gt_column_spanner_outer:last-child {
+#jsyyaxbcxs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yaxfuukljz .gt_column_spanner {
+#jsyyaxbcxs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2311,11 +2328,11 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   width: 100%;
 }
 
-#yaxfuukljz .gt_spanner_row {
+#jsyyaxbcxs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yaxfuukljz .gt_group_heading {
+#jsyyaxbcxs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2341,7 +2358,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   text-align: left;
 }
 
-#yaxfuukljz .gt_empty_group_heading {
+#jsyyaxbcxs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2356,15 +2373,15 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   vertical-align: middle;
 }
 
-#yaxfuukljz .gt_from_md > :first-child {
+#jsyyaxbcxs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yaxfuukljz .gt_from_md > :last-child {
+#jsyyaxbcxs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yaxfuukljz .gt_row {
+#jsyyaxbcxs .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2383,7 +2400,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   overflow-x: hidden;
 }
 
-#yaxfuukljz .gt_stub {
+#jsyyaxbcxs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2396,7 +2413,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#yaxfuukljz .gt_stub_row_group {
+#jsyyaxbcxs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2410,15 +2427,15 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   vertical-align: top;
 }
 
-#yaxfuukljz .gt_row_group_first td {
+#jsyyaxbcxs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yaxfuukljz .gt_row_group_first th {
+#jsyyaxbcxs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yaxfuukljz .gt_summary_row {
+#jsyyaxbcxs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2428,16 +2445,16 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#yaxfuukljz .gt_first_summary_row {
+#jsyyaxbcxs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_first_summary_row.thick {
+#jsyyaxbcxs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yaxfuukljz .gt_last_summary_row {
+#jsyyaxbcxs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2447,7 +2464,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_grand_summary_row {
+#jsyyaxbcxs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2457,7 +2474,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#yaxfuukljz .gt_first_grand_summary_row {
+#jsyyaxbcxs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2467,7 +2484,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-top-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_last_grand_summary_row_top {
+#jsyyaxbcxs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2477,11 +2494,11 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_striped {
+#jsyyaxbcxs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yaxfuukljz .gt_table_body {
+#jsyyaxbcxs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2490,7 +2507,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_footnotes {
+#jsyyaxbcxs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2504,7 +2521,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_footnote {
+#jsyyaxbcxs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2513,7 +2530,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#yaxfuukljz .gt_sourcenotes {
+#jsyyaxbcxs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2527,7 +2544,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#yaxfuukljz .gt_sourcenote {
+#jsyyaxbcxs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2535,72 +2552,72 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#yaxfuukljz .gt_left {
+#jsyyaxbcxs .gt_left {
   text-align: left;
 }
 
-#yaxfuukljz .gt_center {
+#jsyyaxbcxs .gt_center {
   text-align: center;
 }
 
-#yaxfuukljz .gt_right {
+#jsyyaxbcxs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yaxfuukljz .gt_font_normal {
+#jsyyaxbcxs .gt_font_normal {
   font-weight: normal;
 }
 
-#yaxfuukljz .gt_font_bold {
+#jsyyaxbcxs .gt_font_bold {
   font-weight: bold;
 }
 
-#yaxfuukljz .gt_font_italic {
+#jsyyaxbcxs .gt_font_italic {
   font-style: italic;
 }
 
-#yaxfuukljz .gt_super {
+#jsyyaxbcxs .gt_super {
   font-size: 65%;
 }
 
-#yaxfuukljz .gt_footnote_marks {
+#jsyyaxbcxs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yaxfuukljz .gt_asterisk {
+#jsyyaxbcxs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yaxfuukljz .gt_indent_1 {
+#jsyyaxbcxs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yaxfuukljz .gt_indent_2 {
+#jsyyaxbcxs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yaxfuukljz .gt_indent_3 {
+#jsyyaxbcxs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yaxfuukljz .gt_indent_4 {
+#jsyyaxbcxs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yaxfuukljz .gt_indent_5 {
+#jsyyaxbcxs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yaxfuukljz .katex-display {
+#jsyyaxbcxs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yaxfuukljz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jsyyaxbcxs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2618,28 +2635,28 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">climatology.dataset_key → dataset.dataset_key</td>
-<td class="gt_row gt_right" headers="rows">1,828,215</td>
+<td class="gt_row gt_right" headers="rows">1,878,006</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">climatology.grid_key → grid.grid_key</td>
-<td class="gt_row gt_right" headers="rows">1,828,215</td>
+<td class="gt_row gt_right" headers="rows">1,878,006</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">climatology.measurement_type → measurement_type.measurement_type</td>
-<td class="gt_row gt_right" headers="rows">1,828,215</td>
+<td class="gt_row gt_right" headers="rows">1,878,006</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">cruise.ship_key → ship.ship_key</td>
-<td class="gt_row gt_right" headers="rows">845</td>
+<td class="gt_row gt_right" headers="rows">869</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
@@ -2680,356 +2697,363 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">ichthyo_net.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">77,888</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.cruise_key → cruise.cruise_key</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
-<td class="gt_row gt_right" headers="NULL">151,661</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
+<td class="gt_row gt_right" headers="NULL">108,550</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.dataset_key → dataset.dataset_key</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.grid_key → grid.grid_key</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
-<td class="gt_row gt_right" headers="NULL">308,251</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
+<td class="gt_row gt_right" headers="NULL">326,139</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.measurement_type → measurement_type.measurement_type</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
-<td class="gt_row gt_right" headers="NULL">0</td>
-<td class="gt_row gt_right" headers="orphans">0</td>
-<td class="gt_row gt_left" headers="status">ok</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.taxon_key → taxon.taxon_key</td>
-<td class="gt_row gt_right" headers="rows">33,326,406</td>
-<td class="gt_row gt_right" headers="NULL">31,740,374</td>
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs.taxon_key → taxon.taxon_key</td>
+<td class="gt_row gt_right" headers="rows">35,358,143</td>
+<td class="gt_row gt_right" headers="NULL">33,772,111</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.dataset_key → dataset.dataset_key</td>
 <td class="gt_row gt_right" headers="rows">455,300</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.measurement_type → measurement_type.measurement_type</td>
 <td class="gt_row gt_right" headers="rows">455,300</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.sample_key → sample.sample_key</td>
 <td class="gt_row gt_right" headers="rows">455,300</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_attribute.taxon_key → taxon.taxon_key</td>
 <td class="gt_row gt_right" headers="rows">455,300</td>
 <td class="gt_row gt_right" headers="NULL">781</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.cruise_key → cruise.cruise_key</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
-<td class="gt_row gt_right" headers="NULL">142,508</td>
+<td class="gt_row gt_right" headers="NULL">99,342</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.dataset_key → dataset.dataset_key</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.grid_key → grid.grid_key</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
 <td class="gt_row gt_right" headers="NULL">200,389</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.measurement_type → measurement_type.measurement_type</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.root_id → sample_root.root_id</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.sample_key → sample.sample_key</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_bio.taxon_key → taxon.taxon_key</td>
 <td class="gt_row gt_right" headers="rows">1,586,795</td>
 <td class="gt_row gt_right" headers="NULL">763</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.cruise_key → cruise.cruise_key</td>
-<td class="gt_row gt_right" headers="rows">281,888,334</td>
+<td class="gt_row gt_right" headers="rows">286,148,061</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.dataset_key → dataset.dataset_key</td>
-<td class="gt_row gt_right" headers="rows">281,888,334</td>
+<td class="gt_row gt_right" headers="rows">286,148,061</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.grid_key → grid.grid_key</td>
-<td class="gt_row gt_right" headers="rows">281,888,334</td>
+<td class="gt_row gt_right" headers="rows">286,148,061</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.measurement_type → measurement_type.measurement_type</td>
-<td class="gt_row gt_right" headers="rows">281,888,334</td>
+<td class="gt_row gt_right" headers="rows">286,148,061</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_ctd_full.sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">281,888,334</td>
+<td class="gt_row gt_right" headers="rows">286,148,061</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.cruise_key → cruise.cruise_key</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
-<td class="gt_row gt_right" headers="NULL">9,153</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
+<td class="gt_row gt_right" headers="NULL">9,208</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.dataset_key → dataset.dataset_key</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.grid_key → grid.grid_key</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
-<td class="gt_row gt_right" headers="NULL">107,862</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
+<td class="gt_row gt_right" headers="NULL">125,750</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.measurement_type → measurement_type.measurement_type</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
-<td class="gt_row gt_right" headers="NULL">0</td>
-<td class="gt_row gt_right" headers="orphans">0</td>
-<td class="gt_row gt_left" headers="status">ok</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.root_id → sample_root.root_id</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">31,739,611</td>
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.root_id → sample_root.root_id</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_env.sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">33,771,348</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.cruise_key → cruise.cruise_key</td>
 <td class="gt_row gt_right" headers="rows">19,926,523</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.dataset_key → dataset.dataset_key</td>
 <td class="gt_row gt_right" headers="rows">19,926,523</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.grid_key → grid.grid_key</td>
 <td class="gt_row gt_right" headers="rows">19,926,523</td>
 <td class="gt_row gt_right" headers="NULL">16,128</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">obs_mets_full.measurement_type → measurement_type.measurement_type</td>
 <td class="gt_row gt_right" headers="rows">19,926,523</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.cruise_key → cruise.cruise_key</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
-<td class="gt_row gt_right" headers="NULL">14,721</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
+<td class="gt_row gt_right" headers="NULL">12,614</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.dataset_key → dataset.dataset_key</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.grid_key → grid.grid_key</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
 <td class="gt_row gt_right" headers="NULL">23,099</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.parent_sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
-<td class="gt_row gt_right" headers="NULL">419,050</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
+<td class="gt_row gt_right" headers="NULL">419,418</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.root_sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample.station_uuid → sample.source_uuid</td>
-<td class="gt_row gt_right" headers="rows">1,467,016</td>
-<td class="gt_row gt_right" headers="NULL">435,122</td>
+<td class="gt_row gt_right" headers="rows">1,467,375</td>
+<td class="gt_row gt_right" headers="NULL">435,198</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_measurement.dataset_key → dataset.dataset_key</td>
-<td class="gt_row gt_right" headers="rows">658,009</td>
+<td class="gt_row gt_right" headers="rows">659,253</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_measurement.measurement_type → measurement_type.measurement_type</td>
-<td class="gt_row gt_right" headers="rows">658,009</td>
+<td class="gt_row gt_right" headers="rows">659,253</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_measurement.sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">658,009</td>
+<td class="gt_row gt_right" headers="rows">659,253</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
-<td class="gt_row gt_right" headers="orphans">0</td>
-<td class="gt_row gt_left" headers="status">ok</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.cruise_key → cruise.cruise_key</td>
-<td class="gt_row gt_right" headers="rows">419,050</td>
-<td class="gt_row gt_right" headers="NULL">14,131</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.dataset_key → dataset.dataset_key</td>
-<td class="gt_row gt_right" headers="rows">419,050</td>
-<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.cruise_key → cruise.cruise_key</td>
+<td class="gt_row gt_right" headers="rows">419,418</td>
+<td class="gt_row gt_right" headers="NULL">12,024</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.dataset_key → dataset.dataset_key</td>
+<td class="gt_row gt_right" headers="rows">419,418</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.grid_key → grid.grid_key</td>
-<td class="gt_row gt_right" headers="rows">419,050</td>
+<td class="gt_row gt_right" headers="rows">419,418</td>
 <td class="gt_row gt_right" headers="NULL">8,408</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_root.root_sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">419,050</td>
+<td class="gt_row gt_right" headers="rows">419,418</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.root_id → sample_root.root_id</td>
-<td class="gt_row gt_right" headers="rows">1,994,263</td>
-<td class="gt_row gt_right" headers="NULL">0</td>
-<td class="gt_row gt_right" headers="orphans">0</td>
-<td class="gt_row gt_left" headers="status">ok</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.root_sample_key → sample.sample_key</td>
-<td class="gt_row gt_right" headers="rows">1,994,263</td>
+<td class="gt_row gt_right" headers="rows">1,996,331</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.spatial_key → spatial.spatial_key</td>
-<td class="gt_row gt_right" headers="rows">1,994,263</td>
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.root_sample_key → sample.sample_key</td>
+<td class="gt_row gt_right" headers="rows">1,996,331</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">sample_spatial.spatial_key → spatial.spatial_key</td>
+<td class="gt_row gt_right" headers="rows">1,996,331</td>
+<td class="gt_row gt_right" headers="NULL">0</td>
+<td class="gt_row gt_right" headers="orphans">0</td>
+<td class="gt_row gt_left" headers="status">ok</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">spatial_attribute.spatial_key → spatial.spatial_key</td>
 <td class="gt_row gt_right" headers="rows">37,943</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">taxon.parent_taxon_key → taxon.taxon_key</td>
 <td class="gt_row gt_right" headers="rows">2,606</td>
 <td class="gt_row gt_right" headers="NULL">21</td>
 <td class="gt_row gt_right" headers="orphans">0</td>
 <td class="gt_row gt_left" headers="status">ok</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="edge" style="font-family: monospace; font-size: 0.85em">taxon_group.taxon_key → taxon.taxon_key</td>
 <td class="gt_row gt_right" headers="rows">438</td>
 <td class="gt_row gt_right" headers="NULL">0</td>
@@ -3180,32 +3204,32 @@ Table&nbsp;5.5: The gates that stop a release outright, of which the first five 
 <h2 data-number="5.6" class="anchored" data-anchor-id="sec-grid-migration"><span class="header-section-number">5.6</span> The grid key changed in October 2026</h2>
 <p>Until <code>v2026.10.01</code>, <code>grid</code> was the cells of an idealized lattice, clipped by a coarse coastline and patched by hand: an inshore cell could hold two to four of the real stations, which is why the climatology moved to <code>site_key</code> (<a href="./db.html#shared-reference-tables">The database</a>). The release that follows it ships a rebuilt <code>grid</code>: <strong>one cell per official station</strong> — the Voronoi tessellation of the station positions CalCOFI publishes at <a href="https://calcofi.org/sampling-info/station-positions/">calcofi.org/sampling-info/station-positions</a>, confined to the footprint of the previous cells it replaces — <strong>beside the previous cells that lay beyond the official pattern, kept exactly as they were</strong>, so a historical position outside the pattern keys as it always did. Both end at the OpenStreetMap coastline. The table’s columns are unchanged; <code>grid.geom_ctr</code> is now the station itself rather than a centroid. The build, its rules and the evidence are in the workflows notebook <a href="https://calcofi.io/workflows/explore_grid_voronoi.html"><code>explore_grid_voronoi</code></a> and <code>calcofi4r::cc_grid_build()</code>.</p>
 <p><strong>A <code>grid_key</code> keeps its form (<code>st{station}-ln{line}</code>) but is no longer a name for the same water across releases.</strong> A station’s cell is named for its station, and a name that already existed can now be a different polygon.</p>
-<p>For <code>v2026.10.19</code> the crosswalk holds <strong>218</strong> previous keys and <strong>225</strong> current ones, and <code>grid</code> has <strong>225</strong> cells. <strong>196</strong> keys exist in both grids; <strong>22</strong> previous keys are no longer a key at all (retired) and <strong>29</strong> current keys are new. A key present in both is not necessarily the same polygon: <a href="#tbl-grid-moved" class="quarto-xref">Table&nbsp;<span>5.6</span></a> lists the ones that kept the least of their previous cell.</p>
+<p>For <code>v2026.10.20</code> the crosswalk holds <strong>218</strong> previous keys and <strong>225</strong> current ones, and <code>grid</code> has <strong>225</strong> cells. <strong>196</strong> keys exist in both grids; <strong>22</strong> previous keys are no longer a key at all (retired) and <strong>29</strong> current keys are new. A key present in both is not necessarily the same polygon: <a href="#tbl-grid-moved" class="quarto-xref">Table&nbsp;<span>5.6</span></a> lists the ones that kept the least of their previous cell.</p>
 <div class="cell">
 <div id="tbl-grid-moved" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grid-moved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the least of their previous cell. <code>prev_frac</code> is the share of the previous cell still inside the cell of the same name, <code>grid_frac</code> the share of today’s cell that was inside it; a kept cell reads close to one on both (its coastline moved, not its boundary).
+Table&nbsp;5.6: The keys of v2026.10.20 that exist in both grids but keep the least of their previous cell. <code>prev_frac</code> is the share of the previous cell still inside the cell of the same name, <code>grid_frac</code> the share of today’s cell that was inside it; a kept cell reads close to one on both (its coastline moved, not its boundary).
 </figcaption>
 <div aria-describedby="tbl-grid-moved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="suzrknnowr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#suzrknnowr table {
+<div id="wyfalstqyl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wyfalstqyl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#suzrknnowr thead, #suzrknnowr tbody, #suzrknnowr tfoot, #suzrknnowr tr, #suzrknnowr td, #suzrknnowr th {
+#wyfalstqyl thead, #wyfalstqyl tbody, #wyfalstqyl tfoot, #wyfalstqyl tr, #wyfalstqyl td, #wyfalstqyl th {
   border-style: none;
 }
 
-#suzrknnowr p {
+#wyfalstqyl p {
   margin: 0;
   padding: 0;
 }
 
-#suzrknnowr .gt_table {
+#wyfalstqyl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3231,12 +3255,12 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-left-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_caption {
+#wyfalstqyl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#suzrknnowr .gt_title {
+#wyfalstqyl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3248,7 +3272,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-bottom-width: 0;
 }
 
-#suzrknnowr .gt_subtitle {
+#wyfalstqyl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3260,7 +3284,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-top-width: 0;
 }
 
-#suzrknnowr .gt_heading {
+#wyfalstqyl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3272,13 +3296,13 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_bottom_border {
+#wyfalstqyl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_col_headings {
+#wyfalstqyl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3293,7 +3317,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_col_heading {
+#wyfalstqyl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3313,7 +3337,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   overflow-x: hidden;
 }
 
-#suzrknnowr .gt_column_spanner_outer {
+#wyfalstqyl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3325,15 +3349,15 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   padding-right: 4px;
 }
 
-#suzrknnowr .gt_column_spanner_outer:first-child {
+#wyfalstqyl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#suzrknnowr .gt_column_spanner_outer:last-child {
+#wyfalstqyl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#suzrknnowr .gt_column_spanner {
+#wyfalstqyl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3345,11 +3369,11 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   width: 100%;
 }
 
-#suzrknnowr .gt_spanner_row {
+#wyfalstqyl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#suzrknnowr .gt_group_heading {
+#wyfalstqyl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3375,7 +3399,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   text-align: left;
 }
 
-#suzrknnowr .gt_empty_group_heading {
+#wyfalstqyl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3390,15 +3414,15 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   vertical-align: middle;
 }
 
-#suzrknnowr .gt_from_md > :first-child {
+#wyfalstqyl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#suzrknnowr .gt_from_md > :last-child {
+#wyfalstqyl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#suzrknnowr .gt_row {
+#wyfalstqyl .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3417,7 +3441,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   overflow-x: hidden;
 }
 
-#suzrknnowr .gt_stub {
+#wyfalstqyl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3430,7 +3454,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#suzrknnowr .gt_stub_row_group {
+#wyfalstqyl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3444,15 +3468,15 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   vertical-align: top;
 }
 
-#suzrknnowr .gt_row_group_first td {
+#wyfalstqyl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#suzrknnowr .gt_row_group_first th {
+#wyfalstqyl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#suzrknnowr .gt_summary_row {
+#wyfalstqyl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3462,16 +3486,16 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#suzrknnowr .gt_first_summary_row {
+#wyfalstqyl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_first_summary_row.thick {
+#wyfalstqyl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#suzrknnowr .gt_last_summary_row {
+#wyfalstqyl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3481,7 +3505,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-bottom-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_grand_summary_row {
+#wyfalstqyl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3491,7 +3515,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#suzrknnowr .gt_first_grand_summary_row {
+#wyfalstqyl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3501,7 +3525,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-top-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_last_grand_summary_row_top {
+#wyfalstqyl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3511,11 +3535,11 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-bottom-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_striped {
+#wyfalstqyl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#suzrknnowr .gt_table_body {
+#wyfalstqyl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3524,7 +3548,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-bottom-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_footnotes {
+#wyfalstqyl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3538,7 +3562,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_footnote {
+#wyfalstqyl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3547,7 +3571,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#suzrknnowr .gt_sourcenotes {
+#wyfalstqyl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3561,7 +3585,7 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#suzrknnowr .gt_sourcenote {
+#wyfalstqyl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3569,72 +3593,72 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#suzrknnowr .gt_left {
+#wyfalstqyl .gt_left {
   text-align: left;
 }
 
-#suzrknnowr .gt_center {
+#wyfalstqyl .gt_center {
   text-align: center;
 }
 
-#suzrknnowr .gt_right {
+#wyfalstqyl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#suzrknnowr .gt_font_normal {
+#wyfalstqyl .gt_font_normal {
   font-weight: normal;
 }
 
-#suzrknnowr .gt_font_bold {
+#wyfalstqyl .gt_font_bold {
   font-weight: bold;
 }
 
-#suzrknnowr .gt_font_italic {
+#wyfalstqyl .gt_font_italic {
   font-style: italic;
 }
 
-#suzrknnowr .gt_super {
+#wyfalstqyl .gt_super {
   font-size: 65%;
 }
 
-#suzrknnowr .gt_footnote_marks {
+#wyfalstqyl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#suzrknnowr .gt_asterisk {
+#wyfalstqyl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#suzrknnowr .gt_indent_1 {
+#wyfalstqyl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#suzrknnowr .gt_indent_2 {
+#wyfalstqyl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#suzrknnowr .gt_indent_3 {
+#wyfalstqyl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#suzrknnowr .gt_indent_4 {
+#wyfalstqyl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#suzrknnowr .gt_indent_5 {
+#wyfalstqyl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#suzrknnowr .katex-display {
+#wyfalstqyl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#suzrknnowr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wyfalstqyl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3715,32 +3739,32 @@ Table&nbsp;5.6: The keys of v2026.10.19 that exist in both grids but keep the le
 <li><strong>A station is not a polygon.</strong> If you want <em>the station</em>, key on <code>site_key</code> (<code>"090.0 060.0"</code>), which is the same in every release; the climatology is keyed on it and no mean moved. <code>grid.line</code> and <code>grid.station</code> are no longer whole numbers for some cells, so a line is never matched by rounding it (a section of line 93.3 must not pick up the station on line 93.4).</li>
 </ul>
 <p><code>grid_crosswalk</code> has one row per overlapping pair of a previous and a current cell: <code>prev_grid_key</code>, <code>grid_key</code>, <code>overlap_km2</code> (in an equal-area projection), <code>prev_frac</code> (the overlap as a share of the previous cell) and <code>grid_frac</code> (as a share of the current one). The primary key is the pair and <code>grid_key</code> references <code>grid</code> (<a href="#tbl-contract" class="quarto-xref">Table&nbsp;<span>5.2</span></a>). The shares are of the <em>whole</em> cell and are never rescaled, so a previous cell’s shares add to one less the part of it that is land under the finer coastline. <code>calcofi4db::check_grid_crosswalk()</code> fails the release when a cell of either grid is missing from the crosswalk, a pair repeats, or a previous cell is covered by less than its <code>min_cover</code>.</p>
-<p><a href="#tbl-grid-example" class="quarto-xref">Table&nbsp;<span>5.7</span></a> is the previous cell that fans out to the most current ones in <code>v2026.10.19</code>, <code>st35-ln86.7</code>: its water is shared by 8 cells, and a value stored under that key belongs to all of them in the proportions <code>prev_frac</code> gives.</p>
+<p><a href="#tbl-grid-example" class="quarto-xref">Table&nbsp;<span>5.7</span></a> is the previous cell that fans out to the most current ones in <code>v2026.10.20</code>, <code>st35-ln86.7</code>: its water is shared by 8 cells, and a value stored under that key belongs to all of them in the proportions <code>prev_frac</code> gives.</p>
 <div class="cell">
 <div id="tbl-grid-example" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grid-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>grid_crosswalk</code> — the previous cell with the most successors (up to eight shown, largest share first).
+Table&nbsp;5.7: Where one previous cell went in v2026.10.20, read from <code>grid_crosswalk</code> — the previous cell with the most successors (up to eight shown, largest share first).
 </figcaption>
 <div aria-describedby="tbl-grid-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="uqrwcgaect" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uqrwcgaect table {
+<div id="ojkxpmjmjp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ojkxpmjmjp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uqrwcgaect thead, #uqrwcgaect tbody, #uqrwcgaect tfoot, #uqrwcgaect tr, #uqrwcgaect td, #uqrwcgaect th {
+#ojkxpmjmjp thead, #ojkxpmjmjp tbody, #ojkxpmjmjp tfoot, #ojkxpmjmjp tr, #ojkxpmjmjp td, #ojkxpmjmjp th {
   border-style: none;
 }
 
-#uqrwcgaect p {
+#ojkxpmjmjp p {
   margin: 0;
   padding: 0;
 }
 
-#uqrwcgaect .gt_table {
+#ojkxpmjmjp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3766,12 +3790,12 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-left-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_caption {
+#ojkxpmjmjp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uqrwcgaect .gt_title {
+#ojkxpmjmjp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3783,7 +3807,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-bottom-width: 0;
 }
 
-#uqrwcgaect .gt_subtitle {
+#ojkxpmjmjp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3795,7 +3819,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-top-width: 0;
 }
 
-#uqrwcgaect .gt_heading {
+#ojkxpmjmjp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3807,13 +3831,13 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_bottom_border {
+#ojkxpmjmjp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_col_headings {
+#ojkxpmjmjp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3828,7 +3852,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_col_heading {
+#ojkxpmjmjp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3848,7 +3872,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   overflow-x: hidden;
 }
 
-#uqrwcgaect .gt_column_spanner_outer {
+#ojkxpmjmjp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3860,15 +3884,15 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   padding-right: 4px;
 }
 
-#uqrwcgaect .gt_column_spanner_outer:first-child {
+#ojkxpmjmjp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uqrwcgaect .gt_column_spanner_outer:last-child {
+#ojkxpmjmjp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uqrwcgaect .gt_column_spanner {
+#ojkxpmjmjp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3880,11 +3904,11 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   width: 100%;
 }
 
-#uqrwcgaect .gt_spanner_row {
+#ojkxpmjmjp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uqrwcgaect .gt_group_heading {
+#ojkxpmjmjp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3910,7 +3934,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   text-align: left;
 }
 
-#uqrwcgaect .gt_empty_group_heading {
+#ojkxpmjmjp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3925,15 +3949,15 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   vertical-align: middle;
 }
 
-#uqrwcgaect .gt_from_md > :first-child {
+#ojkxpmjmjp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uqrwcgaect .gt_from_md > :last-child {
+#ojkxpmjmjp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uqrwcgaect .gt_row {
+#ojkxpmjmjp .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3952,7 +3976,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   overflow-x: hidden;
 }
 
-#uqrwcgaect .gt_stub {
+#ojkxpmjmjp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3965,7 +3989,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   padding-right: 5px;
 }
 
-#uqrwcgaect .gt_stub_row_group {
+#ojkxpmjmjp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3979,15 +4003,15 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   vertical-align: top;
 }
 
-#uqrwcgaect .gt_row_group_first td {
+#ojkxpmjmjp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uqrwcgaect .gt_row_group_first th {
+#ojkxpmjmjp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uqrwcgaect .gt_summary_row {
+#ojkxpmjmjp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3997,16 +4021,16 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   padding-right: 5px;
 }
 
-#uqrwcgaect .gt_first_summary_row {
+#ojkxpmjmjp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_first_summary_row.thick {
+#ojkxpmjmjp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uqrwcgaect .gt_last_summary_row {
+#ojkxpmjmjp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4016,7 +4040,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-bottom-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_grand_summary_row {
+#ojkxpmjmjp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4026,7 +4050,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   padding-right: 5px;
 }
 
-#uqrwcgaect .gt_first_grand_summary_row {
+#ojkxpmjmjp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4036,7 +4060,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-top-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_last_grand_summary_row_top {
+#ojkxpmjmjp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4046,11 +4070,11 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-bottom-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_striped {
+#ojkxpmjmjp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uqrwcgaect .gt_table_body {
+#ojkxpmjmjp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4059,7 +4083,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-bottom-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_footnotes {
+#ojkxpmjmjp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4073,7 +4097,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_footnote {
+#ojkxpmjmjp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4082,7 +4106,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   padding-right: 5px;
 }
 
-#uqrwcgaect .gt_sourcenotes {
+#ojkxpmjmjp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4096,7 +4120,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#uqrwcgaect .gt_sourcenote {
+#ojkxpmjmjp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4104,72 +4128,72 @@ Table&nbsp;5.7: Where one previous cell went in v2026.10.19, read from <code>gri
   padding-right: 5px;
 }
 
-#uqrwcgaect .gt_left {
+#ojkxpmjmjp .gt_left {
   text-align: left;
 }
 
-#uqrwcgaect .gt_center {
+#ojkxpmjmjp .gt_center {
   text-align: center;
 }
 
-#uqrwcgaect .gt_right {
+#ojkxpmjmjp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uqrwcgaect .gt_font_normal {
+#ojkxpmjmjp .gt_font_normal {
   font-weight: normal;
 }
 
-#uqrwcgaect .gt_font_bold {
+#ojkxpmjmjp .gt_font_bold {
   font-weight: bold;
 }
 
-#uqrwcgaect .gt_font_italic {
+#ojkxpmjmjp .gt_font_italic {
   font-style: italic;
 }
 
-#uqrwcgaect .gt_super {
+#ojkxpmjmjp .gt_super {
   font-size: 65%;
 }
 
-#uqrwcgaect .gt_footnote_marks {
+#ojkxpmjmjp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uqrwcgaect .gt_asterisk {
+#ojkxpmjmjp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uqrwcgaect .gt_indent_1 {
+#ojkxpmjmjp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uqrwcgaect .gt_indent_2 {
+#ojkxpmjmjp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uqrwcgaect .gt_indent_3 {
+#ojkxpmjmjp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uqrwcgaect .gt_indent_4 {
+#ojkxpmjmjp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uqrwcgaect .gt_indent_5 {
+#ojkxpmjmjp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uqrwcgaect .katex-display {
+#ojkxpmjmjp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uqrwcgaect div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ojkxpmjmjp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
