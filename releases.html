@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5712b2b45069c9db74c0b5b13d8467a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-448754dc9c8c59380709b49b289babcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-5712b2b45069c9db74c0b5b13d8467a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-67c9ec12e4ec85bf2fc7f443c363fe06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d9780ef7fc77330cd3a54a2991cfa16a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-67c9ec12e4ec85bf2fc7f443c363fe06.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -672,7 +672,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <p>The integrated database is published as <strong>frozen releases</strong>: an immutable, versioned copy of every table, with a catalog that says exactly which bytes it holds and a DOI that names it. Nothing a consumer reads is ever edited in place. This chapter says what a release is, what ships with it, which versions are kept, and what is checked before one is cut.</p>
 <section id="a-release-in-one-line" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="a-release-in-one-line"><span class="header-section-number">7.1</span> A release in one line</h2>
-<p>The promoted release is <strong>v2026.10.21</strong>, cut 2026-10-21: 26 tables, 383,803,703 rows, 2.85 GB of parquet, DOI <a href="https://doi.org/"></a>. A version is a date (<code>vYYYY.MM.DD</code>), and a release is cut whenever the data or the schema change enough to matter — every few weeks, in practice. <code>latest.txt</code> on the bucket names the promoted one, and it is promoted only after the consumer-contract suite and the client packages’ README examples (<code>calcofi4r</code>, <code>calcofi4py</code>) have passed against the frozen files.</p>
+<p>The promoted release is <strong>v2026.10.21</strong>, cut 2026-10-21: 26 tables, 383,803,703 rows, 2.85 GB of parquet, DOI <a href="https://doi.org/10.5281/zenodo.23566406">10.5281/zenodo.23566406</a>. A version is a date (<code>vYYYY.MM.DD</code>), and a release is cut whenever the data or the schema change enough to matter — every few weeks, in practice. <code>latest.txt</code> on the bucket names the promoted one, and it is promoted only after the consumer-contract suite and the client packages’ README examples (<code>calcofi4r</code>, <code>calcofi4py</code>) have passed against the frozen files.</p>
 </section>
 <section id="what-ships" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="what-ships"><span class="header-section-number">7.2</span> What ships</h2>
@@ -691,23 +691,23 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
 </figcaption>
 <div aria-describedby="tbl-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="juxleribfn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#juxleribfn table {
+<div id="qyaexmvcyx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qyaexmvcyx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#juxleribfn thead, #juxleribfn tbody, #juxleribfn tfoot, #juxleribfn tr, #juxleribfn td, #juxleribfn th {
+#qyaexmvcyx thead, #qyaexmvcyx tbody, #qyaexmvcyx tfoot, #qyaexmvcyx tr, #qyaexmvcyx td, #qyaexmvcyx th {
   border-style: none;
 }
 
-#juxleribfn p {
+#qyaexmvcyx p {
   margin: 0;
   padding: 0;
 }
 
-#juxleribfn .gt_table {
+#qyaexmvcyx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -733,12 +733,12 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-left-color: #D3D3D3;
 }
 
-#juxleribfn .gt_caption {
+#qyaexmvcyx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#juxleribfn .gt_title {
+#qyaexmvcyx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -750,7 +750,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-bottom-width: 0;
 }
 
-#juxleribfn .gt_subtitle {
+#qyaexmvcyx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -762,7 +762,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-top-width: 0;
 }
 
-#juxleribfn .gt_heading {
+#qyaexmvcyx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -774,13 +774,13 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#juxleribfn .gt_bottom_border {
+#qyaexmvcyx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#juxleribfn .gt_col_headings {
+#qyaexmvcyx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -795,7 +795,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#juxleribfn .gt_col_heading {
+#qyaexmvcyx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -815,7 +815,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   overflow-x: hidden;
 }
 
-#juxleribfn .gt_column_spanner_outer {
+#qyaexmvcyx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -827,15 +827,15 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   padding-right: 4px;
 }
 
-#juxleribfn .gt_column_spanner_outer:first-child {
+#qyaexmvcyx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#juxleribfn .gt_column_spanner_outer:last-child {
+#qyaexmvcyx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#juxleribfn .gt_column_spanner {
+#qyaexmvcyx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -847,11 +847,11 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   width: 100%;
 }
 
-#juxleribfn .gt_spanner_row {
+#qyaexmvcyx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#juxleribfn .gt_group_heading {
+#qyaexmvcyx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -877,7 +877,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   text-align: left;
 }
 
-#juxleribfn .gt_empty_group_heading {
+#qyaexmvcyx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -892,15 +892,15 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   vertical-align: middle;
 }
 
-#juxleribfn .gt_from_md > :first-child {
+#qyaexmvcyx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#juxleribfn .gt_from_md > :last-child {
+#qyaexmvcyx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#juxleribfn .gt_row {
+#qyaexmvcyx .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -919,7 +919,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   overflow-x: hidden;
 }
 
-#juxleribfn .gt_stub {
+#qyaexmvcyx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,7 +932,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#juxleribfn .gt_stub_row_group {
+#qyaexmvcyx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -946,15 +946,15 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   vertical-align: top;
 }
 
-#juxleribfn .gt_row_group_first td {
+#qyaexmvcyx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#juxleribfn .gt_row_group_first th {
+#qyaexmvcyx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#juxleribfn .gt_summary_row {
+#qyaexmvcyx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -964,16 +964,16 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#juxleribfn .gt_first_summary_row {
+#qyaexmvcyx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#juxleribfn .gt_first_summary_row.thick {
+#qyaexmvcyx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#juxleribfn .gt_last_summary_row {
+#qyaexmvcyx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -983,7 +983,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#juxleribfn .gt_grand_summary_row {
+#qyaexmvcyx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -993,7 +993,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#juxleribfn .gt_first_grand_summary_row {
+#qyaexmvcyx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1003,7 +1003,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-top-color: #D3D3D3;
 }
 
-#juxleribfn .gt_last_grand_summary_row_top {
+#qyaexmvcyx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1013,11 +1013,11 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#juxleribfn .gt_striped {
+#qyaexmvcyx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#juxleribfn .gt_table_body {
+#qyaexmvcyx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1026,7 +1026,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-bottom-color: #D3D3D3;
 }
 
-#juxleribfn .gt_footnotes {
+#qyaexmvcyx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1040,7 +1040,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#juxleribfn .gt_footnote {
+#qyaexmvcyx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1049,7 +1049,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#juxleribfn .gt_sourcenotes {
+#qyaexmvcyx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1063,7 +1063,7 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   border-right-color: #D3D3D3;
 }
 
-#juxleribfn .gt_sourcenote {
+#qyaexmvcyx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1071,72 +1071,72 @@ Table&nbsp;7.1: The tables of v2026.10.21 as the catalog describes them — obje
   padding-right: 5px;
 }
 
-#juxleribfn .gt_left {
+#qyaexmvcyx .gt_left {
   text-align: left;
 }
 
-#juxleribfn .gt_center {
+#qyaexmvcyx .gt_center {
   text-align: center;
 }
 
-#juxleribfn .gt_right {
+#qyaexmvcyx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#juxleribfn .gt_font_normal {
+#qyaexmvcyx .gt_font_normal {
   font-weight: normal;
 }
 
-#juxleribfn .gt_font_bold {
+#qyaexmvcyx .gt_font_bold {
   font-weight: bold;
 }
 
-#juxleribfn .gt_font_italic {
+#qyaexmvcyx .gt_font_italic {
   font-style: italic;
 }
 
-#juxleribfn .gt_super {
+#qyaexmvcyx .gt_super {
   font-size: 65%;
 }
 
-#juxleribfn .gt_footnote_marks {
+#qyaexmvcyx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#juxleribfn .gt_asterisk {
+#qyaexmvcyx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#juxleribfn .gt_indent_1 {
+#qyaexmvcyx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#juxleribfn .gt_indent_2 {
+#qyaexmvcyx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#juxleribfn .gt_indent_3 {
+#qyaexmvcyx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#juxleribfn .gt_indent_4 {
+#qyaexmvcyx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#juxleribfn .gt_indent_5 {
+#qyaexmvcyx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#juxleribfn .katex-display {
+#qyaexmvcyx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#juxleribfn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qyaexmvcyx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1409,23 +1409,23 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 </figcaption>
 <div aria-describedby="tbl-versions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tjiqepxqtl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tjiqepxqtl table {
+<div id="siwxvglclw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#siwxvglclw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tjiqepxqtl thead, #tjiqepxqtl tbody, #tjiqepxqtl tfoot, #tjiqepxqtl tr, #tjiqepxqtl td, #tjiqepxqtl th {
+#siwxvglclw thead, #siwxvglclw tbody, #siwxvglclw tfoot, #siwxvglclw tr, #siwxvglclw td, #siwxvglclw th {
   border-style: none;
 }
 
-#tjiqepxqtl p {
+#siwxvglclw p {
   margin: 0;
   padding: 0;
 }
 
-#tjiqepxqtl .gt_table {
+#siwxvglclw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1451,12 +1451,12 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-left-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_caption {
+#siwxvglclw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tjiqepxqtl .gt_title {
+#siwxvglclw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1468,7 +1468,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-width: 0;
 }
 
-#tjiqepxqtl .gt_subtitle {
+#siwxvglclw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1480,7 +1480,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-top-width: 0;
 }
 
-#tjiqepxqtl .gt_heading {
+#siwxvglclw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1492,13 +1492,13 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_bottom_border {
+#siwxvglclw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_col_headings {
+#siwxvglclw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1513,7 +1513,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_col_heading {
+#siwxvglclw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1533,7 +1533,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   overflow-x: hidden;
 }
 
-#tjiqepxqtl .gt_column_spanner_outer {
+#siwxvglclw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1545,15 +1545,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 4px;
 }
 
-#tjiqepxqtl .gt_column_spanner_outer:first-child {
+#siwxvglclw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tjiqepxqtl .gt_column_spanner_outer:last-child {
+#siwxvglclw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tjiqepxqtl .gt_column_spanner {
+#siwxvglclw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1565,11 +1565,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   width: 100%;
 }
 
-#tjiqepxqtl .gt_spanner_row {
+#siwxvglclw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tjiqepxqtl .gt_group_heading {
+#siwxvglclw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1595,7 +1595,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   text-align: left;
 }
 
-#tjiqepxqtl .gt_empty_group_heading {
+#siwxvglclw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1610,15 +1610,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   vertical-align: middle;
 }
 
-#tjiqepxqtl .gt_from_md > :first-child {
+#siwxvglclw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tjiqepxqtl .gt_from_md > :last-child {
+#siwxvglclw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tjiqepxqtl .gt_row {
+#siwxvglclw .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1637,7 +1637,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   overflow-x: hidden;
 }
 
-#tjiqepxqtl .gt_stub {
+#siwxvglclw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1650,7 +1650,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#tjiqepxqtl .gt_stub_row_group {
+#siwxvglclw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1664,15 +1664,15 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   vertical-align: top;
 }
 
-#tjiqepxqtl .gt_row_group_first td {
+#siwxvglclw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tjiqepxqtl .gt_row_group_first th {
+#siwxvglclw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tjiqepxqtl .gt_summary_row {
+#siwxvglclw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1682,16 +1682,16 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#tjiqepxqtl .gt_first_summary_row {
+#siwxvglclw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_first_summary_row.thick {
+#siwxvglclw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tjiqepxqtl .gt_last_summary_row {
+#siwxvglclw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1701,7 +1701,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_grand_summary_row {
+#siwxvglclw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1711,7 +1711,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#tjiqepxqtl .gt_first_grand_summary_row {
+#siwxvglclw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1721,7 +1721,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-top-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_last_grand_summary_row_top {
+#siwxvglclw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1731,11 +1731,11 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_striped {
+#siwxvglclw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tjiqepxqtl .gt_table_body {
+#siwxvglclw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1744,7 +1744,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-bottom-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_footnotes {
+#siwxvglclw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1758,7 +1758,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_footnote {
+#siwxvglclw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1767,7 +1767,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#tjiqepxqtl .gt_sourcenotes {
+#siwxvglclw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1781,7 +1781,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   border-right-color: #D3D3D3;
 }
 
-#tjiqepxqtl .gt_sourcenote {
+#siwxvglclw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1789,72 +1789,72 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
   padding-right: 5px;
 }
 
-#tjiqepxqtl .gt_left {
+#siwxvglclw .gt_left {
   text-align: left;
 }
 
-#tjiqepxqtl .gt_center {
+#siwxvglclw .gt_center {
   text-align: center;
 }
 
-#tjiqepxqtl .gt_right {
+#siwxvglclw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tjiqepxqtl .gt_font_normal {
+#siwxvglclw .gt_font_normal {
   font-weight: normal;
 }
 
-#tjiqepxqtl .gt_font_bold {
+#siwxvglclw .gt_font_bold {
   font-weight: bold;
 }
 
-#tjiqepxqtl .gt_font_italic {
+#siwxvglclw .gt_font_italic {
   font-style: italic;
 }
 
-#tjiqepxqtl .gt_super {
+#siwxvglclw .gt_super {
   font-size: 65%;
 }
 
-#tjiqepxqtl .gt_footnote_marks {
+#siwxvglclw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tjiqepxqtl .gt_asterisk {
+#siwxvglclw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tjiqepxqtl .gt_indent_1 {
+#siwxvglclw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tjiqepxqtl .gt_indent_2 {
+#siwxvglclw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tjiqepxqtl .gt_indent_3 {
+#siwxvglclw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tjiqepxqtl .gt_indent_4 {
+#siwxvglclw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tjiqepxqtl .gt_indent_5 {
+#siwxvglclw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tjiqepxqtl .katex-display {
+#siwxvglclw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tjiqepxqtl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#siwxvglclw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1887,8 +1887,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <td class="gt_row gt_right" headers="tables">26</td>
 <td class="gt_row gt_right" headers="rows">383,803,703</td>
 <td class="gt_row gt_right" headers="size-(MB)">2,717</td>
-<td class="gt_row gt_left" headers="DOI"><br>
-</td>
+<td class="gt_row gt_left" headers="DOI">10.5281/zenodo.23566406</td>
 <td class="gt_row gt_left" headers="kept">current</td>
 </tr>
 <tr class="even">
@@ -2300,7 +2299,7 @@ Table&nbsp;7.2: Every release, newest first, from <code>versions.json</code>.
 <h2 data-number="7.4" class="anchored" data-anchor-id="two-dois"><span class="header-section-number">7.4</span> Two DOIs</h2>
 <p>Each release is tagged on GitHub, and Zenodo mints a <strong>version DOI</strong> for it; one <strong>concept DOI</strong> always resolves to the newest. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code>, in the release notes’ <em>How to cite</em>, and on <a href="./cite.html">Cite this data</a>:</p>
 <ul>
-<li>this release: <a href="https://doi.org/" class="uri">https://doi.org/</a></li>
+<li>this release: <a href="https://doi.org/10.5281/zenodo.23566406" class="uri">https://doi.org/10.5281/zenodo.23566406</a></li>
 <li>every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
 </ul>
 </section>
