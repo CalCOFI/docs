@@ -38,8 +38,7 @@ env:
 jobs:
   publish-html:
     name: Render & publish the site
-    # pinned, not ubuntu-latest: on ubuntu-26.04 (latest since Oct 2026) setup-r leaves R on CRAN source and
-    # pak compiles every package (duckdb alone 45+ min, CalCOFI/workflows#216); on 24.04 they are Posit binaries
+    # pinned, not ubuntu-latest (26.04 since Oct 2026): Posit binaries are built for 24.04 ("noble")
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -54,6 +53,13 @@ jobs:
         with:
           r-version: ${{ env.R_VERSION }}
           use-public-rspm: true
+
+      # setup-r exports RSPM (the Posit binary repo) but leaves options(repos) on CRAN source, so pak
+      # compiled every package (duckdb ~50 min) whenever the package cache missed; point CRAN at RSPM
+      - name: Use Posit binary R packages
+        run: |
+          test -n "$RSPM"
+          echo "options(repos = c(CRAN = '$RSPM'))" | sudo tee -a "$(R RHOME)/etc/Rprofile.site"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -99,6 +105,13 @@ jobs:
         with:
           r-version: ${{ env.R_VERSION }}
           use-public-rspm: true
+
+      # setup-r exports RSPM (the Posit binary repo) but leaves options(repos) on CRAN source, so pak
+      # compiled every package (duckdb ~50 min) whenever the package cache missed; point CRAN at RSPM
+      - name: Use Posit binary R packages
+        run: |
+          test -n "$RSPM"
+          echo "options(repos = c(CRAN = '$RSPM'))" | sudo tee -a "$(R RHOME)/etc/Rprofile.site"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
