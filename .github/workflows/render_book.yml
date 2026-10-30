@@ -38,8 +38,7 @@ env:
 jobs:
   publish-html:
     name: Render & publish the site
-    # pinned, not ubuntu-latest (26.04 since Oct 2026): Posit binaries are built for 24.04 ("noble")
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -53,13 +52,6 @@ jobs:
         with:
           r-version: ${{ env.R_VERSION }}
           use-public-rspm: true
-
-      # setup-r exports RSPM (the Posit binary repo) but leaves options(repos) on CRAN source, so pak
-      # compiled every package (duckdb ~50 min) whenever the package cache missed; point CRAN at RSPM
-      - name: Use Posit binary R packages
-        run: |
-          test -n "$RSPM"
-          echo "options(repos = c(CRAN = '$RSPM'))" | sudo tee -a "$(R RHOME)/etc/Rprofile.site"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -85,7 +77,7 @@ jobs:
   build-documents:
     name: Build the PDF and DOCX (non-blocking)
     needs: publish-html
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     continue-on-error: true
     permissions:
       contents: write
@@ -105,13 +97,6 @@ jobs:
         with:
           r-version: ${{ env.R_VERSION }}
           use-public-rspm: true
-
-      # setup-r exports RSPM (the Posit binary repo) but leaves options(repos) on CRAN source, so pak
-      # compiled every package (duckdb ~50 min) whenever the package cache missed; point CRAN at RSPM
-      - name: Use Posit binary R packages
-        run: |
-          test -n "$RSPM"
-          echo "options(repos = c(CRAN = '$RSPM'))" | sudo tee -a "$(R RHOME)/etc/Rprofile.site"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
