@@ -58,6 +58,10 @@ dataset joins to the others through them:
   last resort, and which rule fired is recorded (`cruise_key_method`). The `cruise` reference itself
   is completed at release: one row per key an event names that SWFSC's export has no station row
   for (`cruise_key_method = 'derived'`), which is why `cruise` holds more rows than SWFSC's list.
+  The ship comes from the source, so a source that names the wrong ship for one cruise mints a
+  derived cruise beside the real one. A correction scoped to that cruise
+  (`metadata/cruise_ship_corrections.csv`) fixes it, and the release stops on any derived-cruise
+  event at a station SWFSC occupied on another cruise within a day.
 - **`sample_key` = `{dataset_key}:{sample_type}:{id}`** (`calcofi_bottle:cast:7644`): globally
   unique across datasets *and* across event levels, so a site, a tow, a net, a cast and a bottle
   share one table without collision. The hierarchy is an adjacency list — `parent_sample_key` points
