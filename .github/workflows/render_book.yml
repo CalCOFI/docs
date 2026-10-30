@@ -38,7 +38,9 @@ env:
 jobs:
   publish-html:
     name: Render & publish the site
-    runs-on: ubuntu-latest
+    # pinned, not ubuntu-latest: on ubuntu-26.04 (latest since Oct 2026) setup-r leaves R on CRAN source and
+    # pak compiles every package (duckdb alone 45+ min, CalCOFI/workflows#216); on 24.04 they are Posit binaries
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
@@ -77,7 +79,7 @@ jobs:
   build-documents:
     name: Build the PDF and DOCX (non-blocking)
     needs: publish-html
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     continue-on-error: true
     permissions:
       contents: write
