@@ -8,6 +8,115 @@ quarter of the 2026–27 statement of work (Q1 due 2026-11-30); the entries befo
 three components of the 2025–26 contract. Each is written by reviewing the git histories across
 the CalCOFI repositories since the entry before (`libs/status_git-logs.R`).
 
+## 2026-11-02
+
+<!-- Q1 report of the 2026-09-01 -> 2027-08-31 SoW (Year 1 of the DMP; PO PUR01157414, Q1 due
+     2026-11-30). Sources: git histories 2026-09-01 -> 2026-11-02 across the CalCOFI repositories
+     (libs/status_git-logs.R), the release notes (workflows RELEASES.md), the working-session
+     notes, and the DMP working sessions. This entry is the Q1 deliverable the invoice references. -->
+
+The first quarter of the 2026–27 statement of work (2026-09-01 → 2026-11-30), reviewed on
+2026-11-02 from the git histories of the CalCOFI repositories. Fourteen frozen releases were cut
+(v2026.09.04 → v2026.10.30, now 20 datasets), the CTD casts are served on ERDDAP, the CTD profile
+database is documented, and the bottle migration is written up below. @tbl-sow-q1 is the
+deliverable-by-deliverable crosswalk against the SoW; the sections after it follow the five phases.
+
+| Q1 deliverable (SoW task) | Status | Where |
+|---|---|---|
+| Cloud-hosted integrated database with internal and external read access, and access guidance (Task 11) | ✅ complete | [Access the data](data-access.qmd), [Server access](server-access.qmd) |
+| CTD casts → ERDDAP, live, backend choice documented from the benchmark (carryover) | ✅ complete | [CalCOFI ERDDAP](https://erddap.calcofi.io/erddap/tabledap/index.html), [benchmark report](https://calcofi.io/workflows/bench_erddap_ctd.html) |
+| Bottle → non-proprietary database: schema documentation and migration write-up (Task 1) | ✅ complete | [Bottle: from the Access master to the release](#sec-bottle-migration), below |
+| CTD profile database integrated with bottle samples: data dictionary and schema documentation (Task 2) | ✅ complete | [CTD QA/QC](ctd-qaqc.qmd), [Server access](server-access.qmd#sec-ctd-db) |
+| Naming-convention work begun: inventory of legacy names and a first draft of the conventions (Tasks 12–13) | ✅ complete | [Naming conventions](naming.qmd), [Providing data](provide.qmd) |
+| Versioned frozen releases; quarterly status report; participation in DMP guidance and review | ✅ complete | [Releases](releases.qmd), this entry |
+
+: Q1 deliverables of the 2026-09 → 2027-08 SoW, against the SoW. {#tbl-sow-q1}
+
+**Ingest.** The release now holds 20 datasets. New in the quarter: the CTD derived
+hydrographic products (`calcofi_ctd-derived`, 2026-09-23), the bottle-derived spice and TEOS-10
+density at every bottle since 1949 (`calcofi_bottle-derived`, v2026.10.20), eight 1995–98 CTD
+cruises (v2026.10.20), SWFSC's September and October ichthyoplankton and CUFES exports
+(v2026.10.05, v2026.10.20), and the cetacean sightings, sonobuoy and eDNA data, which are
+ingested and held out of the release (v2026.10.08). Betty Huang staged five CCE-LTER datasets
+(HPLC pigments, POC/PON, TOC, size-fractionated chlorophyll) and the SWFSC CTD-NOAA series;
+they are ingested, not yet released. Provider questions and answers now live in per-provider
+Google Sheets that sync with git, with a standing consent question on every dataset. The July 2009
+bottle and picoplankton casts, which sat on a cruise of their own (`2009-07-31M4`), now join
+their cruise `2009-07-33MH` (v2026.10.30).
+
+### Bottle: from the Access master to the release {#sec-bottle-migration}
+
+The bottle data used to live in a 2.0 GB Microsoft Access database, the hydrographic master
+(`CalCOFI_4903-2304_Master_Final_through_2105`, 1949-03 → 2023-04). It is now a release dataset
+(`calcofi_bottle`) in the open Parquet lake, ingested from the published extract by the same
+pipeline as every other dataset, and the Access master is kept as a **frozen archive that was
+mined, not replaced**. Task 1 therefore has three parts, all done:
+
+- **The master is documented.** It was extracted to Parquet and SQL (`28b0558`, 2026-07-25), which
+  gave a 1,715-line `schema.sql`, the 13 declared relationships, 182 field descriptions and a
+  disposition for each of its 65 tables: 30 working copies or staging tables skipped, 11
+  documentation and metadata tables harvested into the registries, 9 QC reference tables kept for the CTD QA/QC
+  work, 7 covered by an existing release dataset, 6 documented and deliberately not ingested,
+  and 2 reconciled against the release. All 155 saved queries were inventoried and triaged by
+  purpose (52 validation, 35 derived products, 31 correction history, 16 materialization, 8
+  exports, 13 unclassified) and scored for porting hazards. The master's 280-entry change log is
+  kept as data.
+- **The release is verified faithful.** Reconciled against the release of the time (`e8a9a77`),
+  the release is a strict subset of the master: of 36,217 casts and 909,076 bottles in Access,
+  35,644 and 895,371 are in the release and none are release-only. The Access-only rows are
+  exactly seven cruises, 202107–202304, newer than the "through 2105" extract the release was
+  built from. Across about 6.0 million shared bottle measurements in 13 measurement types,
+  one value differs by more than 1e-4 (oxygen, 3e-4). The comparison also found 85 bottles
+  deleted from the master after the export was made (cruises 202105, 202111, 202208, 202211),
+  none of them in the release.
+- **The migration path is settled.** No Access data is imported into the integrated database.
+  The master is mined for the quality-code vocabulary, the −99 sentinel, method and accuracy
+  provenance and the climatology that its QC queries encode, which feed the CTD ingest and the
+  [CTD QA/QC](ctd-qaqc.qmd) store; new bottle cruises arrive through the ingest, not through
+  Access. The remaining QA/QC verification against each new release is the Q2 deliverable.
+
+The CTD profile database (Task 2) is the PostgreSQL working store described in
+[CTD QA/QC](ctd-qaqc.qmd): 409 cast files and 10,812,360 scans loaded verbatim in all 82 source
+columns (workflows `1c82462`, 2026-08-19), 20,521 best-stage casts for 1993–2026, a flag ledger
+with an audit trail, and a data dictionary (`ctd.scan_column`) generated from the measurement-type
+registry. Its casts key to the release's cruise and ship tables, the public release reads inside
+PostgreSQL as `release.*` views, and one DuckDB connection joins both through `cc_get_db()` and
+`cc_pg_attach()`. Accepted flags reach the next ingest through a nightly snapshot (`cf741ce`,
+`c5a72fc`). Open: adoption of the store by the CTD team.
+
+**Publish.** CTD casts are on ERDDAP: `calcofi_ctd-cast`, `calcofi_ctd-cast_full` (full
+resolution), `calcofi_ctd-cast_sample`, `calcofi_ctd_measurement` and `calcofi_ctd_thin`, among 45
+tabledap datasets. The wide table that exhausted ERDDAP's heap is resolved by the benchmark's
+recommendation, now the rule for every dataset: ERDDAP `EDDTableFromDatabase` over DuckDB views on
+the release Parquet, in long format, with NetCDF files generated outside ERDDAP for CF users
+([benchmark report](https://calcofi.io/workflows/bench_erddap_ctd.html)). The full-resolution
+table is queryable but not bulk-downloadable (bulk access is the Parquet release), and after a
+single unconstrained request took the server down on 2026-09-08 ERDDAP refuses bulk dumps
+(server `0965ce1`, written up in the server's incident log).
+Publishers rebuild only what a release changed, so EDI, OBIS, NetCDF and ERDDAP follow each
+release. Open: the EDI and OBIS deposits wait on provider licence and agreement decisions.
+
+**Integrate.** The naming conventions are generated from the registries the pipeline enforces
+([Naming conventions](naming.qmd)); the "Legacy names, mapped" section is the Q1 inventory, a
+crosswalk per dataset from every source column to its standard name, with ship renames and
+cruise-key corrections kept as registries. [Providing data](provide.qmd) is the provider guide
+in draft, and [Keys and integrity](keys.qmd) states and measures the four integrating keys at
+every release; its cruise check gained an eleventh test on 2026-10-30. The station grid was
+rebuilt to one cell per official station, with a crosswalk (v2026.10.05).
+
+**Visualize.** The Explorer runs over the release in the browser; every dataset, species and
+measurement has a generated page, and the measurement pages are the first variable-based entry to
+the data. `calcofi4r` is at 1.29.0 and `calcofi4py` at 0.9.4, with per-cast and seasonal
+climatologies and anomalies (v2026.10.13). Open: the authoritative inventory with variable-based
+discovery (Task 14, beta in Q3).
+
+**Synthesize.** This book is the running record and the living document: its facts are generated
+from the release. DMP working sessions with CalCOFI program staff were held on 2026-09-03,
+2026-09-08, 2026-09-23, 2026-10-01 (with Mark Gold) and 2026-10-12. Next (Q2): bottle QA/QC
+verification against the release, CTD integration validation, the draft naming guide and mapping
+tables, the NetID/UUID advisory, the invertebrate ↔ ichthyoplankton crosswalk and the first
+recorded webinar.
+
 ## 2026-09-08
 
 <!-- The baseline at the start of the 2026-09-01 → 2027-08-31 SoW (Year 1 of the DMP), written
