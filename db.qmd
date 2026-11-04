@@ -139,8 +139,9 @@ seasonal-cycle map, not an anomaly.
 The table has two arms and one extra baseline, none of which changes the grain above:
 
 - **Per-bin rows** are the depth series of `obs_env`, one row per 10 m `depth_bin`.
-- **Per-cast rows** are the derived CTD products of @sec-per-cast-grain (the three mixed-layer
-  depths, `chl_max_depth`, `chl_max` and `chl_integrated`), pooled by the same rules (station,
+- **Per-cast rows** are the derived CTD products of @sec-per-cast-grain (the mixed-layer
+  depths, the chlorophyll maximum and integral, the hypoxic boundary and nitracline depths, the
+  pycnocline depth and its N² maximum), pooled by the same rules (station,
   cruise month, window, quality, cruise floor). A cast-level value has no depth, so its
   **`depth_bin` is NULL**, meaning "a per-cast value", never a depth. A NULL never matches `=`, so a
   per-bin join on `depth_bin = 40` cannot pick one up by accident; a per-cast consumer matches
@@ -368,7 +369,9 @@ if (!is.null(mc)) {
 
 Nearly every series above is a value *at a depth*: a row of `obs_env`. A **product of a whole
 cast** — its mixed-layer depth, the depth and value of its chlorophyll maximum, its integrated
-chlorophyll — has no depth, so it is not a depth observation and is not projected into `obs_env`.
+chlorophyll, the depths at which its oxygen falls to 2.4, 1.4 and 0.5 mL/L and its nitrate
+reaches 1 µmol/L, its pycnocline depth and the N² maximum there — has no depth, so it is not a
+depth observation and is not projected into `obs_env`.
 The release keeps it in `sample_measurement`, on the cast's `sample` (the registry's `grain` is
 `sample`), and the measurements catalog lists it with `grain: "sample"` so it has a page like any
 other key. These are computed, not measured: `calcofi_ctd-derived` derives them from the CTD
