@@ -101,12 +101,37 @@ standard bongo's 0.505 mm; a mesh that differs is what matters). Nothing in your
    cannot answer (a unit, a code, an ambiguous date).
 2. **You get one Sheet** — one tab of questions per dataset, most already carrying a *proposed*
    answer for you to confirm, and a `metadata` tab for the abstract, methods, creators, licence and
-   citation ([Metadata & the ingest loop](metadata.qmd)).
-3. **Ingest and validate** — one reproducible notebook turns the file into the shared schema; every
-   finding is fixed or becomes a question.
-4. **Release** — the dataset joins the next frozen release with a DOI, gets its page at
-   `calcofi.io/datasets/{key}/`, its citation on every figure drawn from it, and — where you want it
-   — its way onward to ERDDAP, OBIS, EDI or the archives ([Portals](portals.qmd)).
+   citation ([Metadata & the ingest loop](metadata.qmd)). One row of that tab is a standing
+   **consent question**: may CalCOFI.io publish this dataset as shown?
+3. **Ingest and validate, held** — one reproducible notebook turns the file into the shared
+   schema; every finding is fixed or becomes a question. The dataset is *staged, not released*:
+   its notebook carries `in_release: false`, its files and tables go to a private bucket
+   (`gcs_bucket_for_dataset()` refuses the public ones for a held dataset), and no release step
+   sees it (`release_excluded_datasets()`).
+4. **You see it first, privately** — a candidate release that includes only your dataset beside
+   the public ones is built into the same private bucket (`scripts/preview_candidate.sh`; the
+   notebook refuses to include a held dataset into a public bucket), and calcofi.io, the Explorer,
+   the Dataset Finder and the ingest notebook are built against it and shown at a private link,
+   `preview.calcofi.io/{key}/{token}/`, that only you and the people you send it to hold
+   (`scripts/build_preview.sh`). Every page carries a feedback button; what you send stays in a
+   private tracker, never a public issue.
+5. **You decide, on the page** — the preview's landing page shows the citation, licence and
+   acknowledgement it would publish, pre-filled from the record, for you to correct, and asks
+   *yes* or *not yet*. The decision is written once to a consent record, and from there into the
+   consent question's row in your Sheet and in git (`scripts/pull_preview_consent.R`), so the
+   Sheet, the repository and the release all hold one answer. *Not yet* with a comment sends the
+   dataset back to step 3 and the preview is rebuilt.
+6. **Release** — with the consent given, the hold is lifted and the dataset joins the next frozen
+   release with a DOI, gets its page at `calcofi.io/datasets/{key}/`, its citation on every figure
+   drawn from it, and — where you want it — its way onward to ERDDAP, OBIS, EDI or the archives
+   ([Portals](portals.qmd)). The release itself checks the answer: `check_dataset_consent()` stops
+   a public release that would carry a dataset whose consent question is not answered *yes*, so
+   nothing reaches the public database before your final acceptance.
+
+@fig-provide-pathway draws the loop; the arrows that cross from held to public are the checks,
+each by name, so the promise is enforced rather than remembered.
+
+![A provider's dataset from the staged ingest to the public database. Everything in the grey lane is private: the staged tables, the candidate release, the preview and the decision record. The named checks on the arrows are what keep it that way, and the last one, `check_dataset_consent()`, is what lets a dataset cross.](diagrams/provide_pathway.svg){#fig-provide-pathway .cc-diagram .nolightbox}
 
 Write to **data@calcofi.io** to start.
 
