@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9ef8120f98bd32a61d6c1c1c07b3b92b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9d96e61768556b3911143762e43db01e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-683d22c2071ad053dab5b6d722ece91f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9d96e61768556b3911143762e43db01e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -684,21 +684,17 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </div>
 <section id="citing-the-database-release" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="citing-the-database-release"><span class="header-section-number">3.1</span> Citing the database release</h2>
-<p>CalCOFI (2026). CalCOFI Integrated Database, release v2026.10.30 [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://doi.org/10.5281/zenodo.23833029</p>
+<p>CalCOFI (2026). CalCOFI Integrated Database, release v2026.11.04 [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://calcofi.io/db-schema/?v=v2026.11.04</p>
 <p>Every release also has a DOI of its own, minted on Zenodo when the release is tagged, and one <strong>concept DOI</strong> that always resolves to the newest release. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code> (<code>doi</code>, <code>concept_doi</code>) and in the release notes’ <em>How to cite</em>:</p>
-<ul>
-<li>this release, <code>v2026.10.30</code>: <a href="https://doi.org/10.5281/zenodo.23833029" class="uri">https://doi.org/10.5281/zenodo.23833029</a></li>
-<li>the concept DOI, every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
-</ul>
 </section>
 <section id="citing-an-individual-dataset" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="citing-an-individual-dataset"><span class="header-section-number">3.2</span> Citing an individual dataset</h2>
-<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. <a href="#tbl-dataset-citations" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is the <code>dataset</code> table of the promoted release, v2026.10.30.</p>
+<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. <a href="#tbl-dataset-citations" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is the <code>dataset</code> table of the promoted release, v2026.11.04.</p>
 <div class="cell">
 <div id="tbl-dataset-citations" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.1: Every dataset of v2026.10.30 with the citation, licence, DOI and contact a use should carry.
+Table&nbsp;3.1: Every dataset of v2026.11.04 with the citation, licence, DOI and contact a use should carry.
 </figcaption>
 <div aria-describedby="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1184,8 +1180,7 @@ Table&nbsp;3.1: Every dataset of v2026.10.30 with the citation, licence, DOI and
 <tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_bottle/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_bottle</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">CalCOFI. (2023). CalCOFI Bottle Database 194903-202105. CalCOFI.org.</td>
-<td class="gt_row gt_left" headers="license"><br>
-</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
 <td class="gt_row gt_left" headers="contact"><br>
@@ -1194,8 +1189,7 @@ Table&nbsp;3.1: Every dataset of v2026.10.30 with the citation, licence, DOI and
 <tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_bottle-derived/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_bottle-derived</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">CalCOFI. (2026). CalCOFI Bottle Derived Hydrographic Products (from the CalCOFI Bottle Database 194903-202105). CalCOFI.io. https://calcofi.io/workflows/ingest_calcofi_bottle-derived.html</td>
-<td class="gt_row gt_left" headers="license"><br>
-</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
 <td class="gt_row gt_left" headers="contact"><br>
