@@ -131,12 +131,19 @@ Bringing a dataset in is a loop of five steps with a person at every hand-off:
    end.
 4. **Validate** — keys, ranges, taxa and coverage are checked; every finding is either fixed or
    becomes a `proposed` question.
-5. **Release** — the dataset joins the next frozen release, gets its page, its EML and STAC
-   records, and its rows in the apps.
+5. **Preview** — the provider sees the dataset first, at a private link: calcofi.io, the
+   Explorer and the notebook built against a candidate release that includes it, with the
+   citation and licence it would publish pre-filled for correction. The decision on that page
+   (*yes* or *not yet*) is written into the dataset's standing consent question, in the Sheet
+   and in git, by `pull_preview_consent.R`.
+6. **Release** — with the consent given, the dataset joins the next frozen release, gets its page,
+   its EML and STAC records, and its rows in the apps; `check_dataset_consent()` stops a public
+   release that would carry a dataset without it.
 
-A dataset can stop after step 3 with `in_release: false` while its questions are open. That
-is normal, and it is what the holdings triage board is for: a holding's `next_step` names which
-of these steps it is waiting on and who owns it.
+A dataset can stop after step 3 with `in_release: false` while its questions are open, and
+stays there through step 5 until the provider says yes. That is normal, and it is what the
+holdings triage board is for: a holding's `next_step` names which of these steps it is waiting
+on and who owns it. [Providing data](provide.qmd#what-happens-next) draws the loop.
 
 ## Who to contact
 

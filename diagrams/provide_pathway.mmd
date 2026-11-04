@@ -1,0 +1,38 @@
+%%{init: {"flowchart": {"wrappingWidth": 340}}}%%
+graph TD
+  %% a provider's dataset from the ingest PR to the public database, by way of a
+  %% private preview; every box left of the public lane is private, and each arrow
+  %% that crosses a gate names the check that enforces it
+
+  subgraph held[Held — nothing public]
+    pr["ingest notebook, staged<br/>in_release: false"]:::step
+    shard["parquet + sidecars<br/>gs://calcofi-preview/ingest/{key}"]:::artifact
+    cand["candidate release, this dataset included<br/>release_database.qmd →<br/>gs://calcofi-preview/ducklake-preview-{ds}/"]:::step
+    prev["private preview<br/>preview.calcofi.io/{key}/{token}/<br/>calcofi.io · Explorer · Finder · notebook"]:::surface
+    dec["the provider decides<br/>yes / not yet · citation · licence · feedback"]:::people
+    rec["consent record<br/>consent/{key}/{utc}_{email}.json, written once"]:::artifact
+    q["the consent question<br/>questions.csv ⇄ the provider's Sheet"]:::people
+  end
+
+  subgraph public[Public]
+    flip["un-hold<br/>in_release: true"]:::step
+    rel[("public release<br/>gs://calcofi-db · DOI")]:::artifact
+    surf["calcofi.io · Explorer · portals"]:::surface
+  end
+
+  pr -- "gcs_bucket_for_dataset()<br/>refuses the public buckets" --> shard
+  shard -- "CALCOFI_RELEASE_INCLUDE<br/>only into calcofi-preview" --> cand
+  cand -- "build_preview.sh<br/>needs the consent question" --> prev
+  prev --> dec --> rec
+  rec -- "pull_preview_consent.R:<br/>answer · who · date → the Sheet + git" --> q
+  q -. "shown in the form" .-> prev
+  dec -. "not yet: fix at the ingest,<br/>rebuild the candidate" .-> pr
+  q -- "answered: yes" --> flip
+  flip -- "check_dataset_consent()<br/>stops a release without it" --> rel --> surf
+
+  classDef step     fill:#fff7d6,stroke:#c9a227,color:#182b49
+  classDef artifact fill:#fbe9c9,stroke:#d97706,color:#182b49
+  classDef surface  fill:#e6f2fb,stroke:#00629b,color:#182b49
+  classDef people   fill:#eef1f5,stroke:#6b7a90,color:#182b49
+  style held   fill:#fafafa,stroke:#cfd6de
+  style public fill:#f3f8f3,stroke:#8fbf8f
