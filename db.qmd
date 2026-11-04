@@ -60,12 +60,16 @@ An observation's provenance is denormalized onto it on purpose: `obs` carries `d
 `cruise_key`, `grid_key`, the position, the datetime and `hex_id` (H3 at resolution 10, so
 coarser aggregations use `h3_cell_to_parent(hex_id, res)` rather than a column per resolution),
 so a rollup groups without a join. `geom` lives on `sample` and on the reference tables, never
-on `obs`. `obs_bio` and `obs_env` also carry `year` and `quarter`, and these are the **cruise's**,
-read from `cruise_key` (`YYYY-MM-NODC`, the month SWFSC designates for the cruise), not from the
-calendar date of the cast; the date is used only where the key does not parse. A cruise often
-begins in the last days of the month before its own, so a cast taken on 30 June of CalCOFI 2607
-(`2026-07-3322`) is in the third quarter with the rest of that cruise, which is also the quarter
-its climatology baseline is filed under. `test_release.qmd` asserts it for that cruise.
+on `obs`. `obs_bio` and `obs_env` also carry `year` and `quarter` (and, appended after `hex7`,
+`cruise_month` and `season_year`), and these are the **cruise's**: the year and month of the median
+datetime of its root samples (`cruise.date_median` / `month_median`, written at release), not the
+calendar date of the cast and not the month its `cruise_key` names, which is used only where the
+cruise has no dated sample; the date is used only where the key does not parse either. `quarter` is
+the season, 1 = DJF, 2 = MAM, 3 = JJA, 4 = SON, and `season_year` counts December toward the
+following year's winter. A cruise often begins in the last days of the month before its own, so a
+cast taken on 30 June of CalCOFI 2607 (`2026-07-3322`) is in summer with the rest of that cruise,
+which is also the season its climatology baseline is filed under. `test_release.qmd` asserts it for
+that cruise.
 
 A sampling event has a hexagon too. `sample.hex7`, copied onto `sample_root.hex7` for the root
 events, is the resolution-7 H3 cell that is the **parent of the resolution-10 cell** of the
@@ -148,23 +152,36 @@ The table has two arms and one extra baseline, none of which changes the grain a
   `check_release_relationships()` reads a declared nullable key column as a value rather than as a
   failure. The release names the types, so `calcofi4db` carries no list of datasets.
 - **A seasonal baseline** sits beside the monthly one as appended columns (nothing was renamed):
-  `quarter` and `season_mean`, `season_sd`, `season_n`, `season_n_cruises`. The quarter is that of
-  the **cruise's month** (Q1 January–March, Q2 April–June, Q3 July–September, Q4 October–December),
-  the same quarter the Explorer's season filter keys on, so CalCOFI 2607's 30 June casts are Q3.
-  The columns are set on every month of a quarter that passes the same cruise floor, so a baseline
-  is still looked up by station, month, bin and type, and nothing that sums the table counts a cell
-  twice. Where a station's months are each below the floor but its quarter is not (mostly the
-  northern lines 60–73.3, whose winter and spring cruises are split across January–April), the row
-  has a seasonal mean and a **NULL `clim_mean`**: a NULL `clim_mean` means "no monthly baseline",
-  exactly as an absent row does, so a consumer tests `clim_mean IS NOT NULL` before it subtracts.
+  `quarter` and `season_mean`, `season_sd`, `season_n`, `season_n_cruises`. The season is that of
+  the **cruise's month** — the meteorological seasons, numbered 1 = DJF (December–February), 2 = MAM,
+  3 = JJA, 4 = SON, December counting toward the following year's winter (`calcofi4db::cruise_quarter_sql()`;
+  through release v2026.10.30 `quarter` was Q1 January–March … Q4 October–December) — the same season
+  the Explorer's season filter keys on, so CalCOFI 2607's 30 June casts are summer. The columns are
+  set on every month of a season that passes the same cruise floor, so a baseline is still looked up
+  by station, month, bin and type, and nothing that sums the table counts a cell twice. Where a
+  station's months are each below the floor but its season is not (mostly the northern lines
+  60–73.3, whose winter and spring cruises are split across January–April), the row has a seasonal
+  mean and a **NULL `clim_mean`**: a NULL `clim_mean` means "no monthly baseline", exactly as an
+  absent row does, so a consumer tests `clim_mean IS NOT NULL` before it subtracts.
   `calcofi4r::cc_climatology(season = TRUE)` reads the seasonal arm and
   `calcofi4r::cc_cast_anomaly()` the per-cast one.
+
+- **The cruise's month is its median cast month.** A cruise ID names sometimes the month a cruise
+  started and sometimes the month it mostly covered, so the month a cast is filed under — in the
+  climatology, in `obs_env` / `obs_bio` (`year`, `quarter`, and the appended `cruise_month`,
+  `season_year`) and in every anomaly — is the calendar month of the median datetime of the
+  cruise's root samples, written on `cruise` as `date_median`, `month_median`, `season` and
+  `season_year` by `calcofi4db::add_cruise_median_date()` at release. A cruise with no dated sample
+  keeps its key's month. A consumer reads `cruise.month_median` or `obs_env.cruise_month`, never
+  the key's `substr(cruise_key, 6, 2)`.
 
 These rules are enforced. `test_release.qmd`'s consumer contract withholds `latest.txt` unless a
 per-cast cell exists for a derived product, every monthly cell also carries a seasonal baseline,
 seasonal-only cells exist, a NULL `depth_bin` appears only on a per-cast type (never on a type
 `obs_env` carries by depth), `depth_bin` is otherwise a 10 m floor bin, one window is stamped on
-every row, and every `obs_env` row of CalCOFI 2607 is in quarter 3 ([the gates](releases.qmd)).
+every row, `cruise` carries the four median-date columns, a December cruise is DJF of the following
+year, every `obs_env` row's `quarter` / `cruise_month` / `season_year` match its cruise, and every
+`obs_env` row of CalCOFI 2607 is in season 3, summer ([the gates](releases.qmd)).
 
 ### Every table in the release
 

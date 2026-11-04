@@ -110,9 +110,11 @@ and the *Sources* line naming every dataset the average pools. A statistic is av
 datasets that share the life stage and the standardization, and never across them — eggs are never
 merged with larvae, counts never with densities.
 
-**② Refine** narrows it: the years (typed, or dragged on the Time panel), the seasons as quarters (the quarter of the cruise's designated month, so a cast taken on 30 June on a
-July cruise is in the third quarter with the rest of its cruise; `test_release.qmd` asserts it for
-CalCOFI 2607), the depth band (typed, or brushed on the Depth panel) and the datasets in view.
+**② Refine** narrows it: the years (typed, or dragged on the Time panel), the seasons (DJF, MAM, JJA,
+SON — the season of the cruise's month, which is the month of its median cast date, December counting
+toward the following year's winter; so a cast taken on 30 June on a July cruise is in summer with the
+rest of its cruise; `test_release.qmd` asserts it for CalCOFI 2607), the depth band (typed, or brushed
+on the Depth panel) and the datasets in view.
 
 **③ Share** is everything that leaves the app: *Download data (zip)* — the summary and the
 observations, the exact SQL against the release's object URLs, a README, the citations and
@@ -230,10 +232,10 @@ x-axis, depth down the y-axis, for **one cruise** (@fig-explore-section-env). Th
 bin — so an anomaly here and an anomaly in [ctd-transects](https://calcofi.io/ctd-transects/)
 cannot disagree ([The database](db.qmd)). A cell with no monthly baseline (an absent row, or one whose
 `clim_mean` is NULL because only its season passes the cruise floor) is left blank, never drawn as
-zero. Beside the checkbox, **month · season** picks the baseline: the cruise's month, or its quarter
-(Q1 Jan–Mar … Q4 Oct–Dec, the release's `season_*` columns), which fills stations whose month alone
-has fewer than five baseline cruises; the caption names the one shown ("the July normal", "the
-Jul–Sep normal"). A release without the seasonal columns keeps the season button disabled.
+zero. Beside the checkbox, **month · season** picks the baseline: the cruise's month, or its season
+(Dec–Feb, Mar–May, Jun–Aug, Sep–Nov, the release's `season_*` columns), which fills stations whose
+month alone has fewer than five baseline cruises; the caption names the one shown ("the July normal",
+"the Jun–Aug normal"). A release without the seasonal columns keeps the season button disabled.
 
 The **Hexagons** and **Contours** lenses offer the same difference for an ocean variable, including
 the per-cast derived products (mixed-layer depth, chlorophyll maximum, integrated chlorophyll):
