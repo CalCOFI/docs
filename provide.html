@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9d96e61768556b3911143762e43db01e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-683d22c2071ad053dab5b6d722ece91f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9d96e61768556b3911143762e43db01e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ef8120f98bd32a61d6c1c1c07b3b92b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -820,10 +820,23 @@ Table&nbsp;8.2: One row of a net-tow dataset that carries every mandatory field,
 <h2 data-number="8.6" class="anchored" data-anchor-id="what-happens-next"><span class="header-section-number">8.6</span> What happens next</h2>
 <ol type="1">
 <li><strong>Explore</strong> — the data team profiles the file and seeds a list of questions from what it cannot answer (a unit, a code, an ambiguous date).</li>
-<li><strong>You get one Sheet</strong> — one tab of questions per dataset, most already carrying a <em>proposed</em> answer for you to confirm, and a <code>metadata</code> tab for the abstract, methods, creators, licence and citation (<a href="./metadata.html">Metadata &amp; the ingest loop</a>).</li>
-<li><strong>Ingest and validate</strong> — one reproducible notebook turns the file into the shared schema; every finding is fixed or becomes a question.</li>
-<li><strong>Release</strong> — the dataset joins the next frozen release with a DOI, gets its page at <code>calcofi.io/datasets/{key}/</code>, its citation on every figure drawn from it, and — where you want it — its way onward to ERDDAP, OBIS, EDI or the archives (<a href="./portals.html">Portals</a>).</li>
+<li><strong>You get one Sheet</strong> — one tab of questions per dataset, most already carrying a <em>proposed</em> answer for you to confirm, and a <code>metadata</code> tab for the abstract, methods, creators, licence and citation (<a href="./metadata.html">Metadata &amp; the ingest loop</a>). One row of that tab is a standing <strong>consent question</strong>: may CalCOFI.io publish this dataset as shown?</li>
+<li><strong>Ingest and validate, held</strong> — one reproducible notebook turns the file into the shared schema; every finding is fixed or becomes a question. The dataset is <em>staged, not released</em>: its notebook carries <code>in_release: false</code>, its files and tables go to a private bucket (<code>gcs_bucket_for_dataset()</code> refuses the public ones for a held dataset), and no release step sees it (<code>release_excluded_datasets()</code>).</li>
+<li><strong>You see it first, privately</strong> — a candidate release that includes only your dataset beside the public ones is built into the same private bucket (<code>scripts/preview_candidate.sh</code>; the notebook refuses to include a held dataset into a public bucket), and calcofi.io, the Explorer, the Dataset Finder and the ingest notebook are built against it and shown at a private link, <code>preview.calcofi.io/{key}/{token}/</code>, that only you and the people you send it to hold (<code>scripts/build_preview.sh</code>). Every page carries a feedback button; what you send stays in a private tracker, never a public issue.</li>
+<li><strong>You decide, on the page</strong> — the preview’s landing page shows the citation, licence and acknowledgement it would publish, pre-filled from the record, for you to correct, and asks <em>yes</em> or <em>not yet</em>. The decision is written once to a consent record, and from there into the consent question’s row in your Sheet and in git (<code>scripts/pull_preview_consent.R</code>), so the Sheet, the repository and the release all hold one answer. <em>Not yet</em> with a comment sends the dataset back to step 3 and the preview is rebuilt.</li>
+<li><strong>Release</strong> — with the consent given, the hold is lifted and the dataset joins the next frozen release with a DOI, gets its page at <code>calcofi.io/datasets/{key}/</code>, its citation on every figure drawn from it, and — where you want it — its way onward to ERDDAP, OBIS, EDI or the archives (<a href="./portals.html">Portals</a>). The release itself checks the answer: <code>check_dataset_consent()</code> stops a public release that would carry a dataset whose consent question is not answered <em>yes</em>, so nothing reaches the public database before your final acceptance.</li>
 </ol>
+<p><a href="#fig-provide-pathway" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> draws the loop; the arrows that cross from held to public are the checks, each by name, so the promise is enforced rather than remembered.</p>
+<div id="fig-provide-pathway" class="cc-diagram nolightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-provide-pathway-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="diagrams/provide_pathway.svg" class="cc-diagram nolightbox img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-provide-pathway-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: A provider’s dataset from the staged ingest to the public database. Everything in the grey lane is private: the staged tables, the candidate release, the preview and the decision record. The named checks on the arrows are what keep it that way, and the last one, <code>check_dataset_consent()</code>, is what lets a dataset cross.
+</figcaption>
+</figure>
+</div>
 <p>Write to <strong>data@calcofi.io</strong> to start.</p>
 </section>
 <section id="names-you-may-see-elsewhere" class="level2" data-number="8.7">
