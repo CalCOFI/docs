@@ -10,6 +10,7 @@ erDiagram
   sample ||--o{ obs_env : "sample_key"
   sample ||--o{ sample_measurement : "sample_key"
   sample ||--o{ obs_attribute : "sample_key"
+  sample ||--o| sample_track : "sample_key"
   sample_root ||--o{ obs_bio : "root_id"
   sample_root ||--o{ obs_env : "root_id"
   taxon ||--o{ obs_bio : "taxon_key"
@@ -91,4 +92,20 @@ erDiagram
   obs_attribute {
     int obs_attribute_id PK
     string sample_key FK
+  }
+  sample_track {
+    string sample_key PK, FK
+    string dataset_key
+    string track_type "effort_segment, sight_line, …"
+    timestamp datetime_beg
+    timestamp datetime_mid
+    timestamp datetime_end
+    double longitude_beg
+    double latitude_beg
+    double longitude_mid
+    double latitude_mid
+    double longitude_end
+    double latitude_end
+    double length_km
+    geometry geom "LINESTRING, beg to end"
   }

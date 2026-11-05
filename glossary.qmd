@@ -17,8 +17,15 @@ cruise's month and 10 m depth bin (`depth_bin` NULL for a per-cast product) over
 seasonal (quarter) baseline beside it. A cell with no monthly baseline is blank, never zero.
 → [The database](db.qmd#shared-reference-tables)
 
+**COGO (coordinate geometry)** — placing a point from a known one by a bearing and a distance. A
+line-transect sighting is recorded as the ship's position, the observer's angle off the bow and a
+distance, so its own position is computed from them (`calcofi4db::cogo_true_bearing()` and
+`cogo_destination()`); the ship-to-animal line is kept as a `sight_line` in `sample_track`.
+→ [The database](db.qmd#sec-sample-track)
+
 **core** — the small family of tables every consumer reads — `sample`, `obs_bio`, `obs_env`,
-`obs_attribute`, `sample_measurement` and the references — that every dataset projects into.
+`obs_attribute`, `sample_measurement`, `sample_track` (where a dataset has paths) and the
+references — that every dataset projects into.
 → [The database](db.qmd)
 
 **cruise** — one voyage of one ship; keyed `YYYY-MM-NODC` by the month SWFSC designates for it and
@@ -88,6 +95,11 @@ is the promoted one. → [Releases](releases.qmd)
 
 **sample** — a physical sampling event of any kind, at its native grain, with its position, time
 and depth span, and its parent. → [The database](db.qmd)
+
+**sample track** — `sample_track`: the path of a `sample` whose event has extent along the sea
+surface (an effort segment of a survey, a line of sight to a sighting) — its beginning, middle and
+end in x, y and t, its length and a beginning-to-end `LINESTRING` — one row at most per sample,
+beside the single point `sample` keeps. → [The database](db.qmd#sec-sample-track)
 
 **series** — one dataset's own column of a measurement — `measurement_type`, in schema terms
 (`calcofi_bottle.temperature`, `calcofi_ctd-cast.temperature_ave`); a *measurement* groups the

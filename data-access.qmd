@@ -101,7 +101,9 @@ Two tables hold the observations, and one view unites them:
 Every observation points at its **sampling event** in `sample` (`sample_key`; `parent_sample_key`
 walks net → tow → site and bottle → cast) and carries its provenance and place —
 `dataset_key`, `cruise_key`, `grid_key`, position, time, `hex_id` — so a rollup needs no join.
-Event-level effort such as `std_haul_factor` is in `sample_measurement`; sub-occurrence detail
+Event-level effort such as `std_haul_factor` is in `sample_measurement`; an event's path along the
+sea surface (a survey segment, a line of sight), where a dataset has one, in `sample_track`
+(joined on `sample_key`; `sample` keeps its one point); sub-occurrence detail
 (length bins, stages) in `obs_attribute`; the references are `cruise`, `ship`, `grid`, `taxon`,
 `dataset`, `measurement_type`, `spatial`. [The database](db.qmd) describes each; [Keys and
 integrity](keys.qmd) says how they join.
