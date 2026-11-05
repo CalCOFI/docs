@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9d96e61768556b3911143762e43db01e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-683d22c2071ad053dab5b6d722ece91f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9d96e61768556b3911143762e43db01e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ef8120f98bd32a61d6c1c1c07b3b92b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -720,6 +720,7 @@ Table&nbsp;8.1: What every dataset must carry, in the form the ingest can read i
 <li><strong>The cruise</strong> — the cruise designation as your records carry it (<code>1902RL</code>, <code>CalCOFI 2019-02</code>, a NOAA cruise id). The database keys every event to a cruise by its date span, so a designation is a check, not a requirement.</li>
 <li><strong>The station</strong> — CalCOFI line and station where the event was on the grid (<code>93.3</code>, <code>26.4</code>), or your own station name where it was not.</li>
 <li><strong>The gear and the tow</strong> — the net or instrument (a CalCOFI tow-type code such as <code>CB</code> for the standard bongo, or a description), the tow number within the cruise, the net side, and the net’s mesh size in millimetres where it applies — it sets the smallest organism the gear retains.</li>
+<li><strong>A path, for an event with extent</strong> — the start and end position and time of a survey segment or a tow (and the observer’s bearing and distance to a sighting, with the ship’s position), and your own length if you computed one. The database keeps them as a <code>sample_track</code> row beside the event’s single <code>sample</code> point; send them rather than only a midpoint.</li>
 <li><strong>A haul factor</strong>, if you already compute one — the factor you use to standardize a catch to a reference tow, so it’s comparable across gear. The database can derive this from volume filtered and tow geometry when you don’t supply it, but if you already have your own, send it rather than have it recomputed.</li>
 <li><strong>Quality flags</strong> — your own vocabulary, as long as it is written down; the database keeps every flag exactly as you assign it and never re-interprets it.</li>
 <li><strong>Precision and method</strong> — the significant digits of a measurement, the analytical method, the processing stage (preliminary, final).</li>
