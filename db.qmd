@@ -542,6 +542,24 @@ GEBCO cell near it, that is **reported and ratcheted, never deleted**: nearly al
 minute-rounded 1949–1975 positions on slopes and canyons — the measurement is fine, the place
 is imprecise.
 
+### Two surveys of the same animals: the dedicated one is kept {#sec-dedicated-survey}
+
+Two datasets can observe the same thing from the same ship. On CalCOFI cruises the Farallon
+Institute's strip-transect census (`farallon_bird-mammal`, seabirds and marine mammals) and the
+Scripps Whale Acoustics Lab's line-transect cetacean survey (`sio_cetacean-sightings`) run with
+independent observer teams, so a whale or dolphin group can be logged by both, and summing the two
+counts it twice. The rule is that **the dedicated survey is kept and the other dataset's overlapping
+records are cut by whole cruise**: `ingest_farallon_bird-mammal.qmd` drops Farallon's marine-mammal
+observations on every cruise where the SIO survey has effort segments (the distinct `cruise_key`
+of its `sample_track` paths), and keeps its birds, fish and turtles, its transects, and its mammals
+on the cruises the SIO survey did not sail. It is enforced at the Farallon ingest, which depends on
+the sightings ingest, and it is **gated on the replacement being public**: the cut applies when
+`sio_cetacean-sightings` is `in_release: true`, and until then Farallon's rows are unchanged, so a
+release never loses the mammals before the dedicated survey can replace them. A private preview
+candidate applies it with `CALCOFI_FARALLON_CUT_COVERED=1`. Each dataset's description states the
+rule, and the notebook lists every Farallon cruise with marine mammals since the SIO survey began,
+covered or not.
+
 ## Integrated database ingestion strategy
 
 ### Overview
