@@ -48,6 +48,10 @@ These let the data team join your rows to everything else, rather than only plac
 - **The gear and the tow** — the net or instrument (a CalCOFI tow-type code such as `CB` for the
   standard bongo, or a description), the tow number within the cruise, the net side, and the net's
   mesh size in millimetres where it applies — it sets the smallest organism the gear retains.
+- **A path, for an event with extent** — the start and end position and time of a survey segment or
+  a tow (and the observer's bearing and distance to a sighting, with the ship's position), and your
+  own length if you computed one. The database keeps them as a `sample_track` row beside the
+  event's single `sample` point; send them rather than only a midpoint.
 - **A haul factor**, if you already compute one — the factor you use to standardize a catch to a
   reference tow, so it's comparable across gear. The database can derive this from volume filtered
   and tow geometry when you don't supply it, but if you already have your own, send it rather than

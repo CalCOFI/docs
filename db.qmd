@@ -48,13 +48,14 @@ family and the reference tables it joins to; @tbl-core says what one row of each
 | **`obs`** | the two above under one name — `realm` = `bio` or `env`, `value` as `measurement_value` — as a **view** the catalog carries; its own objects are deprecated | view |
 | **`obs_attribute`** | **sub-occurrence** detail — length- and stage-frequency bins (`bin_value`, `bin_label`, `count`) and categorical behaviour | core |
 | **`sample_measurement`** | **event-level effort and conditions** — a net's `volume_sampled` and `std_haul_factor`, a cast's surface observations | core |
+| **`sample_track`** | the **path** of a sampling event that has extent along the sea surface — an effort segment of a line-transect survey, the observer's line of sight to a sighting — with its beginning, middle and end in x, y and t (`datetime_beg/_mid/_end`, `longitude_beg/_mid/_end`, `latitude_beg/_mid/_end`), `length_km` and a beginning-to-end `LINESTRING` `geom`; at most one row per `sample` (`sample_key` is its primary key), and present in a release only when a dataset in it has paths | core |
 | **`sample_root`** | one row per root sampling event with the dense integer `root_id` the browser objects join on, its position and the position's H3 cell (`hex7`), time, depth span, gear and seafloor depth | supplemental |
 | **`obs_ctd_full`** | full-resolution CTD scans (~271 M rows); `obs_env` carries the thinned series | supplemental |
 | **`obs_mets_full`** | full-resolution underway meteorology (~20 M rows) | supplemental |
 
 : The core family: what one row of each table stands for, and whether it is in the default set. {#tbl-core}
 
-@tbl-core is the whole model in nine rows; @tbl-inventory below is every table the release
+@tbl-core is the whole model, one row per table; @tbl-inventory below is every table the release
 actually ships.
 An observation's provenance is denormalized onto it on purpose: `obs` carries `dataset_key`,
 `cruise_key`, `grid_key`, the position, the datetime and `hex_id` (H3 at resolution 10, so
@@ -79,6 +80,36 @@ tables for every root, and equals the cell of every observation sitting at the s
 An observation carries its *own* position, so a scan of a CTD cast that drifted across a cell
 edge lies in the neighbouring hexagon: join an observation to its sample on `sample_key`, never
 on the cell.
+
+### A path as well as a point: `sample_track` {#sec-sample-track}
+
+`sample` holds **one point per event**, and that does not change: a net tow is placed at its
+position, a cast at its station, a line-transect effort segment at its midpoint, a sighting at the
+animal's position. Some events also have **extent along the sea surface** (a survey leg, the
+observer's line of sight to a sighting), and that extent lives beside the point in
+`sample_track`, one row for each such `sample` (`sample_key` is both its primary key and a foreign
+key to `sample.sample_key`, so a sample has at most one path). A consumer that reads `sample` is
+unchanged, and one that wants the path joins:
+
+```sql
+SELECT s.sample_key, t.track_type, t.length_km, t.geom      -- or t.longitude_beg … t.latitude_end
+FROM sample s JOIN sample_track t USING (sample_key)
+WHERE s.dataset_key = 'sio_cetacean-sightings' AND t.track_type = 'effort_segment';
+```
+
+`track_type` says what the line is (`effort_segment`, `sight_line`, …). The beginning, middle and
+end each carry a position and a time: the beginning and end come from the provider, the middle is
+computed (halfway in time, at the great-circle midpoint of the two ends). `length_km` is the
+provider's own length where it gave one, otherwise the great-circle distance between the ends.
+`geom` is the straight `LINESTRING` from beginning to end, tagged `EPSG:4326` at release like
+every released geometry; draw a segment from `geom`, or from the six `longitude_*` / `latitude_*`
+columns where the reader has no geometry type. A sighting's own `sample` point is *placed*, by
+coordinate geometry (COGO), from the ship's position, the true bearing of the line of sight and the
+distance, and its `sight_line` runs from the ship to that point
+(`calcofi4db::cogo_true_bearing()`, `cogo_destination()`). The table is assembled by
+`calcofi4db::assemble_core()` and declared in `core_output_tables()` and `core_relationships()`
+like the rest of the core family, and it is absent from a release in which no dataset has a path.
+A net tow's start and end positions are the next use.
 
 ### What the release publishes: `obs_bio` + `obs_env`, and `obs` as a view
 
@@ -750,6 +781,7 @@ lookup rather than a judgement.
 |---|---|---|
 | **`sample`** (adjacency list) | **Event core** | `eventID` = `sample_key`; `parentEventID` = `parent_sample_key`; `eventDate` from `datetime` (a tow publishes as its start/end interval); `decimalLatitude` / `decimalLongitude`; `minimumDepthInMeters` / `maximumDepthInMeters` = `depth_min_m` / `depth_max_m`; `footprintWKT` from `geom`; `locationID` = `site_key`; **`samplingProtocol`** from `metadata/gear.csv` keyed on `tow_type`; **`sampleSizeValue`** = `volume_sampled_m3` with `sampleSizeUnit` = cubic metre |
 | **`obs_bio`** (`obs` where `realm = 'bio'`) | **Occurrence extension** | `occurrenceID` from `obs_id`; `eventID` = `sample_key`; **`scientificNameID`** built from `taxon_key` (`urn:lsid:marinespecies.org:taxname:<worms_id>`, or the ITIS TSN for a bird); `scientificName` from `taxon`; **`lifeStage`** + its NERC S11 id from `metadata/life_stage.csv`; **`organismQuantity`** = `density_per_10m2` or `density_per_1000m3` with `organismQuantityType` naming that denominator |
+| **`sample_track`** | the **Event's footprint** (a survey segment or line of sight) — *intended*: no publisher writes it yet | `footprintWKT` = the `geom` `LINESTRING` as WKT in place of the point, with `footprintSRS` = `EPSG:4326`; `eventDate` as the interval `datetime_beg/datetime_end`; `decimalLatitude` / `decimalLongitude` stay the `sample` point |
 | **`sample_measurement`** | **eMoF on Events** (net effort, cast conditions) | `measurementType` / `measurementValue` / `measurementUnit`, plus **`measurementTypeID`** = `measurement_type.nerc_p01` and **`measurementUnitID`** = `measurement_type.units_nerc_p06` |
 | **`obs_attribute`** | **eMoF on Occurrences** (length and stage frequency) | `bin_value` / `bin_label` / `count` → `measurementValue`; ids as above |
 | **`obs_env`** (`obs` where `realm = 'env'`) | **eMoF on the bottle or depth Event** | ids as above |

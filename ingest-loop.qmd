@@ -44,7 +44,7 @@ Everything a step produces lands in a registry or a sidecar that the next step r
    crosswalk, keys every event to its cruise by date span
    (`resolve_cruise_key()`, never by event month), keeps the provider's own identifiers as columns,
    and **projects its tables into the core family** — `sample`, `obs`, `obs_attribute`,
-   `sample_measurement`, and the taxa references — with the generic `append_*()` helpers. The
+   `sample_measurement`, `sample_track` (only for events with a path), and the taxa references — with the generic `append_*()` helpers. The
    projection SQL lives in the notebook, not in the package, so a new dataset never edits shared
    code. Every notebook ends the same way: `write_parquet_outputs()`, `build_metadata_json()`,
    `sync_to_gcs()`.
