@@ -163,6 +163,8 @@ is written as the story of the release.
 #| results: asis
 heads <- rel_md[grepl("^# ", rel_md)]
 heads <- heads[!grepl("release notes$", heads, ignore.case = TRUE)]
+# the working section is not a release: it is usually empty, and the published page omits it then
+heads <- heads[!grepl("^# Unreleased\\s*$", heads)]
 cat("The most recent sections of the [rendered changelog](https://storage.calcofi.io/calcofi-db/ducklake/releases/RELEASES.html) (raw markdown at [`RELEASES.md`](https://storage.googleapis.com/calcofi-db/ducklake/releases/RELEASES.md)):\n\n")
 for (h in head(heads, 6)) cat("- ", sub("^# ", "", h), "\n", sep = "")
 ```
