@@ -1,12 +1,5 @@
 # Start here {.unnumbered}
 
-CalCOFI.io is the open, versioned, integrated database of CalCOFI's observations — the physical,
-chemical and biological measurements of one of the world's longest ocean time series, from sixteen
-source datasets, in one schema — and the products around it: an explorer that runs in your
-browser, packages for R and Python, a page and a citable record for every dataset, and the
-portals the data reach. This book is its documentation, for everyone who uses the data, builds on
-it, or contributes to it.
-
 ```{r}
 #| label: facts
 #| include: false
@@ -18,6 +11,13 @@ n_tables <- length(catalog$tables)
 fmt_n    <- function(x) format(x, big.mark = ",", scientific = FALSE)
 fmt_gb   <- function(b) sprintf("%.2f GB", b / 1e9)
 ```
+
+CalCOFI.io is the open, versioned, integrated database of CalCOFI's observations — the physical,
+chemical and biological measurements of one of the world's longest ocean time series, from `r nrow(ds)`
+datasets, in one schema — and the products around it: an explorer that runs in your
+browser, packages for R and Python, a page and a citable record for every dataset, and the
+portals the data reach. This book is its documentation, for everyone who uses the data, builds on
+it, or contributes to it.
 
 ::: {.callout-note appearance="simple" icon=false}
 **The promoted release is `r catalog$version`** — `r nrow(ds)` datasets, `r n_tables` tables,
