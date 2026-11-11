@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "CalCOFI.io",
     "section": "",
-    "text": "Start here\nCalCOFI.io is the open, versioned, integrated database of CalCOFI’s observations — the physical, chemical and biological measurements of one of the world’s longest ocean time series, from sixteen source datasets, in one schema — and the products around it: an explorer that runs in your browser, packages for R and Python, a page and a citable record for every dataset, and the portals the data reach. This book is its documentation, for everyone who uses the data, builds on it, or contributes to it.",
+    "text": "Start here\nCalCOFI.io is the open, versioned, integrated database of CalCOFI’s observations — the physical, chemical and biological measurements of one of the world’s longest ocean time series, from 20 datasets, in one schema — and the products around it: an explorer that runs in your browser, packages for R and Python, a page and a citable record for every dataset, and the portals the data reach. This book is its documentation, for everyone who uses the data, builds on it, or contributes to it.",
     "crumbs": [
       "Start here"
     ]
