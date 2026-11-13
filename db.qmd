@@ -196,7 +196,19 @@ The table has two arms and one extra baseline, none of which changes the grain a
   mean and a **NULL `clim_mean`**: a NULL `clim_mean` means "no monthly baseline", exactly as an
   absent row does, so a consumer tests `clim_mean IS NOT NULL` before it subtracts.
   `calcofi4r::cc_climatology(season = TRUE)` reads the seasonal arm and
-  `calcofi4r::cc_cast_anomaly()` the per-cast one.
+  `calcofi4r::cc_cast_anomaly()` the per-cast one. `calcofi4r::cc_bin_anomaly()` differences the
+  per-bin rows of `obs_env` at any stations against the row of *their own* dataset, so the bottle
+  series (from 1949) and the CTD's (from 1993) can be drawn as one time series without being pooled
+  into one normal.
+
+- **Anomalies on density surfaces are not in the table.** Below the mixed layer an anomaly at a
+  fixed depth is mostly the pycnocline moving; on a sigma-theta surface the displacement and the
+  change in the water separate. `calcofi4r::cc_isopycnal_anomaly()` computes them on request from
+  the 1 m casts of `obs_ctd_full`: the depth of each surface (the shallowest crossing, by the rule
+  of the nitracline, `calcofi4db::profile_threshold_depth()`) and the properties on it, against a
+  baseline built by this table's rules with the surface in place of the depth bin (station, cruise
+  month or season, the window, the cruise floor). The client computes it; no release step builds
+  or checks it.
 
 - **The cruise's month is its median cast month.** A cruise ID names sometimes the month a cruise
   started and sometimes the month it mostly covered, so the month a cast is filed under — in the
