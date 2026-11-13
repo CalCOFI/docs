@@ -742,32 +742,32 @@ Table&nbsp;5.1: What each column-name suffix promises about the value the column
 </section>
 <section id="the-contract-per-table" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="the-contract-per-table"><span class="header-section-number">5.2</span> The contract, per table</h2>
-<p>Every released table declares a primary key, and every foreign key between released tables — every arrow in <a href="db.html#fig-core-erd" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>, the core family’s diagram in the <a href="./db.html">Database</a> chapter — is declared in the release’s <code>relationships.json</code> (<code>calcofi4db::core_relationships()</code> for the core family and the tables the release builds; <code>metadata/relationships_cross.csv</code> for the edges that cross datasets). <a href="#tbl-contract" class="quarto-xref">Table&nbsp;<span>5.2</span></a> reads that file for v2026.11.09.</p>
+<p>Every released table declares a primary key, and every foreign key between released tables — every arrow in <a href="db.html#fig-core-erd" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>, the core family’s diagram in the <a href="./db.html">Database</a> chapter — is declared in the release’s <code>relationships.json</code> (<code>calcofi4db::core_relationships()</code> for the core family and the tables the release builds; <code>metadata/relationships_cross.csv</code> for the edges that cross datasets). <a href="#tbl-contract" class="quarto-xref">Table&nbsp;<span>5.2</span></a> reads that file for v2026.11.12.</p>
 <div class="cell">
 <div id="tbl-contract" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.
+Table&nbsp;5.2: Keys declared for every table of v2026.11.12. A NULL in a foreign-key column is permitted (an env observation has no taxon; an ungridded sample has no grid cell); a non-NULL value must resolve.
 </figcaption>
 <div aria-describedby="tbl-contract-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="fdgeswajjq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fdgeswajjq table {
+<div id="zphbobrcts" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zphbobrcts table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fdgeswajjq thead, #fdgeswajjq tbody, #fdgeswajjq tfoot, #fdgeswajjq tr, #fdgeswajjq td, #fdgeswajjq th {
+#zphbobrcts thead, #zphbobrcts tbody, #zphbobrcts tfoot, #zphbobrcts tr, #zphbobrcts td, #zphbobrcts th {
   border-style: none;
 }
 
-#fdgeswajjq p {
+#zphbobrcts p {
   margin: 0;
   padding: 0;
 }
 
-#fdgeswajjq .gt_table {
+#zphbobrcts .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -793,12 +793,12 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-left-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_caption {
+#zphbobrcts .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fdgeswajjq .gt_title {
+#zphbobrcts .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -810,7 +810,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-bottom-width: 0;
 }
 
-#fdgeswajjq .gt_subtitle {
+#zphbobrcts .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -822,7 +822,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-top-width: 0;
 }
 
-#fdgeswajjq .gt_heading {
+#zphbobrcts .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -834,13 +834,13 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_bottom_border {
+#zphbobrcts .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_col_headings {
+#zphbobrcts .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -855,7 +855,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_col_heading {
+#zphbobrcts .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -875,7 +875,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   overflow-x: hidden;
 }
 
-#fdgeswajjq .gt_column_spanner_outer {
+#zphbobrcts .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -887,15 +887,15 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   padding-right: 4px;
 }
 
-#fdgeswajjq .gt_column_spanner_outer:first-child {
+#zphbobrcts .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fdgeswajjq .gt_column_spanner_outer:last-child {
+#zphbobrcts .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fdgeswajjq .gt_column_spanner {
+#zphbobrcts .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -907,11 +907,11 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   width: 100%;
 }
 
-#fdgeswajjq .gt_spanner_row {
+#zphbobrcts .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fdgeswajjq .gt_group_heading {
+#zphbobrcts .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -937,7 +937,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   text-align: left;
 }
 
-#fdgeswajjq .gt_empty_group_heading {
+#zphbobrcts .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -952,15 +952,15 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   vertical-align: middle;
 }
 
-#fdgeswajjq .gt_from_md > :first-child {
+#zphbobrcts .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fdgeswajjq .gt_from_md > :last-child {
+#zphbobrcts .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fdgeswajjq .gt_row {
+#zphbobrcts .gt_row {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -979,7 +979,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   overflow-x: hidden;
 }
 
-#fdgeswajjq .gt_stub {
+#zphbobrcts .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -992,7 +992,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   padding-right: 5px;
 }
 
-#fdgeswajjq .gt_stub_row_group {
+#zphbobrcts .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1006,15 +1006,15 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   vertical-align: top;
 }
 
-#fdgeswajjq .gt_row_group_first td {
+#zphbobrcts .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fdgeswajjq .gt_row_group_first th {
+#zphbobrcts .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fdgeswajjq .gt_summary_row {
+#zphbobrcts .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1024,16 +1024,16 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   padding-right: 5px;
 }
 
-#fdgeswajjq .gt_first_summary_row {
+#zphbobrcts .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_first_summary_row.thick {
+#zphbobrcts .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fdgeswajjq .gt_last_summary_row {
+#zphbobrcts .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1043,7 +1043,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_grand_summary_row {
+#zphbobrcts .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1053,7 +1053,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   padding-right: 5px;
 }
 
-#fdgeswajjq .gt_first_grand_summary_row {
+#zphbobrcts .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1063,7 +1063,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-top-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_last_grand_summary_row_top {
+#zphbobrcts .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1073,11 +1073,11 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_striped {
+#zphbobrcts .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fdgeswajjq .gt_table_body {
+#zphbobrcts .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1086,7 +1086,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-bottom-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_footnotes {
+#zphbobrcts .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1100,7 +1100,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_footnote {
+#zphbobrcts .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1109,7 +1109,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   padding-right: 5px;
 }
 
-#fdgeswajjq .gt_sourcenotes {
+#zphbobrcts .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1123,7 +1123,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   border-right-color: #D3D3D3;
 }
 
-#fdgeswajjq .gt_sourcenote {
+#zphbobrcts .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1131,72 +1131,72 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
   padding-right: 5px;
 }
 
-#fdgeswajjq .gt_left {
+#zphbobrcts .gt_left {
   text-align: left;
 }
 
-#fdgeswajjq .gt_center {
+#zphbobrcts .gt_center {
   text-align: center;
 }
 
-#fdgeswajjq .gt_right {
+#zphbobrcts .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fdgeswajjq .gt_font_normal {
+#zphbobrcts .gt_font_normal {
   font-weight: normal;
 }
 
-#fdgeswajjq .gt_font_bold {
+#zphbobrcts .gt_font_bold {
   font-weight: bold;
 }
 
-#fdgeswajjq .gt_font_italic {
+#zphbobrcts .gt_font_italic {
   font-style: italic;
 }
 
-#fdgeswajjq .gt_super {
+#zphbobrcts .gt_super {
   font-size: 65%;
 }
 
-#fdgeswajjq .gt_footnote_marks {
+#zphbobrcts .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fdgeswajjq .gt_asterisk {
+#zphbobrcts .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fdgeswajjq .gt_indent_1 {
+#zphbobrcts .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fdgeswajjq .gt_indent_2 {
+#zphbobrcts .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fdgeswajjq .gt_indent_3 {
+#zphbobrcts .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fdgeswajjq .gt_indent_4 {
+#zphbobrcts .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fdgeswajjq .gt_indent_5 {
+#zphbobrcts .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fdgeswajjq .katex-display {
+#zphbobrcts .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fdgeswajjq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zphbobrcts div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1449,7 +1449,7 @@ Table&nbsp;5.2: Keys declared for every table of v2026.11.09. A NULL in a foreig
 <section id="measured-this-release" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="measured-this-release"><span class="header-section-number">5.3</span> Measured, this release</h2>
 <p>Declaring a key is cheap. Since 2026-09-08 the release <em>measures</em> every declaration on the assembled tables before it freezes — <code>calcofi4db::check_release_relationships()</code> — and writes the result beside <code>catalog.json</code> as <code>integrity.json</code>. A duplicate or NULL primary key, or any non-NULL foreign key with no match, <strong>stops the release</strong>. The schema browser reads the same file, so a ✓ on a key there means measured, not declared.</p>
-<p>For <strong>v2026.11.09</strong>: 26 primary keys and 61 foreign keys measured, 0 skipped, <strong>every key ok</strong>.</p>
+<p>For <strong>v2026.11.12</strong>: 26 primary keys and 61 foreign keys measured, 0 skipped, <strong>every key ok</strong>.</p>
 <div class="cell">
 <div id="tbl-pk" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1458,23 +1458,23 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
 </figcaption>
 <div aria-describedby="tbl-pk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tyqhfqjzku" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tyqhfqjzku table {
+<div id="cvxatawcgz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cvxatawcgz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tyqhfqjzku thead, #tyqhfqjzku tbody, #tyqhfqjzku tfoot, #tyqhfqjzku tr, #tyqhfqjzku td, #tyqhfqjzku th {
+#cvxatawcgz thead, #cvxatawcgz tbody, #cvxatawcgz tfoot, #cvxatawcgz tr, #cvxatawcgz td, #cvxatawcgz th {
   border-style: none;
 }
 
-#tyqhfqjzku p {
+#cvxatawcgz p {
   margin: 0;
   padding: 0;
 }
 
-#tyqhfqjzku .gt_table {
+#cvxatawcgz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1500,12 +1500,12 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-left-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_caption {
+#cvxatawcgz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tyqhfqjzku .gt_title {
+#cvxatawcgz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1517,7 +1517,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-width: 0;
 }
 
-#tyqhfqjzku .gt_subtitle {
+#cvxatawcgz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1529,7 +1529,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-top-width: 0;
 }
 
-#tyqhfqjzku .gt_heading {
+#cvxatawcgz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1541,13 +1541,13 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_bottom_border {
+#cvxatawcgz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_col_headings {
+#cvxatawcgz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1562,7 +1562,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_col_heading {
+#cvxatawcgz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1582,7 +1582,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   overflow-x: hidden;
 }
 
-#tyqhfqjzku .gt_column_spanner_outer {
+#cvxatawcgz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1594,15 +1594,15 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 4px;
 }
 
-#tyqhfqjzku .gt_column_spanner_outer:first-child {
+#cvxatawcgz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tyqhfqjzku .gt_column_spanner_outer:last-child {
+#cvxatawcgz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tyqhfqjzku .gt_column_spanner {
+#cvxatawcgz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1614,11 +1614,11 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   width: 100%;
 }
 
-#tyqhfqjzku .gt_spanner_row {
+#cvxatawcgz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tyqhfqjzku .gt_group_heading {
+#cvxatawcgz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1644,7 +1644,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   text-align: left;
 }
 
-#tyqhfqjzku .gt_empty_group_heading {
+#cvxatawcgz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1659,15 +1659,15 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   vertical-align: middle;
 }
 
-#tyqhfqjzku .gt_from_md > :first-child {
+#cvxatawcgz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tyqhfqjzku .gt_from_md > :last-child {
+#cvxatawcgz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tyqhfqjzku .gt_row {
+#cvxatawcgz .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1686,7 +1686,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   overflow-x: hidden;
 }
 
-#tyqhfqjzku .gt_stub {
+#cvxatawcgz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1699,7 +1699,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#tyqhfqjzku .gt_stub_row_group {
+#cvxatawcgz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1713,15 +1713,15 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   vertical-align: top;
 }
 
-#tyqhfqjzku .gt_row_group_first td {
+#cvxatawcgz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tyqhfqjzku .gt_row_group_first th {
+#cvxatawcgz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tyqhfqjzku .gt_summary_row {
+#cvxatawcgz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1731,16 +1731,16 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#tyqhfqjzku .gt_first_summary_row {
+#cvxatawcgz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_first_summary_row.thick {
+#cvxatawcgz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tyqhfqjzku .gt_last_summary_row {
+#cvxatawcgz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1750,7 +1750,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_grand_summary_row {
+#cvxatawcgz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1760,7 +1760,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#tyqhfqjzku .gt_first_grand_summary_row {
+#cvxatawcgz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1770,7 +1770,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-top-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_last_grand_summary_row_top {
+#cvxatawcgz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1780,11 +1780,11 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_striped {
+#cvxatawcgz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tyqhfqjzku .gt_table_body {
+#cvxatawcgz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1793,7 +1793,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-bottom-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_footnotes {
+#cvxatawcgz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1807,7 +1807,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_footnote {
+#cvxatawcgz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1816,7 +1816,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#tyqhfqjzku .gt_sourcenotes {
+#cvxatawcgz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1830,7 +1830,7 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   border-right-color: #D3D3D3;
 }
 
-#tyqhfqjzku .gt_sourcenote {
+#cvxatawcgz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1838,72 +1838,72 @@ Table&nbsp;5.3: Primary keys, measured — rows, distinct key values, duplicates
   padding-right: 5px;
 }
 
-#tyqhfqjzku .gt_left {
+#cvxatawcgz .gt_left {
   text-align: left;
 }
 
-#tyqhfqjzku .gt_center {
+#cvxatawcgz .gt_center {
   text-align: center;
 }
 
-#tyqhfqjzku .gt_right {
+#cvxatawcgz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tyqhfqjzku .gt_font_normal {
+#cvxatawcgz .gt_font_normal {
   font-weight: normal;
 }
 
-#tyqhfqjzku .gt_font_bold {
+#cvxatawcgz .gt_font_bold {
   font-weight: bold;
 }
 
-#tyqhfqjzku .gt_font_italic {
+#cvxatawcgz .gt_font_italic {
   font-style: italic;
 }
 
-#tyqhfqjzku .gt_super {
+#cvxatawcgz .gt_super {
   font-size: 65%;
 }
 
-#tyqhfqjzku .gt_footnote_marks {
+#cvxatawcgz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tyqhfqjzku .gt_asterisk {
+#cvxatawcgz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tyqhfqjzku .gt_indent_1 {
+#cvxatawcgz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tyqhfqjzku .gt_indent_2 {
+#cvxatawcgz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tyqhfqjzku .gt_indent_3 {
+#cvxatawcgz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tyqhfqjzku .gt_indent_4 {
+#cvxatawcgz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tyqhfqjzku .gt_indent_5 {
+#cvxatawcgz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tyqhfqjzku .katex-display {
+#cvxatawcgz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tyqhfqjzku div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cvxatawcgz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2172,23 +2172,23 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
 </figcaption>
 <div aria-describedby="tbl-fk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="lnapyweeth" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lnapyweeth table {
+<div id="bscbohiern" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bscbohiern table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lnapyweeth thead, #lnapyweeth tbody, #lnapyweeth tfoot, #lnapyweeth tr, #lnapyweeth td, #lnapyweeth th {
+#bscbohiern thead, #bscbohiern tbody, #bscbohiern tfoot, #bscbohiern tr, #bscbohiern td, #bscbohiern th {
   border-style: none;
 }
 
-#lnapyweeth p {
+#bscbohiern p {
   margin: 0;
   padding: 0;
 }
 
-#lnapyweeth .gt_table {
+#bscbohiern .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2214,12 +2214,12 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-left-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_caption {
+#bscbohiern .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lnapyweeth .gt_title {
+#bscbohiern .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2231,7 +2231,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-width: 0;
 }
 
-#lnapyweeth .gt_subtitle {
+#bscbohiern .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2243,7 +2243,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-top-width: 0;
 }
 
-#lnapyweeth .gt_heading {
+#bscbohiern .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2255,13 +2255,13 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_bottom_border {
+#bscbohiern .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_col_headings {
+#bscbohiern .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2276,7 +2276,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_col_heading {
+#bscbohiern .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2296,7 +2296,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   overflow-x: hidden;
 }
 
-#lnapyweeth .gt_column_spanner_outer {
+#bscbohiern .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2308,15 +2308,15 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 4px;
 }
 
-#lnapyweeth .gt_column_spanner_outer:first-child {
+#bscbohiern .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lnapyweeth .gt_column_spanner_outer:last-child {
+#bscbohiern .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lnapyweeth .gt_column_spanner {
+#bscbohiern .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2328,11 +2328,11 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   width: 100%;
 }
 
-#lnapyweeth .gt_spanner_row {
+#bscbohiern .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lnapyweeth .gt_group_heading {
+#bscbohiern .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2358,7 +2358,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   text-align: left;
 }
 
-#lnapyweeth .gt_empty_group_heading {
+#bscbohiern .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2373,15 +2373,15 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   vertical-align: middle;
 }
 
-#lnapyweeth .gt_from_md > :first-child {
+#bscbohiern .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lnapyweeth .gt_from_md > :last-child {
+#bscbohiern .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lnapyweeth .gt_row {
+#bscbohiern .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2400,7 +2400,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   overflow-x: hidden;
 }
 
-#lnapyweeth .gt_stub {
+#bscbohiern .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2413,7 +2413,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#lnapyweeth .gt_stub_row_group {
+#bscbohiern .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2427,15 +2427,15 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   vertical-align: top;
 }
 
-#lnapyweeth .gt_row_group_first td {
+#bscbohiern .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lnapyweeth .gt_row_group_first th {
+#bscbohiern .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lnapyweeth .gt_summary_row {
+#bscbohiern .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2445,16 +2445,16 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#lnapyweeth .gt_first_summary_row {
+#bscbohiern .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_first_summary_row.thick {
+#bscbohiern .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lnapyweeth .gt_last_summary_row {
+#bscbohiern .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2464,7 +2464,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_grand_summary_row {
+#bscbohiern .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2474,7 +2474,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#lnapyweeth .gt_first_grand_summary_row {
+#bscbohiern .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2484,7 +2484,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-top-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_last_grand_summary_row_top {
+#bscbohiern .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2494,11 +2494,11 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_striped {
+#bscbohiern .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lnapyweeth .gt_table_body {
+#bscbohiern .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2507,7 +2507,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-bottom-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_footnotes {
+#bscbohiern .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2521,7 +2521,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_footnote {
+#bscbohiern .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2530,7 +2530,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#lnapyweeth .gt_sourcenotes {
+#bscbohiern .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2544,7 +2544,7 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   border-right-color: #D3D3D3;
 }
 
-#lnapyweeth .gt_sourcenote {
+#bscbohiern .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2552,72 +2552,72 @@ Table&nbsp;5.4: Foreign keys, measured — rows, rows whose key is NULL (permitt
   padding-right: 5px;
 }
 
-#lnapyweeth .gt_left {
+#bscbohiern .gt_left {
   text-align: left;
 }
 
-#lnapyweeth .gt_center {
+#bscbohiern .gt_center {
   text-align: center;
 }
 
-#lnapyweeth .gt_right {
+#bscbohiern .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lnapyweeth .gt_font_normal {
+#bscbohiern .gt_font_normal {
   font-weight: normal;
 }
 
-#lnapyweeth .gt_font_bold {
+#bscbohiern .gt_font_bold {
   font-weight: bold;
 }
 
-#lnapyweeth .gt_font_italic {
+#bscbohiern .gt_font_italic {
   font-style: italic;
 }
 
-#lnapyweeth .gt_super {
+#bscbohiern .gt_super {
   font-size: 65%;
 }
 
-#lnapyweeth .gt_footnote_marks {
+#bscbohiern .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lnapyweeth .gt_asterisk {
+#bscbohiern .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lnapyweeth .gt_indent_1 {
+#bscbohiern .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lnapyweeth .gt_indent_2 {
+#bscbohiern .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lnapyweeth .gt_indent_3 {
+#bscbohiern .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lnapyweeth .gt_indent_4 {
+#bscbohiern .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lnapyweeth .gt_indent_5 {
+#bscbohiern .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lnapyweeth .katex-display {
+#bscbohiern .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lnapyweeth div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bscbohiern div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3209,32 +3209,32 @@ Table&nbsp;5.5: The gates that stop a release outright, of which the first five 
 <h2 data-number="5.6" class="anchored" data-anchor-id="sec-grid-migration"><span class="header-section-number">5.6</span> The grid key changed in October 2026</h2>
 <p>Until <code>v2026.10.01</code>, <code>grid</code> was the cells of an idealized lattice, clipped by a coarse coastline and patched by hand: an inshore cell could hold two to four of the real stations, which is why the climatology moved to <code>site_key</code> (<a href="./db.html#shared-reference-tables">The database</a>). The release that follows it ships a rebuilt <code>grid</code>: <strong>one cell per official station</strong> — the Voronoi tessellation of the station positions CalCOFI publishes at <a href="https://calcofi.org/sampling-info/station-positions/">calcofi.org/sampling-info/station-positions</a>, confined to the footprint of the previous cells it replaces — <strong>beside the previous cells that lay beyond the official pattern, kept exactly as they were</strong>, so a historical position outside the pattern keys as it always did. Both end at the OpenStreetMap coastline. The table’s columns are unchanged; <code>grid.geom_ctr</code> is now the station itself rather than a centroid. The build, its rules and the evidence are in the workflows notebook <a href="https://calcofi.io/workflows/explore_grid_voronoi.html"><code>explore_grid_voronoi</code></a> and <code>calcofi4r::cc_grid_build()</code>.</p>
 <p><strong>A <code>grid_key</code> keeps its form (<code>st{station}-ln{line}</code>) but is no longer a name for the same water across releases.</strong> A station’s cell is named for its station, and a name that already existed can now be a different polygon.</p>
-<p>For <code>v2026.11.09</code> the crosswalk holds <strong>218</strong> previous keys and <strong>225</strong> current ones, and <code>grid</code> has <strong>225</strong> cells. <strong>196</strong> keys exist in both grids; <strong>22</strong> previous keys are no longer a key at all (retired) and <strong>29</strong> current keys are new. A key present in both is not necessarily the same polygon: <a href="#tbl-grid-moved" class="quarto-xref">Table&nbsp;<span>5.6</span></a> lists the ones that kept the least of their previous cell.</p>
+<p>For <code>v2026.11.12</code> the crosswalk holds <strong>218</strong> previous keys and <strong>225</strong> current ones, and <code>grid</code> has <strong>225</strong> cells. <strong>196</strong> keys exist in both grids; <strong>22</strong> previous keys are no longer a key at all (retired) and <strong>29</strong> current keys are new. A key present in both is not necessarily the same polygon: <a href="#tbl-grid-moved" class="quarto-xref">Table&nbsp;<span>5.6</span></a> lists the ones that kept the least of their previous cell.</p>
 <div class="cell">
 <div id="tbl-grid-moved" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grid-moved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the least of their previous cell. <code>prev_frac</code> is the share of the previous cell still inside the cell of the same name, <code>grid_frac</code> the share of today’s cell that was inside it; a kept cell reads close to one on both (its coastline moved, not its boundary).
+Table&nbsp;5.6: The keys of v2026.11.12 that exist in both grids but keep the least of their previous cell. <code>prev_frac</code> is the share of the previous cell still inside the cell of the same name, <code>grid_frac</code> the share of today’s cell that was inside it; a kept cell reads close to one on both (its coastline moved, not its boundary).
 </figcaption>
 <div aria-describedby="tbl-grid-moved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="dhyeayuwfw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dhyeayuwfw table {
+<div id="wojctfwnrm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wojctfwnrm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dhyeayuwfw thead, #dhyeayuwfw tbody, #dhyeayuwfw tfoot, #dhyeayuwfw tr, #dhyeayuwfw td, #dhyeayuwfw th {
+#wojctfwnrm thead, #wojctfwnrm tbody, #wojctfwnrm tfoot, #wojctfwnrm tr, #wojctfwnrm td, #wojctfwnrm th {
   border-style: none;
 }
 
-#dhyeayuwfw p {
+#wojctfwnrm p {
   margin: 0;
   padding: 0;
 }
 
-#dhyeayuwfw .gt_table {
+#wojctfwnrm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3260,12 +3260,12 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-left-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_caption {
+#wojctfwnrm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dhyeayuwfw .gt_title {
+#wojctfwnrm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3277,7 +3277,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-bottom-width: 0;
 }
 
-#dhyeayuwfw .gt_subtitle {
+#wojctfwnrm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3289,7 +3289,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-top-width: 0;
 }
 
-#dhyeayuwfw .gt_heading {
+#wojctfwnrm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3301,13 +3301,13 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_bottom_border {
+#wojctfwnrm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_col_headings {
+#wojctfwnrm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3322,7 +3322,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_col_heading {
+#wojctfwnrm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3342,7 +3342,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   overflow-x: hidden;
 }
 
-#dhyeayuwfw .gt_column_spanner_outer {
+#wojctfwnrm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3354,15 +3354,15 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   padding-right: 4px;
 }
 
-#dhyeayuwfw .gt_column_spanner_outer:first-child {
+#wojctfwnrm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dhyeayuwfw .gt_column_spanner_outer:last-child {
+#wojctfwnrm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dhyeayuwfw .gt_column_spanner {
+#wojctfwnrm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3374,11 +3374,11 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   width: 100%;
 }
 
-#dhyeayuwfw .gt_spanner_row {
+#wojctfwnrm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dhyeayuwfw .gt_group_heading {
+#wojctfwnrm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3404,7 +3404,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   text-align: left;
 }
 
-#dhyeayuwfw .gt_empty_group_heading {
+#wojctfwnrm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3419,15 +3419,15 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   vertical-align: middle;
 }
 
-#dhyeayuwfw .gt_from_md > :first-child {
+#wojctfwnrm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dhyeayuwfw .gt_from_md > :last-child {
+#wojctfwnrm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dhyeayuwfw .gt_row {
+#wojctfwnrm .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3446,7 +3446,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   overflow-x: hidden;
 }
 
-#dhyeayuwfw .gt_stub {
+#wojctfwnrm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3459,7 +3459,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#dhyeayuwfw .gt_stub_row_group {
+#wojctfwnrm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3473,15 +3473,15 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   vertical-align: top;
 }
 
-#dhyeayuwfw .gt_row_group_first td {
+#wojctfwnrm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dhyeayuwfw .gt_row_group_first th {
+#wojctfwnrm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dhyeayuwfw .gt_summary_row {
+#wojctfwnrm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3491,16 +3491,16 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#dhyeayuwfw .gt_first_summary_row {
+#wojctfwnrm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_first_summary_row.thick {
+#wojctfwnrm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dhyeayuwfw .gt_last_summary_row {
+#wojctfwnrm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3510,7 +3510,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-bottom-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_grand_summary_row {
+#wojctfwnrm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3520,7 +3520,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#dhyeayuwfw .gt_first_grand_summary_row {
+#wojctfwnrm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3530,7 +3530,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-top-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_last_grand_summary_row_top {
+#wojctfwnrm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3540,11 +3540,11 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-bottom-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_striped {
+#wojctfwnrm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dhyeayuwfw .gt_table_body {
+#wojctfwnrm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3553,7 +3553,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-bottom-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_footnotes {
+#wojctfwnrm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3567,7 +3567,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_footnote {
+#wojctfwnrm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3576,7 +3576,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#dhyeayuwfw .gt_sourcenotes {
+#wojctfwnrm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3590,7 +3590,7 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   border-right-color: #D3D3D3;
 }
 
-#dhyeayuwfw .gt_sourcenote {
+#wojctfwnrm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3598,72 +3598,72 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
   padding-right: 5px;
 }
 
-#dhyeayuwfw .gt_left {
+#wojctfwnrm .gt_left {
   text-align: left;
 }
 
-#dhyeayuwfw .gt_center {
+#wojctfwnrm .gt_center {
   text-align: center;
 }
 
-#dhyeayuwfw .gt_right {
+#wojctfwnrm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dhyeayuwfw .gt_font_normal {
+#wojctfwnrm .gt_font_normal {
   font-weight: normal;
 }
 
-#dhyeayuwfw .gt_font_bold {
+#wojctfwnrm .gt_font_bold {
   font-weight: bold;
 }
 
-#dhyeayuwfw .gt_font_italic {
+#wojctfwnrm .gt_font_italic {
   font-style: italic;
 }
 
-#dhyeayuwfw .gt_super {
+#wojctfwnrm .gt_super {
   font-size: 65%;
 }
 
-#dhyeayuwfw .gt_footnote_marks {
+#wojctfwnrm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dhyeayuwfw .gt_asterisk {
+#wojctfwnrm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dhyeayuwfw .gt_indent_1 {
+#wojctfwnrm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dhyeayuwfw .gt_indent_2 {
+#wojctfwnrm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dhyeayuwfw .gt_indent_3 {
+#wojctfwnrm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dhyeayuwfw .gt_indent_4 {
+#wojctfwnrm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dhyeayuwfw .gt_indent_5 {
+#wojctfwnrm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dhyeayuwfw .katex-display {
+#wojctfwnrm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dhyeayuwfw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wojctfwnrm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3744,32 +3744,32 @@ Table&nbsp;5.6: The keys of v2026.11.09 that exist in both grids but keep the le
 <li><strong>A station is not a polygon.</strong> If you want <em>the station</em>, key on <code>site_key</code> (<code>"090.0 060.0"</code>), which is the same in every release; the climatology is keyed on it and no mean moved. <code>grid.line</code> and <code>grid.station</code> are no longer whole numbers for some cells, so a line is never matched by rounding it (a section of line 93.3 must not pick up the station on line 93.4).</li>
 </ul>
 <p><code>grid_crosswalk</code> has one row per overlapping pair of a previous and a current cell: <code>prev_grid_key</code>, <code>grid_key</code>, <code>overlap_km2</code> (in an equal-area projection), <code>prev_frac</code> (the overlap as a share of the previous cell) and <code>grid_frac</code> (as a share of the current one). The primary key is the pair and <code>grid_key</code> references <code>grid</code> (<a href="#tbl-contract" class="quarto-xref">Table&nbsp;<span>5.2</span></a>). The shares are of the <em>whole</em> cell and are never rescaled, so a previous cell’s shares add to one less the part of it that is land under the finer coastline. <code>calcofi4db::check_grid_crosswalk()</code> fails the release when a cell of either grid is missing from the crosswalk, a pair repeats, or a previous cell is covered by less than its <code>min_cover</code>.</p>
-<p><a href="#tbl-grid-example" class="quarto-xref">Table&nbsp;<span>5.7</span></a> is the previous cell that fans out to the most current ones in <code>v2026.11.09</code>, <code>st35-ln86.7</code>: its water is shared by 8 cells, and a value stored under that key belongs to all of them in the proportions <code>prev_frac</code> gives.</p>
+<p><a href="#tbl-grid-example" class="quarto-xref">Table&nbsp;<span>5.7</span></a> is the previous cell that fans out to the most current ones in <code>v2026.11.12</code>, <code>st35-ln86.7</code>: its water is shared by 8 cells, and a value stored under that key belongs to all of them in the proportions <code>prev_frac</code> gives.</p>
 <div class="cell">
 <div id="tbl-grid-example" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grid-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>grid_crosswalk</code> — the previous cell with the most successors (up to eight shown, largest share first).
+Table&nbsp;5.7: Where one previous cell went in v2026.11.12, read from <code>grid_crosswalk</code> — the previous cell with the most successors (up to eight shown, largest share first).
 </figcaption>
 <div aria-describedby="tbl-grid-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="hntmvmnrnc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hntmvmnrnc table {
+<div id="ocgqewcyyn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ocgqewcyyn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hntmvmnrnc thead, #hntmvmnrnc tbody, #hntmvmnrnc tfoot, #hntmvmnrnc tr, #hntmvmnrnc td, #hntmvmnrnc th {
+#ocgqewcyyn thead, #ocgqewcyyn tbody, #ocgqewcyyn tfoot, #ocgqewcyyn tr, #ocgqewcyyn td, #ocgqewcyyn th {
   border-style: none;
 }
 
-#hntmvmnrnc p {
+#ocgqewcyyn p {
   margin: 0;
   padding: 0;
 }
 
-#hntmvmnrnc .gt_table {
+#ocgqewcyyn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3795,12 +3795,12 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-left-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_caption {
+#ocgqewcyyn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hntmvmnrnc .gt_title {
+#ocgqewcyyn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3812,7 +3812,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-bottom-width: 0;
 }
 
-#hntmvmnrnc .gt_subtitle {
+#ocgqewcyyn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3824,7 +3824,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-top-width: 0;
 }
 
-#hntmvmnrnc .gt_heading {
+#ocgqewcyyn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3836,13 +3836,13 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_bottom_border {
+#ocgqewcyyn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_col_headings {
+#ocgqewcyyn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3857,7 +3857,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_col_heading {
+#ocgqewcyyn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3877,7 +3877,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   overflow-x: hidden;
 }
 
-#hntmvmnrnc .gt_column_spanner_outer {
+#ocgqewcyyn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3889,15 +3889,15 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   padding-right: 4px;
 }
 
-#hntmvmnrnc .gt_column_spanner_outer:first-child {
+#ocgqewcyyn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hntmvmnrnc .gt_column_spanner_outer:last-child {
+#ocgqewcyyn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hntmvmnrnc .gt_column_spanner {
+#ocgqewcyyn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3909,11 +3909,11 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   width: 100%;
 }
 
-#hntmvmnrnc .gt_spanner_row {
+#ocgqewcyyn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hntmvmnrnc .gt_group_heading {
+#ocgqewcyyn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3939,7 +3939,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   text-align: left;
 }
 
-#hntmvmnrnc .gt_empty_group_heading {
+#ocgqewcyyn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3954,15 +3954,15 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   vertical-align: middle;
 }
 
-#hntmvmnrnc .gt_from_md > :first-child {
+#ocgqewcyyn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hntmvmnrnc .gt_from_md > :last-child {
+#ocgqewcyyn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hntmvmnrnc .gt_row {
+#ocgqewcyyn .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3981,7 +3981,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   overflow-x: hidden;
 }
 
-#hntmvmnrnc .gt_stub {
+#ocgqewcyyn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3994,7 +3994,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   padding-right: 5px;
 }
 
-#hntmvmnrnc .gt_stub_row_group {
+#ocgqewcyyn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4008,15 +4008,15 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   vertical-align: top;
 }
 
-#hntmvmnrnc .gt_row_group_first td {
+#ocgqewcyyn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hntmvmnrnc .gt_row_group_first th {
+#ocgqewcyyn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hntmvmnrnc .gt_summary_row {
+#ocgqewcyyn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4026,16 +4026,16 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   padding-right: 5px;
 }
 
-#hntmvmnrnc .gt_first_summary_row {
+#ocgqewcyyn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_first_summary_row.thick {
+#ocgqewcyyn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hntmvmnrnc .gt_last_summary_row {
+#ocgqewcyyn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4045,7 +4045,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-bottom-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_grand_summary_row {
+#ocgqewcyyn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4055,7 +4055,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   padding-right: 5px;
 }
 
-#hntmvmnrnc .gt_first_grand_summary_row {
+#ocgqewcyyn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4065,7 +4065,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-top-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_last_grand_summary_row_top {
+#ocgqewcyyn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4075,11 +4075,11 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-bottom-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_striped {
+#ocgqewcyyn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hntmvmnrnc .gt_table_body {
+#ocgqewcyyn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4088,7 +4088,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-bottom-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_footnotes {
+#ocgqewcyyn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4102,7 +4102,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_footnote {
+#ocgqewcyyn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4111,7 +4111,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   padding-right: 5px;
 }
 
-#hntmvmnrnc .gt_sourcenotes {
+#ocgqewcyyn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4125,7 +4125,7 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   border-right-color: #D3D3D3;
 }
 
-#hntmvmnrnc .gt_sourcenote {
+#ocgqewcyyn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4133,72 +4133,72 @@ Table&nbsp;5.7: Where one previous cell went in v2026.11.09, read from <code>gri
   padding-right: 5px;
 }
 
-#hntmvmnrnc .gt_left {
+#ocgqewcyyn .gt_left {
   text-align: left;
 }
 
-#hntmvmnrnc .gt_center {
+#ocgqewcyyn .gt_center {
   text-align: center;
 }
 
-#hntmvmnrnc .gt_right {
+#ocgqewcyyn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hntmvmnrnc .gt_font_normal {
+#ocgqewcyyn .gt_font_normal {
   font-weight: normal;
 }
 
-#hntmvmnrnc .gt_font_bold {
+#ocgqewcyyn .gt_font_bold {
   font-weight: bold;
 }
 
-#hntmvmnrnc .gt_font_italic {
+#ocgqewcyyn .gt_font_italic {
   font-style: italic;
 }
 
-#hntmvmnrnc .gt_super {
+#ocgqewcyyn .gt_super {
   font-size: 65%;
 }
 
-#hntmvmnrnc .gt_footnote_marks {
+#ocgqewcyyn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hntmvmnrnc .gt_asterisk {
+#ocgqewcyyn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hntmvmnrnc .gt_indent_1 {
+#ocgqewcyyn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hntmvmnrnc .gt_indent_2 {
+#ocgqewcyyn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hntmvmnrnc .gt_indent_3 {
+#ocgqewcyyn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hntmvmnrnc .gt_indent_4 {
+#ocgqewcyyn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hntmvmnrnc .gt_indent_5 {
+#ocgqewcyyn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hntmvmnrnc .katex-display {
+#ocgqewcyyn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hntmvmnrnc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ocgqewcyyn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
