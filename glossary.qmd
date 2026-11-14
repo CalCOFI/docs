@@ -13,7 +13,8 @@ The words this book uses with a specific meaning, each ending with the chapter t
 objects that hold it; the contract every reader resolves through. → [Releases](releases.qmd)
 
 **climatology** — the one baseline table every anomaly subtracts: a mean per dataset, station, the
-cruise's month and 10 m depth bin (`depth_bin` NULL for a per-cast product) over 1993–2013, with a
+cruise's month and 10 m depth bin (`depth_bin` NULL for a per-cast product, and for a density surface,
+which is in `sigma_theta`) over 1993–2013, with a
 seasonal (DJF, MAM, JJA, SON) baseline beside it. The cruise's month is the month of its median cast
 date, not the month its key names. A cell with no monthly baseline is blank, never zero.
 → [The database](db.qmd#shared-reference-tables)
@@ -51,6 +52,11 @@ position's cell (`hex7` on `sample`). → [Explore](explore.qmd)
 
 **holding** — a dataset CalCOFI has or knows of but has not ingested; it has a page and a record
 but no rows. → [Metadata & the ingest loop](metadata.qmd)
+
+**isopycnal** — a surface of constant potential density (sigma-theta). The `isopycnal` table holds
+the depth at which each CTD down cast reaches each chosen surface and the temperature, salinity,
+oxygen, estimated nitrate and spice on it; its baseline is the isopycnal rows of `climatology`.
+→ [Database](db.qmd#sec-isopycnal)
 
 **ingest** — the reproducible notebook that turns one source dataset into the shared schema.
 → [Ingesting a dataset](ingest-loop.qmd)
