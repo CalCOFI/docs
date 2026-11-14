@@ -50,6 +50,7 @@ family and the reference tables it joins to; @tbl-core says what one row of each
 | **`sample_measurement`** | **event-level effort and conditions** — a net's `volume_sampled` and `std_haul_factor`, a cast's surface observations | core |
 | **`sample_track`** | the **path** of a sampling event that has extent along the sea surface — an effort segment of a line-transect survey, the observer's line of sight to a sighting — with its beginning, middle and end in x, y and t (`datetime_beg/_mid/_end`, `longitude_beg/_mid/_end`, `latitude_beg/_mid/_end`), `length_km` and a beginning-to-end `LINESTRING` `geom`; at most one row per `sample` (`sample_key` is its primary key), and present in a release only when a dataset in it has paths | core |
 | **`sample_root`** | one row per root sampling event with the dense integer `root_id` the browser objects join on, its position and the position's H3 cell (`hex7`), time, depth span, gear and seafloor depth | supplemental |
+| **`isopycnal`** | **conditions on density surfaces**: one row per CTD down cast × sigma-theta surface × type (the depth of the surface and the temperature, salinity, oxygen, estimated nitrate and spice on it), with a `status` saying whether the cast reaches the surface (@sec-isopycnal) | core |
 | **`obs_ctd_full`** | full-resolution CTD scans (~271 M rows); `obs_env` carries the thinned series | supplemental |
 | **`obs_mets_full`** | full-resolution underway meteorology (~20 M rows) | supplemental |
 
@@ -201,14 +202,17 @@ The table has two arms and one extra baseline, none of which changes the grain a
   series (from 1949) and the CTD's (from 1993) can be drawn as one time series without being pooled
   into one normal.
 
-- **Anomalies on density surfaces are not in the table.** Below the mixed layer an anomaly at a
-  fixed depth is mostly the pycnocline moving; on a sigma-theta surface the displacement and the
-  change in the water separate. `calcofi4r::cc_isopycnal_anomaly()` computes them on request from
-  the 1 m casts of `obs_ctd_full`: the depth of each surface (the shallowest crossing, by the rule
-  of the nitracline, `calcofi4db::profile_threshold_depth()`) and the properties on it, against a
-  baseline built by this table's rules with the surface in place of the depth bin (station, cruise
-  month or season, the window, the cruise floor). The client computes it; no release step builds
-  or checks it.
+- **Isopycnal rows** are the baseline on density surfaces: each cast's value on a sigma-theta
+  surface in the `isopycnal` table (@sec-isopycnal) pooled by the same rules (station, cruise month
+  and season, window, cruise floor) with the surface in place of the depth bin. Their `depth_bin`
+  is NULL and their surface is in **`sigma_theta`**, a column appended after the seasonal ones and
+  NULL on every other row; their types are the table's own `iso_*` types, which no other row and
+  no `obs_env` series carries, so neither a per-bin join nor a per-cast reader matching
+  `depth_bin IS NULL` on its own types can meet one. As in a depth bin, where every `obs` row
+  enters the mean, every cast's value enters its cell: a cruise with two down casts at a station
+  that month counts both. `sigma_theta` is part of the table's key and is declared nullable beside
+  `depth_bin`. `calcofi4r::cc_isopycnal_anomaly()` subtracts these rows when they are the baseline
+  asked for, and otherwise computes the same baseline from `obs_ctd_full` by the same rules.
 
 - **The cruise's month is its median cast month.** A cruise ID names sometimes the month a cruise
   started and sometimes the month it mostly covered, so the month a cast is filed under — in the
@@ -222,7 +226,9 @@ The table has two arms and one extra baseline, none of which changes the grain a
 These rules are enforced. `test_release.qmd`'s consumer contract withholds `latest.txt` unless a
 per-cast cell exists for a derived product, every monthly cell also carries a seasonal baseline,
 seasonal-only cells exist, a NULL `depth_bin` appears only on a per-cast type (never on a type
-`obs_env` carries by depth), `depth_bin` is otherwise a 10 m floor bin, one window is stamped on
+`obs_env` carries by depth), `sigma_theta` is set exactly on the `iso_*` types with `depth_bin`
+NULL, no `iso_*` type is an `obs_env` series, an isopycnal baseline cell exists at a line 93.3
+station, `depth_bin` is otherwise a 10 m floor bin, one window is stamped on
 every row, `cruise` carries the four median-date columns, a December cruise is DJF of the following
 year, every `obs_env` row's `quarter` / `cruise_month` / `season_year` match its cruise, and every
 `obs_env` row of CalCOFI 2607 is in season 3, summer ([the gates](releases.qmd)).
@@ -480,6 +486,70 @@ if (!is.null(pc) && nrow(pc)) {
 To place one on a map or in a hexagon, join `sample_measurement` to `sample` on `sample_key`: the
 cast's `sample` row carries its position, its time and its `hex7`, and the row's own `dataset_key` is
 the derived dataset's, not the cast's.
+
+### Conditions on density surfaces: `isopycnal` {#sec-isopycnal}
+
+Below the mixed layer an anomaly at a fixed depth is mostly the pycnocline moving up or down. On a
+density surface that displacement is the surface's depth, and what is left in temperature,
+salinity, oxygen or nitrate is a change in the water itself; on one surface temperature and
+salinity move together, so their departure there is the water's spice. The **`isopycnal`** table
+holds, for every CTD down cast (the down cast of each station occupation, the up cast only where
+there is none) and each sigma-theta surface Rasmus Swalethorp chose for the California Current
+system (24.0 to 27.0 kg/m³ by 0.2, plus 25.5 and 26.5, near the cores of the California Current and
+the California Undercurrent), the depth at which the cast reaches the surface and the temperature
+(`temperature_ave`), salinity (`salinity_ave_corr`), oxygen (`oxygen_ml_l_ave_sta_corr`), estimated
+nitrate (`est_nitrate_sta_corr`) and spice (`spiciness0`) there. One row is one cast × surface ×
+type; the type is `iso_` + the quantity (`iso_depth_m`, `iso_temperature_ave`, …), so a value on a
+surface is never read as the `obs_env` series of the same quantity at a depth.
+
+The rules are those of `calcofi4r::cc_isopycnal()`, the one implementation, which the release
+calls through `calcofi4db::build_isopycnal()` on the assembled 1 m bins of `obs_ctd_full`:
+
+- **sigma-theta** is the sensor pair by the provider's flags (8/9 dropped, a 1 or 2 selects a
+  sensor, otherwise the mean), as for every CTD average ([quality flags](#quality-flags-reach-consumers-only-if-consumers-apply-them));
+- **a surface's depth** is the shallowest bin whose sigma-theta reaches it, interpolated linearly
+  with the bin above (`calcofi4db::profile_threshold_depth()`, the nitracline's rule), so a density
+  inversion below it does not move the surface;
+- **a property on the surface** is its own unflagged 1 m profile interpolated to that depth, and
+  **spice** is TEOS-10 `gsw_spiciness0()` of the temperature and salinity interpolated there;
+- **every cast and surface keeps its depth row** with a `status`: `ok` (it has a depth and
+  values), `at_surface` (the cast's first bin, within 20 m of the surface, is already as dense:
+  the surface outcrops), `no_bracket` (the same, but the cast starts deeper), `not_reached` (the
+  cast never gets that dense) or `no_data`. Only `ok` carries a value, so "outcrops" and "not
+  reached" stay distinguishable from a missing cast.
+
+The table carries the cast's `cruise_key`, `site_key`, `grid_key`, position, `datetime`,
+`data_stage` and the cruise's `year` and `month` (its median cast month, as everywhere). Its
+baseline is in `climatology` ([Shared reference tables](#shared-reference-tables)), so an anomaly
+on a surface is read like any other. How it is enforced: `release_database.qmd` stops unless every
+cast carries every surface, every row is a CTD cast and an occupation contributes one cast;
+`build_isopycnal()` stops unless the key `(sample_key, sigma_theta, measurement_type)` is unique and
+only an `ok` surface has a value; and `test_release.qmd` repeats the depth-row, value and key checks
+on the published bytes before `latest.txt` moves.
+
+### One value per cast and depth in the CTD series {#sec-ctd-one-value}
+
+A CTD cast holds one value per depth and measurement type, in `obs_env` and in `obs_ctd_full`.
+`ingest_calcofi_ctd-cast.qmd` stops on any `(sample_key, depth, measurement_type)` written twice,
+in both tables. Through v2026.11.12 the source archives broke this on several cruises, and the
+provider's answers (Rasmus Swalethorp, 2026-11-13; ctd-cast question Q47) are how each case is now
+read:
+
+- **An archive that holds a cruise twice is read once per cast.** calcofi.org's
+  `20-1501NH_CTDFinalQC.zip` keeps the dual-sensor casts in `db_csv/dualTCO/`, the single-sensor
+  casts in `db_csv/singleTCO/`, and their union in a top-level file. The ingest reads every cast of
+  `dualTCO/` and, from `singleTCO/`, only the casts `dualTCO/` lacks (`CTD_CAST_FOLDER_PREFER`),
+  and stops if a cast would be lost.
+- **An extra cast at an occupation is a cast of its own.** The extra shallow casts of 1995-04 and
+  1995-10 (`RalfCasts/`, `GoerickeExtraCasts/`) are filed under the regular cast's number. Each is
+  keyed apart: the cast number takes a `b` before the direction letter, so `9504_010d` is the
+  regular down cast and `9504_010bd` the second cast of that occupation (sample key
+  `calcofi_ctd-cast:cast:9504_010bd`). The key still ends in its direction letter, which is all a
+  consumer strips to pair a cast's two directions, and `order_occ` stays the occupation's.
+- **A depth bin written twice within one cast is averaged by the provider's flags**: the values
+  not flagged 8 or 9 are averaged, and only where every copy is flagged is the mean of the flagged
+  copies kept, with the worse flag. A cast with more than a few such bins is a second copy of the
+  cast, which averaging would hide, so the render stops on it unless the cast is declared.
 
 ### Some measurements are derived per bottle {#sec-bottle-derived}
 
