@@ -331,8 +331,8 @@ if (is.null(catalog_record) || is.null(catalog_record$datasets)) {
 
 ## After every release: rebuild what changed, list what is due {#publish-after-release}
 
-The four publishers — `publish_to-edi.qmd`, `publish_to-obis.qmd`, `publish_to-netcdf.qmd` and
-`publish_to-erddap.qmd` — are targets in the same `targets` pipeline as the release, each
+The five publishers — `publish_to-edi.qmd`, `publish_to-obis.qmd`, `publish_to-netcdf.qmd`,
+`publish_to-erddap.qmd` and `publish_to-zip.qmd` — are targets in the same `targets` pipeline as the release, each
 depending on `test_release`, so they run after a release is tested and promoted and always read
 the promoted version. Most releases change a few datasets and leave the rest alone, so each
 publisher fingerprints, per dataset, what its output is a function of
@@ -348,7 +348,7 @@ exports — are therefore paid for once per change, not once per release.
 
 Whether a portal is behind is a second, separate comparison: the bytes built now against the
 bytes the portal was last given (`publish_upload_status()`: `never uploaded`, `current` or
-`changed since {version}`). `publish_status.qmd`, the target that runs after all four, makes that
+`changed since {version}`). `publish_status.qmd`, the target that runs after all five, makes that
 comparison for every dataset on every portal and writes the to-do list to
 `gs://calcofi-db/publish/portal_status.csv` and
 [calcofi.io/workflows/publish_status.html](https://calcofi.io/workflows/publish_status.html);
@@ -360,8 +360,29 @@ comparison for every dataset on every portal and writes the to-do list to
 | OBIS (OBIS-USA IPT) | each archive's `{dataset_key}_manifest.json` (`uploaded_hash`) | manual, after the provider agrees ([OBIS](#obis)) |
 | netCDF | the site's `{dataset}/manifests.json` | `CALCOFI_PUBLISH=true`; bytes already online are listed for the new release, never re-uploaded |
 | ERDDAP | `data/erddap/deploy_status.json` | automatic, unless `CALCOFI_DEPLOY=false` or `CALCOFI_ERDDAP_DEPLOY=false` |
+| Download bundles (`calcofi-db/publish/zip/`) | the bucket's `publish/zip/manifest.json` (`sha256` per zip) | `CALCOFI_PUBLISH_ZIP=true`; bytes already online are never re-uploaded |
 
 : Where each portal's current copy is recorded, and what an upload takes. {#tbl-portal-status}
+
+### Download bundles: a file a researcher can open {#download-bundles}
+
+`publish_to-zip.qmd` is the one publisher whose audience is a person rather than a portal. For
+every dataset in the promoted release it writes one zip per format — CSV for every dataset, an
+Excel workbook only where every table fits comfortably under Excel's sheet limit
+(`calcofi4db::BUNDLE_XLSX_MAX_ROWS`), Parquet for every dataset — named
+`calcofi_{dataset_key}_{version}_{format}.zip`. Each holds the dataset's own rows of every table
+it needs to be used alone (its observations, the samples they sit on, and its rows of the shared
+cruise, taxon and measurement-type tables), with the station's line and station, the taxon's
+names and the measurement's units beside their keys; and inside every zip a `README.md`, a
+`CITATION.md` and `CITATION.bib` (the provider's citation where there is one, always the
+release's), a `LICENSE.txt` (the legal code only for a recognised licence, the provider's terms
+for a custom one, and a plain statement that none is established otherwise) and a `columns.csv`
+dictionary. The rules are `calcofi4db`'s `bundle_*()` functions, each with its own test. The
+full-resolution supplemental tables are left out and named in the README. The zips are
+byte-reproducible, so an unchanged dataset keeps its file and its sha256 from release to
+release. A manifest beside them (`publish/zip/manifest.json`) is the file a dataset page's
+**Download** button is to be built from, and the release's `datasets.json` carries each zip as a
+`kind = "bundle"` distribution.
 
 ## Archive of record, per dataset
 
