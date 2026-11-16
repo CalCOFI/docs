@@ -368,7 +368,7 @@ comparison for every dataset on every portal and writes the to-do list to
 
 `publish_to-zip.qmd` is the one publisher whose audience is a person rather than a portal. For
 every dataset in the promoted release it writes one zip per format — CSV for every dataset, an
-Excel workbook only where every table fits comfortably under Excel's sheet limit
+Excel workbook wherever every table fits an Excel sheet, header row included
 (`calcofi4db::BUNDLE_XLSX_MAX_ROWS`), Parquet for every dataset — named
 `calcofi_{dataset_key}_{version}_{format}.zip`. Each holds the dataset's own rows of every table
 it needs to be used alone (its observations, the samples they sit on, and its rows of the shared
