@@ -641,7 +641,10 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   <li><a href="#data.gov-dcat-us" id="toc-data.gov-dcat-us" class="nav-link" data-scroll-target="#data.gov-dcat-us"><span class="header-section-number">10.5.3</span> data.gov (DCAT-US)</a></li>
   </ul></li>
   <li><a href="#the-dataset-catalog-and-who-registers-where" id="toc-the-dataset-catalog-and-who-registers-where" class="nav-link" data-scroll-target="#the-dataset-catalog-and-who-registers-where"><span class="header-section-number">10.6</span> The dataset catalog, and who registers where</a></li>
-  <li><a href="#publish-after-release" id="toc-publish-after-release" class="nav-link" data-scroll-target="#publish-after-release"><span class="header-section-number">10.7</span> After every release: rebuild what changed, list what is due</a></li>
+  <li><a href="#publish-after-release" id="toc-publish-after-release" class="nav-link" data-scroll-target="#publish-after-release"><span class="header-section-number">10.7</span> After every release: rebuild what changed, list what is due</a>
+  <ul class="collapse">
+  <li><a href="#download-bundles" id="toc-download-bundles" class="nav-link" data-scroll-target="#download-bundles"><span class="header-section-number">10.7.1</span> Download bundles: a file a researcher can open</a></li>
+  </ul></li>
   <li><a href="#archive-of-record-per-dataset" id="toc-archive-of-record-per-dataset" class="nav-link" data-scroll-target="#archive-of-record-per-dataset"><span class="header-section-number">10.8</span> Archive of record, per dataset</a></li>
   <li><a href="#getting-the-data-through-calcofi.io" id="toc-getting-the-data-through-calcofi.io" class="nav-link" data-scroll-target="#getting-the-data-through-calcofi.io"><span class="header-section-number">10.9</span> Getting the data through calcofi.io</a></li>
   </ul>
@@ -700,23 +703,23 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
 </figcaption>
 <div aria-describedby="tbl-portals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="ugpkylowpl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ugpkylowpl table {
+<div id="wxaiglakfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wxaiglakfi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ugpkylowpl thead, #ugpkylowpl tbody, #ugpkylowpl tfoot, #ugpkylowpl tr, #ugpkylowpl td, #ugpkylowpl th {
+#wxaiglakfi thead, #wxaiglakfi tbody, #wxaiglakfi tfoot, #wxaiglakfi tr, #wxaiglakfi td, #wxaiglakfi th {
   border-style: none;
 }
 
-#ugpkylowpl p {
+#wxaiglakfi p {
   margin: 0;
   padding: 0;
 }
 
-#ugpkylowpl .gt_table {
+#wxaiglakfi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -742,12 +745,12 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-left-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_caption {
+#wxaiglakfi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ugpkylowpl .gt_title {
+#wxaiglakfi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -759,7 +762,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-width: 0;
 }
 
-#ugpkylowpl .gt_subtitle {
+#wxaiglakfi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -771,7 +774,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-width: 0;
 }
 
-#ugpkylowpl .gt_heading {
+#wxaiglakfi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -783,13 +786,13 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_bottom_border {
+#wxaiglakfi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_col_headings {
+#wxaiglakfi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -804,7 +807,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_col_heading {
+#wxaiglakfi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -824,7 +827,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#ugpkylowpl .gt_column_spanner_outer {
+#wxaiglakfi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -836,15 +839,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 4px;
 }
 
-#ugpkylowpl .gt_column_spanner_outer:first-child {
+#wxaiglakfi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ugpkylowpl .gt_column_spanner_outer:last-child {
+#wxaiglakfi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ugpkylowpl .gt_column_spanner {
+#wxaiglakfi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -856,11 +859,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   width: 100%;
 }
 
-#ugpkylowpl .gt_spanner_row {
+#wxaiglakfi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ugpkylowpl .gt_group_heading {
+#wxaiglakfi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -886,7 +889,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   text-align: left;
 }
 
-#ugpkylowpl .gt_empty_group_heading {
+#wxaiglakfi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -901,15 +904,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: middle;
 }
 
-#ugpkylowpl .gt_from_md > :first-child {
+#wxaiglakfi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ugpkylowpl .gt_from_md > :last-child {
+#wxaiglakfi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ugpkylowpl .gt_row {
+#wxaiglakfi .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -928,7 +931,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   overflow-x: hidden;
 }
 
-#ugpkylowpl .gt_stub {
+#wxaiglakfi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -941,7 +944,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ugpkylowpl .gt_stub_row_group {
+#wxaiglakfi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -955,15 +958,15 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   vertical-align: top;
 }
 
-#ugpkylowpl .gt_row_group_first td {
+#wxaiglakfi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ugpkylowpl .gt_row_group_first th {
+#wxaiglakfi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ugpkylowpl .gt_summary_row {
+#wxaiglakfi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -973,16 +976,16 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ugpkylowpl .gt_first_summary_row {
+#wxaiglakfi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_first_summary_row.thick {
+#wxaiglakfi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ugpkylowpl .gt_last_summary_row {
+#wxaiglakfi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -992,7 +995,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_grand_summary_row {
+#wxaiglakfi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1002,7 +1005,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ugpkylowpl .gt_first_grand_summary_row {
+#wxaiglakfi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1012,7 +1015,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-top-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_last_grand_summary_row_top {
+#wxaiglakfi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1022,11 +1025,11 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_striped {
+#wxaiglakfi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ugpkylowpl .gt_table_body {
+#wxaiglakfi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1035,7 +1038,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-bottom-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_footnotes {
+#wxaiglakfi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1049,7 +1052,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_footnote {
+#wxaiglakfi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1058,7 +1061,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ugpkylowpl .gt_sourcenotes {
+#wxaiglakfi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1072,7 +1075,7 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   border-right-color: #D3D3D3;
 }
 
-#ugpkylowpl .gt_sourcenote {
+#wxaiglakfi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1080,72 +1083,72 @@ Table&nbsp;10.1: Portal capabilities, from <code>metadata/portal.csv</code> (Cal
   padding-right: 5px;
 }
 
-#ugpkylowpl .gt_left {
+#wxaiglakfi .gt_left {
   text-align: left;
 }
 
-#ugpkylowpl .gt_center {
+#wxaiglakfi .gt_center {
   text-align: center;
 }
 
-#ugpkylowpl .gt_right {
+#wxaiglakfi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ugpkylowpl .gt_font_normal {
+#wxaiglakfi .gt_font_normal {
   font-weight: normal;
 }
 
-#ugpkylowpl .gt_font_bold {
+#wxaiglakfi .gt_font_bold {
   font-weight: bold;
 }
 
-#ugpkylowpl .gt_font_italic {
+#wxaiglakfi .gt_font_italic {
   font-style: italic;
 }
 
-#ugpkylowpl .gt_super {
+#wxaiglakfi .gt_super {
   font-size: 65%;
 }
 
-#ugpkylowpl .gt_footnote_marks {
+#wxaiglakfi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ugpkylowpl .gt_asterisk {
+#wxaiglakfi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ugpkylowpl .gt_indent_1 {
+#wxaiglakfi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ugpkylowpl .gt_indent_2 {
+#wxaiglakfi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ugpkylowpl .gt_indent_3 {
+#wxaiglakfi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ugpkylowpl .gt_indent_4 {
+#wxaiglakfi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ugpkylowpl .gt_indent_5 {
+#wxaiglakfi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ugpkylowpl .katex-display {
+#wxaiglakfi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ugpkylowpl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wxaiglakfi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1518,23 +1521,23 @@ Figure&nbsp;10.2: Metadata in the form of ecological metadata language (EML) is 
 Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted release’s <code>datasets.json</code>.
 </figcaption>
 <div aria-describedby="tbl-registrations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="bejiaygjgd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bejiaygjgd table {
+<div id="gvlmurvvnb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gvlmurvvnb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bejiaygjgd thead, #bejiaygjgd tbody, #bejiaygjgd tfoot, #bejiaygjgd tr, #bejiaygjgd td, #bejiaygjgd th {
+#gvlmurvvnb thead, #gvlmurvvnb tbody, #gvlmurvvnb tfoot, #gvlmurvvnb tr, #gvlmurvvnb td, #gvlmurvvnb th {
   border-style: none;
 }
 
-#bejiaygjgd p {
+#gvlmurvvnb p {
   margin: 0;
   padding: 0;
 }
 
-#bejiaygjgd .gt_table {
+#gvlmurvvnb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1560,12 +1563,12 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-left-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_caption {
+#gvlmurvvnb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bejiaygjgd .gt_title {
+#gvlmurvvnb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1577,7 +1580,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-width: 0;
 }
 
-#bejiaygjgd .gt_subtitle {
+#gvlmurvvnb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1589,7 +1592,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-top-width: 0;
 }
 
-#bejiaygjgd .gt_heading {
+#gvlmurvvnb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1601,13 +1604,13 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_bottom_border {
+#gvlmurvvnb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_col_headings {
+#gvlmurvvnb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1622,7 +1625,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_col_heading {
+#gvlmurvvnb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1642,7 +1645,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   overflow-x: hidden;
 }
 
-#bejiaygjgd .gt_column_spanner_outer {
+#gvlmurvvnb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1654,15 +1657,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 4px;
 }
 
-#bejiaygjgd .gt_column_spanner_outer:first-child {
+#gvlmurvvnb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bejiaygjgd .gt_column_spanner_outer:last-child {
+#gvlmurvvnb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bejiaygjgd .gt_column_spanner {
+#gvlmurvvnb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1674,11 +1677,11 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   width: 100%;
 }
 
-#bejiaygjgd .gt_spanner_row {
+#gvlmurvvnb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bejiaygjgd .gt_group_heading {
+#gvlmurvvnb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1704,7 +1707,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   text-align: left;
 }
 
-#bejiaygjgd .gt_empty_group_heading {
+#gvlmurvvnb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1719,15 +1722,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   vertical-align: middle;
 }
 
-#bejiaygjgd .gt_from_md > :first-child {
+#gvlmurvvnb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bejiaygjgd .gt_from_md > :last-child {
+#gvlmurvvnb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bejiaygjgd .gt_row {
+#gvlmurvvnb .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -1746,7 +1749,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   overflow-x: hidden;
 }
 
-#bejiaygjgd .gt_stub {
+#gvlmurvvnb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1759,7 +1762,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#bejiaygjgd .gt_stub_row_group {
+#gvlmurvvnb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1773,15 +1776,15 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   vertical-align: top;
 }
 
-#bejiaygjgd .gt_row_group_first td {
+#gvlmurvvnb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bejiaygjgd .gt_row_group_first th {
+#gvlmurvvnb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bejiaygjgd .gt_summary_row {
+#gvlmurvvnb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1791,16 +1794,16 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#bejiaygjgd .gt_first_summary_row {
+#gvlmurvvnb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_first_summary_row.thick {
+#gvlmurvvnb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bejiaygjgd .gt_last_summary_row {
+#gvlmurvvnb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1810,7 +1813,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_grand_summary_row {
+#gvlmurvvnb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1820,7 +1823,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#bejiaygjgd .gt_first_grand_summary_row {
+#gvlmurvvnb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1830,7 +1833,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-top-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_last_grand_summary_row_top {
+#gvlmurvvnb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1840,11 +1843,11 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_striped {
+#gvlmurvvnb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bejiaygjgd .gt_table_body {
+#gvlmurvvnb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1853,7 +1856,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-bottom-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_footnotes {
+#gvlmurvvnb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1867,7 +1870,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_footnote {
+#gvlmurvvnb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1876,7 +1879,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#bejiaygjgd .gt_sourcenotes {
+#gvlmurvvnb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1890,7 +1893,7 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   border-right-color: #D3D3D3;
 }
 
-#bejiaygjgd .gt_sourcenote {
+#gvlmurvvnb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1898,72 +1901,72 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
   padding-right: 5px;
 }
 
-#bejiaygjgd .gt_left {
+#gvlmurvvnb .gt_left {
   text-align: left;
 }
 
-#bejiaygjgd .gt_center {
+#gvlmurvvnb .gt_center {
   text-align: center;
 }
 
-#bejiaygjgd .gt_right {
+#gvlmurvvnb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bejiaygjgd .gt_font_normal {
+#gvlmurvvnb .gt_font_normal {
   font-weight: normal;
 }
 
-#bejiaygjgd .gt_font_bold {
+#gvlmurvvnb .gt_font_bold {
   font-weight: bold;
 }
 
-#bejiaygjgd .gt_font_italic {
+#gvlmurvvnb .gt_font_italic {
   font-style: italic;
 }
 
-#bejiaygjgd .gt_super {
+#gvlmurvvnb .gt_super {
   font-size: 65%;
 }
 
-#bejiaygjgd .gt_footnote_marks {
+#gvlmurvvnb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bejiaygjgd .gt_asterisk {
+#gvlmurvvnb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bejiaygjgd .gt_indent_1 {
+#gvlmurvvnb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bejiaygjgd .gt_indent_2 {
+#gvlmurvvnb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bejiaygjgd .gt_indent_3 {
+#gvlmurvvnb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bejiaygjgd .gt_indent_4 {
+#gvlmurvvnb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bejiaygjgd .gt_indent_5 {
+#gvlmurvvnb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bejiaygjgd .katex-display {
+#gvlmurvvnb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bejiaygjgd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gvlmurvvnb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2176,8 +2179,8 @@ Table&nbsp;10.2: Per-dataset portal registrations, read from the promoted releas
 </section>
 <section id="publish-after-release" class="level2" data-number="10.7">
 <h2 data-number="10.7" class="anchored" data-anchor-id="publish-after-release"><span class="header-section-number">10.7</span> After every release: rebuild what changed, list what is due</h2>
-<p>The four publishers — <code>publish_to-edi.qmd</code>, <code>publish_to-obis.qmd</code>, <code>publish_to-netcdf.qmd</code> and <code>publish_to-erddap.qmd</code> — are targets in the same <code>targets</code> pipeline as the release, each depending on <code>test_release</code>, so they run after a release is tested and promoted and always read the promoted version. Most releases change a few datasets and leave the rest alone, so each publisher fingerprints, per dataset, what its output is a function of (<code>calcofi4db::publish_fingerprint()</code>): the dataset’s rows in every table it reads, identified by the release’s own row signatures rather than by bytes or version (a <code>dataset_key</code> partition is signed by its catalog <code>content_hash</code>, a shared object is read once and its per-dataset signatures cached by <code>content_hash</code>); the dataset’s catalog record and the registries the output carries; and the publisher’s own code. An unchanged fingerprint with the output still on disk is reused — the package, archive or file keeps the release it was built from, and records the release it was confirmed against — and anything else is rebuilt, the notebook naming the input that moved (<code>publish_decide()</code>). The slowest outputs — the full-resolution CTD netCDF and the EDI CSV exports — are therefore paid for once per change, not once per release.</p>
-<p>Whether a portal is behind is a second, separate comparison: the bytes built now against the bytes the portal was last given (<code>publish_upload_status()</code>: <code>never uploaded</code>, <code>current</code> or <code>changed since {version}</code>). <code>publish_status.qmd</code>, the target that runs after all four, makes that comparison for every dataset on every portal and writes the to-do list to <code>gs://calcofi-db/publish/portal_status.csv</code> and <a href="https://calcofi.io/workflows/publish_status.html">calcofi.io/workflows/publish_status.html</a>; <a href="#tbl-portal-status" class="quarto-xref">Table&nbsp;<span>10.3</span></a> says where each portal’s copy is recorded.</p>
+<p>The five publishers — <code>publish_to-edi.qmd</code>, <code>publish_to-obis.qmd</code>, <code>publish_to-netcdf.qmd</code>, <code>publish_to-erddap.qmd</code> and <code>publish_to-zip.qmd</code> — are targets in the same <code>targets</code> pipeline as the release, each depending on <code>test_release</code>, so they run after a release is tested and promoted and always read the promoted version. Most releases change a few datasets and leave the rest alone, so each publisher fingerprints, per dataset, what its output is a function of (<code>calcofi4db::publish_fingerprint()</code>): the dataset’s rows in every table it reads, identified by the release’s own row signatures rather than by bytes or version (a <code>dataset_key</code> partition is signed by its catalog <code>content_hash</code>, a shared object is read once and its per-dataset signatures cached by <code>content_hash</code>); the dataset’s catalog record and the registries the output carries; and the publisher’s own code. An unchanged fingerprint with the output still on disk is reused — the package, archive or file keeps the release it was built from, and records the release it was confirmed against — and anything else is rebuilt, the notebook naming the input that moved (<code>publish_decide()</code>). The slowest outputs — the full-resolution CTD netCDF and the EDI CSV exports — are therefore paid for once per change, not once per release.</p>
+<p>Whether a portal is behind is a second, separate comparison: the bytes built now against the bytes the portal was last given (<code>publish_upload_status()</code>: <code>never uploaded</code>, <code>current</code> or <code>changed since {version}</code>). <code>publish_status.qmd</code>, the target that runs after all five, makes that comparison for every dataset on every portal and writes the to-do list to <code>gs://calcofi-db/publish/portal_status.csv</code> and <a href="https://calcofi.io/workflows/publish_status.html">calcofi.io/workflows/publish_status.html</a>; <a href="#tbl-portal-status" class="quarto-xref">Table&nbsp;<span>10.3</span></a> says where each portal’s copy is recorded.</p>
 <div id="tbl-portal-status" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-portal-status-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2213,11 +2216,20 @@ Table&nbsp;10.3: Where each portal’s current copy is recorded, and what an upl
 <td><code>data/erddap/deploy_status.json</code></td>
 <td>automatic, unless <code>CALCOFI_DEPLOY=false</code> or <code>CALCOFI_ERDDAP_DEPLOY=false</code></td>
 </tr>
+<tr class="odd">
+<td>Download bundles (<code>calcofi-db/publish/zip/</code>)</td>
+<td>the bucket’s <code>publish/zip/manifest.json</code> (<code>sha256</code> per zip)</td>
+<td><code>CALCOFI_PUBLISH_ZIP=true</code>; bytes already online are never re-uploaded</td>
+</tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
+<section id="download-bundles" class="level3" data-number="10.7.1">
+<h3 data-number="10.7.1" class="anchored" data-anchor-id="download-bundles"><span class="header-section-number">10.7.1</span> Download bundles: a file a researcher can open</h3>
+<p><code>publish_to-zip.qmd</code> is the one publisher whose audience is a person rather than a portal. For every dataset in the promoted release it writes one zip per format — CSV for every dataset, an Excel workbook wherever every table fits an Excel sheet, header row included (<code>calcofi4db::BUNDLE_XLSX_MAX_ROWS</code>), Parquet for every dataset — named <code>calcofi_{dataset_key}_{version}_{format}.zip</code>. Each holds the dataset’s own rows of every table it needs to be used alone (its observations, the samples they sit on, and its rows of the shared cruise, taxon and measurement-type tables), with the station’s line and station, the taxon’s names and the measurement’s units beside their keys; and inside every zip a <code>README.md</code>, a <code>CITATION.md</code> and <code>CITATION.bib</code> (the provider’s citation where there is one, always the release’s), a <code>LICENSE.txt</code> (the legal code only for a recognised licence, the provider’s terms for a custom one, and a plain statement that none is established otherwise) and a <code>columns.csv</code> dictionary. The rules are <code>calcofi4db</code>’s <code>bundle_*()</code> functions, each with its own test. The full-resolution supplemental tables are left out and named in the README. The zips are byte-reproducible, so an unchanged dataset keeps its file and its sha256 from release to release. A manifest beside them (<code>publish/zip/manifest.json</code>) is the file a dataset page’s <strong>Download</strong> button is to be built from, and the release’s <code>datasets.json</code> carries each zip as a <code>kind = "bundle"</code> distribution.</p>
+</section>
 </section>
 <section id="archive-of-record-per-dataset" class="level2" data-number="10.8">
 <h2 data-number="10.8" class="anchored" data-anchor-id="archive-of-record-per-dataset"><span class="header-section-number">10.8</span> Archive of record, per dataset</h2>
@@ -2236,23 +2248,23 @@ Table&nbsp;10.3: Where each portal’s current copy is recorded, and what an upl
 Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promoted release’s <code>datasets.json</code> (the registry it comes from until a release carries it).
 </figcaption>
 <div aria-describedby="tbl-policy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="vwhvkkkxwd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vwhvkkkxwd table {
+<div id="legtacituf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#legtacituf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vwhvkkkxwd thead, #vwhvkkkxwd tbody, #vwhvkkkxwd tfoot, #vwhvkkkxwd tr, #vwhvkkkxwd td, #vwhvkkkxwd th {
+#legtacituf thead, #legtacituf tbody, #legtacituf tfoot, #legtacituf tr, #legtacituf td, #legtacituf th {
   border-style: none;
 }
 
-#vwhvkkkxwd p {
+#legtacituf p {
   margin: 0;
   padding: 0;
 }
 
-#vwhvkkkxwd .gt_table {
+#legtacituf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2278,12 +2290,12 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-left-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_caption {
+#legtacituf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vwhvkkkxwd .gt_title {
+#legtacituf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2295,7 +2307,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-width: 0;
 }
 
-#vwhvkkkxwd .gt_subtitle {
+#legtacituf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2307,7 +2319,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-top-width: 0;
 }
 
-#vwhvkkkxwd .gt_heading {
+#legtacituf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2319,13 +2331,13 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_bottom_border {
+#legtacituf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_col_headings {
+#legtacituf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2340,7 +2352,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_col_heading {
+#legtacituf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2360,7 +2372,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   overflow-x: hidden;
 }
 
-#vwhvkkkxwd .gt_column_spanner_outer {
+#legtacituf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2372,15 +2384,15 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 4px;
 }
 
-#vwhvkkkxwd .gt_column_spanner_outer:first-child {
+#legtacituf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vwhvkkkxwd .gt_column_spanner_outer:last-child {
+#legtacituf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vwhvkkkxwd .gt_column_spanner {
+#legtacituf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2392,11 +2404,11 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   width: 100%;
 }
 
-#vwhvkkkxwd .gt_spanner_row {
+#legtacituf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vwhvkkkxwd .gt_group_heading {
+#legtacituf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2422,7 +2434,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   text-align: left;
 }
 
-#vwhvkkkxwd .gt_empty_group_heading {
+#legtacituf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2437,15 +2449,15 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   vertical-align: middle;
 }
 
-#vwhvkkkxwd .gt_from_md > :first-child {
+#legtacituf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vwhvkkkxwd .gt_from_md > :last-child {
+#legtacituf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vwhvkkkxwd .gt_row {
+#legtacituf .gt_row {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -2464,7 +2476,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   overflow-x: hidden;
 }
 
-#vwhvkkkxwd .gt_stub {
+#legtacituf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2477,7 +2489,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#vwhvkkkxwd .gt_stub_row_group {
+#legtacituf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2491,15 +2503,15 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   vertical-align: top;
 }
 
-#vwhvkkkxwd .gt_row_group_first td {
+#legtacituf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vwhvkkkxwd .gt_row_group_first th {
+#legtacituf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vwhvkkkxwd .gt_summary_row {
+#legtacituf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2509,16 +2521,16 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#vwhvkkkxwd .gt_first_summary_row {
+#legtacituf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_first_summary_row.thick {
+#legtacituf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vwhvkkkxwd .gt_last_summary_row {
+#legtacituf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2528,7 +2540,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_grand_summary_row {
+#legtacituf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2538,7 +2550,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#vwhvkkkxwd .gt_first_grand_summary_row {
+#legtacituf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2548,7 +2560,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-top-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_last_grand_summary_row_top {
+#legtacituf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2558,11 +2570,11 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_striped {
+#legtacituf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vwhvkkkxwd .gt_table_body {
+#legtacituf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2571,7 +2583,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-bottom-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_footnotes {
+#legtacituf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2585,7 +2597,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_footnote {
+#legtacituf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2594,7 +2606,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#vwhvkkkxwd .gt_sourcenotes {
+#legtacituf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2608,7 +2620,7 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   border-right-color: #D3D3D3;
 }
 
-#vwhvkkkxwd .gt_sourcenote {
+#legtacituf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2616,72 +2628,72 @@ Table&nbsp;10.4: Each dataset’s archive-of-record policy, read from the promot
   padding-right: 5px;
 }
 
-#vwhvkkkxwd .gt_left {
+#legtacituf .gt_left {
   text-align: left;
 }
 
-#vwhvkkkxwd .gt_center {
+#legtacituf .gt_center {
   text-align: center;
 }
 
-#vwhvkkkxwd .gt_right {
+#legtacituf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vwhvkkkxwd .gt_font_normal {
+#legtacituf .gt_font_normal {
   font-weight: normal;
 }
 
-#vwhvkkkxwd .gt_font_bold {
+#legtacituf .gt_font_bold {
   font-weight: bold;
 }
 
-#vwhvkkkxwd .gt_font_italic {
+#legtacituf .gt_font_italic {
   font-style: italic;
 }
 
-#vwhvkkkxwd .gt_super {
+#legtacituf .gt_super {
   font-size: 65%;
 }
 
-#vwhvkkkxwd .gt_footnote_marks {
+#legtacituf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vwhvkkkxwd .gt_asterisk {
+#legtacituf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vwhvkkkxwd .gt_indent_1 {
+#legtacituf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vwhvkkkxwd .gt_indent_2 {
+#legtacituf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vwhvkkkxwd .gt_indent_3 {
+#legtacituf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vwhvkkkxwd .gt_indent_4 {
+#legtacituf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vwhvkkkxwd .gt_indent_5 {
+#legtacituf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vwhvkkkxwd .katex-display {
+#legtacituf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vwhvkkkxwd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#legtacituf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
