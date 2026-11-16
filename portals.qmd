@@ -99,11 +99,11 @@ portals_tbl |>
 package is built from the release's own `eml/{dataset_key}.xml` plus CSV entities exported from
 the core — for the bottle database three tables totalling 2.1 GB plus the shared vocabulary
 table). (1) An EDI account for the open `edi` scope, held by Erin, with Ben granted editor access
-through the EML `access` element — created once at dashboard.edirepository.org. Every release
-already stages the package at `gs://calcofi-db/publish/edi/{dataset_key}/{dataset_key}_{version}/`
-for review (the dataset page lists it as *built, not deposited*), `version` being the release it
-was last rebuilt from (a package is rebuilt only when its dataset changed — see
-[After every release](#publish-after-release)); every entity's
+through the EML `access` element — created once at dashboard.edirepository.org. A package is
+staged for review at its content-addressed folder,
+`gs://calcofi-db/publish/edi/{dataset_key}/{content_hash}/` (the dataset page lists it as *built,
+not deposited*), built from the release its content first appeared in and never rebuilt while
+that content is unchanged — see [After every release](#publish-after-release); every entity's
 EML `url` points at that staged copy, and the EML is checked against the EML 2.2 schema
 (`EML::eml_validate()`, inside `check_eml()`) on every run, a reused package included. (2) Set
 `EDI_USER`/`EDI_PASS` (or an EDI API key as `EDI_KEY`) wherever the pipeline runs and render the
@@ -150,8 +150,8 @@ packages stay theirs and are never republished.
 
 
 **Uploading is manual, and deliberately so.** `publish_to-obis.qmd` writes
-`data/darwincore/{dataset_key}_{version}.zip` and a `{dataset_key}_manifest.json`, and stages both
-at `gs://calcofi-db/publish/dwca/{dataset_key}/` so a provider — and the dataset page, which
+`{dataset_key}_{since}.zip` in the archive's content-addressed folder and a
+`{dataset_key}_manifest.json`, and stages both under `gs://calcofi-db/publish/dwca/{dataset_key}/` so a provider — and the dataset page, which
 lists the archive as *built, not deposited* — can inspect the bundle before any upload; nothing
 in the pipeline talks to a portal. CalCOFI has no IPT of its own — the resources live on the
 **OBIS-USA IPT**, `ipt-obis.gbif.us`, under Ben's login. Before a first upload, the OBIS records that
@@ -345,6 +345,14 @@ the package, archive or file keeps the release it was built from, and records th
 confirmed against — and anything else is rebuilt, the notebook naming the input that moved
 (`publish_decide()`). The slowest outputs — the full-resolution CTD netCDF and the EDI CSV
 exports — are therefore paid for once per change, not once per release.
+
+Since calcofi4db 4.41.0 the published files follow the release's own content-addressing
+([Releases](releases.qmd)): a file's identity is its `content_hash` over the dataset's rows, its
+metadata record and a pinned format version (`CC_PUBLISH_FORMAT`), never the code or the release
+version; it is stored once, at `…/{dataset_key}/{content_hash}/`, named for the release its
+content first appeared in (`since`), and every later release with the same content only lists it
+in that release's manifest. Nothing published is deleted: the chain of per-release manifests is
+each file's history, as the chain of catalogs is each table's.
 
 Whether a portal is behind is a second, separate comparison: the bytes built now against the
 bytes the portal was last given (`publish_upload_status()`: `never uploaded`, `current` or
