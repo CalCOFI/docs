@@ -55,6 +55,9 @@ book's spine: each phase has a product that realizes it and a chapter that expla
 
 ## Which door is yours
 
+Short answers to the questions asked most — how to download, how to cite, which site is which —
+are in [Frequently asked questions](faq.qmd). Otherwise, pick the row that fits you.
+
 | If you are … | start with | then |
 |---|---|---|
 | new to CalCOFI and curious what it collects | the calcofi.io front page, [See what CalCOFI collects](https://calcofi.io/#learn) | [Explore](explore.qmd) |

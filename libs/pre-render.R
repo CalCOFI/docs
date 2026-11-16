@@ -147,6 +147,13 @@ for (i in seq_len(nrow(ds)))
   fetch(file.path(wf_raw, "metadata", ds$provider[i], ds$dataset[i], "flds_redefine.csv"),
         file.path(dir_xw, paste0(ds$dataset_key[i], ".csv")), required = FALSE)
 
+# the download bundles' manifest (workflows publish_to-zip.qmd): which zips each dataset has,
+# and why a format is not offered (Excel, where a table is longer than a sheet). Optional:
+# before the first upload there is none, and a chapter that reads it says less rather than
+# typing what it would have said.
+fetch("https://storage.googleapis.com/calcofi-db/publish/zip/manifest.json",
+      file.path(dir_data, "zip_manifest.json"), required = FALSE)
+
 # the products and the ship's log's hand-written rows on calcofi.io ------------------
 fetch(file.path(site_raw, "_data/products.yml"), file.path(dir_data, "products.yml"))
 fetch(file.path(site_raw, "_data/news.yml"),     file.path(dir_data, "news.yml"))

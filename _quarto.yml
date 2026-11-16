@@ -85,6 +85,7 @@ book:
     - index.qmd
     - part: "Use the data"
       chapters:
+        - faq.qmd
         - explore.qmd
         - data-access.qmd
         - cite.qmd
