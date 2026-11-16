@@ -57,16 +57,28 @@ book's spine: each phase has a product that realizes it and a chapter that expla
 
 | If you are … | start with | then |
 |---|---|---|
-| curious about the ocean off California, or a scientist who wants to see the data | [Explore](explore.qmd) | [Access the data](data-access.qmd), [Cite this data](cite.qmd) |
-| a data scientist writing queries or building on the release | [Access the data](data-access.qmd) | [The database](db.qmd), [Keys and integrity](keys.qmd), [Releases](releases.qmd) |
+| new to CalCOFI and curious what it collects | the calcofi.io front page, [See what CalCOFI collects](https://calcofi.io/#learn) | [Explore](explore.qmd) |
+| a researcher new to CalCOFI data, who wants to see it and take some home | [Explore](explore.qmd): pick what, when and where on a map, then download the table | [Access the data](data-access.qmd), [Cite this data](cite.qmd) |
+| familiar with CalCOFI and after one particular dataset | the [dataset catalog](https://calcofi.io/datasets/): each dataset's page says where to get it and how to cite it | [Portals](portals.qmd) |
+| publishing or reporting work that uses CalCOFI data | [Cite this data](cite.qmd) | [Releases](releases.qmd) |
+| an analyst or programmer pulling data in R, Python or SQL | [Access the data](data-access.qmd) | [The database](db.qmd), [Keys and integrity](keys.qmd), [Releases](releases.qmd) |
 | a data provider, now or in future | [Providing data to CalCOFI](provide.qmd) | [Metadata & the ingest loop](metadata.qmd), [Portals](portals.qmd) |
+
+: Where to start, by who you are and what you came for. {#tbl-doors}
+
+If you are not sure between the second and third rows: use the Explorer when you want several kinds of observations together, or only one area and period; use a dataset's own page when you want that one dataset as its provider published it.
+
+If you work on the CalCOFI team, these are your doors.
+
+| If you are … | start with | then |
+|---|---|---|
 | on the CTD team | [CTD QA/QC, start to release](ctd-qaqc.qmd) | [Server access](server-access.qmd) |
 | on the data team, or building a CalCOFI.io product | [Ingesting a dataset](ingest-loop.qmd) | [Products, brand and uptime](products.qmd), [Architecture](architecture.qmd) |
 | reporting on the program | [The data management plan](dmp.qmd) | [Status](status.qmd) |
 
-: Where to start, by who you are and what you came for. {#tbl-doors}
+: Where to start, for the team. {#tbl-team}
 
-Pick your row in @tbl-doors; every chapter links onward to the next one you are likely to want.
+Pick your row in @tbl-doors, or in @tbl-team if you work on the team; every chapter links onward to the next one you are likely to want.
 
 ## How this book is kept true
 
