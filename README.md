@@ -52,10 +52,40 @@ find yourself typing a number, look for the file that carries it.
 The revamp of 2026-09 that gave the book its parts, its build and its keys chapter is planned in
 `CalCOFI/workflows` `.claude/plans/2026-09-08 Docs revamp — ….md`.
 
+## Brand
+
+The book wears the [calcofi.io brand, v3](https://calcofi.io/brand/v3/) (v2's tokens, fonts and
+lockup, with the header every product shares). Quarto owns the navbar, so the brand's own header
+markup is not used (the contract's § 4.6):
+
+- `_quarto.yml` `book.navbar` puts the lockup (to calcofi.io) and the title "Docs" in the navbar's
+  brand slot. Search stays in the sidebar; source, sharing, feedback and the theme toggle are the
+  navbar's tools.
+- `brand-head.html` loads the brand (`v2/fonts.css`, `v2/theme.css`, `v3/header.css`,
+  `v3/theme.js`, `v3/header.js`), keeps Quarto's toggle and the brand's cross-site theme in step
+  (`?theme=dark|light` works on any page), and adds the feedback button.
+- `libs/brand-nav.js` draws **the brand's words** into the navbar: `header.js` reads
+  `https://calcofi.io/brand/v3/nav.json` and this script turns that list into navbar items and
+  dropdowns. Nothing about the words is typed here; they change in calcofi.io's `_data/nav.yml`
+  and reach the book with no render. The one item typed in `_quarto.yml` (`calcofi.io`) is a
+  stand-in: Quarto draws the menu button only for a navbar that has an item, and the stand-in
+  shows only with JavaScript off or when `nav.json` cannot be read.
+- `brand-navbar.scss` dresses the navbar (height, edge, words, menus, the phone row) for both
+  themes; `brand-light.scss` and `brand-dark.scss` carry each theme's colours.
+- `brand-wave.html` puts the wave (`.cc-wave.cc-wave-slim`) under the navbar on every page.
+
+Under 992 px Quarto's own collapse carries the words in one column behind the menu button, so the
+bar stays on one line down to 360 px.
+
+To see the book against a brand that is not deployed yet (a branch of `CalCOFI/CalCOFI.github.io`
+with new header words, say), render, then `libs/preview_brand.sh <a built site's brand/ folder>
+<output folder>` and serve the output folder: the pages load that copy and the navbar shows its
+words. calcofi.io's `scripts/check_brand.py --url <page>` checks a page of the result.
+
 ## Feedback
 
 Every page carries the fleet's feedback dialog — calcofi.io's `assets/feedback.{css,js}` (the Explorer's
-annotated-screenshot dialog, plain JS) — as a speech-bubble sidebar tool beside Quarto's theme toggle,
+annotated-screenshot dialog, plain JS) — as a speech-bubble navbar tool beside Quarto's theme toggle,
 inserted by `brand-head.html`. A report (note, this page's URL, viewport, theme, the marked-up screenshot)
 goes to the "CalCOFI app feedback" Sheet and its recipients with `app: docs`; the Apps Script files the
 public issue in the repo it maps `docs` to, so `calcofi4r::cc_feedback_script(repos = c(…, docs = "CalCOFI/docs"))`

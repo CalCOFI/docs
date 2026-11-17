@@ -152,9 +152,19 @@ breath:
 - `?tour=off` suppresses any guided tour, so `live_url?theme=<t>&tour=off` is a deterministic
   screenshot; every card carries a light and a dark shot taken that way.
 
+Since 2026-11-17 the header has a version of its own, [calcofi.io/brand/v3](https://calcofi.io/brand/v3/):
+v2 in everything else, with one header for every product that wears it. The words of the bar are
+the brand's, the same everywhere and in sentence case (today **Data · Map · Learn ·
+calcofi.org**), kept as one list on calcofi.io and drawn from it, so a product does not type them;
+under the bar runs a navy band that ends in a wave. calcofi.io, the Explorer, the Query Builder and
+this book wear v3. A product moves by changing its head block, and one that has not moved keeps the
+v2 header it has. Here Quarto owns the bar, so the lockup and the title sit in its navbar, the
+words are drawn into it from the brand's list, and the wave is placed under it.
+
 `calcofi4r::cc_brand_head()` and `cc_brand_header()` give a Shiny app the head block and the bar;
 the Quarto sites include the same head file; `check_brand.py` in the landing repository probes
-every product for the theme, the favicon, the home link, the toggle, the version and the default.
+every product for the theme, the favicon, the home link, the toggle, the version and the default,
+and a product on v3 for its words, their case and the wave.
 
 ## Adding a product
 

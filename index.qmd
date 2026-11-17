@@ -58,14 +58,20 @@ book's spine: each phase has a product that realizes it and a chapter that expla
 Short answers to the questions asked most — how to download, how to cite, which site is which —
 are in [Frequently asked questions](faq.qmd). Otherwise, pick the row that fits you.
 
+The rows name what you see on [calcofi.io](https://calcofi.io). Its first screen asks *Where do
+you want to start?* over three cards — **Visualize on a map**, **Download a dataset** and **Pull
+exact data** — with two links under them, **Contribute** and **Statewide monitoring** (for ocean
+and fisheries management, [calcofi.io/#monitor](https://calcofi.io/#monitor)). Its header, the one
+at the top of this book too, reads **Data · Map · Learn**.
+
 | If you are … | start with | then |
 |---|---|---|
-| new to CalCOFI and curious what it collects | the calcofi.io front page, [See what CalCOFI collects](https://calcofi.io/#learn) | [Explore](explore.qmd) |
-| a researcher new to CalCOFI data, who wants to see it and take some home | [Explore](explore.qmd): pick what, when and where on a map, then download the table | [Access the data](data-access.qmd), [Cite this data](cite.qmd) |
-| familiar with CalCOFI and after one particular dataset | the [dataset catalog](https://calcofi.io/datasets/): each dataset's page says where to get it and how to cite it | [Portals](portals.qmd) |
-| publishing or reporting work that uses CalCOFI data | [Cite this data](cite.qmd) | [Releases](releases.qmd) |
-| an analyst or programmer pulling data in R, Python or SQL | [Access the data](data-access.qmd) | [The database](db.qmd), [Keys and integrity](keys.qmd), [Releases](releases.qmd) |
-| a data provider, now or in future | [Providing data to CalCOFI](provide.qmd) | [Metadata & the ingest loop](metadata.qmd), [Portals](portals.qmd) |
+| new to CalCOFI and curious what it collects | **Learn › How CalCOFI samples** in the header ([calcofi.io/#learn](https://calcofi.io/#learn)) | [Explore](explore.qmd) |
+| a researcher new to CalCOFI data, who wants to see it and take some home | the first card, **Visualize on a map**: its button opens the [Explorer](https://calcofi.io/explore/), where you pick what, when and where on a map, then download the table ([Explore](explore.qmd) is its guide) | [Access the data](data-access.qmd), [Cite this data](cite.qmd) |
+| familiar with CalCOFI and after one particular dataset | the second card, **Download a dataset**: *Browse datasets* opens the [dataset catalog](https://calcofi.io/datasets/) (also **Data › Datasets** in the header), where each dataset's page says where to get it and how to cite it | [Portals](portals.qmd) |
+| publishing or reporting work that uses CalCOFI data | [Cite this data](cite.qmd), which is **Learn › Cite the data** in the header | [Releases](releases.qmd) |
+| an analyst or programmer pulling data in R, Python or SQL | the third card, **Pull exact data**: the [Query Builder](https://calcofi.io/query/) (also **Data › Query Builder** in the header) makes one table across datasets with no code, and *Code* opens R, Python, SQL and ERDDAP side by side ([calcofi.io/#program](https://calcofi.io/#program)), which [Access the data](data-access.qmd) explains | [The database](db.qmd), [Keys and integrity](keys.qmd), [Releases](releases.qmd) |
+| a data provider, now or in future | **Contribute**, under the cards, which opens [Providing data to CalCOFI](provide.qmd) | [Metadata & the ingest loop](metadata.qmd), [Portals](portals.qmd) |
 
 : Where to start, by who you are and what you came for. {#tbl-doors}
 

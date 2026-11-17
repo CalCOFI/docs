@@ -1,0 +1,134 @@
+/*-- scss:rules --*/
+// quarto's navbar wearing the calcofi.io header — brand v3 § 4.6 (https://calcofi.io/brand/v3/).
+// listed after brand-light.scss and brand-dark.scss in _quarto.yml, so one file serves both themes:
+// the colours here are the brand's custom properties (brand/v2/theme.css follows <html data-theme>),
+// the navbar's own ground and text are $navbar-bg / $navbar-fg / $navbar-hl in the two theme files.
+//
+// brand/v3/header.css scopes its bar to .cc-header, which a framework's navbar is not, so the bar's
+// height, edge, words and menus are restated here from that file. STOPGAP, marked (stopgap) below:
+// values copied from header.css; they move with it by hand until the brand exports them
+// (asked of the brand 2026-11-17).
+
+// ---- the bar: the brand's page height, the lockup at 36 px, the title beside it -------------------
+#quarto-header {
+  .navbar {
+    min-height: 72px;                       // (stopgap) --header-h at the page scale
+    padding-top: 0; padding-bottom: 0;
+    font-family: var(--sans, inherit);
+  }
+  // the brand's bar holds a centred 1170 px column; quarto's page with its two sidebars is wider,
+  // so here the bar runs the window's width with a gutter
+  .navbar-container { padding-left: 24px; padding-right: 24px; }
+  .navbar-logo { height: 36px; max-height: 36px; padding-right: 0; }
+  .navbar-brand.navbar-brand-logo { margin-right: 12px; }
+  .navbar-brand, .navbar-title {
+    font-size: 15px; font-weight: 700; letter-spacing: 0; text-transform: none;   // sentence case, § 4.1
+  }
+  .navbar-brand:hover .navbar-title { color: $navbar-hl; }
+  // the tools (source, share, feedback, the toggle) sit after the words, as the brand's icon buttons do
+  .quarto-navbar-tools { margin-left: 8px; white-space: nowrap; }
+  .navbar-toggler { border: 0; padding: 4px 6px; }
+  .navbar-toggler:focus { box-shadow: 0 0 0 2px var(--accent); }
+}
+// the bar's edge: over the navy wave a hairline vanishes, so light gets a clear line and a deep
+// shadow, dark the brand's border (stopgap: header.css "the bar's edge"). the line is the last row
+// of the header: the navbar, or under 992 px the breadcrumb row quarto adds below it. it is drawn
+// inside that row's height, so quarto's measure of the header (which leaves a border out) is exact
+// and the wave starts where the header ends
+#quarto-header .navbar, #quarto-header .quarto-secondary-nav { box-sizing: border-box; border-bottom: 1px solid var(--border, #{$border-color}); }
+@include media-breakpoint-down(lg) { #quarto-header .navbar { border-bottom-color: transparent; } }
+:root:not([data-theme="dark"]) #quarto-header {
+  .navbar, .quarto-secondary-nav { border-bottom-color: #c9d4e2; }
+  box-shadow: 0 1px 0 rgba(24, 43, 73, .05), 0 8px 18px -4px rgba(0, 0, 0, .45);
+}
+@include media-breakpoint-down(lg) { :root:not([data-theme="dark"]) #quarto-header .navbar { border-bottom-color: transparent; } }
+// quarto sets the page's top offset from the header once its script runs; say it here first so the
+// page does not jump (a phone adds the breadcrumb row and is left to quarto)
+@include media-breakpoint-up(lg) { body.nav-fixed { padding-top: 72px; } }
+
+// a link to a place in a page (#tbl-doors, a chapter's #sec-…) must land below the fixed header.
+// quarto does this for a <section> only (its #quarto-target-style); a table, a figure and a chapter
+// title are not sections and came to rest under the navbar: 72 px, or with the breadcrumb row on a
+// phone up to 122 px
+:target:not(section) { scroll-margin-top: 88px; }
+@include media-breakpoint-down(lg) { :target:not(section) { scroll-margin-top: 136px; } }
+
+// ---- the words (libs/brand-nav.js draws them from the brand's nav.json) ---------------------------
+#quarto-header .navbar-collapse .navbar-nav {
+  // the stand-in item typed in _quarto.yml keeps its place, unseen, until the words are drawn; it
+  // shows again if they could not be read (and with javascript off: <noscript> in brand-head.html)
+  &:not([data-cc-nav-state="ready"]):not([data-cc-nav-state="failed"]) { visibility: hidden; }
+  .nav-link {
+    font-size: 15.5px; font-weight: 600; letter-spacing: 0; text-transform: none;   // (stopgap) § 4.2
+    white-space: nowrap;
+  }
+  .nav-link.cc-ext { font-weight: 500; color: var(--muted); }
+  .nav-link.cc-ext:hover { color: $navbar-hl; }
+  .nav-link.show { color: $navbar-hl; }
+}
+@include media-breakpoint-up(lg) {
+  #quarto-header .navbar-collapse .navbar-nav { gap: 6px; }
+  #quarto-header .navbar-collapse .navbar-nav .nav-link { padding-left: 8px; padding-right: 8px; }
+}
+
+// ---- a word's menu: bootstrap's dropdown in the brand's panel (stopgap: header.css .cc-dd) --------
+#quarto-header .navbar-nav .dropdown-menu.cc-menu {
+  --edge: color-mix(in srgb, var(--fg) 22%, var(--bg));
+  min-width: 270px; margin-top: 10px; padding: 10px 8px;
+  background: var(--bg); color: var(--fg);
+  border: 1px solid var(--edge); border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .08), 0 18px 44px rgba(10, 20, 36, .28);
+  font-size: 14px;
+  ul { margin: 0; padding: 0; }
+  .dropdown-header {
+    margin: 0; padding: 0 10px 4px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--muted);
+  }
+  .dropdown-item {
+    padding: 7px 10px; border-radius: 8px; white-space: normal; color: var(--fg);
+    .dropdown-text { display: block; font-size: 14.5px; font-weight: 700; }
+    small { display: block; margin-top: 1px; font-size: 12.5px; color: var(--muted); }
+    &:hover, &:focus-visible, &:active { background: var(--accent-bg); color: var(--fg); }
+  }
+  .dropdown-divider { margin: 4px 8px; border-top-color: var(--border); opacity: 1; }
+}
+@include media-breakpoint-up(lg) {
+  // not in the collapsed column, where a menu is inline and has no shadow
+  :root[data-theme="dark"] #quarto-header .navbar-nav .dropdown-menu.cc-menu { box-shadow: 0 18px 44px rgba(0, 0, 0, .6); }
+  // a menu with two columns keeps them (Data: Find, Get it; Learn: Guides, News)
+  #quarto-header .navbar-nav .dropdown-menu.cc-menu-2.show {
+    display: grid; grid-template-columns: repeat(2, 230px); gap: 2px 16px; padding: 12px 10px;
+  }
+}
+
+// ---- under 992 px: quarto's own collapse carries the words in one column, so the bar never wraps --
+// the row is the lockup and the title at the left, then the tools and the menu button at the right
+@include media-breakpoint-down(lg) {
+  #quarto-header .navbar-container { padding-left: 12px; padding-right: 12px; }
+  #quarto-header .quarto-navbar-tools { margin-left: auto; }
+  #quarto-header .navbar-toggler { margin-left: 4px; }
+  #quarto-header .navbar-collapse {
+    // the header is fixed: what ran below the window could otherwise never be reached
+    max-height: calc(100vh - 84px); max-height: calc(100dvh - 84px);
+    overflow-y: auto; overscroll-behavior: contain;
+    border-top: 1px solid var(--border); padding: 4px 0 8px;
+  }
+  #quarto-header .navbar-collapse .navbar-nav .nav-link { padding: 10px 4px; }
+  #quarto-header .navbar-nav .dropdown-menu.cc-menu {
+    margin: -2px 0 6px; padding: 0 0 0 8px; border: 0; box-shadow: none; background: transparent;
+    .dropdown-header { padding-top: 6px; }
+  }
+}
+
+// ---- a phone: one line down to 360 px -------------------------------------------------------------
+// the lockup at the brand's app height and a lower bar (the breadcrumb row sits under it, and the
+// whole header is fixed); sharing leaves the bar, where the phone's own share sheet does the job
+@include media-breakpoint-down(sm) {
+  #quarto-header .navbar { min-height: 60px; padding-left: 0; padding-right: 0; }
+  #quarto-header .navbar-toggler { padding: 4px 2px; margin-left: 2px; }
+  #quarto-header .navbar-logo { height: 28px; max-height: 28px; }
+  #quarto-header .navbar-brand.navbar-brand-logo { margin-right: 8px; }
+  #quarto-header .navbar-brand-container { max-width: none; }
+  #quarto-header .quarto-navbar-tools > .dropdown { display: none; }
+  #quarto-header .navbar-collapse { max-height: calc(100vh - 72px); max-height: calc(100dvh - 72px); }
+}

@@ -7,14 +7,15 @@ $body-bg:      #0f1a2e;
 $body-color:   #e9edf3;
 $link-color:   #4fb6e6;
 $border-color: #34486b;
-$navbar-bg:    #182b49;
+$navbar-bg:    #182b49;   // the navbar (brand v2 --header-bg / --fg / --accent, dark)
+$navbar-fg:    #e9edf3;
+$navbar-hl:    #4fb6e6;
 $sidebar-bg:   #182b49;
 $code-bg:      #182b49;
 $text-muted:   #9fb0c8;
 
 /*-- scss:rules --*/
-// the v2 lockup in quarto's sidebar logo slot: the brand's page height, never a fixed 32 px mark
-.sidebar-logo { height: 36px; width: auto; max-width: 100%; }
+// the navbar (the lockup, the words, their menus) is brand-navbar.scss, shared by both themes
 
 // ---- code blocks: cosmo's dark derivation left <pre> text at the muted grey ----------------
 pre, pre code, code { color: #e9edf3; }
