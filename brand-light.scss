@@ -1,20 +1,21 @@
 /*-- scss:defaults --*/
 $font-family-sans-serif: "Source Sans 3", "Source Sans Pro", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;  // brand v2 (fonts.css in brand-head.html)
-// calcofi.io brand tokens (https://calcofi.io/brand/v2/theme.css), light ground.
+// calcofi.io brand tokens (https://calcofi.io/brand/v2/theme.css, which brand v3 keeps), light ground.
 // layered on cosmo, which already sits close to these; stated so the two
 // stylesheets are symmetric and the values are the brand's, not the theme's.
 $body-bg:      #ffffff;
 $body-color:   #182b49;
 $link-color:   #00629b;
 $border-color: #dddddd;
-$navbar-bg:    #f5f5f5;
+$navbar-bg:    #ffffff;   // the navbar (brand v2 --header-bg / --fg / --accent, light)
+$navbar-fg:    #182b49;
+$navbar-hl:    #00629b;
 $sidebar-bg:   #f5f5f5;
 $code-bg:      #f5f5f5;
 $text-muted:   #66686a;
 
 /*-- scss:rules --*/
-// the v2 lockup in quarto's sidebar logo slot: the brand's page height, never a fixed 32 px mark
-.sidebar-logo { height: 36px; width: auto; max-width: 100%; }
+// the navbar (the lockup, the words, their menus) is brand-navbar.scss, shared by both themes
 .cc-diagram-wrap .svg-pan-zoom-control-background { fill: #dddddd; }
 .cc-diagram-wrap .svg-pan-zoom-control-element    { fill: #182b49; }
 // gt tables: a long URL or DOI must wrap rather than push the table off the page, and a stub

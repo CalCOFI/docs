@@ -9,6 +9,8 @@ project:
   - "libs/diagram.js"
   - "libs/diagram.css"
   - "libs/svg-pan-zoom.min.js"
+  # the brand's words in quarto's navbar (brand v3 § 4.6), read from calcofi.io's nav.json
+  - "libs/brand-nav.js"
   # the one place the network is touched at render time: snapshots the promoted
   # release's sidecars, the workflows registries and the product cards under data/
   pre-render:
@@ -55,21 +57,35 @@ book:
   repo-actions: [edit]
   sharing: [twitter, facebook, linkedin]
   google-analytics: "G-0HVK8TDMCF"
-  search: true
+  # with a navbar quarto would move the search into it; the book keeps it in the sidebar
+  # (and in the breadcrumb row on a phone), where it was
+  search:
+    location: sidebar
   page-navigation: true
-  # calcofi.io brand contract (https://calcofi.io/brand/v2/): the CalCOFI favicon
-  # set; in the sidebar quarto owns, the horizontal lockup (logo_calcofi_h*.svg,
-  # 36 px — the mark alone is v1) linking to calcofi.io with the product title
-  # ("Docs") beside it linking to this book's root. the theme half (both
-  # stylesheets, quarto's toggle bridged) is under format.html below.
+  # calcofi.io brand contract v3 (https://calcofi.io/brand/v3/, § 4.6: a bar a framework owns).
+  # quarto owns the navbar, so the horizontal lockup sits in its brand slot linking to
+  # calcofi.io, with the product title ("Docs") beside it; libs/brand-nav.js points the title
+  # at this book's root (quarto gives the logo and the title one href) and draws the brand's
+  # words into the navbar from https://calcofi.io/brand/v3/nav.json, so they are not typed here.
+  # the theme half (stylesheets, quarto's toggle bridged) is under format.html below.
   # favicon.png is https://calcofi.io/brand/v2/favicon-32x32.png (quarto rewrites a URL here to ./https://...)
   favicon: favicon.png
-  sidebar:
+  navbar:
     title: Docs
     logo:
       light: {path: https://calcofi.io/brand/v2/logo_calcofi_h_light.svg, alt: CalCOFI.io}
       dark: {path: https://calcofi.io/brand/v2/logo_calcofi_h.svg, alt: CalCOFI.io}
     logo-href: https://calcofi.io
+    collapse-below: lg
+    # the lockup stays far left on a phone; the menu button goes right, beside the toggle
+    toggle-position: right
+    # quarto draws the menu button and the collapsing list only for a navbar that has an item.
+    # this one is the stand-in libs/brand-nav.js replaces with the brand's words; it shows only
+    # with javascript off or when nav.json cannot be read, and then leads to where the words are
+    right:
+      - text: "calcofi.io"
+        href: https://calcofi.io
+  sidebar:
     # the pdf and docx are built by the non-blocking second CI job and published as the
     # assets of the rolling `documents` release, so these links never dangle when a
     # LaTeX or Word export fails (see .github/workflows/render_book.yml)
@@ -128,8 +144,8 @@ format:
     # "quarto-color-scheme" sentinel reads "alternate" for dark; brand-head.html
     # seeds that sentinel from the cross-site theme and bridges the toggle
     theme:
-      light: [cosmo, brand-light.scss]
-      dark: [cosmo, brand-dark.scss]
+      light: [cosmo, brand-light.scss, brand-navbar.scss]
+      dark: [cosmo, brand-dark.scss, brand-navbar.scss]
     include-in-header: brand-head.html
     toc: true
     number-sections: true
