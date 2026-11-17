@@ -67,7 +67,7 @@ book:
   # calcofi.io, with the product title ("Docs") beside it; libs/brand-nav.js points the title
   # at this book's root (quarto gives the logo and the title one href) and draws the brand's
   # words into the navbar from https://calcofi.io/brand/v3/nav.json, so they are not typed here.
-  # the theme half (stylesheets, quarto's toggle bridged) is under format.html below.
+  # the theme half (stylesheets, quarto's toggle bridged, the wave) is under format.html below.
   # favicon.png is https://calcofi.io/brand/v2/favicon-32x32.png (quarto rewrites a URL here to ./https://...)
   favicon: favicon.png
   navbar:
@@ -147,6 +147,8 @@ format:
       light: [cosmo, brand-light.scss, brand-navbar.scss]
       dark: [cosmo, brand-dark.scss, brand-navbar.scss]
     include-in-header: brand-head.html
+    # the wave under the navbar (brand v3 § 4.5)
+    include-before-body: brand-wave.html
     toc: true
     number-sections: true
     # every figure — the pre-rendered SVG diagrams above all — opens full-size
