@@ -46,9 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9ef8120f98bd32a61d6c1c1c07b3b92b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-bcfeb65accd24e2bbe196d27b5dbcb46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-eb372b95657dffa35da82b40d17ff65e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ac5a9f867ae893da54b729573b10e59.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-eb372b95657dffa35da82b40d17ff65e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -61,7 +61,6 @@ ul.task-list li input[type="checkbox"] {
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -85,18 +84,27 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-0HVK8TDMCF', { 'anonymize_ip': true});
 </script>
-<!-- calcofi.io brand contract v2 (https://calcofi.io/brand/v2/; light default since 2026-09-04) for this quarto book.
-     quarto owns the sidebar and the dark/light toggle: window.quartoToggleColorScheme()
-     flips the quarto-dark / quarto-light class on <body> and stores its choice in
-     localStorage "quarto-color-scheme" as "default" (the FIRST theme in _quarto.yml,
-     light) or "alternate" (dark). the favicon and logo come from book.favicon and
-     book.sidebar in _quarto.yml; this file carries the theme half of the contract. -->
+<!-- calcofi.io brand contract v3 (https://calcofi.io/brand/v3/; v2 with one header for every product) for this
+     quarto book. v3 is v2's tokens, fonts, logos and favicons, still loaded from /brand/v2/, plus header.css
+     (the wave; the brand's own bar is not used here), theme.js reporting version "3" and header.js, which
+     reads the brand's words (nav.json beside it). quarto owns the navbar (§ 4.6): the lockup and the title are
+     in its brand slot (book.navbar in _quarto.yml), libs/brand-nav.js draws the words into it, brand-navbar.scss
+     dresses it, and brand-wave.html puts the wave under it.
+     quarto also owns the dark/light toggle: window.quartoToggleColorScheme() flips the quarto-dark /
+     quarto-light class on <body> and stores its choice in localStorage "quarto-color-scheme" as "default"
+     (the FIRST theme in _quarto.yml, light) or "alternate" (dark). the bridge below keeps it and the brand's
+     cross-site theme in step. the favicon comes from book.favicon in _quarto.yml. -->
 <script>(function(){var d=document.documentElement,m=/[?&]theme=(dark|light)\b/.exec(location.search),k=/(?:^|;\s*)cc_theme_src=user\b/.test(document.cookie),c=k&&/(?:^|;\s*)cc_theme=(dark|light)\b/.exec(document.cookie),s=null;try{if(localStorage.getItem("cc_theme_src")==="user")s=localStorage.getItem("cc_theme")}catch(e){}var t=(m&&m[1])||(c&&c[1])||(s==="dark"||s==="light"?s:null)||"light";d.dataset.theme=t;d.setAttribute("data-bs-theme",t);d.setAttribute("data-md-color-scheme",t==="dark"?"slate":"default");d.style.colorScheme=t;/* seed quarto's sentinel before its before-body script reads it, so the first paint is already the resolved theme */
 try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")}catch(e){}})();</script>
 <link rel="preload" href="https://calcofi.io/brand/v2/fonts/SourceSans3-VF.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="stylesheet" href="https://calcofi.io/brand/v2/fonts.css">
 <link rel="stylesheet" href="https://calcofi.io/brand/v2/theme.css">
-<script defer="" src="https://calcofi.io/brand/v2/theme.js"></script>
+<link rel="stylesheet" href="https://calcofi.io/brand/v3/header.css">
+<script defer="" src="https://calcofi.io/brand/v3/theme.js"></script>
+<script defer="" src="https://calcofi.io/brand/v3/header.js"></script>
+<script defer="" src="libs/brand-nav.js"></script>
+<!-- with javascript off the stand-in item typed in _quarto.yml is the navbar's one link; brand-navbar.scss hides it otherwise -->
+<noscript><style>#quarto-header .navbar-collapse .navbar-nav { visibility: visible !important; }</style></noscript>
 <style>
   /* quarto's toggle draws bootstrap's toggle-off / toggle-on switch — a glyph that says
      nothing about what it does. Dress it in the brand pair instead (theme.css exports the
@@ -134,7 +142,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 })();</script>
 
 <!-- feedback (2026-09-08): the fleet's feedback dialog — calcofi.io/assets/feedback.{css,js}, the Explorer's
-     annotated-screenshot dialog ported to plain JS — with this book's own trigger: a speech-bubble sidebar
+     annotated-screenshot dialog ported to plain JS — with this book's own trigger: a speech-bubble navbar
      tool inserted just before quarto's theme toggle on DOMContentLoaded (feedback.js binds on DOM ready and
      reads endpoint / repo / app from the button). The endpoint is the "CalCOFI app feedback" Apps Script the
      Explorer and calcofi.io use (calcofi4r::cc_feedback_script()); app "docs" — the script maps an app to
@@ -142,7 +150,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <link rel="stylesheet" href="https://calcofi.io/assets/feedback.css">
 <script defer="" src="https://calcofi.io/assets/feedback.js"></script>
 <style>
-  /* the sidebar tool: quarto's tools are 1 rem bootstrap glyphs on the sidebar's text colour; the bubble is an
+  /* the navbar tool: quarto's tools are 1 rem bootstrap glyphs on the navbar's text colour; the bubble is an
      inline SVG at the same size, so it sits level with the share and toggle icons */
   .cc-feedback.quarto-navigation-tool { display: inline-flex; align-items: center; vertical-align: middle; }
   .cc-feedback.quarto-navigation-tool svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
@@ -171,7 +179,7 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 </head>
 
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -337,6 +345,57 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="https://calcofi.io" class="navbar-brand navbar-brand-logo">
+    <img src="https://calcofi.io/brand/v2/logo_calcofi_h_light.svg" alt="CalCOFI.io" class="navbar-logo light-content">
+    <img src="https://calcofi.io/brand/v2/logo_calcofi_h.svg" alt="CalCOFI.io" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="https://calcofi.io">
+    <span class="navbar-title">Docs</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://calcofi.io"> 
+<span class="menu-text">calcofi.io</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/CalCOFI/docs/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -352,46 +411,16 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="https://calcofi.io" class="sidebar-logo-link">
-      <img src="https://calcofi.io/brand/v2/logo_calcofi_h_light.svg" alt="CalCOFI.io" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="https://calcofi.io/brand/v2/logo_calcofi_h.svg" alt="CalCOFI.io" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="./index.html" class="sidebar-logo-link">
       </a>
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Docs</a> 
-        <div class="sidebar-tools-main tools-wide">
+      <div class="sidebar-tools-main">
     <a href="https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.pdf" title="PDF" class="quarto-navigation-tool px-1" aria-label="PDF"><i class="bi bi-file-earmark-pdf"></i></a>
     <a href="https://github.com/CalCOFI/docs/releases/download/documents/CalCOFI.io-docs.docx" title="DOCX" class="quarto-navigation-tool px-1" aria-label="DOCX"><i class="bi bi-file-earmark-word"></i></a>
-    <a href="https://github.com/CalCOFI/docs/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-twitter pe-1"></i>
-            Twitter
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
-            Facebook
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
-            LinkedIn
-            </a>
-          </li>
-      </ul>
-    </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -622,6 +651,13 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<!-- calcofi.io brand v3 § 4.5: the wave, a navy band directly under the bar on every page (drawn by
+     https://calcofi.io/brand/v3/header.css). quarto puts an include-before-body at the top of <main>,
+     inside the article column, and offers no place between its header and the page; the line below
+     lifts the band out to stand there, full width, before anything is painted under it. with
+     javascript off it stays where quarto put it, at the head of the column. -->
+<div class="cc-wave cc-wave-slim" id="cc-wave" aria-hidden="true"></div>
+<script>(function () { var w = document.getElementById("cc-wave"), c = document.getElementById("quarto-content"); if (w && c && c.parentNode) c.parentNode.insertBefore(w, c); })();</script>
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dmp.html">The plan and the record</a></li><li class="breadcrumb-item"><a href="./architecture.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Architecture</span></a></li></ol></nav>
 <div class="quarto-title">
