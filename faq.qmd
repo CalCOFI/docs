@@ -23,7 +23,8 @@ n_recent <- sum(as.Date(vers$release_date) > as.Date(catalog$release_date) - 90)
 # an oxford comma here, since several categories already hold an "and"
 cats <- rec$datasets$category
 cats <- if (is.data.frame(cats)) cats[order(cats$order), "name"] else unlist(cats)
-cats <- unique(tolower(gsub(" & ", " and ", cats)))
+# lowercase a word's leading capital only, so "Genomics & eDNA" reads "genomics and eDNA"
+cats <- unique(gsub("\\b([A-Z])(?=[a-z])", "\\L\\1", gsub(" & ", " and ", cats), perl = TRUE))
 kinds <- if (length(cats) < 3) paste(cats, collapse = " and ") else
   paste0(paste(head(cats, -1), collapse = ", "), ", and ", tail(cats, 1))
 
