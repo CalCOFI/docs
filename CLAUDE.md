@@ -38,8 +38,8 @@ R deps: `remotes::install_deps()` from the root. The PDF needs TinyTeX and librs
   - the registries from `CalCOFI/workflows` `metadata/` into `data/registry/`
   - the product cards and ship's-log rows from `CalCOFI/CalCOFI.github.io` (`data/products.yml`,
     `data/news.yml`)
-  - the download bundles' manifest (`data/zip_manifest.json`, optional), from which `faq.qmd`
-    says which datasets come as Excel
+  - the download bundles' manifest (`data/zip_manifest.json`, optional), which says which datasets
+    come as Excel; no chapter reads it since the FAQ's Excel note was dropped (2026-11-24)
   - a stamp in `data/_snapshot.json`, which records the version and the `measurements_source`
 
   If a required fetch fails, the render stops. Optional sources are skipped or fall back
