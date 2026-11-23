@@ -77,7 +77,7 @@
     "href": "faq.html#faq-datasets",
     "title": "Frequently asked questions",
     "section": "Which datasets are available?",
-    "text": "Which datasets are available?\nCalCOFI.io has data from CalCOFI’s ocean surveys, including physical oceanography, nutrients and chemistry, carbonate system, meteorology and sea state, phytoplankton, picoplankton and bacteria, zooplankton, euphausiids (krill), fish eggs and larvae, mesopelagic fish, seabirds and marine mammals, and genomics and edna. See the full dataset list for everything that’s available.\nThe current integrated database release holds 20 datasets. CalCOFI.io also lists 9 more datasets that aren’t available for download yet (listed as holdings). Their pages tell you where to find the data. More datasets are added over time.",
+    "text": "Which datasets are available?\nCalCOFI.io has data from CalCOFI’s ocean surveys, including physical oceanography, nutrients and chemistry, carbonate system, meteorology and sea state, phytoplankton, picoplankton and bacteria, zooplankton, euphausiids (krill), fish eggs and larvae, mesopelagic fish, seabirds and marine mammals, and genomics and eDNA. See the full dataset list for everything that’s available.\nThe current integrated database release holds 20 datasets. CalCOFI.io also lists 9 more datasets that aren’t available for download yet (listed as holdings). Their pages tell you where to find the data. More datasets are added over time.",
     "crumbs": [
       "Use the data",
       "Frequently asked questions"
