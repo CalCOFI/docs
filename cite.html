@@ -726,21 +726,21 @@ try{localStorage.setItem("quarto-color-scheme",t==="dark"?"alternate":"default")
 </div>
 <section id="citing-the-database-release" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="citing-the-database-release"><span class="header-section-number">3.1</span> Citing the database release</h2>
-<p>CalCOFI (2026). CalCOFI Integrated Database, release v2026.11.18 [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://doi.org/10.5281/zenodo.24358383</p>
+<p>CalCOFI (2026). CalCOFI Integrated Database, release v2026.11.25 [Data set]. Scripps Institution of Oceanography, NOAA Fisheries, and California Department of Fish and Wildlife. https://doi.org/10.5281/zenodo.24541941</p>
 <p>Every release also has a DOI of its own, minted on Zenodo when the release is tagged, and one <strong>concept DOI</strong> that always resolves to the newest release. Cite the version DOI in a paper — it names exactly the bytes you used — and the concept DOI where a living pointer is wanted. Both are in <code>catalog.json</code> (<code>doi</code>, <code>concept_doi</code>) and in the release notes’ <em>How to cite</em>:</p>
 <ul>
-<li>this release, <code>v2026.11.18</code>: <a href="https://doi.org/10.5281/zenodo.24358383" class="uri">https://doi.org/10.5281/zenodo.24358383</a></li>
+<li>this release, <code>v2026.11.25</code>: <a href="https://doi.org/10.5281/zenodo.24541941" class="uri">https://doi.org/10.5281/zenodo.24541941</a></li>
 <li>the concept DOI, every release: <a href="https://doi.org/10.5281/zenodo.22281994" class="uri">https://doi.org/10.5281/zenodo.22281994</a></li>
 </ul>
 </section>
 <section id="citing-an-individual-dataset" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="citing-an-individual-dataset"><span class="header-section-number">3.2</span> Citing an individual dataset</h2>
-<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. <a href="#tbl-dataset-citations" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is the <code>dataset</code> table of the promoted release, v2026.11.18.</p>
+<p>Every dataset in the release carries its own <code>citation_main</code>, a registered <code>license</code>, and — where the source gives one — a <code>doi</code>, an <code>acknowledgement</code> and a <code>contact</code>. The columns are <code>dataset.doi</code>, <code>dataset.license_url</code>, <code>dataset.acknowledgement</code>, <code>dataset.contact</code> and <code>dataset.source_accessed</code> (measured at release, never typed; see <a href="./db.html">the database</a>). They have shipped since v2026.09.04. <a href="#tbl-dataset-citations" class="quarto-xref">Table&nbsp;<span>3.1</span></a> is the <code>dataset</code> table of the promoted release, v2026.11.25.</p>
 <div class="cell">
 <div id="tbl-dataset-citations" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and contact a use should carry.
+Table&nbsp;3.1: Every dataset of v2026.11.25 with the citation, licence, DOI and contact a use should carry.
 </figcaption>
 <div aria-describedby="tbl-dataset-citations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1218,19 +1218,18 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_2022-edna/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_2022-edna</a></span></td>
-<td class="gt_row gt_left" headers="citation_main">Patin N, ODonnell G (2026). CalCOFI October 2022 Vertebrate eDNA. Version 1.3. Occurrence dataset. https://doi.org/10.15468/n52j6r</td>
+<td class="gt_row gt_left" headers="citation_main">Patin N, ODonnell G (2026). CalCOFI October 2022 Vertebrate eDNA. Version 1.0. Occurrence dataset. https://ipt-obis.gbif.us/resource?r=calcofi_october2022_edna&amp;v=1.0 https://doi.org/10.15468/n52j6r</td>
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.15468/n52j6r" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
 <td class="gt_row gt_left" headers="contact">mailto:nvpatin@ucsd.edu</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_bottle/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_bottle</a></span></td>
-<td class="gt_row gt_left" headers="citation_main">CalCOFI. (2023). CalCOFI Bottle Database 194903-202105. CalCOFI.org.</td>
+<td class="gt_row gt_left" headers="citation_main">Scripps Institution of Oceanography, UC San Diego, 2026. CalCOFI Hydrographic CTD Bottle Data. https://calcofi.org/data/oceanographic-data/bottle-database/</td>
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_left" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">rswalethorp@ucsd.edu</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_bottle-derived/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_bottle-derived</a></span></td>
@@ -1238,14 +1237,12 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_left" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">rswalethorp@ucsd.edu</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_ctd-cast/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_ctd-cast</a></span></td>
-<td class="gt_row gt_left" headers="citation_main">CalCOFI. (2023). CalCOFI CTD Cast Files. CalCOFI.org.</td>
-<td class="gt_row gt_left" headers="license"><br>
-</td>
+<td class="gt_row gt_left" headers="citation_main">Scripps Institution of Oceanography, UC San Diego, 2026. CalCOFI Hydrographic CTD Cast Profile Data. https://calcofi.org/data/oceanographic-data/ctd-cast-files/</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
 <td class="gt_row gt_left" headers="contact">rswalethorp@ucsd.edu</td>
@@ -1253,12 +1250,10 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 <tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_ctd-derived/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_ctd-derived</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">CalCOFI. (2026). CalCOFI CTD Derived Hydrographic Products (from the CalCOFI CTD Cast Files). CalCOFI.io. https://calcofi.io/workflows/ingest_calcofi_ctd-derived.html</td>
-<td class="gt_row gt_left" headers="license"><br>
-</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_left" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">rswalethorp@ucsd.edu</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_dic/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_dic</a></span></td>
@@ -1270,8 +1265,7 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 <tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_mets/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_mets</a></span></td>
 <td class="gt_row gt_left" headers="citation_main">CalCOFI. Underway (METS) TSG/Meteorology Data. CalCOFI.org.</td>
-<td class="gt_row gt_left" headers="license"><br>
-</td>
+<td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
 <td class="gt_row gt_left" headers="contact">rswalethorp@ucsd.edu</td>
@@ -1281,7 +1275,7 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 <td class="gt_row gt_left" headers="citation_main">CalCOFI - Scripps Institution of Oceanography and T. Koslow. 2017. Data pertaining to lobster phyllosoma, Panulirus interruptus, collection methods, locations, identification and staging (1951-2008, months of July and August) ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa</td>
 <td class="gt_row gt_left" headers="license">custom</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.6073/pasta/9e38121ebb26f1b59b7b39b2eff844fa" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
-<td class="gt_row gt_left" headers="contact">tkoslow@ucsd.edu</td>
+<td class="gt_row gt_left" headers="contact">jkoslow@ucsd.edu</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/calcofi_phytoplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">calcofi_phytoplankton</a></span></td>
@@ -1337,13 +1331,11 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
-<td class="gt_row gt_left" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">christy.juhasz@wildlife.ca.gov</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/farallon_bird-mammal/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">farallon_bird-mammal</a></span></td>
-<td class="gt_row gt_left" headers="citation_main"><br>
-</td>
+<td class="gt_row gt_left" headers="citation_main">Sydeman, W. J., Veit, R. R., &amp; Hyrenbach, K. D. (2025). CalCOFI Farallon Institute Seabirds [Dataset]. Farallon Institute. NOAA ERDDAP. https://oceanview.pfeg.noaa.gov/erddap/tabledap/CAC_FI_SBAS_tr.html</td>
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
@@ -1354,8 +1346,7 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 <td class="gt_row gt_left" headers="citation_main">Koslow, J. Anthony (2016). CalCOFI Trawl Data. In California Cooperative Oceanic Fisheries Investigations (CalCOFI): Acoustic and Trawl Data. UC San Diego Library Digital Collections. https://doi.org/10.6075/J0BZ64DH</td>
 <td class="gt_row gt_left" headers="license">CC-BY-4.0</td>
 <td class="gt_row gt_left" headers="doi"><span style="white-space: pre;"><a href="https://doi.org/10.6075/J0BZ64DH" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">doi</a></span></td>
-<td class="gt_row gt_left" headers="contact"><br>
-</td>
+<td class="gt_row gt_left" headers="contact">jkoslow@ucsd.edu</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/sio_pic-zooplankton/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">sio_pic-zooplankton</a></span></td>
@@ -1370,9 +1361,8 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_cufes/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">swfsc_cufes</a></span></td>
-<td class="gt_row gt_left" headers="citation_main"><br>
-</td>
-<td class="gt_row gt_left" headers="license">custom</td>
+<td class="gt_row gt_left" headers="citation_main">Southwest Fisheries Science Center, 2026: Continuous Underway Fish-Egg Sampler (CUFES) Database. NOAA National Centers for Environmental Information, https://www.fisheries.noaa.gov/inport/item/20692.</td>
+<td class="gt_row gt_left" headers="license">CC0-1.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
 <td class="gt_row gt_left" headers="contact"><br>
@@ -1380,9 +1370,8 @@ Table&nbsp;3.1: Every dataset of v2026.11.18 with the citation, licence, DOI and
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="page"><span style="white-space: pre;"><a href="https://calcofi.io/datasets/swfsc_ichthyo/" target="_blank" style="color:#008B8B;text-decoration:underline;text-underline-position: under;display: inline-block;">swfsc_ichthyo</a></span></td>
-<td class="gt_row gt_left" headers="citation_main">NOAA Fisheries SWFSC. CalCOFI Ichthyoplankton Database.</td>
-<td class="gt_row gt_left" headers="license"><br>
-</td>
+<td class="gt_row gt_left" headers="citation_main">Southwest Fisheries Science Center, 2026: CalCOFI Database. NOAA National Centers for Environmental Information, https://www.fisheries.noaa.gov/inport/item/20691.</td>
+<td class="gt_row gt_left" headers="license">CC0-1.0</td>
 <td class="gt_row gt_left" headers="doi"><br>
 </td>
 <td class="gt_row gt_left" headers="contact"><br>
