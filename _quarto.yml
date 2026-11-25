@@ -62,6 +62,9 @@ book:
   search:
     location: sidebar
   page-navigation: true
+  # the same line calcofi.io's own footer carries (CalCOFI.github.io#56)
+  page-footer:
+    center: "[How we use AI](https://calcofi.io/ai-use/)"
   # calcofi.io brand contract v3 (https://calcofi.io/brand/v3/, § 4.6: a bar a framework owns).
   # quarto owns the navbar, so the horizontal lockup sits in its brand slot linking to
   # calcofi.io, with the product title ("Docs") beside it; libs/brand-nav.js points the title
