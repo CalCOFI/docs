@@ -76,10 +76,16 @@ dataset joins to the others through them:
   `worms:<AphiaID>`, or `itis:<TSN>` for birds, whose WoRMS taxonomy lags (see
   [The database](db.qmd#taxonomy)).
 
-**The release mints one sequential integer**, `root_id` on `sample_root`: a dense integer for each
-root sampling event (a `sample` row with no parent), numbered deterministically so a rebuild
-reproduces it, and carried on `obs_bio` and `obs_env` so a browser can join observations to their
-event without the string key.
+**The release mints the integer ids**: `obs_id`, `obs_attribute_id` and `sample_measurement_id` on
+the rows of their tables, and `root_id` on `sample_root`, one for each root sampling event (a
+`sample` row with no parent), carried on `obs_bio` and `obs_env` so a browser can join observations
+to their event without the string key. Each dataset owns a block of numbers
+([`metadata/id_block.csv`](https://github.com/CalCOFI/workflows/blob/main/metadata/id_block.csv),
+never changed or reused), and an id is the block's start plus the row's rank among its own
+dataset's rows: `id_block × 10,000,000,000 + n` for the three row ids, `id_block × 5,000,000 + n`
+for `root_id`. So an id changes only when its own dataset's rows change, never because another
+dataset grew, and a rebuild of unchanged data reproduces it. It is still not a permanent name for a
+row: to follow a row across releases use its `sample_key` with the measurement, taxon and depth.
 
 ### Why not UUID primary keys?
 
@@ -238,7 +244,7 @@ obs_bio.sample_key          -> sample.sample_key
 sample.parent_sample_key    -> sample.sample_key      -- the containing event
 sample.root_sample_key      -> sample.sample_key      -- the top of the chain
 
--- the dense integer twin the browser objects use instead of the string key
+-- the integer twin the browser objects use instead of the string key
 obs_bio.root_id             -> sample_root.root_id
 sample_spatial.root_id      -> sample_root.root_id    -- which polygons a root sample falls in
 

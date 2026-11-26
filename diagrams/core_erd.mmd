@@ -43,7 +43,7 @@ erDiagram
     string root_sample_key FK
   }
   obs_bio {
-    int obs_id PK
+    bigint obs_id PK
     string sample_key FK
     int root_id FK
     string taxon_key FK
@@ -51,7 +51,7 @@ erDiagram
     double value
   }
   obs_env {
-    int obs_id PK
+    bigint obs_id PK
     string sample_key FK
     int root_id FK
     string measurement_type FK
@@ -86,11 +86,11 @@ erDiagram
     string taxon_key FK
   }
   sample_measurement {
-    int sample_measurement_id PK
+    bigint sample_measurement_id PK
     string sample_key FK
   }
   obs_attribute {
-    int obs_attribute_id PK
+    bigint obs_attribute_id PK
     string sample_key FK
   }
   sample_track {
